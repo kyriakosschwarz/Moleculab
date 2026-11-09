@@ -12,7 +12,80 @@
 > explain why $a=F/m$ needs no hidden constant; and catch unit errors before
 > they become fake physics.
 
-## 1. Why start with units?
+## 1. Learning objectives and how this tutorial is organised
+
+**Core**
+
+- Read the unit contract and say what unit every symbol carries.
+- Convert between Å, nm, fs, ps, kcal/mol, and kJ/mol.
+- Explain why $a=F/m$ needs no conversion constant in this system.
+- Perform a dimensional check on an energy or force equation.
+
+**Deeper insight**
+
+- Distinguish the molar gas constant $R$ from the single-particle $k_B$.
+- Explain why the units are chosen together rather than one at a time.
+- Recognise that energy-scale tables are order-of-magnitude references.
+
+**Looking ahead**
+
+- Electrostatic screening, reaction fields, and Ewald summation are previewed
+  but developed later.
+- The running particle introduced here carries through tutorials 02–04.
+
+These tutorials use a consistent pattern. Each major concept moves through five
+stages:
+
+![The physics to software pattern](assets/stage_flow.svg)
+
+*Physical meaning first, then the equation, then its units, then the code, then
+a numerical check.*
+
+The same pattern appears in the library itself:
+
+| Stage | Question | Where it lives |
+| --- | --- | --- |
+| Physical meaning | What is the quantity? | prose in this tutorial |
+| Mathematics | What equation describes it? | equations below |
+| Units | What does each symbol carry? | this tutorial and `units.py` |
+| Implementation | How is it computed? | `src/moleculab/` |
+| Verification | How do we know it is right? | tests and experiments |
+
+Within each tutorial, material is also labelled by how much you need it:
+
+- **Core** — required to understand the current lesson.
+- **Deeper insight** — useful context; revisit it later if it does not click yet.
+- **Looking ahead** — a preview of a concept developed in a later tutorial.
+
+You do not have to master every *deeper insight* on the first pass. The core
+path through this tutorial is: units → conversion → the acceleration shortcut →
+dimensional analysis.
+
+## 2. The running example
+
+The whole four-tutorial sequence follows one particle. We will call it **the
+Moleculab particle**, or simply $P$.
+
+| Property | Value | Unit |
+| --- | --- | --- |
+| mass $m$ | 12 | Da |
+| position $\mathbf r$ | $(0.1, 0, 0)$ | nm |
+| velocity $\mathbf v$ | $(0.1, 0, 0)$ | nm/ps |
+| speed $|\mathbf v|$ | 0.10 | nm/ps |
+| kinetic energy $K$ | 0.06 | kJ/mol |
+
+![One particle reused across the tutorial sequence](assets/learning_ladder.svg)
+
+*A single particle carries the story: units give it meaning, tutorial 02
+describes its state, tutorial 03 puts it in a landscape, and tutorial 04 makes
+it move.*
+
+The values are chosen because the arithmetic is easy, not because they describe
+a typical thermal particle. Tutorial 02 will show how far 0.1 nm/ps is from a
+room-temperature speed. For now, $P$ is a concrete object we can use to check
+every equation.
+
+## 3. Physical intuition: a quantity is a number plus a unit
 
 Computational drug discovery is built from questions such as:
 
@@ -21,21 +94,18 @@ Computational drug discovery is built from questions such as:
 - How much energy does it cost to move a drug into a binding pocket?
 - How fast does a protein loop move?
 
-Every answer is a physical quantity. A quantity is not a bare number. It is a
-number together with a unit. “The distance is 2” is meaningless until we know
-whether that means 2 Å, 2 nm, or 2 µm.
+Every answer is a physical quantity. “The distance is 2” is meaningless until
+we know whether that means 2 Å, 2 nm, or 2 µm.
 
-At molecular scales, the numbers are awkward in SI units:
+At molecular scales, SI units produce awkward numbers:
 
 - a typical bond length is about $1.5\times10^{-10}$ m;
 - a molecular dynamics timestep is about $2\times10^{-15}$ s;
 - one mole contains $6.022\times10^{23}$ particles.
 
 Writing those powers of ten in every equation makes code noisy and mistakes
-easy. Moleculab therefore chooses a **coherent internal unit system** designed
-for molecular simulation.
-
-## 2. The scale of the molecular world
+easy. Moleculab therefore chooses an **internal unit system** designed for
+molecular simulation.
 
 ![Length scales from atoms to a human](assets/unit_scale.svg)
 
@@ -59,10 +129,7 @@ A molecular simulation usually focuses on a small box: perhaps 5 nm on a side,
 containing a protein fragment, a ligand, water, and ions. The box is tiny by
 human standards but enormous by atomic standards.
 
-This is why we need a unit system that makes nanometres and picoseconds
-natural.
-
-## 3. The seven quantities Moleculab tracks
+## 4. Mathematical description: the seven quantities
 
 Moleculab's internal system is:
 
@@ -76,10 +143,9 @@ Moleculab's internal system is:
 | temperature | kelvin | K |
 | charge | elementary charge | e |
 
-Do not memorize the table as a list of trivia. Think of it as a contract:
+Think of this table as a contract:
 
-- if a function is documented as returning a force, the number is in
-  kJ/(mol nm);
+- if a function returns a force, the number is in kJ/(mol nm);
 - if a position array is passed in, its components are in nm;
 - if a velocity is updated, the result is in nm/ps.
 
@@ -96,31 +162,25 @@ TEMPERATURE_UNIT = "K"
 CHARGE_UNIT = "e"
 ```
 
-These constants are documentation and code in the same place. When a later
-module writes a force, it can refer to the same unit definitions instead of
-inventing a new convention.
+### 4.1 The units are chosen together
 
-## 4. SI intuition versus simulation units
+The key idea is not that each unit is convenient in isolation. It is that the
+units are **internally coherent**: derived units follow from the base choices
+with no leftover numerical factor, apart from the roughly $10^{-9}$ difference
+between the dalton and one gram per mole.
 
-SI units are wonderful for fundamental physics. They are not always convenient
-for molecular simulation.
-
-Compare:
-
-| Quantity | SI expression | Moleculab expression |
+| Derived quantity | Relation | Unit that follows |
 | --- | --- | --- |
-| bond length | $1.5\times10^{-10}$ m | 0.15 nm |
-| timestep | $2\times10^{-15}$ s | 0.002 ps |
-| kinetic energy | $10^{-21}$ J | about 0.6 kJ/mol |
-| force | $10^{-11}$ N | about 10 kJ/(mol nm) |
+| velocity | distance / time | nm/ps |
+| force | energy / distance | kJ/(mol nm) |
+| acceleration | force / mass | nm/ps² |
+| kinetic energy | mass × velocity² | Da (nm/ps)² |
 
-The simulation units keep the numbers close to human-scale values: 0.15,
-0.002, 0.6, 10. That makes patterns easier to see.
+The last row is not obviously kJ/mol. The next two sections show why it is.
+This is the whole reason the code can write `force / mass` and get an
+acceleration without a conversion constant.
 
-This is not a claim that simulation units are “more correct.” They are a
-convenient coordinate system for the same physics.
-
-## 5. The central convenience: acceleration needs no constant
+## 5. Units and dimensions: why $a=F/m$ needs no constant
 
 Newton's second law is
 
@@ -132,8 +192,8 @@ If force is in newtons and mass in kilograms, acceleration is in m/s². But
 Moleculab stores force in **kJ/(mol nm)**, mass in **Da**, and acceleration in
 **nm/ps²**. At first glance, those units look incompatible.
 
-The surprising fact is that the conversion factors cancel exactly. Let us
-verify this carefully, because it is the foundation of the whole unit system.
+The conversion factors cancel to about one part in $10^9$. Let us verify this
+carefully, because it is the foundation of the whole unit system.
 
 ### 5.1 Convert force to a per-particle force
 
@@ -190,7 +250,10 @@ $$
 10^{-15}.
 $$
 
-Using $N_A=6.02214076\times10^{23}$, this factor is one. Therefore
+Using $N_A=6.02214076\times10^{23}$, this factor is one to about one part in
+$10^9$. The tiny residual comes from 1 Da being approximately, not exactly,
+1 g/mol. For molecular simulation this is far below the precision of the
+models. Therefore
 
 $$
 \boxed{
@@ -207,7 +270,59 @@ numerically.
 *The conversion factors for kJ/mol, nm, ps, and Da cancel. This is why the code
 can write `force / mass` directly.*
 
-### 5.5 Worked example
+### 5.5 The same cancellation for kinetic energy
+
+The same principle explains why $K=\tfrac12mv^2$ needs no constant. Let
+
+$$
+m=1\ \mathrm{Da},
+\qquad
+v=1\ \mathrm{nm/ps}.
+$$
+
+Then
+
+$$
+\frac12mv^2
+=
+0.5\ \mathrm{Da\,(nm/ps)^2}.
+$$
+
+Convert to SI:
+
+$$
+0.5\times1.66054\times10^{-27}\ \mathrm{kg}
+\times\left(\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}}\right)^2
+=
+8.3027\times10^{-22}\ \mathrm{J}.
+$$
+
+Multiply by Avogadro's number:
+
+$$
+8.3027\times10^{-22}\times6.02214\times10^{23}
+\approx500\ \mathrm{J/mol}
+=
+0.5\ \mathrm{kJ/mol}.
+$$
+
+So one $\mathrm{Da\,(nm/ps)^2}$ is one kJ/mol, and
+
+$$
+\boxed{
+K_{\mathrm{kJ/mol}}
+=
+\frac12 m_{\mathrm{Da}}|\mathbf v|^2_{\mathrm{nm/ps}}
+}
+$$
+
+numerically.
+
+**Core takeaway.** The numerical shortcuts work because the conversion factors
+cancel. They are not permission to drop units. They are a consequence of
+choosing the units together.
+
+### 5.6 Worked example: the running particle
 
 Take
 
@@ -223,7 +338,7 @@ $$
 a=\frac{10}{12}=0.8333\ \mathrm{nm/ps^2}.
 $$
 
-Let us check in SI. The force per particle is
+Check in SI. The force per particle is
 
 $$
 F_{\text{particle}}
@@ -252,33 +367,44 @@ $$
 =0.8333\ \mathrm{nm/ps^2}.
 $$
 
-The two routes agree. The shortcut is not an approximation; it is an exact
-consequence of the chosen units.
+The two routes agree. The shortcut is not a rough approximation; it is a
+consequence of the chosen units, accurate to about one part in $10^9$. The
+small residual is the difference between the dalton and one gram per mole.
 
 ## 6. Energy scales you should internalize
 
 ![Energy scales in molecular systems](assets/energy_scale.svg)
 
-*Thermal energy at room temperature is only a few kJ/mol. Hydrogen bonds and
-Lennard-Jones wells are larger but still on the same order. Covalent bonds and
-strong point-charge interactions are much larger.*
+*Order-of-magnitude reference values. Thermal energy at room temperature is a
+few kJ/mol; covalent bonds and bare point-charge interactions are much larger.*
 
 Approximate room-temperature scales:
 
-- thermal energy $RT$ at 300 K: about 2.5 kJ/mol;
-- a typical Lennard-Jones well: about 0.1–2 kJ/mol;
-- a hydrogen bond: about 5–40 kJ/mol;
-- a covalent bond: about 300–500 kJ/mol;
-- a point-charge Coulomb interaction can be hundreds of kJ/mol at short
-  distances.
+| Interaction | Typical magnitude (kJ/mol) | Important caveat |
+| --- | --- | --- |
+| thermal energy $RT$ at 300 K | 2.5 | exact for the stated temperature |
+| Lennard-Jones well | 0.1–2 | depends on the atom pair |
+| hydrogen bond | 5–40 | strongly environment-dependent |
+| covalent bond | 300–500 | depends on the bond |
+| bare $\pm e$ Coulomb at 0.3 nm | about 463 | unscreened vacuum value |
 
-These numbers matter for intuition. A force or energy that is thousands of
+Two qualifications matter:
+
+1. **These are order-of-magnitude references, not universal constants.** A
+   hydrogen bond in a protein interior is not the same as a hydrogen bond in
+   water. The number depends on geometry, environment, and how the interaction
+   is defined.
+2. **The Coulomb value is a bare interaction.** It is the energy of two point
+   charges in vacuum. In a molecular system, solvent and other charges screen
+   the interaction, so the *effective* electrostatic energy is usually smaller.
+
+Even with those caveats, the scale is useful: a force or energy of thousands of
 kJ/mol is usually a sign of an atomic clash or a unit mistake, not normal
 thermal motion.
 
 ## 7. Molar energy and the gas constant
 
-Moleculab expresses energy per mole. This is why the gas constant is
+Moleculab expresses energy per mole. The molar gas constant is
 
 $$
 R=0.008314462618\ \mathrm{kJ/(mol\,K)}.
@@ -313,6 +439,25 @@ $$
 Use $R$ when your energy is per mole. Use $k_B$ when your energy is per
 particle. Mixing them is a common source of factors of $N_A$.
 
+### 7.1 A naming trap in the code
+
+For historical reasons, the library calls the molar gas constant
+`BOLTZMANN_CONSTANT`:
+
+```python
+# src/moleculab/units.py
+BOLTZMANN_CONSTANT = 0.008314462618   # kJ/(mol K), despite the name
+MOLAR_GAS_CONSTANT = BOLTZMANN_CONSTANT
+```
+
+The value is $R$, not $k_B$. The descriptive alias `MOLAR_GAS_CONSTANT` exists
+so new code can say what it means. The historical name is kept so existing code
+does not break. The true single-particle constant is stored separately as
+`BOLTZMANN_CONSTANT_J_PER_K`.
+
+**Core takeaway.** A variable name is not a unit. Read the comment and check the
+value.
+
 ## 8. Charge and the Coulomb constant
 
 Coulomb's law in SI is
@@ -346,66 +491,67 @@ $$
 U\approx138.935\ \mathrm{kJ/mol}.
 $$
 
-At $r=0.3$ nm the interaction is roughly $463$ kJ/mol. That is much larger
-than thermal energy, which is why electrostatics can dominate molecular
-recognition and why water screening matters so much.
+At $r=0.3$ nm the interaction is roughly $463$ kJ/mol.
 
-## 9. How the code protects the unit contract
+**Deeper insight.** That number is the *vacuum* interaction. Water has a large
+relative permittivity, so the effective attraction between ions in water is much
+weaker at the same separation. This is why molecular models use reaction-field
+or Ewald electrostatics instead of bare $1/r$ sums. The constant is still the
+right starting point; it is the surrounding model that changes.
 
-The unit constants are used by the rest of the library. For example:
+## 9. Python implementation and verification
+
+The unit constants are used by the rest of the library:
 
 ```python
 from moleculab import units
 
-print(units.DISTANCE_UNIT)          # nm
-print(units.BOLTZMANN_CONSTANT)     # kJ/(mol K)
-print(units.COULOMB_CONSTANT)       # kJ nm/(mol e^2)
+print(units.DISTANCE_UNIT)               # nm
+print(units.MOLAR_GAS_CONSTANT)          # 0.008314462618 kJ/(mol K)
+print(units.BOLTZMANN_CONSTANT)          # same number; historical name
+print(units.BOLTZMANN_CONSTANT_J_PER_K)  # 1.380649e-23 J/K
+print(units.COULOMB_CONSTANT)            # 138.935... kJ nm/(mol e^2)
 ```
 
-The real code also validates vector shapes. A `Particle` refuses a position
-with two components, because a two-component position would silently break
-every later 3D force calculation.
-
-A typical numerical check:
+A numerical check:
 
 ```bash
 uv run python - <<'PY'
 from moleculab import units
-print("RT at 300 K:", units.BOLTZMANN_CONSTANT * 300)
-print("Coulomb constant:", units.COULOMB_CONSTANT)
+
+print("R            =", units.MOLAR_GAS_CONSTANT)
+print("R * 300 K    =", units.MOLAR_GAS_CONSTANT * 300)
+print("k_B          =", units.BOLTZMANN_CONSTANT_J_PER_K)
+print("N_A          =", units.AVOGADRO_CONSTANT)
+print("Coulomb      =", units.COULOMB_CONSTANT)
 PY
 ```
 
 Expected:
 
 ```text
-RT at 300 K: 2.4943387854
-Coulomb constant: 138.93545764438198
+R            = 0.008314462618
+R * 300 K    = 2.4943387854
+k_B          = 1.380649e-23
+N_A          = 6.02214076e+23
+Coulomb      = 138.9354576444
 ```
 
 Run the unit tests:
 
 ```bash
-uv run pytest tests/test_units.py -q
+uv run pytest tests/test_units.py tests/test_particles.py -q
 ```
 
-## 10. Dimensional analysis as a debugging tool
+The particle tests belong here too, because they enforce the shape and unit
+contract at the boundary of the system. A `Particle` refuses a position with two
+components; a two-component position would silently break every later 3D force
+calculation.
 
-Dimensional analysis means checking that both sides of an equation have the
-same units. It catches many errors before running a simulation.
+**Why this is tested.** A constant with the wrong units still produces a finite
+number. Tests turn a silent unit error into a loud failure.
 
-Examples:
-
-- $U=\tfrac12kx^2$: $k$ is kJ/(mol nm²), $x²$ is nm², so $U$ is kJ/mol.
-- $F=kx$: kJ/(mol nm²) × nm = kJ/(mol nm).
-- $a=F/m$: kJ/(mol nm) / Da gives nm/ps² numerically in this unit system.
-- $K=\tfrac12mv²$: Da × (nm/ps)² gives kJ/mol numerically.
-
-If you derive a new equation, write the units next to every symbol before
-coding. If the units do not match, the equation is wrong even if it looks
-plausible.
-
-## 11. Numerical experiments
+## 10. Experiments
 
 ### Experiment 1: thermal energy
 
@@ -420,24 +566,38 @@ of 5 kcal/mol to kJ/mol.
 ### Experiment 3: Coulomb scale
 
 Compute the Coulomb energy of two unit charges at 0.3 nm, 0.5 nm, and 1.0 nm.
-Compare each result with $RT$ at 300 K. What does the comparison suggest about
-electrostatic interactions in molecular recognition?
+Compare each result with $RT$ at 300 K. Then explain why the effective
+interaction in water can be much smaller.
 
-## 12. Common mistakes
+### Experiment 4: dimensional analysis of kinetic energy
 
-1. **Using Å in a nm equation.** Convert by multiplying by 0.1.
-2. **Using kcal/mol in a kJ/mol equation.** Multiply by 4.184.
-3. **Using fs in a ps equation.** Multiply by 0.001.
-4. **Forgetting the per-mole convention.** Use $R$, not $k_B$, when energies
-   are per mole.
-5. **Dropping the 1/4πε₀ factor in SI Coulomb calculations.** In Moleculab,
-   that factor is already inside `COULOMB_CONSTANT`.
-6. **Assuming the acceleration shortcut is universal.** It is specific to the
-   chosen internal units.
-7. **Trusting a number because it is finite.** A finite number can still have
-   the wrong units.
+Start from $K=\tfrac12m|\mathbf v|^2$ with $m$ in Da and $|\mathbf v|$ in nm/ps.
+Show by explicit SI conversion that the result is in kJ/mol. Do not look at
+section 5.5 until you have tried it.
 
-## 13. Connections to later tutorials
+### Experiment 5: the running particle
+
+Compute the kinetic energy of $P$ from its mass and speed. Confirm that you get
+0.06 kJ/mol without inserting any conversion factor.
+
+## 11. Common misconceptions
+
+1. **“Units are just notation.”** A number without a unit is not a physical
+   quantity. The unit system is part of the model.
+2. **Using Å in a nm equation.** Convert by multiplying by 0.1.
+3. **Using kcal/mol in a kJ/mol equation.** Multiply by 4.184.
+4. **Using fs in a ps equation.** Multiply by 0.001.
+5. **Using $k_B$ when the energy is per mole.** In Moleculab, use $R$. The
+   historical variable name is misleading; check the units.
+6. **Dropping $1/(4\pi\epsilon_0)$ in an SI Coulomb calculation.** In
+   Moleculab, that factor is already inside `COULOMB_CONSTANT`.
+7. **Assuming the acceleration shortcut is universal.** It holds for this
+   particular unit system. Change the units and the factor returns.
+8. **Treating reference energies as universal constants.** Hydrogen-bond and
+   Coulomb values depend on the environment and on what is included in the
+   model.
+
+## 12. Connections and what comes next
 
 Units are not an isolated preliminary. They appear in every later layer:
 
@@ -449,10 +609,11 @@ Units are not an isolated preliminary. They appear in every later layer:
 - **Docking:** interaction energies are kJ/mol, not arbitrary scores.
 - **QM/MM:** quantum energies are converted to kJ/mol before mixing with MM.
 
-When a later result looks strange, first check its units. Many “physics bugs”
-are unit bugs.
+**Looking ahead.** The next tutorial gives $P$ a state and computes its kinetic
+energy. That calculation is only meaningful because of the unit contract
+established here.
 
-## 14. Self-check with answers
+## 13. Self-check with answers
 
 1. **How many nm are in 1 Å?**
    0.1 nm.
@@ -470,33 +631,64 @@ are unit bugs.
    $a=24/4=6$ nm/ps².
 
 6. **Why does $a=F/m$ not need a constant here?**
-   Because the conversion factors for kJ/mol, nm, ps, and Da cancel exactly.
+   Because the conversion factors for kJ/mol, nm, ps, and Da cancel to about
+   one part in $10^9$.
 
-7. **Why is a point-charge Coulomb energy often much larger than $RT$?**
-   Because the Coulomb interaction has no screening in vacuum and grows as
-   $1/r$; at molecular contact distances it can be hundreds of kJ/mol.
+7. **What is the value of `BOLTZMANN_CONSTANT`, and what is it really?**
+   It is 0.008314462618, the molar gas constant $R$ in kJ/(mol K), not the
+   single-particle Boltzmann constant.
 
-8. **Which constant would you use for a single particle's thermal energy?**
-   $k_B$, not $R$.
+8. **Why can a bare Coulomb energy overstate an interaction in water?**
+   The bare $1/r$ value is unscreened. Solvent and other charges screen the
+   interaction, so the effective energy is smaller.
 
-## 15. Exercises
+9. **Why is a finite number not enough to trust a result?**
+   A finite number can still have the wrong units or the wrong model.
 
-1. Write a short Python function that converts Å to nm and kcal/mol to kJ/mol.
-   Add a test for each conversion.
-2. Derive the units of the harmonic stiffness $k$ from $U=\tfrac12kx²$.
-3. Compute the Coulomb energy of charges $+1e$ and $-1e$ at 0.25 nm and compare
-   with $RT$ at 298 K. Is the interaction “strong” on a thermal scale?
-4. Read `src/moleculab/units.py` and list every constant with its units.
-5. Explain in one paragraph why unit systems are part of the model rather than
-   mere notation.
+## 14. Exercises
 
-## 16. Summary
+### Calculation
+
+1. Convert 1.5 Å to nm, 2 fs to ps, and 5 kcal/mol to kJ/mol.
+2. Compute $RT$ at 298 K and at 310 K.
+3. Compute the Coulomb energy of $+1e$ and $-1e$ at 0.25 nm.
+4. Compute the kinetic energy of a 4 Da particle at 0.2 nm/ps.
+
+### Reasoning
+
+1. Why does $a=F/m$ not need a constant in this unit system? Explain in terms
+   of the conversion factors, not just “the units match.”
+2. Why is it dangerous to compare a bare Coulomb energy with $RT$ and conclude
+   that the interaction in a protein is always huge?
+3. Why is a variable named `BOLTZMANN_CONSTANT` allowed to hold the molar gas
+   constant? What should you check before using it?
+4. A function returns an energy of $10^6$ kJ/mol for a normal molecular
+   configuration. What are the two most likely explanations?
+
+### Implementation
+
+1. Write a Python function that converts Å to nm and kcal/mol to kJ/mol. Add a
+   test for each conversion.
+2. Derive the units of the harmonic stiffness $k$ from $U=\tfrac12kx^2$, then
+   verify them in code with `units.py`.
+3. Add a small script that prints the kinetic energy of $P$ and checks it
+   against the analytic value.
+4. Read `src/moleculab/units.py` and list every constant with its units. Mark
+   which ones are conversion factors and which are physical constants.
+
+## 15. Summary
 
 - Moleculab uses nm, ps, kJ/mol, Da, kJ/(mol nm), K, and e.
+- The units are chosen together, so derived units need no numerical factor.
 - The acceleration equation is numerically $a=F/m$ in these units because
   the conversion factors cancel.
+- Kinetic energy is numerically $K=\tfrac12m|\mathbf v|^2$ for the same reason.
 - Energy is molar; use $R$, not $k_B$, unless you explicitly convert.
-- Coulomb interactions use a single precomputed constant.
+- `BOLTZMANN_CONSTANT` is a historical name for $R$; `MOLAR_GAS_CONSTANT` is the
+  descriptive alias.
+- Coulomb interactions use a single precomputed constant, but the bare value is
+  not the effective interaction in a solvent.
+- Energy-scale tables are order-of-magnitude guides, not universal constants.
 - Dimensional analysis and unit tests catch errors before they contaminate a
   simulation.
 

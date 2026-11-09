@@ -118,7 +118,13 @@ For a harmonic oscillator with `m = 12 Da` and `k = 12*pi^2`, the period is
 stays nearly constant.
 
 Run: `uv run python examples/harmonic_oscillator.py`.
-Check: `uv run pytest tests/test_integrators.py -q`.
+
+For an independent check, run
+`uv run python examples/harmonic_validation.py`. It compares the numerical
+trajectory with the analytic solution and reports second-order convergence as
+the timestep is halved.
+
+Check: `uv run pytest tests/test_integrators.py tests/test_harmonic_validation.py -q`.
 
 Deep dive: [04 — Velocity Verlet and energy conservation](individual/04_velocity_verlet.md).
 

@@ -39,6 +39,12 @@ CHARGE_UNIT = "e"
 #: numerically equal to 0.008314462618 kJ/(mol K).
 BOLTZMANN_CONSTANT = 0.008314462618
 
+#: Descriptive alias for :data:`BOLTZMANN_CONSTANT`.
+#:
+#: ``BOLTZMANN_CONSTANT`` is retained for compatibility, but its value is the
+#: *molar* gas constant ``R`` in kJ/(mol K).  New code should prefer this name.
+MOLAR_GAS_CONSTANT = BOLTZMANN_CONSTANT
+
 #: Avogadro constant in 1/mol.
 AVOGADRO_CONSTANT = 6.02214076e23
 

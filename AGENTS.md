@@ -4,7 +4,7 @@
 
 - Moleculab is a working **educational** molecular physics/simulation library. Optimize for scientific correctness and readable, inspectable code, not production hardening.
 - The code in `src/moleculab/` is now the executable source of truth. `docs/lib.md` describes the long-term architecture/roadmap; `docs/energies.md` preserves the first-milestone derivation and expected numbers. Reconcile docs with code rather than assuming the docs are implemented.
-- Implemented: units, typed `Particle` state, `HarmonicPotential`, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, and a CPU-default optional PyTorch Ewald backend.
+- Implemented: units, typed `Particle` state, `HarmonicPotential`, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, analytic validation of the Velocity Verlet harmonic oscillator, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, and a CPU-default optional PyTorch Ewald backend.
 - Deferred: molecular FEP/TI/MBAR for complex systems, trained/empirical binding-affinity scoring, real QM/MM/DFT, and NPU-specific acceleration. Do not add these without tests and a numerical example.
 - Python + NumPy first. Rust/PyO3 is explicitly a later optimization, not part of the current implementation.
 
@@ -18,6 +18,8 @@ uv run pytest -q                          # full suite
 uv run pytest tests/test_torsion.py -v     # one test file
 uv run pytest tests/test_box.py::test_minimum_image_uses_the_shortest_separation -v
 uv run python examples/bonded_molecule.py
+uv run python examples/harmonic_oscillator.py
+uv run python examples/harmonic_validation.py
 uv run python examples/trajectory_analysis.py
 uv run python examples/solvent_box.py
 uv run python examples/free_energy_perturbation.py
@@ -45,7 +47,7 @@ uv run python examples/backend_benchmark.py --backend cpu
 
 - Internal units: distance **nm**, time **ps**, energy **kJ/mol**, mass **Da**, force **kJ/(mol nm)**, temperature **K**, charge **e**.
 - With this system, `a = F / m` is numerically correct without conversion factors. Do not add ad-hoc conversion constants inside physics code.
-- `BOLTZMANN_CONSTANT = 0.008314462618` is actually the **molar gas constant** `R` in kJ/(mol K), despite the name. Keep the name/value for compatibility; use `BOLTZMANN_CONSTANT_J_PER_K` for the single-particle constant.
+- `BOLTZMANN_CONSTANT = 0.008314462618` is actually the **molar gas constant** `R` in kJ/(mol K), despite the name. Keep the name/value for compatibility; `MOLAR_GAS_CONSTANT` is the descriptive alias, and `BOLTZMANN_CONSTANT_J_PER_K` is the single-particle constant.
 - `COULOMB_CONSTANT ≈ 138.935456 kJ nm/(mol e²)` is derived from SI constants in `units.py`. Charges are in elementary-charge units and distances in nm.
 
 ## Architecture rules

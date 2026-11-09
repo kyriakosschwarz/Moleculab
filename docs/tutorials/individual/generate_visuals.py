@@ -62,6 +62,16 @@ def save_gif(animation, name, fps=25):
     plt.close(animation._fig)
 
 
+def strip_svg_trailing_whitespace():
+    """Keep generated SVG diffs free of trailing spaces."""
+
+    for path in ASSETS.glob("*.svg"):
+        text = path.read_text()
+        cleaned = "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+        if cleaned != text:
+            path.write_text(cleaned)
+
+
 def unit_scale():
     fig, ax = plt.subplots(figsize=(10.5, 3.6))
     objects = [
@@ -130,24 +140,237 @@ def unit_bridge():
         ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 0.18, label, ha="center", fontsize=9, color=GRAY)
 
     ax.text(5, 5.55, "The internal unit system makes a = F/m numerically direct", ha="center", fontsize=14, weight="bold")
-    box(0.4, 3.7, 2.5, 1.15, "force\nkJ/(mol nm)", BLUE)
-    box(3.7, 3.7, 2.4, 1.15, "mass\nDa", ORANGE)
-    box(7.0, 3.7, 2.5, 1.15, "acceleration\nnm/ps²", GREEN)
-    arrow(2.9, 4.27, 3.55, 4.27, "F = 10")
-    arrow(6.1, 4.27, 6.85, 4.27, "m = 12")
-    ax.text(5.0, 2.85, "a = F/m = 10/12 = 0.8333 nm/ps²", ha="center", fontsize=13, color=GREEN, weight="bold")
+    box(0.6, 3.8, 2.7, 1.15, "force\nkJ/(mol nm)", BLUE)
+    box(0.6, 2.25, 2.7, 1.15, "mass\nDa", ORANGE)
+    box(5.75, 3.03, 3.25, 1.15, "acceleration\nnm/ps²", GREEN)
+    arrow(3.35, 4.37, 5.65, 3.95, "F = 10")
+    arrow(3.35, 2.82, 5.65, 3.28, "m = 12")
+    ax.text(6.95, 2.48, "a = F/m = 10/12 = 0.8333 nm/ps²", ha="center", fontsize=12.5, color=GREEN, weight="bold")
     ax.text(
         5.0,
-        2.15,
+        1.82,
         "Why no extra constant?  The SI conversion factors for kJ/mol, nm, ps and Da cancel exactly.",
         ha="center",
         fontsize=10.5,
         color=GRAY,
     )
-    box(0.4, 0.65, 4.1, 0.95, "SI force per particle: kJ → J, divide by N_A", BLUE)
-    box(5.0, 0.65, 4.6, 0.95, "SI mass: Da → kg, then convert m/s² → nm/ps²", ORANGE)
-    ax.text(5.0, 0.22, "Mixing Å, kcal/mol, fs or kg without converting breaks this shortcut.", ha="center", fontsize=9.5, color=RED)
+    box(0.4, 0.55, 4.1, 0.9, "SI force per particle: kJ → J, divide by N_A", BLUE)
+    box(5.0, 0.55, 4.6, 0.9, "SI mass: Da → kg, then convert m/s² → nm/ps²", ORANGE)
+    ax.text(5.0, 0.16, "Mixing Å, kcal/mol, fs or kg without converting breaks this shortcut.", ha="center", fontsize=9.5, color=RED)
     save_svg(fig, "unit_bridge.svg")
+
+
+def learning_ladder():
+    fig, ax = plt.subplots(figsize=(11.0, 4.6))
+    ax.set_xlim(0, 11)
+    ax.set_ylim(0, 4.6)
+    ax.axis("off")
+
+    steps = [
+        ("01", "Units", "nm, ps, kJ/mol, Da\nmake numbers physical"),
+        ("02", "Particle", "mass, position, velocity\nkinetic energy"),
+        ("03", "Landscape", "U(x) and F = -dU/dx\nharmonic model"),
+        ("04", "Motion", "Velocity Verlet\nenergy stays bounded"),
+    ]
+    width = 2.35
+    gap = 0.34
+    start = 0.28
+    for index, (number, title, body) in enumerate(steps):
+        x = start + index * (width + gap)
+        color = [BLUE, ORANGE, GREEN, RED][index]
+        rect = FancyBboxPatch(
+            (x, 2.55),
+            width,
+            1.35,
+            boxstyle="round,pad=0.06,rounding_size=0.12",
+            linewidth=1.6,
+            edgecolor=color,
+            facecolor="white",
+        )
+        ax.add_patch(rect)
+        ax.text(x + 0.18, 3.62, number, fontsize=18, weight="bold", color=color)
+        ax.text(x + width / 2, 3.42, title, ha="center", fontsize=11.5, weight="bold")
+        ax.text(x + width / 2, 2.92, body, ha="center", va="center", fontsize=8.4, color=GRAY)
+        if index < len(steps) - 1:
+            ax.add_patch(
+                FancyArrowPatch(
+                    (x + width + 0.03, 3.22),
+                    (x + width + gap - 0.03, 3.22),
+                    arrowstyle="-|>",
+                    mutation_scale=14,
+                    linewidth=1.4,
+                    color=GRAY,
+                )
+            )
+
+    ax.text(5.5, 1.95, "One particle, reused at every step", ha="center", fontsize=12, weight="bold", color=GRAY)
+    details = [
+        ("mass", "12 Da"),
+        ("position", "(0.1, 0, 0) nm"),
+        ("velocity", "(0.1, 0, 0) nm/ps"),
+        ("speed", "0.10 nm/ps"),
+        ("kinetic energy", "0.06 kJ/mol"),
+    ]
+    for index, (label, value) in enumerate(details):
+        x = 0.55 + index * 2.05
+        ax.text(x, 1.55, label, fontsize=9, color=GRAY)
+        ax.text(x, 1.22, value, fontsize=10, weight="bold", color=BLUE)
+        ax.plot([x, x + 1.75], [1.05, 1.05], color=LIGHT, lw=4)
+    ax.text(5.5, 0.55, "Tutorial 01 chooses the language  →  02 describes the state  →  03 adds a landscape  →  04 makes it move",
+            ha="center", fontsize=9.5, color=GRAY)
+    save_svg(fig, "learning_ladder.svg")
+
+
+def stage_flow():
+    fig, ax = plt.subplots(figsize=(10.8, 2.9))
+    ax.set_xlim(0, 10.8)
+    ax.set_ylim(0, 2.9)
+    ax.axis("off")
+    labels = [
+        ("Physical\nmeaning", BLUE),
+        ("Mathematical\ndefinition", ORANGE),
+        ("Units and\ndimensions", GREEN),
+        ("Python\nimplementation", RED),
+        ("Numerical\nverification", GRAY),
+    ]
+    width = 1.85
+    gap = 0.24
+    start = 0.22
+    for index, (label, color) in enumerate(labels):
+        x = start + index * (width + gap)
+        rect = FancyBboxPatch(
+            (x, 0.95),
+            width,
+            1.05,
+            boxstyle="round,pad=0.06,rounding_size=0.12",
+            linewidth=1.5,
+            edgecolor=color,
+            facecolor="white",
+        )
+        ax.add_patch(rect)
+        ax.text(x + width / 2, 1.47, label, ha="center", va="center", fontsize=10.5)
+        if index < len(labels) - 1:
+            ax.add_patch(
+                FancyArrowPatch(
+                    (x + width + 0.02, 1.47),
+                    (x + width + gap - 0.02, 1.47),
+                    arrowstyle="-|>",
+                    mutation_scale=13,
+                    linewidth=1.3,
+                    color=GRAY,
+                )
+            )
+    ax.text(5.4, 2.5, "The pattern behind every section of this course", ha="center", fontsize=12.5, weight="bold")
+    ax.text(5.4, 0.45, "A model is not finished until the equation, the units, the code, and the test all agree.",
+            ha="center", fontsize=9.5, color=GRAY)
+    save_svg(fig, "stage_flow.svg")
+
+
+def particle_state():
+    fig, ax = plt.subplots(figsize=(10.4, 4.8))
+    ax.set_xlim(0, 10.4)
+    ax.set_ylim(0, 4.8)
+    ax.axis("off")
+
+    stored = [
+        ("mass", "scalar, Da", "particle parameter"),
+        ("position", "vector, nm", "current state"),
+        ("velocity", "vector, nm/ps", "current state"),
+    ]
+    derived = [
+        ("speed", "|v|", "from velocity"),
+        ("kinetic energy", "½ m |v|²", "from mass and velocity"),
+        ("force", "-∇U(r)", "from the potential"),
+        ("acceleration", "F / m", "from force and mass"),
+    ]
+
+    ax.text(1.75, 4.35, "Stored state", ha="center", fontsize=12.5, weight="bold", color=BLUE)
+    ax.text(7.0, 4.35, "Derived quantities", ha="center", fontsize=12.5, weight="bold", color=GREEN)
+
+    for index, (name, symbol, reason) in enumerate(stored):
+        y = 3.35 - index * 1.02
+        rect = FancyBboxPatch(
+            (0.35, y - 0.34),
+            2.8,
+            0.68,
+            boxstyle="round,pad=0.05,rounding_size=0.1",
+            linewidth=1.4,
+            edgecolor=BLUE,
+            facecolor="white",
+        )
+        ax.add_patch(rect)
+        ax.text(0.55, y + 0.1, name, fontsize=10.5, weight="bold")
+        ax.text(0.55, y - 0.16, f"{symbol}  ·  {reason}", fontsize=8.6, color=GRAY)
+
+    for index, (name, symbol, reason) in enumerate(derived):
+        y = 3.65 - index * 0.92
+        rect = FancyBboxPatch(
+            (5.55, y - 0.3),
+            4.45,
+            0.6,
+            boxstyle="round,pad=0.05,rounding_size=0.1",
+            linewidth=1.3,
+            edgecolor=GREEN,
+            facecolor="white",
+        )
+        ax.add_patch(rect)
+        ax.text(5.75, y + 0.09, name, fontsize=10.2, weight="bold")
+        ax.text(7.55, y + 0.09, symbol, fontsize=9.4, color=GREEN)
+        ax.text(5.75, y - 0.17, reason, fontsize=8.4, color=GRAY)
+
+    ax.add_patch(
+        FancyArrowPatch(
+            (3.25, 2.55),
+            (5.45, 2.55),
+            arrowstyle="-|>",
+            mutation_scale=16,
+            linewidth=1.5,
+            color=GRAY,
+            connectionstyle="arc3,rad=-0.15",
+        )
+    )
+    ax.text(4.35, 2.78, "always recomputed\nfrom the stored state", ha="center", fontsize=8.8, color=GRAY)
+    ax.text(5.2, 0.35, "One source of truth: the state. Everything else is a calculation.",
+            ha="center", fontsize=9.5, color=GRAY)
+    save_svg(fig, "particle_state.svg")
+
+
+def verlet_flow():
+    fig, ax = plt.subplots(figsize=(9.2, 5.0))
+    ax.set_xlim(0, 9.2)
+    ax.set_ylim(0, 5.0)
+    ax.axis("off")
+
+    steps = [
+        ("1", r"$\mathbf{F}_n = -\nabla U(\mathbf{r}_n)$", "force at the current position"),
+        ("2", r"$\mathbf{a}_n = \mathbf{F}_n / m$", "current acceleration"),
+        ("3", r"$\mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n\Delta t + \frac{1}{2}\mathbf{a}_n\Delta t^2$", "move the position"),
+        ("4", r"$\mathbf{F}_{n+1} = -\nabla U(\mathbf{r}_{n+1})$", "force at the new position"),
+        ("5", r"$\mathbf{v}_{n+1} = \mathbf{v}_n + \frac{1}{2}(\mathbf{a}_n + \mathbf{a}_{n+1})\Delta t$", "average the acceleration"),
+    ]
+    y_positions = [4.35, 3.55, 2.72, 1.9, 1.08]
+    for index, (number, equation, note) in enumerate(steps):
+        y = y_positions[index]
+        color = GREEN if index < 2 else (BLUE if index == 2 else (ORANGE if index == 3 else RED))
+        circle = plt.Circle((0.7, y), 0.22, color=color, alpha=0.9)
+        ax.add_patch(circle)
+        ax.text(0.7, y, number, ha="center", va="center", fontsize=10, color="white", weight="bold")
+        ax.text(1.15, y + 0.11, equation, fontsize=12.5, va="center")
+        ax.text(1.15, y - 0.2, note, fontsize=9, va="center", color=GRAY)
+        if index < len(steps) - 1:
+            ax.add_patch(
+                FancyArrowPatch(
+                    (1.15, y - 0.34),
+                    (1.15, y_positions[index + 1] + 0.25),
+                    arrowstyle="-|>",
+                    mutation_scale=12,
+                    linewidth=1.2,
+                    color=GRAY,
+                )
+            )
+    ax.text(4.6, 0.35, "Repeat: $\\mathbf{F}_{n+1}$ and $\\mathbf{a}_{n+1}$ become the next step's current values.",
+            ha="center", fontsize=9.5, color=GRAY)
+    save_svg(fig, "verlet_flow.svg")
 
 
 def particle_velocity():
@@ -204,10 +427,11 @@ def maxwell_speed():
         ax.plot(speed, density, lw=2.3, color=color, label=f"{temperature} K")
         mean = np.trapezoid(speed * density, speed)
         ax.axvline(mean, color=color, ls=":", lw=1.2, alpha=0.8)
+    ax.axvline(0.1, color=GRAY, ls="--", lw=1.6, label="example velocity 0.1 nm/ps")
     ax.set_xlabel("speed |v| (nm/ps)")
     ax.set_ylabel("probability density")
-    ax.set_title("Thermal speed distribution for a 12 Da particle")
-    ax.legend()
+    ax.set_title("Thermal speeds for a 12 Da particle, with the example marked")
+    ax.legend(title="temperature / example", loc="upper right")
     save_svg(fig, "maxwell_speed.svg")
 
 
@@ -566,8 +790,11 @@ def euler_vs_verlet():
 
 
 def main():
+    learning_ladder()
+    stage_flow()
     unit_scale()
     unit_bridge()
+    particle_state()
     particle_velocity()
     kinetic_energy_curves()
     maxwell_speed()
@@ -587,6 +814,8 @@ def main():
     energy_drift()
     euler_vs_verlet()
     dt_stability()
+    verlet_flow()
+    strip_svg_trailing_whitespace()
     print(f"Wrote visualizations to {ASSETS}")
 
 

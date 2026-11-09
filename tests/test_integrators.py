@@ -37,6 +37,22 @@ def test_velocity_verlet_step_does_not_mutate_input():
     np.testing.assert_allclose(particle.velocity, velocity_before)
 
 
+def test_velocity_verlet_step_preserves_chemical_identity():
+    particle = Particle(
+        mass=12.0,
+        position=[0.1, 0.0, 0.0],
+        velocity=[0.0, 0.0, 0.0],
+        atom_type="carbon",
+        charge=-0.2,
+    )
+    potential = HarmonicPotential(stiffness=100.0, center=[0.0, 0.0, 0.0])
+
+    updated = velocity_verlet_step(particle, potential, dt=0.001)
+
+    assert updated.atom_type == "carbon"
+    assert updated.charge == pytest.approx(-0.2)
+
+
 def test_one_step_matches_the_velocity_verlet_equations():
     particle = Particle(mass=2.0, position=[0.1, 0.0, 0.0], velocity=[0.0, 0.0, 0.0])
     potential = HarmonicPotential(stiffness=100.0, center=[0.0, 0.0, 0.0])

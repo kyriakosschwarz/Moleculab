@@ -1,17 +1,63 @@
 # 04 — Velocity Verlet and the conservation of energy
 
 > **Where we are.** Tutorial 03 gave us a potential landscape and a force. Now
-> we let the particle move through time and watch kinetic and potential energy
-> trade places.
+> we let the running particle move through time and watch kinetic and potential
+> energy trade places.
 >
 > **What you should already know.** Kinetic energy, potential energy, force as
 > the negative gradient, and the unit system.
 >
 > **What you will be able to do afterwards.** Explain why a numerical
-> integrator is needed, derive Velocity Verlet, implement one step, analyze a
+> integrator is needed, derive Velocity Verlet, implement one step, analyse a
 > trajectory, choose a timestep, and diagnose energy drift.
 
-## 1. From force to motion
+## 1. Learning objectives
+
+**Core**
+
+- Explain why the equations of motion must be integrated numerically.
+- Derive the Velocity Verlet position and velocity updates.
+- Implement one step and a trajectory loop.
+- Check energy conservation and the analytic period.
+
+**Deeper insight**
+
+- Explain why explicit Euler gains energy for an oscillator.
+- Explain what “symplectic” and “time-reversible” mean in practice.
+- Distinguish stability from accuracy when choosing a timestep.
+
+**Looking ahead**
+
+- Production MD adds thermostats, barostats, constraints, and many particles.
+- SHAKE/RATTLE remove the fastest bond vibrations so a larger timestep is safe.
+
+## 2. The running example
+
+We keep the same mass and the same starting position. Two closely related
+experiments are useful.
+
+| Quantity | Tutorial 03 well | Exact benchmark |
+| --- | --- | --- |
+| mass $m$ | 12 Da | 12 Da |
+| initial position $x_0$ | 0.1 nm | 0.1 nm |
+| initial velocity $v_0$ | 0.1 nm/ps | 0 nm/ps |
+| stiffness $k$ | 100 kJ/(mol nm²) | $12\pi^2$ kJ/(mol nm²) |
+| angular frequency $\omega=\sqrt{k/m}$ | 2.8868 rad/ps | $\pi$ rad/ps |
+| period $T=2\pi/\omega$ | 2.1766 ps | 2 ps |
+| initial energy $E$ | 0.56 kJ/mol | 0.5922 kJ/mol |
+
+The second column is a deliberate benchmark, not a different physical model.
+Choosing $k=12\pi^2$ and releasing the particle from rest gives the exact
+solution
+
+$$
+x(t)=0.1\cos(\pi t)\ \mathrm{nm},
+$$
+
+with period exactly 2 ps. That lets us compare the integrator against a known
+answer rather than against another simulation.
+
+## 3. Physical intuition: force to motion
 
 Newton's second law is
 
@@ -43,7 +89,14 @@ The computational loop is:
 The quality of step 3 determines whether the simulation is physically
 trustworthy.
 
-## 2. The simplest attempt: explicit Euler
+![The Velocity Verlet loop](assets/verlet_flow.svg)
+
+*One step: force, acceleration, position update, new force, velocity update.
+The new force is reused as the current force in the next step.*
+
+## 4. Mathematical description
+
+### 4.1 The simplest attempt: explicit Euler
 
 The most direct update is
 
@@ -74,7 +127,7 @@ particle spirals outward instead of staying on a closed orbit.
 the total energy bounded. A method can look stable for a short time and still
 be physically wrong.*
 
-## 3. A better update: Taylor expansion
+### 4.2 A better update: Taylor expansion
 
 Expand position in a Taylor series:
 
@@ -85,10 +138,11 @@ $$
 +\mathbf v(t)\Delta t
 +\frac12\mathbf a(t)\Delta t^2
 +\frac16\mathbf j(t)\Delta t^3
-+\cdots.
++\cdots,
 $$
 
-Truncating after the quadratic term gives
+where $\mathbf j=d\mathbf a/dt$ is the jerk. Truncating after the quadratic term
+gives
 
 $$
 \mathbf r_{n+1}
@@ -112,7 +166,7 @@ $$
 
 This is the **Velocity Verlet** algorithm.
 
-## 4. The algorithm in detail
+### 4.3 The algorithm in detail
 
 One step:
 
@@ -146,7 +200,7 @@ $$
 The extra force evaluation at the new position is the key difference from
 Euler. It is also why Velocity Verlet is stable for oscillatory systems.
 
-## 5. Why Velocity Verlet is special
+### 4.4 Why Velocity Verlet is special
 
 Velocity Verlet has several properties that matter for MD:
 
@@ -164,7 +218,75 @@ trajectory stays near the true energy surface instead of spiraling away.
 This is why Velocity Verlet, or closely related Verlet-family methods, are
 standard in molecular dynamics.
 
-## 6. The harmonic oscillator as an exact benchmark
+## 5. Units and dimensions
+
+The oscillator equations are dimensionally consistent in the internal system:
+
+| Quantity | Relation | Unit |
+| --- | --- | --- |
+| $k/m$ | kJ/(mol nm²) / Da | 1/ps² |
+| $\omega=\sqrt{k/m}$ | square root of the above | 1/ps |
+| $\omega\Delta t$ | dimensionless | — |
+| $a\Delta t^2$ | (nm/ps²)(ps²) | nm |
+| $v\Delta t$ | (nm/ps)(ps) | nm |
+
+The frequency unit is often written rad/ps, but the radian is dimensionless.
+This is why $\omega\Delta t$ can be compared with a pure number in the
+stability condition.
+
+## 6. Worked example: one step by hand
+
+Use the exact benchmark: $m=12$ Da, $k=12\pi^2$, $x_0=0.1$ nm, $v_0=0$, and
+choose $\Delta t=0.1$ ps.
+
+**Step 1. Current acceleration.**
+
+$$
+a_0=-\frac{kx_0}{m}
+=-\frac{(12\pi^2)(0.1)}{12}
+\approx-0.98696\ \mathrm{nm/ps^2}.
+$$
+
+**Step 2. New position.**
+
+$$
+x_1
+=
+0.1+0+\frac12(-0.98696)(0.1)^2
+\approx0.0950652\ \mathrm{nm}.
+$$
+
+**Step 3. New acceleration.**
+
+$$
+a_1=-\frac{(12\pi^2)(0.0950652)}{12}
+\approx-0.938256\ \mathrm{nm/ps^2}.
+$$
+
+**Step 4. New velocity.**
+
+$$
+v_1
+=
+0+\frac12(-0.98696-0.938256)(0.1)
+\approx-0.0962608\ \mathrm{nm/ps}.
+$$
+
+Compare with the exact solution at $t=0.1$ ps:
+
+$$
+x_{\text{exact}}=0.1\cos(0.1\pi)\approx0.0951057\ \mathrm{nm},
+$$
+
+$$
+v_{\text{exact}}=-0.1\pi\sin(0.1\pi)\approx-0.0970806\ \mathrm{nm/ps}.
+$$
+
+The position error is about $4\times10^{-5}$ nm; the velocity error is about
+$8\times10^{-4}$ nm/ps. This is a single step with a relatively large timestep.
+The error is small because the method is second-order, but it is not zero.
+
+## 7. The harmonic oscillator as an exact benchmark
 
 For a one-dimensional harmonic oscillator,
 
@@ -188,15 +310,15 @@ T=\frac{2\pi}{\omega}
 2\pi\sqrt{\frac{m}{k}}.
 $$
 
-We choose
+With
 
 $$
 m=12\ \mathrm{Da},
 \qquad
-k=12\pi^2\ \mathrm{kJ/(mol\,nm^2)}.
+k=12\pi^2\ \mathrm{kJ/(mol\,nm^2)},
 $$
 
-Then
+we get
 
 $$
 \omega=\sqrt{\frac{12\pi^2}{12}}=\pi\ \mathrm{rad/ps},
@@ -213,7 +335,7 @@ $$
 After 2 ps, the particle should be back at $x=0.1$ nm. This gives us an exact
 test for both the period and the trajectory.
 
-## 7. Position and velocity
+## 8. Position, velocity, and energy
 
 ![Oscillator position and velocity](assets/oscillator_position_velocity.svg)
 
@@ -225,8 +347,6 @@ The quarter-period phase difference is important:
 - maximum displacement → maximum potential energy, zero kinetic energy;
 - equilibrium → zero potential energy, maximum kinetic energy;
 - the particle does not stop at equilibrium; inertia carries it through.
-
-## 8. Energy exchange
 
 ![Kinetic, potential, and total energy](assets/oscillator_energy.svg)
 
@@ -282,7 +402,7 @@ Watch the feedback loop:
 The animation is not just decorative. It is a visual representation of the
 integration algorithm.
 
-## 11. Code walkthrough
+## 11. Python implementation
 
 The integrator is in
 [`src/moleculab/integrators.py`](../../../src/moleculab/integrators.py):
@@ -310,6 +430,8 @@ def velocity_verlet_step(particle, potential, dt):
         mass=particle.mass,
         position=new_position,
         velocity=new_velocity,
+        atom_type=particle.atom_type,
+        charge=particle.charge,
     )
 ```
 
@@ -332,14 +454,17 @@ def simulate_velocity_verlet(particle, potential, dt, steps):
     return Trajectory(...)
 ```
 
-Three design choices are worth noticing:
+Four design choices are worth noticing:
 
 1. **The input particle is not mutated.** The function returns a new particle.
    This makes reasoning and testing easier.
 2. **The force is evaluated at the new position.** That is the defining feature
    of Velocity Verlet.
-3. **The trajectory stores every state.** You can analyze the step where
+3. **The trajectory stores every state.** You can analyse the step where
    something went wrong instead of seeing only the final result.
+4. **Chemical identity is preserved.** The new particle keeps `atom_type` and
+   `charge`, so an integrator step does not silently change a later nonbonded
+   calculation.
 
 Run the example:
 
@@ -347,32 +472,115 @@ Run the example:
 uv run python examples/harmonic_oscillator.py
 ```
 
-Tests:
+A compact check:
+
+```bash
+uv run python - <<'PY'
+import numpy as np
+from moleculab import (
+    HarmonicPotential, Particle,
+    simulate_velocity_verlet,
+)
+
+particle = Particle(12.0, [0.1, 0.0, 0.0], [0.0, 0.0, 0.0])
+potential = HarmonicPotential(12.0 * np.pi**2, [0.0, 0.0, 0.0])
+trajectory = simulate_velocity_verlet(particle, potential, dt=0.001, steps=2000)
+
+print("start x    =", trajectory.position[0, 0])
+print("after 2 ps =", trajectory.position[-1, 0])
+print("max |E-E0| =", np.max(np.abs(trajectory.total_energy - trajectory.total_energy[0])))
+PY
+```
+
+Expected, up to small numerical differences:
+
+```text
+start x    = 0.1
+after 2 ps = 0.1000...
+max |E-E0| = small (on the order of 1e-6)
+```
+
+## 12. Tests and verification
 
 ```bash
 uv run pytest tests/test_integrators.py -q
 ```
 
-## 12. Timestep and stability
+What the tests protect:
+
+- one step matches the Velocity Verlet equations exactly;
+- the input particle is not mutated;
+- a step preserves `atom_type` and `charge`;
+- the trajectory has one snapshot per state, including the initial one;
+- the total energy of a harmonic oscillator stays bounded;
+- the numerical trajectory matches the analytic solution, including a general
+  initial phase;
+- position, velocity, and energy errors are second order in the timestep;
+- the oscillator returns near its starting position after one period;
+- zero steps returns only the initial snapshot;
+- invalid timesteps and step counts are rejected.
+
+**Core idea.** Testing against an exact solution is stronger than testing that
+“the code runs.” The period and the energy are physical predictions.
+
+### 12.1 Independent analytic validation
+
+For the benchmark, the exact solution is
+
+$$
+x(t)=x_0\cos(\omega t)+\frac{v_0}{\omega}\sin(\omega t),
+$$
+
+which reduces to $0.1\cos(\pi t)$ when $v_0=0$. We can compare every numerical
+snapshot with this formula, not just the final energy.
+
+Running `examples/harmonic_validation.py` over two periods gives:
+
+| $\Delta t$ (ps) | steps/period | max $\lvert x-x_{\text{exact}}\rvert$ | max $\lvert v-v_{\text{exact}}\rvert$ | max $\lvert E-E_0\rvert$ | observed order |
+| --- | --- | --- | --- | --- | --- |
+| 0.02 | 100 | $1.816\times10^{-4}$ | $6.575\times10^{-4}$ | $5.845\times10^{-4}$ | — |
+| 0.01 | 200 | $4.541\times10^{-5}$ | $1.644\times10^{-4}$ | $1.461\times10^{-4}$ | 2.00 |
+| 0.005 | 400 | $1.135\times10^{-5}$ | $4.110\times10^{-5}$ | $3.653\times10^{-5}$ | 2.00 |
+| 0.0025 | 800 | $2.838\times10^{-6}$ | $1.028\times10^{-5}$ | $9.132\times10^{-6}$ | 2.00 |
+| 0.00125 | 1600 | $7.094\times10^{-7}$ | $2.569\times10^{-6}$ | $2.283\times10^{-6}$ | 2.00 |
+
+Every time the timestep is halved, the errors fall by about four. That is the
+signature of a second-order method. At $\Delta t=0.001$ ps, the measured period
+from zero crossings is 1.99999918 ps, a relative error of about
+$4\times10^{-7}$.
+
+This comparison is stronger than energy conservation alone. A symplectic method
+can keep the energy bounded while still accumulating a phase error. Comparing
+the trajectory with the analytic solution checks the motion itself.
+
+The permanent tests are in
+[`tests/test_harmonic_validation.py`](../../../tests/test_harmonic_validation.py).
+They cover a general initial phase, a multidimensional oscillator, second-order
+convergence of position, velocity, and energy, numerical period measurement, and
+the small-timestep limit.
+
+## 13. Timestep, stability, and accuracy
 
 ![The same oscillator at several timesteps](assets/dt_stability.svg)
 
 *Small timesteps track the exact solution closely. Large timesteps distort the
-period and amplitude; very large timesteps can destabilize the trajectory.*
+period and amplitude; very large timesteps can destabilise the trajectory.*
 
-The safe timestep depends on the fastest motion in the system. For a harmonic
-oscillator, the period is
+For the harmonic oscillator, Velocity Verlet is stable only when
 
 $$
-T=2\pi\sqrt{\frac{m}{k}}.
+\omega\Delta t<2.
 $$
 
-A useful rule of thumb is to resolve the fastest period with many steps, not
-just a few. In atomistic MD, the fastest motions are often bond vibrations
-involving hydrogen, which is why typical timesteps are around 1–2 fs
-($0.001$–$0.002$ ps).
+For the benchmark $\omega=\pi$, this gives $\Delta t<0.637$ ps. But stability is
+not the same as accuracy. At $\Delta t=0.1$ ps the method is stable, but the
+period and amplitude already carry measurable error. A useful practical rule is
+to resolve the fastest period with many steps, not just enough steps to avoid
+blowing up.
 
-## 13. Energy drift versus timestep
+In atomistic MD, the fastest motions are often bond vibrations involving
+hydrogen. Their periods are on the order of 10 fs, which is why typical
+timesteps are around 1–2 fs ($0.001$–$0.002$ ps).
 
 ![Energy drift versus timestep](assets/energy_drift.svg)
 
@@ -420,9 +628,59 @@ This is enough for:
 - computing period and frequency;
 - computing phase-space orbits;
 - diagnosing instabilities;
-- later, analyzing diffusion or structural fluctuations.
+- later, analysing diffusion or structural fluctuations.
 
-## 16. Connections to molecular dynamics and CADD
+## 16. Experiments
+
+### Experiment 1: timestep scan
+
+For the benchmark oscillator, run 2 ps with timesteps 0.01, 0.005, 0.002,
+0.001, and 0.0005 ps. Record the maximum relative energy drift and plot it
+against $\Delta t$ on a log-log axis. Estimate the slope.
+
+### Experiment 2: measure the period
+
+Use the trajectory to find the times at which $x$ crosses zero. Estimate the
+period and compare with 2 ps. How does the error change with $\Delta t$?
+
+### Experiment 3: Euler comparison
+
+Implement explicit Euler for the same oscillator. Plot the total energy against
+time for Euler and for Velocity Verlet. Which one drifts? Which one stays
+bounded?
+
+### Experiment 4: initial conditions
+
+Start at $x=0$ with nonzero velocity. How do the cosine and sine roles swap?
+Does the energy still stay bounded?
+
+### Experiment 5: the tutorial-03 well
+
+Repeat the energy check with $k=100$ and initial velocity 0.1 nm/ps. What is the
+period? Why is it not exactly 2 ps?
+
+## 17. Common misconceptions
+
+1. **Using the old acceleration for the entire velocity update.** Velocity
+   Verlet averages old and new acceleration.
+2. **Forgetting to recompute force at the new position.** This reduces the
+   method toward Euler.
+3. **Choosing a timestep that is too large.** The trajectory may look plausible
+   for a few steps and then explode.
+4. **Judging a simulation only by its final snapshot.** Check energy drift and
+   conservation over time.
+5. **Confusing period with timestep.** The benchmark period is 2 ps; the
+   timestep is usually a small fraction of that.
+6. **Expecting exact energy conservation.** Floating-point roundoff and finite
+   timesteps produce small bounded oscillations.
+7. **Using the wrong mass or stiffness units.** The period formula assumes
+   consistent units.
+8. **Believing stability implies accuracy.** A stable trajectory can still have
+   the wrong period and amplitude.
+9. **Thinking the integrator changes the physical model.** It only approximates
+   the same equations of motion.
+
+## 18. Connections and what comes next
 
 This small oscillator is the core of MD:
 
@@ -443,24 +701,29 @@ Understanding this tiny system makes it much easier to interpret:
 - why constraints are used for water and hydrogen bonds;
 - why a trajectory can look “stable” but still be numerically wrong.
 
-## 17. Common mistakes
+**Looking ahead.** The multi-particle integrator in `System` uses the same
+Velocity Verlet update, plus constraints and periodic boundaries. The
+bookkeeping grows; the algorithm does not.
 
-1. **Using the old acceleration for the entire velocity update.** Velocity
-   Verlet averages old and new acceleration.
-2. **Forgetting to recompute force at the new position.** This reduces the
-   method toward Euler.
-3. **Choosing a timestep that is too large.** The trajectory may look plausible
-   for a few steps and then explode.
-4. **Judging a simulation only by its final snapshot.** Check energy drift and
-   conservation over time.
-5. **Confusing period with timestep.** The period is 2 ps here; the timestep is
-   0.001 ps.
-6. **Expecting exact energy conservation.** Floating-point roundoff and finite
-   timesteps produce small bounded oscillations.
-7. **Using the wrong mass or stiffness units.** The period formula assumes
-   consistent units.
+### 18.1 What you have built so far
 
-## 18. Self-check with answers
+The four tutorials follow the library's own construction:
+
+| Layer | Code | Tutorial |
+| --- | --- | --- |
+| unit contract | `units.py` | 01 |
+| particle state | `Particle` | 02 |
+| kinetic energy | `kinetic_energy` | 02 |
+| potential model | `HarmonicPotential` | 03 |
+| force and acceleration | `potential_energy`, `acceleration` | 03 |
+| time step | `velocity_verlet_step` | 04 |
+| trajectory | `simulate_velocity_verlet` | 04 |
+
+That is a complete, testable molecular-dynamics core for one particle. The rest
+of Moleculab extends it: more particles, more potential terms, boundaries,
+constraints, thermostats, and analysis.
+
+## 19. Self-check with answers
 
 1. **Why does Velocity Verlet evaluate the force twice per step?**
    The new force gives the new acceleration used in the averaged velocity
@@ -470,8 +733,8 @@ Understanding this tiny system makes it much easier to interpret:
    $T=2\pi\sqrt{12/(12\pi^2)}=2$ ps.
 
 3. **What happens to the energy drift if the timestep is halved?**
-   The error generally drops by about a factor of four for second-order
-   methods.
+   The error generally drops by about a factor of four for a second-order
+   method.
 
 4. **Why does an Euler oscillator gain energy?**
    It uses only the old acceleration, so it consistently overshoots.
@@ -488,26 +751,57 @@ Understanding this tiny system makes it much easier to interpret:
 8. **Why is the trajectory stored at every step?**
    To support analysis and debugging of the integration.
 
-## 19. Exercises
+9. **What is the stability condition for the harmonic oscillator?**
+   $\omega\Delta t<2$. Accuracy requires a considerably smaller timestep.
 
-1. Derive the period of a harmonic oscillator from $m d²x/dt²=-kx$.
-2. Modify the example to start with zero position and nonzero velocity. How do
+## 20. Exercises
+
+### Calculation
+
+1. Derive the period of a harmonic oscillator from $m\,d^2x/dt^2=-kx$.
+2. For the benchmark, compute the exact position and velocity at $t=0.25$ ps.
+3. Repeat the one-step worked example with $\Delta t=0.01$ ps. Compare the
+   errors with the $\Delta t=0.1$ ps results.
+4. Compute the stability limit $\Delta t=2/\omega$ for $k=100$ and $k=12\pi^2$.
+
+### Reasoning
+
+1. Why does Velocity Verlet need the force at the new position?
+2. Why is a symplectic method preferable to a method with smaller short-term
+   error but systematic energy drift?
+3. Why is energy conservation a useful diagnostic even in a simulation with a
+   thermostat?
+4. Why can a trajectory look smooth and still be numerically wrong?
+5. Why is a smaller timestep not always better in a real simulation? Consider
+   wall-clock time and accumulated roundoff.
+6. Why does removing fast bond vibrations allow a larger timestep?
+
+### Implementation
+
+1. Modify the example to start with zero position and nonzero velocity. How do
    the cosine and sine roles swap?
-3. Compute the maximum relative energy drift for timesteps 0.01, 0.001, and
+2. Compute the maximum relative energy drift for timesteps 0.01, 0.001, and
    0.0001 ps. Plot the result on a log-log axis.
-4. Implement explicit Euler for the same oscillator and compare its energy
+3. Implement explicit Euler for the same oscillator and compare its energy
    drift with Velocity Verlet.
-5. Explain why a smaller timestep is not always better in a real simulation
-   (think about total wall-clock time and accumulated roundoff).
+4. Add a function that measures the period from zero crossings of the
+   trajectory and compare it with the analytic value.
+5. Extend `simulate_velocity_verlet` to record `atom_type` and `charge` in the
+   trajectory metadata, or explain why the current design does not need to.
 
-## 20. Summary
+## 21. Summary
 
 - Velocity Verlet updates position with old velocity and old acceleration, then
   updates velocity with the average of old and new acceleration.
 - It is second-order, time-reversible, and symplectic.
 - It keeps the total energy of a conservative oscillator bounded.
 - The timestep must resolve the fastest motion in the system.
+- Stability ($\omega\Delta t<2$) is necessary but not sufficient; accuracy
+  requires a much smaller step.
 - Energy drift is a diagnostic, not a decoration.
+- The running particle's tutorial-03 well and the exact 2 ps benchmark are the
+  same physical model with different parameters, chosen to make the physics
+  visible.
 - This small integrator is the engine that will later drive many-particle
   molecular dynamics.
 

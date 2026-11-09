@@ -117,7 +117,13 @@ def velocity_verlet_step(
     acceleration_next = acceleration(particle, force_next)
     new_velocity = particle.velocity + 0.5 * (acceleration_now + acceleration_next) * step
 
-    return Particle(mass=particle.mass, position=new_position, velocity=new_velocity)
+    return Particle(
+        mass=particle.mass,
+        position=new_position,
+        velocity=new_velocity,
+        atom_type=particle.atom_type,
+        charge=particle.charge,
+    )
 
 
 def simulate_velocity_verlet(
