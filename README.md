@@ -68,9 +68,12 @@ remain on the roadmap.
 
 The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The first
 implementation notes are in [`docs/energies.md`](docs/energies.md),
-[`docs/tutorial.md`](docs/tutorial.md) is a guided path from one particle to a
-small molecular simulation, and [`docs/acceleration.md`](docs/acceleration.md)
-covers CPU/ROCm/NPU backend choices.
+[`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
+from one particle to a small molecular simulation,
+[`docs/tutorials/individual/`](docs/tutorials/individual/) contains deeper
+visual tutorials for the first four concepts, and
+[`docs/acceleration.md`](docs/acceleration.md) covers CPU/ROCm/NPU backend
+choices.
 
 ## Install with uv
 

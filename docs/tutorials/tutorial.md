@@ -14,6 +14,10 @@ uv sync
 uv run pytest -q
 ```
 
+For a slower, more visual path through sections 1–4, see
+[`individual/README.md`](individual/README.md) and the four deep-dive tutorials
+inside `individual/`.
+
 ## 1. Units first
 
 Moleculab uses one internal unit system:
@@ -38,6 +42,8 @@ without an extra conversion constant.  The constants live in
 `src/moleculab/units.py`.
 
 Check: `uv run pytest tests/test_units.py -q`.
+
+Deep dive: [01 — Units and scales](individual/01_units.md).
 
 ## 2. A particle and its energy
 
@@ -64,6 +70,8 @@ For this particle, `K = 0.06 kJ/mol`.
 
 Check: `uv run pytest tests/test_particles.py tests/test_physics.py -q`.
 
+Deep dive: [02 — Particles and kinetic energy](individual/02_particle_energy.md).
+
 ## 3. A potential must provide energy and force
 
 The harmonic potential is an external spring-like model:
@@ -87,6 +95,8 @@ energy.  The test suite verifies this with a finite-difference derivative.
 Run: `uv run python examples/first_particle.py`.
 Check: `uv run pytest tests/test_potentials.py -q`.
 
+Deep dive: [03 — Potential energy and force](individual/03_potential_force.md).
+
 ## 4. Time integration and energy conservation
 
 Velocity Verlet updates position with the current acceleration and velocity
@@ -109,6 +119,8 @@ stays nearly constant.
 
 Run: `uv run python examples/harmonic_oscillator.py`.
 Check: `uv run pytest tests/test_integrators.py -q`.
+
+Deep dive: [04 — Velocity Verlet and energy conservation](individual/04_velocity_verlet.md).
 
 ## 5. Nonbonded interactions
 
