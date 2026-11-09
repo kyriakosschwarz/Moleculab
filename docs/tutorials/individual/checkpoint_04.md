@@ -26,29 +26,15 @@ This checkpoint combines:
 
 Use
 
-$$
-m=12\ \mathrm{Da},
-\qquad
-k=12\pi^2\ \mathrm{kJ/(mol\,nm^2)},
-\qquad
-x_0=0.1\ \mathrm{nm},
-\qquad
-v_0=0.
-$$
+$$ m=12\ \mathrm{Da}, \qquad k=12\pi^2\ \mathrm{kJ/(mol\ nm^2)}, \qquad x_0=0.1\ \mathrm{nm}, \qquad v_0=0. $$
 
 Then
 
-$$
-\omega=\sqrt{\frac{k}{m}}=\pi\ \mathrm{rad/ps},
-\qquad
-T=\frac{2\pi}{\omega}=2\ \mathrm{ps}.
-$$
+$$ \omega=\sqrt{\frac{k}{m}}=\pi\ \mathrm{rad/ps}, \qquad T=\frac{2\pi}{\omega}=2\ \mathrm{ps}. $$
 
 The exact solution is
 
-$$
-x(t)=0.1\cos(\pi t)\ \mathrm{nm}.
-$$
+$$ x(t)=0.1\cos(\pi t)\ \mathrm{nm}. $$
 
 ## 3. Tasks
 
@@ -77,9 +63,7 @@ two panels. Mark the turning points and the equilibrium crossings.
 
 At every step, compute
 
-$$
-x_{\text{exact}}(t)=0.1\cos(\pi t).
-$$
+$$ x_{\text{exact}}(t)=0.1\cos(\pi t). $$
 
 Find the maximum absolute position error over the two periods.
 
@@ -148,10 +132,7 @@ $2\times10^{-6}$ kJ/mol.
 
 The ratios are approximately four:
 
-$$
-\frac{1.816\times10^{-4}}{1.135\times10^{-5}}\approx16
-\quad\text{for a factor-of-four change in }\Delta t,
-$$
+$$ \frac{1.816\times10^{-4}}{1.135\times10^{-5}}\approx16 \quad\text{for a factor-of-four change in }\Delta t, $$
 
 which is consistent with second order.
 

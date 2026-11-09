@@ -67,11 +67,7 @@ A many-particle system answers: “What is the energy of all pairs at once?”
 
 The two ideas connect through a sum. Each pair contributes independently:
 
-$$
-U_{\mathrm{nonbonded}}
-=
-u_{01}+u_{02}+u_{12}.
-$$
+$$ U_{\mathrm{nonbonded}} = u_{01}+u_{02}+u_{12}. $$
 
 Each pair also contributes a force to each of its two particles. Forces are
 vectors, so they add by vector addition. A particle in the middle of two
@@ -87,19 +83,11 @@ energy.
 
 For $N$ particles,
 
-$$
-U_{\mathrm{nonbonded}}
-=
-\sum_{i=1}^{N}\sum_{j=i+1}^{N}u(r_{ij}),
-\qquad
-r_{ij}=|\mathbf r_i-\mathbf r_j|.
-$$
+$$ U_{\mathrm{nonbonded}} = \sum_{i=1}^{N}\sum_{j=i+1}^{N}u(r_{ij}), \qquad r_{ij}=|\mathbf r_i-\mathbf r_j|. $$
 
 The restriction $j>i$ enforces one contribution per pair. The number of terms is
 
-$$
-\binom{N}{2}=\frac{N(N-1)}{2}.
-$$
+$$ \binom{N}{2}=\frac{N(N-1)}{2}. $$
 
 For $N=3$, there are three pairs. For $N=1000$, there are 499,500 pairs.
 
@@ -107,28 +95,16 @@ For $N=3$, there are three pairs. For $N=1000$, there are 499,500 pairs.
 
 Let $\mathbf f_{ij}$ be the force on particle $i$ due to particle $j$. Then
 
-$$
-\mathbf F_i=\sum_{j\ne i}\mathbf f_{ij}.
-$$
+$$ \mathbf F_i=\sum_{j\ne i}\mathbf f_{ij}. $$
 
 For a conservative pair potential,
 
-$$
-\mathbf f_{ij}=-\nabla_{\mathbf r_i}u(r_{ij}),
-\qquad
-\mathbf f_{ji}=-\mathbf f_{ij}.
-$$
+$$ \mathbf f_{ij}=-\nabla_{\mathbf r_i}u(r_{ij}), \qquad \mathbf f_{ji}=-\mathbf f_{ij}. $$
 
 The second relation is Newton's third law. If the pair potential is the only
 interaction, the total force on the whole system is
 
-$$
-\sum_i\mathbf F_i
-=
-\sum_{i<j}(\mathbf f_{ij}+\mathbf f_{ji})
-=
-0.
-$$
+$$ \sum_i\mathbf F_i = \sum_{i<j}(\mathbf f_{ij}+\mathbf f_{ji}) = 0. $$
 
 This is why an isolated system conserves total momentum.
 
@@ -136,11 +112,7 @@ This is why an isolated system conserves total momentum.
 
 For particles with masses $m_i$ and velocities $\mathbf v_i$,
 
-$$
-K=\sum_i\frac12m_i|\mathbf v_i|^2,
-\qquad
-E=K+U.
-$$
+$$ K=\sum_i\frac12m_i|\mathbf v_i|^2, \qquad E=K+U. $$
 
 A `System` stores particles and interactions, and exposes these sums directly.
 
@@ -191,37 +163,24 @@ The pair distances are:
 
 The total energy is
 
-$$
-U
-=
-(-0.605708)+(-0.011593)+(-0.605708)
-\approx-1.223009\ \mathrm{kJ/mol}.
-$$
+$$ U = (-0.605708)+(-0.011593)+(-0.605708) \approx-1.223009\ \mathrm{kJ/mol}. $$
 
 For particle 0, both pair forces point toward $+x$:
 
-$$
-F_0=6.230260+0.077065\approx6.307324.
-$$
+$$ F_0=6.230260+0.077065\approx6.307324. $$
 
 For particle 1, the pull from particle 0 points toward $-x$ and the pull from
 particle 2 points toward $+x$. They have equal magnitude, so
 
-$$
-F_1=-6.230260+6.230260=0.
-$$
+$$ F_1=-6.230260+6.230260=0. $$
 
 For particle 2, both pair forces point toward $-x$:
 
-$$
-F_2=-6.230260-0.077065\approx-6.307324.
-$$
+$$ F_2=-6.230260-0.077065\approx-6.307324. $$
 
 The three net forces sum to zero:
 
-$$
-6.307324+0-6.307324=0.
-$$
+$$ 6.307324+0-6.307324=0. $$
 
 This is Newton's third law at the level of the whole system.
 
@@ -306,9 +265,7 @@ $i=0,j=1$ and again as $i=1,j=0$. The energy would be doubled. Starting at
 
 The double loop has
 
-$$
-\frac{N(N-1)}{2}
-$$
+$$ \frac{N(N-1)}{2} $$
 
 iterations. For large $N$, this grows as $N^2$. Doubling the particle count
 roughly quadruples the number of pair evaluations. This is why production MD

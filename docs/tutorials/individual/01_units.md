@@ -71,7 +71,7 @@ Moleculab particle**, or simply $P$.
 | mass $m$ | 12 | Da |
 | position $\mathbf r$ | $(0.1, 0, 0)$ | nm |
 | velocity $\mathbf v$ | $(0.1, 0, 0)$ | nm/ps |
-| speed $|\mathbf v|$ | 0.10 | nm/ps |
+| speed $\lvert\mathbf v\rvert$ | 0.10 | nm/ps |
 | kinetic energy $K$ | 0.06 | kJ/mol |
 
 ![One particle reused across the tutorial sequence](assets/learning_ladder.svg)
@@ -184,9 +184,7 @@ acceleration without a conversion constant.
 
 Newton's second law is
 
-$$
-\mathbf F = m\mathbf a.
-$$
+$$ \mathbf F = m\mathbf a. $$
 
 If force is in newtons and mass in kilograms, acceleration is in m/s². But
 Moleculab stores force in **kJ/(mol nm)**, mass in **Da**, and acceleration in
@@ -197,71 +195,41 @@ carefully, because it is the foundation of the whole unit system.
 
 ### 5.1 Convert force to a per-particle force
 
-A force of $1\ \mathrm{kJ/(mol\,nm)}$ means that moving one mole of particles
+A force of $1\ \mathrm{kJ/(mol\ nm)}$ means that moving one mole of particles
 by one nanometre changes the energy by one kilojoule.
 
 For a single particle, the energy change is divided by Avogadro's number, and
 the distance is converted from nm to m:
 
-$$
-F_{\text{particle}}
-=
-F_{\text{molar}}
-\frac{1000}{N_A}
-\frac{1}{10^{-9}}\ \mathrm{N}.
-$$
+$$ F_{\text{particle}} = F_{\text{molar}} \frac{1000}{N_A} \frac{1}{10^{-9}}\ \mathrm{N}. $$
 
 ### 5.2 Convert mass to kilograms
 
-$$
-m_{\mathrm{kg}}
-=
-m_{\mathrm{Da}}
-\times1.66054\times10^{-27}\ \mathrm{kg}.
-$$
+$$ m_{\mathrm{kg}} = m_{\mathrm{Da}} \times1.66054\times10^{-27}\ \mathrm{kg}. $$
 
 ### 5.3 Convert acceleration back to nm/ps²
 
 One nm/ps² is
 
-$$
-\frac{10^{-9}\ \mathrm{m}}{(10^{-12}\ \mathrm{s})^2}
-=
-10^{15}\ \mathrm{m/s^2}.
-$$
+$$ \frac{10^{-9}\ \mathrm{m}}{(10^{-12}\ \mathrm{s})^2} = 10^{15}\ \mathrm{m/s^2}. $$
 
 So
 
-$$
-a_{\mathrm{nm/ps^2}}
-=
-a_{\mathrm{m/s^2}}\times10^{-15}.
-$$
+$$ a_{\mathrm{nm/ps^2}} = a_{\mathrm{m/s^2}}\times10^{-15}. $$
 
 ### 5.4 Put the factors together
 
 The conversion factor between the numerical value of $F/m$ in internal units
 and the numerical value of acceleration in nm/ps² is
 
-$$
-\frac{1000}{N_A}
-\frac{1}{10^{-9}}
-\frac{1}{1.66054\times10^{-27}}
-10^{-15}.
-$$
+$$ \frac{1000}{N_A} \frac{1}{10^{-9}} \frac{1}{1.66054\times10^{-27}} 10^{-15}. $$
 
 Using $N_A=6.02214076\times10^{23}$, this factor is one to about one part in
 $10^9$. The tiny residual comes from 1 Da being approximately, not exactly,
 1 g/mol. For molecular simulation this is far below the precision of the
 models. Therefore
 
-$$
-\boxed{
-a_{\mathrm{nm/ps^2}}
-=
-\frac{F_{\mathrm{kJ/(mol\,nm)}}}{m_{\mathrm{Da}}}
-}
-$$
+$$ a_{\mathrm{nm/ps^2}} = \frac{F_{\mathrm{kJ/(mol\ nm)}}}{m_{\mathrm{Da}}} $$
 
 numerically.
 
@@ -274,47 +242,23 @@ can write `force / mass` directly.*
 
 The same principle explains why $K=\tfrac12mv^2$ needs no constant. Let
 
-$$
-m=1\ \mathrm{Da},
-\qquad
-v=1\ \mathrm{nm/ps}.
-$$
+$$ m=1\ \mathrm{Da}, \qquad v=1\ \mathrm{nm/ps}. $$
 
 Then
 
-$$
-\frac12mv^2
-=
-0.5\ \mathrm{Da\,(nm/ps)^2}.
-$$
+$$ \frac12mv^2 = 0.5\ \mathrm{Da\ (nm/ps)^2}. $$
 
 Convert to SI:
 
-$$
-0.5\times1.66054\times10^{-27}\ \mathrm{kg}
-\times\left(\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}}\right)^2
-=
-8.3027\times10^{-22}\ \mathrm{J}.
-$$
+$$ 0.5\times1.66054\times10^{-27}\ \mathrm{kg} \times\left(\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}}\right)^2 = 8.3027\times10^{-22}\ \mathrm{J}. $$
 
 Multiply by Avogadro's number:
 
-$$
-8.3027\times10^{-22}\times6.02214\times10^{23}
-\approx500\ \mathrm{J/mol}
-=
-0.5\ \mathrm{kJ/mol}.
-$$
+$$ 8.3027\times10^{-22}\times6.02214\times10^{23} \approx500\ \mathrm{J/mol} = 0.5\ \mathrm{kJ/mol}. $$
 
-So one $\mathrm{Da\,(nm/ps)^2}$ is one kJ/mol, and
+So one $\mathrm{Da\ (nm/ps)^2}$ is one kJ/mol, and
 
-$$
-\boxed{
-K_{\mathrm{kJ/mol}}
-=
-\frac12 m_{\mathrm{Da}}|\mathbf v|^2_{\mathrm{nm/ps}}
-}
-$$
+$$ K_{\mathrm{kJ/mol}} = \frac12 m_{\mathrm{Da}}|\mathbf v|^2_{\mathrm{nm/ps}} $$
 
 numerically.
 
@@ -326,46 +270,27 @@ choosing the units together.
 
 Take
 
-$$
-F=10\ \mathrm{kJ/(mol\,nm)},
-\qquad
-m=12\ \mathrm{Da}.
-$$
+$$ F=10\ \mathrm{kJ/(mol\ nm)}, \qquad m=12\ \mathrm{Da}. $$
 
 The shortcut gives
 
-$$
-a=\frac{10}{12}=0.8333\ \mathrm{nm/ps^2}.
-$$
+$$ a=\frac{10}{12}=0.8333\ \mathrm{nm/ps^2}. $$
 
 Check in SI. The force per particle is
 
-$$
-F_{\text{particle}}
-=10\frac{1000}{6.022\times10^{23}}\frac{1}{10^{-9}}
-\approx1.6605\times10^{-11}\ \mathrm{N}.
-$$
+$$ F_{\text{particle}} =10\frac{1000}{6.022\times10^{23}}\frac{1}{10^{-9}} \approx1.6605\times10^{-11}\ \mathrm{N}. $$
 
 The mass is
 
-$$
-m=12\times1.66054\times10^{-27}
-\approx1.9926\times10^{-26}\ \mathrm{kg}.
-$$
+$$ m=12\times1.66054\times10^{-27} \approx1.9926\times10^{-26}\ \mathrm{kg}. $$
 
 Thus
 
-$$
-a=\frac{1.6605\times10^{-11}}{1.9926\times10^{-26}}
-\approx8.333\times10^{14}\ \mathrm{m/s^2}.
-$$
+$$ a=\frac{1.6605\times10^{-11}}{1.9926\times10^{-26}} \approx8.333\times10^{14}\ \mathrm{m/s^2}. $$
 
 Convert:
 
-$$
-8.333\times10^{14}\times10^{-15}
-=0.8333\ \mathrm{nm/ps^2}.
-$$
+$$ 8.333\times10^{14}\times10^{-15} =0.8333\ \mathrm{nm/ps^2}. $$
 
 The two routes agree. The shortcut is not a rough approximation; it is a
 consequence of the chosen units, accurate to about one part in $10^9$. The
@@ -406,35 +331,23 @@ thermal motion.
 
 Moleculab expresses energy per mole. The molar gas constant is
 
-$$
-R=0.008314462618\ \mathrm{kJ/(mol\,K)}.
-$$
+$$ R=0.008314462618\ \mathrm{kJ/(mol\ K)}. $$
 
 At temperature $T$,
 
-$$
-RT
-=
-0.008314462618\,T\ \mathrm{kJ/mol}.
-$$
+$$ RT = 0.008314462618\ T\ \mathrm{kJ/mol}. $$
 
 At 300 K,
 
-$$
-RT=2.4943387854\ \mathrm{kJ/mol}.
-$$
+$$ RT=2.4943387854\ \mathrm{kJ/mol}. $$
 
 The single-particle Boltzmann constant is
 
-$$
-k_B=1.380649\times10^{-23}\ \mathrm{J/K}.
-$$
+$$ k_B=1.380649\times10^{-23}\ \mathrm{J/K}. $$
 
 The relation is
 
-$$
-R=N_Ak_B.
-$$
+$$ R=N_Ak_B. $$
 
 Use $R$ when your energy is per mole. Use $k_B$ when your energy is per
 particle. Mixing them is a common source of factors of $N_A$.
@@ -462,34 +375,20 @@ value.
 
 Coulomb's law in SI is
 
-$$
-U(r)=\frac{1}{4\pi\epsilon_0}\frac{q_iq_j}{r}.
-$$
+$$ U(r)=\frac{1}{4\pi\epsilon_0}\frac{q_iq_j}{r}. $$
 
 In Moleculab, charges are in units of the elementary charge $e$ and distance is
 in nm. The conversion is collected into one constant:
 
-$$
-k_e
-=
-\frac{1}{4\pi\epsilon_0}
-e^2
-\frac{1}{10^{-9}}
-\frac{N_A}{1000}
-\approx138.935456\ \mathrm{kJ\,nm/(mol\,e^2)}.
-$$
+$$ k_e = \frac{1}{4\pi\epsilon_0} e^2 \frac{1}{10^{-9}} \frac{N_A}{1000} \approx138.935456\ \mathrm{kJ\ nm/(mol\ e^2)}. $$
 
 Then the internal-unit equation is simply
 
-$$
-U(r)=k_e\frac{q_iq_j}{r}.
-$$
+$$ U(r)=k_e\frac{q_iq_j}{r}. $$
 
 For example, two unit charges at $r=1$ nm have
 
-$$
-U\approx138.935\ \mathrm{kJ/mol}.
-$$
+$$ U\approx138.935\ \mathrm{kJ/mol}. $$
 
 At $r=0.3$ nm the interaction is roughly $463$ kJ/mol.
 
@@ -583,7 +482,7 @@ interaction in water can be much smaller.
 
 ### Experiment 4: dimensional analysis of kinetic energy
 
-Start from $K=\tfrac12m|\mathbf v|^2$ with $m$ in Da and $|\mathbf v|$ in nm/ps.
+Start from $K=\tfrac12m|\mathbf v|^2$ with $m$ in Da and $\lvert\mathbf v\rvert$ in nm/ps.
 Show by explicit SI conversion that the result is in kJ/mol. Do not look at
 section 5.5 until you have tried it.
 

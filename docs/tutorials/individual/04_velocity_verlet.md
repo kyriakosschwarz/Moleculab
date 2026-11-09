@@ -50,9 +50,7 @@ The second column is a deliberate benchmark, not a different physical model.
 Choosing $k=12\pi^2$ and releasing the particle from rest gives the exact
 solution
 
-$$
-x(t)=0.1\cos(\pi t)\ \mathrm{nm},
-$$
+$$ x(t)=0.1\cos(\pi t)\ \mathrm{nm}, $$
 
 with period exactly 2 ps. That lets us compare the integrator against a known
 answer rather than against another simulation.
@@ -61,16 +59,11 @@ answer rather than against another simulation.
 
 Newton's second law is
 
-$$
-\mathbf F=m\mathbf a
-=m\frac{d^2\mathbf r}{dt^2}.
-$$
+$$ \mathbf F=m\mathbf a =m\frac{d^2\mathbf r}{dt^2}. $$
 
 For a potential,
 
-$$
-m\frac{d^2\mathbf r}{dt^2}=-\nabla U.
-$$
+$$ m\frac{d^2\mathbf r}{dt^2}=-\nabla U. $$
 
 This is a second-order differential equation. Given an initial position and
 velocity, the equation determines the future trajectory.
@@ -100,17 +93,9 @@ The new force is reused as the current force in the next step.*
 
 The most direct update is
 
-$$
-\mathbf r_{n+1}
-=
-\mathbf r_n+\mathbf v_n\Delta t,
-$$
+$$ \mathbf r_{n+1} = \mathbf r_n+\mathbf v_n\Delta t, $$
 
-$$
-\mathbf v_{n+1}
-=
-\mathbf v_n+\mathbf a_n\Delta t.
-$$
+$$ \mathbf v_{n+1} = \mathbf v_n+\mathbf a_n\Delta t. $$
 
 This is explicit Euler. It uses the current force for the entire step.
 
@@ -131,38 +116,19 @@ be physically wrong.*
 
 Expand position in a Taylor series:
 
-$$
-\mathbf r(t+\Delta t)
-=
-\mathbf r(t)
-+\mathbf v(t)\Delta t
-+\frac12\mathbf a(t)\Delta t^2
-+\frac16\mathbf j(t)\Delta t^3
-+\cdots,
-$$
+$$ \mathbf r(t+\Delta t) = \mathbf r(t) +\mathbf v(t)\Delta t +\frac12\mathbf a(t)\Delta t^2 +\frac16\mathbf j(t)\Delta t^3 +\cdots, $$
 
 where $\mathbf j=d\mathbf a/dt$ is the jerk. Truncating after the quadratic term
 gives
 
-$$
-\mathbf r_{n+1}
-=
-\mathbf r_n
-+\mathbf v_n\Delta t
-+\frac12\mathbf a_n\Delta t^2.
-$$
+$$ \mathbf r_{n+1} = \mathbf r_n +\mathbf v_n\Delta t +\frac12\mathbf a_n\Delta t^2. $$
 
 The position update is now second-order accurate. The neglected term is
 proportional to $\Delta t^3$, so the local error is smaller than Euler's.
 
 For velocity, we can use the average acceleration over the step:
 
-$$
-\mathbf v_{n+1}
-=
-\mathbf v_n
-+\frac12(\mathbf a_n+\mathbf a_{n+1})\Delta t.
-$$
+$$ \mathbf v_{n+1} = \mathbf v_n +\frac12(\mathbf a_n+\mathbf a_{n+1})\Delta t. $$
 
 This is the **Velocity Verlet** algorithm.
 
@@ -173,29 +139,17 @@ One step:
 1. Compute the force at the current position.
 2. Compute the current acceleration:
 
-$$
-\mathbf a_n=\frac{\mathbf F_n}{m}.
-$$
+$$ \mathbf a_n=\frac{\mathbf F_n}{m}. $$
 
 3. Update the position:
 
-$$
-\mathbf r_{n+1}
-=
-\mathbf r_n+\mathbf v_n\Delta t
-+\frac12\mathbf a_n\Delta t^2.
-$$
+$$ \mathbf r_{n+1} = \mathbf r_n+\mathbf v_n\Delta t +\frac12\mathbf a_n\Delta t^2. $$
 
 4. Compute the force at the **new** position.
 5. Compute the new acceleration $\mathbf a_{n+1}$.
 6. Update the velocity:
 
-$$
-\mathbf v_{n+1}
-=
-\mathbf v_n
-+\frac12(\mathbf a_n+\mathbf a_{n+1})\Delta t.
-$$
+$$ \mathbf v_{n+1} = \mathbf v_n +\frac12(\mathbf a_n+\mathbf a_{n+1})\Delta t. $$
 
 The extra force evaluation at the new position is the key difference from
 Euler. It is also why Velocity Verlet is stable for oscillatory systems.
@@ -245,46 +199,25 @@ choose $\Delta t=0.1$ ps.
 
 **Step 1. Current acceleration.**
 
-$$
-a_0=-\frac{kx_0}{m}
-=-\frac{(12\pi^2)(0.1)}{12}
-\approx-0.98696\ \mathrm{nm/ps^2}.
-$$
+$$ a_0=-\frac{kx_0}{m} =-\frac{(12\pi^2)(0.1)}{12} \approx-0.98696\ \mathrm{nm/ps^2}. $$
 
 **Step 2. New position.**
 
-$$
-x_1
-=
-0.1+0+\frac12(-0.98696)(0.1)^2
-\approx0.0950652\ \mathrm{nm}.
-$$
+$$ x_1 = 0.1+0+\frac12(-0.98696)(0.1)^2 \approx0.0950652\ \mathrm{nm}. $$
 
 **Step 3. New acceleration.**
 
-$$
-a_1=-\frac{(12\pi^2)(0.0950652)}{12}
-\approx-0.938256\ \mathrm{nm/ps^2}.
-$$
+$$ a_1=-\frac{(12\pi^2)(0.0950652)}{12} \approx-0.938256\ \mathrm{nm/ps^2}. $$
 
 **Step 4. New velocity.**
 
-$$
-v_1
-=
-0+\frac12(-0.98696-0.938256)(0.1)
-\approx-0.0962608\ \mathrm{nm/ps}.
-$$
+$$ v_1 = 0+\frac12(-0.98696-0.938256)(0.1) \approx-0.0962608\ \mathrm{nm/ps}. $$
 
 Compare with the exact solution at $t=0.1$ ps:
 
-$$
-x_{\text{exact}}=0.1\cos(0.1\pi)\approx0.0951057\ \mathrm{nm},
-$$
+$$ x_{\text{exact}}=0.1\cos(0.1\pi)\approx0.0951057\ \mathrm{nm}, $$
 
-$$
-v_{\text{exact}}=-0.1\pi\sin(0.1\pi)\approx-0.0970806\ \mathrm{nm/ps}.
-$$
+$$ v_{\text{exact}}=-0.1\pi\sin(0.1\pi)\approx-0.0970806\ \mathrm{nm/ps}. $$
 
 The position error is about $4\times10^{-5}$ nm; the velocity error is about
 $8\times10^{-4}$ nm/ps. This is a single step with a relatively large timestep.
@@ -294,47 +227,27 @@ The error is small because the method is second-order, but it is not zero.
 
 For a one-dimensional harmonic oscillator,
 
-$$
-m\frac{d^2x}{dt^2}=-kx.
-$$
+$$ m\frac{d^2x}{dt^2}=-kx. $$
 
 The exact solution is
 
-$$
-x(t)=A\cos(\omega t+\phi),
-\qquad
-\omega=\sqrt{\frac{k}{m}}.
-$$
+$$ x(t)=A\cos(\omega t+\phi), \qquad \omega=\sqrt{\frac{k}{m}}. $$
 
 The period is
 
-$$
-T=\frac{2\pi}{\omega}
-=
-2\pi\sqrt{\frac{m}{k}}.
-$$
+$$ T=\frac{2\pi}{\omega} = 2\pi\sqrt{\frac{m}{k}}. $$
 
 With
 
-$$
-m=12\ \mathrm{Da},
-\qquad
-k=12\pi^2\ \mathrm{kJ/(mol\,nm^2)},
-$$
+$$ m=12\ \mathrm{Da}, \qquad k=12\pi^2\ \mathrm{kJ/(mol\ nm^2)}, $$
 
 we get
 
-$$
-\omega=\sqrt{\frac{12\pi^2}{12}}=\pi\ \mathrm{rad/ps},
-\qquad
-T=2\ \mathrm{ps}.
-$$
+$$ \omega=\sqrt{\frac{12\pi^2}{12}}=\pi\ \mathrm{rad/ps}, \qquad T=2\ \mathrm{ps}. $$
 
 Starting at $x=0.1$ nm with zero velocity:
 
-$$
-x(t)=0.1\cos(\pi t)\ \mathrm{nm}.
-$$
+$$ x(t)=0.1\cos(\pi t)\ \mathrm{nm}. $$
 
 After 2 ps, the particle should be back at $x=0.1$ nm. This gives us an exact
 test for both the period and the trajectory.
@@ -359,13 +272,7 @@ constant.*
 
 For the exact oscillator,
 
-$$
-K=\frac12mv^2,
-\qquad
-U=\frac12kx^2,
-\qquad
-E=K+U=\text{constant}.
-$$
+$$ K=\frac12mv^2, \qquad U=\frac12kx^2, \qquad E=K+U=\text{constant}. $$
 
 The simulation does not enforce constant energy explicitly. Velocity Verlet
 approximately conserves it because of its geometric properties. Small bounded
@@ -531,9 +438,7 @@ What the tests protect:
 
 For the benchmark, the exact solution is
 
-$$
-x(t)=x_0\cos(\omega t)+\frac{v_0}{\omega}\sin(\omega t),
-$$
+$$ x(t)=x_0\cos(\omega t)+\frac{v_0}{\omega}\sin(\omega t), $$
 
 which reduces to $0.1\cos(\pi t)$ when $v_0=0$. We can compare every numerical
 snapshot with this formula, not just the final energy.
@@ -590,9 +495,7 @@ period and amplitude; very large timesteps can destabilise the trajectory.*
 
 For the harmonic oscillator, Velocity Verlet is stable only when
 
-$$
-\omega\Delta t<2.
-$$
+$$ \omega\Delta t<2. $$
 
 For the benchmark $\omega=\pi$, this gives $\Delta t<0.637$ ps. But stability is
 not the same as accuracy. At $\Delta t=0.1$ ps the method is stable, but the
@@ -602,12 +505,12 @@ blowing up.
 
 In atomistic MD, the fastest motions are often bond vibrations involving
 hydrogen. Their periods are on the order of 10 fs, which is why typical
-timesteps are around 1–2 fs ($0.001$–$0.002$ ps).
+timesteps are around 1–2 fs ($0.001$ to $0.002$ ps).
 
 ![Energy drift versus timestep](assets/energy_drift.svg)
 
-*The maximum relative energy drift decreases roughly as $\Delta t^2$ for
-Velocity Verlet. Smaller timesteps improve conservation but cost more CPU time.*
+The maximum relative energy drift decreases roughly as $\Delta t^2$ for
+Velocity Verlet. Smaller timesteps improve conservation but cost more CPU time.
 
 This is the central practical tradeoff of MD:
 
@@ -780,7 +683,7 @@ constraints, thermostats, and analysis.
 
 ### Calculation
 
-1. Derive the period of a harmonic oscillator from $m\,d^2x/dt^2=-kx$.
+1. Derive the period of a harmonic oscillator from $m\ d^2x/dt^2=-kx$.
 2. For the benchmark, compute the exact position and velocity at $t=0.25$ ps.
 3. Repeat the one-step worked example with $\Delta t=0.01$ ps. Compare the
    errors with the $\Delta t=0.1$ ps results.

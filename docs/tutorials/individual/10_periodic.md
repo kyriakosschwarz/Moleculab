@@ -81,37 +81,19 @@ a nonbonded pair.
 For two particles, there are infinitely many image separations. The
 minimum-image convention chooses the shortest one:
 
-$$
-\mathbf d_{\min}
-=
-\mathbf d
--
-\operatorname{round}(\mathbf d/\mathbf L)\odot\mathbf L,
-$$
+$$ \mathbf d_{\min} = \mathbf d - \operatorname{round}(\mathbf d/\mathbf L)\odot\mathbf L, $$
 
 where $\mathbf L=(L_x,L_y,L_z)$ and $\odot$ is element-wise multiplication.
 
 For an orthorhombic box, each component is treated independently:
 
-$$
-d_{\min,\alpha}
-=
-d_\alpha
--
-\operatorname{round}(d_\alpha/L_\alpha)L_\alpha.
-$$
+$$ d_{\min,\alpha} = d_\alpha - \operatorname{round}(d_\alpha/L_\alpha)L_\alpha. $$
 
 ### 3.2 Wrapping
 
 Wrapping moves a position into the primary box:
 
-$$
-\mathbf r_{\mathrm{wrapped}}
-=
-\mathbf r
--
-\lfloor\mathbf r/\mathbf L\rfloor\odot\mathbf L.
-$$
+$$ \mathbf r_{\mathrm{wrapped}} = \mathbf r - \lfloor\mathbf r/\mathbf L\rfloor\odot\mathbf L. $$
 
 Wrapping changes the stored coordinates but not the physical configuration. A
 particle at $x=1.05$ nm in a 1 nm box is equivalent to one at $x=0.05$ nm.
@@ -131,35 +113,21 @@ Wrapping a position does not by itself compute a pair separation.
 
 ### 4.1 Minimum-image distance
 
-$$
-r_{\min}=|\mathbf d_{\min}|.
-$$
+$$ r_{\min}=|\mathbf d_{\min}|. $$
 
 For $\mathbf d=(0.9,0,0)$ and $L=1$,
 
-$$
-\frac{0.9}{1}=0.9,
-\qquad
-\operatorname{round}(0.9)=1,
-$$
+$$ \frac{0.9}{1}=0.9, \qquad \operatorname{round}(0.9)=1, $$
 
 so
 
-$$
-d_{\min}=0.9-1(1)=-0.1,
-\qquad
-r_{\min}=0.1\ \mathrm{nm}.
-$$
+$$ d_{\min}=0.9-1(1)=-0.1, \qquad r_{\min}=0.1\ \mathrm{nm}. $$
 
 ### 4.2 Cutoff rule
 
 A nonbonded cutoff $R_c$ must satisfy
 
-$$
-R_c\le\frac{L_{\min}}{2},
-\qquad
-L_{\min}=\min(L_x,L_y,L_z).
-$$
+$$ R_c\le\frac{L_{\min}}{2}, \qquad L_{\min}=\min(L_x,L_y,L_z). $$
 
 If the cutoff were larger, a particle could interact with two images of the same
 neighbour, and the minimum-image choice would no longer be unique for all pairs.
@@ -183,13 +151,7 @@ practice, bonded molecules are often kept whole or handled carefully.
 
 MSD compares positions at different times:
 
-$$
-\mathrm{MSD}(\tau)
-=
-\left\langle
-|\mathbf r_i(t+\tau)-\mathbf r_i(t)|^2
-\right\rangle.
-$$
+$$ \mathrm{MSD}(\tau) = \left\langle |\mathbf r_i(t+\tau)-\mathbf r_i(t)|^2 \right\rangle. $$
 
 If coordinates are wrapped, a particle that crosses the boundary appears to
 jump by nearly the box length. The MSD then saturates at the box size instead of
@@ -221,48 +183,24 @@ $\mathbf d/\mathbf L$ is nm/nm.
 
 The raw separation is
 
-$$
-|\mathbf r_0-\mathbf r_1|
-=
-|0.05-0.95|
-=
-0.90\ \mathrm{nm}.
-$$
+$$ |\mathbf r_0-\mathbf r_1| = |0.05-0.95| = 0.90\ \mathrm{nm}. $$
 
 The minimum-image component is
 
-$$
-d_{\min,x}
-=
-0.05-0.95-\operatorname{round}(-0.9)(1)
-=
--0.9+1
-=
-0.1\ \mathrm{nm}.
-$$
+$$ d_{\min,x} = 0.05-0.95-\operatorname{round}(-0.9)(1) = -0.9+1 = 0.1\ \mathrm{nm}. $$
 
 So
 
-$$
-r_{\min}=0.1\ \mathrm{nm}.
-$$
+$$ r_{\min}=0.1\ \mathrm{nm}. $$
 
 The Lennard-Jones parameters are $\epsilon=1.0$ kJ/mol and $\sigma=0.1$ nm, so
 the pair sits exactly at $r=\sigma$. Therefore
 
-$$
-U_{\mathrm{LJ}}=0.
-$$
+$$ U_{\mathrm{LJ}}=0. $$
 
 The force magnitude at $r=\sigma$ is
 
-$$
-\frac{24\epsilon}{\sigma}
-=
-\frac{24(1.0)}{0.1}
-=
-240\ \mathrm{kJ/(mol\,nm)}.
-$$
+$$ \frac{24\epsilon}{\sigma} = \frac{24(1.0)}{0.1} = 240\ \mathrm{kJ/(mol\ nm)}. $$
 
 The forces on the two particles are equal and opposite, along the minimum-image
 direction.
@@ -311,9 +249,7 @@ Bonded terms call `topology.energy(self.positions)` and
 
 When a `NonbondedModel` is attached, the `System` constructor checks
 
-$$
-R_c\le\frac{1}{2}\min(L_x,L_y,L_z).
-$$
+$$ R_c\le\frac{1}{2}\min(L_x,L_y,L_z). $$
 
 If not, it raises an error. This catches a common and subtle modelling mistake.
 

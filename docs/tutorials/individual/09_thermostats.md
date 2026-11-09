@@ -68,11 +68,7 @@ freedom: it describes the average kinetic energy per independent mode.
 
 For a system in thermal equilibrium at temperature $T$, equipartition gives
 
-$$
-\left\langle\frac12m v_x^2\right\rangle
-=
-\frac12RT
-$$
+$$ \left\langle\frac12m v_x^2\right\rangle = \frac12RT $$
 
 per translational degree of freedom, with the molar convention used in
 Moleculab. In three dimensions, the average kinetic energy per particle is
@@ -91,18 +87,12 @@ alter the energy function or the interparticle forces.
 
 The instantaneous kinetic temperature is
 
-$$
-T=\frac{2K}{N_{\mathrm{dof}}R},
-\qquad
-R=0.008314462618\ \mathrm{kJ/(mol\,K)}.
-$$
+$$ T=\frac{2K}{N_{\mathrm{dof}}R}, \qquad R=0.008314462618\ \mathrm{kJ/(mol\ K)}. $$
 
 For an isolated system of $N>1$ particles without constraints, removing the
 three centre-of-mass translation modes gives
 
-$$
-N_{\mathrm{dof}}=3N-3.
-$$
+$$ N_{\mathrm{dof}}=3N-3. $$
 
 For $N=2$, this is 3 degrees of freedom.
 
@@ -110,11 +100,7 @@ For $N=2$, this is 3 degrees of freedom.
 
 The centre-of-mass velocity is
 
-$$
-\mathbf V_{\mathrm{CM}}
-=
-\frac{\sum_i m_i\mathbf v_i}{\sum_i m_i}.
-$$
+$$ \mathbf V_{\mathrm{CM}} = \frac{\sum_i m_i\mathbf v_i}{\sum_i m_i}. $$
 
 If the whole system drifts, that bulk motion has kinetic energy but does not
 represent internal thermal motion. Including it would make the temperature
@@ -137,14 +123,7 @@ an exact thermodynamic temperature.
 
 The Berendsen thermostat rescales velocities by
 
-$$
-\lambda
-=
-\sqrt{
-1+\frac{\Delta t}{\tau}
-\left(\frac{T_0}{T}-1\right)
-},
-$$
+$$ \lambda = \sqrt{ 1+\frac{\Delta t}{\tau} \left(\frac{T_0}{T}-1\right) }, $$
 
 where:
 
@@ -155,15 +134,11 @@ where:
 
 Then
 
-$$
-\mathbf v_i\leftarrow\lambda\mathbf v_i.
-$$
+$$ \mathbf v_i\leftarrow\lambda\mathbf v_i. $$
 
 The scaling changes kinetic energy by $\lambda^2$:
 
-$$
-K'=\lambda^2K.
-$$
+$$ K'=\lambda^2K. $$
 
 If $T<T_0$, then $\lambda>1$ and the system heats. If $T>T_0$, then $\lambda<1$
 and the system cools.
@@ -223,38 +198,17 @@ that switch.
 
 Check:
 
-$$
-\frac{K}{R}
-=
-\frac{\mathrm{kJ/mol}}{\mathrm{kJ/(mol\,K)}}
-=
-\mathrm{K}.
-$$
+$$ \frac{K}{R} = \frac{\mathrm{kJ/mol}}{\mathrm{kJ/(mol\ K)}} = \mathrm{K}. $$
 
 ## 6. Worked example: the initial temperature
 
 Each particle has velocity $(0,\pm0.05,0)$ nm/ps. The kinetic energy is
 
-$$
-K
-=
-2\times\frac12(39.948)(0.05)^2
-=
-39.948(0.0025)
-=
-0.09987\ \mathrm{kJ/mol}.
-$$
+$$ K = 2\times\frac12(39.948)(0.05)^2 = 39.948(0.0025) = 0.09987\ \mathrm{kJ/mol}. $$
 
 With $N_{\mathrm{dof}}=3$,
 
-$$
-T
-=
-\frac{2(0.09987)}{3(0.008314462618)}
-=
-\frac{0.19974}{0.024943387854}
-\approx8.01\ \mathrm{K}.
-$$
+$$ T = \frac{2(0.09987)}{3(0.008314462618)} = \frac{0.19974}{0.024943387854} \approx8.01\ \mathrm{K}. $$
 
 This is far below the target of 100 K, so the thermostat must heat the system.
 
@@ -262,26 +216,15 @@ This is far below the target of 100 K, so the thermostat must heat the system.
 
 At $T=8.01$ K, $T_0=100$ K, $\Delta t=0.001$ ps, and $\tau=0.1$ ps,
 
-$$
-\frac{\Delta t}{\tau}=0.01,
-\qquad
-\frac{T_0}{T}\approx12.48.
-$$
+$$ \frac{\Delta t}{\tau}=0.01, \qquad \frac{T_0}{T}\approx12.48. $$
 
 Thus
 
-$$
-\lambda^2
-=
-1+0.01(12.48-1)
-\approx1.1148,
-$$
+$$ \lambda^2 = 1+0.01(12.48-1) \approx1.1148, $$
 
 and
 
-$$
-\lambda\approx1.0558.
-$$
+$$ \lambda\approx1.0558. $$
 
 Velocities grow by about 5.6% in one step, so the kinetic energy grows by about
 11.5%. Repeating this over many steps drives the temperature toward 100 K.

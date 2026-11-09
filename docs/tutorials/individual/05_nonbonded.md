@@ -59,9 +59,9 @@ particle $i$ is pulled toward $+x$, which is toward $j$.
 
 ![Lennard-Jones and Coulomb pair interactions](assets/nonbonded_pair.svg)
 
-*Left: the Lennard-Jones energy has a repulsive wall, a zero at $r=\sigma$, and
+Left: the Lennard-Jones energy has a repulsive wall, a zero at $r=\sigma$, and
 a well of depth $\epsilon$. Middle: the force is zero at the well minimum.
-Right: the bare Coulomb energy for like and opposite charges.*
+Right: the bare Coulomb energy for like and opposite charges.
 
 ## 3. Physical intuition: two different kinds of interaction
 
@@ -107,16 +107,7 @@ summation is a later tutorial.
 
 ### 4.1 Lennard-Jones energy
 
-$$
-U_{\mathrm{LJ}}(r)
-=
-4\epsilon
-\left[
-\left(\frac{\sigma}{r}\right)^{12}
--
-\left(\frac{\sigma}{r}\right)^{6}
-\right].
-$$
+$$ U_{\mathrm{LJ}}(r) = 4\epsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]. $$
 
 The $r^{-12}$ term is the repulsive wall. The $r^{-6}$ term is the attractive
 dispersion tail. The powers are chosen for computational convenience, not from
@@ -124,36 +115,21 @@ a fundamental law.
 
 At $r=\sigma$,
 
-$$
-U_{\mathrm{LJ}}(\sigma)=4\epsilon(1-1)=0.
-$$
+$$ U_{\mathrm{LJ}}(\sigma)=4\epsilon(1-1)=0. $$
 
 The minimum is found from $dU/dr=0$:
 
-$$
-r_{\min}=2^{1/6}\sigma\approx1.12246\,\sigma.
-$$
+$$ r_{\min}=2^{1/6}\sigma\approx1.12246\ \sigma. $$
 
 At that separation,
 
-$$
-U_{\mathrm{LJ}}(r_{\min})=-\epsilon.
-$$
+$$ U_{\mathrm{LJ}}(r_{\min})=-\epsilon. $$
 
 ### 4.2 Lennard-Jones force
 
 For a displacement vector $\mathbf r=\mathbf r_i-\mathbf r_j$,
 
-$$
-\mathbf F_{i\leftarrow j}
-=
-\frac{24\epsilon}{r^2}
-\left[
-2\left(\frac{\sigma}{r}\right)^{12}
--
-\left(\frac{\sigma}{r}\right)^{6}
-\right]\mathbf r.
-$$
+$$ \mathbf F_{i\leftarrow j} = \frac{24\epsilon}{r^2} \left[ 2\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]\mathbf r. $$
 
 The force on particle $j$ is $-\mathbf F_{i\leftarrow j}$.
 
@@ -165,19 +141,11 @@ Useful values:
 
 ### 4.3 Coulomb energy and force
 
-$$
-U_{\mathrm{C}}(r)=k_e\frac{q_iq_j}{r},
-\qquad
-k_e=138.935456\ \mathrm{kJ\,nm/(mol\,e^2)}.
-$$
+$$ U_{\mathrm{C}}(r)=k_e\frac{q_iq_j}{r}, \qquad k_e=138.935456\ \mathrm{kJ\ nm/(mol\ e^2)}. $$
 
 For a displacement vector $\mathbf r$,
 
-$$
-\mathbf F_{i\leftarrow j}
-=
-k_e\frac{q_iq_j}{r^3}\mathbf r.
-$$
+$$ \mathbf F_{i\leftarrow j} = k_e\frac{q_iq_j}{r^3}\mathbf r. $$
 
 Like charges give a positive product and a repulsive force. Opposite charges
 give a negative product and an attractive force.
@@ -198,13 +166,7 @@ Two details matter:
 
 The simplest choice is
 
-$$
-U_{\text{cut}}(r)=
-\begin{cases}
-U(r), & r<R_c,\\
-0, & r\ge R_c.
-\end{cases}
-$$
+$$ U_{\text{cut}}(r)= \begin{cases} U(r), & r<R_c,\\ 0, & r\ge R_c. \end{cases} $$
 
 At $r=R_c$ the energy jumps from $U(R_c)$ to zero. For Lennard-Jones,
 $U(R_c)$ is small but not zero. The force also jumps, because the derivative of
@@ -215,13 +177,7 @@ discontinuity.
 
 A shifted potential subtracts the value at the cutoff:
 
-$$
-U_{\text{shift}}(r)=
-\begin{cases}
-U(r)-U(R_c), & r<R_c,\\
-0, & r\ge R_c.
-\end{cases}
-$$
+$$ U_{\text{shift}}(r)= \begin{cases} U(r)-U(R_c), & r<R_c,\\ 0, & r\ge R_c. \end{cases} $$
 
 Now the energy is continuous at $R_c$. The force is unchanged inside the
 cutoff, because the derivative of the constant $U(R_c)$ is zero. The force is
@@ -231,9 +187,7 @@ still discontinuous at $R_c$ unless $dU/dr=0$ there.
 
 A switching function multiplies the potential by a smooth factor:
 
-$$
-U_{\text{switch}}(r)=U(r)S(r),
-$$
+$$ U_{\text{switch}}(r)=U(r)S(r), $$
 
 where $S(r)=1$ for $r<R_{\text{on}}$, decreases smoothly, and reaches zero at
 $R_c$. Both the energy and the force can be made continuous. The switching
@@ -269,25 +223,11 @@ handled by Ewald summation. The code is explicit about which model is active.
 
 Check the Lennard-Jones force:
 
-$$
-\frac{\epsilon}{r^2}\cdot r
-=
-\frac{\mathrm{kJ/mol}}{\mathrm{nm}^2}\cdot\mathrm{nm}
-=
-\mathrm{kJ/(mol\,nm)}.
-$$
+$$ \frac{\epsilon}{r^2}\cdot r = \frac{\mathrm{kJ/mol}}{\mathrm{nm}^2}\cdot\mathrm{nm} = \mathrm{kJ/(mol\ nm)}. $$
 
 The Coulomb force:
 
-$$
-k_e\frac{q_iq_j}{r^3}\mathbf r
-=
-\frac{\mathrm{kJ\,nm}}{\mathrm{mol\,e^2}}
-\frac{\mathrm{e^2}}{\mathrm{nm^3}}
-\mathrm{nm}
-=
-\mathrm{kJ/(mol\,nm)}.
-$$
+$$ k_e\frac{q_iq_j}{r^3}\mathbf r = \frac{\mathrm{kJ\ nm}}{\mathrm{mol\ e^2}} \frac{\mathrm{e^2}}{\mathrm{nm^3}} \mathrm{nm} = \mathrm{kJ/(mol\ nm)}. $$
 
 ## 6. Worked example: the running pair
 
@@ -295,25 +235,15 @@ $$
 
 With $\epsilon=1.0$ kJ/mol and $\sigma=0.34$ nm,
 
-$$
-\frac{\sigma}{r}=\frac{0.34}{0.45}=0.75556.
-$$
+$$ \frac{\sigma}{r}=\frac{0.34}{0.45}=0.75556. $$
 
 Then
 
-$$
-U_{\mathrm{LJ}}
-=
-4(1.0)\left[(0.75556)^{12}-(0.75556)^6\right]
-\approx-0.605708\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{LJ}} = 4(1.0)\left[(0.75556)^{12}-(0.75556)^6\right] \approx-0.605708\ \mathrm{kJ/mol}. $$
 
 The force on $i$ is
 
-$$
-\mathbf F_{i\leftarrow j}
-\approx(+6.230260,0,0)\ \mathrm{kJ/(mol\,nm)}.
-$$
+$$ \mathbf F_{i\leftarrow j} \approx(+6.230260,0,0)\ \mathrm{kJ/(mol\ nm)}. $$
 
 It points toward $j$: the pair is attracted at this separation.
 
@@ -321,19 +251,11 @@ It points toward $j$: the pair is attracted at this separation.
 
 For $q_i=+1$ and $q_j=-1$,
 
-$$
-U_{\mathrm{C}}
-=
-138.935456\frac{(+1)(-1)}{0.45}
-\approx-308.745\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{C}} = 138.935456\frac{(+1)(-1)}{0.45} \approx-308.745\ \mathrm{kJ/mol}. $$
 
 The force on $i$ is
 
-$$
-\mathbf F_{i\leftarrow j}
-\approx(+686.101,0,0)\ \mathrm{kJ/(mol\,nm)}.
-$$
+$$ \mathbf F_{i\leftarrow j} \approx(+686.101,0,0)\ \mathrm{kJ/(mol\ nm)}. $$
 
 It also points toward $j$, but it is much stronger than the Lennard-Jones
 attraction at this separation.
@@ -342,11 +264,7 @@ attraction at this separation.
 
 At $r=0.45$ nm:
 
-$$
-\frac{|U_{\mathrm{C}}|}{|U_{\mathrm{LJ}}|}
-\approx\frac{308.745}{0.605708}
-\approx510.
-$$
+$$ \frac{|U_{\mathrm{C}}|}{|U_{\mathrm{LJ}}|} \approx\frac{308.745}{0.605708} \approx510. $$
 
 The force ratio is smaller, about 110, because the Coulomb force falls as
 $1/r^2$ while the Lennard-Jones force near the well is shallower. The message
@@ -430,11 +348,7 @@ model = NonbondedModel(
 For a pair of different types, the default combining rules are
 Lorentz-Berthelot:
 
-$$
-\sigma_{ij}=\frac{\sigma_i+\sigma_j}{2},
-\qquad
-\epsilon_{ij}=\sqrt{\epsilon_i\epsilon_j}.
-$$
+$$ \sigma_{ij}=\frac{\sigma_i+\sigma_j}{2}, \qquad \epsilon_{ij}=\sqrt{\epsilon_i\epsilon_j}. $$
 
 ### 7.2 Exclusions
 

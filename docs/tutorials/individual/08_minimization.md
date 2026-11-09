@@ -48,7 +48,7 @@ We reuse the distorted triatomic molecule from tutorial 07.
 | converged | — | yes |
 
 The target geometry is exactly the minimum of the bonded model: both bonds at
-$x_0=1.0$ nm and the angle at $\theta_0=60°$.
+$x_0=1.0$ nm and the angle at $\theta_0=60^\circ$.
 
 ![Minimisation history](assets/minimization_path.svg)
 
@@ -87,13 +87,7 @@ not change the energy landscape.
 
 At each step,
 
-$$
-\mathbf r_{\text{new}}
-=
-\mathbf r
-+
-\eta\mathbf F,
-$$
+$$ \mathbf r_{\text{new}} = \mathbf r + \eta\mathbf F, $$
 
 where $\eta$ is the step size and $\mathbf F=-\nabla U$ is the force.
 
@@ -104,19 +98,11 @@ force lowers the energy.
 
 The force has units kJ/(mol nm). To get a position in nm,
 
-$$
-\eta\mathbf F
-\longrightarrow
-\eta\cdot\frac{\mathrm{kJ}}{\mathrm{mol\,nm}}
-=
-\mathrm{nm}.
-$$
+$$ \eta\mathbf F \longrightarrow \eta\cdot\frac{\mathrm{kJ}}{\mathrm{mol\ nm}} = \mathrm{nm}. $$
 
 Therefore
 
-$$
-\eta\sim\frac{\mathrm{nm^2}}{\mathrm{kJ/mol}}.
-$$
+$$ \eta\sim\frac{\mathrm{nm^2}}{\mathrm{kJ/mol}}. $$
 
 A typical value is $\eta=10^{-5}$ nm²/(kJ/mol). The exact value depends on the
 stiffness of the system.
@@ -126,11 +112,7 @@ stiffness of the system.
 A fixed step can overshoot and raise the energy. The implementation therefore
 tries a step and, if the energy increases, halves the step and tries again:
 
-$$
-\eta\leftarrow\frac{\eta}{2}
-\quad\text{until}\quad
-U(\mathbf r+\eta\mathbf F)<U(\mathbf r).
-$$
+$$ \eta\leftarrow\frac{\eta}{2} \quad\text{until}\quad U(\mathbf r+\eta\mathbf F)<U(\mathbf r). $$
 
 This is a simple **line search**. It keeps the method stable for stiff bonded
 terms.
@@ -139,15 +121,11 @@ terms.
 
 A minimum has zero net force:
 
-$$
-\mathbf F_i=0\quad\text{for every }i.
-$$
+$$ \mathbf F_i=0\quad\text{for every }i. $$
 
 The code stops when
 
-$$
-\max_i|\mathbf F_i|\le\text{force tolerance}.
-$$
+$$ \max_i|\mathbf F_i|\le\text{force tolerance}. $$
 
 The default tolerance is $10^{-3}$ kJ/(mol nm). The user can change it.
 
@@ -188,31 +166,18 @@ update is dimensionally consistent.
 
 The initial maximum force is 221.136005 kJ/(mol nm). With
 
-$$
-\eta=10^{-5}\ \mathrm{nm^2/(kJ/mol)},
-$$
+$$ \eta=10^{-5}\ \mathrm{nm^2/(kJ/mol)}, $$
 
 the largest displacement is roughly
 
-$$
-\eta F
-=
-10^{-5}\times221.136005
-\approx2.21\times10^{-3}\ \mathrm{nm}.
-$$
+$$ \eta F = 10^{-5}\times221.136005 \approx2.21\times10^{-3}\ \mathrm{nm}. $$
 
 That is a small fraction of a bond length. The method takes many small steps
 rather than one large jump.
 
 The initial bonded energy is
 
-$$
-U_0
-=
-40+13.707784
-=
-53.707784\ \mathrm{kJ/mol}.
-$$
+$$ U_0 = 40+13.707784 = 53.707784\ \mathrm{kJ/mol}. $$
 
 After 4741 accepted steps, the energy is numerically zero and the maximum force
 is about $9.98\times10^{-4}$ kJ/(mol nm), just below the default tolerance.

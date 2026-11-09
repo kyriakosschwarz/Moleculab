@@ -43,7 +43,7 @@ We continue with the same particle from tutorial 01.
 | mass $m$ | 12 | Da |
 | position $\mathbf r$ | $(0.1, 0, 0)$ | nm |
 | velocity $\mathbf v$ | $(0.1, 0, 0)$ | nm/ps |
-| speed $|\mathbf v|$ | 0.10 | nm/ps |
+| speed $\lvert\mathbf v\rvert$ | 0.10 | nm/ps |
 | kinetic energy $K$ | 0.06 | kJ/mol |
 
 The velocity is an **arbitrary arithmetic choice**, not a typical
@@ -82,12 +82,7 @@ smallest object whose motion we can describe exactly, then add chemistry later.
 A position tells us where a particle is relative to an origin. In three
 dimensions:
 
-$$
-\mathbf r=
-\begin{pmatrix}
-x\\y\\z
-\end{pmatrix}.
-$$
+$$ \mathbf r= \begin{pmatrix} x\\y\\z \end{pmatrix}. $$
 
 In Moleculab, `position` is a NumPy array with shape `(3,)`, and every
 component is in nm.
@@ -95,15 +90,11 @@ component is in nm.
 The origin is a choice. Moving the origin changes the coordinate numbers but
 not the physics. What matters for interactions is usually a **displacement**:
 
-$$
-\Delta\mathbf r=\mathbf r_i-\mathbf r_j.
-$$
+$$ \Delta\mathbf r=\mathbf r_i-\mathbf r_j. $$
 
 The distance between the particles is the norm:
 
-$$
-r_{ij}=|\mathbf r_i-\mathbf r_j|.
-$$
+$$ r_{ij}=|\mathbf r_i-\mathbf r_j|. $$
 
 This distinction between a position and a displacement will matter repeatedly:
 a bond or a force depends on the relative position, not on where the pair is in
@@ -113,16 +104,12 @@ the box.
 
 Velocity is
 
-$$
-\mathbf v=\frac{d\mathbf r}{dt}.
-$$
+$$ \mathbf v=\frac{d\mathbf r}{dt}. $$
 
 In a simulation with a small time step $\Delta t$, a finite-difference
 approximation is
 
-$$
-\mathbf v\approx\frac{\Delta\mathbf r}{\Delta t}.
-$$
+$$ \mathbf v\approx\frac{\Delta\mathbf r}{\Delta t}. $$
 
 Velocity has direction. If a particle moves 0.1 nm in 1 ps to the right, its
 velocity is $(0.1,0,0)$ nm/ps. If it moves to the left, the velocity is
@@ -130,27 +117,21 @@ $(-0.1,0,0)$ nm/ps.
 
 Speed is the magnitude:
 
-$$
-|\mathbf v|=\sqrt{v_x^2+v_y^2+v_z^2}.
-$$
+$$ |\mathbf v|=\sqrt{v_x^2+v_y^2+v_z^2}. $$
 
 Speed has no direction and is never negative.
 
 ![Velocity components and speed](assets/particle_velocity.svg)
 
-*Velocity is built from components. The dashed lines show the component
+Velocity is built from components. The dashed lines show the component
 vectors; the arrow is the full velocity. Here $v_x=0.08$ nm/ps,
-$v_y=0.06$ nm/ps, and $|\mathbf v|=0.10$ nm/ps.*
+$v_y=0.06$ nm/ps, and $|\mathbf v|=0.10$ nm/ps.
 
 #### Average versus instantaneous velocity
 
 If a particle moves from A to B over a finite time, the average velocity is
 
-$$
-\mathbf v_{\text{avg}}
-=
-\frac{\mathbf r_B-\mathbf r_A}{t_B-t_A}.
-$$
+$$ \mathbf v_{\text{avg}} = \frac{\mathbf r_B-\mathbf r_A}{t_B-t_A}. $$
 
 Instantaneous velocity is the limit as the time interval becomes very small.
 MD works with instantaneous velocities at each step.
@@ -159,37 +140,26 @@ MD works with instantaneous velocities at each step.
 
 Kinetic energy is the energy associated with motion:
 
-$$
-K=\frac12m|\mathbf v|^2.
-$$
+$$ K=\frac12m|\mathbf v|^2. $$
 
 In three dimensions,
 
-$$
-K=\frac12m(v_x^2+v_y^2+v_z^2)
-=\frac12m\mathbf v\cdot\mathbf v.
-$$
+$$ K=\frac12m(v_x^2+v_y^2+v_z^2) =\frac12m\mathbf v\cdot\mathbf v. $$
 
 #### Where does the factor $1/2$ come from?
 
 Imagine a particle starting from rest and accelerating under a constant force
 $F$. Its acceleration is $a=F/m$. After time $t$, its speed is
 
-$$
-v=at.
-$$
+$$ v=at. $$
 
 The distance travelled is
 
-$$
-d=\frac12at^2.
-$$
+$$ d=\frac12at^2. $$
 
 The work done by the force is
 
-$$
-W=Fd=ma\cdot\frac12at^2=\frac12m(at)^2=\frac12mv^2.
-$$
+$$ W=Fd=ma\cdot\frac12at^2=\frac12m(at)^2=\frac12mv^2. $$
 
 So the work done becomes exactly the kinetic energy. The factor $1/2$ is not an
 arbitrary convention; it follows from the geometry of constant acceleration.
@@ -198,17 +168,11 @@ arbitrary convention; it follows from the geometry of constant acceleration.
 
 For a force that changes with position,
 
-$$
-W=\int F\,dx.
-$$
+$$ W=\int F\ dx. $$
 
-Using $F=m\,dv/dt$ and $dx=v\,dt$,
+Using $F=m\ dv/dt$ and $dx=v\ dt$,
 
-$$
-W=\int m\frac{dv}{dt}v\,dt
-=\int mv\,dv
-=\frac12mv^2\bigg|_{\text{start}}^{\text{end}}.
-$$
+$$ W=\int m\frac{dv}{dt}v\ dt =\int mv\ dv =\frac12mv^2\bigg|_{\text{start}}^{\text{end}}. $$
 
 If the particle starts from rest, $W=\tfrac12mv^2$.
 
@@ -230,15 +194,7 @@ motion twice.
 
 The kinetic-energy equation uses the unit cancellation from tutorial 01:
 
-$$
-[K]
-=
-\mathrm{Da}\left(\frac{\mathrm{nm}}{\mathrm{ps}}\right)^2
-=
-\mathrm{Da\,nm^2/ps^2}
-=
-\mathrm{kJ/mol}.
-$$
+$$ [K] = \mathrm{Da}\left(\frac{\mathrm{nm}}{\mathrm{ps}}\right)^2 = \mathrm{Da\ nm^2/ps^2} = \mathrm{kJ/mol}. $$
 
 Numerically, $K=\tfrac12m|\mathbf v|^2$ needs no conversion factor.
 
@@ -246,9 +202,7 @@ Numerically, $K=\tfrac12m|\mathbf v|^2$ needs no conversion factor.
 
 A particle in Moleculab stores only the **state**:
 
-$$
-(\mathbf r,\mathbf v;m).
-$$
+$$ (\mathbf r,\mathbf v;m). $$
 
 Everything else is calculated. The figure and table make the boundary explicit.
 
@@ -264,7 +218,7 @@ recomputed when needed.*
 | velocity $\mathbf v$ | yes | current state |
 | atom type | yes | chemical identity, not mechanical state |
 | charge | yes | electrostatic parameter, not mechanical state |
-| speed $|\mathbf v|$ | no | derived from velocity |
+| speed $\lvert\mathbf v\rvert$ | no | derived from velocity |
 | kinetic energy $K$ | no | derived from mass and velocity |
 | force $\mathbf F$ | no | derived from the potential and position |
 | acceleration $\mathbf a$ | no | derived from force and mass |
@@ -279,17 +233,11 @@ consistent with the current state. The question is not “is it ever stored?” 
 
 For
 
-$$
-m=12\ \mathrm{Da},
-\qquad
-\mathbf v=(0.1,0,0)\ \mathrm{nm/ps},
-$$
+$$ m=12\ \mathrm{Da}, \qquad \mathbf v=(0.1,0,0)\ \mathrm{nm/ps}, $$
 
 we have
 
-$$
-K=\frac12(12)(0.1)^2=0.06\ \mathrm{kJ/mol}.
-$$
+$$ K=\frac12(12)(0.1)^2=0.06\ \mathrm{kJ/mol}. $$
 
 Notice that no conversion constant appears. This is the payoff of the unit
 system.
@@ -298,10 +246,7 @@ system.
 
 A speed of $0.1$ nm/ps is
 
-$$
-0.1\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}}
-=100\ \mathrm{m/s}.
-$$
+$$ 0.1\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}} =100\ \mathrm{m/s}. $$
 
 That is fast by everyday standards, but not necessarily a thermal speed. The
 next subsection makes the difference precise.
@@ -311,11 +256,7 @@ next subsection makes the difference precise.
 If speed doubles from 0.1 to 0.2 nm/ps, kinetic energy increases by a factor of
 four:
 
-$$
-K_{\text{new}}
-=\frac12(12)(0.2)^2
-=0.24\ \mathrm{kJ/mol}.
-$$
+$$ K_{\text{new}} =\frac12(12)(0.2)^2 =0.24\ \mathrm{kJ/mol}. $$
 
 This quadratic dependence is important in thermostats and in collision
 analysis.
@@ -329,20 +270,11 @@ point marks the running particle: 12 Da at 0.1 nm/ps gives 0.06 kJ/mol.*
 
 For a classical gas, the most probable speed of a particle of molar mass $M$ is
 
-$$
-v_{\text{most probable}}
-=
-\sqrt{\frac{2RT}{M}}.
-$$
+$$ v_{\text{most probable}} = \sqrt{\frac{2RT}{M}}. $$
 
 For $M=12$ Da at $T=300$ K,
 
-$$
-v_{\text{most probable}}
-=
-\sqrt{\frac{2(0.008314462618)(300)}{12}}
-\approx0.645\ \mathrm{nm/ps}.
-$$
+$$ v_{\text{most probable}} = \sqrt{\frac{2(0.008314462618)(300)}{12}} \approx0.645\ \mathrm{nm/ps}. $$
 
 The mean speed is about $0.728$ nm/ps, and the root-mean-square speed is about
 $0.790$ nm/ps. The example speed of $0.1$ nm/ps is roughly **six times slower**
@@ -361,14 +293,7 @@ energy will all depend on averages over distributions like this one.
 If you formally applied the equipartition formula to the three velocity
 components of the example particle, you would get
 
-$$
-T_{\text{formal}}
-=
-\frac{2K}{3R}
-=
-\frac{2(0.06)}{3(0.008314462618)}
-\approx4.8\ \mathrm{K}.
-$$
+$$ T_{\text{formal}} = \frac{2K}{3R} = \frac{2(0.06)}{3(0.008314462618)} \approx4.8\ \mathrm{K}. $$
 
 That is not a real thermodynamic temperature for one particle; it is a sign
 that the example is deliberately slow.
@@ -379,17 +304,12 @@ that the example is deliberately slow.
 temperature is defined from the total kinetic energy and the number of thermal
 degrees of freedom:
 
-$$
-T=\frac{2K}{N_{\mathrm{dof}}R}.
-$$
+$$ T=\frac{2K}{N_{\mathrm{dof}}R}. $$
 
 For an isolated system with no constraints, removing the three center-of-mass
 translation modes gives
 
-$$
-N_{\mathrm{dof}}=3N-3
-\qquad(N>1).
-$$
+$$ N_{\mathrm{dof}}=3N-3 \qquad(N>1). $$
 
 Constraints physically remove further degrees of freedom. A rigid water
 molecule, for example, has fewer internal degrees of freedom than three

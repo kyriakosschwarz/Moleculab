@@ -60,9 +60,7 @@ used there.
 A potential energy function assigns an energy to every possible configuration
 of the system:
 
-$$
-U=U(\mathbf r_1,\mathbf r_2,\dots).
-$$
+$$ U=U(\mathbf r_1,\mathbf r_2,\dots). $$
 
 For one particle in one dimension, we can draw $U(x)$ as a curve. For one
 particle in two dimensions, it is a surface. For many particles, it is a
@@ -87,36 +85,26 @@ not on the path. Gravity and spring forces are conservative. Friction is not.
 
 For a conservative force, we can define a potential energy $U$ such that
 
-$$
-W=-\Delta U.
-$$
+$$ W=-\Delta U. $$
 
 If the particle moves from $A$ to $B$,
 
-$$
-W_{A\to B}=U(A)-U(B).
-$$
+$$ W_{A\to B}=U(A)-U(B). $$
 
 The force does positive work when the potential energy decreases. A ball
 falling downward loses potential energy and gains kinetic energy.
 
 In one dimension,
 
-$$
-W=\int_{x_A}^{x_B}F(x)\,dx.
-$$
+$$ W=\int_{x_A}^{x_B}F(x)\ dx. $$
 
 Comparing with $W=U(A)-U(B)$ gives
 
-$$
-F(x)=-\frac{dU}{dx}.
-$$
+$$ F(x)=-\frac{dU}{dx}. $$
 
 In three dimensions,
 
-$$
-\mathbf F=-\nabla U.
-$$
+$$ \mathbf F=-\nabla U. $$
 
 The gradient points uphill. The negative gradient points downhill. Force points
 toward lower potential energy.
@@ -131,9 +119,7 @@ landscape.*
 
 The simplest landscape is a parabola:
 
-$$
-U(\mathbf r)=\frac12k|\mathbf r-\mathbf r_0|^2.
-$$
+$$ U(\mathbf r)=\frac12k|\mathbf r-\mathbf r_0|^2. $$
 
 Here:
 
@@ -143,13 +129,7 @@ Here:
 
 The force is
 
-$$
-\mathbf F
-=
--\nabla U
-=
--k(\mathbf r-\mathbf r_0).
-$$
+$$ \mathbf F = -\nabla U = -k(\mathbf r-\mathbf r_0). $$
 
 This is Hooke's law in three dimensions. The force is:
 
@@ -162,21 +142,19 @@ bowl.
 
 ![Harmonic energy and force](assets/harmonic_energy_force.svg)
 
-*Left: the energy bowl. Right: the force, which is the negative slope of the
-bowl. At $x=0.1$ nm, $U=0.5$ kJ/mol and $F=-10$ kJ/(mol nm).*
+Left: the energy bowl. Right: the force, which is the negative slope of the
+bowl. At $x=0.1$ nm, $U=0.5$ kJ/mol and $F=-10$ kJ/(mol nm).
 
 #### Why the stiffness controls the shape
 
 ![Harmonic potentials for several stiffnesses](assets/harmonic_curvature.svg)
 
-*A larger $k$ gives a narrower, steeper bowl. For the same displacement, the
-force and the curvature are larger.*
+A larger $k$ gives a narrower, steeper bowl. For the same displacement, the
+force and the curvature are larger.
 
 The second derivative of $U$ is
 
-$$
-\frac{d^2U}{dx^2}=k.
-$$
+$$ \frac{d^2U}{dx^2}=k. $$
 
 So the stiffness is literally the curvature of the energy landscape.
 
@@ -187,21 +165,11 @@ every smooth potential looks approximately parabolic.
 
 Expand $U(x)$ around a minimum $x_0$:
 
-$$
-U(x)=U(x_0)
-+U'(x_0)(x-x_0)
-+\frac12U''(x_0)(x-x_0)^2
-+\cdots.
-$$
+$$ U(x)=U(x_0) +U'(x_0)(x-x_0) +\frac12U''(x_0)(x-x_0)^2 +\cdots. $$
 
 At a minimum, $U'(x_0)=0$, so
 
-$$
-U(x)\approx U(x_0)
-+\frac12k(x-x_0)^2,
-\qquad
-k=U''(x_0).
-$$
+$$ U(x)\approx U(x_0) +\frac12k(x-x_0)^2, \qquad k=U''(x_0). $$
 
 The constant $U(x_0)$ does not affect force. The quadratic term does. This is
 why harmonic potentials describe:
@@ -219,15 +187,11 @@ But locally, the parabola is the right first approximation.
 
 You can add a constant to $U$:
 
-$$
-U'(x)=U(x)+C.
-$$
+$$ U'(x)=U(x)+C. $$
 
 Then
 
-$$
-\frac{dU'}{dx}=\frac{dU}{dx},
-$$
+$$ \frac{dU'}{dx}=\frac{dU}{dx}, $$
 
 so the force is unchanged. Only energy differences matter for force and
 dynamics.
@@ -257,34 +221,19 @@ wrong.
 
 Take
 
-$$
-k=100\ \mathrm{kJ/(mol\,nm^2)},
-\qquad
-\mathbf r=(0.1,0,0)\ \mathrm{nm},
-\qquad
-\mathbf r_0=(0,0,0).
-$$
+$$ k=100\ \mathrm{kJ/(mol\ nm^2)}, \qquad \mathbf r=(0.1,0,0)\ \mathrm{nm}, \qquad \mathbf r_0=(0,0,0). $$
 
 Potential energy:
 
-$$
-U=\frac12(100)(0.1)^2=0.5\ \mathrm{kJ/mol}.
-$$
+$$ U=\frac12(100)(0.1)^2=0.5\ \mathrm{kJ/mol}. $$
 
 Force:
 
-$$
-\mathbf F=-100(0.1,0,0)
-=(-10,0,0)\ \mathrm{kJ/(mol\,nm)}.
-$$
+$$ \mathbf F=-100(0.1,0,0) =(-10,0,0)\ \mathrm{kJ/(mol\ nm)}. $$
 
 For the particle of mass 12 Da,
 
-$$
-\mathbf a=\frac{\mathbf F}{m}
-=\frac{(-10,0,0)}{12}
-=(-0.8333,0,0)\ \mathrm{nm/ps^2}.
-$$
+$$ \mathbf a=\frac{\mathbf F}{m} =\frac{(-10,0,0)}{12} =(-0.8333,0,0)\ \mathrm{nm/ps^2}. $$
 
 The acceleration points back toward the origin. If the particle is displaced to
 the right, it accelerates left; if displaced left, it accelerates right.
@@ -293,13 +242,7 @@ the right, it accelerates left; if displaced left, it accelerates right.
 
 At this instant the particle has
 
-$$
-K=0.06\ \mathrm{kJ/mol},
-\qquad
-U=0.5\ \mathrm{kJ/mol},
-\qquad
-E=K+U=0.56\ \mathrm{kJ/mol}.
-$$
+$$ K=0.06\ \mathrm{kJ/mol}, \qquad U=0.5\ \mathrm{kJ/mol}, \qquad E=K+U=0.56\ \mathrm{kJ/mol}. $$
 
 If the particle is later released, the total energy should stay near 0.56
 kJ/mol while $K$ and $U$ trade places. Tutorial 04 tests exactly that.
@@ -433,9 +376,7 @@ a = [-0.8333  0.     0.   ]
 We can test whether a force implementation agrees with its energy
 implementation by finite differences:
 
-$$
-F(x)\approx-\frac{U(x+h)-U(x-h)}{2h}.
-$$
+$$ F(x)\approx-\frac{U(x+h)-U(x-h)}{2h}. $$
 
 The central difference cancels the first-order error, leaving an error that
 scales as $h^2$ for smooth functions.
@@ -452,8 +393,8 @@ There is a tradeoff in choosing $h$:
 
 ![Finite-difference error versus step size](assets/finite_difference_error.svg)
 
-*For this harmonic potential, the error is minimised around $h\sim10^{-5}$ nm.
-Making $h$ smaller than that makes the result worse because of roundoff.*
+For this harmonic potential, the error is minimised around $h\sim10^{-5}$ nm.
+Making $h$ smaller than that makes the result worse because of roundoff.
 
 The tests use a small step such as $h=10^{-6}$ nm and a tolerance such as
 $10^{-6}$. This is not a formality: a sign error or a missing factor in the

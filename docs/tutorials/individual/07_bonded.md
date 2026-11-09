@@ -47,7 +47,7 @@ We use the distorted triatomic molecule from the minimization example.
 | --- | --- | --- |
 | bond 0–1 | $k=1000$, $r_0=1.0$ nm | $r=1.2$ nm |
 | bond 1–2 | $k=1000$, $r_0=1.0$ nm | $r=1.2$ nm |
-| angle 0–1–2 | $k=100$, $\theta_0=60°$ | $\theta=90°$ |
+| angle 0–1–2 | $k=100$, $\theta_0=60^\circ$ | $\theta=90^\circ$ |
 | total bonded energy | — | $53.707784$ kJ/mol |
 | maximum force | — | $221.136005$ kJ/(mol nm) |
 
@@ -55,9 +55,9 @@ The molecule is deliberately distorted. Tutorial 08 will let it relax.
 
 ![Bond, angle, and torsion energy curves](assets/bonded_geometry.svg)
 
-*Left: a harmonic bond penalises stretch. Middle: a harmonic angle penalises
+Left: a harmonic bond penalises stretch. Middle: a harmonic angle penalises
 bending away from $\theta_0$. Right: a threefold torsion has three equivalent
-minima and a barrier of $2k$.*
+minima and a barrier of $2k$.
 
 ## 3. Physical intuition: a molecular graph with springs
 
@@ -87,19 +87,11 @@ model. `Topology.energy` and `Topology.forces` evaluate that model.
 
 For two bonded atoms $i$ and $j$,
 
-$$
-U_{\mathrm{bond}}(r)=\frac12k(r-r_0)^2,
-\qquad
-r=|\mathbf r_i-\mathbf r_j|.
-$$
+$$ U_{\mathrm{bond}}(r)=\frac12k(r-r_0)^2, \qquad r=|\mathbf r_i-\mathbf r_j|. $$
 
 The force on atom $i$ is
 
-$$
-\mathbf F_i
-=
--k(r-r_0)\frac{\mathbf r_i-\mathbf r_j}{r}.
-$$
+$$ \mathbf F_i = -k(r-r_0)\frac{\mathbf r_i-\mathbf r_j}{r}. $$
 
 If the bond is stretched ($r>r_0$), the force on $i$ points toward $j$. If it is
 compressed, the force points away.
@@ -109,38 +101,23 @@ $\mathbf r=\mathbf r_i-\mathbf r_j$.
 
 ### 4.2 Harmonic angle
 
-For three atoms $i$–$j$–$k$ with vertex $j$,
+For three atoms $i$, $j$, and $k$ with vertex $j$,
 
-$$
-U_{\mathrm{angle}}(\theta)
-=
-\frac12k(\theta-\theta_0)^2.
-$$
+$$ U_{\mathrm{angle}}(\theta) = \frac12k(\theta-\theta_0)^2. $$
 
 The angle is computed from the two vectors
 
-$$
-\mathbf r_{ji}=\mathbf r_i-\mathbf r_j,
-\qquad
-\mathbf r_{jk}=\mathbf r_k-\mathbf r_j,
-$$
+$$ \mathbf r_{ji}=\mathbf r_i-\mathbf r_j, \qquad \mathbf r_{jk}=\mathbf r_k-\mathbf r_j, $$
 
 as
 
-$$
-\cos\theta
-=
-\frac{\mathbf r_{ji}\cdot\mathbf r_{jk}}
-{|\mathbf r_{ji}|\,|\mathbf r_{jk}|}.
-$$
+$$ \cos\theta = \frac{\mathbf r_{ji}\cdot\mathbf r_{jk}} {|\mathbf r_{ji}|\ |\mathbf r_{jk}|}. $$
 
 The force on each atom follows from the chain rule. The code computes the
 derivatives of $\cos\theta$ with respect to the two bond vectors and applies
 $-\nabla U$. A useful check is that the three forces sum to zero:
 
-$$
-\mathbf F_i+\mathbf F_j+\mathbf F_k=0.
-$$
+$$ \mathbf F_i+\mathbf F_j+\mathbf F_k=0. $$
 
 That must hold because an angle term has no external force.
 
@@ -149,13 +126,9 @@ degrees, use `np.deg2rad`.
 
 ### 4.3 Periodic torsion
 
-For four atoms $i$–$j$–$k$–$l$,
+For four atoms $i$, $j$, $k$, and $l$,
 
-$$
-U_{\mathrm{torsion}}(\phi)
-=
-k\left[1+\cos(n\phi-\delta)\right].
-$$
+$$ U_{\mathrm{torsion}}(\phi) = k\left[1+\cos(n\phi-\delta)\right]. $$
 
 Here:
 
@@ -170,11 +143,7 @@ the typical shape for rotation about a single bond in ethane-like molecules.
 
 The dihedral angle is defined by the bond vectors
 
-$$
-\mathbf r_{ij}=\mathbf r_j-\mathbf r_i,\qquad
-\mathbf r_{jk}=\mathbf r_k-\mathbf r_j,\qquad
-\mathbf r_{kl}=\mathbf r_l-\mathbf r_k.
-$$
+$$ \mathbf r_{ij}=\mathbf r_j-\mathbf r_i,\qquad \mathbf r_{jk}=\mathbf r_k-\mathbf r_j,\qquad \mathbf r_{kl}=\mathbf r_l-\mathbf r_k. $$
 
 Moleculab returns a signed angle in $(-\pi,\pi]$.
 
@@ -205,19 +174,11 @@ count the same interaction.
 
 Check the bond energy:
 
-$$
-\mathrm{kJ/(mol\,nm^2)}\times\mathrm{nm^2}
-=
-\mathrm{kJ/mol}.
-$$
+$$ \mathrm{kJ/(mol\ nm^2)}\times\mathrm{nm^2} = \mathrm{kJ/mol}. $$
 
 The angle energy uses radians, which are dimensionless:
 
-$$
-\mathrm{kJ/(mol\,rad^2)}\times\mathrm{rad^2}
-=
-\mathrm{kJ/mol}.
-$$
+$$ \mathrm{kJ/(mol\ rad^2)}\times\mathrm{rad^2} = \mathrm{kJ/mol}. $$
 
 ## 6. Worked example: the distorted triatomic
 
@@ -225,49 +186,26 @@ $$
 
 Each bond has $r=1.2$ nm and $r_0=1.0$ nm, so the stretch is 0.2 nm:
 
-$$
-U_{\mathrm{bond}}
-=
-\frac12(1000)(0.2)^2
-=
-20\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{bond}} = \frac12(1000)(0.2)^2 = 20\ \mathrm{kJ/mol}. $$
 
 There are two bonds, so the bond contribution is
 
-$$
-U_{\mathrm{bonds}}=40\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{bonds}}=40\ \mathrm{kJ/mol}. $$
 
 ### 6.2 Angle energy
 
 The actual angle is 90°, or $\pi/2$ radians. The target is 60°, or $\pi/3$
 radians. The difference is
 
-$$
-\Delta\theta=\frac{\pi}{2}-\frac{\pi}{3}=\frac{\pi}{6}.
-$$
+$$ \Delta\theta=\frac{\pi}{2}-\frac{\pi}{3}=\frac{\pi}{6}. $$
 
 Thus
 
-$$
-U_{\mathrm{angle}}
-=
-\frac12(100)\left(\frac{\pi}{6}\right)^2
-=
-50\frac{\pi^2}{36}
-\approx13.707784\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{angle}} = \frac12(100)\left(\frac{\pi}{6}\right)^2 = 50\frac{\pi^2}{36} \approx13.707784\ \mathrm{kJ/mol}. $$
 
 ### 6.3 Total
 
-$$
-U_{\mathrm{bonded}}
-=
-40+13.707784
-=
-53.707784\ \mathrm{kJ/mol}.
-$$
+$$ U_{\mathrm{bonded}} = 40+13.707784 = 53.707784\ \mathrm{kJ/mol}. $$
 
 This matches the example and the `System.potential_energy()` value.
 
@@ -275,25 +213,13 @@ This matches the example and the `System.potential_energy()` value.
 
 Take four atoms with bond vectors
 
-$$
-\mathbf r_{ij}=(0.15,0,0),\quad
-\mathbf r_{jk}=(0,0.15,0),\quad
-\mathbf r_{kl}=(0,0,0.15).
-$$
+$$ \mathbf r_{ij}=(0.15,0,0),\quad \mathbf r_{jk}=(0,0.15,0),\quad \mathbf r_{kl}=(0,0,0.15). $$
 
-The dihedral is $\phi=90°$. With $k=2$ kJ/mol, $n=3$, and $\delta=0$,
+The dihedral is $\phi=90^\circ$. With $k=2$ kJ/mol, $n=3$, and $\delta=0$,
 
-$$
-U
-=
-2\left[1+\cos(3\cdot90°)\right]
-=
-2\left[1+\cos270°\right]
-=
-2\ \mathrm{kJ/mol}.
-$$
+$$ U = 2\left[1+\cos(3\cdot90^\circ)\right] = 2\left[1+\cos270^\circ\right] = 2\ \mathrm{kJ/mol}. $$
 
-At $\phi=60°$, $\cos180°=-1$ and the energy is zero. At $\phi=0$,
+At $\phi=60^\circ$, $\cos180^\circ=-1$ and the energy is zero. At $\phi=0$,
 $\cos0=1$ and the energy is $4$ kJ/mol, the top of the barrier.
 
 ## 7. Python implementation
@@ -509,7 +435,7 @@ excluded? Why is the 1-4 pair in a four-atom chain not in the list?
 1. **What is the bond energy for $k=1000$, $r=1.2$, $r_0=1.0$?**
    $0.5\times1000\times0.2^2=20$ kJ/mol.
 
-2. **What is the angle energy for $k=100$, $\theta=90°$, $\theta_0=60°$?**
+2. **What is the angle energy for $k=100$, $\theta=90^\circ$, $\theta_0=60^\circ$?**
    $0.5\times100\times(\pi/6)^2\approx13.7078$ kJ/mol.
 
 3. **What is the total bonded energy of the running molecule?**
@@ -528,7 +454,7 @@ excluded? Why is the 1-4 pair in a four-atom chain not in the list?
    1-2 and 1-3 pairs.
 
 8. **Where is the torsion minimum for $n=3$, $\delta=0$?**
-   At $\phi=60°$, $180°$, and $300°$ (equivalently $-60°$).
+   At $\phi=60^\circ$, $180^\circ$, and $300^\circ$ (equivalently $-60^\circ$).
 
 ## 13. Exercises
 
@@ -536,7 +462,7 @@ excluded? Why is the 1-4 pair in a four-atom chain not in the list?
 
 1. Compute the bond energy for a 0.05 nm compression with $k=2000$.
 2. Compute the angle energy for a 10° deviation from 109.5° with $k=500$.
-3. Compute the torsion energy at $\phi=30°$ for $k=1$, $n=3$, $\delta=0$.
+3. Compute the torsion energy at $\phi=30^\circ$ for $k=1$, $n=3$, $\delta=0$.
 4. For the running molecule, compute the force magnitude on each atom from the
    bond terms alone.
 

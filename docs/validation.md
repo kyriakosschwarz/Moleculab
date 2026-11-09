@@ -143,6 +143,30 @@ environment, so the backend path is exercised.
 All core examples listed in Level 4 run successfully, and the visual generator
 reproduces the tutorial assets.
 
+## Math rendering compatibility
+
+The tutorials must render on both GitHub and the VS Code Markdown preview.
+GitHub's Markdown parser and KaTeX have different quirks, so the following
+conventions are enforced:
+
+- **Display math stays on one line**: `$$ ... $$`. Multi-line display blocks can
+  be parsed as Markdown headings or lists when a line starts with `-`, `=`, or
+  similar.
+- **Use `\ ` for spaces inside math**, not `\,` or `~`. GitHub turns `\,` into a
+  comma and drops `~`; `\ ` survives.
+- **Do not put inline math inside italic spans.** GitHub renders it as literal
+  dollar-delimited text. Image captions containing math are therefore not
+  italicised.
+- **Do not use literal `|` inside math in table cells.** It breaks the table
+  parser. Use `\lvert ... \rvert`.
+- **Use `^\circ` for degrees inside math**, not the Unicode degree sign.
+- **Avoid uncommon macros** such as `\boxed` when a plain display equation is
+  sufficient.
+
+All 947 math expressions in the individual tutorials are checked against both
+KaTeX and MathJax, and the GitHub Markdown API is used to confirm that every
+expression is recognised as math.
+
 ## Known limitations
 
 - The Berendsen thermostat is an equilibration method, not an exact canonical
