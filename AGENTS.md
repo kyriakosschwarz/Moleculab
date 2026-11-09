@@ -4,13 +4,13 @@
 
 - Moleculab is a working **educational** molecular physics/simulation library. Optimize for scientific correctness and readable, inspectable code, not production hardening.
 - The code in `src/moleculab/` is now the executable source of truth. `docs/lib.md` describes the long-term architecture/roadmap; `docs/energies.md` preserves the first-milestone derivation and expected numbers. Reconcile docs with code rather than assuming the docs are implemented.
-- Implemented: units, typed `Particle` state, `HarmonicPotential`, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, and a finite-difference QM/MM particle-in-a-box model.
-- Deferred: molecular FEP/TI/MBAR for complex systems, trained/empirical binding-affinity scoring, and real QM/MM/DFT. Do not add these without tests and a numerical example.
+- Implemented: units, typed `Particle` state, `HarmonicPotential`, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, and a CPU-default optional PyTorch Ewald backend.
+- Deferred: molecular FEP/TI/MBAR for complex systems, trained/empirical binding-affinity scoring, real QM/MM/DFT, and NPU-specific acceleration. Do not add these without tests and a numerical example.
 - Python + NumPy first. Rust/PyO3 is explicitly a later optimization, not part of the current implementation.
 
 ## Environment and commands
 
-- The project uses a **uv-managed** `.venv` and `uv.lock`.
+- The project uses a **uv-managed** `.venv` and `uv.lock`. The development environment currently runs Python 3.14.8, NumPy 2.5.4, pytest 9.2.0, and PyTorch 2.14.1+rocm7.2 on AMD ROCm 7.2/HIP. Prefer current versions when upgrading.
 
 ```bash
 uv sync                                   # install package + dev deps
@@ -34,9 +34,11 @@ uv run python examples/mc_alchemy.py
 uv run python examples/solvated_alchemy.py
 uv run python examples/qm_mm.py
 uv run python examples/flexible_docking.py
+uv run python examples/backend_benchmark.py --backend cpu
 ```
 
-- `pyproject.toml` uses a setuptools `src/` layout, `requires-python >=3.10`, and `numpy`. `pytest` is in the `dev` dependency group; `matplotlib` is optional under `[project.optional-dependencies] examples`.
+- CPU is the default backend. `moleculab.backend.set_backend("cpu"|"auto"|"torch")` and `MOLECULAB_BACKEND` select it; PyTorch is lazy and optional (`uv sync --extra rocm`). Only the Ewald reciprocal energy/force path is accelerated. `auto` picks a CUDA/ROCm or MPS device only when PyTorch reports one; otherwise CPU. Vendor NPUs are not supported. `set_precision("float32")` enables the faster ROCm path; `to_torch`/`to_numpy` provide zero-copy CPU handoff before non-blocking device moves.
+- `pyproject.toml` uses a setuptools `src/` layout, `requires-python >=3.14`, and `numpy>=2.5`. `pytest` is in the `dev` dependency group; `matplotlib` is optional under `examples`; ROCm PyTorch is optional under `rocm`, with `torch`/`triton-rocm` resolved from the PyTorch ROCm 7.2 index.
 - Re-export public API from `moleculab/__init__.py`; examples and tests import from `moleculab`, not internal modules.
 
 ## Units and constants

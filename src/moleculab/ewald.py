@@ -36,6 +36,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from ._validation import as_displacement, as_positive_float
+from .backend import _load_torch, get_backend, to_numpy, to_torch, torch_dtype
 from .box import Box
 from .units import COULOMB_CONSTANT
 
@@ -152,6 +153,15 @@ class EwaldElectrostatics:
         if wave_vectors.size == 0:
             return 0.0
 
+        if get_backend() == "torch":
+            return self._reciprocal_energy_torch(
+                coordinates,
+                charge_values,
+                wave_vectors,
+                squared,
+                box.volume,
+            )
+
         phases = np.exp(1j * (coordinates @ wave_vectors.T))
         structure_factor = charge_values @ phases
         prefactor = (
@@ -165,6 +175,39 @@ class EwaldElectrostatics:
             / (2.0 * box.volume)
             * np.sum(prefactor * np.abs(structure_factor) ** 2)
         )
+
+    def _reciprocal_energy_torch(
+        self,
+        coordinates: np.ndarray,
+        charge_values: np.ndarray,
+        wave_vectors: np.ndarray,
+        squared: np.ndarray,
+        volume: float,
+    ) -> float:
+        torch = _load_torch()
+        dtype = torch_dtype()
+        t_positions = to_torch(coordinates, dtype=dtype)
+        t_charges = to_torch(charge_values, dtype=dtype)
+        t_wave_vectors = to_torch(wave_vectors, dtype=dtype)
+        t_squared = to_torch(squared, dtype=dtype)
+
+        angles = t_positions @ t_wave_vectors.T
+        phases = torch.complex(torch.cos(angles), torch.sin(angles))
+        structure_factor = torch.complex(
+            t_charges, torch.zeros_like(t_charges)
+        ) @ phases
+        prefactor = (
+            4.0
+            * np.pi
+            / t_squared
+            * torch.exp(-t_squared / (4.0 * self.alpha**2))
+        )
+        energy = (
+            COULOMB_CONSTANT
+            / (2.0 * volume)
+            * torch.sum(prefactor * torch.abs(structure_factor) ** 2)
+        )
+        return float(energy.detach().cpu().item())
 
     def self_energy(self, charges: np.ndarray) -> float:
         """Return the Ewald self-energy correction in kJ/mol."""
@@ -235,6 +278,15 @@ class EwaldElectrostatics:
         if wave_vectors.size == 0:
             return forces
 
+        if get_backend() == "torch":
+            return self._global_forces_torch(
+                coordinates,
+                charge_values,
+                wave_vectors,
+                squared,
+                box.volume,
+            )
+
         phases = np.exp(1j * (coordinates @ wave_vectors.T))
         structure_factor = charge_values @ phases
         prefactor = (
@@ -258,6 +310,48 @@ class EwaldElectrostatics:
             )
         )
         return forces
+
+    def _global_forces_torch(
+        self,
+        coordinates: np.ndarray,
+        charge_values: np.ndarray,
+        wave_vectors: np.ndarray,
+        squared: np.ndarray,
+        volume: float,
+    ) -> np.ndarray:
+        torch = _load_torch()
+        dtype = torch_dtype()
+        t_positions = to_torch(coordinates, dtype=dtype)
+        t_charges = to_torch(charge_values, dtype=dtype)
+        t_wave_vectors = to_torch(wave_vectors, dtype=dtype)
+        t_squared = to_torch(squared, dtype=dtype)
+
+        angles = t_positions @ t_wave_vectors.T
+        phases = torch.complex(torch.cos(angles), torch.sin(angles))
+        structure_factor = torch.complex(
+            t_charges, torch.zeros_like(t_charges)
+        ) @ phases
+        prefactor = (
+            4.0
+            * np.pi
+            / t_squared
+            * torch.exp(-t_squared / (4.0 * self.alpha**2))
+        )
+        imaginary = torch.imag(
+            structure_factor.unsqueeze(0) * torch.conj(phases)
+        )
+        forces = (
+            -COULOMB_CONSTANT
+            / volume
+            * t_charges.unsqueeze(1)
+            * torch.sum(
+                prefactor.unsqueeze(0).unsqueeze(-1)
+                * t_wave_vectors.unsqueeze(0)
+                * imaginary.unsqueeze(-1),
+                dim=1,
+            )
+        )
+        return to_numpy(forces)
 
     def exclusion_energy(
         self,

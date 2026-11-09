@@ -58,6 +58,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   receptor-strain calibration term.
 - A minimal finite-difference QM/MM particle-in-a-box model coupled to fixed
   MM point charges, validated against analytic and perturbative references.
+- CPU-default NumPy execution with an optional lazy PyTorch backend for the
+  Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.
 
 This is still an educational engine, not a production molecular-dynamics
@@ -65,9 +67,10 @@ package.  Solvent models, free-energy methods, docking, and quantum chemistry
 remain on the roadmap.
 
 The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The first
-implementation notes are in [`docs/energies.md`](docs/energies.md), and
+implementation notes are in [`docs/energies.md`](docs/energies.md),
 [`docs/tutorial.md`](docs/tutorial.md) is a guided path from one particle to a
-small molecular simulation.
+small molecular simulation, and [`docs/acceleration.md`](docs/acceleration.md)
+covers CPU/ROCm/NPU backend choices.
 
 ## Install with uv
 
@@ -78,12 +81,34 @@ uv sync
 ```
 
 This installs the package in editable mode together with the development
-dependencies (`pytest`).  To run the examples, install the optional plotting
-dependency:
+dependencies (`pytest`).  The core runtime requires Python 3.14+ and
+`numpy>=2.5`.
+
+To run the examples, install the optional plotting dependency:
 
 ```bash
 uv sync --extra examples
 ```
+
+CPU execution is the default.  For AMD ROCm, install the optional extra:
+
+```bash
+uv sync --extra rocm
+```
+
+This resolves `torch` and `triton-rocm` from the PyTorch ROCm 7.2 index
+declared in `pyproject.toml`; no NVIDIA packages are pulled in.  The extra is
+never installed by a plain `uv sync`.
+
+For NVIDIA/CUDA, install a matching PyTorch wheel manually, for example:
+
+```bash
+uv pip install torch --index-url https://download.pytorch.org/whl/cu130
+```
+
+Then select it at runtime with `set_backend("auto")` or
+`MOLECULAB_BACKEND=auto`.  PyTorch is never required for the normal test suite
+or the core library.
 
 Activate the environment if you prefer a shell session:
 
@@ -103,6 +128,80 @@ Run one test or one file while developing:
 uv run pytest tests/test_integrators.py::test_velocity_verlet_conserves_energy_for_a_harmonic_oscillator -v
 uv run pytest tests/test_potentials.py -v
 ```
+
+## CPU and optional acceleration
+
+The default backend is NumPy on the CPU.  Select an accelerator explicitly:
+
+```python
+from moleculab import backend_info, set_backend
+
+set_backend("auto")   # use CUDA/ROCm or MPS if PyTorch reports one
+print(backend_info())
+```
+
+Or set the environment variable:
+
+```bash
+MOLECULAB_BACKEND=auto uv run python examples/backend_benchmark.py --backend auto
+```
+
+`--backend torch` forces PyTorch even on CPU for benchmarking; `auto` stays on
+the CPU when no supported accelerator is visible.  The current accelerated
+path is Ewald reciprocal-space energy and forces.  Other modules remain
+NumPy/CPU and convert at their boundaries.
+
+For APUs, `set_precision("float32")` enables the faster half-width ROCm path,
+and `to_torch`/`to_numpy` use a zero-copy `torch.from_numpy` handoff before the
+non-blocking device move.  The CPU thread limits and a vectorized GPU pairwise
+example are in `examples/amd_gpu_tuning.py`.
+
+### AMD ROCm on this machine
+
+The system ROCm/HIP runtime and the Radeon 890M (`gfx1151`) are present:
+
+```bash
+rocminfo        # enumerates the Radeon 890M GPU agent
+hipconfig       # HIP_PATH=/usr, ROCM_PATH=/usr, HIP_PLATFORM=amd
+```
+
+The optional ROCm extra resolves the matching PyTorch wheel automatically:
+
+```bash
+uv sync --extra rocm
+```
+
+If you need to install it manually instead:
+
+```bash
+uv pip install --index-url https://download.pytorch.org/whl/rocm7.2 \
+  "torch==2.14.1+rocm7.2"
+```
+
+The manual command is also useful if your installed ROCm is 6.x; substitute a
+matching `rocm6.4` wheel/index.
+
+If the device is not detected, set the architecture override before launching:
+
+```bash
+export HSA_OVERRIDE_GFX_VERSION=11.5.1
+```
+
+Verified on this system:
+
+```text
+Python 3.14.8
+numpy 2.5.4
+pytest 9.2.0
+torch 2.14.1+rocm7.2, HIP 7.2.53211
+torch.cuda.is_available() -> True
+device -> AMD Radeon 890M
+backend_info() -> {'backend': 'torch', 'device': 'cuda', 'accelerator': True}
+```
+
+Vendor NPUs (AMD XDNA) are present as `/dev/accel0` but are not supported by
+this backend layer.  They require an ONNX Runtime/Vitis AI/vendor runtime path
+and are inference-oriented; they are not exposed as a native PyTorch device.
 
 ## Try it
 
@@ -131,6 +230,8 @@ uv run python examples/mc_alchemy.py
 uv run python examples/solvated_alchemy.py
 uv run python examples/qm_mm.py
 uv run python examples/flexible_docking.py
+uv run python examples/backend_benchmark.py --backend cpu
+uv run python examples/amd_gpu_tuning.py --backend auto
 ```
 
 - `first_particle.py` reproduces the hand calculation from the first tutorial.
@@ -177,6 +278,11 @@ uv run python examples/flexible_docking.py
   calibrated flexible score with rigid-receptor docking.
 - `qm_mm.py` solves a finite-difference electron-in-a-box model and perturbs it
   with fixed MM point charges.
+- `backend_benchmark.py` benchmarks CPU versus optional PyTorch Ewald
+  reciprocal energy/forces.
+- `amd_gpu_tuning.py` exercises zero-copy handoff, float32 ROCm Ewald,
+  vectorized GPU pairwise distances, bfloat16 autocast, and optional
+  `torch.compile`.
 
 A minimal interactive example:
 
@@ -230,6 +336,7 @@ constant is likewise expressed in internal units as
 ```text
 src/moleculab/
 ├── units.py        Unit labels, constants, and unit conversions
+├── backend.py      CPU/PyTorch backend selection
 ├── particles.py    Particle state and validation
 ├── potentials.py   Nonbonded models: harmonic, Lennard-Jones, Coulomb
 ├── nonbonded.py    Typed nonbonded model, exclusions, reaction field
@@ -287,6 +394,7 @@ Moleculab is being built from simple mechanics toward molecular simulation:
 - [x] Solvated-ligand FEP/TI/MBAR with Ewald water
 - [x] Flexible-receptor docking with side-chain strain scoring
 - [x] Minimal finite-difference QM/MM particle in a box
+- [x] CPU-default backend with optional PyTorch Ewald acceleration
 - [ ] Molecular FEP/TI/MBAR for complex systems
 - [ ] Trained/empirical binding-affinity scoring functions
 - [ ] Real QM/MM, Hartree-Fock, and DFT

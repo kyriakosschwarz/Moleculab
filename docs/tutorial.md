@@ -30,9 +30,9 @@ Moleculab uses one internal unit system:
 
 The key convenience is that Newton's second law becomes numerically
 
-\[
+$$
 a = F / m
-\]
+$$
 
 without an extra conversion constant.  The constants live in
 `src/moleculab/units.py`.
@@ -68,11 +68,11 @@ Check: `uv run pytest tests/test_particles.py tests/test_physics.py -q`.
 
 The harmonic potential is an external spring-like model:
 
-\[
+$$
 U(\mathbf r) = \tfrac{1}{2} k |\mathbf r - \mathbf r_0|^2,
 \qquad
 \mathbf F = -k(\mathbf r - \mathbf r_0).
-\]
+$$
 
 ```python
 from moleculab import HarmonicPotential
@@ -92,15 +92,15 @@ Check: `uv run pytest tests/test_potentials.py -q`.
 Velocity Verlet updates position with the current acceleration and velocity
 with the average of the old and new accelerations:
 
-\[
+$$
 \mathbf r_{n+1} = \mathbf r_n + \mathbf v_n \Delta t
 + \tfrac{1}{2}\mathbf a_n \Delta t^2,
-\]
+$$
 
-\[
+$$
 \mathbf v_{n+1} = \mathbf v_n
 + \tfrac{1}{2}(\mathbf a_n + \mathbf a_{n+1})\Delta t.
-\]
+$$
 
 For a harmonic oscillator with `m = 12 Da` and `k = 12*pi^2`, the period is
 2 ps.  The example starts at `x = 0.1 nm` and integrates 2000 steps of
@@ -116,11 +116,11 @@ Two pair potentials are implemented.
 
 ### Lennard-Jones
 
-\[
+$$
 U(r) = 4\epsilon
 \left[\left(\frac{\sigma}{r}\right)^{12}
 - \left(\frac{\sigma}{r}\right)^6\right].
-\]
+$$
 
 - `U = 0` at `r = sigma`.
 - The minimum is at `r = 2^(1/6) sigma`.
@@ -129,9 +129,9 @@ U(r) = 4\epsilon
 
 ### Coulomb
 
-\[
+$$
 U(r) = k_e \frac{q_i q_j}{r}.
-\]
+$$
 
 In Moleculab units, `k_e = COULOMB_CONSTANT = 138.935456 kJ nm/(mol e²)`.
 Like charges repel; opposite charges attract.
@@ -143,9 +143,9 @@ Check: `uv run pytest tests/test_pair_potentials.py -q`.
 
 A `System` sums nonbonded interactions over every unique pair:
 
-\[
+$$
 U_{\text{nonbonded}} = \sum_{i<j} U_{\text{pair}}(r_{ij}).
-\]
+$$
 
 For each pair, the force on particle `j` is the negative of the force on
 particle `i`, so total momentum is conserved when there are no external
@@ -211,9 +211,9 @@ Check: `uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_tor
 At a minimum, every net force is zero.  Steepest descent moves atoms along the
 force:
 
-\[
+$$
 \mathbf r_{\text{new}} = \mathbf r + \text{step} \cdot \mathbf F.
-\]
+$$
 
 `step_size` has units of nm²/(kJ/mol), and backtracking reduces it whenever a
 trial move raises the energy.
@@ -225,19 +225,19 @@ Check: `uv run pytest tests/test_minimization.py -q`.
 
 The instantaneous kinetic temperature is
 
-\[
+$$
 T = \frac{2K}{N_{\text{dof}} R},
-\]
+$$
 
 with `R = 0.008314462618 kJ/(mol K)`.  For an isolated system the three
 center-of-mass translation modes are normally removed, so `N_dof = 3N - 3`.
 
 The Berendsen thermostat weakly rescales velocities:
 
-\[
+$$
 \lambda = \sqrt{1 + \frac{\Delta t}{\tau}
 \left(\frac{T_0}{T} - 1\right)}.
-\]
+$$
 
 Run: `uv run python examples/thermostat.py`.
 Check: `uv run pytest tests/test_thermostats.py -q`.
@@ -246,10 +246,10 @@ Check: `uv run pytest tests/test_thermostats.py -q`.
 
 An orthorhombic `Box` uses the minimum-image convention:
 
-\[
+$$
 \mathbf d_{\min} = \mathbf d
 - \operatorname{round}(\mathbf d / \mathbf L) \odot \mathbf L.
-\]
+$$
 
 When `System.box` is set, nonbonded interactions use the minimum image.
 Bonded terms use the stored coordinates directly.
@@ -263,11 +263,11 @@ A simulation produces more than a final structure.  Two standard analyses are:
 
 ### Mean-squared displacement
 
-\[
+$$
 \mathrm{MSD}(\tau) = \left\langle
 |\mathbf r_i(t+\tau) - \mathbf r_i(t)|^2
 \right\rangle_{i,t}.
-\]
+$$
 
 For diffusive motion in three dimensions, `MSD(tau) ~ 6 D tau`, so the slope
 gives the diffusion coefficient.  When a periodic box is supplied, Moleculab
@@ -275,11 +275,11 @@ uses minimum-image displacements.
 
 ### Radial distribution function
 
-\[
+$$
 g(r_k) = \frac{N_k}
 {N_{\mathrm{frames}} N_{\mathrm{pairs}}
 (4\pi r_k^2 \Delta r / V)}.
-\]
+$$
 
 `g(r) = 1` for an ideal gas.  Peaks show solvation shells; the first peak of a
 Lennard-Jones fluid appears near `r ~ sigma`.
@@ -300,16 +300,16 @@ Check: `uv run pytest tests/test_analysis.py -q`.
 `build_solvent_box` creates an explicit coarse-grained solvent in a periodic
 box.  Each solvent molecule is one Lennard-Jones particle:
 
-\[
+$$
 U(r) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}
 - \left(\frac{\sigma}{r}\right)^6\right].
-\]
+$$
 
 The builder can size the box from a target number density,
 
-\[
+$$
 L = \left(\frac{N}{\rho}\right)^{1/3},
-\]
+$$
 
 place particles on a lattice or randomly, and initialize velocities at a
 target temperature.  The result is a normal `System` with a `Box`, so the same
@@ -340,20 +340,20 @@ Check: `uv run pytest tests/test_solvent.py -q`.
 FEP estimates the free-energy difference between two states by sampling state
 0 and reweighting each sample by the work needed to switch to state 1:
 
-\[
+$$
 \Delta G = -RT \ln
 \left\langle \exp\left(-\frac{\Delta U}{RT}\right) \right\rangle_0,
 \qquad
 \Delta U = U_1 - U_0.
-\]
+$$
 
 Moleculab uses molar units, so `RT = 0.008314462618 * T` kJ/mol.  The module's
 test system is a three-dimensional harmonic oscillator with a stiffness change,
 whose exact result is
 
-\[
+$$
 \Delta G_{\mathrm{exact}} = \frac{3}{2} RT \ln\left(\frac{k_1}{k_0}\right).
-\]
+$$
 
 ```python
 from moleculab import (
@@ -409,13 +409,13 @@ nonbonded model uses:
   each angle;
 - reaction-field electrostatics with cutoff `R_c`:
 
-\[
+$$
 U(r) = k_e q_i q_j \left[
 \frac{1}{r}
 + \frac{\epsilon_{rf}-1}{2\epsilon_{rf}+1}\frac{r^2}{R_c^3}
 - \frac{3\epsilon_{rf}}{2\epsilon_{rf}+1}\frac{1}{R_c}
 \right].
-\]
+$$
 
 The potential is shifted to zero at the cutoff.  This is a minimal
 reaction-field treatment.  For long-range electrostatics, pass an
@@ -428,11 +428,11 @@ velocity update.  Use a conservative timestep (the example uses `1e-4 ps`).
 
 SHAKE corrects a stretched constraint with
 
-\[
+$$
 \Delta \mathbf r_i = -\frac{\mu}{m_i}\frac{r-d}{r}\mathbf r,
 \qquad
 \Delta \mathbf r_j = +\frac{\mu}{m_j}\frac{r-d}{r}\mathbf r,
-\]
+$$
 
 and RATTLE removes the radial relative velocity.  Pass `rigid=False` to build
 flexible water for comparison.
@@ -447,11 +447,11 @@ Docking searches for a ligand placement that interacts favorably with a
 receptor.  Moleculab keeps the ligand rigid and scores only receptor-ligand
 pairs with the existing typed nonbonded model:
 
-\[
+$$
 E_{\text{pose}} = \sum_{r \in \text{receptor}}
 \sum_{l \in \text{ligand}}
 \left(U_{\text{LJ}}^{rl} + U_{\text{Coulomb}}^{rl}\right).
-\]
+$$
 
 A rigid ligand pose is a center-of-mass translation plus a rotation.  The
 sampler draws translations uniformly in a ball and rotations uniformly over
@@ -486,27 +486,27 @@ every charge interacts with every periodic image.  Ewald summation splits the
 lattice sum into a short-range real-space part and a long-range reciprocal-space
 part:
 
-\[
+$$
 U = U_{\mathrm{real}} + U_{\mathrm{recip}} + U_{\mathrm{self}}
 + U_{\mathrm{charge}}.
-\]
+$$
 
 The real-space part uses
 
-\[
+$$
 U_{\mathrm{real}}(r) = k_e q_i q_j
 \frac{\operatorname{erfc}(\alpha r)}{r},
-\]
+$$
 
 and the reciprocal part sums over wave vectors
-\(\mathbf k = 2\pi(n_x/L_x, n_y/L_y, n_z/L_z)\):
+$\mathbf k = 2\pi(n_x/L_x, n_y/L_y, n_z/L_z)$:
 
-\[
+$$
 U_{\mathrm{recip}} =
 \frac{k_e}{2V}\sum_{\mathbf k \ne 0}
 \frac{4\pi}{k^2}e^{-k^2/(4\alpha^2)}
 \left|\sum_i q_i e^{i\mathbf k\cdot\mathbf r_i}\right|^2.
-\]
+$$
 
 Moleculab evaluates the real-space terms in the normal typed pair loop and adds
 the reciprocal, self, and net-charge terms once in `System`.
@@ -548,17 +548,17 @@ Check: `uv run pytest tests/test_ewald.py tests/test_water.py -q`.
 
 Pressure has a kinetic and a virial part:
 
-\[
+$$
 P = \frac{2K}{3V} + P_{\mathrm{virial}}.
-\]
+$$
 
 Moleculab estimates the virial by isotropically scaling both the box and all
 particle positions and measuring the potential-energy change:
 
-\[
+$$
 P_{\mathrm{virial}} = -\frac{\partial U}{\partial V}
 \approx -\frac{U(V+\Delta V)-U(V-\Delta V)}{2\Delta V}.
-\]
+$$
 
 This automatically includes bonds, angles, nonbonded interactions, and Ewald
 terms.  Pressure is reported in `kJ/(mol nm^3)` in the core and converted to
@@ -566,9 +566,9 @@ bar with `pressure_bar()`.
 
 The Berendsen barostat applies
 
-\[
+$$
 \mu = \left[1-\frac{\kappa \Delta t}{\tau_P}(P_0-P)\right]^{1/3}
-\]
+$$
 
 and scales the box and positions by `mu`.  Higher target pressure compresses
 the system; lower target pressure expands it.
@@ -597,20 +597,20 @@ Check: `uv run pytest tests/test_pressure.py -q`.
 Thermodynamic integration computes a free-energy difference by integrating the
 ensemble average of the Hamiltonian derivative along an alchemical path:
 
-\[
+$$
 \Delta G = \int_0^1
 \left\langle \frac{\partial U_\lambda}{\partial \lambda}
 \right\rangle_\lambda d\lambda.
-\]
+$$
 
 For the linear path
 
-\[
+$$
 U_\lambda = (1-\lambda)U_0 + \lambda U_1,
-\]
+$$
 
-the derivative is simply \(U_1-U_0\).  The module's test system is a harmonic
-oscillator with interpolated stiffness and center.  At every \(\lambda\), the
+the derivative is simply $U_1-U_0$.  The module's test system is a harmonic
+oscillator with interpolated stiffness and center.  At every $\lambda$, the
 potential is quadratic, so samples are drawn exactly from its Gaussian
 Boltzmann distribution.
 
@@ -640,15 +640,15 @@ Check: `uv run pytest tests/test_ti.py -q`.
 ## 19. MBAR over alchemical windows
 
 MBAR combines samples from several states instead of analyzing one pair at a
-time.  For reduced potentials \(u_i(x)=U_i(x)/(RT)\) and \(N_k\) samples from
+time.  For reduced potentials $u_i(x)=U_i(x)/(RT)$ and $N_k$ samples from
 state k, the self-consistent equations are
 
-\[
+$$
 e^{-f_i} = \sum_{n=1}^{N}
 \frac{e^{-u_i(x_n)}}{\sum_k N_k e^{f_k-u_k(x_n)}}.
-\]
+$$
 
-Moleculab fixes \(f_0=0\), so relative free energies are \(\Delta G_i=RT f_i\).
+Moleculab fixes $f_0=0$, so relative free energies are $\Delta G_i=RT f_i$.
 
 ```python
 from moleculab import HarmonicPotential, mbar_harmonic
@@ -675,14 +675,14 @@ The harmonic examples are analytically clear, but molecular interactions have
 repulsive cores.  `SoftCoreLennardJones` couples a mobile particle to a fixed
 particle through a harmonic trap and a soft-core LJ interaction:
 
-\[
+$$
 s(r,\lambda)=\alpha(1-\lambda)+(r/\sigma)^6,
-\]
+$$
 
-\[
+$$
 U_{\mathrm{LJ}}(r,\lambda)
 =4\epsilon\lambda\left(\frac{1}{s^2}-\frac{1}{s}\right).
-\]
+$$
 
 At `lambda=0` the LJ term vanishes; at `lambda=1` it is the ordinary 12-6
 potential.  The soft core makes `dU/dlambda` finite at the endpoint, which
@@ -690,9 +690,9 @@ keeps TI and MBAR stable.
 
 Samples are drawn from the exact radial distribution
 
-\[
+$$
 p_\lambda(r)\propto r^2 e^{-U_\lambda(r)/(RT)}
-\]
+$$
 
 on a high-resolution grid.  FEP, TI, and MBAR are all validated against a
 high-accuracy radial-quadrature reference.
@@ -716,24 +716,24 @@ Check: `uv run pytest tests/test_lj_alchemy.py -q`.
 The QM/MM module solves a one-dimensional time-independent Schrödinger
 equation with finite differences:
 
-\[
+$$
 -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}+V(x)\psi=E\psi.
-\]
+$$
 
 The box has hard walls at `x=0` and `x=L`.  The Hamiltonian is tridiagonal and
 is diagonalized with `numpy.linalg.eigh`.  Without an external potential, the
 finite-difference levels converge to the analytic particle-in-a-box values
 
-\[
+$$
 E_n=\frac{\hbar^2\pi^2 n^2}{2mL^2}.
-\]
+$$
 
 MM point charges add
 
-\[
+$$
 V_{\mathrm{MM}}(x)=k_e q_{\mathrm{QM}}
 \sum_i\frac{q_i}{|x-x_i|}.
-\]
+$$
 
 ```python
 from moleculab import ELECTRON_MASS_DA, MMPointCharge, ParticleInBox
@@ -783,12 +783,12 @@ print(pair.mbar(n_windows=11, n_samples=1000, seed=303).delta_g[-1])
 
 The reference is
 
-\[
+$$
 \Delta G = -RT \ln \frac{Z_{\lambda=1}}{Z_{\lambda=0}},
 \qquad
 Z_\lambda = \int_0^\infty r^2
 e^{-[U_{\mathrm{bond}}(r)+U_{\mathrm{LJ}}(r,\lambda)]/(RT)}dr.
-\]
+$$
 
 Run: `uv run python examples/mc_alchemy.py`.
 Check: `uv run pytest tests/test_mc_alchemy.py -q`.
@@ -811,9 +811,9 @@ The water-water energy is identical in every alchemical state, so it cancels
 from the ligand decoupling.  FEP, TI, and MBAR therefore use only the
 ligand-water soft-core energies:
 
-\[
+$$
 \Delta G = \Delta G_{\mathrm{ligand-water}}.
-\]
+$$
 
 ```python
 from moleculab import EwaldElectrostatics, SolvatedLigandAlchemy, build_water_box
@@ -841,10 +841,10 @@ Rigid docking assumes the receptor is fixed.  `SideChain` adds explicit
 side-chain flexibility: a group of receptor atoms is translated as a rigid
 block during the search.  The calibrated score adds a harmonic strain penalty:
 
-\[
+$$
 S = E_{\mathrm{interaction}}
 + \sum_s \frac{1}{2}k_s|\Delta \mathbf r_s|^2.
-\]
+$$
 
 The interaction energy is still the typed Lennard-Jones/Coulomb energy
 between the ligand and receptor.  The strain term penalizes large side-chain
@@ -874,6 +874,68 @@ and recovers a favorable pose.
 
 Run: `uv run python examples/flexible_docking.py`.
 Check: `uv run pytest tests/test_flexible_docking.py -q`.
+
+## 25. CPU and optional acceleration
+
+Moleculab defaults to NumPy on the CPU.  The optional PyTorch backend is
+lazy-loaded and currently accelerates only the Ewald reciprocal energy/force
+path.
+
+```python
+from moleculab import backend_info, set_backend
+
+set_backend("auto")   # CUDA/ROCm or MPS if available, otherwise CPU
+print(backend_info())
+```
+
+You can also set `MOLECULAB_BACKEND=auto` in the environment.  Explicit
+`set_backend("torch")` runs PyTorch even on CPU for benchmarking; `auto` stays
+on CPU when no supported accelerator is visible.
+
+Install the optional ROCm framework with:
+
+```bash
+uv sync --extra rocm
+```
+
+For NVIDIA/CUDA, install a matching PyTorch wheel manually instead.  The
+`rocm` extra resolves `torch` and `triton-rocm` from the PyTorch ROCm 7.2 index
+declared in `pyproject.toml`; a plain `uv sync` stays CPU-only.
+
+For AMD ROCm, verify the wheel/device:
+
+```bash
+uv pip install --index-url https://download.pytorch.org/whl/rocm7.2 \
+  "torch==2.14.1+rocm7.2"
+```
+
+Use the wheel matching your ROCm version (`rocm6.4` for ROCm 6.x, for example).
+On a Radeon 890M / gfx1151 system, verify:
+
+```bash
+rocminfo
+hipconfig
+python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+
+For APU throughput, `set_precision("float32")` selects the faster ROCm path,
+and `to_torch`/`to_numpy` avoid an intermediate NumPy copy before the
+non-blocking device move.  See `examples/amd_gpu_tuning.py` for zero-copy,
+vectorized GPU pairwise distances, bfloat16 autocast, and optional
+`torch.compile`.
+
+Run the benchmark:
+
+```bash
+uv run python examples/backend_benchmark.py --backend cpu
+uv run python examples/backend_benchmark.py --backend auto
+```
+
+`auto` selects the ROCm GPU when `torch.cuda.is_available()` is true.  Vendor
+NPUs are not supported by this backend layer yet, and all other modules remain
+CPU/NumPy.
+
+Check: `uv run pytest tests/test_backend.py -q`.
 
 ## Suggested exercises
 
@@ -920,6 +982,8 @@ Check: `uv run pytest tests/test_flexible_docking.py -q`.
     ligand-water decoupling free energy and estimator spread change.
 22. Vary the side-chain stiffness and maximum displacement in
     `flexible_docking.py` and compare the gain over rigid docking.
+23. Run `backend_benchmark.py` with CPU and the available backend and compare
+    the Ewald timing and checksum.
 
 ## Where to go next
 

@@ -1,5 +1,8 @@
+# Moleculab package metadata and tool configuration.
+# CPU-only by default. ROCm PyTorch is an explicit optional extra.
+
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=84"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,23 +10,37 @@ name = "moleculab"
 version = "0.1.0"
 description = "An educational molecular physics and simulation library"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.14"
 dependencies = [
-    "numpy>=1.24",
+    "numpy>=2.5",
 ]
 
 [project.optional-dependencies]
 examples = [
-    "matplotlib>=3.8",
+    "matplotlib>=3.11",
+]
+rocm = [
+    "torch>=2.14",
+    "triton-rocm>=3.8,<3.9",
 ]
 
 [dependency-groups]
 dev = [
-    "pytest>=8.0",
+    "pytest>=9",
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+# Resolve the optional PyTorch packages only from AMD's ROCm 7.2 wheel index.
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+triton-rocm = { index = "pytorch-rocm" }
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.2"
+explicit = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
