@@ -551,6 +551,18 @@ calculation.
 **Why this is tested.** A constant with the wrong units still produces a finite
 number. Tests turn a silent unit error into a loud failure.
 
+### 9.1 Physical invariants
+
+A correct unit system must preserve these truths:
+
+- every equation is dimensionally consistent;
+- the acceleration conversion factor is one to about $3.5\times10^{-10}$;
+- $R=N_Ak_B$ within the same precision;
+- changing from Å to nm changes the number, not the predicted physics.
+
+**Recurring question:** if the units change, does the physical prediction stay
+the same? It must.
+
 ## 10. Experiments
 
 ### Experiment 1: thermal energy

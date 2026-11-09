@@ -77,6 +77,10 @@ This is not the same as molecular dynamics:
 Minimisation ignores velocities. Two systems with the same positions but
 different velocities minimise to the same structure.
 
+**Model versus algorithm.** The potential energy is the physical model.
+Steepest descent is a numerical algorithm that searches it. The algorithm does
+not change the energy landscape.
+
 ## 4. Mathematical description
 
 ### 4.1 Steepest descent
@@ -316,6 +320,23 @@ The tests check:
 A good physics check is that a one-dimensional harmonic oscillator minimises to
 its equilibrium position and zero energy.
 
+### 8.1 Physical and numerical checks
+
+**Algorithm expectations**
+
+- Every accepted minimisation step lowers or preserves the energy.
+- The maximum force decreases toward the tolerance.
+- Convergence is judged by force norm, not by a small energy change alone.
+
+**Exact properties**
+
+- Translating the system does not change its energy.
+- Minimisation changes positions only; it preserves the model and chemical
+  identity.
+
+**Recurring question:** is the structure actually at a stationary point, or
+did the energy merely stop changing quickly?
+
 ## 9. Experiments
 
 ### Experiment 1: step size
@@ -428,5 +449,6 @@ dynamics. Compare with running dynamics directly from the overlap.
 - Minimisation changes positions only and preserves chemical identity.
 - It is a standard preparation step before MD.
 
-**Previous:** [07 — Bonds, angles, and torsions](07_bonded.md).  
+**Previous:** [07 — Bonds, angles, and torsions](07_bonded.md).
+
 **Next:** [09 — Temperature and thermostats](09_thermostats.md).

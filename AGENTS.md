@@ -57,7 +57,7 @@ uv run python examples/backend_benchmark.py --backend cpu
 - **Nonbonded** potentials (`HarmonicPotential` is external; `LennardJonesPotential` and `CoulombPotential` are pair potentials) implement `energy`/`force`. Pair displacement is `r_i - r_j`; the force is on particle i and the force on j is its negative.
 - `nonbonded.py` adds the typed path: `NonbondedModel` combines per-type Lennard-Jones parameters with Lorentz-Berthelot rules, reads charges from particles, and applies `ReactionFieldElectrostatics` or no electrostatics. Its cutoff must not exceed half the shortest box edge. Exclusions come from `Topology.nonbonded_exclusions()` (1-2 bonds and 1-3 angle endpoints) plus any explicit model exclusions.
 - **Bonded** potentials live in `bonded.py` and are indexed by explicit atom numbers in `topology.py`. Bond displacement is `r_j - r_i`; angle vectors are `r_ji = r_i - r_j`, `r_jk = r_k - r_j`; torsion bond vectors are `r_ij = r_j - r_i`, `r_jk = r_k - r_j`, `r_kl = r_l - r_k`.
-- Forces must be the negative gradient of the same energy (`F = -∇U`). `tests/test_bonded.py`, `test_pair_potentials.py`, and `test_torsion.py` verify this with central finite differences.
+- Forces must be the negative gradient of the same energy (`F = -∇U`). `tests/test_bonded.py`, `test_pair_potentials.py`, `test_torsion.py`, and the consolidated `tests/test_force_gradients.py` verify this with central finite differences.
 - Angle parameters are in **radians** (`angle0`), not degrees. Use `np.deg2rad`.
 - `HarmonicPotential` is an **external** one-particle potential, not a chemical bond. Do not use it for bonded topology.
 - `System` sums nonbonded `pair_potentials` over all unique pairs and adds `topology` bonded terms. When `System.box` is set, only nonbonded interactions use the minimum-image convention; bonded terms use raw coordinates.
@@ -83,7 +83,7 @@ uv run python examples/backend_benchmark.py --backend cpu
 ## Testing and examples
 
 - Every physical equation needs an implementation, a unit test, and a numerical experiment.
-- Test **physics relationships**, not just that functions run: equilibrium values, symmetry, Newton's third law, energy conservation, infinite-dilution limits, and analytical force vs. central finite difference (`h=1e-6`, `atol=1e-6`).
+- Test **physics relationships**, not just that functions run: equilibrium values, symmetry, Newton's third law, energy conservation, infinite-dilution limits, and analytical force vs. central finite difference (`h=1e-6`, `atol=1e-6`). The validation levels are documented in `docs/validation.md`.
 - Use `np.testing.assert_allclose` for arrays and `pytest.approx` for scalars. Preserve documented exact examples (e.g. kinetic energy `0.06`, total energy `0.56`).
 - Tests are fast (<1 s); run the full suite before finishing. Add a focused test file for each new module and a runnable example under `examples/`.
 

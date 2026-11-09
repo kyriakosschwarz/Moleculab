@@ -474,6 +474,18 @@ uv run pytest tests/test_potentials.py tests/test_physics.py -q
 - the centre is copied;
 - acceleration is force divided by mass.
 
+### 9.3 Physical invariants
+
+- Force is the negative gradient of the same energy: $\mathbf F=-\nabla U$.
+- Adding a constant to $U$ changes neither force nor dynamics.
+- Force vanishes at a smooth minimum.
+- An isotropic harmonic potential is invariant under rotation about its
+  centre.
+- A central difference converges as $h^2$ for smooth potentials.
+
+**Recurring question:** does the force still point downhill after the code
+changes? It must.
+
 ## 10. Experiments
 
 ### Experiment 1: slope and force
@@ -611,5 +623,6 @@ becomes the benchmark that the integrator must preserve.
   starting configuration.
 - These ideas will become force fields, minimisation, dynamics, and docking.
 
-**Previous:** [02 — Particles and kinetic energy](02_particle_energy.md).  
+**Previous:** [02 — Particles and kinetic energy](02_particle_energy.md).
+
 **Next:** [04 — Velocity Verlet and energy conservation](04_velocity_verlet.md).

@@ -72,6 +72,10 @@ direction:
 The simulation still contains only $N$ particles. The images are a bookkeeping
 device that makes the system behave as if it were part of a larger bulk.
 
+**Convention versus force.** Periodic boundaries are a simulation convention,
+not a force and not a new interaction. They change which separation is used for
+a nonbonded pair.
+
 ### 3.1 The minimum-image convention
 
 For two particles, there are infinitely many image separations. The
@@ -112,6 +116,17 @@ $$
 Wrapping changes the stored coordinates but not the physical configuration. A
 particle at $x=1.05$ nm in a 1 nm box is equivalent to one at $x=0.05$ nm.
 
+Wrapping, minimum imaging, and cutoffs are three distinct operations:
+
+| Operation | Input | Output |
+| --- | --- | --- |
+| wrap | one position | position in the primary box |
+| minimum image | one displacement | shortest periodic displacement |
+| cutoff | one distance | include or exclude the pair |
+
+A cutoff is applied **after** the minimum-image displacement has been computed.
+Wrapping a position does not by itself compute a pair separation.
+
 ## 4. Mathematical description
 
 ### 4.1 Minimum-image distance
@@ -141,7 +156,9 @@ $$
 A nonbonded cutoff $R_c$ must satisfy
 
 $$
-R_c\le\frac{L_{\min}}{2}.
+R_c\le\frac{L_{\min}}{2},
+\qquad
+L_{\min}=\min(L_x,L_y,L_z).
 $$
 
 If the cutoff were larger, a particle could interact with two images of the same
@@ -339,6 +356,19 @@ The tests check:
 A useful manual check is to draw the box and its neighbouring copies, then mark
 the nearest image of each particle.
 
+### 8.1 Physical invariants
+
+- A wrapped and an unwrapped representation give the same interactions under
+  the minimum image.
+- Displacements that differ by a lattice vector are equivalent:
+  $\mathbf d$ and $\mathbf d+n\mathbf L$ give the same minimum image.
+- The cutoff is at most half the shortest box edge.
+- Bonded terms use raw coordinates, not the minimum image.
+- Long-lag MSD requires unwrapped coordinates.
+
+**Recurring question:** does wrapping change the physics, or only the stored
+numbers? It must change only the numbers.
+
 ## 9. Experiments
 
 ### Experiment 1: near the half-box boundary
@@ -455,5 +485,6 @@ and using the minimum image. Which is correct? Why?
 - Periodic boundaries are the foundation for Ewald summation, pressure
   coupling, and bulk solvent models.
 
-**Previous:** [09 — Temperature and thermostats](09_thermostats.md).  
+**Previous:** [09 — Temperature and thermostats](09_thermostats.md).
+
 **Return to the individual tutorial index:** [README](README.md).

@@ -537,6 +537,18 @@ What the tests protect:
 - `copy()` produces an independent particle;
 - `atom_type` and `charge` survive copying.
 
+### 8.1 Physical invariants
+
+- Mass is finite and positive.
+- Kinetic energy is non-negative: $K\ge0$.
+- Kinetic energy depends on speed, not direction: reversing $\mathbf v$ leaves
+  $K$ unchanged.
+- A Galilean boost changes $K$ by a predictable bulk term.
+- Speed is the non-negative magnitude of velocity.
+
+**Recurring question:** which quantities are physical state, and which are
+derived? The invariants must hold for the derived ones too.
+
 ## 9. Animated example: constant velocity
 
 ![Animated particle moving at constant velocity](assets/particle_motion.gif)
@@ -699,5 +711,6 @@ will turn that force into an acceleration.
 - The example speed 0.1 nm/ps is deliberately slow; a 12 Da particle at 300 K
   moves at roughly 0.6–0.8 nm/ps.
 
-**Previous:** [01 — Units and scales](01_units.md).  
+**Previous:** [01 — Units and scales](01_units.md).
+
 **Next:** [03 — Potential energy and force](03_potential_force.md).

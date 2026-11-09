@@ -82,6 +82,9 @@ A thermostat is an algorithm that nudges the velocities toward a target
 temperature. It is not part of the physical potential. It changes velocities,
 not forces.
 
+**Model versus protocol.** The thermostat is a simulation protocol. It does not
+alter the energy function or the interparticle forces.
+
 ## 4. Mathematical description
 
 ### 4.1 Kinetic temperature
@@ -174,15 +177,37 @@ and the system cools.
 A common rule of thumb is $\tau$ of order 0.1–1 ps for small molecular systems.
 The “right” value depends on what you want to measure.
 
-### 4.6 What Berendsen does not do
+### 4.6 What Berendsen does and does not do
 
-The Berendsen thermostat drives the mean temperature toward $T_0$, but it does
-not generate the exact canonical distribution. In particular, it suppresses
-temperature fluctuations.
+The Berendsen thermostat is best understood as a **simulation protocol**, not as
+a physical model and not as an exact statistical-mechanics sampler.
 
-For exact canonical sampling, use a Nosé–Hoover or Langevin thermostat. Those
-are not implemented in the current milestone; Berendsen is a simple, explicit
-first thermostat.
+| Property | Berendsen behaviour |
+| --- | --- |
+| Controls the mean temperature | approximately |
+| Relaxes toward a target | yes |
+| Useful for equilibration | yes |
+| Produces exact canonical fluctuations | no |
+| Suitable for fluctuation-based observables | generally no |
+| Simple and stable | yes |
+
+The velocity rescaling suppresses natural kinetic-energy fluctuations. That is
+acceptable for preparation and equilibration, where the goal is to bring a
+system near a target temperature. It is not acceptable when the scientific
+question depends on the exact canonical distribution, such as a heat-capacity
+or fluctuation-based estimate.
+
+For exact canonical sampling, use a Langevin or Nosé–Hoover thermostat. Those
+are not implemented in the current milestone. The honest summary is:
+
+- Berendsen controls temperature approximately;
+- it is useful for equilibration;
+- it does not produce exact NVT sampling;
+- more rigorous thermostats come later.
+
+A common workflow is to equilibrate with Berendsen and then switch to a
+rigorous thermostat for production statistics. Moleculab does not yet implement
+that switch.
 
 ## 5. Units and dimensions
 
@@ -351,6 +376,24 @@ The tests check:
 A useful direct check is to compute $T$ by hand for a two-particle system and
 compare with `kinetic_temperature`.
 
+### 8.1 Physical and numerical checks
+
+**Exact properties**
+
+- Kinetic temperature is non-negative.
+- Setting the target to zero sets all velocities to zero.
+- With centre-of-mass removal, adding a uniform bulk velocity does not change
+  the reported temperature.
+
+**Numerical and protocol expectations**
+
+- Heating increases kinetic energy; cooling decreases it.
+- The mean temperature approaches the target for suitable coupling.
+- Berendsen does not reproduce exact canonical fluctuations.
+
+**Recurring question:** is the thermostat controlling the mean, or is it
+sampling the correct ensemble? These are different claims.
+
 ## 9. Experiments
 
 ### Experiment 1: coupling time
@@ -466,5 +509,6 @@ implementation handle it cleanly?
 - A thermostat changes velocities, not the physical potential.
 - Constraints change the degree-of-freedom count.
 
-**Previous:** [08 — Energy minimization](08_minimization.md).  
+**Previous:** [08 — Energy minimization](08_minimization.md).
+
 **Next:** [10 — Periodic boundaries](10_periodic.md).

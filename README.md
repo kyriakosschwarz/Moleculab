@@ -71,7 +71,9 @@ implementation notes are in [`docs/energies.md`](docs/energies.md),
 [`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
 from one particle to a small molecular simulation,
 [`docs/tutorials/individual/`](docs/tutorials/individual/) contains deeper
-visual tutorials for the first ten concepts, and
+visual tutorials for the first ten concepts,
+[`docs/validation.md`](docs/validation.md) documents the component,
+combined-system, numerical, and reproducibility checks, and
 [`docs/acceleration.md`](docs/acceleration.md) covers CPU/ROCm/NPU backend
 choices.
 

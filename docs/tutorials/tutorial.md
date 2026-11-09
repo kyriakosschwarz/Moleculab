@@ -128,6 +128,8 @@ Check: `uv run pytest tests/test_integrators.py tests/test_harmonic_validation.p
 
 Deep dive: [04 — Velocity Verlet and energy conservation](individual/04_velocity_verlet.md).
 
+Checkpoint: [one oscillator, end to end](individual/checkpoint_04.md).
+
 ## 5. Nonbonded interactions
 
 Two pair potentials are implemented.

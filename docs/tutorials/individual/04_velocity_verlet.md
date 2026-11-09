@@ -218,6 +218,10 @@ trajectory stays near the true energy surface instead of spiraling away.
 This is why Velocity Verlet, or closely related Verlet-family methods, are
 standard in molecular dynamics.
 
+**Model versus algorithm.** The potential is the physical model. Velocity
+Verlet is a numerical algorithm that approximates the same equations of motion.
+Changing the integrator does not change the force field.
+
 ## 5. Units and dimensions
 
 The oscillator equations are dimensionally consistent in the internal system:
@@ -559,6 +563,24 @@ They cover a general initial phase, a multidimensional oscillator, second-order
 convergence of position, velocity, and energy, numerical period measurement, and
 the small-timestep limit.
 
+### 12.2 Physical and numerical checks
+
+**Exact identities**
+
+- The numerical trajectory must converge to the analytic solution as
+  $\Delta t\to0$.
+- A free particle moves at constant velocity.
+- The integrator is time-reversible in exact arithmetic.
+- A step preserves particle identity and does not mutate the input.
+
+**Numerical expectations**
+
+- Position, velocity, and energy errors scale as $\Delta t^2$.
+- The total energy of the conservative oscillator stays bounded over the run.
+
+**Recurring question:** does the trajectory itself stay correct, or only the
+energy? Check both.
+
 ## 13. Timestep, stability, and accuracy
 
 ![The same oscillator at several timesteps](assets/dt_stability.svg)
@@ -805,5 +827,8 @@ constraints, thermostats, and analysis.
 - This small integrator is the engine that will later drive many-particle
   molecular dynamics.
 
-**Previous:** [03 — Potential energy and force](03_potential_force.md).  
+**Previous:** [03 — Potential energy and force](03_potential_force.md).
+
+**Next:** [Checkpoint after part 4](checkpoint_04.md).
+
 **Return to the tutorial index:** [Moleculab tutorial](../tutorial.md).

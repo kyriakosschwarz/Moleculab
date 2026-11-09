@@ -78,6 +78,9 @@ used with many conformations. That is why Moleculab stores bonds, angles, and
 torsions in a `Topology` indexed by atom numbers, not in the particles
 themselves.
 
+**Model versus algorithm.** The topology and its potentials are the physical
+model. `Topology.energy` and `Topology.forces` evaluate that model.
+
 ## 4. Mathematical description
 
 ### 4.1 Harmonic bond
@@ -436,6 +439,19 @@ The tests check:
 The finite-difference checks are especially important for angles and torsions,
 where the chain-rule expressions are easy to get subtly wrong.
 
+### 8.1 Physical invariants
+
+- Each bonded force is the negative gradient of its energy.
+- The forces of a single bond, angle, or torsion sum to zero.
+- Translating the molecule does not change its internal energy.
+- Rotating the molecule does not change its internal energy.
+- The torsion energy is periodic:
+  $U(\phi+2\pi/n)=U(\phi)$.
+- The angle is defined only for $0<\theta<\pi$.
+
+**Recurring question:** does a rigid translation or rotation change the bonded
+energy? It must not.
+
 ## 9. Experiments
 
 ### Experiment 1: bond stiffness
@@ -551,5 +567,6 @@ excluded? Why is the 1-4 pair in a four-atom chain not in the list?
 - The topology is separate from the coordinates and is indexed by atom number.
 - Bonded energy and forces are tested together with finite differences.
 
-**Previous:** [06 — Many particles and the System](06_system.md).  
+**Previous:** [06 — Many particles and the System](06_system.md).
+
 **Next:** [08 — Energy minimization](08_minimization.md).

@@ -82,7 +82,8 @@ The Lennard-Jones potential is a simple model that captures both:
 - a weak tail that decays at long range.
 
 It is not derived from quantum mechanics. It is a fitted, physically motivated
-shape. Its two parameters have clear meanings:
+shape. In the language of this course, it is a **physical model**, not a
+numerical algorithm. Its two parameters have clear meanings:
 
 - $\sigma$ is the separation at which the energy is zero;
 - $\epsilon$ is the depth of the attractive well.
@@ -190,10 +191,71 @@ Two details matter:
 
 1. **The cutoff must fit the box.** In a periodic box, it must not exceed half
    the shortest box edge.
-2. **Truncation is not the same as shifting.** The Lennard-Jones energy is set
-   to zero beyond the cutoff but is not shifted to zero at the cutoff. That
-   leaves a small discontinuity in the energy. Reaction-field electrostatics is
-   constructed to vanish at the cutoff.
+2. **Truncation is a modelling choice, not just a speed trick.** The way the
+   potential is turned off changes the energy and force near $R_c$.
+
+#### Plain truncation
+
+The simplest choice is
+
+$$
+U_{\text{cut}}(r)=
+\begin{cases}
+U(r), & r<R_c,\\
+0, & r\ge R_c.
+\end{cases}
+$$
+
+At $r=R_c$ the energy jumps from $U(R_c)$ to zero. For Lennard-Jones,
+$U(R_c)$ is small but not zero. The force also jumps, because the derivative of
+$U$ is not zero at $R_c$. A plain cutoff is cheap, but it introduces a small
+discontinuity.
+
+#### Shifted potential
+
+A shifted potential subtracts the value at the cutoff:
+
+$$
+U_{\text{shift}}(r)=
+\begin{cases}
+U(r)-U(R_c), & r<R_c,\\
+0, & r\ge R_c.
+\end{cases}
+$$
+
+Now the energy is continuous at $R_c$. The force is unchanged inside the
+cutoff, because the derivative of the constant $U(R_c)$ is zero. The force is
+still discontinuous at $R_c$ unless $dU/dr=0$ there.
+
+#### Switched potential
+
+A switching function multiplies the potential by a smooth factor:
+
+$$
+U_{\text{switch}}(r)=U(r)S(r),
+$$
+
+where $S(r)=1$ for $r<R_{\text{on}}$, decreases smoothly, and reaches zero at
+$R_c$. Both the energy and the force can be made continuous. The switching
+function adds a small extra force term, so it must be included consistently.
+
+#### Coulomb truncation
+
+Bare Coulomb truncation is a poor approximation for long-range electrostatics.
+Charges beyond the cutoff still interact in reality, and simply ignoring them
+can produce serious artifacts.
+
+Moleculab's typed model offers reaction-field electrostatics, which adds a
+mean-field correction inside the cutoff. For periodic systems with important
+long-range electrostatics, Ewald summation or particle-mesh Ewald is the
+rigorous approach. Those are later topics. The goal of this tutorial is to
+understand the pair physics, not to implement production electrostatics.
+
+**What is implemented here.** The simple `LennardJonesPotential` is evaluated
+with a plain cutoff by `NonbondedModel`. If `ReactionFieldElectrostatics` is
+supplied, the electrostatic part uses the reaction-field form. If
+`EwaldElectrostatics` is supplied for a periodic system, the long-range part is
+handled by Ewald summation. The code is explicit about which model is active.
 
 ## 5. Units and dimensions
 
@@ -409,6 +471,18 @@ The tests check, among other things:
 number with the wrong sign or a missing factor. The central-difference test
 checks that the force is the derivative of the same energy model.
 
+### 8.1 Physical invariants
+
+- Each pair force is the negative gradient of its energy.
+- The force on $j$ is the negative of the force on $i$.
+- $U_{\mathrm{LJ}}(\sigma)=0$.
+- $U_{\mathrm{LJ}}(r_{\min})=-\epsilon$ and $F(r_{\min})=0$.
+- The combined parameters are symmetric in the two atom types.
+- Cutoff continuity is *not* automatic; it depends on the truncation scheme.
+
+**Recurring question:** if the energy is correct, is the force correct too?
+Check the gradient, not just the energy.
+
 ## 9. Experiments
 
 ### Experiment 1: locate the minimum
@@ -538,5 +612,6 @@ not the same operation.
 - Typed models add per-atom-type parameters, combining rules, and exclusions.
 - Energy and force must be tested together.
 
-**Previous:** [04 — Velocity Verlet](04_velocity_verlet.md).  
+**Previous:** [04 — Velocity Verlet](04_velocity_verlet.md).
+
 **Next:** [06 — Many particles and the System](06_system.md).

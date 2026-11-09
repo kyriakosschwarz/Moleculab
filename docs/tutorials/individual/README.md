@@ -71,6 +71,58 @@ From tutorial 05 onward, the recurring cast grows:
 | [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
 | [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
 
+## Checkpoint after part 4
+
+Before moving from one particle to interacting particles, complete the
+[checkpoint](checkpoint_04.md). It combines units, particle state, the harmonic
+potential, Velocity Verlet, energy exchange, and the analytic solution in one
+short investigation.
+
+## Physical and numerical checks
+
+A correct implementation must preserve physical truths, not just run without
+exceptions. Some of these are exact identities; others are numerical or
+algorithmic expectations that hold in the appropriate regime.
+
+| Part | Check | Type |
+| --- | --- | --- |
+| 01 | Every equation is dimensionally consistent; $R=N_Ak_B$. | identity |
+| 02 | Mass is positive; kinetic energy is non-negative and independent of direction. | identity |
+| 03 | $\mathbf F=-\nabla U$; adding a constant to $U$ changes neither force nor motion. | model identity |
+| 04 | The analytic trajectory is reproduced; halving $\Delta t$ reduces the error by about four; energy stays bounded. | numerical expectation |
+| 05 | Each pair force is the negative gradient of its energy; the two pair forces are equal and opposite. | model identity |
+| 06 | The total force from internal pair interactions is zero; each pair is counted once. | identity |
+| 07 | Translation and rotation do not change internal energy; each bonded term's forces sum to zero. | identity |
+| 08 | Accepted minimisation steps never raise the energy; convergence is measured by force norm. | algorithm expectation |
+| 09 | Heating raises kinetic energy, cooling lowers it, and the mean approaches the target under suitable coupling. | protocol expectation |
+| 10 | Wrapping does not change interactions under the minimum image; the cutoff is at most half the shortest box edge. | convention identity |
+
+An **identity** should hold to numerical precision. A **numerical expectation**
+is a property of a method in a particular regime, tested with tolerances and
+reported convergence. An **algorithm or protocol expectation** describes how a
+procedure behaves, not a law of nature.
+
+The recurring question is:
+
+> What physical truth should still hold after we write the code?
+
+## Models, algorithms, and protocols
+
+The tutorials distinguish three kinds of statement:
+
+| Concept | Category |
+| --- | --- |
+| Lennard-Jones potential | physical model |
+| Coulomb potential | physical model |
+| Harmonic bond/angle/torsion | physical model |
+| Velocity Verlet | numerical algorithm |
+| Steepest descent | numerical algorithm |
+| Berendsen thermostat | simulation method/protocol |
+| Periodic boundary conditions | simulation convention |
+
+Changing the algorithm should not change the physical model. Changing the
+protocol should not be confused with changing the energy function.
+
 ## Recommended pace
 
 Each tutorial assumes the previous one:
@@ -79,12 +131,13 @@ Each tutorial assumes the previous one:
 2. **Particle state and kinetic energy** turn motion into a measurable quantity.
 3. **Potential energy and force** explain where motion comes from.
 4. **Velocity Verlet** combines state, energy, and force into a trajectory.
-5. **Nonbonded interactions** add Lennard-Jones and Coulomb physics.
-6. **`System`** sums those interactions over many particles.
-7. **Bonded terms** add the molecular graph.
-8. **Minimisation** finds a nearby low-energy structure.
-9. **Thermostats** control the statistical temperature.
-10. **Periodic boundaries** remove surfaces and prepare for bulk simulation.
+5. **Checkpoint** verifies the one-particle story end to end.
+6. **Nonbonded interactions** add Lennard-Jones and Coulomb physics.
+7. **`System`** sums those interactions over many particles.
+8. **Bonded terms** add the molecular graph.
+9. **Minimisation** finds a nearby low-energy structure.
+10. **Thermostats** control the statistical temperature.
+11. **Periodic boundaries** remove surfaces and prepare for bulk simulation.
 
 Do not skip ahead to the thermostat or periodic boundaries before the
 energy–force relationship and pair sums feel natural. The later molecular
@@ -115,6 +168,15 @@ The permanent checks are in
 [`tests/test_harmonic_validation.py`](../../../tests/test_harmonic_validation.py),
 together with the state-preservation tests in
 [`tests/test_state_preservation.py`](../../../tests/test_state_preservation.py).
+
+Every core potential is also covered by a consolidated force-gradient audit in
+[`tests/test_force_gradients.py`](../../../tests/test_force_gradients.py). It
+numerically differentiates the energy and compares the result with the
+analytical force.
+
+Full-system symmetries and combined-system behaviour are checked in
+[`tests/test_symmetry.py`](../../../tests/test_symmetry.py). The complete
+validation plan is in [`docs/validation.md`](../../validation.md).
 
 ## Visual conventions
 

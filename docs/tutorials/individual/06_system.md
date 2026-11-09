@@ -160,6 +160,9 @@ A `System` stores particles and interactions, and exposes these sums directly.
 interaction. A simple educational model uses `pair_potentials`; a typed force
 field uses `nonbonded_model`.
 
+**Model versus container.** A `System` is an aggregation layer. It does not
+define new physics; it sums the interactions you give it.
+
 ## 5. Units and dimensions
 
 The pair-sum equations add energies and forces, so every term must use the same
@@ -336,6 +339,17 @@ A useful manual check is to compute every pair by hand for $N=3$ and compare
 with `system.potential_energy()`. If the manual sum is exactly twice the code
 value, the unique-pair rule is broken.
 
+### 8.1 Physical invariants
+
+- The energy is the sum over unique pairs, with each pair counted once.
+- The total force from internal pair interactions is zero.
+- Translating every particle does not change the energy.
+- Pair forces obey Newton's third law.
+- An isolated system conserves total momentum under dynamics.
+
+**Recurring question:** after summing many pairs, does the total force still
+vanish? It must.
+
 ## 9. Experiments
 
 ### Experiment 1: add a fourth particle
@@ -452,5 +466,6 @@ total force no longer vanishes.
 - The same `System` is the foundation for integration, minimisation,
   thermostats, and analysis.
 
-**Previous:** [05 — Nonbonded interactions](05_nonbonded.md).  
+**Previous:** [05 — Nonbonded interactions](05_nonbonded.md).
+
 **Next:** [07 — Bonds, angles, and torsions](07_bonded.md).

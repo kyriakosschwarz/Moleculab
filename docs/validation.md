@@ -1,0 +1,156 @@
+# Validation milestone
+
+This document defines how the current Moleculab foundation is validated. The
+goal is to establish that the library behaves correctly as a connected physical
+system, not merely that individual functions return finite numbers.
+
+The tutorials teach the physics; this milestone checks that the implementation
+keeps its promises.
+
+## Guiding distinction
+
+Not every check is the same kind of claim.
+
+| Type | Meaning | Example |
+| --- | --- | --- |
+| identity | should hold to numerical precision | $\mathbf F=-\nabla U$ |
+| model property | follows from the interaction model | equal-and-opposite pair forces |
+| numerical expectation | holds for a method in a regime | second-order Verlet convergence |
+| algorithm expectation | describes a procedure | minimisation lowers energy |
+| protocol expectation | describes a sampling method | Berendsen approaches a target |
+
+Exact identities are tested with tight tolerances. Numerical expectations are
+tested with tolerances appropriate to a finite timestep and reported
+quantitatively.
+
+## Level 1 — Individual components
+
+**Question:** does each model produce a consistent energy and force, and does
+input validation reject invalid states?
+
+```bash
+uv run pytest tests/test_units.py tests/test_particles.py -q
+uv run pytest tests/test_potentials.py tests/test_pair_potentials.py -q
+uv run pytest tests/test_force_gradients.py -q
+uv run pytest tests/test_nonbonded.py tests/test_bonded.py tests/test_torsion.py -q
+```
+
+Covered:
+
+- unit labels and conversion factors;
+- positive mass and three-component vectors;
+- harmonic, Lennard-Jones, Coulomb, bond, angle, torsion, reaction-field, and
+  typed nonbonded gradients;
+- Lorentz-Berthelot combining and exclusions;
+- parameter validation and shape checks.
+
+The force-gradient audit uses only the energy function in its numerical
+derivative. It never calls the analytical force internally.
+
+## Level 2 — Combined systems
+
+**Question:** do many-particle sums and symmetries behave correctly?
+
+```bash
+uv run pytest tests/test_system.py tests/test_system_integrator.py -q
+uv run pytest tests/test_symmetry.py tests/test_box.py -q
+```
+
+Covered:
+
+- each unique pair is counted once;
+- two-particle forces are equal and opposite;
+- total internal force is zero;
+- translation leaves internal energy and forces unchanged;
+- rotation leaves internal energy unchanged and rotates forces;
+- wrapping preserves periodic pair interactions;
+- lattice translations preserve periodic energy;
+- a quarter-turn of a cubic box preserves energy and rotates forces;
+- the cutoff does not exceed half the shortest box edge.
+
+## Level 3 — Numerical behaviour
+
+**Question:** does the dynamics behave as the numerical analysis predicts?
+
+```bash
+uv run pytest tests/test_integrators.py tests/test_harmonic_validation.py -q
+uv run pytest tests/test_minimization.py tests/test_thermostats.py -q
+```
+
+Covered:
+
+- Velocity Verlet evaluates the force at the updated position;
+- the numerical trajectory matches the analytic harmonic solution;
+- position, velocity, and energy errors are second order in $\Delta t$;
+- total energy stays bounded for a conservative oscillator;
+- the measured period matches the analytic period;
+- minimisation lowers energy and converges on force norm;
+- heating raises kinetic energy and cooling lowers it;
+- state and chemical identity survive every rebuild path.
+
+## Level 4 — Reproducibility
+
+**Question:** can a reader reproduce the documented results from a clean
+checkout?
+
+```bash
+uv sync
+uv run pytest -q
+
+uv run python examples/first_particle.py
+uv run python examples/harmonic_oscillator.py
+uv run python examples/harmonic_validation.py
+uv run python examples/nonbonded_interactions.py
+uv run python examples/bonded_molecule.py
+uv run python examples/minimization.py
+uv run python examples/thermostat.py
+uv run python examples/periodic_box.py
+
+uv run python docs/tutorials/individual/generate_visuals.py
+```
+
+The checkpoint in
+[`tutorials/individual/checkpoint_04.md`](tutorials/individual/checkpoint_04.md)
+reproduces the analytic oscillator table independently.
+
+## Where the invariants live
+
+| Invariant | Test |
+| --- | --- |
+| dimensional consistency | `tests/test_units.py` |
+| non-negative kinetic energy | `tests/test_physics.py` |
+| force is negative energy gradient | `tests/test_force_gradients.py` |
+| second-order convergence | `tests/test_harmonic_validation.py` |
+| bounded oscillator energy | `tests/test_integrators.py` |
+| equal-and-opposite pair forces | `tests/test_pair_potentials.py`, `tests/test_symmetry.py` |
+| zero total internal force | `tests/test_symmetry.py` |
+| translation and rotation invariance | `tests/test_symmetry.py` |
+| periodic wrapping invariance | `tests/test_symmetry.py`, `tests/test_box.py` |
+| force-based minimisation convergence | `tests/test_minimization.py` |
+| thermostat heating and cooling | `tests/test_thermostats.py` |
+| state and identity preservation | `tests/test_state_preservation.py` |
+
+## Current status
+
+```text
+$ uv run pytest -q
+345 passed, 1 skipped
+```
+
+The skip is the PyTorch-unavailable test; PyTorch is installed in this
+environment, so the backend path is exercised.
+
+All core examples listed in Level 4 run successfully, and the visual generator
+reproduces the tutorial assets.
+
+## Known limitations
+
+- The Berendsen thermostat is an equilibration method, not an exact canonical
+  sampler.
+- Lennard-Jones uses a plain cutoff by default; shifted and switched forms are
+  discussed but not implemented in the simple path.
+- Periodic rotation invariance is tested for a cubic box and a symmetry-compatible
+  rotation. General rotation invariance is tested for non-periodic systems.
+- Boxes are orthorhombic; triclinic cells are not implemented.
+- Long-range electrostatics is validated through the existing reaction-field and
+  Ewald tests, but a full Ewald accuracy study is outside this milestone.
