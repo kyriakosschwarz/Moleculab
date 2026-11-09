@@ -19,10 +19,26 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
 
 from moleculab import (
+    Angle,
+    Bond,
+    Box,
+    CoulombPotential,
+    HarmonicAnglePotential,
+    HarmonicBondPotential,
     HarmonicPotential,
+    LennardJonesPotential,
     Particle,
+    PeriodicTorsionPotential,
+    System,
+    Topology,
+    Torsion,
+    berendsen_thermostat,
     kinetic_energy,
+    kinetic_temperature,
+    max_force_magnitude,
+    minimize_energy,
     simulate_velocity_verlet,
+    velocity_verlet_step_system,
 )
 
 ASSETS = Path(__file__).resolve().parent / "assets"
@@ -789,6 +805,360 @@ def euler_vs_verlet():
     save_svg(fig, "euler_vs_verlet.svg")
 
 
+def course_map():
+    fig, ax = plt.subplots(figsize=(12.2, 5.6))
+    ax.set_xlim(0, 12.2)
+    ax.set_ylim(0, 5.6)
+    ax.axis("off")
+
+    parts = [
+        ("01", "Units", "nm, ps, kJ/mol", BLUE),
+        ("02", "Particle", "state and $K$", ORANGE),
+        ("03", "Force", "$U$ and $-\\nabla U$", GREEN),
+        ("04", "Motion", "Velocity Verlet", RED),
+        ("05", "Nonbonded", "LJ and Coulomb", BLUE),
+        ("06", "System", "pair sums", ORANGE),
+        ("07", "Bonded", "bonds and angles", GREEN),
+        ("08", "Minimise", "steepest descent", RED),
+        ("09", "Thermostat", "kinetic temperature", BLUE),
+        ("10", "Periodic", "minimum image", ORANGE),
+    ]
+    width = 2.18
+    gap = 0.25
+    start = 0.25
+    for index, (number, title, subtitle, color) in enumerate(parts):
+        row = 0 if index < 5 else 1
+        column = index % 5
+        x = start + column * (width + gap)
+        y = 3.15 if row == 0 else 0.95
+        rect = FancyBboxPatch(
+            (x, y),
+            width,
+            1.25,
+            boxstyle="round,pad=0.05,rounding_size=0.1",
+            linewidth=1.5,
+            edgecolor=color,
+            facecolor="white",
+        )
+        ax.add_patch(rect)
+        ax.text(x + 0.12, y + 0.98, number, fontsize=14, weight="bold", color=color)
+        ax.text(x + width / 2, y + 0.70, title, ha="center", fontsize=10.5, weight="bold")
+        ax.text(x + width / 2, y + 0.30, subtitle, ha="center", fontsize=8.6, color=GRAY)
+        if column < 4:
+            ax.add_patch(
+                FancyArrowPatch(
+                    (x + width + 0.02, y + 0.62),
+                    (x + width + gap - 0.02, y + 0.62),
+                    arrowstyle="-|>",
+                    mutation_scale=12,
+                    linewidth=1.2,
+                    color=GRAY,
+                )
+            )
+
+    ax.text(0.25, 4.65, "Part I — one particle and one pair", fontsize=11, weight="bold", color=GRAY)
+    ax.text(0.25, 2.45, "Part II — many particles and molecular structure", fontsize=11, weight="bold", color=GRAY)
+    ax.text(6.1, 5.25, "The Moleculab tutorial sequence", ha="center", fontsize=14, weight="bold")
+    ax.text(6.1, 0.30, "Each part builds on the previous one; the same equations return at every scale.",
+            ha="center", fontsize=9.5, color=GRAY)
+    save_svg(fig, "course_map.svg")
+
+
+def nonbonded_pair():
+    r = np.linspace(0.30, 1.00, 500)
+    lj = LennardJonesPotential(epsilon=1.0, sigma=0.34)
+    lj_energy = np.array([lj.energy([value, 0.0, 0.0]) for value in r])
+    lj_force = np.array([lj.force([value, 0.0, 0.0])[0] for value in r])
+    like = CoulombPotential(1.0, 1.0)
+    opposite = CoulombPotential(1.0, -1.0)
+    like_energy = np.array([like.energy([value, 0.0, 0.0]) for value in r])
+    opposite_energy = np.array([opposite.energy([value, 0.0, 0.0]) for value in r])
+
+    sigma = 0.34
+    minimum = 2.0 ** (1.0 / 6.0) * sigma
+
+    fig, (ax_energy, ax_force, ax_coulomb) = plt.subplots(
+        1, 3, figsize=(13.0, 4.2)
+    )
+
+    ax_energy.plot(r, lj_energy, color=BLUE, lw=2.2)
+    ax_energy.axhline(0.0, color=GRAY, lw=0.8)
+    ax_energy.axvline(sigma, color=GRAY, ls=":", lw=1.0)
+    ax_energy.axvline(minimum, color=GREEN, ls=":", lw=1.0)
+    ax_energy.plot([minimum], [-1.0], "o", color=GREEN, ms=6)
+    ax_energy.annotate(r"$r=\sigma$", xy=(sigma, 0.4), xytext=(0.36, 2.2),
+                       arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_energy.annotate("well: $U=-\\epsilon$", xy=(minimum, -1.0),
+                       xytext=(0.52, -0.85),
+                       arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_energy.set_ylim(-1.25, 5.0)
+    ax_energy.set_xlabel("separation $r$ (nm)")
+    ax_energy.set_ylabel("$U_{\\mathrm{LJ}}$ (kJ/mol)")
+    ax_energy.set_title("Lennard-Jones energy")
+
+    ax_force.plot(r, lj_force, color=RED, lw=2.2)
+    ax_force.axhline(0.0, color=GRAY, lw=0.8)
+    ax_force.axvline(sigma, color=GRAY, ls=":", lw=1.0)
+    ax_force.axvline(minimum, color=GREEN, ls=":", lw=1.0)
+    ax_force.plot([sigma], [24.0 / sigma], "o", color=RED, ms=6)
+    ax_force.set_ylim(-40.0, 90.0)
+    ax_force.set_xlabel("separation $r$ (nm)")
+    ax_force.set_ylabel("$F_r$ (kJ/(mol nm))")
+    ax_force.set_title("Lennard-Jones force")
+
+    ax_coulomb.plot(r, like_energy, color=ORANGE, lw=2.2, label="$+1,+1$")
+    ax_coulomb.plot(r, opposite_energy, color=GREEN, lw=2.2, label="$+1,-1$")
+    ax_coulomb.axhline(0.0, color=GRAY, lw=0.8)
+    ax_coulomb.set_xlabel("separation $r$ (nm)")
+    ax_coulomb.set_ylabel("$U_{\\mathrm{C}}$ (kJ/mol)")
+    ax_coulomb.set_title("Bare Coulomb energy")
+    ax_coulomb.legend(loc="lower right")
+
+    fig.suptitle("Nonbonded interactions have different shapes and ranges", y=1.02)
+    save_svg(fig, "nonbonded_pair.svg")
+
+
+def pair_sum():
+    fig, (ax_pairs, ax_forces) = plt.subplots(
+        1, 2, figsize=(10.8, 4.8), gridspec_kw={"width_ratios": [1.0, 1.2]}
+    )
+
+    corners = np.array([[0.2, 0.2], [0.8, 0.2], [0.8, 0.8], [0.2, 0.8]])
+    for i in range(4):
+        for j in range(i + 1, 4):
+            ax_pairs.plot(
+                [corners[i, 0], corners[j, 0]],
+                [corners[i, 1], corners[j, 1]],
+                color=LIGHT,
+                lw=2.0,
+                zorder=1,
+            )
+    ax_pairs.scatter(corners[:, 0], corners[:, 1], s=180, color=BLUE, zorder=2)
+    for index, (x, y) in enumerate(corners):
+        ax_pairs.text(
+            x,
+            y,
+            str(index),
+            ha="center",
+            va="center",
+            fontsize=10,
+            weight="bold",
+            color="white",
+            zorder=3,
+        )
+    ax_pairs.text(0.5, -0.08, "$N(N-1)/2 = 4 \\times 3 / 2 = 6$ unique pairs",
+                  ha="center", fontsize=10.5, color=GRAY)
+    ax_pairs.set_xlim(0.05, 0.95)
+    ax_pairs.set_ylim(-0.15, 0.95)
+    ax_pairs.set_aspect("equal")
+    ax_pairs.axis("off")
+    ax_pairs.set_title("Every unique pair contributes once")
+
+    positions = np.array([0.0, 0.45, 0.90])
+    ax_forces.plot(positions, np.zeros(3), "o", color=BLUE, ms=16)
+    for index, x in enumerate(positions):
+        ax_forces.text(x, -0.16, str(index), ha="center", fontsize=10, color=GRAY)
+    ax_forces.annotate("", xy=(0.86, 0.0), xytext=(0.62, 0.0),
+                       arrowprops=dict(arrowstyle="-|>", color=RED, lw=2.0))
+    ax_forces.annotate("", xy=(0.04, 0.0), xytext=(0.28, 0.0),
+                       arrowprops=dict(arrowstyle="-|>", color=RED, lw=2.0))
+    ax_forces.text(0.45, 0.14, "net force = 0", ha="center", color=GREEN, fontsize=10.5)
+    ax_forces.text(0.225, -0.34, "0.45 nm", ha="center", color=GRAY, fontsize=9)
+    ax_forces.text(0.675, -0.34, "0.45 nm", ha="center", color=GRAY, fontsize=9)
+    ax_forces.set_xlim(-0.1, 1.0)
+    ax_forces.set_ylim(-0.5, 0.35)
+    ax_forces.axis("off")
+    ax_forces.set_title("Pair forces cancel on the central particle")
+
+    save_svg(fig, "pair_sum.svg")
+
+
+def bonded_geometry():
+    fig, (ax_bond, ax_angle, ax_torsion) = plt.subplots(
+        1, 3, figsize=(13.0, 4.2)
+    )
+
+    stretch = np.linspace(-0.25, 0.25, 400)
+    ax_bond.plot(stretch, 0.5 * 1000.0 * stretch**2, color=BLUE, lw=2.2)
+    ax_bond.axvline(0.0, color=GRAY, lw=0.8)
+    ax_bond.plot([0.2], [0.5 * 1000.0 * 0.2**2], "o", color=ORANGE, ms=7)
+    ax_bond.annotate("initial stretch\n0.2 nm", xy=(0.2, 20.0), xytext=(-0.20, 26.0),
+                     arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_bond.set_xlabel("$r-r_0$ (nm)")
+    ax_bond.set_ylabel("$U_{\\mathrm{bond}}$ (kJ/mol)")
+    ax_bond.set_title("Harmonic bond: $k=1000$")
+
+    angle = np.linspace(30.0, 120.0, 400)
+    angle_energy = 0.5 * 100.0 * (np.deg2rad(angle) - np.deg2rad(60.0)) ** 2
+    ax_angle.plot(angle, angle_energy, color=GREEN, lw=2.2)
+    ax_angle.axvline(60.0, color=GRAY, lw=0.8)
+    ax_angle.plot([90.0], [0.5 * 100.0 * (np.pi / 2 - np.pi / 3) ** 2], "o", color=ORANGE, ms=7)
+    ax_angle.annotate("initial 90°", xy=(90.0, 13.7), xytext=(75.0, 30.0),
+                      arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_angle.set_xlabel("angle (degrees)")
+    ax_angle.set_ylabel("$U_{\\mathrm{angle}}$ (kJ/mol)")
+    ax_angle.set_title("Harmonic angle: $k=100$, $\\theta_0=60°$")
+
+    phi = np.linspace(-180.0, 180.0, 500)
+    torsion_energy = 2.0 * (1.0 + np.cos(3.0 * np.deg2rad(phi)))
+    ax_torsion.plot(phi, torsion_energy, color=ORANGE, lw=2.2)
+    ax_torsion.set_xlabel("dihedral $\\phi$ (degrees)")
+    ax_torsion.set_ylabel("$U_{\\mathrm{torsion}}$ (kJ/mol)")
+    ax_torsion.set_title("Threefold torsion: barrier $2k=4$")
+    ax_torsion.set_xticks([-180, -120, -60, 0, 60, 120, 180])
+
+    fig.suptitle("Bonded terms penalise stretch, bend, and the wrong dihedral", y=1.02)
+    save_svg(fig, "bonded_geometry.svg")
+
+
+def minimization_path():
+    particles = [
+        Particle(12.0, [1.20, 0.0, 0.0]),
+        Particle(12.0, [0.0, 0.0, 0.0]),
+        Particle(12.0, [0.0, 1.20, 0.0]),
+    ]
+    topology = Topology(
+        bonds=[
+            Bond(0, 1, HarmonicBondPotential(stiffness=1000.0, length0=1.0)),
+            Bond(1, 2, HarmonicBondPotential(stiffness=1000.0, length0=1.0)),
+        ],
+        angles=[
+            Angle(
+                0,
+                1,
+                2,
+                HarmonicAnglePotential(stiffness=100.0, angle0=np.pi / 3.0),
+            )
+        ],
+    )
+    system = System(particles=particles, topology=topology)
+    result = minimize_energy(system, step_size=1e-5, max_steps=5000)
+
+    steps = np.arange(result.energies.size)
+    fig, (ax_energy, ax_force) = plt.subplots(1, 2, figsize=(10.8, 4.6))
+    ax_energy.semilogy(steps, np.maximum(result.energies, 1e-12), color=BLUE, lw=1.8)
+    ax_energy.set_xlabel("accepted step")
+    ax_energy.set_ylabel("potential energy (kJ/mol, log scale)")
+    ax_energy.set_title("Energy falls toward zero")
+
+    ax_force.semilogy(steps, np.maximum(result.max_forces, 1e-12), color=RED, lw=1.8)
+    ax_force.axhline(1e-3, color=GRAY, ls=":", lw=1.0, label="tolerance")
+    ax_force.set_xlabel("accepted step")
+    ax_force.set_ylabel("max force (kJ/(mol nm), log scale)")
+    ax_force.set_title("Forces approach the convergence threshold")
+    ax_force.legend()
+
+    fig.suptitle(
+        f"Steepest descent: {result.steps} accepted steps, converged={result.converged}",
+        y=1.02,
+    )
+    save_svg(fig, "minimization_path.svg")
+
+
+def thermostat_relaxation():
+    sigma = 0.34
+    epsilon = 0.997
+    equilibrium = 2.0 ** (1.0 / 6.0) * sigma
+
+    def initial_system():
+        return System(
+            particles=[
+                Particle(
+                    39.948,
+                    [-equilibrium / 2.0, 0.0, 0.0],
+                    [0.0, 0.05, 0.0],
+                ),
+                Particle(
+                    39.948,
+                    [equilibrium / 2.0, 0.0, 0.0],
+                    [0.0, -0.05, 0.0],
+                ),
+            ],
+            pair_potentials=[LennardJonesPotential(epsilon, sigma)],
+        )
+
+    dt = 0.001
+    steps = 2000
+    fig, ax = plt.subplots(figsize=(8.4, 4.6))
+    for coupling_time, color in [(0.02, GREEN), (0.10, BLUE), (0.50, ORANGE)]:
+        system = initial_system()
+        temperatures = []
+        for _ in range(steps):
+            system = velocity_verlet_step_system(system, dt)
+            system = berendsen_thermostat(
+                system,
+                temperature=100.0,
+                coupling_time=coupling_time,
+                dt=dt,
+            )
+            temperatures.append(kinetic_temperature(system))
+        ax.plot(
+            np.arange(steps) * dt,
+            temperatures,
+            color=color,
+            lw=1.5,
+            label=f"$\\tau={coupling_time:g}$ ps",
+        )
+    ax.axhline(100.0, color=GRAY, ls="--", lw=1.2, label="target")
+    ax.set_xlabel("time (ps)")
+    ax.set_ylabel("kinetic temperature (K)")
+    ax.set_title("Berendsen relaxation: faster coupling is not always better")
+    ax.legend(ncol=2)
+    save_svg(fig, "thermostat_relaxation.svg")
+
+
+def minimum_image_box():
+    fig, ax = plt.subplots(figsize=(7.0, 5.0))
+    box_length = 1.0
+
+    for shift, alpha in [(-1.0, 0.35), (0.0, 1.0), (1.0, 0.35)]:
+        left = shift * box_length
+        rect = Rectangle(
+            (left, 0.0),
+            box_length,
+            box_length,
+            fill=False,
+            edgecolor=GRAY,
+            lw=1.4,
+            ls="-" if shift == 0.0 else "--",
+            alpha=alpha,
+        )
+        ax.add_patch(rect)
+
+    ax.plot([0.05], [0.5], "o", color=BLUE, ms=13, zorder=3)
+    ax.plot([0.95], [0.5], "o", color=ORANGE, ms=13, zorder=3)
+    ax.plot([-0.05], [0.5], "o", color=ORANGE, ms=9, alpha=0.5, zorder=3)
+    ax.plot([1.05], [0.5], "o", color=BLUE, ms=9, alpha=0.5, zorder=3)
+
+    ax.plot([0.05, 0.05], [0.5, 0.65], color=GRAY, lw=0.8, ls=":")
+    ax.plot([0.95, 0.95], [0.5, 0.65], color=GRAY, lw=0.8, ls=":")
+    ax.annotate(
+        "",
+        xy=(0.95, 0.65),
+        xytext=(0.05, 0.65),
+        arrowprops=dict(arrowstyle="<->", color=RED, lw=1.8, ls="--"),
+    )
+    ax.text(0.50, 0.70, "raw separation 0.90 nm", ha="center", color=RED, fontsize=9.5)
+
+    ax.plot([0.05, 0.05], [0.5, 0.35], color=GRAY, lw=0.8, ls=":")
+    ax.plot([-0.05, -0.05], [0.5, 0.35], color=GRAY, lw=0.8, ls=":")
+    ax.plot([-0.05, 0.05], [0.35, 0.35], color=GREEN, lw=2.5)
+    ax.plot([-0.05, -0.05], [0.335, 0.365], color=GREEN, lw=2.0)
+    ax.plot([0.05, 0.05], [0.335, 0.365], color=GREEN, lw=2.0)
+    ax.text(0.0, 0.24, "minimum image 0.10 nm", ha="center", color=GREEN, fontsize=9.5)
+
+    ax.set_xlim(-1.05, 1.05)
+    ax.set_ylim(-0.08, 1.08)
+    ax.set_aspect("equal")
+    ax.set_xticks([-1.0, -0.5, 0.0, 0.5, 1.0])
+    ax.set_yticks([0.0, 0.5, 1.0])
+    ax.set_xlabel("x (nm)")
+    ax.set_ylabel("y (nm)")
+    ax.set_title("Minimum image: the closest copy may be in the next box")
+    ax.grid(False)
+    save_svg(fig, "minimum_image_box.svg")
+
+
 def main():
     learning_ladder()
     stage_flow()
@@ -815,6 +1185,13 @@ def main():
     euler_vs_verlet()
     dt_stability()
     verlet_flow()
+    course_map()
+    nonbonded_pair()
+    pair_sum()
+    bonded_geometry()
+    minimization_path()
+    thermostat_relaxation()
+    minimum_image_box()
     strip_svg_trailing_whitespace()
     print(f"Wrote visualizations to {ASSETS}")
 

@@ -14,8 +14,8 @@ uv sync
 uv run pytest -q
 ```
 
-For a slower, more visual path through sections 1–4, see
-[`individual/README.md`](individual/README.md) and the four deep-dive tutorials
+For a slower, more visual path through sections 1–10, see
+[`individual/README.md`](individual/README.md) and the ten deep-dive tutorials
 inside `individual/`.
 
 ## 1. Units first
@@ -157,6 +157,8 @@ Like charges repel; opposite charges attract.
 Run: `uv run python examples/nonbonded_interactions.py`.
 Check: `uv run pytest tests/test_pair_potentials.py -q`.
 
+Deep dive: [05 — Nonbonded interactions](individual/05_nonbonded.md).
+
 ## 6. Many particles: `System`
 
 A `System` sums nonbonded interactions over every unique pair:
@@ -184,6 +186,8 @@ print(system.forces())
 ```
 
 Check: `uv run pytest tests/test_system.py tests/test_system_integrator.py -q`.
+
+Deep dive: [06 — Many particles and the System](individual/06_system.md).
 
 ## 7. Bonds, angles, and torsions
 
@@ -224,6 +228,8 @@ Run: `uv run python examples/bonded_molecule.py` and
 `uv run python examples/torsion_scan.py`.
 Check: `uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_torsion.py -q`.
 
+Deep dive: [07 — Bonds, angles, and torsions](individual/07_bonded.md).
+
 ## 8. Energy minimization
 
 At a minimum, every net force is zero.  Steepest descent moves atoms along the
@@ -238,6 +244,8 @@ trial move raises the energy.
 
 Run: `uv run python examples/minimization.py`.
 Check: `uv run pytest tests/test_minimization.py -q`.
+
+Deep dive: [08 — Energy minimization](individual/08_minimization.md).
 
 ## 9. Temperature control
 
@@ -260,6 +268,8 @@ $$
 Run: `uv run python examples/thermostat.py`.
 Check: `uv run pytest tests/test_thermostats.py -q`.
 
+Deep dive: [09 — Temperature and thermostats](individual/09_thermostats.md).
+
 ## 10. Periodic boundaries
 
 An orthorhombic `Box` uses the minimum-image convention:
@@ -274,6 +284,8 @@ Bonded terms use the stored coordinates directly.
 
 Run: `uv run python examples/periodic_box.py`.
 Check: `uv run pytest tests/test_box.py -q`.
+
+Deep dive: [10 — Periodic boundaries](individual/10_periodic.md).
 
 ## 11. Trajectory analysis
 

@@ -90,4 +90,4 @@ uv run python examples/backend_benchmark.py --backend cpu
 ## Docs caveat
 
 - Code blocks in `docs/` are AI-exported and often have newlines/indentation collapsed. Treat them as intent, not copy-paste source; write clean, PEP 8 code matching the described behavior.
-- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values. The guided tutorial is `docs/tutorials/tutorial.md`; deeper visual tutorials for sections 1–4 are in `docs/tutorials/individual/`.
+- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values. The guided tutorial is `docs/tutorials/tutorial.md`; deeper visual tutorials for sections 1–10 are in `docs/tutorials/individual/`.

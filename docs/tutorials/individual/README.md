@@ -1,10 +1,10 @@
-# Individual tutorials 1–4
+# Individual tutorials 1–10
 
-These four tutorials expand the first four sections of
+These ten tutorials expand the first ten sections of
 [`../tutorial.md`](../tutorial.md) into a slower, more visual path from units
-to a working Velocity Verlet simulation.
+to interacting molecular systems.
 
-![The tutorial sequence and its running example](assets/learning_ladder.svg)
+![The tutorial sequence](assets/course_map.svg)
 
 ## A consistent course structure
 
@@ -31,9 +31,9 @@ Material is labelled by importance:
 - **Deeper insight** — useful context, safe to revisit later.
 - **Looking ahead** — a preview developed in a later tutorial.
 
-## The running particle
+## The running examples
 
-All four tutorials reuse one particle:
+Tutorials 01–04 reuse one particle:
 
 | Property | Value | Unit |
 | --- | --- | --- |
@@ -46,7 +46,17 @@ All four tutorials reuse one particle:
 It is an arithmetic example, not a typical room-temperature particle.
 Tutorial 02 compares its speed with the thermal speed of a 12 Da particle.
 
-## The four tutorials
+From tutorial 05 onward, the recurring cast grows:
+
+| Object | Purpose |
+| --- | --- |
+| a Lennard-Jones pair | nonbonded energy, force, cutoff |
+| a three-particle chain | pair sums and Newton's third law |
+| a distorted triatomic | bonds, angles, minimisation |
+| an argon-like pair | temperature and thermostat |
+| a two-particle periodic box | minimum image and cutoffs |
+
+## The ten tutorials
 
 | Tutorial | Physics | Code | Visuals |
 | --- | --- | --- | --- |
@@ -54,6 +64,12 @@ Tutorial 02 compares its speed with the thermal speed of a 12 Da particle.
 | [02 — Particles and kinetic energy](02_particle_energy.md) | position, velocity, speed, $K=\tfrac12mv^2$ | `Particle`, `kinetic_energy` | vector diagram, KE curves, stored/derived state, Maxwell distribution, motion GIF |
 | [03 — Potential energy and force](03_potential_force.md) | energy landscapes, gradient, harmonic model | `HarmonicPotential`, `potential_energy`, `acceleration` | energy/force curves, 2D quiver, finite-difference figures |
 | [04 — Velocity Verlet](04_velocity_verlet.md) | numerical integration, energy conservation, timesteps | `velocity_verlet_step`, `simulate_velocity_verlet` | algorithm flow, position/velocity, energy, phase space, oscillator GIF, drift plots |
+| [05 — Nonbonded interactions](05_nonbonded.md) | Lennard-Jones, Coulomb, cutoffs, atom types | `LennardJonesPotential`, `CoulombPotential`, `NonbondedModel` | pair energy and force curves, Coulomb comparison |
+| [06 — Many particles](06_system.md) | pair sums, Newton's third law, `O(N²)` cost | `System`, `nonbonded_energy`, `forces` | unique-pair and force-cancellation diagrams |
+| [07 — Bonds, angles, torsions](07_bonded.md) | molecular graph, harmonic bond/angle, periodic torsion | `Topology`, bonded potentials | bond, angle, and torsion energy curves |
+| [08 — Energy minimization](08_minimization.md) | steepest descent, backtracking, convergence | `minimize_energy`, `steepest_descent_step` | energy and force histories |
+| [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
+| [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
 
 ## Recommended pace
 
@@ -63,10 +79,16 @@ Each tutorial assumes the previous one:
 2. **Particle state and kinetic energy** turn motion into a measurable quantity.
 3. **Potential energy and force** explain where motion comes from.
 4. **Velocity Verlet** combines state, energy, and force into a trajectory.
+5. **Nonbonded interactions** add Lennard-Jones and Coulomb physics.
+6. **`System`** sums those interactions over many particles.
+7. **Bonded terms** add the molecular graph.
+8. **Minimisation** finds a nearby low-energy structure.
+9. **Thermostats** control the statistical temperature.
+10. **Periodic boundaries** remove surfaces and prepare for bulk simulation.
 
-Do not skip ahead to the integrator before the energy–force relationship feels
-natural. The later molecular mechanics and MD layers reuse exactly these four
-ideas.
+Do not skip ahead to the thermostat or periodic boundaries before the
+energy–force relationship and pair sums feel natural. The later molecular
+mechanics and MD layers reuse exactly these ideas.
 
 1. Read one tutorial at a time.
 2. Run the short code snippet before moving on.
