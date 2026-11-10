@@ -66,6 +66,7 @@ uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_
 uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
+uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -79,8 +80,10 @@ mapping to the deposited coordinates and writes
 pocket and atom-level contacts and writes
 `data/structures/2HYY.binding-site.json`. The sixth classifies interactions
 only where explicit chemical evidence is available and writes
-`data/structures/2HYY.interactions.json`. None of the commands docks a ligand,
-predicts affinity, or estimates a free energy.
+`data/structures/2HYY.interactions.json`. The seventh builds a three-state
+interaction-evidence fingerprint and writes
+`data/structures/2HYY.evidence-fingerprint.json`. None of the commands docks a
+ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -445,6 +448,57 @@ This is the intended outcome: a smaller, defensible interaction record rather
 than an overconfident diagram. No interaction is converted into an affinity
 estimate.
 
+### 4.8 Batch 6: evidence-aware interaction fingerprints
+
+Batch 6 turns the interaction record into a three-state evidence fingerprint.
+
+```bash
+uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
+```
+
+The record is written to `data/structures/2HYY.evidence-fingerprint.json`.
+
+For 2HYY the result is:
+
+| Result | Value |
+| --- | --- |
+| Category features | 6 |
+| Present | 0 |
+| Absent | 0 |
+| Unknown | 6 |
+| Assessable denominator | 0 of 6 |
+
+The five unknown chemistry categories and the not-applicable metal category all
+remain **unknown** in the fingerprint. The category-level status is preserved
+separately: hydrogen bonding, ionic, hydrophobic, aromatic, and water-mediated
+are `unknown`; metal coordination is `not_applicable`. Neither state is converted
+into a confirmed absence.
+
+This 2HYY record is deliberately category-level because no interaction pair has
+enough evidence to be classified. The analysis API also supports atom-pair
+features with the protein residue/atom, ligand atom, and water identity. A later
+chemistry-aware run can therefore produce pair-level fingerprints without
+changing the three-state semantics.
+
+The fingerprint uses three evidence states:
+
+$$ f_i \in \{1,0,?\} $$
+
+where `?` means the available evidence cannot establish presence or absence.
+Unknown features are excluded from assessable denominators. Occupancy and
+comparison therefore report how many observations could actually be assessed,
+not how many files were processed.
+
+Schema compatibility is explicit: the schema identifier, criteria fingerprint,
+and ordered feature identities must match before comparison or aggregation. This
+prevents records with different distance, angle, or chemical-feature rules from
+being compared as if they were the same measurement. Water-mediated features
+retain the water identifier and are not merged with direct protein–ligand
+features.
+
+The fingerprint is a structural representation, not a similarity score or a
+binding free energy.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -493,6 +547,7 @@ uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_
 uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
+uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -514,6 +569,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | ligand coordinate reconciliation | `capstone_ligand_coordinates.py` | experimental + calculated |
 | binding-site reconciliation | `capstone_binding_site.py` | experimental + calculated |
 | interaction interpretation | `capstone_interactions.py` | calculated, with explicit evidence |
+| evidence-aware fingerprint | `capstone_evidence_fingerprint.py` | calculated, with unknown states preserved |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

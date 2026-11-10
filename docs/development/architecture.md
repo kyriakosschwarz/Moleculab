@@ -72,7 +72,8 @@ src/moleculab/
 ├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR, ADME
 ├── applications/     docking, solvent, water, free energy, acid-base, QM/MM,
 │                     structure provenance, ligand identity, ligand coordinates,
-│                     binding-site reconciliation, interaction interpretation
+│                     binding-site reconciliation, interaction interpretation,
+│                     evidence fingerprints
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -139,6 +140,7 @@ The actual imports are visible in the source. The important rules are:
 | `analysis.sar` | foundation units and NumPy only | structure or chemistry toolkits, activity prediction |
 | `analysis.adme` | NumPy only | pKa prediction, ADME prediction |
 | `analysis.docking` | Python and NumPy only | `System`, integrators, docking parsers or search engines |
+| `analysis.evidence` | Python standard library only | `System`, integrators, structure parsers, chemistry toolkits |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
 | `applications.structure_manifest` | Python standard library only | coordinate parsers, chemistry toolkits, `System`, integrators |
@@ -146,6 +148,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.ligand_coordinates` | `applications.ligand_identity`, `applications.structure_manifest`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.binding_site_reconciliation` | `analysis.binding_site`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.interaction_interpretation` | `analysis.interactions`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interaction_evidence` | `analysis.evidence`, `applications.interaction_interpretation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -173,9 +176,9 @@ finite-difference Schrödinger equation with fixed point charges. It is not a
 classical potential and is deliberately isolated.
 
 `structure_manifest`, `ligand_identity`, `ligand_coordinates`,
-`binding_site_reconciliation`, and `interaction_interpretation` are **record
-layers**. They accept plain, already-parsed data and do not import `gemmi`,
-RDKit, or any coordinate reader.
+`binding_site_reconciliation`, `interaction_interpretation`, and
+`interaction_evidence` are **record layers**. They accept plain, already-parsed
+data and do not import `gemmi`, RDKit, or any coordinate reader.
 The capstone adapters in `examples/drug_discovery/` own those optional
 dependencies and pass explicit records, graphs, candidate mappings, coordinate
 records, and protein/water records into the library. This keeps the core
@@ -583,8 +586,11 @@ selects a protein pocket with an explicit cutoff and records residue identities,
 contacts, waters, hetero residues, and missing records without turning proximity
 into an affinity claim. `applications/interaction_interpretation.py` classifies
 interaction types only when explicit chemical features and geometry are supplied;
-unknown chemistry remains unknown. The capstone consumes these records rather
-than hard-coding a residue lookup. The records are JSON-serialisable and validated
+unknown chemistry remains unknown. `analysis/evidence.py` represents
+present/absent/unknown states, and `applications/interaction_evidence.py` maps
+interaction categories into an assessable fingerprint without encoding unknown
+as zero. The capstone consumes these records rather than hard-coding a residue
+lookup. The records are JSON-serialisable and validated
 independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
@@ -713,7 +719,8 @@ mmCIF file (adapter: gemmi)
     → BindingSiteRecord
     → explicit chemical features (adapter: chemistry toolkit)
     → InteractionInterpretationRecord
-    → interaction fingerprint analysis
+    → InteractionEvidenceRecord (present / absent / unknown)
+    → fingerprint occupancy and comparison
 ```
 
 The adapter owns file parsing and chemistry-toolkit calls. The library receives
@@ -732,7 +739,10 @@ waters, hetero residues, and missing records; proximity is not converted into an
 interaction or affinity claim. `interaction_interpretation` classifies
 hydrogen-bond, ionic, hydrophobic, aromatic, water-mediated, and metal
 interactions only when the required features and geometry are explicit. Missing
-chemistry remains `unknown` or `not_applicable`.
+chemistry remains `unknown` or `not_applicable`. `analysis/evidence.py` then
+represents each feature as present, absent, or unknown; unknown is excluded from
+assessable denominators and is never treated as zero. Schema and criteria
+compatibility are checked before aggregation or comparison.
 
 The reference records live in [`data/structures/`](../../data/structures/README.md):
 the manifest, identity record, and coordinate record are committed, while the
@@ -775,7 +785,7 @@ forking the codebase.
 | --- | --- | --- | --- |
 | A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
 | B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
-| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation | turns structural observations into auditable records without claiming affinity |
+| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints | turns structural observations into auditable records without claiming affinity |
 
 The capstone is the integration point:
 
@@ -786,7 +796,8 @@ experimental structure
     → ligand coordinate record (occupancy, alternate locations, geometry)
     → binding-site record (pocket, residues, waters, contacts)
     → interaction interpretation (only with explicit chemical evidence)
-    → interaction fingerprint analysis
+    → evidence fingerprint (present / absent / unknown)
+    → fingerprint occupancy and comparison
     → explicit limitations; no affinity or free-energy claim
 ```
 
@@ -896,7 +907,9 @@ binding-site record (pocket, residues, waters, atom contacts)
         ↓
 interaction interpretation (explicit features only)
         ↓
-interaction fingerprint analysis
+evidence fingerprint (present / absent / unknown)
+        ↓
+occupancy and compatible-schema comparison
         ↓
 later decision: System preparation and force-field parameters
 ```
@@ -921,6 +934,8 @@ Every stage is already represented by a module:
   residues, waters, hetero residues, and atom-level contacts.
 - `interaction_interpretation` classifies interactions only where explicit
   chemical features and geometry are supplied.
+- `analysis.evidence` and `interaction_evidence` retain present, absent, and
+  unknown states with assessable denominators.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1064,6 +1079,7 @@ These are the rules that keep the layers honest.
 | coordinate records preserve occupancy, alternate locations, missing atoms, and geometry sanity checks | `tests/test_ligand_coordinates.py` |
 | binding-site records preserve cutoff policy, residue namespaces, waters, contacts, and the proximity/affinity boundary | `tests/test_binding_site_reconciliation.py` |
 | interaction interpretation preserves missing chemistry as unknown and does not claim affinity | `tests/test_interaction_interpretation.py` |
+| evidence fingerprints keep unknown distinct from absent, use assessable denominators, and reject incompatible schemas | `tests/test_evidence_fingerprint.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1091,10 +1107,12 @@ For a new contributor, the source is best read in this order:
 11. `applications/structure_manifest.py`, `applications/ligand_identity.py`,
     `applications/ligand_coordinates.py`,
     `applications/binding_site_reconciliation.py`,
-    `applications/interaction_interpretation.py` — provenance, explicit
-    selection, atom mapping, chemical-identity discrepancies, occupancy,
-    alternate locations, coordinate geometry, pocket selection, contacts, and
-    evidence-gated interaction classification.
+    `applications/interaction_interpretation.py`,
+    `applications/interaction_evidence.py`, `analysis/evidence.py` — provenance,
+    explicit selection, atom mapping, chemical-identity discrepancies,
+    occupancy, alternate locations, coordinate geometry, pocket selection,
+    contacts, evidence-gated interaction classification, and three-state
+    fingerprints.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.
@@ -1117,8 +1135,9 @@ The tutorials follow the same order, which is not a coincidence.
 - Tests are the executable specification of the architecture.
 - The tutorials are a layer-by-layer tour of the same structure.
 - Experimental provenance, ligand identity, coordinate geometry, binding-site
-  context, and evidence-gated interaction interpretation are first-class
-  records, separate from the physics and from any affinity claim.
+  context, evidence-gated interaction interpretation, and three-state evidence
+  fingerprints are first-class records, separate from the physics and from any
+  affinity claim.
 - The composition path from particle to force field to solvent to docking to
   free energy is already present, with explicit limitations.
 - The design is a good basis for drug discovery because new physics and new

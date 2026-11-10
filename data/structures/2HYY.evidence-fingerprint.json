@@ -1,0 +1,400 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "interaction_record_path": "data/structures/2HYY.interactions.json",
+  "interaction_record_sha256": "fc4f6ada4afe92cf7c23e0df8725723f8e44859152fc3503d7625d4fb2c6507f",
+  "accession": "2HYY",
+  "schema": {
+    "schema_id": "interaction-category-v1",
+    "criteria_fingerprint": "0182f82a20b788f4ab2420507592d682f1825b80a9e148ec3c20c5761a552cd5",
+    "features": [
+      {
+        "scope": "category",
+        "interaction_type": "aromatic",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      },
+      {
+        "scope": "category",
+        "interaction_type": "hydrogen_bond",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      },
+      {
+        "scope": "category",
+        "interaction_type": "hydrophobic",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      },
+      {
+        "scope": "category",
+        "interaction_type": "ionic",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      },
+      {
+        "scope": "category",
+        "interaction_type": "metal_coordination",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      },
+      {
+        "scope": "category",
+        "interaction_type": "water_mediated",
+        "protein_residue": "",
+        "protein_atom": "",
+        "ligand_atom": "",
+        "ligand_residue": "",
+        "water_id": ""
+      }
+    ]
+  },
+  "fingerprint": {
+    "schema": {
+      "schema_id": "interaction-category-v1",
+      "criteria_fingerprint": "0182f82a20b788f4ab2420507592d682f1825b80a9e148ec3c20c5761a552cd5",
+      "features": [
+        {
+          "scope": "category",
+          "interaction_type": "aromatic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        {
+          "scope": "category",
+          "interaction_type": "hydrogen_bond",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        {
+          "scope": "category",
+          "interaction_type": "hydrophobic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        {
+          "scope": "category",
+          "interaction_type": "ionic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        {
+          "scope": "category",
+          "interaction_type": "metal_coordination",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        {
+          "scope": "category",
+          "interaction_type": "water_mediated",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        }
+      ]
+    },
+    "states": [
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "assessable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "observations": [
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "hydrogen_bond",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "donor and acceptor assignments are incomplete",
+        "criteria": "D-A <= 0.35 nm; D-H...A >= 120.0 degrees",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      },
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "ionic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "formal charges are not assigned for every candidate atom",
+        "criteria": "opposite nonzero charges <= 0.4 nm",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      },
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "hydrophobic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "hydrophobic flags are incomplete",
+        "criteria": "explicit hydrophobic pairs <= 0.4 nm",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      },
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "aromatic",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "aromatic ring definitions are incomplete",
+        "criteria": "centroid distance <= 0.55 nm; normal angle <= 30.0 degrees",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      },
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "water_mediated",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "water or polar atom features are incomplete",
+        "criteria": "water bridges <= 0.35 nm on both sides",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      },
+      {
+        "feature": {
+          "scope": "category",
+          "interaction_type": "metal_coordination",
+          "protein_residue": "",
+          "protein_atom": "",
+          "ligand_atom": "",
+          "ligand_residue": "",
+          "water_id": ""
+        },
+        "state": "unknown",
+        "assessable": false,
+        "evidence": "not applicable: no explicit metal features supplied",
+        "criteria": "metal distance <= 0.3 nm",
+        "provenance": "interaction interpretation record",
+        "distance_nm": null,
+        "angle_degrees": null
+      }
+    ]
+  },
+  "category_statuses": [
+    {
+      "interaction_type": "hydrogen_bond",
+      "status": "unknown"
+    },
+    {
+      "interaction_type": "ionic",
+      "status": "unknown"
+    },
+    {
+      "interaction_type": "hydrophobic",
+      "status": "unknown"
+    },
+    {
+      "interaction_type": "aromatic",
+      "status": "unknown"
+    },
+    {
+      "interaction_type": "water_mediated",
+      "status": "unknown"
+    },
+    {
+      "interaction_type": "metal_coordination",
+      "status": "not_applicable"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "mapped category statuses into present, absent, and unknown states",
+      "actor": "interaction evidence fingerprint",
+      "rationale": "classified categories are present; assessed categories with no qualifying pair are absent; missing evidence is unknown"
+    },
+    {
+      "decision": "preserved category-level status separately from pair-level identity",
+      "actor": "interaction evidence fingerprint",
+      "rationale": "an unknown category does not imply that every candidate atom pair was assessed and found absent"
+    },
+    {
+      "decision": "used assessable categories as the denominator",
+      "actor": "interaction evidence fingerprint",
+      "rationale": "unknown categories are excluded from occupancy denominators"
+    },
+    {
+      "decision": "did not convert the fingerprint into affinity",
+      "actor": "interaction evidence fingerprint",
+      "rationale": "the fingerprint is a structural representation, not a free energy"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "interaction evidence",
+        "detail": "Fingerprint derived from 112 Batch 4 contacts and the Batch 5 interpretation record.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "three-state fingerprint",
+        "detail": "0 present, 0 absent, 6 unknown categories; 0 assessable.",
+        "actor": "interaction evidence fingerprint"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity or free-energy prediction is produced.",
+        "actor": "interaction evidence fingerprint"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "none",
+        "detail": "No mechanism is inferred from the fingerprint.",
+        "actor": "interaction evidence fingerprint"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "evidence.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "all prior records are recorded",
+        "observed": "four record paths present",
+        "expected": "manifest, identity, binding-site, and interaction records",
+        "detail": "the fingerprint is traceable to the structural evidence chain"
+      },
+      {
+        "check_id": "evidence.schema_compatible",
+        "category": "schema",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "category schema and criteria are explicit",
+        "observed": "schema interaction-category-v1",
+        "expected": "explicit schema identifier and criteria fingerprint",
+        "detail": "criteria fingerprint 0182f82a20b788f4ab2420507592d682f1825b80a9e148ec3c20c5761a552cd5"
+      },
+      {
+        "check_id": "evidence.assessable",
+        "category": "evidence",
+        "status": "not_run",
+        "subject": "2HYY",
+        "criterion": "at least one category is assessable",
+        "observed": "0 assessable categories",
+        "expected": "one or more, or explicit unknown categories",
+        "detail": "unknown categories are not counted as absent"
+      },
+      {
+        "check_id": "evidence.unknown_not_zero",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "unknown evidence is preserved rather than encoded as absence",
+        "observed": "6 unknown categories",
+        "expected": "unknown distinct from absent",
+        "detail": "unknown categories are excluded from assessable denominators"
+      },
+      {
+        "check_id": "evidence.no_affinity",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "fingerprint is not converted into affinity",
+        "observed": "no affinity or free-energy estimate is produced",
+        "expected": "structural representation only",
+        "detail": "a fingerprint is not a binding free energy"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "insufficient_evidence",
+      "status": "not_applicable",
+      "detail": "No interaction category is assessable from the available evidence.",
+      "observed": "0 assessable categories",
+      "expected": "explicit chemical features and geometry",
+      "resolution": "Unknown categories remain unknown; no zero was substituted."
+    }
+  ]
+}
