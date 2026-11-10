@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reconcile the validated ligand with its protein binding site.
 
 This is Batch 4 of the capstone.  It selects protein atoms around the ligand

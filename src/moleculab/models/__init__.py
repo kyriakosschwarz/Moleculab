@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Physical models: potentials, bonded terms, topology, nonbonded forces, Ewald.
 
 A model defines what the system is and how its energy depends on coordinates.

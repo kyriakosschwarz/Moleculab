@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Prepare hydrogen evidence for the selected ligand and protein states.
 
 This is Batch 12A of the capstone.  It keeps deposited heavy atoms separate from

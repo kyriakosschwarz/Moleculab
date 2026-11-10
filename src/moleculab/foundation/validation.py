@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Validation helpers shared by the public data classes."""
 
 from __future__ import annotations

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Minimal rigid-ligand docking.
 
 Docking asks which position and orientation of a ligand fits best into a

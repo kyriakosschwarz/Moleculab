@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Binding-site reconciliation around a validated ligand.
 
 This module connects the ligand coordinate record to the selected protein

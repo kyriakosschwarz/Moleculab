@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Tests for evidence-complete ligand/protein state combinations."""
 
 from __future__ import annotations

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Three-state evidence fingerprints and comparisons.
 
 A conventional binary fingerprint records presence or absence.  That is not

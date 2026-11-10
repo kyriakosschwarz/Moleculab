@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Compare ligand binding modes by geometry and interaction patterns.
 
 Geometry and interaction patterns are reported separately. The module does not

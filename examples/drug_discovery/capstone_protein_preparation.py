@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Prepare explicit chemical states for the selected protein pocket.
 
 This is Batch 10 of the capstone.  It records residue-template formal charges,

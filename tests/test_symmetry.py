@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Symmetry and combined-system validation.
 
 These tests check properties that are deeper than a single force gradient:

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Parser-independent binding-site geometry.
 
 This module works only with Cartesian coordinates in nanometres. It does not

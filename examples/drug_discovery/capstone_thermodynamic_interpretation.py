@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Interpret structural evidence without inventing a binding free energy.
 
 This is Batch 14 of the capstone.  It consumes the structural, interaction,

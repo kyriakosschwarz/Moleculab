@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Chemical examples beyond the harmonic oscillator.
 
 The harmonic oscillator is the clean validation model.  This example shows

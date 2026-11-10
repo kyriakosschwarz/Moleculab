@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Acid-base equilibria and discrete protonation-state populations.
 
 This module does the thermodynamic bookkeeping that connects a pH value to

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Ewald summation for periodic point charges.
 
 For a periodic system, the Coulomb interaction cannot be truncated naively:

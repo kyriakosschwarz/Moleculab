@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Minimal QM/MM: an electron in a 1D box coupled to MM point charges.
 
 The finite-difference Schrödinger equation is solved for an electron in a

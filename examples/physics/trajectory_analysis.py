@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Simulate a small periodic Lennard-Jones fluid and analyze its trajectory.
 
 The example demonstrates two standard trajectory analyses:

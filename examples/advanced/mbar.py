@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Use MBAR to combine samples from several alchemical harmonic states.
 
 The alchemical path changes the harmonic stiffness through k = 100, 150, 200

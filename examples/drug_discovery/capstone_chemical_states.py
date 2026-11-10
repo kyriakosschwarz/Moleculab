@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Enumerate protonation and tautomer states without selecting or weighting one.
 
 This is Batch 8 of the capstone.  It reuses the Batch 7 reference-neutral state

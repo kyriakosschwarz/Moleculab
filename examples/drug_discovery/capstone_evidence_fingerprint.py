@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Build a three-state interaction-evidence fingerprint.
 
 This is Batch 6 of the capstone.  It consumes the Batch 5 interaction

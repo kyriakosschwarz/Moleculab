@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Compare Lennard-Jones and Coulomb interactions at several distances.
 
 This example makes the shape of the two nonbonded potentials visible.  The

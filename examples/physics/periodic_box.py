@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Explore periodic boundary conditions with a small Lennard-Jones pair.
 
 Two particles near opposite faces of a box can be much closer through the

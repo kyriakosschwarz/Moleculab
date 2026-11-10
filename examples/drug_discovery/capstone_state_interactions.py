@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Interpret one experimental binding site under multiple chemical states.
 
 This is Batch 9 of the capstone.  It maps each enumerated chemical state back to

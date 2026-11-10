@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Interpret ligand-protein contacts with explicit chemical evidence.
 
 This is Batch 5 of the capstone.  It consumes the Batch 4 contact record and

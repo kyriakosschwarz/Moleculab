@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Geometric contacts and their persistence across coordinate frames.
 
 This module works with Cartesian positions and boolean contact matrices. It

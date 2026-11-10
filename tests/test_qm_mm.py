@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Tests for the finite-difference QM/MM particle-in-a-box model."""
 
 import numpy as np

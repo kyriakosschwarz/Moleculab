@@ -10,6 +10,8 @@ name = "moleculab"
 version = "0.1.0"
 description = "An educational molecular physics and simulation library"
 readme = "README.md"
+license = "MIT OR Apache-2.0"
+license-files = ["LICENSE-MIT", "LICENSE-APACHE"]
 requires-python = ">=3.14"
 dependencies = [
     "numpy>=2.5",

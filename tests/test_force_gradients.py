@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Force-gradient audit for every core potential.
 
 Each potential is numerically differentiated and compared with its analytical

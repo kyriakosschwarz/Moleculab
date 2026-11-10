@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Generate the three Visualization Batch 1 figures from the 2HYY records.
 
 The figures are:

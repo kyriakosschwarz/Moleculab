@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Flexible-receptor docking with ligand rigid-body sampling.
 
 The receptor can contain one or more explicit side-chain groups.  Each group is

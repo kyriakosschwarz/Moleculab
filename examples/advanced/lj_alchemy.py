@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Molecular FEP, TI, and MBAR on a soft-core Lennard-Jones pair.
 
 A mobile particle is held near a fixed particle by a harmonic trap.  The

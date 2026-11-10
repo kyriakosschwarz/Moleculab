@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Minimize a distorted triatomic molecule.
 
 Energy minimization is the molecular-mechanics counterpart of letting a

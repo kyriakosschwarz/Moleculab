@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Protonation and tautomer populations from acid-base thermodynamics.
 
 This example uses pKa values as inputs. It does not predict pKa. Run it with:

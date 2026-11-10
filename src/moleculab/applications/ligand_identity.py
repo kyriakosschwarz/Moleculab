@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Ligand identity reconciliation for experimental structures.
 
 This module compares a deposited ligand graph with a reference chemical graph.

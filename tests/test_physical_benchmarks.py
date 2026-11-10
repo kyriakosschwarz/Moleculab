@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Independent physical benchmarks for constants and pair physics.
 
 These tests are deliberately **not** written as "the code agrees with itself".

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Assess every ligand/protein chemical-state combination on fixed contacts.
 
 This is Batch 11 of the capstone.  It crosses eight ligand states with two

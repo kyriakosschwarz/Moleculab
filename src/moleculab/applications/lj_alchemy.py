@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Alchemical Lennard-Jones pair in a harmonic trap.
 
 This module extends the free-energy estimators from the harmonic oscillator to

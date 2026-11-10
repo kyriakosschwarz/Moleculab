@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Binding-site geometry from Cartesian coordinates.
 
 This example is parser-independent: the coordinates are already in nm and the

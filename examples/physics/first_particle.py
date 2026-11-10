@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Calculate the energy and force for one particle in a harmonic potential.
 
 This is the smallest complete Moleculab example.  It uses the parameters from

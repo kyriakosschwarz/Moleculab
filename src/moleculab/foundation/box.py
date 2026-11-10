@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Periodic boundary conditions for an orthorhombic simulation box.
 
 A finite simulation box is usually treated as if it were surrounded by copies

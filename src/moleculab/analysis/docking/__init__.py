@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Pose records, RMSD, clustering, and binding-mode comparison.
 
 This package analyses poses produced elsewhere. It does not contain a docking

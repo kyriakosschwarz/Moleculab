@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reproducible imatinib chemical-record and provenance anchor.
 
 This script calculates only RDKit descriptors and chemical identity. It does

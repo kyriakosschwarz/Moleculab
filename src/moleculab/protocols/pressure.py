@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Pressure and the Berendsen barostat.
 
 The instantaneous pressure has an ideal-gas kinetic contribution and a virial

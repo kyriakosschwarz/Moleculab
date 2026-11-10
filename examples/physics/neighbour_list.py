@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Compare a cell-list neighbour screen with brute-force pair enumeration.
 
 The cell list does not replace the force calculation.  It only proposes

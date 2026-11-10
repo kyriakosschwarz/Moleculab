@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Learn thermodynamic integration on an exactly solvable harmonic system.
 
 The alchemical path linearly changes the stiffness of a three-dimensional

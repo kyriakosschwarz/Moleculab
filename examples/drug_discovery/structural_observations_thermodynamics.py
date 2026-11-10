@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Illustrate why contact counts do not determine binding free energy.
 
 The numbers are hypothetical components, not a force field or a free-energy

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Evidence-aware fingerprints built from interaction interpretation records.
 
 The application adapter keeps category-level interaction status separate from

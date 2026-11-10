@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Explicit-mapping RMSD for ligand poses.
 
 RMSD depends on atom mapping. This module never guesses which atoms correspond.

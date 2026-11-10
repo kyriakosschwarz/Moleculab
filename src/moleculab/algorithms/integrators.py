@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Time integration for molecular dynamics.
 
 The first integrator in Moleculab is the velocity Verlet algorithm.  It is a

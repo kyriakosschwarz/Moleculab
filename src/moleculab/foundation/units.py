@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Physical units and constants used throughout Moleculab.
 
 Moleculab uses one consistent internal unit system.  Keeping the numbers in

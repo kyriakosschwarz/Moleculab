@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Scan the energy of a four-atom torsion.
 
 The dihedral angle controls molecular conformation.  This example rotates the

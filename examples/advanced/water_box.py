@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Build and simulate a minimal explicit three-site water box.
 
 This example demonstrates the pieces that distinguish atomistic water from

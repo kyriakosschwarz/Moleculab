@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Deposited-water evidence and geometric bridge plausibility.
 
 This layer preserves experimental water identity, coordinates, occupancy, and

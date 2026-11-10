@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reconcile selected ligand coordinates with the Batch 2 identity record.
 
 This is Batch 3 of the capstone.  It records the deposited coordinates,

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Generate the architecture diagram used by docs/development/architecture.md.
 
 Run from the repository root:

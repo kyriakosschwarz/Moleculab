@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Ionisation-aware lipophilicity helpers.
 
 The functions here convert a neutral-form LogP into a pH-dependent LogD for a

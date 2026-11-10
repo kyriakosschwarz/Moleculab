@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Geometry-based protein-ligand interaction detection.
 
 The first implementation covers hydrogen bonds. It consumes prepared chemical

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Stereochemistry, E/Z geometry, and conformational versus configurational isomerism.
 
 Run with RDKit available:

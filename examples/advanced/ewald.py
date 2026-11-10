@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Run Ewald summation for a small periodic ionic system.
 
 The system is a neutral 2x2x2 lattice of +1 and -1 charges.  Lennard-Jones

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Software-correctness tests for state preservation.
 
 Every rebuild path must keep each particle's chemical identity.  Losing

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Alchemical decoupling of a neutral ligand in an explicit water box.
 
 This module extends the molecular free-energy path to a multi-component

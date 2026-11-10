@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reassess interaction conclusions under explicit analysis assumptions.
 
 This is Batch 13 of the capstone.  It varies contact cutoffs, hydrogen-bond

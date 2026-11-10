@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Explicit solvent boxes for molecular simulations.
 
 This module provides a deliberately simple explicit-solvent path.  Each

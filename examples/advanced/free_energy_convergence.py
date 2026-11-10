@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Compare exact and FEP free energies on good- and poor-overlap harmonics.
 
 The model is a three-dimensional harmonic oscillator.  Two transformations are

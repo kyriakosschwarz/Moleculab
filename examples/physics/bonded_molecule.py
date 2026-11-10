@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Simulate a small bonded molecule with bond and angle terms.
 
 This is a water-like triatomic model, but the force-field parameters are

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Applications: docking, solvent, water, free energy, acid-base, QM/MM, provenance, and structural records.
 
 Applications answer scientific questions using the lower layers. They may

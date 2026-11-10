@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reproducible docking benchmarks over pose-recovery results.
 
 A benchmark record keeps valid failures and invalid cases separate. Invalid

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """State-aware interpretation of the same experimental binding site.
 
 This layer combines the explicit chemical-state enumeration with the

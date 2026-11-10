@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Molecular connectivity and bonded energy terms.
 
 A force field needs to know which atoms are connected.  That information is

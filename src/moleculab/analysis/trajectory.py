@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Trajectory analysis for molecular simulations.
 
 Two of the most useful first analyses of a trajectory are:

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Thermodynamic interpretation boundaries for structural evidence.
 
 This layer connects the capstone's structural records to the questions a

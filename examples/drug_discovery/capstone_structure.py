@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Retrieve 2HYY, preserve the deposited file, and emit a provenance manifest.
 
 This is batch 1 of the capstone: experimental-structure retrieval and

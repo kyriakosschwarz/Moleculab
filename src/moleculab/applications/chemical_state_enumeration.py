@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Enumeration records for protonation and tautomer states.
 
 This layer stores explicitly enumerated chemical states.  It does not predict

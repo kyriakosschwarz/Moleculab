@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """SHAKE and RATTLE distance constraints.
 
 SHAKE corrects positions after an unconstrained integration step so that

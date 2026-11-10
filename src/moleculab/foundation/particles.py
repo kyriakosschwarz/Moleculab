@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """The mechanical state of a single particle.
 
 A particle in Moleculab is deliberately small: it stores the three quantities

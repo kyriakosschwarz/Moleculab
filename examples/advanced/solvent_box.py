@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Build and simulate an explicit coarse-grained water box.
 
 This is the minimal explicit-solvent path in Moleculab.  Each water molecule is

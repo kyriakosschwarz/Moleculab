@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Trajectory, contact, binding-site, interaction, evidence-fingerprint, pose, SAR, and charge analysis.
 
 Analysis reads position arrays and an optional box. It does not import System

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Tests for the optional cell-list neighbour generator.
 
 The cell list is a candidate screen, not a force calculation.  Its contract is:

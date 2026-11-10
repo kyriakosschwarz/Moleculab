@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Optional compute backends.
 
 Moleculab is NumPy/CPU by default.  The backend selector is deliberately

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Inspect the hierarchy, uncertainty, and units of a protein structure.
 
 The example uses a small synthetic PDB excerpt so the output is deterministic.

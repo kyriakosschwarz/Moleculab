@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Separate chemical preparation for selected protein pocket atoms.
 
 This layer is intentionally conservative.  It records residue-template formal

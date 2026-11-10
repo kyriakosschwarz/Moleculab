@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Interaction fingerprints and trajectory occupancy.
 
 The fingerprint layer consumes interaction records from

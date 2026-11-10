@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Final capstone integration, scientific audit, and controlled demonstration.
 
 The example connects the structural records to a controlled statistical-

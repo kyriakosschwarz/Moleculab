@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Free-energy perturbation (FEP) for a simple analytically tractable system.
 
 FEP estimates the free-energy difference between two states, 0 and 1, by

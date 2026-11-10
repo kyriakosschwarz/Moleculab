@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Benchmark CPU versus optional PyTorch acceleration for Ewald forces.
 
 CPU is the default.  Select ``--backend auto`` to use a CUDA/ROCm or Apple MPS

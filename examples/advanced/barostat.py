@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Run a short NPT-like simulation with the Berendsen barostat.
 
 The system is a low-density coarse-grained argon box.  The pressure has a

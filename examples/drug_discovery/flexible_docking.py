@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Flexible-receptor docking with an explicit side-chain strain penalty.
 
 The receptor has a fixed attractive atom and a flexible side-chain atom that

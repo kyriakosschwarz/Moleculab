@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Educational free-energy study on an exactly solvable harmonic model.
 
 This module adds the analytical and convergence layer around the existing

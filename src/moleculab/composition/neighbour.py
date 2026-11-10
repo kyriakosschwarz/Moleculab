@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Optional cell-list neighbour generation.
 
 The default :class:`~moleculab.composition.system.System` pair loop is deliberately

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Sensitivity and robustness records for structural interaction conclusions.
 
 This layer does not add interaction categories.  It re-evaluates existing

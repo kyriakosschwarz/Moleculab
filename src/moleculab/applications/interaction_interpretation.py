@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Chemistry-aware interpretation of ligand-protein contacts.
 
 This module consumes explicit atom features and interaction criteria.  It does

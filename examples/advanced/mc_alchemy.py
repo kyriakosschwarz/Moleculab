@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Multi-particle Monte Carlo FEP, TI, and MBAR for a bonded LJ pair.
 
 Two particles are connected by a harmonic bond and interact through a

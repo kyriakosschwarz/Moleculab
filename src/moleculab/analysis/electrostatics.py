@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Dipole moments from formal or partial charges.
 
 A dipole moment is a charge-weighted displacement. For a neutral system it is

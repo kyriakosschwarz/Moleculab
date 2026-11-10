@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Temperature and simple velocity-rescaling thermostats.
 
 In the internal unit system, kinetic energy is in kJ/mol and the molar gas

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """RDKit 2D chemical diagrams derived from validated ligand records."""
 
 from __future__ import annotations

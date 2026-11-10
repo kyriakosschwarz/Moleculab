@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Reconcile the selected 2HYY ligand with the imatinib reference identity.
 
 This is Batch 2 of the capstone.  It reads the ligand selected by the Batch 1

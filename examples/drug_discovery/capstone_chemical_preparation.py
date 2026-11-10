@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Prepare explicit chemical states without altering experimental records.
 
 This is Batch 7 of the capstone.  It creates a separate preparation record with

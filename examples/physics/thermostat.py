@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Run a small NVT-like simulation with the Berendsen thermostat.
 
 The two particles form an argon-like Lennard-Jones pair.  The loop alternates

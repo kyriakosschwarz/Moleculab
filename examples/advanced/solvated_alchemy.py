@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Decouple a neutral ligand from an explicit Ewald water box.
 
 The water-water interactions use Ewald electrostatics and rigid SHAKE/RATTLE

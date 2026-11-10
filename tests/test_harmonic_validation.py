@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Analytic validation of the velocity Verlet harmonic oscillator.
 
 These tests compare the simulated trajectory with the exact solution,

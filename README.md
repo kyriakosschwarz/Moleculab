@@ -473,3 +473,13 @@ Moleculab is being built from simple mechanics toward molecular simulation:
 
 The roadmap is a guide, not a race.  Each milestone should have a working
 implementation, tests, and a numerical experiment before the next one begins.
+
+## License
+
+Moleculab is dual-licensed under either of:
+
+- the [MIT License](LICENSE-MIT);
+- the [Apache License, Version 2.0](LICENSE-APACHE).
+
+You may choose either license. The SPDX license expression is
+`MIT OR Apache-2.0`. Source files carry the corresponding SPDX identifiers.

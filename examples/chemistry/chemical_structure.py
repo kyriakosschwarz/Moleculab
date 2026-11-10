@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Explore chemical conformation with a four-atom torsion.
 
 This is a small, visible model of the conformational problem behind medicinal

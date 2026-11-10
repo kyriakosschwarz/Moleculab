@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Final capstone audit and an end-to-end statistical-mechanics demonstration.
 
 The audit checks the provenance chain, the structural/thermodynamic boundaries,

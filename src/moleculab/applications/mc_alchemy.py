@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Multi-particle Monte Carlo free-energy path for a bonded LJ pair.
 
 This module samples a real two-particle :class:`~moleculab.composition.system.System` by

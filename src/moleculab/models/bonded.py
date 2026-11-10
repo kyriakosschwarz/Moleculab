@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Potentials for bonds and angles.
 
 Nonbonded potentials act between every pair of particles.  Bonded potentials

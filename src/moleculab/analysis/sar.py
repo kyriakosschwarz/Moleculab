@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Structure–activity relationships and matched-pair comparisons.
 
 The module is intentionally parser-independent. It consumes prepared compound

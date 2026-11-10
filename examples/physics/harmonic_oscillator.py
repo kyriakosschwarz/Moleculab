@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Simulate a harmonic oscillator and inspect numerical energy conservation.
 
 The oscillator has mass 12 Da and stiffness 12*pi^2 kJ/(mol nm^2), so

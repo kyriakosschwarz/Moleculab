@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Tune Molab for an AMD Strix Point APU with ROCm PyTorch.
 
 This example demonstrates the practical optimizations for APUs:

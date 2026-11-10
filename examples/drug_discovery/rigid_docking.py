@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Dock a rigid two-atom ligand into a simple octahedral receptor pocket.
 
 The receptor is six typed particles arranged around the origin.  The ligand is

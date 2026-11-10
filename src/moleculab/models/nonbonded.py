@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Typed nonbonded interactions with intramolecular exclusions.
 
 A molecular force field cannot use one pair of Lennard-Jones parameters for

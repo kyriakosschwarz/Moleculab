@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Run bonded rigid water with Ewald long-range electrostatics.
 
 This example builds two rigid three-site water molecules in a periodic box and

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """PyMOL renders of the selected protein-ligand structure."""
 
 from __future__ import annotations

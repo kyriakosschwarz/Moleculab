@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Coordinate reconciliation for a chemically identified ligand.
 
 This module connects the explicit atom mapping from a ligand identity record to

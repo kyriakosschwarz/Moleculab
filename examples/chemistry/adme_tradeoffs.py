@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Physicochemical trade-offs and LogP/LogD for several drugs.
 
 Run with RDKit available:

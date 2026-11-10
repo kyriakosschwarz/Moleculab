@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Interaction fingerprints and occupancy from synthetic frames.
 
 The frames are constructed explicitly so every occupancy can be checked by

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Molecular descriptors and chemical similarity with RDKit.
 
 Run with RDKit available:

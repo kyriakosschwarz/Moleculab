@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Minimal QM/MM: a quantum particle in a 1D box coupled to MM point charges.
 
 The time-independent Schrödinger equation is solved by finite differences on

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Moleculab: an educational molecular physics and simulation library.
 
 The package is intentionally small and explicit.  Physical models (potentials)

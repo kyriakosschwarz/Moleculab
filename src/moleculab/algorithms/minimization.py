@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Energy minimization by steepest descent.
 
 Molecular dynamics asks, "Where do the atoms go next?"  Energy minimization

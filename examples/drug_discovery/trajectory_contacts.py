@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Geometric contacts, occupancy, and lifetimes from synthetic frames.
 
 Run:

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Thermodynamic integration for an alchemically coupled harmonic system.
 
 Thermodynamic integration (TI) computes a free-energy difference by integrating

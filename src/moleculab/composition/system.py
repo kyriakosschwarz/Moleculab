@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """A collection of particles and their interactions.
 
 The single-particle examples are useful for learning one equation at a time.

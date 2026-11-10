@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Moleculab Contributors
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
 """Demonstrate SHAKE/RATTLE rigid-water constraints.
 
 The example first distorts one O-H bond and applies SHAKE directly.  It then
