@@ -1,0 +1,1252 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "ligand_coordinate_record_path": "data/structures/2HYY.ligand-coordinates.json",
+  "ligand_coordinate_record_sha256": "eae85cb84fa3faa25d4ba8ead2853b153ac84fd1e1f8ea22716438f3cdd74b4c",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "chemical_state_record_path": "data/structures/2HYY.chemical-states.json",
+  "chemical_state_record_sha256": "c34dfcdcd5070f136d9374340c56971aa349eccf8400d9e6749d3f7407ba727a",
+  "protein_preparation_record_path": "data/structures/2HYY.protein-preparation.json",
+  "protein_preparation_record_sha256": "5950b4a2545796816a154629e964f82fecad7ec2abd9ef6f66311e4b6563218a",
+  "hydrogen_evidence_record_path": "data/structures/2HYY.hydrogen-evidence.json",
+  "hydrogen_evidence_record_sha256": "d1e0e30631bf3f1f25a662274beceb67258082dc0bd9138bc2b2854d6a72da32",
+  "water_evidence_record_path": "data/structures/2HYY.water-evidence.json",
+  "water_evidence_record_sha256": "15b94681941ed31180865d875481c8876576982f2dec0e0a3ac9db9ac730ff23",
+  "accession": "2HYY",
+  "protein_selection": {
+    "label_asym_id": "A",
+    "auth_asym_id": "A"
+  },
+  "ligand_selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "baseline_contact_cutoff_angstrom": 4.0,
+  "baseline_hydrogen_criteria": {
+    "max_distance_nm": 0.35,
+    "min_angle_degrees": 120.0
+  },
+  "baseline_water_cutoff_angstrom": 3.5,
+  "protein_hydrogen_status": "not_run",
+  "water_roles_assigned": false,
+  "contact_cutoffs_angstrom": [
+    3.0,
+    3.5,
+    4.0,
+    5.0
+  ],
+  "hydrogen_angle_thresholds_degrees": [
+    90.0,
+    100.0,
+    110.0,
+    120.0,
+    130.0,
+    140.0,
+    150.0
+  ],
+  "hydrogen_placement_offsets_degrees": [
+    -20.0,
+    -10.0,
+    0.0,
+    10.0,
+    20.0
+  ],
+  "water_cutoffs_angstrom": [
+    3.0,
+    3.25,
+    3.5,
+    3.75,
+    4.0
+  ],
+  "contact_cutoff_results": [
+    {
+      "cutoff_angstrom": 3.0,
+      "ligand_contact_atom_count": 4,
+      "protein_contact_atom_count": 5,
+      "combination_count": 16,
+      "minimum_classified_per_combination": 1,
+      "maximum_classified_per_combination": 1,
+      "classified_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "count": 0
+        },
+        {
+          "interaction_type": "ionic",
+          "count": 0
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "count": 0
+        },
+        {
+          "interaction_type": "aromatic",
+          "count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "count": 0
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "count": 0
+        }
+      ],
+      "category_status_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "ionic",
+          "status": "not_classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "status": "not_classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "aromatic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "status": "not_applicable",
+          "combination_count": 16
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 3.5,
+      "ligand_contact_atom_count": 16,
+      "protein_contact_atom_count": 17,
+      "combination_count": 16,
+      "minimum_classified_per_combination": 2,
+      "maximum_classified_per_combination": 2,
+      "classified_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "count": 0
+        },
+        {
+          "interaction_type": "ionic",
+          "count": 0
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "count": 16
+        },
+        {
+          "interaction_type": "aromatic",
+          "count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "count": 0
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "count": 0
+        }
+      ],
+      "category_status_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "ionic",
+          "status": "not_classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "aromatic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "status": "not_applicable",
+          "combination_count": 16
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 4.0,
+      "ligand_contact_atom_count": 34,
+      "protein_contact_atom_count": 53,
+      "combination_count": 16,
+      "minimum_classified_per_combination": 19,
+      "maximum_classified_per_combination": 19,
+      "classified_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "count": 0
+        },
+        {
+          "interaction_type": "ionic",
+          "count": 0
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "count": 288
+        },
+        {
+          "interaction_type": "aromatic",
+          "count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "count": 0
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "count": 0
+        }
+      ],
+      "category_status_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "ionic",
+          "status": "not_classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "aromatic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "status": "not_applicable",
+          "combination_count": 16
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 5.0,
+      "ligand_contact_atom_count": 37,
+      "protein_contact_atom_count": 102,
+      "combination_count": 16,
+      "minimum_classified_per_combination": 19,
+      "maximum_classified_per_combination": 19,
+      "classified_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "count": 0
+        },
+        {
+          "interaction_type": "ionic",
+          "count": 0
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "count": 288
+        },
+        {
+          "interaction_type": "aromatic",
+          "count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "count": 0
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "count": 0
+        }
+      ],
+      "category_status_counts": [
+        {
+          "interaction_type": "hydrogen_bond",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "ionic",
+          "status": "not_classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "hydrophobic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "aromatic",
+          "status": "classified",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "water_mediated",
+          "status": "unknown",
+          "combination_count": 16
+        },
+        {
+          "interaction_type": "metal_coordination",
+          "status": "not_applicable",
+          "combination_count": 16
+        }
+      ]
+    }
+  ],
+  "hydrogen_candidates": [
+    {
+      "hydrogen_id": "N13:H1",
+      "donor_atom_id": "N13",
+      "acceptor_atom_id": "A:315:OG1",
+      "donor_acceptor_distance_angstrom": 3.0137322376083784,
+      "angle_degrees": 123.62809249943989,
+      "default_status": "supported"
+    },
+    {
+      "hydrogen_id": "N21:H1",
+      "donor_atom_id": "N21",
+      "acceptor_atom_id": "A:286:OE2",
+      "donor_acceptor_distance_angstrom": 3.0892798513569457,
+      "angle_degrees": 142.40329715319888,
+      "default_status": "supported"
+    },
+    {
+      "hydrogen_id": "N21:H1",
+      "donor_atom_id": "N21",
+      "acceptor_atom_id": "A:381:O",
+      "donor_acceptor_distance_angstrom": 3.4772589779882677,
+      "angle_degrees": 68.11525127688682,
+      "default_status": "not_supported"
+    }
+  ],
+  "hydrogen_angle_results": [
+    {
+      "min_angle_degrees": 90.0,
+      "supported_candidate_count": 2,
+      "supported_candidate_ids": [
+        "N13->A:315:OG1",
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 100.0,
+      "supported_candidate_count": 2,
+      "supported_candidate_ids": [
+        "N13->A:315:OG1",
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 110.0,
+      "supported_candidate_count": 2,
+      "supported_candidate_ids": [
+        "N13->A:315:OG1",
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 120.0,
+      "supported_candidate_count": 2,
+      "supported_candidate_ids": [
+        "N13->A:315:OG1",
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 130.0,
+      "supported_candidate_count": 1,
+      "supported_candidate_ids": [
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 140.0,
+      "supported_candidate_count": 1,
+      "supported_candidate_ids": [
+        "N21->A:286:OE2"
+      ]
+    },
+    {
+      "min_angle_degrees": 150.0,
+      "supported_candidate_count": 0,
+      "supported_candidate_ids": []
+    }
+  ],
+  "hydrogen_placement_results": [
+    {
+      "hydrogen_id": "N13:H1",
+      "donor_atom_id": "N13",
+      "acceptor_atom_id": "A:315:OG1",
+      "current_angle_degrees": 123.62809249943989,
+      "current_status": "supported",
+      "tested_offsets_degrees": [
+        -20.0,
+        -10.0,
+        0.0,
+        10.0,
+        20.0
+      ],
+      "supported_offsets_degrees": [
+        -20.0,
+        -10.0,
+        0.0
+      ],
+      "placement_status": "placement_sensitive",
+      "modest_band_offsets_degrees": [
+        -10.0,
+        0.0,
+        10.0
+      ],
+      "modest_band_supported_offsets_degrees": [
+        -10.0,
+        0.0
+      ],
+      "modest_band_status": "placement_sensitive"
+    },
+    {
+      "hydrogen_id": "N21:H1",
+      "donor_atom_id": "N21",
+      "acceptor_atom_id": "A:286:OE2",
+      "current_angle_degrees": 142.40329715319888,
+      "current_status": "supported",
+      "tested_offsets_degrees": [
+        -20.0,
+        -10.0,
+        0.0,
+        10.0,
+        20.0
+      ],
+      "supported_offsets_degrees": [
+        -20.0,
+        -10.0,
+        0.0,
+        10.0
+      ],
+      "placement_status": "placement_sensitive",
+      "modest_band_offsets_degrees": [
+        -10.0,
+        0.0,
+        10.0
+      ],
+      "modest_band_supported_offsets_degrees": [
+        -10.0,
+        0.0,
+        10.0
+      ],
+      "modest_band_status": "invariant_supported"
+    },
+    {
+      "hydrogen_id": "N21:H1",
+      "donor_atom_id": "N21",
+      "acceptor_atom_id": "A:381:O",
+      "current_angle_degrees": 68.11525127688682,
+      "current_status": "not_supported",
+      "tested_offsets_degrees": [
+        -20.0,
+        -10.0,
+        0.0,
+        10.0,
+        20.0
+      ],
+      "supported_offsets_degrees": [],
+      "placement_status": "invariant_unsupported",
+      "modest_band_offsets_degrees": [
+        -10.0,
+        0.0,
+        10.0
+      ],
+      "modest_band_supported_offsets_degrees": [],
+      "modest_band_status": "invariant_unsupported"
+    }
+  ],
+  "water_cutoff_results": [
+    {
+      "cutoff_angstrom": 3.0,
+      "plausible_count": 0,
+      "not_supported_count": 4,
+      "unknown_count": 0,
+      "water_statuses": [
+        {
+          "water_id": "I:146:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:87:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:37:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:175:O",
+          "status": "not_supported"
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 3.25,
+      "plausible_count": 1,
+      "not_supported_count": 3,
+      "unknown_count": 0,
+      "water_statuses": [
+        {
+          "water_id": "I:146:O",
+          "status": "geometrically_plausible"
+        },
+        {
+          "water_id": "I:87:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:37:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:175:O",
+          "status": "not_supported"
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 3.5,
+      "plausible_count": 1,
+      "not_supported_count": 3,
+      "unknown_count": 0,
+      "water_statuses": [
+        {
+          "water_id": "I:146:O",
+          "status": "geometrically_plausible"
+        },
+        {
+          "water_id": "I:87:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:37:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:175:O",
+          "status": "not_supported"
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 3.75,
+      "plausible_count": 1,
+      "not_supported_count": 3,
+      "unknown_count": 0,
+      "water_statuses": [
+        {
+          "water_id": "I:146:O",
+          "status": "geometrically_plausible"
+        },
+        {
+          "water_id": "I:87:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:37:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:175:O",
+          "status": "not_supported"
+        }
+      ]
+    },
+    {
+      "cutoff_angstrom": 4.0,
+      "plausible_count": 1,
+      "not_supported_count": 3,
+      "unknown_count": 0,
+      "water_statuses": [
+        {
+          "water_id": "I:146:O",
+          "status": "geometrically_plausible"
+        },
+        {
+          "water_id": "I:87:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:37:O",
+          "status": "not_supported"
+        },
+        {
+          "water_id": "I:175:O",
+          "status": "not_supported"
+        }
+      ]
+    }
+  ],
+  "state_sensitivity": {
+    "reference_ligand_state_id": "reference-neutral",
+    "reference_protein_state_id": "standard-templates",
+    "ligand_patterns": [
+      {
+        "state_id": "protonation-1",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "protonation-2",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "reference-neutral",
+        "pattern_id": "pattern-1",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "tautomer-1",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "tautomer-2",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "tautomer-3",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "tautomer-4",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "tautomer-5",
+        "pattern_id": "pattern-2",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "protein_patterns": [
+      {
+        "state_id": "histidine-protonated",
+        "pattern_id": "pattern-1",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "state_id": "standard-templates",
+        "pattern_id": "pattern-1",
+        "classified_count": 19,
+        "classification_counts": [
+          {
+            "interaction_type": "hydrophobic",
+            "count": 18
+          },
+          {
+            "interaction_type": "aromatic",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "unique_ligand_pattern_count": 2,
+    "unique_protein_pattern_count": 1,
+    "ligand_states_matching_reference_pattern": [
+      "reference-neutral"
+    ],
+    "ligand_states_differing_from_reference_pattern": [
+      "protonation-1",
+      "protonation-2",
+      "tautomer-1",
+      "tautomer-2",
+      "tautomer-3",
+      "tautomer-4",
+      "tautomer-5"
+    ],
+    "protein_states_matching_reference_pattern": [
+      "histidine-protonated",
+      "standard-templates"
+    ],
+    "protein_states_differing_from_reference_pattern": [],
+    "minimum_classified_count": 19,
+    "maximum_classified_count": 19,
+    "category_count_ranges": [
+      {
+        "interaction_type": "hydrogen_bond",
+        "minimum_count": 0,
+        "maximum_count": 0
+      },
+      {
+        "interaction_type": "ionic",
+        "minimum_count": 0,
+        "maximum_count": 0
+      },
+      {
+        "interaction_type": "hydrophobic",
+        "minimum_count": 18,
+        "maximum_count": 18
+      },
+      {
+        "interaction_type": "aromatic",
+        "minimum_count": 1,
+        "maximum_count": 1
+      },
+      {
+        "interaction_type": "water_mediated",
+        "minimum_count": 0,
+        "maximum_count": 0
+      },
+      {
+        "interaction_type": "metal_coordination",
+        "minimum_count": 0,
+        "maximum_count": 0
+      }
+    ]
+  },
+  "conclusions": [
+    {
+      "conclusion_id": "contact_classified_count",
+      "axis": "contact_cutoff",
+      "statement": "The number of classified interactions per state combination depends on the contact cutoff (3 A: 1-1, 3.5 A: 2-2, 4 A: 19-19, 5 A: 19-19).",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "contact_cutoff=4_A",
+        "contact_cutoff=5_A"
+      ],
+      "contradicting_conditions": [
+        "contact_cutoff=3_A",
+        "contact_cutoff=3.5_A"
+      ],
+      "limitations": "The contact cutoff selects candidate atoms; interaction-specific distance and angle criteria remain fixed."
+    },
+    {
+      "conclusion_id": "contact_hydrophobic",
+      "axis": "contact_cutoff",
+      "statement": "Hydrophobic atom-pair classification is present: 3 A: 0/16 combinations, 3.5 A: 16/16 combinations, 4 A: 16/16 combinations, 5 A: 16/16 combinations.",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "contact_cutoff=3.5_A",
+        "contact_cutoff=4_A",
+        "contact_cutoff=5_A"
+      ],
+      "contradicting_conditions": [
+        "contact_cutoff=3_A"
+      ],
+      "limitations": "Hydrophobic assignments are template features, not measured interaction energies."
+    },
+    {
+      "conclusion_id": "contact_aromatic",
+      "axis": "contact_cutoff",
+      "statement": "An aromatic ring-pair classification is present at every tested contact cutoff.",
+      "status": "invariant",
+      "supporting_conditions": [
+        "contact_cutoff=3_A",
+        "contact_cutoff=3.5_A",
+        "contact_cutoff=4_A",
+        "contact_cutoff=5_A"
+      ],
+      "contradicting_conditions": [],
+      "limitations": "The aromatic classification is a geometric ring-centroid criterion under explicit aromatic templates."
+    },
+    {
+      "conclusion_id": "contact_ionic",
+      "axis": "contact_cutoff",
+      "statement": "An ionic interaction is supported at the assessed contacts.",
+      "status": "unsupported",
+      "supporting_conditions": [],
+      "contradicting_conditions": [
+        "contact_cutoff=3_A",
+        "contact_cutoff=3.5_A",
+        "contact_cutoff=4_A",
+        "contact_cutoff=5_A"
+      ],
+      "limitations": "Absence of a classified ionic pair is not evidence that electrostatics does not contribute to binding."
+    },
+    {
+      "conclusion_id": "hydrogen_angle_count",
+      "axis": "hydrogen_angle",
+      "statement": "The number of supported ligand-donor hydrogen-bond candidates depends on the angle criterion (90 deg: 2, 100 deg: 2, 110 deg: 2, 120 deg: 2, 130 deg: 1, 140 deg: 1, 150 deg: 0).",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "hydrogen_angle=90_deg",
+        "hydrogen_angle=100_deg",
+        "hydrogen_angle=110_deg",
+        "hydrogen_angle=120_deg"
+      ],
+      "contradicting_conditions": [
+        "hydrogen_angle=130_deg",
+        "hydrogen_angle=140_deg",
+        "hydrogen_angle=150_deg"
+      ],
+      "limitations": "Candidates use generated ligand hydrogens; protein-donor hydrogen bonds remain unavailable."
+    },
+    {
+      "conclusion_id": "hydrogen_angle.N13->A:315:OG1",
+      "axis": "hydrogen_angle",
+      "statement": "N13->A:315:OG1 is supported at 4 of 7 tested angle thresholds (D-A 3.01 A, D-H...A 123.6 deg).",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "hydrogen_angle=90_deg",
+        "hydrogen_angle=100_deg",
+        "hydrogen_angle=110_deg",
+        "hydrogen_angle=120_deg"
+      ],
+      "contradicting_conditions": [
+        "hydrogen_angle=130_deg",
+        "hydrogen_angle=140_deg",
+        "hydrogen_angle=150_deg"
+      ],
+      "limitations": "The angular result depends on the generated hydrogen position, not an experimentally observed hydrogen."
+    },
+    {
+      "conclusion_id": "hydrogen_angle.N21->A:286:OE2",
+      "axis": "hydrogen_angle",
+      "statement": "N21->A:286:OE2 is supported at 6 of 7 tested angle thresholds (D-A 3.09 A, D-H...A 142.4 deg).",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "hydrogen_angle=90_deg",
+        "hydrogen_angle=100_deg",
+        "hydrogen_angle=110_deg",
+        "hydrogen_angle=120_deg",
+        "hydrogen_angle=130_deg",
+        "hydrogen_angle=140_deg"
+      ],
+      "contradicting_conditions": [
+        "hydrogen_angle=150_deg"
+      ],
+      "limitations": "The angular result depends on the generated hydrogen position, not an experimentally observed hydrogen."
+    },
+    {
+      "conclusion_id": "hydrogen_angle.N21->A:381:O",
+      "axis": "hydrogen_angle",
+      "statement": "N21->A:381:O is supported at 0 of 7 tested angle thresholds (D-A 3.48 A, D-H...A 68.1 deg).",
+      "status": "unsupported",
+      "supporting_conditions": [],
+      "contradicting_conditions": [
+        "hydrogen_angle=90_deg",
+        "hydrogen_angle=100_deg",
+        "hydrogen_angle=110_deg",
+        "hydrogen_angle=120_deg",
+        "hydrogen_angle=130_deg",
+        "hydrogen_angle=140_deg",
+        "hydrogen_angle=150_deg"
+      ],
+      "limitations": "The angular result depends on the generated hydrogen position, not an experimentally observed hydrogen."
+    },
+    {
+      "conclusion_id": "hydrogen_placement.N13->A:315:OG1",
+      "axis": "hydrogen_placement",
+      "statement": "N13->A:315:OG1 changes classification under a modest D-H orientation perturbation of +/-10 deg.",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "placement_offset=-10_deg",
+        "placement_offset=0_deg"
+      ],
+      "contradicting_conditions": [
+        "placement_offset=10_deg"
+      ],
+      "limitations": "The perturbation is a sensitivity probe, not an alternative chemistry-toolkit preparation or a calibrated uncertainty interval. It samples one D-H/D-A plane, not the full orientation space. Outside the modest band, a more aligned hypothetical placement can support a candidate that is unsupported at the reference placement; that is not evidence from the reference structure."
+    },
+    {
+      "conclusion_id": "hydrogen_placement.N21->A:286:OE2",
+      "axis": "hydrogen_placement",
+      "statement": "N21->A:286:OE2 remains supported under a modest D-H orientation perturbation of +/-10 deg.",
+      "status": "invariant",
+      "supporting_conditions": [
+        "placement_offset=-10_deg",
+        "placement_offset=0_deg",
+        "placement_offset=10_deg"
+      ],
+      "contradicting_conditions": [],
+      "limitations": "The perturbation is a sensitivity probe, not an alternative chemistry-toolkit preparation or a calibrated uncertainty interval. It samples one D-H/D-A plane, not the full orientation space. Outside the modest band, a more aligned hypothetical placement can support a candidate that is unsupported at the reference placement; that is not evidence from the reference structure."
+    },
+    {
+      "conclusion_id": "hydrogen_placement.N21->A:381:O",
+      "axis": "hydrogen_placement",
+      "statement": "N21->A:381:O remains unsupported under a modest D-H orientation perturbation of +/-10 deg.",
+      "status": "unsupported",
+      "supporting_conditions": [],
+      "contradicting_conditions": [
+        "placement_offset=-10_deg",
+        "placement_offset=0_deg",
+        "placement_offset=10_deg"
+      ],
+      "limitations": "The perturbation is a sensitivity probe, not an alternative chemistry-toolkit preparation or a calibrated uncertainty interval. It samples one D-H/D-A plane, not the full orientation space. Outside the modest band, a more aligned hypothetical placement can support a candidate that is unsupported at the reference placement; that is not evidence from the reference structure."
+    },
+    {
+      "conclusion_id": "water_bridge_geometry",
+      "axis": "water_cutoff",
+      "statement": "A geometrically plausible water bridge is present under some cutoffs (3 A: 0, 3.25 A: 1, 3.5 A: 1, 3.75 A: 1, 4 A: 1).",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "water_cutoff=3.25_A",
+        "water_cutoff=3.5_A",
+        "water_cutoff=3.75_A",
+        "water_cutoff=4_A"
+      ],
+      "contradicting_conditions": [
+        "water_cutoff=3_A"
+      ],
+      "limitations": "Geometric plausibility is not a chemically classified water-mediated interaction."
+    },
+    {
+      "conclusion_id": "water_chemical_classification",
+      "axis": "water_cutoff",
+      "statement": "No water-mediated interaction is chemically classified under any tested water cutoff.",
+      "status": "unknown",
+      "supporting_conditions": [],
+      "contradicting_conditions": [
+        "water_cutoff=3_A",
+        "water_cutoff=3.25_A",
+        "water_cutoff=3.5_A",
+        "water_cutoff=3.75_A",
+        "water_cutoff=4_A"
+      ],
+      "limitations": "Water orientation and donor/acceptor roles remain unassigned; a nearby water is not automatically a donor or acceptor."
+    },
+    {
+      "conclusion_id": "protein_state_pattern",
+      "axis": "protein_state",
+      "statement": "The classified interaction pattern is invariant across the tested protein histidine-protonation states.",
+      "status": "invariant",
+      "supporting_conditions": [
+        "protein_state=histidine-protonated",
+        "protein_state=standard-templates"
+      ],
+      "contradicting_conditions": [],
+      "limitations": "Only two explicit protein-template states are available; this does not establish invariance under other protein preparations."
+    },
+    {
+      "conclusion_id": "ligand_state_category_counts",
+      "axis": "ligand_state",
+      "statement": "Every ligand/protein state combination classifies the same number of interactions by category.",
+      "status": "invariant",
+      "supporting_conditions": [
+        "ligand_state=protonation-1",
+        "ligand_state=protonation-2",
+        "ligand_state=reference-neutral",
+        "ligand_state=tautomer-1",
+        "ligand_state=tautomer-2",
+        "ligand_state=tautomer-3",
+        "ligand_state=tautomer-4",
+        "ligand_state=tautomer-5"
+      ],
+      "contradicting_conditions": [],
+      "limitations": "Equal category counts do not make the specific participants identical or imply equal binding strength."
+    },
+    {
+      "conclusion_id": "ligand_state_specific_pairs",
+      "axis": "ligand_state",
+      "statement": "The specific classified hydrophobic and aromatic participants change across ligand states, even where category counts are stable.",
+      "status": "assumption_sensitive",
+      "supporting_conditions": [
+        "ligand_state=reference-neutral"
+      ],
+      "contradicting_conditions": [
+        "ligand_state=protonation-1",
+        "ligand_state=protonation-2",
+        "ligand_state=tautomer-1",
+        "ligand_state=tautomer-2",
+        "ligand_state=tautomer-3",
+        "ligand_state=tautomer-4",
+        "ligand_state=tautomer-5"
+      ],
+      "limitations": "Ligand-state atom and ring identities are state-specific; the same feature count does not imply the same interaction set."
+    },
+    {
+      "conclusion_id": "protein_donor_hydrogen",
+      "axis": "protein_state",
+      "statement": "Protein-donor hydrogen bonds remain unknown because protein hydrogens were not prepared.",
+      "status": "unknown",
+      "supporting_conditions": [],
+      "contradicting_conditions": [],
+      "limitations": "The absence of a protein-donor candidate is not evidence that no such hydrogen bond exists."
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "treated each assumption axis independently",
+      "actor": "interaction robustness analysis",
+      "rationale": "contact, angular, placement, state, and water uncertainties have different physical meanings"
+    },
+    {
+      "decision": "preserved invariant, sensitive, unsupported, and unknown conclusions separately",
+      "actor": "interaction robustness analysis",
+      "rationale": "a robust conclusion is not the same as a high-confidence score"
+    },
+    {
+      "decision": "perturbed generated hydrogen orientation only as a sensitivity probe",
+      "actor": "interaction robustness analysis",
+      "rationale": "the perturbations are not experimental coordinates or new toolkit preparations"
+    },
+    {
+      "decision": "did not rank states or convert interactions into affinity",
+      "actor": "interaction robustness analysis",
+      "rationale": "sensitivity analysis is not a binding free-energy calculation"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited heavy atoms and waters",
+        "detail": "All sensitivity conditions reuse the original experimental coordinates.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "interaction and geometric sensitivity",
+        "detail": "Contact cutoffs, angular criteria, water cutoffs, and state combinations are recalculated from prior records.",
+        "actor": "interaction robustness analysis"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity or free-energy estimate is produced.",
+        "actor": "interaction robustness analysis"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "hydrogen-placement perturbations",
+        "detail": "Perturbed hydrogen orientations are sensitivity probes, not experimental or toolkit-generated coordinates.",
+        "actor": "interaction robustness analysis"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "robustness.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "all structural and evidence records are referenced",
+        "observed": "eight input records present",
+        "expected": "manifest, identity, coordinates, binding site, ligand states, protein states, hydrogen evidence, water evidence",
+        "detail": "the robustness record references prior records without modifying them"
+      },
+      {
+        "check_id": "robustness.contact_cutoffs",
+        "category": "sensitivity",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "contact results cover every tested cutoff",
+        "observed": "4 results",
+        "expected": "4 cutoffs",
+        "detail": "each cutoff is an independent condition"
+      },
+      {
+        "check_id": "robustness.hydrogen_angles",
+        "category": "sensitivity",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "hydrogen-angle results cover every tested threshold",
+        "observed": "7 results",
+        "expected": "7 thresholds",
+        "detail": "each threshold is an independent condition"
+      },
+      {
+        "check_id": "robustness.hydrogen_placement",
+        "category": "sensitivity",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "hydrogen-placement results use the declared perturbation grid",
+        "observed": "3 candidates",
+        "expected": "declared offset grid on every candidate",
+        "detail": "perturbed positions are sensitivity probes, not new experimental coordinates"
+      },
+      {
+        "check_id": "robustness.water_cutoffs",
+        "category": "sensitivity",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "water results cover every tested cutoff",
+        "observed": "5 results",
+        "expected": "5 cutoffs",
+        "detail": "each cutoff is an independent condition"
+      },
+      {
+        "check_id": "robustness.no_composite_score",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "conclusions are not collapsed into a confidence score",
+        "observed": "separate invariant, sensitive, unsupported, and unknown conclusions",
+        "expected": "no aggregate score or ranking",
+        "detail": "different uncertainties retain different physical meanings"
+      },
+      {
+        "check_id": "robustness.no_affinity",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "robustness is not converted into affinity",
+        "observed": "no affinity or free-energy estimate is produced",
+        "expected": "assumption-sensitivity evidence only",
+        "detail": "interaction counts are not binding free energies"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "hydrogen_placement",
+      "status": "not_applicable",
+      "detail": "No experimentally observed hydrogen positions are available.",
+      "observed": "generated and perturbed positions",
+      "expected": "experimental hydrogen positions for direct angular evidence",
+      "resolution": "Hydrogen-angle conclusions remain conditioned on generated positions."
+    },
+    {
+      "category": "protein_hydrogens",
+      "status": "not_applicable",
+      "detail": "Protein hydrogens were not prepared.",
+      "observed": "not_run",
+      "expected": "generated protein hydrogens for protein-donor hydrogen bonds",
+      "resolution": "Protein-donor hydrogen bonds remain unknown."
+    },
+    {
+      "category": "water_chemistry",
+      "status": "not_applicable",
+      "detail": "Water orientation and donor/acceptor roles remain unassigned.",
+      "observed": "unassigned",
+      "expected": "explicit water chemistry for a classified water-mediated interaction",
+      "resolution": "Only geometric bridge plausibility is reported."
+    }
+  ]
+}

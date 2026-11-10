@@ -48,6 +48,11 @@ and its provenance manifest.
   deposited water identity, coordinates, occupancy, and B-factors, leaves
   orientation and donor/acceptor roles unassigned, and reports geometric bridge
   plausibility without classifying a water-mediated interaction.
+- `2HYY.interaction-robustness.json` is the Batch 13 sensitivity record. It
+  varies contact cutoffs, hydrogen-bond angles, generated-hydrogen orientation,
+  ligand/protein states, and water cutoffs independently, then labels each
+  conclusion invariant, assumption-sensitive, unsupported, or unknown. It
+  contains no composite confidence score, ranking, or affinity estimate.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -68,4 +73,5 @@ uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.
 uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
 uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
 uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
+uv run python examples/drug_discovery/capstone_interaction_robustness.py
 ```

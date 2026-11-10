@@ -65,6 +65,7 @@ linked from the relevant tutorial or reference page.
 | [`capstone_combination_interactions.py`](drug_discovery/capstone_combination_interactions.py) | 8×2 ligand/protein [state interaction matrix](../data/structures/2HYY.combination-interactions.json) |
 | [`capstone_hydrogen_evidence.py`](drug_discovery/capstone_hydrogen_evidence.py) | generated-hydrogen provenance and D–H···A [geometry](../data/structures/2HYY.hydrogen-evidence.json) |
 | [`capstone_water_evidence.py`](drug_discovery/capstone_water_evidence.py) | deposited-water identity, occupancy, and geometric [bridge plausibility](../data/structures/2HYY.water-evidence.json) |
+| [`capstone_interaction_robustness.py`](drug_discovery/capstone_interaction_robustness.py) | independent assumption axes and [interaction robustness](../data/structures/2HYY.interaction-robustness.json); no confidence score |
 
 ## Advanced
 

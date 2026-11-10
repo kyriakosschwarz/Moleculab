@@ -77,7 +77,7 @@ def architecture_layers():
                 "solvent and\nwater boxes",
                 "MSD / RDF",
                 "QM/MM",
-                "records, evidence,\nstate matrices,\nH / water evidence",
+                "records, evidence,\nstate matrices,\nH/water + sensitivity",
             ],
             RED,
         ),

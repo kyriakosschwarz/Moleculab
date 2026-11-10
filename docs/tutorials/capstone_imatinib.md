@@ -74,6 +74,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.
 uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
 uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
 uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
+uv run python examples/drug_discovery/capstone_interaction_robustness.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -103,8 +104,10 @@ protein states and writes
 generated ligand hydrogens from deposited heavy atoms and writes
 `data/structures/2HYY.hydrogen-evidence.json`. The fourteenth preserves
 deposited waters and reports geometric bridge plausibility in
-`data/structures/2HYY.water-evidence.json`. None of the commands docks a
-ligand, predicts affinity, or estimates a free energy.
+`data/structures/2HYY.water-evidence.json`. The fifteenth varies analysis
+assumptions and writes
+`data/structures/2HYY.interaction-robustness.json`. None of the commands docks
+a ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -795,6 +798,66 @@ roles, orientation, and the complementarity of its partners have not been
 established. The record therefore adds traceable geometric evidence without
 resolving the missing chemistry, and it computes no affinity.
 
+### 4.16 Batch 13: interaction sensitivity and robustness
+
+Batch 13 asks whether the current interaction conclusions survive reasonable
+changes in analysis assumptions. It does not add interaction categories and it
+does not collapse the answers into a confidence score.
+
+```bash
+uv run python examples/drug_discovery/capstone_interaction_robustness.py
+```
+
+The record is written to
+`data/structures/2HYY.interaction-robustness.json`.
+
+The tested axes are independent:
+
+| Axis | Tested conditions |
+| --- | --- |
+| Contact cutoff | 3.0, 3.5, 4.0, 5.0 Å |
+| Hydrogen-bond angle | 90, 100, 110, 120, 130, 140, 150° |
+| Hydrogen placement | D–H orientation perturbed by ±20°, with a ±10° modest band |
+| Protein chemical state | Both histidine-protonation hypotheses |
+| Ligand chemical state | All eight enumerated states |
+| Water bridge cutoff | 3.0, 3.25, 3.5, 3.75, 4.0 Å |
+
+For 2HYY the sensitivity record finds:
+
+| Conclusion | Result |
+| --- | --- |
+| Classified interactions per state combination | 1 at 3.0 Å, 2 at 3.5 Å, 19 at 4.0–5.0 Å |
+| Hydrophobic classification | Absent at 3.0 Å; present in all 16 combinations at 3.5–5.0 Å |
+| Aromatic ring-pair classification | One pair at every tested cutoff |
+| Ionic classification | Unsupported at every tested cutoff |
+| Hydrogen-bond candidates | 2 at 90–120°, 1 at 130–140°, 0 at 150° |
+| Protein-state pattern | Invariant across both histidine hypotheses |
+| Ligand-state category counts | Invariant at 19 interactions (18 hydrophobic, 1 aromatic) |
+| Ligand-state specific participants | Assumption-sensitive; the non-reference states share a different pair set |
+| Water bridge geometry | 0 plausible at 3.0 Å; 1 at 3.25–4.0 Å |
+| Water chemical classification | Unknown under every tested cutoff |
+| Protein-donor hydrogen bonds | Unknown because protein hydrogens were not prepared |
+
+The record separates conclusions into four statuses:
+
+- `invariant`: supported under every tested condition on that axis;
+- `assumption_sensitive`: supported under some conditions and not others;
+- `unsupported`: no tested condition supports the positive claim;
+- `unknown`: the evidence needed for the claim is missing.
+
+It contains 17 conclusions: 4 invariant, 8 assumption-sensitive, 3 unsupported,
+and 2 unknown. These are not combined into a single score. A hydrophobic count
+that changes with the contact cutoff, an angular criterion that changes a
+hydrogen-bond candidate, and an unassigned water chemistry are different kinds
+of uncertainty and remain separate.
+
+The hydrogen-placement axis is a perturbation probe, not a new toolkit
+preparation: the D–H vector is rotated in the D–H/D–A plane while the D–H bond
+length is preserved. The resulting positions are not experimental coordinates
+and are not presented as alternative chemical states. The record therefore
+keeps generated-hydrogen conclusions conditioned on the original preparation
+and reports where a modest orientation change would alter the classification.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -828,6 +891,7 @@ pipeline.
 | long-range electrostatics | reaction field, Ewald |
 | binding pose | rigid and flexible docking |
 | binding affinity | FEP, TI, MBAR, alchemical decoupling |
+| assumption sensitivity | interaction-robustness record; invariant, sensitive, unsupported, and unknown stay separate |
 | SAR and ADME context | Track B module 08; Track C module 09 |
 | electronic effects | QM/MM concepts |
 
@@ -1073,6 +1137,7 @@ Moleculab can:
 - build small solvated systems;
 - run MD, minimisation, docking, and free-energy estimators on controlled
   examples;
+- test how interaction conclusions depend on explicit analysis assumptions;
 - show how water, Ewald, and alchemical decoupling enter the calculation.
 
 Moleculab cannot yet:
@@ -1100,6 +1165,7 @@ number:
 | interaction record | donor/acceptor assignments, distance/angle criteria, fingerprints, occupancy |
 | hydrogen record | generated-versus-deposited provenance, generation method and toolkit, donor–hydrogen validation, D–H···A geometry |
 | water record | deposited identity, coordinates, occupancy, B-factor, unassigned roles, bridge geometry versus chemical classification |
+| robustness record | separate assumption axes, invariant/sensitive/unsupported/unknown conclusions, no composite confidence score |
 | pose record | atom mapping, symmetry handling, RMSD, threshold, score provenance |
 | SAR record | measured activity type, descriptor changes, docking scores, separated hypothesis |
 | thermodynamics note | method, standard state, uncertainty, sampling limitations |
@@ -1118,6 +1184,8 @@ Acceptance criteria:
 - generated hydrogen positions are never presented as experimentally observed;
 - a geometrically plausible water bridge is never presented as a classified
   water-mediated interaction;
+- sensitivity conclusions retain separate invariant, sensitive, unsupported, and
+  unknown statuses rather than a composite confidence score;
 - a geometric contact is never presented as a thermodynamic contribution;
 - a failed or invalid benchmark case is reported, not hidden;
 - the capstone states what further experiments or calculations would establish.

@@ -56,6 +56,7 @@ uv run pytest tests/test_protein_preparation.py -q
 uv run pytest tests/test_combination_interactions.py -q
 uv run pytest tests/test_hydrogen_evidence.py -q
 uv run pytest tests/test_water_evidence.py -q
+uv run pytest tests/test_interaction_robustness.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -78,6 +79,8 @@ Covered:
 - pose clustering, centroid comparison, and interaction-pattern Jaccard;
 - benchmark statuses, valid-case denominators, and protocol retention;
 - contact matrices, occupancy, missing frames, and lifetime run lengths;
+- contact-cutoff, hydrogen-angle, hydrogen-placement, state-pattern, and
+  water-cutoff sensitivity with separate conclusion statuses;
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - dipole moments, origin dependence, and charge/position validation;
 - pH-dependent LogD corrections for monoprotic acids and bases;
@@ -226,6 +229,8 @@ point when a single operator typo could corrupt every downstream result.
 | ligand/protein state matrix completeness and no-ranking interaction classification are tested | `tests/test_combination_interactions.py` |
 | generated hydrogens keep generated provenance, donor–hydrogen connectivity is checked, and D–H···A geometry is tested | `tests/test_hydrogen_evidence.py` |
 | deposited water identity, occupancy, B-factor, unassigned roles, and geometric-only bridge status are tested | `tests/test_water_evidence.py` |
+| contact cutoffs, hydrogen angles, hydrogen-placement perturbations, state patterns, and water cutoffs are tested as independent sensitivity axes | `tests/test_interaction_robustness.py` |
+| invariant, assumption-sensitive, unsupported, and unknown conclusions keep consistent support sets and no composite score | `tests/test_interaction_robustness.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |
