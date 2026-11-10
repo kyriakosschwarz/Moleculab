@@ -12,6 +12,8 @@ import pytest
 
 from moleculab import (
     FIGURE_METADATA_SCHEMA_VERSION,
+    EVIDENCE_STYLES,
+    ROBUSTNESS_STYLES,
     FigureContext,
     FigureMetadata,
     build_hydrogen_water_script,
@@ -19,15 +21,25 @@ from moleculab import (
     build_pocket_script,
     draw_chemical_state_comparison,
     draw_ligand_2d,
+    evidence_style,
     load_binding_site,
     load_chemical_state_enumeration,
     load_combination_record,
     load_figure_metadata,
+    load_harmonic_fep_study,
     load_hydrogen_evidence,
+    load_interaction_robustness,
     load_ligand_identity,
     load_manifest,
+    load_thermodynamic_interpretation,
     load_water_evidence,
     plot_evidence_matrix,
+    plot_free_energy_convergence,
+    plot_interaction_sensitivity,
+    plot_structural_thermodynamics_boundary,
+    requirement_style,
+    robustness_style,
+    term_style,
     validate_figure_metadata,
     write_figure_metadata,
 )
@@ -62,6 +74,19 @@ def metadata(tmp_path: Path, figure_id: str = "test") -> FigureMetadata:
         alt_text="test alt text",
         caption="test caption",
     )
+
+
+def test_evidence_and_robustness_semantics_are_stable():
+    assert evidence_style("unknown").label == "unknown"
+    assert evidence_style("unknown").colour == EVIDENCE_STYLES["unknown"].colour
+    assert evidence_style("unknown").colour != evidence_style("present").colour
+    assert evidence_style("unknown").colour != evidence_style("absent").colour
+    assert robustness_style("assumption_sensitive").label == "assumption-sensitive"
+    assert robustness_style("unsupported").colour == ROBUSTNESS_STYLES["unsupported"].colour
+    assert robustness_style("unknown").colour != robustness_style("invariant").colour
+    assert requirement_style("not_run").label == "not run"
+    assert term_style("not_estimated").label == "not estimated"
+    assert term_style("not_estimated").colour != term_style("not_available").colour
 
 
 def test_metadata_round_trip_and_validation(tmp_path):
@@ -250,3 +275,85 @@ def test_hydrogen_water_script_keeps_generated_positions_distinct(tmp_path):
     assert "angle_" not in script
     assert "HN13" in pdb
     assert "HN21" in pdb
+
+
+def test_interaction_sensitivity_figure(tmp_path):
+    pytest.importorskip("matplotlib")
+    robustness = load_interaction_robustness(
+        ROOT / "data/structures/2HYY.interaction-robustness.json"
+    )
+    png_path = tmp_path / "sensitivity.png"
+    svg_path = tmp_path / "sensitivity.svg"
+    figure = plot_interaction_sensitivity(
+        robustness_record=robustness,
+        context=context(),
+        output_png=png_path,
+        output_svg=svg_path,
+        figure_id="test-sensitivity",
+        title="Sensitivity",
+        caption="caption",
+        alt_text="alt text",
+        source_records=("robustness.json",),
+        source_checksums=(("robustness.json", "d" * 64),),
+        width=9.0,
+        height=7.0,
+    )
+
+    assert png_path.exists() and png_path.stat().st_size > 0
+    assert svg_path.exists() and svg_path.stat().st_size > 0
+    assert figure.visualization_tool == "Matplotlib"
+    assert figure.source_records == ("robustness.json",)
+
+
+def test_free_energy_convergence_figure(tmp_path):
+    pytest.importorskip("matplotlib")
+    study = load_harmonic_fep_study(
+        ROOT / "data/free_energy/harmonic-fep-study.json"
+    )
+    png_path = tmp_path / "fep.png"
+    svg_path = tmp_path / "fep.svg"
+    figure = plot_free_energy_convergence(
+        study=study,
+        context=context(),
+        output_png=png_path,
+        output_svg=svg_path,
+        figure_id="test-fep",
+        title="FEP",
+        caption="caption",
+        alt_text="alt text",
+        source_records=("study.json",),
+        source_checksums=(("study.json", "e" * 64),),
+        width=9.0,
+        height=5.0,
+    )
+
+    assert png_path.exists() and png_path.stat().st_size > 0
+    assert svg_path.exists() and svg_path.stat().st_size > 0
+    assert figure.image_path == str(png_path)
+
+
+def test_structural_thermodynamics_boundary_figure(tmp_path):
+    pytest.importorskip("matplotlib")
+    record = load_thermodynamic_interpretation(
+        ROOT / "data/structures/2HYY.thermodynamic-interpretation.json"
+    )
+    png_path = tmp_path / "thermo.png"
+    svg_path = tmp_path / "thermo.svg"
+    figure = plot_structural_thermodynamics_boundary(
+        record=record,
+        context=context(),
+        output_png=png_path,
+        output_svg=svg_path,
+        figure_id="test-thermo",
+        title="Thermodynamics",
+        caption="caption",
+        alt_text="alt text",
+        source_records=("thermodynamics.json",),
+        source_checksums=(("thermodynamics.json", "f" * 64),),
+        width=9.0,
+        height=7.0,
+    )
+
+    assert png_path.exists() and png_path.stat().st_size > 0
+    assert svg_path.exists() and svg_path.stat().st_size > 0
+    assert figure.source_records == ("thermodynamics.json",)

@@ -12,6 +12,7 @@ from xml.sax.saxutils import escape
 from ..applications.chemical_state_enumeration import ChemicalState
 from ..applications.ligand_identity import LigandIdentityRecord
 from .metadata import FigureContext, FigureMetadata
+from .styles import clean_svg_file
 
 _DONOR_COLOUR = (0.20, 0.40, 0.95, 0.38)
 _ACCEPTOR_COLOUR = (0.95, 0.42, 0.18, 0.38)
@@ -150,6 +151,7 @@ def draw_ligand_2d(
         f"{caption} Alt text: {alt_text}",
     )
     output_svg_path.write_text(svg, encoding="utf-8")
+    clean_svg_file(output_svg_path)
 
     if output_png is not None:
         output_png_path = Path(output_png)

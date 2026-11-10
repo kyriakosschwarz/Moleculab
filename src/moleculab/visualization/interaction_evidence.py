@@ -10,6 +10,12 @@ from ..applications.combination_interactions import (
     CombinationInteractionRecord,
 )
 from .metadata import FigureContext, FigureMetadata
+from .styles import (
+    EVIDENCE_STYLES,
+    configure_matplotlib,
+    evidence_style,
+    save_figure,
+)
 
 _STATUS_INDEX = {
     "classified": 0,
@@ -17,8 +23,7 @@ _STATUS_INDEX = {
     "unknown": 2,
     "not_applicable": 3,
 }
-_STATUS_LABEL = ("present", "absent", "unknown", "N/A")
-_STATUS_COLOURS = ("#2f855a", "#cbd5e0", "#d69e2e", "#a0aec0")
+_STATUS_NAMES = ("present", "absent", "unknown", "not_applicable")
 
 
 def plot_evidence_matrix(
@@ -39,9 +44,8 @@ def plot_evidence_matrix(
 ) -> FigureMetadata:
     """Plot present/absent/unknown/not-applicable evidence as a 6-panel matrix."""
 
+    configure_matplotlib()
     import matplotlib
-
-    matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib.colors import ListedColormap
     from matplotlib.patches import Patch
@@ -52,7 +56,10 @@ def plot_evidence_matrix(
         (item.ligand_state_id, item.protein_state_id): item
         for item in combination_record.combinations
     }
-    colormap = ListedColormap(_STATUS_COLOURS)
+    status_styles = tuple(evidence_style(status) for status in _STATUS_NAMES)
+    colormap = ListedColormap(
+        [style.colour for style in status_styles]
+    )
 
     figure, axes = plt.subplots(
         3,
@@ -95,15 +102,15 @@ def plot_evidence_matrix(
                 axis.text(
                     column_index,
                     row_index,
-                    _STATUS_LABEL[value],
+                    status_styles[value].label,
                     ha="center",
                     va="center",
                     fontsize=7.5,
                     color="black",
                 )
     handles = [
-        Patch(facecolor=colour, edgecolor="none", label=label)
-        for colour, label in zip(_STATUS_COLOURS, _STATUS_LABEL, strict=True)
+        Patch(facecolor=style.colour, edgecolor="none", label=style.label)
+        for style in status_styles
     ]
     figure.legend(
         handles=handles,
@@ -123,11 +130,9 @@ def plot_evidence_matrix(
     )
     output_png_path = Path(output_png)
     output_png_path.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(output_png_path, dpi=dpi, facecolor="white")
     if output_svg is not None:
-        output_svg_path = Path(output_svg)
-        output_svg_path.parent.mkdir(parents=True, exist_ok=True)
-        figure.savefig(output_svg_path, facecolor="white")
+        Path(output_svg).parent.mkdir(parents=True, exist_ok=True)
+    save_figure(figure, output_png_path, output_svg, dpi=dpi)
     plt.close(figure)
 
     return FigureMetadata(
@@ -145,10 +150,10 @@ def plot_evidence_matrix(
             ("height_inches", f"{height:g}"),
             ("dpi", str(dpi)),
             ("layout", "3x2 category panels"),
-            ("present_colour", _STATUS_COLOURS[0]),
-            ("absent_colour", _STATUS_COLOURS[1]),
-            ("unknown_colour", _STATUS_COLOURS[2]),
-            ("not_applicable_colour", _STATUS_COLOURS[3]),
+            ("present_colour", EVIDENCE_STYLES["present"].colour),
+            ("absent_colour", EVIDENCE_STYLES["absent"].colour),
+            ("unknown_colour", EVIDENCE_STYLES["unknown"].colour),
+            ("not_applicable_colour", EVIDENCE_STYLES["not_applicable"].colour),
             ("cell_labels", "present, absent, unknown, N/A"),
         ),
         rendering_config_sha256=None,

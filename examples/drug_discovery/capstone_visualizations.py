@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Moleculab Contributors
 # SPDX-License-Identifier: MIT OR Apache-2.0
 
-"""Generate the Visualization Batch 1 and 2 figures from the 2HYY records.
+"""Generate the Visualization Batch 1, 2, and 3 figures from the 2HYY records.
 
 The figures are:
 1. an RDKit 2D diagram of the reference-neutral imatinib state;
@@ -9,7 +9,10 @@ The figures are:
 3. a PyMOL binding-pocket close-up with measured contacts;
 4. an RDKit comparison of selected chemical-state alternatives;
 5. an interaction-evidence matrix across eight ligand and two protein states;
-6. a PyMOL view of generated hydrogens, acceptor geometry, and deposited waters.
+6. a PyMOL view of generated hydrogens, acceptor geometry, and deposited waters;
+7. a multi-axis interaction-sensitivity plot;
+8. an exact-versus-FEP harmonic convergence study;
+9. a structural-evidence versus thermodynamic-requirement boundary.
 
 Every figure is written with source, tool-version, camera, and limitation
 metadata.  Geometry comes from the deposited structure and validated records;
@@ -33,11 +36,17 @@ from moleculab import (
     load_chemical_state_enumeration,
     load_combination_record,
     load_figure_metadata,
+    load_harmonic_fep_study,
     load_hydrogen_evidence,
+    load_interaction_robustness,
     load_ligand_identity,
     load_manifest,
+    load_thermodynamic_interpretation,
     load_water_evidence,
     plot_evidence_matrix,
+    plot_free_energy_convergence,
+    plot_interaction_sensitivity,
+    plot_structural_thermodynamics_boundary,
     pymol_available,
     render_binding_pocket_closeup,
     render_hydrogen_water_evidence,
@@ -119,6 +128,10 @@ def main() -> None:
         "water": "data/structures/2HYY.water-evidence.json",
         "combination": "data/structures/2HYY.combination-interactions.json",
         "robustness": "data/structures/2HYY.interaction-robustness.json",
+        "thermodynamics": (
+            "data/structures/2HYY.thermodynamic-interpretation.json"
+        ),
+        "free_energy_study": "data/free_energy/harmonic-fep-study.json",
     }
     source_hashes = {
         name: sha256_file(ROOT / path) for name, path in source_paths.items()
@@ -135,6 +148,13 @@ def main() -> None:
     hydrogen = load_hydrogen_evidence(ROOT / source_paths["hydrogen"])
     water = load_water_evidence(ROOT / source_paths["water"])
     combination = load_combination_record(ROOT / source_paths["combination"])
+    robustness = load_interaction_robustness(ROOT / source_paths["robustness"])
+    thermodynamics = load_thermodynamic_interpretation(
+        ROOT / source_paths["thermodynamics"]
+    )
+    free_energy_study = load_harmonic_fep_study(
+        ROOT / source_paths["free_energy_study"]
+    )
 
     context = FigureContext(
         source_structure=manifest.source.accession,
@@ -320,7 +340,90 @@ def main() -> None:
         camera_view=views.get("capstone-hydrogen-water"),
     )
 
-    figures = (two_d, overview, pocket, comparison, evidence_matrix, hydrogen_water)
+    sensitivity_png = args.figure_directory / "2HYY-interaction-sensitivity.png"
+    sensitivity_svg = args.figure_directory / "2HYY-interaction-sensitivity.svg"
+    sensitivity = plot_interaction_sensitivity(
+        robustness_record=robustness,
+        context=context,
+        output_png=sensitivity_png,
+        output_svg=sensitivity_svg,
+        figure_id="capstone-interaction-sensitivity",
+        title="Interaction sensitivity across tested assumptions",
+        caption=(
+            "Separate sensitivity axes for contact cutoff, hydrogen-bond angle, "
+            "water cutoff, and hydrogen-placement perturbation. Conclusion "
+            "colors distinguish invariant, assumption-sensitive, unsupported, "
+            "and unknown statuses. No composite score is produced."
+        ),
+        alt_text=(
+            "Four sensitivity panels plus a conclusion-status legend showing "
+            "contact cutoff, hydrogen-bond angle, water cutoff, and hydrogen "
+            "placement effects."
+        ),
+        source_records=records("robustness"),
+        source_checksums=checksums("robustness"),
+    )
+
+    fe_png = args.figure_directory / "harmonic-fep-convergence.png"
+    fe_svg = args.figure_directory / "harmonic-fep-convergence.svg"
+    free_energy = plot_free_energy_convergence(
+        study=free_energy_study,
+        context=context,
+        output_png=fe_png,
+        output_svg=fe_svg,
+        figure_id="harmonic-fep-convergence",
+        title="Exact versus estimated harmonic free energy",
+        caption=(
+            "Controlled three-dimensional harmonic model. Dashed lines are the "
+            "exact free-energy differences; points are forward-FEP estimates "
+            "with standard errors as sample count grows. The right panel shows "
+            "effective sample fraction for the good- and poor-overlap cases."
+        ),
+        alt_text=(
+            "Two panels showing exact and FEP harmonic free-energy convergence "
+            "with error bars and effective sample fractions."
+        ),
+        source_records=records("free_energy_study"),
+        source_checksums=checksums("free_energy_study"),
+    )
+
+    thermo_png = (
+        args.figure_directory / "2HYY-structural-vs-thermodynamics.png"
+    )
+    thermo_svg = (
+        args.figure_directory / "2HYY-structural-vs-thermodynamics.svg"
+    )
+    thermo = plot_structural_thermodynamics_boundary(
+        record=thermodynamics,
+        context=context,
+        output_png=thermo_png,
+        output_svg=thermo_svg,
+        figure_id="capstone-structural-vs-thermodynamics",
+        title="Structural evidence is not binding free energy",
+        caption=(
+            "Structural counts are shown separately from the missing "
+            "thermodynamic terms and preparation requirements. Every term is "
+            "unestimated and the binding free energy is not computed."
+        ),
+        alt_text=(
+            "Bar chart of structural evidence next to a table of unestimated "
+            "thermodynamic terms and a large not-computed free-energy status."
+        ),
+        source_records=records("thermodynamics"),
+        source_checksums=checksums("thermodynamics"),
+    )
+
+    figures = (
+        two_d,
+        overview,
+        pocket,
+        comparison,
+        evidence_matrix,
+        hydrogen_water,
+        sensitivity,
+        free_energy,
+        thermo,
+    )
     errors = validate_figure_metadata(figures)
     if errors:
         for error in errors:
@@ -328,7 +431,7 @@ def main() -> None:
         raise SystemExit(2)
     metadata_path = write_figure_metadata(args.metadata, figures)
 
-    print("Visualization Batches 1 and 2")
+    print("Visualization Batches 1, 2, and 3")
     for figure in figures:
         print(
             f"  {figure.figure_id}: {figure.image_path} "

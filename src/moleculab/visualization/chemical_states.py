@@ -10,6 +10,7 @@ from ..applications.chemical_state_enumeration import ChemicalState
 from ..applications.ligand_identity import LigandIdentityRecord
 from .metadata import FigureContext, FigureMetadata
 from .molecular_2d import _require_rdkit, build_reference_molecule
+from .styles import clean_svg_file
 
 _CHARGE_COLOUR = (0.95, 0.15, 0.75, 0.45)
 _ROLE_COLOUR = (0.55, 0.25, 0.85, 0.45)
@@ -184,6 +185,7 @@ def draw_chemical_state_comparison(
     output_svg_path = Path(output_svg)
     output_svg_path.parent.mkdir(parents=True, exist_ok=True)
     output_svg_path.write_text(svg, encoding="utf-8")
+    clean_svg_file(output_svg_path)
 
     if output_png is not None:
         image = MolsToGridImage(

@@ -331,6 +331,132 @@
         72.66826629638672,
         -20.0
       ]
+    },
+    {
+      "figure_id": "capstone-interaction-sensitivity",
+      "title": "Interaction sensitivity across tested assumptions",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-interaction-sensitivity.png",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom"
+      },
+      "visualization_tool": "Matplotlib",
+      "tool_version": "3.11.2",
+      "source_records": [
+        "data/structures/2HYY.interaction-robustness.json"
+      ],
+      "source_checksums": {
+        "data/structures/2HYY.interaction-robustness.json": "7b39117b5bcdf79c0baf56b5d63f67f1e0d9014546136ad2cbebdf5a8c2fda93"
+      },
+      "rendering_config": {
+        "assumption_sensitive_colour": "#d69e2e",
+        "backend": "Matplotlib",
+        "dpi": "200",
+        "height_inches": "12",
+        "invariant_colour": "#2f855a",
+        "panels": "contact, angle, water, placement, conclusion statuses",
+        "unknown_colour": "#805ad5",
+        "unsupported_colour": "#c53030",
+        "width_inches": "14"
+      },
+      "rendering_config_sha256": "3a869d6a06a1cb3e90638a1479bc4f34e130cfcc533e8e4fae86893680d7397c",
+      "scientific_limitations": [
+        "Each sensitivity axis is independent; the axes are not combined into a score.",
+        "Invariant means stable only across the tested assumptions.",
+        "Unsupported means no tested condition supports the positive claim.",
+        "Unknown means the necessary evidence is unavailable.",
+        "No state ranking, population, energy, or affinity is implied."
+      ],
+      "alt_text": "Four sensitivity panels plus a conclusion-status legend showing contact cutoff, hydrogen-bond angle, water cutoff, and hydrogen placement effects.",
+      "caption": "Separate sensitivity axes for contact cutoff, hydrogen-bond angle, water cutoff, and hydrogen-placement perturbation. Conclusion colors distinguish invariant, assumption-sensitive, unsupported, and unknown statuses. No composite score is produced.",
+      "camera_view": null
+    },
+    {
+      "figure_id": "harmonic-fep-convergence",
+      "title": "Exact versus estimated harmonic free energy",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/harmonic-fep-convergence.png",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom"
+      },
+      "visualization_tool": "Matplotlib",
+      "tool_version": "3.11.2",
+      "source_records": [
+        "data/free_energy/harmonic-fep-study.json"
+      ],
+      "source_checksums": {
+        "data/free_energy/harmonic-fep-study.json": "7259ffc6cf7c87e5dbed32794fa01b882d62526a35c31f9f7171999ad0d89310"
+      },
+      "rendering_config": {
+        "backend": "Matplotlib",
+        "dpi": "200",
+        "height_inches": "6.5",
+        "left_panel": "exact reference and FEP error bars",
+        "replicate_summary": "mean, standard_deviation, CI_coverage",
+        "right_panel": "effective_sample_fraction",
+        "width_inches": "13",
+        "x_scale": "log samples"
+      },
+      "rendering_config_sha256": "14b4229bd5522e255718c3fd1d2fc47adf61d11ffa365008a19d1f6b0ca071ec",
+      "scientific_limitations": [
+        "The model is a three-dimensional harmonic oscillator, not a protein-ligand system.",
+        "Only forward FEP is shown; no bidirectional estimator or MBAR overlap correction is applied.",
+        "Finite-sample bias under poor overlap can remain even when the standard error is small.",
+        "Effective sample size is an observed-weight diagnostic, not proof of complete phase-space coverage.",
+        "No imatinib binding free energy is computed."
+      ],
+      "alt_text": "Two panels showing exact and FEP harmonic free-energy convergence with error bars and effective sample fractions.",
+      "caption": "Controlled three-dimensional harmonic model. Dashed lines are the exact free-energy differences; points are forward-FEP estimates with standard errors as sample count grows. The right panel shows effective sample fraction for the good- and poor-overlap cases.",
+      "camera_view": null
+    },
+    {
+      "figure_id": "capstone-structural-vs-thermodynamics",
+      "title": "Structural evidence is not binding free energy",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-structural-vs-thermodynamics.png",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom"
+      },
+      "visualization_tool": "Matplotlib",
+      "tool_version": "3.11.2",
+      "source_records": [
+        "data/structures/2HYY.thermodynamic-interpretation.json"
+      ],
+      "source_checksums": {
+        "data/structures/2HYY.thermodynamic-interpretation.json": "4b82a09c0e61dd622eb372aaac1d86d08c0f70326b61e37a1b6dbb74c5928723"
+      },
+      "rendering_config": {
+        "backend": "Matplotlib",
+        "dpi": "200",
+        "free_energy_status": "not_computed",
+        "height_inches": "9",
+        "left_panel": "structural counts",
+        "requirements_panel": "requirement status counts",
+        "terms_panel": "unestimated thermodynamic terms",
+        "width_inches": "14"
+      },
+      "rendering_config_sha256": "c565c280040bf37e8991fdc93f77e49624a6d1dcc61d8ef8e020068bd9bbc61e",
+      "scientific_limitations": [
+        "Structural counts are not interaction energies or free energies.",
+        "Every listed thermodynamic term is unestimated in this record.",
+        "No binding affinity, population, or state ranking is implied.",
+        "The figure does not supply force-field, solvent, sampling, or uncertainty analysis."
+      ],
+      "alt_text": "Bar chart of structural evidence next to a table of unestimated thermodynamic terms and a large not-computed free-energy status.",
+      "caption": "Structural counts are shown separately from the missing thermodynamic terms and preparation requirements. Every term is unestimated and the binding free energy is not computed.",
+      "camera_view": null
     }
   ]
 }

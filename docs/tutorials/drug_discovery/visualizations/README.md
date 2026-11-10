@@ -120,9 +120,69 @@ water proximity is not a water-mediated interaction.
 **Does not establish:** experimental hydrogen positions, classified hydrogen
 bonds, water roles, interaction energies, or affinity.
 
-## Evidence and visual language
+## Figure 7 — Interaction sensitivity
 
-The figures use a restrained legend:
+![Interaction sensitivity across tested assumptions](2HYY-interaction-sensitivity.png)
+
+Four independent panels show how contact cutoff, hydrogen-bond angle,
+water-bridge cutoff, and generated-hydrogen orientation affect the recorded
+classifications. The conclusion legend distinguishes invariant,
+assumption-sensitive, unsupported, and unknown statuses.
+
+**Teaches:** “robust under tested assumptions” is not the same as “validated”.
+
+**Does not establish:** a probability, confidence score, state ranking, energy,
+or affinity.
+
+## Figure 8 — Exact versus estimated harmonic free energy
+
+![Exact versus estimated harmonic free energy](harmonic-fep-convergence.png)
+
+The left panel compares exact harmonic free-energy differences with forward-FEP
+estimates and standard errors as sample count grows. The right panel shows the
+effective sample fraction. Good-overlap and poor-overlap transformations are
+shown separately.
+
+**Teaches:** sampling error, overlap, and finite-sample bias in a model with a
+known exact answer.
+
+**Does not establish:** an imatinib or protein–ligand binding free energy. The
+model is a controlled three-dimensional harmonic oscillator.
+
+## Figure 9 — Structural evidence versus thermodynamics
+
+![Structural evidence is not binding free energy](2HYY-structural-vs-thermodynamics.png)
+
+The figure separates structural counts from the unestimated thermodynamic terms
+and preparation requirements. The binding free energy is explicitly
+`not_computed`.
+
+**Teaches:** structural observations do not add up to a free energy, and the
+missing terms must remain visible.
+
+**Does not establish:** an energy, population, affinity, or ranking.
+
+## Shared visual language
+
+`src/moleculab/visualization/styles.py` centralises evidence, robustness,
+requirement, and thermodynamic-term colors and labels. The semantic mappings are
+tested, so unknown evidence always receives the unknown style regardless of its
+position in a matrix.
+
+The visual semantics are:
+
+| Visual cue | Meaning |
+| --- | --- |
+| green | present / invariant / met |
+| light gray | absent / not run |
+| amber | unknown / assumption-sensitive / partial |
+| dark gray | outside the applicable model |
+| red | unsupported |
+| magenta/purple/green highlights | charge/role/hydrogen-count changes between states |
+
+## Molecular and structural cues
+
+The figures use a restrained molecular legend:
 
 | Visual cue | Meaning |
 | --- | --- |
@@ -149,24 +209,21 @@ uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
 ```
 
 RDKit produces the molecular diagrams, PyMOL produces the 3D renders, and
-Matplotlib produces the evidence matrix. The script is deterministic: when
-metadata for the same structure checksum already exists, the stored PyMOL camera
-view is reused. The metadata file is rewritten with the tool versions, source
-checksums, rendering-configuration fingerprints, and camera views actually used.
+Matplotlib produces the evidence, sensitivity, free-energy, and thermodynamic
+panels. The script is deterministic: when metadata for the same structure
+checksum already exists, the stored PyMOL camera view is reused. The metadata
+file is rewritten with the tool versions, source checksums,
+rendering-configuration fingerprints, and camera views actually used.
 
 If PyMOL is unavailable, the example stops with a clear error rather than
 silently producing a different kind of figure.
 
 ## Scope
 
-Visualization Batches 1 and 2 cover molecular identity, structure, chemical-state
-alternatives, interaction evidence, and hydrogen/water evidence. Later batches
-can add:
+Visualization Batches 1–3 cover molecular identity, structure, chemical-state
+alternatives, interaction evidence, hydrogen/water evidence, sensitivity,
+harmonic FEP convergence, and the structural-to-thermodynamic boundary. Optional
+interactive 3D exploration remains future work.
 
-- robustness and sensitivity plots;
-- exact-versus-sampled free-energy figures;
-- the structural-to-thermodynamic boundary;
-- optional interactive 3D exploration.
-
-All later figures should follow the same rule: consume validated records, state
-what the figure teaches, and disclose what it does not establish.
+All figures follow the same rule: consume validated records, state what the
+figure teaches, and disclose what it does not establish.

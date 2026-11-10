@@ -1,7 +1,7 @@
 # Figure metadata
 
-`capstone-visualizations.json` describes the Visualization Batch 1 and 2
-figures stored in `docs/tutorials/drug_discovery/visualizations/`.
+`capstone-visualizations.json` describes the Visualization Batch 1–3 figures
+stored in `docs/tutorials/drug_discovery/visualizations/`.
 
 Each entry records:
 

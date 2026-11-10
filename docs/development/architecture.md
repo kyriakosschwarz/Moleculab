@@ -119,7 +119,7 @@ analysis (trajectory, binding sites)
                     structure provenance, ligand identity, hydrogen and water
                     evidence, interaction robustness, thermodynamic boundaries,
                     scientific audit)
-    + visualization (RDKit 2D, PyMOL 3D, figure metadata)
+    + visualization (RDKit 2D, PyMOL 3D, Matplotlib plots, metadata)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -210,13 +210,16 @@ and analysis layers.
 reference graph and a selected chemical state and produces an RDKit diagram;
 `chemical_states` compares selected states with change annotations;
 `interaction_evidence` plots the 8×2 evidence matrix; `hydrogen_water` renders
-generated hydrogens, acceptor geometry, and deposited waters; and
-`protein_ligand` takes the manifest, binding-site record, and explicit source
-path and produces deterministic PyMOL renders. Every figure writes metadata with
-per-record source checksums, tool version, rendering-configuration fingerprint,
-camera view, alt text, and scientific limitations. The layer does not assign
-protonation, infer interactions, classify favourability, or modify scientific
-geometry.
+generated hydrogens, acceptor geometry, and deposited waters; `robustness` plots
+the independent sensitivity axes; `free_energy` plots exact-versus-FEP harmonic
+convergence; `thermodynamics` plots the structural-evidence/thermodynamic-
+requirement boundary; and `protein_ligand` takes the manifest, binding-site
+record, and explicit source path and produces deterministic PyMOL renders.
+`styles` centralises semantic colors, labels, and export conventions. Every
+figure writes metadata with per-record source checksums, tool version,
+rendering-configuration fingerprint, camera view, alt text, and scientific
+limitations. The layer does not assign protonation, infer interactions, classify
+favourability, or modify scientific geometry.
 
 ## 5. Core data structures and contracts
 
@@ -1255,7 +1258,7 @@ These are the rules that keep the layers honest.
 | thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
 | exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
 | the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/test_scientific_audit.py` |
-| figure metadata, deterministic render scripts, and RDKit 2D output are tested | `tests/test_visualization.py` |
+| figure metadata, rendering fingerprints, semantic status mappings, deterministic render scripts, RDKit state comparisons, Matplotlib evidence/sensitivity/FEP/thermodynamic figures, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1308,7 +1311,8 @@ For a new contributor, the source is best read in this order:
     `applications/solvated_alchemy.py`, `applications/free_energy_study.py` — free energy and exact-reference convergence diagnostics.
 14. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
     quantum model.
-15. `visualization/` — reproducible 2D and 3D figures and metadata.
+15. `visualization/` — reproducible 2D, 3D, and analytical figures, shared
+    semantic styles, and metadata.
 16. `backend.py` — optional acceleration.
 
 The tutorials follow the same order, which is not a coincidence.

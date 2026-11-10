@@ -1192,6 +1192,43 @@ analysis. Their companion metadata now records per-source checksums and a
 rendering-configuration fingerprint in addition to the structure checksum, camera
 view, tool versions, alt text, and limitations.
 
+### 4.22 Visual learning layer: sensitivity and thermodynamics
+
+The third visualization batch makes robustness and thermodynamic boundaries
+visible.
+
+![Interaction sensitivity across tested assumptions](drug_discovery/visualizations/2HYY-interaction-sensitivity.png)
+
+The sensitivity figure keeps each tested assumption separate: contact cutoff,
+hydrogen-bond angle, water-bridge cutoff, and generated-hydrogen placement. The
+conclusion legend distinguishes invariant, assumption-sensitive, unsupported,
+and unknown statuses. The figure does not combine them into a score or rank the
+states.
+
+![Exact versus estimated harmonic free energy](drug_discovery/visualizations/harmonic-fep-convergence.png)
+
+The harmonic FEP figure compares exact reference values with finite-sample
+estimates and standard errors. The right panel shows the effective sample
+fraction for a good-overlap stiffness change and a poor-overlap center shift.
+This is a controlled three-dimensional harmonic model, not an imatinib binding
+calculation. The poor-overlap case demonstrates why a formally correct
+exponential average can remain difficult even at one million samples.
+
+![Structural evidence is not binding free energy](drug_discovery/visualizations/2HYY-structural-vs-thermodynamics.png)
+
+The thermodynamic boundary figure separates structural counts from the
+unestimated interaction, desolvation, entropy, water, strain, standard-state,
+sampling, and uncertainty terms. The preparation and sampling requirements are
+shown by status, and the binding free energy remains explicitly
+`not_computed`.
+
+The visualization package now has a shared style module,
+`src/moleculab/visualization/styles.py`. Evidence, robustness, requirement, and
+thermodynamic-term mappings are centralised and tested, so an unknown status
+always receives the unknown style regardless of its position in a matrix. The
+figures remain static documentation first; interactive exploration is optional
+future work.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
