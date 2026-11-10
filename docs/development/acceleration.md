@@ -11,8 +11,9 @@ uv sync
 The heavy framework stack is optional:
 
 ```bash
-uv sync --extra rocm     # AMD ROCm 7.2 PyTorch, optional
-uv sync --extra examples # Matplotlib only
+uv sync --extra rocm                    # AMD ROCm 7.2 PyTorch, optional
+uv sync --extra examples                # Matplotlib, Pillow, RDKit, and gemmi
+uv sync --extra rocm --extra examples   # both
 ```
 
 `torch` and `triton-rocm` live only in the `rocm` extra and are resolved from

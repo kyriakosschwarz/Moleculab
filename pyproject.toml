@@ -16,9 +16,15 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Example and documentation dependencies: plotting, animations, chemical
+# perception, and experimental-structure parsing.
 examples = [
     "matplotlib>=3.11",
+    "pillow>=13",
+    "rdkit>=2026.9",
+    "gemmi>=0.7",
 ]
+# PyTorch 2.14.x from the ROCm 7.2 index pairs with triton-rocm 3.8.x.
 rocm = [
     "torch>=2.14",
     "triton-rocm>=3.8,<3.9",

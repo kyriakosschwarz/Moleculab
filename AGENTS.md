@@ -14,6 +14,8 @@
 
 ```bash
 uv sync                                   # install package + dev deps
+uv sync --extra examples                  # plotting, chemistry, and structure examples
+uv sync --extra rocm                      # optional ROCm PyTorch Ewald backend
 uv run pytest -q                          # full suite
 uv run pytest tests/test_torsion.py -v     # one test file
 uv run pytest tests/test_acid_base.py -v   # protonation populations
@@ -72,7 +74,7 @@ uv run python docs/generate_architecture_visuals.py
 ```
 
 - CPU is the default backend. `moleculab.backend.set_backend("cpu"|"auto"|"torch")` and `MOLECULAB_BACKEND` select it; PyTorch is lazy and optional (`uv sync --extra rocm`). Only the Ewald reciprocal energy/force path is accelerated. `auto` picks a CUDA/ROCm or MPS device only when PyTorch reports one; otherwise CPU. Vendor NPUs are not supported. `set_precision("float32")` enables the faster ROCm path; `to_torch`/`to_numpy` provide zero-copy CPU handoff before non-blocking device moves.
-- `pyproject.toml` uses a setuptools `src/` layout, `requires-python >=3.14`, and `numpy>=2.5`. `pytest` is in the `dev` dependency group; `matplotlib` is optional under `examples`; ROCm PyTorch is optional under `rocm`, with `torch`/`triton-rocm` resolved from the PyTorch ROCm 7.2 index.
+- `pyproject.toml` uses a setuptools `src/` layout, `requires-python >=3.14`, and `numpy>=2.5`. `pytest` is in the `dev` dependency group; `matplotlib`, `pillow`, `rdkit`, and `gemmi` are optional under `examples`; ROCm PyTorch is optional under `rocm`, with `torch`/`triton-rocm` resolved from the PyTorch ROCm 7.2 index.
 - Re-export public API from `moleculab/__init__.py`; examples and tests import from `moleculab`, not internal modules.
 
 ## Units and constants

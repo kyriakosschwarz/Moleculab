@@ -11,7 +11,7 @@ Run it with:
 
 Install the optional framework first with:
 
-    uv sync --extra accel
+    uv sync --extra rocm
 """
 
 import argparse

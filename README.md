@@ -155,7 +155,8 @@ This installs the package in editable mode together with the development
 dependencies (`pytest`).  The core runtime requires Python 3.14+ and
 `numpy>=2.5`.
 
-To run the examples, install the optional plotting dependency:
+To run all examples, install the optional example dependencies
+(Matplotlib, Pillow, RDKit, and gemmi):
 
 ```bash
 uv sync --extra examples

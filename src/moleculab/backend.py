@@ -38,7 +38,7 @@ def _load_torch():
     except ImportError as exc:
         raise ImportError(
             "PyTorch is not installed. Install the optional acceleration extra "
-            "with `uv sync --extra accel` or `pip install torch`."
+            "with `uv sync --extra rocm` or `pip install torch`."
         ) from exc
     _TORCH = torch
     return torch

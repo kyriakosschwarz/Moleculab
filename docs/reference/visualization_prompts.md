@@ -11,7 +11,7 @@ three-track map, see [`README.md`](../tutorials/README.md).
 
 ## Setup
 
-Matplotlib is an optional dependency:
+The plotting dependencies (Matplotlib and Pillow) are optional:
 
 ```bash
 uv sync --extra examples
