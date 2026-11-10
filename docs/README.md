@@ -18,7 +18,6 @@ that matches your goal.
 | [`tutorials/`](tutorials/README.md) | Track A physics, Track B chemistry, Track C drug discovery, and the imatinib capstone |
 | [`reference/`](reference/README.md) | units, validation, troubleshooting, answer keys, visualization prompts, and the first-milestone derivation |
 | [`development/`](development/README.md) | architecture, roadmap, performance, acceleration, testing, and contribution guidance |
-| [`internal/`](internal/README.md) | non-user-facing background material retained for development history |
 
 The tutorial path is intentionally:
 
