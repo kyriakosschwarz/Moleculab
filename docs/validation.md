@@ -35,6 +35,8 @@ uv run pytest tests/test_potentials.py tests/test_pair_potentials.py -q
 uv run pytest tests/test_force_gradients.py -q
 uv run pytest tests/test_nonbonded.py tests/test_bonded.py tests/test_torsion.py -q
 uv run pytest tests/test_acid_base.py -q
+uv run pytest tests/test_binding_site.py -q
+uv run pytest tests/test_interactions.py -q
 ```
 
 Covered:
@@ -46,6 +48,9 @@ Covered:
 - Lorentz-Berthelot combining and exclusions;
 - Henderson-Hasselbalch limits, microstate normalisation, and Boltzmann
   populations;
+- binding-site distances, cutoff selection, residue aggregation, and
+  rigid-motion invariance;
+- hydrogen-bond distance/angle criteria, donor direction, and negative cases;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -111,6 +116,9 @@ uv run python examples/minimization.py
 uv run python examples/thermostat.py
 uv run python examples/periodic_box.py
 uv run python examples/protonation.py
+uv run --with gemmi python examples/protein_structure.py
+uv run python examples/binding_site.py
+uv run python examples/interactions.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -165,12 +173,18 @@ point when a single operator typo could corrupt every downstream result.
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |
+| binding-site distances match hand calculations | `tests/test_binding_site.py` |
+| pocket selection is translation- and rotation-invariant | `tests/test_binding_site.py` |
+| residue aggregation preserves residue identity without duplicates | `tests/test_binding_site.py` |
+| hydrogen-bond distance and angle boundaries are explicit | `tests/test_interactions.py` |
+| hydrogen-bond direction and invalid chemistry are tested | `tests/test_interactions.py` |
+| interaction detection is rigid-motion and ordering invariant | `tests/test_interactions.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-401 passed, 1 skipped
+433 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

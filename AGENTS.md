@@ -4,7 +4,7 @@
 
 - Moleculab is a working **educational** molecular physics/simulation library. Optimize for scientific correctness and readable, inspectable code, not production hardening.
 - The code in `src/moleculab/` is now the executable source of truth. `docs/lib.md` describes the long-term architecture/roadmap; `docs/energies.md` preserves the first-milestone derivation and expected numbers. Reconcile docs with code rather than assuming the docs are implemented.
-- Implemented: units, typed `Particle` state, `HarmonicPotential`, double-well external potential, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, analytic validation of the Velocity Verlet harmonic oscillator, an optional cell-list neighbour screen with opt-in `System` parity, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, acid-base/protonation and tautomer population bookkeeping, and a CPU-default optional PyTorch Ewald backend.
+- Implemented: units, typed `Particle` state, `HarmonicPotential`, double-well external potential, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, analytic validation of the Velocity Verlet harmonic oscillator, an optional cell-list neighbour screen with opt-in `System` parity, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, acid-base/protonation and tautomer population bookkeeping, parser-independent binding-site geometry, hydrogen-bond interaction geometry, and a CPU-default optional PyTorch Ewald backend.
 - Deferred: molecular FEP/TI/MBAR for complex systems, trained/empirical binding-affinity scoring, real QM/MM/DFT, and NPU-specific acceleration. Do not add these without tests and a numerical example.
 - Python + NumPy first. Rust/PyO3 is explicitly a later optimization, not part of the current implementation.
 
@@ -17,6 +17,8 @@ uv sync                                   # install package + dev deps
 uv run pytest -q                          # full suite
 uv run pytest tests/test_torsion.py -v     # one test file
 uv run pytest tests/test_acid_base.py -v   # protonation populations
+uv run pytest tests/test_binding_site.py -v # binding-site geometry
+uv run pytest tests/test_interactions.py -v # hydrogen-bond geometry
 uv run pytest tests/test_box.py::test_minimum_image_uses_the_shortest_separation -v
 uv run python examples/bonded_molecule.py
 uv run python examples/harmonic_oscillator.py
@@ -39,6 +41,9 @@ uv run python examples/mc_alchemy.py
 uv run python examples/solvated_alchemy.py
 uv run python examples/qm_mm.py
 uv run python examples/protonation.py
+uv run --with gemmi python examples/protein_structure.py
+uv run python examples/binding_site.py
+uv run python examples/interactions.py
 uv run python examples/flexible_docking.py
 uv run python examples/backend_benchmark.py --backend cpu
 uv run python examples/neighbour_list.py
@@ -99,4 +104,4 @@ uv run python docs/generate_architecture_visuals.py
 - Code blocks in `docs/` are AI-exported and often have newlines/indentation collapsed. Treat them as intent, not copy-paste source; write clean, PEP 8 code matching the described behavior.
 - Tutorial math must render on GitHub and in VS Code. Keep display math on one `$$ ... $$` line, use `\ ` rather than `\,` or `~` for spaces inside math, avoid math inside italics, and use `\lvert ... \rvert` instead of literal `|` in table math.
 - `docs/all.md` is internal background material and is not part of the user-facing documentation. Do not link it from READMEs or tutorials; use `docs/tutorials/capstone_imatinib.md` for the user-facing imatinib capstone.
-- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The tutorial entry point is `docs/tutorials/README.md`; the CADD-focused overview is `docs/tutorials/introduction.md`; the curriculum and prerequisites are in `docs/tutorials/tracks.md`. Track A is `docs/tutorials/tutorial.md` plus `docs/tutorials/physics/`; Track B starts at `docs/tutorials/chemistry/01_chemical_structure.md` and continues through `02_molecular_representation.md`, `03_molecular_properties.md`, and `04_protonation_and_tautomerism.md`; Track C starts at `docs/tutorials/drug_discovery/README.md`. The tracks meet in `docs/tutorials/capstone_imatinib.md`.
+- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The tutorial entry point is `docs/tutorials/README.md`; the CADD-focused overview is `docs/tutorials/introduction.md`; the curriculum and prerequisites are in `docs/tutorials/tracks.md`. Track A is `docs/tutorials/tutorial.md` plus `docs/tutorials/physics/`; Track B starts at `docs/tutorials/chemistry/01_chemical_structure.md` and continues through `02_molecular_representation.md`, `03_molecular_properties.md`, and `04_protonation_and_tautomerism.md`; Track C starts at `docs/tutorials/drug_discovery/README.md` and its first three modules are `docs/tutorials/drug_discovery/01_protein_structure.md`, `docs/tutorials/drug_discovery/02_binding_sites.md`, and `docs/tutorials/drug_discovery/03_protein_ligand_interactions.md`; `docs/tutorials/drug_discovery/units.md` is the Track C unit reference. The tracks meet in `docs/tutorials/capstone_imatinib.md`.

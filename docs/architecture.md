@@ -69,7 +69,7 @@ src/moleculab/
 ├── composition/      System, neighbour list, constraints
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
-├── analysis/         MSD, RDF
+├── analysis/         MSD, RDF, binding-site and interaction geometry
 ├── applications/     docking, solvent, water, free energy, acid-base, QM/MM
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
@@ -89,7 +89,7 @@ The most important distinctions are summarised below.
 | data structure | how is the state represented? | `Particle`, `System`, `Topology`, `Box`, `Trajectory` | contain a hidden integration loop |
 | numerical algorithm | how are the equations solved? | Velocity Verlet, steepest descent, SHAKE/RATTLE | define a new force field |
 | simulation protocol | how is the state prepared or sampled? | Berendsen thermostat, barostat | change the potential energy function |
-| analysis | what does a trajectory mean? | MSD, RDF | modify the trajectory or the forces |
+| analysis | what does a trajectory or structure mean? | MSD, RDF, binding-site geometry, interaction records | modify the trajectory, forces, or structure |
 | application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations | duplicate core physics |
 | backend | where does a numerical kernel run? | CPU, optional PyTorch Ewald | leak device details into models |
 
@@ -109,7 +109,7 @@ composition (system, neighbour, constraints)
     |
 algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
-analysis (trajectory) + applications (docking, solvent, water, free energy, acid-base, QM/MM)
+analysis (trajectory, binding sites) + applications (docking, solvent, water, free energy, acid-base, QM/MM)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -128,6 +128,8 @@ The actual imports are visible in the source. The important rules are:
 | `algorithms.minimization` | `composition.system`, `composition.constraints` | thermostats, docking |
 | `protocols.thermostats`, `protocols.pressure` | `composition.system`, foundation | potentials directly |
 | `analysis.trajectory` | `foundation.box` only | `System`, integrators |
+| `analysis.binding_site` | Python and NumPy only | `System`, integrators, structure toolkits |
+| `analysis.interactions` | Python and NumPy only | `System`, integrators, structure or chemistry toolkits |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
 | `backend` | optional PyTorch | any model |
@@ -595,6 +597,18 @@ toolkit.
 source. MSD uses minimum-image displacements when a box is supplied; RDF
 requires a box for volume normalisation.
 
+`analysis.binding_site` operates on protein and ligand position arrays in nm.
+It computes minimum protein–ligand distances, selects atoms by a documented
+cutoff, groups selected atoms by residue label, and reports a pocket centre and
+bounding box. It does not apply periodic minimum images or infer chemical
+interactions; those decisions belong to the caller.
+
+`analysis.interactions` consumes prepared `InteractionAtom` features and
+returns typed geometric interaction records. The first detector covers
+hydrogen bonds; it requires donor/acceptor flags and hydrogen positions and
+uses explicit distance and angle criteria. It does not parse structures or
+infer donor/acceptor chemistry.
+
 ## 8. How the architecture supports education and the tutorials
 
 The ten physics deep dives are Track A's guided tour of the architecture, one
@@ -864,7 +878,8 @@ For a new contributor, the source is best read in this order:
 8. `composition/constraints.py`, `algorithms/integrators.py` — time stepping.
 9. `algorithms/minimization.py`, `protocols/thermostats.py`, `protocols/pressure.py` — other algorithms and
    protocols.
-10. `analysis/trajectory.py` — trajectory measurements.
+10. `analysis/trajectory.py`, `analysis/binding_site.py`, `analysis/interactions.py`
+    — trajectory, binding-site, and interaction measurements.
 11. `applications/solvent.py`, `applications/water.py` — environment builders.
 12. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.

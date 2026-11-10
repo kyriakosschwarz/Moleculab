@@ -152,6 +152,10 @@ def boltzmann_populations(
 
     Energies are relative free energies. An arbitrary constant offset cancels,
     so only energy differences matter. The temperature must be positive.
+
+    This is appropriate for states with the same composition. For protonation
+    equilibria, include the pH-dependent proton chemical potential in the
+    state energies; see :func:`protonation_microstates`.
     """
 
     energies = np.asarray(state_energies, dtype=float).reshape(-1)
@@ -177,8 +181,11 @@ def tautomer_populations(
     """Return populations of two tautomers separated by *delta_g* kJ/mol.
 
     ``delta_g`` is the free-energy difference ``G_B - G_A``. The result is
-    ``[p_A, p_B]``. This assumes the two states are in equilibrium; it does
-    not describe the rate of tautomer interconversion.
+    ``[p_A, p_B]``. Both tautomers are assumed to have the same composition.
+    For states that differ in proton count, use
+    :func:`protonation_microstates` or pH-dependent microstate energies
+    instead. This function does not describe the rate of tautomer
+    interconversion.
     """
 
     difference = _finite_float("delta_g", delta_g)

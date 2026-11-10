@@ -33,15 +33,15 @@ with geometry and representation before it introduces scoring.
 
 | Module | Focus | Status |
 | --- | --- | --- |
-| 01 — Protein structure fundamentals (planned) | chains, residues, coordinates, structure quality | planned |
-| 02 — Binding sites and cavities | pocket geometry, waters, volume, complementarity | planned |
-| 03 — Protein–ligand interaction geometry | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | planned |
+| [01 — Protein structure fundamentals](01_protein_structure.md) | chains, residues, coordinates, structure quality | available |
+| [02 — Binding sites and cavities](02_binding_sites.md) | pocket geometry, waters, volume, complementarity | available |
+| [03 — Protein–ligand interaction geometry](03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
 | 04 — Interaction fingerprints | residue-ligand contact features and trajectory occupancy | planned |
 | 05 — Docking foundations | search, scoring, poses, and limitations | available in Track A |
 | 06 — Trajectory contact analysis | contact timelines and persistence | planned |
 
-Module 01 is the recommended starting point once it is available. Its planned
-scope is described below so the rest of the track has a stable target.
+Start with [module 01](01_protein_structure.md). It establishes the structural
+representation and import boundary that the later modules assume.
 
 ### 2.1 Available now
 
@@ -65,10 +65,10 @@ The applied module code is in `src/moleculab/applications/docking.py` and
 
 ### 2.2 Module 01: protein structure fundamentals
 
-The first module should teach how to inspect a protein structure before scoring
-anything:
+[Module 01](01_protein_structure.md) teaches how to inspect a protein structure
+before scoring anything:
 
-- PDB files, chains, residues, and atom names;
+- PDB and mmCIF files, chains, residues, and atom names;
 - experimental versus predicted structures;
 - missing atoms, alternate locations, and incomplete side chains;
 - hydrogen atoms and protonation states;
@@ -76,13 +76,15 @@ anything:
 - symmetry mates and biological assemblies;
 - what a structure does not contain: missing loops, disorder, and uncertainty.
 
-The acceptance criterion is geometric and representational: a reader should be
-able to identify the chains, residues, ligands, waters, and missing regions in a
-real structure, and explain which of them are safe to use in a calculation.
+The acceptance criterion is representational: a reader should be able to
+identify the chains, residues, ligands, waters, and missing regions in a real
+structure, and explain which of them are safe to use in a calculation.
+
+Runnable inspection: `uv run --with gemmi python examples/protein_structure.py`.
 
 ### 2.3 Module 02: binding sites and cavities
 
-This module should treat the binding site as a geometric object:
+[Module 02](02_binding_sites.md) treats the binding site as a geometric object:
 
 - pocket detection and cavity volume;
 - buried versus exposed surface;
@@ -90,10 +92,14 @@ This module should treat the binding site as a geometric object:
 - conserved and structural waters;
 - the difference between an ATP site, an allosteric site, and a surface groove.
 
+The first implementation is deliberately modest: minimum protein–ligand
+distances, cutoff-based atom selection, residue aggregation, and a pocket centre
+and bounding box. It is structural analysis, not an energy calculation.
+
 ### 2.4 Module 03: protein–ligand interaction geometry
 
-This module should identify interactions from coordinates before assigning
-energies:
+[Module 03](03_protein_ligand_interactions.md) identifies interactions from
+coordinates before assigning energies:
 
 - donor–acceptor distances and hydrogen-bond angles;
 - salt-bridge distances and charge complementarity;
@@ -103,6 +109,10 @@ energies:
 
 A geometric contact says that an interaction is possible in that structure. It
 does not say how much that contact contributes to binding.
+
+This milestone implements the chemical-feature record and hydrogen-bond
+detector. The remaining interaction types are specified as next detectors so
+that each can have its own geometry and tests.
 
 ### 2.5 Module 04: interaction fingerprints
 
@@ -172,7 +182,12 @@ The same warning applies throughout: the engine computes what its model says.
 Track C interprets that output in a drug-discovery context, and must state the
 model's limitations.
 
-## 6. Acceptance criteria
+## 6. Reference
+
+- [Units and conventions](units.md) — Angstrom, nm, degrees, kJ/mol,
+  kcal/mol, molar concentrations, pIC50, pH, pressure, and structural units.
+
+## 7. Acceptance criteria
 
 A Track C module is complete when:
 
@@ -184,5 +199,6 @@ A Track C module is complete when:
 - docking results are reported as poses and scores, not as binding affinities;
 - the link to the relevant Track A and Track B foundations is explicit.
 
-**Previous:** [Track B — Chemical structure and properties](../chemistry/README.md).  
+**Previous:** [Track B — Chemical structure and properties](../chemistry/README.md).
+
 **Next:** [Capstone — imatinib and BCR-ABL1](../capstone_imatinib.md).

@@ -83,8 +83,12 @@ engine does not depend on it.
 
 Track C starts from protein structure and binding-site geometry, then builds
 towards interaction fingerprints, docking, and trajectory contact analysis.
-The first modules are planned; the docking foundations are already available as
-Track A sections 15 and 24.
+Modules [01](drug_discovery/01_protein_structure.md),
+[02](drug_discovery/02_binding_sites.md), and
+[03](drug_discovery/03_protein_ligand_interactions.md) are available; the later
+modules are planned. The docking foundations are already available as Track A
+sections 15 and 24. [Units and conventions](drug_discovery/units.md) collects
+the common structural and affinity units.
 
 ## Integration and reference
 
@@ -93,6 +97,7 @@ Track A sections 15 and 24.
 | [Introduction](introduction.md) | why the tracks exist and how CADD methods connect |
 | [Learning tracks](tracks.md) | prerequisites, module tables, and study orders |
 | [Capstone: imatinib and BCR-ABL1](capstone_imatinib.md) | the cross-track integration exercise |
+| [Track C units](drug_discovery/units.md) | Angstrom, nm, kcal/mol, affinity, and structural units |
 | [Troubleshooting](troubleshooting.md) | symptom table and diagnostic recipes |
 | [Visualization prompts](visualization_prompts.md) | notebook-sized plotting prompts |
 | [Answer keys](answer_keys.md) | answer sketches and expected magnitudes |

@@ -159,6 +159,14 @@ Tautomerism is not resonance. Resonance structures have the same nuclear
 positions and differ only in the distribution of electrons. Tautomers have
 different connectivities and require the movement of at least one proton.
 
+Tautomers of the same molecule have the same molecular formula and the same
+number of protons. Their equilibrium is therefore a composition-conserving
+isomerisation, and the Boltzmann expression below is appropriate. A protonation
+equilibrium is different: it changes the number of protons and therefore the
+composition of the species. Protonation populations need the pH-dependent
+proton chemical potential introduced in section 6.1, not a bare tautomer
+Boltzmann ratio.
+
 For two tautomers A and B,
 
 $$ K_T = \frac{[\mathrm{B}]}{[\mathrm{A}]} = e^{-\Delta G^\circ/(RT)}, $$
@@ -236,7 +244,10 @@ $$ G_i^{\mathrm{prot}} - G_i^{\mathrm{deprot}} = RT\ln 10\left(\mathrm{pH}-\math
 
 This term is the bridge between the Henderson-Hasselbalch picture and the
 Boltzmann picture. It includes the chemical potential of the proton at the
-chosen pH.
+chosen pH. With zero coupling between sites, the microstate model reduces to
+the product of independent Henderson-Hasselbalch fractions. The coupling terms
+describe interactions between sites; the pH term describes the proton
+chemical potential.
 
 Adding a positive interaction energy when both sites are protonated penalises
 the HH state. With a +2.0 kJ/mol HH coupling, the example gives:
@@ -485,6 +496,8 @@ Acceptance criteria for this module:
 - pH is described as changing populations of discrete states;
 - independent-site and coupled-site models are distinguished;
 - tautomers are distinguished from resonance structures;
+- same-composition tautomer weighting is distinguished from pH-dependent
+  protonation weighting;
 - enumeration, population estimation, and pKa prediction are distinguished;
 - protein pKa values are marked as approximate and environment-dependent;
 - the force-field consequences of changing protonation are stated;
@@ -535,8 +548,10 @@ Acceptance criteria for this module:
 - Multiple ionizable sites require microstate bookkeeping. Independent sites
   factorise; coupled sites require microstate free energies.
 - Tautomers are constitutional isomers, not resonance structures. Their
-  populations follow a Boltzmann distribution, but the equilibrium may not be
-  fast.
+  populations follow a Boltzmann distribution when they have the same
+  composition, but the equilibrium may not be fast.
+- Protonation changes the number of protons, so its populations require the
+  pH-dependent proton chemical potential, not a bare tautomer ratio.
 - Protein residue pKa values are approximate and environment-dependent.
 - Protonation changes formal charge, hydrogen bonding, electrostatics,
   desolvation, and force-field parameters.

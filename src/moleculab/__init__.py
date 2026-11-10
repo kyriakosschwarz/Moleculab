@@ -17,7 +17,7 @@ The source is organised by architecture layer:
 ``protocols``
     thermostats and pressure coupling;
 ``analysis``
-    trajectory measurements;
+    trajectory measurements, binding-site geometry, and interaction records;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -46,6 +46,20 @@ from .algorithms.minimization import (
     max_force_magnitude,
     minimize_energy,
     steepest_descent_step,
+)
+from .analysis.binding_site import (
+    BindingSiteGeometry,
+    binding_site_geometry,
+    group_indices_by_residue,
+    minimum_distances,
+    pocket_geometry,
+    select_pocket_atoms,
+)
+from .analysis.interactions import (
+    HydrogenBond,
+    HydrogenBondCriteria,
+    InteractionAtom,
+    detect_hydrogen_bonds,
 )
 from .analysis.trajectory import (
     MSDResult,
@@ -184,6 +198,7 @@ __all__ = [
     "SPCE_WATER",
     "Angle",
     "AnglePotential",
+    "BindingSiteGeometry",
     "Bond",
     "BondPotential",
     "BondedLennardJonesMC",
@@ -200,6 +215,9 @@ __all__ = [
     "HarmonicAnglePotential",
     "HarmonicBondPotential",
     "HarmonicPotential",
+    "HydrogenBond",
+    "HydrogenBondCriteria",
+    "InteractionAtom",
     "LennardJonesParameters",
     "LennardJonesPotential",
     "MBARResult",
@@ -239,6 +257,7 @@ __all__ = [
     "backend_info",
     "berendsen_barostat",
     "berendsen_thermostat",
+    "binding_site_geometry",
     "boltzmann_populations",
     "build_neighbour_list",
     "build_solvent_box",
@@ -247,6 +266,7 @@ __all__ = [
     "constraint_error",
     "degrees_of_freedom",
     "deprotonated_fraction",
+    "detect_hydrogen_bonds",
     "dihedral_angle",
     "dock_flexible_receptor",
     "dock_rigid_ligand",
@@ -256,6 +276,7 @@ __all__ = [
     "free_energy_perturbation",
     "get_backend",
     "get_precision",
+    "group_indices_by_residue",
     "harmonic_free_energy_difference",
     "integrate_thermodynamic_derivative",
     "kinetic_energy",
@@ -269,6 +290,8 @@ __all__ = [
     "mean_protonation",
     "mean_squared_displacement",
     "minimize_energy",
+    "minimum_distances",
+    "pocket_geometry",
     "potential_energy",
     "pressure",
     "pressure_bar",
@@ -280,6 +303,7 @@ __all__ = [
     "sample_harmonic_positions",
     "score_flexible_pose",
     "score_pose",
+    "select_pocket_atoms",
     "set_backend",
     "set_precision",
     "shake_positions",

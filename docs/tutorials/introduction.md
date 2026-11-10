@@ -189,9 +189,9 @@ modules 01–04. The track covers:
 
 | Module | What it adds | Status |
 | --- | --- | --- |
-| 01 Protein structure fundamentals | chains, residues, coordinates, structure quality | planned |
-| 02 Binding sites and cavities | pocket geometry, waters, complementarity | planned |
-| 03 Protein–ligand interaction geometry | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | planned |
+| [01 Protein structure fundamentals](drug_discovery/01_protein_structure.md) | chains, residues, coordinates, structure quality | available |
+| [02 Binding sites and cavities](drug_discovery/02_binding_sites.md) | pocket geometry, waters, complementarity | available |
+| [03 Protein–ligand interaction geometry](drug_discovery/03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
 | 04 Interaction fingerprints | residue-level contacts and occupancy | planned |
 | 05 Docking foundations | search, scoring, poses, limitations | available in Track A |
 | 06 Trajectory contact analysis | contact timelines and persistence | planned |
@@ -367,6 +367,7 @@ There are several entry points:
 | [Track A physics deep dives](physics/README.md) | slower, visual deep dives for parts 1–10 |
 | [Track B](chemistry/README.md) | chemical structure, representation, properties, and protonation |
 | [Track C](drug_discovery/README.md) | protein structure, binding sites, interactions, and docking |
+| [Track C units](drug_discovery/units.md) | Angstrom, nm, kcal/mol, affinity, and structural units |
 | [Capstone](capstone_imatinib.md) | the imatinib–BCR-ABL1 cross-track integration |
 | [Troubleshooting](troubleshooting.md) | symptom table and diagnostic recipes |
 | [Visualization prompts](visualization_prompts.md) | notebook-sized plotting prompts |
