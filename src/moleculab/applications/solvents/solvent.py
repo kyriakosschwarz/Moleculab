@@ -30,7 +30,7 @@ import numpy as np
 from ...composition.system import System
 from ...foundation.box import Box
 from ...foundation.particles import Particle
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...foundation.validation import as_finite_float, as_positive_float
 from ...models.potentials import CoulombPotential, LennardJonesPotential, PairPotential
 
@@ -281,7 +281,7 @@ def build_solvent_box(
             velocities = np.zeros((count, 3), dtype=float)
         else:
             standard_deviation = np.sqrt(
-                BOLTZMANN_CONSTANT * target / model.mass
+                MOLAR_GAS_CONSTANT * target / model.mass
             )
             velocities = rng.normal(
                 scale=standard_deviation,

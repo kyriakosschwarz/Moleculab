@@ -401,25 +401,6 @@ $$ R = N_A k_B. $$
 Use $R$ when your energy is per mole. Use $k_B$ when your energy is per
 particle. Mixing them is a common source of factors of $N_A$.
 
-### 7.1 A naming trap in the code
-
-For historical reasons, the library calls the molar gas constant
-`BOLTZMANN_CONSTANT`:
-
-```python
-# src/moleculab/foundation/units.py
-BOLTZMANN_CONSTANT = 0.008314462618   # kJ/(mol K), despite the name
-MOLAR_GAS_CONSTANT = BOLTZMANN_CONSTANT
-```
-
-The value is $R$, not $k_B$. The descriptive alias `MOLAR_GAS_CONSTANT` exists
-so new code can say what it means. The historical name is kept so existing code
-does not break. The true single-particle constant is stored separately as
-`BOLTZMANN_CONSTANT_J_PER_K`.
-
-**Core takeaway.** A variable name is not a unit. Read the comment and check the
-value.
-
 ## 8. Charge and the Coulomb constant
 
 Coulomb's law in SI is
@@ -472,14 +453,15 @@ the stored constant rather than rebuilding it.
 
 ## 9. Python implementation and verification
 
-The unit constants are used by the rest of the library:
+The names state the energy scale: `MOLAR_GAS_CONSTANT` is $R$, and
+`BOLTZMANN_CONSTANT_J_PER_K` is $k_B$. The constants are used by the rest of
+the library:
 
 ```python
 from moleculab import units
 
 print(units.DISTANCE_UNIT)               # nm
 print(units.MOLAR_GAS_CONSTANT)          # 0.008314462618 kJ/(mol K)
-print(units.BOLTZMANN_CONSTANT)          # same number; historical name
 print(units.BOLTZMANN_CONSTANT_J_PER_K)  # 1.380649e-23 J/K
 print(units.COULOMB_CONSTANT)            # 138.935... kJ nm/(mol e^2)
 ```
@@ -571,8 +553,9 @@ Compute the kinetic energy of $P$ from its mass and speed. Confirm that you get
 2. **Using Å in a nm equation.** Convert by multiplying by 0.1.
 3. **Using kcal/mol in a kJ/mol equation.** Multiply by 4.184.
 4. **Using fs in a ps equation.** Multiply by 0.001.
-5. **Using $k_B$ when the energy is per mole.** In Moleculab, use $R$. The
-   historical variable name is misleading; check the units.
+5. **Using $k_B$ when the energy is per mole.** In Moleculab, use
+   `MOLAR_GAS_CONSTANT` for molar energy and `BOLTZMANN_CONSTANT_J_PER_K` for
+   per-particle energy.
 6. **Dropping $1/(4\pi\epsilon_0)$ in an SI Coulomb calculation.** In
    Moleculab, that factor is already inside `COULOMB_CONSTANT`.
 7. **Assuming the acceleration shortcut is universal.** It holds for this
@@ -619,9 +602,9 @@ established here.
    becomes $1.66\times10^{-27}$ kg, and their ratio is $10^{15}$ m/s², which is
    exactly 1 nm/ps². The two $1.66$ factors cancel.
 
-7. **What is the value of `BOLTZMANN_CONSTANT`, and what is it really?**
-   It is 0.008314462618, the molar gas constant $R$ in kJ/(mol K), not the
-   single-particle Boltzmann constant.
+7. **What do `MOLAR_GAS_CONSTANT` and `BOLTZMANN_CONSTANT_J_PER_K` hold?**
+   `MOLAR_GAS_CONSTANT` is $R=0.008314462618$ kJ/(mol K).
+   `BOLTZMANN_CONSTANT_J_PER_K` is $k_B=1.380649\times10^{-23}$ J/K.
 
 8. **Why can a bare Coulomb energy overstate an interaction in water?**
    The bare $1/r$ value is unscreened. Solvent and other charges screen the
@@ -645,8 +628,8 @@ established here.
    of the one-unit conversions, not just “the units match.”
 2. Why is it dangerous to compare a bare Coulomb energy with $RT$ and conclude
    that the interaction in a protein is always huge?
-3. Why is a variable named `BOLTZMANN_CONSTANT` allowed to hold the molar gas
-   constant? What should you check before using it?
+3. Why does the library keep separate names for $R$ and $k_B$? What mistake
+   does each name help prevent?
 4. A function returns an energy of $10^6$ kJ/mol for a normal molecular
    configuration. What are the two most likely explanations?
 
@@ -672,8 +655,8 @@ established here.
 - Kinetic energy is numerically $K=\tfrac12m\lvert\mathbf v\rvert^2$ for the
   same reason: $1\ \mathrm{Da\ (nm/ps)^2}$ is 1 kJ/mol.
 - Energy is molar; use $R$, not $k_B$, unless you explicitly convert.
-- `BOLTZMANN_CONSTANT` is a historical name for $R$; `MOLAR_GAS_CONSTANT` is the
-  descriptive alias.
+- `MOLAR_GAS_CONSTANT` holds $R$ and `BOLTZMANN_CONSTANT_J_PER_K` holds $k_B$;
+  the names state the energy scale.
 - Coulomb interactions use a single precomputed constant, but the bare value is
   not the effective interaction in a solvent.
 - Energy-scale tables are order-of-magnitude guides, not universal constants.

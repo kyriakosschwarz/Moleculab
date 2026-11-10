@@ -29,7 +29,6 @@ from moleculab import (
     load_ligand_coordinates,
     load_ligand_identity,
     load_manifest,
-    load_state_interactions,
     sha256_file,
     validate_state_interactions,
     write_state_interactions,

@@ -238,7 +238,7 @@ The thermostat is in
 def kinetic_temperature(system, remove_com=True):
     dof = degrees_of_freedom(system, remove_com=remove_com)
     kinetic = system.kinetic_energy()
-    return 2.0 * kinetic / (dof * BOLTZMANN_CONSTANT)
+    return 2.0 * kinetic / (dof * MOLAR_GAS_CONSTANT)
 
 
 def berendsen_thermostat(system, temperature, coupling_time, dt, remove_com=True):

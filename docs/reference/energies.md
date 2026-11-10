@@ -113,7 +113,7 @@ Let's put these conventions in one place.
 File: `src/moleculab/foundation/units.py`
 
 ```
-# DistanceDISTANCE_UNIT = "nm"# TimeTIME_UNIT = "ps"# EnergyENERGY_UNIT = "kJ/mol"# MassMASS_UNIT = "Da"# ForceFORCE_UNIT = "kJ/(mol nm)"# TemperatureTEMPERATURE_UNIT = "K"# ChargeCHARGE_UNIT = "e"# Physical constantsBOLTZMANN_CONSTANT = 0.008314462618# kJ / (mol K)
+# DistanceDISTANCE_UNIT = "nm"# TimeTIME_UNIT = "ps"# EnergyENERGY_UNIT = "kJ/mol"# MassMASS_UNIT = "Da"# ForceFORCE_UNIT = "kJ/(mol nm)"# TemperatureTEMPERATURE_UNIT = "K"# ChargeCHARGE_UNIT = "e"# Physical constantsMOLAR_GAS_CONSTANT = 0.008314462618# kJ / (mol K)
 ```
 
 Why store the Boltzmann constant?

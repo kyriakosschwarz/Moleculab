@@ -625,14 +625,19 @@ def run_capstone_audit(
                 rel_tol=1e-6,
                 abs_tol=1e-6,
             )
-            and units.BOLTZMANN_CONSTANT == units.MOLAR_GAS_CONSTANT,
+            and math.isclose(
+                units.MOLAR_GAS_CONSTANT,
+                units.AVOGADRO_CONSTANT * units.BOLTZMANN_CONSTANT_J_PER_K / 1000.0,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            ),
             subject="units",
             criterion="golden constants retain their documented values",
             observed=(
                 f"R={units.MOLAR_GAS_CONSTANT:.12f}, "
                 f"kC={units.COULOMB_CONSTANT:.6f}"
             ),
-            detail="the compatibility alias BOLTZMANN_CONSTANT remains the molar gas constant",
+            detail="R equals N_A k_B converted from J to kJ per mole",
         ),
         _check(
             "physics.harmonic_exact",

@@ -36,17 +36,7 @@ TEMPERATURE_UNIT = "K"
 CHARGE_UNIT = "e"
 
 #: Molar gas constant, R = N_A * k_B, in kJ/(mol K).
-#:
-#: The historical name in this project is ``BOLTZMANN_CONSTANT``.  The value
-#: is the *molar* constant because Moleculab expresses energy per mole.  It is
-#: numerically equal to 0.008314462618 kJ/(mol K).
-BOLTZMANN_CONSTANT = 0.008314462618
-
-#: Descriptive alias for :data:`BOLTZMANN_CONSTANT`.
-#:
-#: ``BOLTZMANN_CONSTANT`` is retained for compatibility, but its value is the
-#: *molar* gas constant ``R`` in kJ/(mol K).  New code should prefer this name.
-MOLAR_GAS_CONSTANT = BOLTZMANN_CONSTANT
+MOLAR_GAS_CONSTANT = 0.008314462618
 
 #: Avogadro constant in 1/mol.
 AVOGADRO_CONSTANT = 6.02214076e23
@@ -68,10 +58,7 @@ H_BAR_J_S = 1.054571817e-34
 ELECTRON_MASS_KG = 9.1093837015e-31
 ELECTRON_MASS_DA = ELECTRON_MASS_KG / DALTON_IN_KILOGRAMS
 
-#: Pressure unit used by the virial expression: kJ/(mol nm^3).
-PRESSURE_UNIT = "kJ/(mol nm^3)"
-
-#: Convert one internal pressure unit to bar.
+#: Convert one internal pressure unit, kJ/(mol nm^3), to bar.
 #:
 #: 1 kJ/mol/nm^3 = (1000 J / N_A) / (1e-27 m^3) / 1e5 Pa/bar.
 KILOJOULES_PER_MOLE_PER_NM3_TO_BAR = (

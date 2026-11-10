@@ -17,8 +17,6 @@ Run it with:
     uv run python examples/advanced/free_energy_perturbation.py
 """
 
-import numpy as np
-
 from moleculab import (
     HarmonicPotential,
     fep_harmonic_oscillator,

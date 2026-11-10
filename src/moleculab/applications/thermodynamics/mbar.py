@@ -30,7 +30,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...models.potentials import HarmonicPotential
 
 
@@ -178,7 +178,7 @@ def mbar(
             f"{max_iterations} iterations (last change {change:.3e})."
         )
 
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     return MBARResult(
         free_energies=free_energies,
         delta_g=free_energies * rt,
@@ -217,7 +217,7 @@ def mbar_harmonic(
         raise ValueError("n_samples must be at least 1.")
     n_samples = int(n_samples)
 
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     rng = np.random.default_rng(seed)
     samples = []
     sample_states = []

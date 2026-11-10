@@ -22,8 +22,10 @@ def test_unit_labels_match_the_documented_system():
 
 def test_molar_gas_constant_value():
     # R = 8.314462618 J/(mol K) = 0.008314462618 kJ/(mol K)
-    assert units.BOLTZMANN_CONSTANT == pytest.approx(0.008314462618)
-    assert units.MOLAR_GAS_CONSTANT == units.BOLTZMANN_CONSTANT
+    assert units.MOLAR_GAS_CONSTANT == pytest.approx(0.008314462618)
+    assert units.MOLAR_GAS_CONSTANT == pytest.approx(
+        units.AVOGADRO_CONSTANT * units.BOLTZMANN_CONSTANT_J_PER_K / 1000.0
+    )
     assert units.BOLTZMANN_CONSTANT_J_PER_K == pytest.approx(1.380649e-23)
 
 

@@ -13,7 +13,6 @@ the original experimental and preparation records are referenced, not modified.
 from __future__ import annotations
 
 import json
-import math
 import re
 from collections.abc import Mapping
 from dataclasses import dataclass

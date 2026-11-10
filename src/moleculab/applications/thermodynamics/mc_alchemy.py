@@ -31,7 +31,7 @@ import numpy as np
 
 from ...composition.system import System
 from ...foundation.particles import Particle
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...foundation.validation import as_finite_float, as_positive_float
 from ...models.bonded import HarmonicBondPotential
 from ...models.topology import Bond, Topology
@@ -166,7 +166,7 @@ class BondedLennardJonesMC:
 
     @property
     def rt(self) -> float:
-        return BOLTZMANN_CONSTANT * self.temperature
+        return MOLAR_GAS_CONSTANT * self.temperature
 
     def pair_potential(self, lambda_value: float) -> SoftCoreLennardJonesPair:
         return SoftCoreLennardJonesPair(

@@ -45,7 +45,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...foundation.validation import as_finite_float, as_positive_float
 from .fep import free_energy_perturbation
 from .mbar import MBARResult
@@ -123,7 +123,7 @@ class SoftCoreLennardJones:
     def rt(self) -> float:
         """Molar thermal energy RT in kJ/mol."""
 
-        return BOLTZMANN_CONSTANT * self.temperature
+        return MOLAR_GAS_CONSTANT * self.temperature
 
     def soft_core_energy(self, lambda_value: float, radius: np.ndarray) -> np.ndarray:
         """Return the soft-core LJ energy (excluding the trap) in kJ/mol."""

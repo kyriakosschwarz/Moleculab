@@ -15,8 +15,6 @@ Run it with:
     uv run python examples/drug_discovery/flexible_docking.py
 """
 
-import numpy as np
-
 from moleculab import (
     LennardJonesParameters,
     NonbondedModel,

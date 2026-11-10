@@ -23,7 +23,7 @@ from __future__ import annotations
 import numpy as np
 
 from ..composition.system import System
-from ..foundation.units import BOLTZMANN_CONSTANT
+from ..foundation.units import MOLAR_GAS_CONSTANT
 
 
 def degrees_of_freedom(system: System, remove_com: bool = True) -> int:
@@ -46,7 +46,7 @@ def kinetic_temperature(system: System, remove_com: bool = True) -> float:
 
     dof = degrees_of_freedom(system, remove_com=remove_com)
     kinetic = system.kinetic_energy()
-    return float(2.0 * kinetic / (dof * BOLTZMANN_CONSTANT))
+    return float(2.0 * kinetic / (dof * MOLAR_GAS_CONSTANT))
 
 
 def _with_velocities(system: System, velocities: np.ndarray) -> System:

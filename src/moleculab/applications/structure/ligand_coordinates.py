@@ -768,7 +768,6 @@ def reconcile_ligand_coordinates(
         if ring.rmsd_angstrom > criteria.ring_planarity_rmsd_max_angstrom
     ]
 
-    coordinate_names = set(atom_names)
     all_mapped_atoms_have_coordinates = not missing_coordinate_atoms
     alternate_locations_documented = all(
         atom.atom_name not in alternate_location_atoms

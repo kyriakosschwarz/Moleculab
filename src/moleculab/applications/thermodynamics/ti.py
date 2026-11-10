@@ -39,7 +39,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...models.potentials import HarmonicPotential
 
 
@@ -190,7 +190,7 @@ def thermodynamic_integration_harmonic(
         raise ValueError("n_samples must be at least 2.")
     n_samples = int(n_samples)
 
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     lambda_values = np.linspace(0.0, 1.0, n_windows)
     derivatives = np.empty(n_windows, dtype=float)
     standard_errors = np.empty(n_windows, dtype=float)

@@ -19,10 +19,9 @@ import numpy as np
 
 from moleculab import (
     HarmonicPotential,
-    harmonic_free_energy_difference,
     mbar_harmonic,
 )
-from moleculab.foundation.units import BOLTZMANN_CONSTANT
+from moleculab.foundation.units import MOLAR_GAS_CONSTANT
 
 
 def main() -> None:
@@ -32,7 +31,7 @@ def main() -> None:
         HarmonicPotential(stiffness=k, center=[0.0, 0.0, 0.0])
         for k in stiffnesses
     ]
-    rt = BOLTZMANN_CONSTANT * temperature
+    rt = MOLAR_GAS_CONSTANT * temperature
     exact = np.array(
         [1.5 * rt * np.log(k / stiffnesses[0]) for k in stiffnesses]
     )

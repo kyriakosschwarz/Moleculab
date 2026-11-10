@@ -45,7 +45,7 @@ def test_harmonic_free_energy_difference_matches_analytic_formula():
 
     expected = (
         1.5
-        * units.BOLTZMANN_CONSTANT
+        * units.MOLAR_GAS_CONSTANT
         * temperature
         * np.log(potential1.stiffness / potential0.stiffness)
     )
@@ -123,7 +123,7 @@ def test_harmonic_samples_have_expected_mean_and_variance():
         seed=789,
     )
 
-    expected_variance = units.BOLTZMANN_CONSTANT * temperature / potential.stiffness
+    expected_variance = units.MOLAR_GAS_CONSTANT * temperature / potential.stiffness
     np.testing.assert_allclose(
         np.mean(positions, axis=0),
         potential.center,

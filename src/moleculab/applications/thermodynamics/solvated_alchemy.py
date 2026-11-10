@@ -25,7 +25,7 @@ import numpy as np
 from ...algorithms.integrators import velocity_verlet_step_system
 from ...composition.system import System
 from ...foundation.particles import Particle
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...foundation.validation import as_positive_float, as_vector3
 from ...models.nonbonded import LennardJonesParameters
 from ...protocols.thermostats import berendsen_thermostat
@@ -110,7 +110,7 @@ class SolvatedLigandAlchemy:
 
     @property
     def rt(self) -> float:
-        return BOLTZMANN_CONSTANT * self.temperature
+        return MOLAR_GAS_CONSTANT * self.temperature
 
     def pair_potential(self, lambda_value: float) -> SoftCoreLennardJonesPair:
         return SoftCoreLennardJonesPair(

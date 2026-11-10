@@ -49,7 +49,7 @@
       "subject": "units",
       "criterion": "golden constants retain their documented values",
       "observed": "R=0.008314462618, kC=138.935458",
-      "detail": "the compatibility alias BOLTZMANN_CONSTANT remains the molar gas constant"
+      "detail": "R equals N_A k_B converted from J to kJ per mole"
     },
     {
       "check_id": "physics.harmonic_exact",

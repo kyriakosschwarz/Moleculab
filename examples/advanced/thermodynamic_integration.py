@@ -19,8 +19,6 @@ Run it with:
     uv run python examples/advanced/thermodynamic_integration.py
 """
 
-import numpy as np
-
 from moleculab import (
     HarmonicPotential,
     harmonic_free_energy_difference,

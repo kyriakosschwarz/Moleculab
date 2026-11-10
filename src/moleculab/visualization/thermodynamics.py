@@ -39,7 +39,6 @@ def plot_structural_thermodynamics_boundary(
 
     configure_matplotlib()
     import matplotlib.pyplot as plt
-    from matplotlib.patches import Patch
 
     figure = plt.figure(figsize=(width, height), constrained_layout=False)
     grid = figure.add_gridspec(2, 2, height_ratios=(1.0, 0.55))

@@ -4,8 +4,8 @@
 > [`tutorials/README.md`](../tutorials/README.md); for the CADD-focused course
 > overview, see [`tutorials/overview.md`](../tutorials/overview.md).
 >
-> **Current educational status:** the planned 16-batch capstone is complete
-> through the scientific audit. The milestones below describe the broader
+> **Current educational status:** the 16-batch capstone is complete through the
+> scientific audit. The milestones below describe the broader
 > long-term roadmap; they are not a claim that every later milestone is
 > implemented.
 

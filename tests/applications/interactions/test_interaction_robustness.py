@@ -9,7 +9,6 @@ from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
-import pytest
 
 from moleculab import (
     ROBUSTNESS_SCHEMA_VERSION,

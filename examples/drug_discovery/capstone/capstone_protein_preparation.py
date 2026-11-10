@@ -17,7 +17,6 @@ Run with gemmi available:
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 from pathlib import Path
 
 import gemmi
@@ -34,7 +33,6 @@ from moleculab import (
     residue_atom_features,
     load_binding_site,
     load_manifest,
-    load_protein_preparation,
     sha256_file,
     validate_protein_preparation,
     write_protein_preparation,

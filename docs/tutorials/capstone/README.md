@@ -1026,7 +1026,7 @@ formally correct estimator.
 
 ### 4.19 Batch 16: integration and scientific audit
 
-Batch 16 is the final planned milestone. It does not add another physical model;
+Batch 16 is the final milestone. It does not add another physical model;
 it audits the chain and demonstrates the statistical-mechanics path end to end.
 
 ```bash
@@ -1145,11 +1145,12 @@ No color means “energetically favourable.” No nearby contact is drawn as a
 hydrogen bond merely because it is close. The figures are static documentation
 first; interactive 3D exploration remains optional future work.
 
-This is Visualization Batch 1. Batch 2 adds chemical-state and evidence views
-below. Later batches can add robustness plots, exact-versus-sampled free-energy
-figures, and a browser-based structure viewer. They should follow the same rule:
-consume validated records, teach one scientific idea, distinguish observation
-from hypothesis, and state what the figure does not establish.
+The full visual learning layer also covers chemical states, interaction
+evidence, hydrogen and water evidence, assumption sensitivity, harmonic FEP
+convergence, and the structural-to-thermodynamic boundary. Every figure should
+follow the same rule: consume validated records, teach one scientific idea,
+distinguish observation from hypothesis, and state what the figure does not
+establish.
 
 ### 4.21 Visual learning layer: chemical states and evidence
 

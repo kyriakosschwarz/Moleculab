@@ -84,8 +84,8 @@ backend accelerates the reciprocal Ewald path.
 The roadmap includes more realistic force fields, particle-mesh Ewald,
 triclinic boxes, enhanced sampling, trained scoring functions, and real quantum
 chemistry. Those are explicitly **not** part of the current tutorial's claims.
-The planned 16-batch educational foundation is complete through the scientific
-audit; more ambitious molecular force fields, explicit-solvent MD, alchemical
+The 16-batch educational foundation is complete through the scientific audit;
+more ambitious molecular force fields, explicit-solvent MD, alchemical
 protein-ligand transformations, and BAR/MBAR uncertainty analysis would be a new
 development phase with its own scientific validation criteria.
 

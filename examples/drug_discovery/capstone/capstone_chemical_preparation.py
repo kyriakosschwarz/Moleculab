@@ -23,7 +23,6 @@ Run with RDKit available:
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -37,7 +36,6 @@ from moleculab import (
     PreparedWaterRole,
     build_chemical_preparation_record,
     load_binding_site,
-    load_chemical_preparation,
     load_ligand_coordinates,
     load_ligand_identity,
     load_manifest,
@@ -299,10 +297,6 @@ def main() -> None:
 
     destination = write_chemical_preparation(args.output, record)
     reference = next(state for state in record.states if state.state_id == "reference-neutral")
-    families = Counter(
-        "donor" if atom.is_donor else "acceptor" if atom.is_acceptor else "other"
-        for atom in reference.atoms
-    )
     print(f"{record.accession} chemical-state preparation")
     print(f"  states: {len(record.states)}; selected_state_id: {record.selected_state_id!r}")
     for state in record.states:

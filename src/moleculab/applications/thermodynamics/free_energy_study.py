@@ -27,7 +27,7 @@ from typing import Any
 
 import numpy as np
 
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...models.potentials import HarmonicPotential
 from .fep import (
     FEPResult,
@@ -447,7 +447,7 @@ def harmonic_configurational_partition_function(
     temperature_value = float(temperature)
     if not np.isfinite(temperature_value) or temperature_value <= 0.0:
         raise ValueError("temperature must be finite and positive.")
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     return float((2.0 * math.pi * rt / potential.stiffness) ** 1.5)
 
 
@@ -463,7 +463,7 @@ def harmonic_configurational_free_energy(
         temperature_value,
     )
     return float(
-        -BOLTZMANN_CONSTANT * temperature_value * math.log(partition_function)
+        -MOLAR_GAS_CONSTANT * temperature_value * math.log(partition_function)
     )
 
 
@@ -481,7 +481,7 @@ def two_state_partition_function(
         raise ValueError("temperature must be finite and positive.")
     if degeneracy0 < 1 or degeneracy1 < 1:
         raise ValueError("degeneracies must be positive integers.")
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     return float(
         degeneracy0 * math.exp(-float(energy0_kj_per_mol) / rt)
         + degeneracy1 * math.exp(-float(energy1_kj_per_mol) / rt)
@@ -504,7 +504,7 @@ def two_state_populations(
         degeneracy1,
         temperature,
     )
-    rt = BOLTZMANN_CONSTANT * float(temperature)
+    rt = MOLAR_GAS_CONSTANT * float(temperature)
     population0 = (
         degeneracy0 * math.exp(-float(energy0_kj_per_mol) / rt)
         / partition_function
@@ -530,7 +530,7 @@ def two_state_free_energy_difference(
     temperature_value = float(temperature)
     if not np.isfinite(temperature_value) or temperature_value <= 0.0:
         raise ValueError("temperature must be finite and positive.")
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     return float(
         (float(energy1_kj_per_mol) - float(energy0_kj_per_mol))
         - rt * math.log(degeneracy1 / degeneracy0)
@@ -591,7 +591,7 @@ def fep_overlap_diagnostics(
     """
 
     result = free_energy_perturbation(work, temperature)
-    rt = BOLTZMANN_CONSTANT * result.temperature
+    rt = MOLAR_GAS_CONSTANT * result.temperature
     log_weights = -result.work / rt
     shifted = log_weights - float(np.max(log_weights))
     weights = np.exp(shifted)

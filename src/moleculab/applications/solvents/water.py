@@ -28,7 +28,7 @@ from ...composition.constraints import DistanceConstraint
 from ...composition.system import System
 from ...foundation.box import Box
 from ...foundation.particles import Particle
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...foundation.validation import (
     as_finite_float,
     as_nonnegative_float,
@@ -327,7 +327,7 @@ def build_water_box(
             velocities = np.array(
                 [
                     rng.normal(
-                        scale=np.sqrt(BOLTZMANN_CONSTANT * target / particle.mass),
+                        scale=np.sqrt(MOLAR_GAS_CONSTANT * target / particle.mass),
                         size=3,
                     )
                     for particle in particles

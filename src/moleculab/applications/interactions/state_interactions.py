@@ -26,12 +26,11 @@ from ...analysis.evidence import (
     EvidenceFeature,
     EvidenceFingerprint,
     EvidenceObservation,
-    EvidenceSchema,
     build_evidence_fingerprint,
     compare_evidence_fingerprints,
     criteria_fingerprint,
 )
-from ..chemistry.chemical_state_enumeration import ChemicalState, ChemicalStateEnumerationRecord
+from ..chemistry.chemical_state_enumeration import ChemicalState
 from ..structure.ligand_coordinates import CoordinateAtom
 from ..structure.structure_manifest import (
     PROVENANCE_LABELS,

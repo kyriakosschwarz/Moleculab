@@ -13,8 +13,6 @@ Run it with:
     uv run python examples/advanced/qm_mm.py
 """
 
-import numpy as np
-
 from moleculab import ELECTRON_MASS_DA, MMPointCharge, ParticleInBox
 
 

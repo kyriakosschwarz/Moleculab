@@ -37,7 +37,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ...foundation.units import BOLTZMANN_CONSTANT
+from ...foundation.units import MOLAR_GAS_CONSTANT
 from ...models.potentials import HarmonicPotential, Potential
 
 
@@ -109,7 +109,7 @@ def free_energy_perturbation(
 
     values = _validate_samples(work)
     temperature_value = _validate_temperature(temperature)
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     beta = 1.0 / rt
     n_samples = values.size
 
@@ -191,7 +191,7 @@ def sample_harmonic_positions(
     n_samples = int(n_samples)
 
     standard_deviation = np.sqrt(
-        BOLTZMANN_CONSTANT * temperature_value / potential.stiffness
+        MOLAR_GAS_CONSTANT * temperature_value / potential.stiffness
     )
     rng = np.random.default_rng(seed)
     return rng.normal(
@@ -218,7 +218,7 @@ def harmonic_free_energy_difference(
     if not isinstance(potential1, HarmonicPotential):
         raise TypeError("potential1 must be a HarmonicPotential.")
     temperature_value = _validate_temperature(temperature)
-    rt = BOLTZMANN_CONSTANT * temperature_value
+    rt = MOLAR_GAS_CONSTANT * temperature_value
     return float(
         1.5 * rt * np.log(potential1.stiffness / potential0.stiffness)
     )

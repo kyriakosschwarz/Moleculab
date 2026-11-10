@@ -24,7 +24,7 @@ def harmonic_potentials():
 
 
 def exact_delta_g(potentials, temperature):
-    rt = units.BOLTZMANN_CONSTANT * temperature
+    rt = units.MOLAR_GAS_CONSTANT * temperature
     return np.array(
         [
             1.5 * rt * np.log(potential.stiffness / potentials[0].stiffness)
