@@ -470,8 +470,11 @@ documented examples.
 credible if the library reproduces it.
 
 **Consequences.** `tests/test_force_gradients.py`, `test_harmonic_validation.py`,
-`test_symmetry.py`, and `test_state_preservation.py` form an executable
-specification. [`validation.md`](validation.md) maps the levels.
+`test_symmetry.py`, `test_state_preservation.py`, and
+`test_physical_benchmarks.py` form an executable specification.
+[`validation.md`](validation.md) maps the levels. Constants are checked against
+independent golden values, closed-form geometries, sign invariants, and
+order-of-magnitude bounds, not only against the implementation's own formula.
 
 **Trade-off.** Tests and docs must be maintained together. The alternative is a
 library that looks correct but cannot demonstrate it.

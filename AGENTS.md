@@ -87,6 +87,7 @@ uv run python docs/generate_architecture_visuals.py
 
 - Every physical equation needs an implementation, a unit test, and a numerical experiment.
 - Test **physics relationships**, not just that functions run: equilibrium values, symmetry, Newton's third law, energy conservation, infinite-dilution limits, and analytical force vs. central finite difference (`h=1e-6`, `atol=1e-6`). The validation levels are documented in `docs/validation.md`.
+- Fundamental constants need independent golden values, closed-form checks, sign invariants, and order-of-magnitude bounds in `tests/test_physical_benchmarks.py`; do not rely only on self-consistency tests.
 - Use `np.testing.assert_allclose` for arrays and `pytest.approx` for scalars. Preserve documented exact examples (e.g. kinetic energy `0.06`, total energy `0.56`).
 - Tests are fast (<1 s); run the full suite before finishing. Add a focused test file for each new module and a runnable example under `examples/`.
 

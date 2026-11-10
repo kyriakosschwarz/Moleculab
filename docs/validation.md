@@ -116,11 +116,33 @@ The checkpoint in
 [`tutorials/individual/checkpoint_04.md`](tutorials/individual/checkpoint_04.md)
 reproduces the analytic oscillator table independently.
 
+## Independent physical benchmarks
+
+Self-consistency tests are not enough. A test that recomputes a constant from
+the same formula, or compares a potential to a constant imported from the same
+module, can pass even when the constant is wrong. The suite therefore includes
+four independent layers:
+
+| Layer | Question | Example |
+| --- | --- | --- |
+| golden values | does the constant match an independent literature value? | $k_e\approx138.935456$ |
+| closed-form smoke tests | does a hand-calculable geometry give the expected number? | two unit charges at 1 nm |
+| sign and direction invariants | does the physics have the right sign? | like charges repel |
+| magnitude bounds | is the value in the right order of magnitude? | $100<k_e<200$ |
+
+These live in
+[`tests/test_physical_benchmarks.py`](../tests/test_physical_benchmarks.py).
+They are deliberately redundant with the derivation tests: redundancy is the
+point when a single operator typo could corrupt every downstream result.
+
 ## Where the invariants live
 
 | Invariant | Test |
 | --- | --- |
 | dimensional consistency | `tests/test_units.py` |
+| golden constants and magnitude bounds | `tests/test_physical_benchmarks.py` |
+| closed-form Coulomb and Lennard-Jones references | `tests/test_physical_benchmarks.py` |
+| Coulomb sign and direction | `tests/test_physical_benchmarks.py`, `tests/test_pair_potentials.py` |
 | non-negative kinetic energy | `tests/test_physics.py` |
 | force is negative energy gradient | `tests/test_force_gradients.py` |
 | double-well minima, barrier, and gradient | `tests/test_potentials.py`, `tests/test_force_gradients.py` |
@@ -141,7 +163,7 @@ reproduces the analytic oscillator table independently.
 
 ```text
 $ uv run pytest -q
-372 passed, 1 skipped
+381 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this
