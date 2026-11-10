@@ -1,0 +1,350 @@
+{
+  "schema_version": "1.0",
+  "temperature_kelvin": 300.0,
+  "two_state_example": {
+    "energy0_kj_per_mol": 0.0,
+    "energy1_kj_per_mol": 5.0,
+    "degeneracy0": 1,
+    "degeneracy1": 100,
+    "partition_function": 14.472235462158485,
+    "population0": 0.06909782546136473,
+    "population1": 0.9309021745386353,
+    "delta_g_kj_per_mol": -6.486854608277829
+  },
+  "sample_sizes": [
+    1000,
+    10000,
+    100000,
+    1000000
+  ],
+  "replicate_count": 20,
+  "replicate_sample_size": 20000,
+  "cases": [
+    {
+      "case_id": "mild-stiffness-change",
+      "label": "Good overlap: k0=100, k1=200 kJ/(mol nm^2)",
+      "potential0_stiffness": 100.0,
+      "potential1_stiffness": 200.0,
+      "potential0_center_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "potential1_center_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exact_partition_function0": 0.062044453305341966,
+      "exact_partition_function1": 0.021936026833609703,
+      "exact_configurational_free_energy0_kj_per_mol": 6.934022771108371,
+      "exact_configurational_free_energy1_kj_per_mol": 9.527438615800364,
+      "exact_delta_g_kj_per_mol": 2.5934158446919926,
+      "convergence": [
+        {
+          "n_samples": 1000,
+          "delta_g_kj_per_mol": 2.5287286146055643,
+          "standard_error_kj_per_mol": 0.058005002716406025,
+          "error_kj_per_mol": -0.0646872300864283,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 1000,
+            "effective_sample_size": 649.2501100039327,
+            "effective_sample_fraction": 0.6492501100039327,
+            "maximum_weight_fraction": 0.0027257778887920915,
+            "work_mean_kj_per_mol": 3.658862111428997,
+            "work_standard_deviation_kj_per_mol": 2.9713491254699145
+          }
+        },
+        {
+          "n_samples": 10000,
+          "delta_g_kj_per_mol": 2.598259049440822,
+          "standard_error_kj_per_mol": 0.01833004769514978,
+          "error_kj_per_mol": 0.004843204748829599,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 10000,
+            "effective_sample_size": 6493.615968709037,
+            "effective_sample_fraction": 0.6493615968709037,
+            "maximum_weight_fraction": 0.00028310461664574375,
+            "work_mean_kj_per_mol": 3.749079237068724,
+            "work_standard_deviation_kj_per_mol": 3.056067181680852
+          }
+        },
+        {
+          "n_samples": 100000,
+          "delta_g_kj_per_mol": 2.592691985384258,
+          "standard_error_kj_per_mol": 0.005783613023609461,
+          "error_kj_per_mol": -0.0007238593077345534,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 100000,
+            "effective_sample_size": 65035.16527334974,
+            "effective_sample_fraction": 0.6503516527334974,
+            "maximum_weight_fraction": 2.8257870074272904e-05,
+            "work_mean_kj_per_mol": 3.7373672080080302,
+            "work_standard_deviation_kj_per_mol": 3.050592159021745
+          }
+        },
+        {
+          "n_samples": 1000000,
+          "delta_g_kj_per_mol": 2.594609843674807,
+          "standard_error_kj_per_mol": 0.0018332143369621196,
+          "error_kj_per_mol": 0.0011939989828144704,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 1000000,
+            "effective_sample_size": 649286.9897848369,
+            "effective_sample_fraction": 0.6492869897848369,
+            "maximum_weight_fraction": 2.8295167148922485e-06,
+            "work_mean_kj_per_mol": 3.7426967572414895,
+            "work_standard_deviation_kj_per_mol": 3.054648882492431
+          }
+        }
+      ],
+      "replicates": {
+        "n_replicates": 20,
+        "n_samples_per_replicate": 20000,
+        "mean_delta_g_kj_per_mol": 2.5911157401941756,
+        "standard_deviation_kj_per_mol": 0.01728484652432361,
+        "minimum_delta_g_kj_per_mol": 2.5565185582590675,
+        "maximum_delta_g_kj_per_mol": 2.6248144809488303,
+        "mean_standard_error_kj_per_mol": 0.012950342682137508,
+        "mean_error_kj_per_mol": -0.002300104497817035,
+        "confidence_interval_coverage": 0.8
+      },
+      "note": "The exact free-energy change is positive and the distributions overlap well."
+    },
+    {
+      "case_id": "poor-overlap-center-shift",
+      "label": "Poor overlap: same stiffness, 0.5 nm center shift",
+      "potential0_stiffness": 100.0,
+      "potential1_stiffness": 100.0,
+      "potential0_center_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "potential1_center_nm": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "exact_partition_function0": 0.062044453305341966,
+      "exact_partition_function1": 0.062044453305341966,
+      "exact_configurational_free_energy0_kj_per_mol": 6.934022771108371,
+      "exact_configurational_free_energy1_kj_per_mol": 6.934022771108371,
+      "exact_delta_g_kj_per_mol": 0.0,
+      "convergence": [
+        {
+          "n_samples": 1000,
+          "delta_g_kj_per_mol": -0.735113219018553,
+          "standard_error_kj_per_mol": 1.2803233605311806,
+          "error_kj_per_mol": -0.735113219018553,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 1000,
+            "effective_sample_size": 3.7849413504077707,
+            "effective_sample_fraction": 0.0037849413504077705,
+            "maximum_weight_fraction": 0.49467684157427627,
+            "work_mean_kj_per_mol": 12.485115627077871,
+            "work_standard_deviation_kj_per_mol": 8.210418964319752
+          }
+        },
+        {
+          "n_samples": 10000,
+          "delta_g_kj_per_mol": 0.8278234292307091,
+          "standard_error_kj_per_mol": 0.44056815021815776,
+          "error_kj_per_mol": 0.8278234292307091,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 10000,
+            "effective_sample_size": 31.954947469687653,
+            "effective_sample_fraction": 0.003195494746968765,
+            "maximum_weight_fraction": 0.14576737039342888,
+            "work_mean_kj_per_mol": 12.374070223568443,
+            "work_standard_deviation_kj_per_mol": 7.86486009789944
+          }
+        },
+        {
+          "n_samples": 100000,
+          "delta_g_kj_per_mol": -0.4393374723758507,
+          "standard_error_kj_per_mol": 0.4533734709208531,
+          "error_kj_per_mol": -0.4393374723758507,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 100000,
+            "effective_sample_size": 30.260184845371313,
+            "effective_sample_fraction": 0.00030260184845371316,
+            "maximum_weight_fraction": 0.15535789556991167,
+            "work_mean_kj_per_mol": 12.498183385913318,
+            "work_standard_deviation_kj_per_mol": 7.87226750452993
+          }
+        },
+        {
+          "n_samples": 1000000,
+          "delta_g_kj_per_mol": -0.19915962744904855,
+          "standard_error_kj_per_mol": 0.18569130799397393,
+          "error_kj_per_mol": -0.19915962744904855,
+          "confidence_interval_contains_exact": true,
+          "overlap": {
+            "n_samples": 1000000,
+            "effective_sample_size": 180.40551380432714,
+            "effective_sample_fraction": 0.00018040551380432715,
+            "maximum_weight_fraction": 0.04404741255734384,
+            "work_mean_kj_per_mol": 12.504623571875845,
+            "work_standard_deviation_kj_per_mol": 7.894263462245481
+          }
+        }
+      ],
+      "replicates": {
+        "n_replicates": 20,
+        "n_samples_per_replicate": 20000,
+        "mean_delta_g_kj_per_mol": 0.1226815795554355,
+        "standard_deviation_kj_per_mol": 1.2448200055537804,
+        "minimum_delta_g_kj_per_mol": -3.307665664713408,
+        "maximum_delta_g_kj_per_mol": 1.268608972981867,
+        "mean_standard_error_kj_per_mol": 0.5072360002204734,
+        "mean_error_kj_per_mol": 0.1226815795554355,
+        "confidence_interval_coverage": 0.55
+      },
+      "note": "The exact free-energy difference is zero because the center shift does not change the partition function; forward FEP still has poor overlap and high variance."
+    }
+  ],
+  "limitations": [
+    "The model is a three-dimensional harmonic oscillator, not a protein-ligand system.",
+    "Absolute configurational free energies omit the thermal-wavelength term; only differences are compared.",
+    "Forward FEP is used; no bidirectional estimator, MBAR overlap correction, or enhanced sampling is applied.",
+    "Finite sample sizes cannot remove the bias of poor overlap, even when the reported standard error is small.",
+    "No solvent, protonation, conformational ensemble, force field, or experimental affinity is included."
+  ],
+  "decisions": [
+    {
+      "decision": "used an exactly solvable harmonic model",
+      "actor": "free-energy study",
+      "rationale": "an analytic reference separates estimator error from model error"
+    },
+    {
+      "decision": "reported exact and estimated free energies separately",
+      "actor": "free-energy study",
+      "rationale": "agreement or disagreement is only meaningful against a reference"
+    },
+    {
+      "decision": "included a good-overlap and a poor-overlap case",
+      "actor": "free-energy study",
+      "rationale": "the same estimator can behave very differently when state overlap changes"
+    },
+    {
+      "decision": "reported effective sample size and maximum weight fraction",
+      "actor": "free-energy study",
+      "rationale": "sample count alone does not reveal whether a few configurations dominate"
+    },
+    {
+      "decision": "did not present the harmonic result as an imatinib affinity",
+      "actor": "free-energy study",
+      "rationale": "the capstone structural record remains separate from this toy calculation"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "none",
+        "detail": "No experimental data are used in this controlled harmonic study.",
+        "actor": "free-energy study"
+      },
+      {
+        "label": "calculated",
+        "subject": "exact partition functions and FEP estimates",
+        "detail": "Harmonic partition functions and FEP estimates are calculated from explicit model parameters.",
+        "actor": "free-energy study"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No binding affinity or molecular property is predicted.",
+        "actor": "free-energy study"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "harmonic test model",
+        "detail": "The harmonic oscillator is a deliberate teaching model, not a molecular force field.",
+        "actor": "free-energy study"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "free_energy.two_state_reference",
+        "category": "reference",
+        "status": "pass",
+        "subject": "two-state model",
+        "criterion": "the discrete populations sum to one",
+        "observed": "p0=0.069098, p1=0.930902",
+        "expected": "p0 + p1 = 1",
+        "detail": "the two-state reference shows how degeneracy enters the partition function and free energy"
+      },
+      {
+        "check_id": "free_energy.partition_functions",
+        "category": "reference",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "exact configurational partition functions are positive",
+        "observed": "2 cases",
+        "expected": "positive Z for both states",
+        "detail": "absolute A omits the thermal-wavelength term; differences are meaningful"
+      },
+      {
+        "check_id": "free_energy.exact_delta_g",
+        "category": "reference",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "an exact free-energy difference is available for every case",
+        "observed": "2 exact values",
+        "expected": "analytic harmonic delta G",
+        "detail": "the exact value is the reference for convergence and bias"
+      },
+      {
+        "check_id": "free_energy.convergence_grid",
+        "category": "sampling",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "every case uses the declared sample-size grid",
+        "observed": "4 sample sizes",
+        "expected": "same convergence grid for every case",
+        "detail": "sample-size trends are compared on the same grid"
+      },
+      {
+        "check_id": "free_energy.overlap_diagnostics",
+        "category": "sampling",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "effective sample size and maximum weight are recorded",
+        "observed": "overlap diagnostics for every convergence point",
+        "expected": "finite effective sample size and normalized weights",
+        "detail": "a small effective-sample fraction signals poor overlap"
+      },
+      {
+        "check_id": "free_energy.replicates",
+        "category": "uncertainty",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "replicate estimates are summarized for every case",
+        "observed": "20 replicates x 20000 samples",
+        "expected": "mean, spread, and confidence-interval coverage",
+        "detail": "repeated independent estimates expose run-to-run variability"
+      },
+      {
+        "check_id": "free_energy.not_binding",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "harmonic model",
+        "criterion": "the study is not presented as a protein-ligand affinity",
+        "observed": "3D harmonic oscillator only",
+        "expected": "no binding, solvent, or force-field claim",
+        "detail": "the exact reference is a toy statistical-mechanics model"
+      }
+    ]
+  }
+}

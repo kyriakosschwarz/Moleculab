@@ -81,6 +81,7 @@ These extend the physics and alchemical material beyond the introductory path.
 | [`ewald.py`](advanced/ewald.py) | periodic Ewald summation |
 | [`barostat.py`](advanced/barostat.py) | pressure coupling and NPT |
 | [`free_energy_perturbation.py`](advanced/free_energy_perturbation.py) | harmonic FEP |
+| [`free_energy_convergence.py`](advanced/free_energy_convergence.py) | exact partition function, sample-size convergence, overlap, and replicate uncertainty ([record](../data/free_energy/harmonic-fep-study.json)) |
 | [`thermodynamic_integration.py`](advanced/thermodynamic_integration.py) | harmonic TI |
 | [`mbar.py`](advanced/mbar.py) | harmonic MBAR |
 | [`lj_alchemy.py`](advanced/lj_alchemy.py) | soft-core LJ FEP/TI/MBAR |

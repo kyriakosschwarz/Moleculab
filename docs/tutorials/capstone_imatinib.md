@@ -76,6 +76,7 @@ uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
 uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 uv run python examples/drug_discovery/capstone_interaction_robustness.py
 uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
+uv run python examples/advanced/free_energy_convergence.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -109,8 +110,11 @@ deposited waters and reports geometric bridge plausibility in
 assumptions and writes
 `data/structures/2HYY.interaction-robustness.json`. The sixteenth relates the
 structural evidence to the requirements for a binding free-energy calculation
-and writes `data/structures/2HYY.thermodynamic-interpretation.json`. None of
-the commands docks a ligand, predicts affinity, or estimates a free energy.
+and writes `data/structures/2HYY.thermodynamic-interpretation.json`. The
+seventeenth runs the controlled harmonic free-energy study and writes
+`data/free_energy/harmonic-fep-study.json`; it is not an imatinib calculation.
+None of the structural commands docks a ligand, predicts affinity, or estimates
+a binding free energy.
 
 ## 1. Why imatinib?
 
@@ -947,6 +951,75 @@ Neither quantity is obtained by counting contacts. The existing
 `structural_observations_thermodynamics.py` example and Track C module 10
 provide the broader conceptual background.
 
+### 4.18 Batch 15: educational free-energy calculation
+
+Batch 15 leaves the imatinib structure behind deliberately. It starts with an
+exactly solvable harmonic model so that estimator error can be separated from
+model error.
+
+```bash
+uv run python examples/advanced/free_energy_convergence.py
+```
+
+The study is written to `data/free_energy/harmonic-fep-study.json`.
+
+It starts with an exact two-state example: state 0 has energy 0 and degeneracy 1;
+state 1 has energy 5 kJ/mol and degeneracy 100. At 300 K,
+
+$$ Z=1+100e^{-5/RT}=14.472, \qquad p_1=0.931, $$
+
+and the free-energy difference is
+
+$$ \Delta G=G_1-G_0=5-RT\ln(100)=-6.487\ \mathrm{kJ/mol}. $$
+
+A higher-energy state is therefore lower in free energy when its degeneracy is
+large enough. This is the discrete statistical-mechanics reference before any
+sampling is introduced.
+
+The numerical part is a three-dimensional harmonic oscillator. Its configurational
+partition function is
+
+$$ Z=\left(\frac{2\pi RT}{k}\right)^{3/2}, $$
+
+and the exact free-energy difference between two stiffnesses is
+
+$$ \Delta G_{\mathrm{exact}}=\frac{3}{2}RT\ln\left(\frac{k_1}{k_0}\right). $$
+
+FEP samples state 0 and reweights to state 1:
+
+$$ \Delta G_{\mathrm{FEP}}=-RT\ln\left\langle e^{-\Delta U/RT}\right\rangle_0. $$
+
+Two transformations are compared:
+
+| Case | Exact ΔG | Largest-sample FEP | Effective sample fraction | Maximum weight fraction |
+| --- | --- | --- | --- | --- |
+| Mild stiffness change, `k0=100 → k1=200` | 2.593 kJ/mol | 2.595 ± 0.002 kJ/mol | 0.649 | 0.000003 |
+| Pure 0.5 nm center shift, `k0=k1=100` | 0.000 kJ/mol | −0.199 ± 0.186 kJ/mol | 0.00018 | 0.044 |
+
+The center-shift case has zero exact ΔG because moving a harmonic well does not
+change its partition function. Forward FEP nevertheless has poor overlap: at one
+million samples the effective sample size is only about 180, and the estimate
+remains noisy. This is the central lesson: a zero free-energy difference does
+not make a transformation easy to sample.
+
+The record also reports:
+
+- sample-size convergence;
+- effective sample size and maximum weight fraction;
+- replicate means, standard deviations, and ranges;
+- confidence-interval coverage.
+
+The replicate coverage values (0.80 for the mild case and 0.55 for the poor
+case) are empirical observations from 20 finite replicates, not guaranteed
+coverage rates. They illustrate how uncertainty statements depend on overlap
+and sample size.
+
+This harmonic study is not an imatinib affinity calculation. It contains no
+protein, ligand, solvent, force field, or experimental binding data. It is the
+first controlled demonstration that the free-energy machinery produces the
+right answer when the reference is known, and that poor overlap can defeat a
+formally correct estimator.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -980,6 +1053,7 @@ pipeline.
 | long-range electrostatics | reaction field, Ewald |
 | binding pose | rigid and flexible docking |
 | binding affinity | FEP, TI, MBAR, alchemical decoupling |
+| controlled free-energy validation | exact harmonic partition function, FEP convergence, overlap, and replicate uncertainty |
 | thermodynamic interpretation | Track C module 10; ΔG = ΔH − TΔS, partition function, missing-term checklist |
 | assumption sensitivity | interaction-robustness record; invariant, sensitive, unsupported, and unknown stay separate |
 | SAR and ADME context | Track B module 08; Track C module 09 |

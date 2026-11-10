@@ -73,7 +73,7 @@ def architecture_layers():
             1.00,
             [
                 "docking",
-                "free energy\nFEP / TI / MBAR",
+                "free energy\nFEP / TI / MBAR\nconvergence",
                 "solvent and\nwater boxes",
                 "MSD / RDF",
                 "QM/MM",

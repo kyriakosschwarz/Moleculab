@@ -161,6 +161,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.water_evidence` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.interaction_robustness` | `applications.combination_interactions`, `applications.hydrogen_evidence`, `applications.water_evidence`, `analysis.interactions` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.thermodynamic_interpretation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators, free-energy estimators |
+| `applications.free_energy_study` | `applications.fep`, `models.potentials`, `foundation.units`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -682,9 +683,15 @@ Mapping to modules:
 3. `fep`, `ti`, or `mbar` estimates the free-energy difference.
 4. `lj_alchemy`, `mc_alchemy`, and `solvated_alchemy` are complete experiments;
    `fep`, `ti`, and `mbar` are reusable estimators.
+5. `free_energy_study` wraps the harmonic FEP path with exact partition
+   functions, sample-size convergence, effective sample size, maximum weight
+   fraction, and replicate uncertainty.
 
 The estimators do not know whether the model is harmonic, Lennard-Jones, or a
-solvated ligand. They depend on energies and sample labels.
+solvated ligand. They depend on energies and sample labels. `free_energy_study`
+is a controlled validation layer, not a protein-ligand affinity calculation:
+it separates estimator error from model error and demonstrates why poor overlap
+can defeat a formally correct exponential average.
 
 ### 7.4 Docking
 
@@ -865,7 +872,7 @@ forking the codebase.
 
 | Track | Architectural focus | Main modules | Capstone contribution |
 | --- | --- | --- | --- |
-| A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
+| A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR, exact harmonic convergence study | supplies the physical model and the limits of energy calculations |
 | B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
 | C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration, state-aware interactions, protein-pocket preparation, combination interaction matrices | turns structural observations into auditable records without claiming affinity |
 
@@ -1216,6 +1223,7 @@ These are the rules that keep the layers honest.
 | water evidence preserves deposited observations, leaves roles unassigned, and reports geometry without chemical classification | `tests/test_water_evidence.py` |
 | robustness conclusions keep consistent support sets and no composite confidence score | `tests/test_interaction_robustness.py` |
 | thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
+| exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1263,7 +1271,7 @@ For a new contributor, the source is best read in this order:
     assumption-sensitivity records, and structural-to-thermodynamic boundaries.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
-    `applications/solvated_alchemy.py` — free energy.
+    `applications/solvated_alchemy.py`, `applications/free_energy_study.py` — free energy and exact-reference convergence diagnostics.
 14. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
     quantum model.
 15. `backend.py` — optional acceleration.

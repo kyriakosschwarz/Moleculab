@@ -436,6 +436,20 @@ estimators, or MBAR instead of a single large perturbation.
 Run: `uv run python examples/advanced/free_energy_perturbation.py`.
 Check: `uv run pytest tests/test_fep.py -q`.
 
+The convergence study first shows an exact two-state model, then adds the exact
+configurational partition function
+
+$$ Z=\left(\frac{2\pi RT}{k}\right)^{3/2}, $$
+
+sample-size convergence, effective sample size, maximum weight fraction, and
+replicate uncertainty.  It compares a good-overlap stiffness change with a pure
+center shift whose exact free-energy difference is zero but whose forward FEP
+overlap is poor.
+
+Run: `uv run python examples/advanced/free_energy_convergence.py`.
+Check: `uv run pytest tests/test_free_energy_study.py -q`.
+Record: `data/free_energy/harmonic-fep-study.json`.
+
 ## 14. Atomistic water, atom types, and exclusions
 
 The coarse-grained solvent treats each molecule as one particle.  A three-site
