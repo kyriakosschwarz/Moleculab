@@ -16,6 +16,9 @@ and its provenance manifest.
 - `2HYY.binding-site.json` is the Batch 4 binding-site record. It preserves the
   pocket cutoff, residue identities, atom-level contacts, nearby waters, other
   hetero residues, missing residue numbers, and alternate locations.
+- `2HYY.interactions.json` is the Batch 5 interaction interpretation. It records
+  classified interactions only where donor/acceptor, charge, hydrophobic, ring,
+  water, or metal evidence is explicit; unknown chemistry remains unknown.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -27,4 +30,5 @@ uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
 uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
+uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 ```

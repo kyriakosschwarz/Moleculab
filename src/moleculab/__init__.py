@@ -23,7 +23,8 @@ The source is organised by architecture layer:
 ``applications``
     docking, solvent, water, free energy, acid-base, QM/MM,
     experimental-structure provenance, ligand identity reconciliation,
-    ligand coordinate reconciliation, and binding-site reconciliation.
+    ligand coordinate reconciliation, binding-site reconciliation, and
+    evidence-gated interaction interpretation.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -193,6 +194,19 @@ from .applications.binding_site_reconciliation import (
     validate_binding_site,
     write_binding_site,
 )
+from .applications.interaction_interpretation import (
+    INTERACTION_SCHEMA_VERSION,
+    AtomFeature,
+    AromaticRing,
+    InteractionCriteria,
+    InteractionDiscrepancy,
+    InteractionInterpretationRecord,
+    InteractionRecord,
+    interpret_interactions,
+    load_interactions,
+    validate_interactions,
+    write_interactions,
+)
 from .applications.ligand_coordinates import (
     LIGAND_COORDINATE_SCHEMA_VERSION,
     AngleGeometry,
@@ -334,7 +348,9 @@ __all__ = [
     "AngleGeometry",
     "AnglePotential",
     "AssayMeasurement",
+    "AtomFeature",
     "AtomMapping",
+    "AromaticRing",
     "BenchmarkCase",
     "BenchmarkSummary",
     "BINDING_SITE_SCHEMA_VERSION",
@@ -378,8 +394,13 @@ __all__ = [
     "HeteroResidueRecord",
     "HydrogenBondCriteria",
     "IdentityDiscrepancy",
+    "INTERACTION_SCHEMA_VERSION",
     "InteractionAtom",
+    "InteractionCriteria",
+    "InteractionDiscrepancy",
     "InteractionFeature",
+    "InteractionInterpretationRecord",
+    "InteractionRecord",
     "InteractionFingerprint",
     "InteractionPatternComparison",
     "LIGAND_COORDINATE_SCHEMA_VERSION",
@@ -491,11 +512,13 @@ __all__ = [
     "group_indices_by_residue",
     "harmonic_free_energy_difference",
     "integrate_thermodynamic_derivative",
+    "interpret_interactions",
     "kinetic_energy",
     "kinetic_pressure",
     "kinetic_temperature",
     "ligand_efficiency",
     "load_binding_site",
+    "load_interactions",
     "load_ligand_coordinates",
     "load_ligand_identity",
     "load_manifest",
@@ -548,6 +571,7 @@ __all__ = [
     "use_backend",
     "validate_atom_mapping",
     "validate_binding_site",
+    "validate_interactions",
     "validate_ligand_coordinates",
     "validate_ligand_identity",
     "validate_manifest",
@@ -555,6 +579,7 @@ __all__ = [
     "velocity_verlet_step_system",
     "virial_pressure",
     "write_binding_site",
+    "write_interactions",
     "write_ligand_coordinates",
     "write_ligand_identity",
     "write_manifest",

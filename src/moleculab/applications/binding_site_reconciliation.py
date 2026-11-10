@@ -118,6 +118,8 @@ def _string_tuple(data: Mapping[str, Any], key: str) -> tuple[str, ...]:
 class BindingSiteCriteria:
     pocket_cutoff_angstrom: float = 4.0
     pocket_cutoff_nm: float = 0.4
+    contact_cutoff_angstrom: float = 4.0
+    contact_cutoff_nm: float = 0.4
     inclusive: bool = False
     water_cutoff_angstrom: float = 6.0
     protein_atom_policy: str = (
@@ -141,6 +143,8 @@ class BindingSiteCriteria:
         return {
             "pocket_cutoff_angstrom": self.pocket_cutoff_angstrom,
             "pocket_cutoff_nm": self.pocket_cutoff_nm,
+            "contact_cutoff_angstrom": self.contact_cutoff_angstrom,
+            "contact_cutoff_nm": self.contact_cutoff_nm,
             "inclusive": self.inclusive,
             "water_cutoff_angstrom": self.water_cutoff_angstrom,
             "protein_atom_policy": self.protein_atom_policy,
@@ -156,6 +160,8 @@ class BindingSiteCriteria:
         return cls(
             pocket_cutoff_angstrom=_required_float(data, "pocket_cutoff_angstrom"),
             pocket_cutoff_nm=_required_float(data, "pocket_cutoff_nm"),
+            contact_cutoff_angstrom=_required_float(data, "contact_cutoff_angstrom"),
+            contact_cutoff_nm=_required_float(data, "contact_cutoff_nm"),
             inclusive=_required_bool(data, "inclusive"),
             water_cutoff_angstrom=_required_float(data, "water_cutoff_angstrom"),
             protein_atom_policy=_required_string(data, "protein_atom_policy"),
@@ -735,8 +741,8 @@ def reconcile_binding_site(
                     best_distance = distance
                     best_protein = protein_atom.atom_name
                     best_ligand = ligand_atom.atom_name
-                if distance < criteria.pocket_cutoff_angstrom or (
-                    criteria.inclusive and distance <= criteria.pocket_cutoff_angstrom
+                if distance < criteria.contact_cutoff_angstrom or (
+                    criteria.inclusive and distance <= criteria.contact_cutoff_angstrom
                 ):
                     contacts.append(
                         LigandProteinContact(
@@ -944,9 +950,15 @@ def reconcile_binding_site(
             contact_atoms_traceable,
             subject=ligand_selection.component_id,
             criterion="every contact names a specific ligand and protein atom",
-            observed=f"{len(contacts)} atom contacts",
+            observed=(
+                f"{len(contacts)} atom contacts within "
+                f"{criteria.contact_cutoff_angstrom} A"
+            ),
             expected="traceable atom pairs",
-            detail="contacts are proximity observations, not interaction assignments",
+            detail=(
+                "pocket atoms and contact pairs use independent cutoffs; contacts "
+                "are proximity observations, not interaction assignments"
+            ),
         ),
         _check(
             "interpretation",
@@ -1070,7 +1082,8 @@ def reconcile_binding_site(
                 (
                     f"{pocket_atom_count} pocket atoms, {len(residues)} residues, "
                     f"{len(contacts)} atom contacts within "
-                    f"{criteria.pocket_cutoff_angstrom} A."
+                    f"{criteria.contact_cutoff_angstrom} A (pocket cutoff "
+                    f"{criteria.pocket_cutoff_angstrom} A)."
                 ),
                 actor="binding-site reconciliation",
             ),
@@ -1170,6 +1183,17 @@ def validate_binding_site(record: BindingSiteRecord) -> list[str]:
         abs_tol=1e-9,
     ):
         errors.append("pocket_cutoff_angstrom and pocket_cutoff_nm are inconsistent.")
+    if criteria.contact_cutoff_angstrom <= 0 or criteria.contact_cutoff_nm <= 0:
+        errors.append("contact cutoffs must be positive.")
+    if not math.isclose(
+        criteria.contact_cutoff_angstrom * _ANGSTROM_TO_NM,
+        criteria.contact_cutoff_nm,
+        rel_tol=1e-9,
+        abs_tol=1e-9,
+    ):
+        errors.append(
+            "contact_cutoff_angstrom and contact_cutoff_nm are inconsistent."
+        )
     if criteria.water_cutoff_angstrom <= 0:
         errors.append("water_cutoff_angstrom must be positive.")
 

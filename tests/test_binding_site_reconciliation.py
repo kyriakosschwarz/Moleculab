@@ -310,6 +310,8 @@ def test_custom_cutoff_changes_the_pocket():
         criteria=BindingSiteCriteria(
             pocket_cutoff_angstrom=2.0,
             pocket_cutoff_nm=0.2,
+            contact_cutoff_angstrom=2.0,
+            contact_cutoff_nm=0.2,
             water_cutoff_angstrom=6.0,
         ),
     )

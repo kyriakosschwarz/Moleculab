@@ -29,6 +29,8 @@
   "criteria": {
     "pocket_cutoff_angstrom": 4.0,
     "pocket_cutoff_nm": 0.4,
+    "contact_cutoff_angstrom": 4.0,
+    "contact_cutoff_nm": 0.4,
     "inclusive": false,
     "water_cutoff_angstrom": 6.0,
     "protein_atom_policy": "polymer ATOM records in the manifest-selected chain and model",
@@ -1818,7 +1820,7 @@
       {
         "label": "calculated",
         "subject": "pocket and contacts",
-        "detail": "53 pocket atoms, 23 residues, 112 atom contacts within 4.0 A.",
+        "detail": "53 pocket atoms, 23 residues, 112 atom contacts within 4.0 A (pocket cutoff 4.0 A).",
         "actor": "binding-site reconciliation"
       },
       {
@@ -1933,9 +1935,9 @@
         "status": "pass",
         "subject": "STI",
         "criterion": "every contact names a specific ligand and protein atom",
-        "observed": "112 atom contacts",
+        "observed": "112 atom contacts within 4.0 A",
         "expected": "traceable atom pairs",
-        "detail": "contacts are proximity observations, not interaction assignments"
+        "detail": "pocket atoms and contact pairs use independent cutoffs; contacts are proximity observations, not interaction assignments"
       },
       {
         "check_id": "binding_site.proximity_not_affinity",

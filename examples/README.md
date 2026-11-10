@@ -56,6 +56,7 @@ linked from the relevant tutorial or reference page.
 | [`capstone_ligand_identity.py`](drug_discovery/capstone_ligand_identity.py) | deposited-ligand to imatinib identity reconciliation and [atom mapping](../data/structures/2HYY.ligand-identity.json) |
 | [`capstone_ligand_coordinates.py`](drug_discovery/capstone_ligand_coordinates.py) | coordinate reconciliation, occupancy, B-factors, and ligand [geometry](../data/structures/2HYY.ligand-coordinates.json) |
 | [`capstone_binding_site.py`](drug_discovery/capstone_binding_site.py) | protein pocket, residues, waters, and ligand–protein [contacts](../data/structures/2HYY.binding-site.json) |
+| [`capstone_interactions.py`](drug_discovery/capstone_interactions.py) | chemistry-aware interaction [classification](../data/structures/2HYY.interactions.json), preserving unknown evidence |
 
 ## Advanced
 

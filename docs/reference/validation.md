@@ -47,6 +47,7 @@ uv run pytest tests/test_structure_manifest.py -q
 uv run pytest tests/test_ligand_identity.py -q
 uv run pytest tests/test_ligand_coordinates.py -q
 uv run pytest tests/test_binding_site_reconciliation.py -q
+uv run pytest tests/test_interaction_interpretation.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -208,6 +209,7 @@ point when a single operator typo could corrupt every downstream result.
 | ligand formula, connectivity, bond orders, mapping ambiguity, and unresolved discrepancies are tested | `tests/test_ligand_identity.py` |
 | coordinate mapping, occupancy, alternate locations, geometry, and missing atoms are tested | `tests/test_ligand_coordinates.py` |
 | pocket selection, residue namespaces, water policy, contacts, and proximity boundaries are tested | `tests/test_binding_site_reconciliation.py` |
+| interaction classification, missing evidence, and the no-affinity boundary are tested | `tests/test_interaction_interpretation.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

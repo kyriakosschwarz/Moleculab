@@ -65,6 +65,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
 uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
+uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -76,7 +77,9 @@ ligand with the imatinib reference and writes
 mapping to the deposited coordinates and writes
 `data/structures/2HYY.ligand-coordinates.json`. The fifth selects the protein
 pocket and atom-level contacts and writes
-`data/structures/2HYY.binding-site.json`. None of the commands docks a ligand,
+`data/structures/2HYY.binding-site.json`. The sixth classifies interactions
+only where explicit chemical evidence is available and writes
+`data/structures/2HYY.interactions.json`. None of the commands docks a ligand,
 predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -382,6 +385,7 @@ For 2HYY the record establishes:
 | Protein selection | author chain A / label chain A, model 1 |
 | Protein atoms parsed | 2,073 polymer atoms across 263 residues |
 | Pocket cutoff | 4.0 Å, strict |
+| Contact cutoff | 4.0 Å, recorded independently of the pocket cutoff |
 | Pocket | 53 protein atoms in 23 residues |
 | Ligand–protein contacts | 112 atom pairs; closest 2.723 Å |
 | Waters | 51 in the selected chain, 4 within 6.0 Å of the ligand |
@@ -399,6 +403,47 @@ observation; it is not automatically a hydrogen bond, a favourable hydrophobic
 contact, or a contribution to binding affinity. The binding-site record therefore
 stops at structural context. Hydrogen-bond detection, interaction fingerprints,
 and free-energy interpretation remain later, separately labelled analyses.
+
+### 4.7 Batch 5: interaction interpretation
+
+Batch 5 classifies an interaction only when the required chemical evidence is
+explicitly supplied.
+
+```bash
+uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
+```
+
+The workflow consumes the Batch 4 contacts and the preceding identity,
+coordinate, and binding-site records. It writes
+`data/structures/2HYY.interactions.json`.
+
+For 2HYY the result is deliberately conservative:
+
+| Result | Value |
+| --- | --- |
+| Input contacts | 112 |
+| Feature records | 53 protein, 34 ligand, 4 water |
+| Classified interactions | 0 |
+| Unknown interactions | 5 |
+| Not applicable | 1 (metal coordination) |
+| Affinity estimate | none |
+
+The unknown categories are hydrogen bonding, ionic, hydrophobic, aromatic, and
+water-mediated interactions. The deposited structure does not provide the
+required donor/acceptor assignments, hydrogen positions, formal charges,
+hydrophobic classifications, aromatic ring definitions, or water interaction
+roles. Those facts are reported as missing rather than inferred from element
+symbols or proximity.
+
+The hydrogen-bond path reuses the existing `detect_hydrogen_bonds` API. It is
+only called when donor/acceptor flags and donor hydrogen positions are available.
+Ionic classification requires explicit formal charges. Aromatic classification
+requires explicit ring centroids and normals. Metal coordination does not claim
+a geometry that was not supplied.
+
+This is the intended outcome: a smaller, defensible interaction record rather
+than an overconfident diagram. No interaction is converted into an affinity
+estimate.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
@@ -447,6 +492,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
 uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
+uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -467,6 +513,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | ligand identity reconciliation | `capstone_ligand_identity.py` | experimental + calculated |
 | ligand coordinate reconciliation | `capstone_ligand_coordinates.py` | experimental + calculated |
 | binding-site reconciliation | `capstone_binding_site.py` | experimental + calculated |
+| interaction interpretation | `capstone_interactions.py` | calculated, with explicit evidence |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |
