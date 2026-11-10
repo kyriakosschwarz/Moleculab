@@ -37,7 +37,7 @@ from .structure_manifest import (
     ValidationRecord,
 )
 
-LIGAND_IDENTITY_SCHEMA_VERSION = "1.0"
+LIGAND_IDENTITY_SCHEMA_VERSION = "1.1"
 DISCREPANCY_STATUSES = ("open", "resolved", "not_applicable")
 
 _SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
@@ -155,7 +155,8 @@ class DepositedLigand:
     atoms_are_heavy: bool
     formal_charges_present: bool
     hydrogen_atoms_present: bool
-    omitted_hydrogen_bonds: int = 0
+    omitted_bond_records: int = 0
+    omitted_bond_atom_elements: tuple[str, ...] = ()
     stereochemistry: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
@@ -172,7 +173,8 @@ class DepositedLigand:
             "atoms_are_heavy": self.atoms_are_heavy,
             "formal_charges_present": self.formal_charges_present,
             "hydrogen_atoms_present": self.hydrogen_atoms_present,
-            "omitted_hydrogen_bonds": self.omitted_hydrogen_bonds,
+            "omitted_bond_records": self.omitted_bond_records,
+            "omitted_bond_atom_elements": list(self.omitted_bond_atom_elements),
             "stereochemistry": list(self.stereochemistry),
         }
 
@@ -198,7 +200,10 @@ class DepositedLigand:
             atoms_are_heavy=_required_bool(data, "atoms_are_heavy"),
             formal_charges_present=_required_bool(data, "formal_charges_present"),
             hydrogen_atoms_present=_required_bool(data, "hydrogen_atoms_present"),
-            omitted_hydrogen_bonds=_required_int(data, "omitted_hydrogen_bonds"),
+            omitted_bond_records=_required_int(data, "omitted_bond_records"),
+            omitted_bond_atom_elements=_string_tuple(
+                data, "omitted_bond_atom_elements"
+            ),
             stereochemistry=_string_tuple(data, "stereochemistry"),
         )
 
@@ -308,6 +313,7 @@ class AtomMapping:
     candidate_count: int
     ambiguous: bool
     selection_rule: str
+    ordering_basis: str = "deposited.atoms order"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -318,6 +324,7 @@ class AtomMapping:
             "candidate_count": self.candidate_count,
             "ambiguous": self.ambiguous,
             "selection_rule": self.selection_rule,
+            "ordering_basis": self.ordering_basis,
         }
 
     @classmethod
@@ -337,6 +344,7 @@ class AtomMapping:
             candidate_count=_required_int(data, "candidate_count"),
             ambiguous=_required_bool(data, "ambiguous"),
             selection_rule=_required_string(data, "selection_rule"),
+            ordering_basis=_required_string(data, "ordering_basis"),
         )
 
 
@@ -373,6 +381,32 @@ class IdentityDiscrepancy:
 
 
 @dataclass(frozen=True)
+class NormalizationRecord:
+    bond_order_rule: str
+    aromaticity_method: str | None = None
+    toolkit: str | None = None
+    toolkit_version: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "bond_order_rule": self.bond_order_rule,
+            "aromaticity_method": self.aromaticity_method,
+            "toolkit": self.toolkit,
+            "toolkit_version": self.toolkit_version,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> NormalizationRecord:
+        data = _as_mapping(data, "normalization record")
+        return cls(
+            bond_order_rule=_required_string(data, "bond_order_rule"),
+            aromaticity_method=_optional_string(data, "aromaticity_method"),
+            toolkit=_optional_string(data, "toolkit"),
+            toolkit_version=_optional_string(data, "toolkit_version"),
+        )
+
+
+@dataclass(frozen=True)
 class LigandIdentityRecord:
     source_manifest_path: str
     source_manifest_sha256: str
@@ -381,6 +415,7 @@ class LigandIdentityRecord:
     deposited: DepositedLigand
     reference: ReferenceLigand
     mapping: AtomMapping
+    normalization: NormalizationRecord
     decisions: tuple[DecisionRecord, ...]
     provenance: ProvenanceRecord
     validation: ValidationRecord
@@ -397,6 +432,7 @@ class LigandIdentityRecord:
             "deposited": self.deposited.to_dict(),
             "reference": self.reference.to_dict(),
             "mapping": self.mapping.to_dict(),
+            "normalization": self.normalization.to_dict(),
             "decisions": [decision.to_dict() for decision in self.decisions],
             "provenance": self.provenance.to_dict(),
             "validation": self.validation.to_dict(),
@@ -415,6 +451,9 @@ class LigandIdentityRecord:
             deposited=DepositedLigand.from_dict(_as_mapping(data.get("deposited"), "deposited")),
             reference=ReferenceLigand.from_dict(_as_mapping(data.get("reference"), "reference")),
             mapping=AtomMapping.from_dict(_as_mapping(data.get("mapping"), "mapping")),
+            normalization=NormalizationRecord.from_dict(
+                _as_mapping(data.get("normalization"), "normalization")
+            ),
             decisions=tuple(
                 DecisionRecord.from_dict(_as_mapping(item, "decision record"))
                 for item in _as_list(data.get("decisions"), "decisions")
@@ -498,6 +537,7 @@ def reconcile_ligand_identity(
     mapping_selection_rule: str = (
         "lexicographically smallest reference-index tuple in deposited-atom order"
     ),
+    normalization: NormalizationRecord | None = None,
 ) -> LigandIdentityRecord:
     """Compare a deposited ligand with a reference graph.
 
@@ -1002,6 +1042,14 @@ def reconcile_ligand_identity(
             candidate_count=candidate_count,
             ambiguous=ambiguous,
             selection_rule=mapping_selection_rule,
+            ordering_basis="deposited.atoms order",
+        ),
+        normalization=normalization
+        or NormalizationRecord(
+            bond_order_rule=(
+                "raw Kekule orders are compared first; aromatic bonds are treated "
+                "as equivalent only in the separate normalized comparison"
+            )
         ),
         decisions=decisions,
         provenance=provenance,
@@ -1055,8 +1103,12 @@ def validate_ligand_identity(record: LigandIdentityRecord) -> list[str]:
         errors.append("deposited.auth_seq_id is required.")
     if not deposited.atoms:
         errors.append("deposited.atoms must not be empty.")
-    if deposited.omitted_hydrogen_bonds < 0:
-        errors.append("deposited.omitted_hydrogen_bonds cannot be negative.")
+    if deposited.omitted_bond_records < 0:
+        errors.append("deposited.omitted_bond_records cannot be negative.")
+    if deposited.omitted_bond_records and not deposited.omitted_bond_atom_elements:
+        errors.append(
+            "deposited.omitted_bond_atom_elements must describe the omitted atoms."
+        )
 
     atom_names = [atom.atom_name for atom in deposited.atoms]
     if len(set(atom_names)) != len(atom_names):
@@ -1116,11 +1168,21 @@ def validate_ligand_identity(record: LigandIdentityRecord) -> list[str]:
         errors.append("mapping.pairs must not be empty when candidates are available.")
     if mapping.candidate_count == 0 and mapping.pairs:
         errors.append("mapping.pairs must be empty when candidate_count is zero.")
+    if not mapping.ordering_basis:
+        errors.append("mapping.ordering_basis is required.")
     if mapping.pairs:
         if set(pair_names) != atom_name_set:
             errors.append("mapping must cover every deposited atom.")
         if set(pair_indices) != reference_index_set:
             errors.append("mapping must cover every reference heavy atom.")
+
+    normalization = record.normalization
+    if not normalization.bond_order_rule:
+        errors.append("normalization.bond_order_rule is required.")
+    if normalization.toolkit and not normalization.toolkit_version:
+        errors.append(
+            "normalization.toolkit_version is required when a toolkit is recorded."
+        )
 
     if not record.decisions:
         errors.append("decisions must contain at least one record.")

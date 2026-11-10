@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source_manifest_path": "data/structures/2HYY.manifest.json",
   "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
   "accession": "2HYY",
@@ -465,7 +465,10 @@
     "atoms_are_heavy": true,
     "formal_charges_present": false,
     "hydrogen_atoms_present": false,
-    "omitted_hydrogen_bonds": 31,
+    "omitted_bond_records": 31,
+    "omitted_bond_atom_elements": [
+      "H"
+    ],
     "stereochemistry": []
   },
   "reference": {
@@ -1066,7 +1069,14 @@
     ],
     "candidate_count": 4,
     "ambiguous": true,
-    "selection_rule": "lexicographically smallest reference-index tuple in deposited-atom order"
+    "selection_rule": "lexicographically smallest reference-index tuple in deposited-atom order",
+    "ordering_basis": "deposited.atoms order"
+  },
+  "normalization": {
+    "bond_order_rule": "raw Kekule orders are compared first; aromatic bonds are treated as equivalent only in the separate aromatic-normalized comparison",
+    "aromaticity_method": "RDKit sanitization and built-in aromaticity perception",
+    "toolkit": "RDKit",
+    "toolkit_version": "2026.09.1"
   },
   "decisions": [
     {

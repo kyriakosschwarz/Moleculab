@@ -45,6 +45,7 @@ uv run pytest tests/test_trajectory_contacts.py -q
 uv run pytest tests/test_sar.py -q
 uv run pytest tests/test_structure_manifest.py -q
 uv run pytest tests/test_ligand_identity.py -q
+uv run pytest tests/test_ligand_coordinates.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -204,6 +205,7 @@ point when a single operator typo could corrupt every downstream result.
 | opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
 | manifest checksums, selections, decisions, actors, and machine-readable checks are validated | `tests/test_structure_manifest.py` |
 | ligand formula, connectivity, bond orders, mapping ambiguity, and unresolved discrepancies are tested | `tests/test_ligand_identity.py` |
+| coordinate mapping, occupancy, alternate locations, geometry, and missing atoms are tested | `tests/test_ligand_coordinates.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

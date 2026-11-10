@@ -1,0 +1,1487 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "accession": "2HYY",
+  "selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "criteria": {
+    "bond_length_min_angstrom": 0.5,
+    "bond_length_max_angstrom": 2.5,
+    "angle_min_degrees": 30.0,
+    "angle_max_degrees": 180.0,
+    "ring_planarity_rmsd_max_angstrom": 0.2,
+    "close_contact_min_angstrom": 1.5
+  },
+  "atoms": [
+    {
+      "atom_name": "C1",
+      "element": "C",
+      "reference_index": 35,
+      "position_angstrom": [
+        22.827,
+        11.725,
+        13.78
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 37.27,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C6",
+      "element": "C",
+      "reference_index": 36,
+      "position_angstrom": [
+        22.036,
+        12.177,
+        14.839
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 39.6,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C5",
+      "element": "C",
+      "reference_index": 31,
+      "position_angstrom": [
+        20.668,
+        11.809,
+        14.959
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.15,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C4",
+      "element": "C",
+      "reference_index": 32,
+      "position_angstrom": [
+        20.14,
+        11.001,
+        13.947
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.69,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N3",
+      "element": "N",
+      "reference_index": 33,
+      "position_angstrom": [
+        20.892,
+        10.57,
+        12.904
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.16,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C2",
+      "element": "C",
+      "reference_index": 34,
+      "position_angstrom": [
+        22.176,
+        10.931,
+        12.842
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 37.87,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C7",
+      "element": "C",
+      "reference_index": 29,
+      "position_angstrom": [
+        19.778,
+        12.261,
+        16.119
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.16,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C12",
+      "element": "C",
+      "reference_index": 28,
+      "position_angstrom": [
+        20.266,
+        12.828,
+        17.228
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.07,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C11",
+      "element": "C",
+      "reference_index": 27,
+      "position_angstrom": [
+        19.347,
+        13.177,
+        18.235
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.38,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N10",
+      "element": "N",
+      "reference_index": 26,
+      "position_angstrom": [
+        18.047,
+        12.944,
+        18.07
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 39.49,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C9",
+      "element": "C",
+      "reference_index": 25,
+      "position_angstrom": [
+        17.593,
+        12.383,
+        16.962
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.62,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N8",
+      "element": "N",
+      "reference_index": 30,
+      "position_angstrom": [
+        18.433,
+        12.021,
+        15.977
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 39.94,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N13",
+      "element": "N",
+      "reference_index": 24,
+      "position_angstrom": [
+        16.254,
+        12.125,
+        16.695
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.09,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C14",
+      "element": "C",
+      "reference_index": 2,
+      "position_angstrom": [
+        15.346,
+        12.271,
+        17.71
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 42.83,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C19",
+      "element": "C",
+      "reference_index": 1,
+      "position_angstrom": [
+        15.234,
+        11.305,
+        18.732
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 42.81,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C18",
+      "element": "C",
+      "reference_index": 6,
+      "position_angstrom": [
+        14.285,
+        11.539,
+        19.714
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 45.14,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C17",
+      "element": "C",
+      "reference_index": 5,
+      "position_angstrom": [
+        13.451,
+        12.699,
+        19.699
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 42.64,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C16",
+      "element": "C",
+      "reference_index": 4,
+      "position_angstrom": [
+        13.56,
+        13.633,
+        18.698
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 41.64,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C15",
+      "element": "C",
+      "reference_index": 3,
+      "position_angstrom": [
+        14.506,
+        13.401,
+        17.688
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.75,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N21",
+      "element": "N",
+      "reference_index": 7,
+      "position_angstrom": [
+        12.659,
+        14.735,
+        18.814
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.36,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C22",
+      "element": "C",
+      "reference_index": 8,
+      "position_angstrom": [
+        12.589,
+        15.682,
+        17.851
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 38.78,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C23",
+      "element": "C",
+      "reference_index": 10,
+      "position_angstrom": [
+        11.455,
+        16.642,
+        17.9
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 36.59,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C25",
+      "element": "C",
+      "reference_index": 11,
+      "position_angstrom": [
+        11.079,
+        17.33,
+        16.713
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 34.88,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C26",
+      "element": "C",
+      "reference_index": 12,
+      "position_angstrom": [
+        10.006,
+        18.285,
+        16.678
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 33.94,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C27",
+      "element": "C",
+      "reference_index": 13,
+      "position_angstrom": [
+        9.298,
+        18.536,
+        17.869
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 35.29,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C28",
+      "element": "C",
+      "reference_index": 14,
+      "position_angstrom": [
+        9.662,
+        17.854,
+        19.065
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 35.22,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C29",
+      "element": "C",
+      "reference_index": 15,
+      "position_angstrom": [
+        10.736,
+        16.908,
+        19.112
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 34.82,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C46",
+      "element": "C",
+      "reference_index": 16,
+      "position_angstrom": [
+        8.196,
+        19.529,
+        17.832
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 34.3,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N48",
+      "element": "N",
+      "reference_index": 17,
+      "position_angstrom": [
+        8.191,
+        20.406,
+        18.988
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 33.42,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C53",
+      "element": "C",
+      "reference_index": 18,
+      "position_angstrom": [
+        9.455,
+        21.152,
+        19.106
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 26.21,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C52",
+      "element": "C",
+      "reference_index": 19,
+      "position_angstrom": [
+        9.448,
+        22.049,
+        20.402
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 31.38,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "N51",
+      "element": "N",
+      "reference_index": 20,
+      "position_angstrom": [
+        8.15,
+        22.812,
+        20.447
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 35.38,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C54",
+      "element": "C",
+      "reference_index": 23,
+      "position_angstrom": [
+        8.183,
+        23.619,
+        21.64
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 32.34,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C50",
+      "element": "C",
+      "reference_index": 21,
+      "position_angstrom": [
+        6.928,
+        22.029,
+        20.38
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 32.11,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C49",
+      "element": "C",
+      "reference_index": 22,
+      "position_angstrom": [
+        6.952,
+        21.23,
+        19.053
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 30.94,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "O29",
+      "element": "O",
+      "reference_index": 9,
+      "position_angstrom": [
+        13.399,
+        15.803,
+        16.931
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.62,
+      "alternate_location": null,
+      "model_number": 1
+    },
+    {
+      "atom_name": "C20",
+      "element": "C",
+      "reference_index": 0,
+      "position_angstrom": [
+        16.075,
+        10.053,
+        18.815
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 40.2,
+      "alternate_location": null,
+      "model_number": 1
+    }
+  ],
+  "bonds": [
+    {
+      "atom_name_1": "C1",
+      "atom_name_2": "C6",
+      "reference_index_1": 35,
+      "reference_index_2": 36,
+      "length_angstrom": 1.3969488179600578,
+      "length_nm": 0.13969488179600578
+    },
+    {
+      "atom_name_1": "C1",
+      "atom_name_2": "C2",
+      "reference_index_1": 35,
+      "reference_index_2": 34,
+      "length_angstrom": 1.3907124073653772,
+      "length_nm": 0.13907124073653773
+    },
+    {
+      "atom_name_1": "C6",
+      "atom_name_2": "C5",
+      "reference_index_1": 36,
+      "reference_index_2": 31,
+      "length_angstrom": 1.4217060174311726,
+      "length_nm": 0.14217060174311727
+    },
+    {
+      "atom_name_1": "C5",
+      "atom_name_2": "C4",
+      "reference_index_1": 31,
+      "reference_index_2": 32,
+      "length_angstrom": 1.398496335354512,
+      "length_nm": 0.13984963353545118
+    },
+    {
+      "atom_name_1": "C5",
+      "atom_name_2": "C7",
+      "reference_index_1": 31,
+      "reference_index_2": 29,
+      "length_angstrom": 1.530360741786067,
+      "length_nm": 0.1530360741786067
+    },
+    {
+      "atom_name_1": "C4",
+      "atom_name_2": "N3",
+      "reference_index_1": 32,
+      "reference_index_2": 33,
+      "length_angstrom": 1.356139373368385,
+      "length_nm": 0.13561393733683852
+    },
+    {
+      "atom_name_1": "N3",
+      "atom_name_2": "C2",
+      "reference_index_1": 33,
+      "reference_index_2": 34,
+      "length_angstrom": 1.3352232023148776,
+      "length_nm": 0.13352232023148777
+    },
+    {
+      "atom_name_1": "C7",
+      "atom_name_2": "C12",
+      "reference_index_1": 29,
+      "reference_index_2": 28,
+      "length_angstrom": 1.3377271769684593,
+      "length_nm": 0.13377271769684593
+    },
+    {
+      "atom_name_1": "C7",
+      "atom_name_2": "N8",
+      "reference_index_1": 29,
+      "reference_index_2": 30,
+      "length_angstrom": 1.3736043826371536,
+      "length_nm": 0.13736043826371536
+    },
+    {
+      "atom_name_1": "C12",
+      "atom_name_2": "C11",
+      "reference_index_1": 28,
+      "reference_index_2": 27,
+      "length_angstrom": 1.4072707628597954,
+      "length_nm": 0.14072707628597955
+    },
+    {
+      "atom_name_1": "C11",
+      "atom_name_2": "N10",
+      "reference_index_1": 27,
+      "reference_index_2": 26,
+      "length_angstrom": 1.3309823439850736,
+      "length_nm": 0.13309823439850738
+    },
+    {
+      "atom_name_1": "N10",
+      "atom_name_2": "C9",
+      "reference_index_1": 26,
+      "reference_index_2": 25,
+      "length_angstrom": 1.3223089654086158,
+      "length_nm": 0.1322308965408616
+    },
+    {
+      "atom_name_1": "C9",
+      "atom_name_2": "N8",
+      "reference_index_1": 25,
+      "reference_index_2": 30,
+      "length_angstrom": 1.34419827406525,
+      "length_nm": 0.134419827406525
+    },
+    {
+      "atom_name_1": "C9",
+      "atom_name_2": "N13",
+      "reference_index_1": 25,
+      "reference_index_2": 24,
+      "length_angstrom": 1.3895229397170799,
+      "length_nm": 0.138952293971708
+    },
+    {
+      "atom_name_1": "N13",
+      "atom_name_2": "C14",
+      "reference_index_1": 24,
+      "reference_index_2": 2,
+      "length_angstrom": 1.3696733187150882,
+      "length_nm": 0.13696733187150884
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "C19",
+      "reference_index_1": 2,
+      "reference_index_2": 1,
+      "length_angstrom": 1.4107388135299883,
+      "length_nm": 0.14107388135299884
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "C15",
+      "reference_index_1": 2,
+      "reference_index_2": 3,
+      "length_angstrom": 1.4081846469834833,
+      "length_nm": 0.14081846469834833
+    },
+    {
+      "atom_name_1": "C19",
+      "atom_name_2": "C18",
+      "reference_index_1": 1,
+      "reference_index_2": 6,
+      "length_angstrom": 1.3855255320635556,
+      "length_nm": 0.13855255320635557
+    },
+    {
+      "atom_name_1": "C19",
+      "atom_name_2": "C20",
+      "reference_index_1": 1,
+      "reference_index_2": 0,
+      "length_angstrom": 1.5105211021366092,
+      "length_nm": 0.15105211021366094
+    },
+    {
+      "atom_name_1": "C18",
+      "atom_name_2": "C17",
+      "reference_index_1": 6,
+      "reference_index_2": 5,
+      "length_angstrom": 1.4287690506166486,
+      "length_nm": 0.14287690506166487
+    },
+    {
+      "atom_name_1": "C17",
+      "atom_name_2": "C16",
+      "reference_index_1": 5,
+      "reference_index_2": 4,
+      "length_angstrom": 1.3734038007811107,
+      "length_nm": 0.13734038007811109
+    },
+    {
+      "atom_name_1": "C16",
+      "atom_name_2": "C15",
+      "reference_index_1": 4,
+      "reference_index_2": 3,
+      "length_angstrom": 1.403153591022737,
+      "length_nm": 0.14031535910227372
+    },
+    {
+      "atom_name_1": "C16",
+      "atom_name_2": "N21",
+      "reference_index_1": 4,
+      "reference_index_2": 7,
+      "length_angstrom": 1.4281670070408434,
+      "length_nm": 0.14281670070408434
+    },
+    {
+      "atom_name_1": "N21",
+      "atom_name_2": "C22",
+      "reference_index_1": 7,
+      "reference_index_2": 8,
+      "length_angstrom": 1.352434101906634,
+      "length_nm": 0.1352434101906634
+    },
+    {
+      "atom_name_1": "C22",
+      "atom_name_2": "C23",
+      "reference_index_1": 8,
+      "reference_index_2": 10,
+      "length_angstrom": 1.4865924121964296,
+      "length_nm": 0.14865924121964297
+    },
+    {
+      "atom_name_1": "C22",
+      "atom_name_2": "O29",
+      "reference_index_1": 8,
+      "reference_index_2": 9,
+      "length_angstrom": 1.2317227772514376,
+      "length_nm": 0.12317227772514378
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C25",
+      "reference_index_1": 10,
+      "reference_index_2": 11,
+      "length_angstrom": 1.4225642340506077,
+      "length_nm": 0.14225642340506078
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C29",
+      "reference_index_1": 10,
+      "reference_index_2": 15,
+      "length_angstrom": 1.434106341942605,
+      "length_nm": 0.1434106341942605
+    },
+    {
+      "atom_name_1": "C25",
+      "atom_name_2": "C26",
+      "reference_index_1": 11,
+      "reference_index_2": 12,
+      "length_angstrom": 1.4368642942184917,
+      "length_nm": 0.14368642942184917
+    },
+    {
+      "atom_name_1": "C26",
+      "atom_name_2": "C27",
+      "reference_index_1": 12,
+      "reference_index_2": 13,
+      "length_angstrom": 1.4081001384844751,
+      "length_nm": 0.14081001384844752
+    },
+    {
+      "atom_name_1": "C27",
+      "atom_name_2": "C28",
+      "reference_index_1": 13,
+      "reference_index_2": 14,
+      "length_angstrom": 1.4240912892086683,
+      "length_nm": 0.14240912892086685
+    },
+    {
+      "atom_name_1": "C27",
+      "atom_name_2": "C46",
+      "reference_index_1": 13,
+      "reference_index_2": 16,
+      "length_angstrom": 1.4838537663799616,
+      "length_nm": 0.14838537663799617
+    },
+    {
+      "atom_name_1": "C28",
+      "atom_name_2": "C29",
+      "reference_index_1": 14,
+      "reference_index_2": 15,
+      "length_angstrom": 1.4319919692512229,
+      "length_nm": 0.14319919692512229
+    },
+    {
+      "atom_name_1": "C46",
+      "atom_name_2": "N48",
+      "reference_index_1": 16,
+      "reference_index_2": 17,
+      "length_angstrom": 1.4510306681803784,
+      "length_nm": 0.14510306681803783
+    },
+    {
+      "atom_name_1": "N48",
+      "atom_name_2": "C53",
+      "reference_index_1": 17,
+      "reference_index_2": 18,
+      "length_angstrom": 1.4724591675153516,
+      "length_nm": 0.14724591675153517
+    },
+    {
+      "atom_name_1": "N48",
+      "atom_name_2": "C49",
+      "reference_index_1": 17,
+      "reference_index_2": 22,
+      "length_angstrom": 1.4894032361989835,
+      "length_nm": 0.14894032361989837
+    },
+    {
+      "atom_name_1": "C53",
+      "atom_name_2": "C52",
+      "reference_index_1": 18,
+      "reference_index_2": 19,
+      "length_angstrom": 1.5761579870051086,
+      "length_nm": 0.15761579870051087
+    },
+    {
+      "atom_name_1": "C52",
+      "atom_name_2": "N51",
+      "reference_index_1": 19,
+      "reference_index_2": 20,
+      "length_angstrom": 1.5063193552497434,
+      "length_nm": 0.15063193552497434
+    },
+    {
+      "atom_name_1": "N51",
+      "atom_name_2": "C54",
+      "reference_index_1": 20,
+      "reference_index_2": 23,
+      "length_angstrom": 1.4406897653554707,
+      "length_nm": 0.14406897653554707
+    },
+    {
+      "atom_name_1": "N51",
+      "atom_name_2": "C50",
+      "reference_index_1": 20,
+      "reference_index_2": 21,
+      "length_angstrom": 1.4528805869719654,
+      "length_nm": 0.14528805869719655
+    },
+    {
+      "atom_name_1": "C50",
+      "atom_name_2": "C49",
+      "reference_index_1": 21,
+      "reference_index_2": 22,
+      "length_angstrom": 1.5491629998163505,
+      "length_nm": 0.15491629998163506
+    }
+  ],
+  "angles": [
+    {
+      "atom_name_1": "C2",
+      "atom_name_2": "C1",
+      "atom_name_3": "C6",
+      "angle_degrees": 115.52979753268502
+    },
+    {
+      "atom_name_1": "C12",
+      "atom_name_2": "C11",
+      "atom_name_3": "N10",
+      "angle_degrees": 120.37872914023384
+    },
+    {
+      "atom_name_1": "C11",
+      "atom_name_2": "C12",
+      "atom_name_3": "C7",
+      "angle_degrees": 117.39408658827705
+    },
+    {
+      "atom_name_1": "C15",
+      "atom_name_2": "C14",
+      "atom_name_3": "C19",
+      "angle_degrees": 120.89303717508038
+    },
+    {
+      "atom_name_1": "C15",
+      "atom_name_2": "C14",
+      "atom_name_3": "N13",
+      "angle_degrees": 117.9958061079039
+    },
+    {
+      "atom_name_1": "C19",
+      "atom_name_2": "C14",
+      "atom_name_3": "N13",
+      "angle_degrees": 121.0971533814135
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "C15",
+      "atom_name_3": "C16",
+      "angle_degrees": 121.57401315432223
+    },
+    {
+      "atom_name_1": "C15",
+      "atom_name_2": "C16",
+      "atom_name_3": "C17",
+      "angle_degrees": 117.75510325851938
+    },
+    {
+      "atom_name_1": "C15",
+      "atom_name_2": "C16",
+      "atom_name_3": "N21",
+      "angle_degrees": 127.68944657742058
+    },
+    {
+      "atom_name_1": "C17",
+      "atom_name_2": "C16",
+      "atom_name_3": "N21",
+      "angle_degrees": 114.54954016306476
+    },
+    {
+      "atom_name_1": "C16",
+      "atom_name_2": "C17",
+      "atom_name_3": "C18",
+      "angle_degrees": 120.89451791317924
+    },
+    {
+      "atom_name_1": "C17",
+      "atom_name_2": "C18",
+      "atom_name_3": "C19",
+      "angle_degrees": 121.97099291496103
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "C19",
+      "atom_name_3": "C18",
+      "angle_degrees": 116.88397688682466
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "C19",
+      "atom_name_3": "C20",
+      "angle_degrees": 124.27460848976685
+    },
+    {
+      "atom_name_1": "C18",
+      "atom_name_2": "C19",
+      "atom_name_3": "C20",
+      "angle_degrees": 118.84141289293059
+    },
+    {
+      "atom_name_1": "C1",
+      "atom_name_2": "C2",
+      "atom_name_3": "N3",
+      "angle_degrees": 124.97293411981721
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C22",
+      "atom_name_3": "N21",
+      "angle_degrees": 117.91714202727105
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C22",
+      "atom_name_3": "O29",
+      "angle_degrees": 117.56937916587924
+    },
+    {
+      "atom_name_1": "N21",
+      "atom_name_2": "C22",
+      "atom_name_3": "O29",
+      "angle_degrees": 124.51310414087203
+    },
+    {
+      "atom_name_1": "C22",
+      "atom_name_2": "C23",
+      "atom_name_3": "C25",
+      "angle_degrees": 119.10657287314623
+    },
+    {
+      "atom_name_1": "C22",
+      "atom_name_2": "C23",
+      "atom_name_3": "C29",
+      "angle_degrees": 122.0108505715844
+    },
+    {
+      "atom_name_1": "C25",
+      "atom_name_2": "C23",
+      "atom_name_3": "C29",
+      "angle_degrees": 118.87894355845202
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C25",
+      "atom_name_3": "C26",
+      "angle_degrees": 122.62557072667305
+    },
+    {
+      "atom_name_1": "C25",
+      "atom_name_2": "C26",
+      "atom_name_3": "C27",
+      "angle_degrees": 118.25194643306952
+    },
+    {
+      "atom_name_1": "C26",
+      "atom_name_2": "C27",
+      "atom_name_3": "C28",
+      "angle_degrees": 119.76636878779601
+    },
+    {
+      "atom_name_1": "C26",
+      "atom_name_2": "C27",
+      "atom_name_3": "C46",
+      "angle_degrees": 118.13895349208892
+    },
+    {
+      "atom_name_1": "C28",
+      "atom_name_2": "C27",
+      "atom_name_3": "C46",
+      "angle_degrees": 122.08990845762035
+    },
+    {
+      "atom_name_1": "C27",
+      "atom_name_2": "C28",
+      "atom_name_3": "C29",
+      "angle_degrees": 122.3871971623457
+    },
+    {
+      "atom_name_1": "C23",
+      "atom_name_2": "C29",
+      "atom_name_3": "C28",
+      "angle_degrees": 118.0871741623669
+    },
+    {
+      "atom_name_1": "C5",
+      "atom_name_2": "C4",
+      "atom_name_3": "N3",
+      "angle_degrees": 122.06009764378398
+    },
+    {
+      "atom_name_1": "C27",
+      "atom_name_2": "C46",
+      "atom_name_3": "N48",
+      "angle_degrees": 112.77784642052372
+    },
+    {
+      "atom_name_1": "C50",
+      "atom_name_2": "C49",
+      "atom_name_3": "N48",
+      "angle_degrees": 109.60975515792809
+    },
+    {
+      "atom_name_1": "C4",
+      "atom_name_2": "C5",
+      "atom_name_3": "C6",
+      "angle_degrees": 116.85652695864184
+    },
+    {
+      "atom_name_1": "C4",
+      "atom_name_2": "C5",
+      "atom_name_3": "C7",
+      "angle_degrees": 119.9726168434068
+    },
+    {
+      "atom_name_1": "C6",
+      "atom_name_2": "C5",
+      "atom_name_3": "C7",
+      "angle_degrees": 123.16973162644918
+    },
+    {
+      "atom_name_1": "C49",
+      "atom_name_2": "C50",
+      "atom_name_3": "N51",
+      "angle_degrees": 107.72394219841478
+    },
+    {
+      "atom_name_1": "C53",
+      "atom_name_2": "C52",
+      "atom_name_3": "N51",
+      "angle_degrees": 108.46114944262112
+    },
+    {
+      "atom_name_1": "C52",
+      "atom_name_2": "C53",
+      "atom_name_3": "N48",
+      "angle_degrees": 110.51240943878497
+    },
+    {
+      "atom_name_1": "C1",
+      "atom_name_2": "C6",
+      "atom_name_3": "C5",
+      "angle_degrees": 121.67351311216031
+    },
+    {
+      "atom_name_1": "C12",
+      "atom_name_2": "C7",
+      "atom_name_3": "C5",
+      "angle_degrees": 122.78056270160747
+    },
+    {
+      "atom_name_1": "C12",
+      "atom_name_2": "C7",
+      "atom_name_3": "N8",
+      "angle_degrees": 121.12855102322949
+    },
+    {
+      "atom_name_1": "C5",
+      "atom_name_2": "C7",
+      "atom_name_3": "N8",
+      "angle_degrees": 116.07115081064397
+    },
+    {
+      "atom_name_1": "N10",
+      "atom_name_2": "C9",
+      "atom_name_3": "N13",
+      "angle_degrees": 124.79480060456896
+    },
+    {
+      "atom_name_1": "N10",
+      "atom_name_2": "C9",
+      "atom_name_3": "N8",
+      "angle_degrees": 120.91166333574846
+    },
+    {
+      "atom_name_1": "N13",
+      "atom_name_2": "C9",
+      "atom_name_3": "N8",
+      "angle_degrees": 114.29141125318947
+    },
+    {
+      "atom_name_1": "C11",
+      "atom_name_2": "N10",
+      "atom_name_3": "C9",
+      "angle_degrees": 120.89680782119841
+    },
+    {
+      "atom_name_1": "C14",
+      "atom_name_2": "N13",
+      "atom_name_3": "C9",
+      "angle_degrees": 118.46622957263853
+    },
+    {
+      "atom_name_1": "C16",
+      "atom_name_2": "N21",
+      "atom_name_3": "C22",
+      "angle_degrees": 121.0055043772923
+    },
+    {
+      "atom_name_1": "C2",
+      "atom_name_2": "N3",
+      "atom_name_3": "C4",
+      "angle_degrees": 118.88337640063422
+    },
+    {
+      "atom_name_1": "C46",
+      "atom_name_2": "N48",
+      "atom_name_3": "C49",
+      "angle_degrees": 111.83981072200667
+    },
+    {
+      "atom_name_1": "C46",
+      "atom_name_2": "N48",
+      "atom_name_3": "C53",
+      "angle_degrees": 111.53659591003597
+    },
+    {
+      "atom_name_1": "C49",
+      "atom_name_2": "N48",
+      "atom_name_3": "C53",
+      "angle_degrees": 115.48768084853093
+    },
+    {
+      "atom_name_1": "C50",
+      "atom_name_2": "N51",
+      "atom_name_3": "C52",
+      "angle_degrees": 116.76966219532173
+    },
+    {
+      "atom_name_1": "C50",
+      "atom_name_2": "N51",
+      "atom_name_3": "C54",
+      "angle_degrees": 111.05924074782155
+    },
+    {
+      "atom_name_1": "C52",
+      "atom_name_2": "N51",
+      "atom_name_3": "C54",
+      "angle_degrees": 106.78215338705175
+    },
+    {
+      "atom_name_1": "C7",
+      "atom_name_2": "N8",
+      "atom_name_3": "C9",
+      "angle_degrees": 119.28064041686507
+    }
+  ],
+  "rings": [
+    {
+      "atom_names": [
+        "C1",
+        "C11",
+        "C12",
+        "C2",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C9",
+        "N10",
+        "N3",
+        "N8"
+      ],
+      "aromatic_bond_count": 13,
+      "rmsd_angstrom": 0.09674437261296044,
+      "max_deviation_angstrom": 0.1318855887879343
+    },
+    {
+      "atom_names": [
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19"
+      ],
+      "aromatic_bond_count": 6,
+      "rmsd_angstrom": 0.005890554016783852,
+      "max_deviation_angstrom": 0.00994415049992801
+    },
+    {
+      "atom_names": [
+        "C23",
+        "C25",
+        "C26",
+        "C27",
+        "C28",
+        "C29"
+      ],
+      "aromatic_bond_count": 6,
+      "rmsd_angstrom": 0.002203232767278693,
+      "max_deviation_angstrom": 0.003128870674151878
+    }
+  ],
+  "close_contacts": [],
+  "missing_component_atoms": [
+    "H11",
+    "H111",
+    "H121",
+    "H131",
+    "H151",
+    "H171",
+    "H181",
+    "H201",
+    "H202",
+    "H203",
+    "H21",
+    "H211",
+    "H251",
+    "H261",
+    "H281",
+    "H291",
+    "H41",
+    "H461",
+    "H462",
+    "H491",
+    "H492",
+    "H501",
+    "H502",
+    "H521",
+    "H522",
+    "H531",
+    "H532",
+    "H541",
+    "H542",
+    "H543",
+    "H61"
+  ],
+  "missing_heavy_atoms": [],
+  "alternate_location_atoms": [],
+  "decisions": [
+    {
+      "decision": "preserved deposited coordinates in angstrom and recorded nm conversions",
+      "actor": "ligand coordinate reconciliation",
+      "rationale": "the source frame is retained; lengths and distances are converted to nm for analysis"
+    },
+    {
+      "decision": "did not choose or average alternate conformers",
+      "actor": "ligand coordinate reconciliation",
+      "rationale": "alternate locations are recorded; geometry is withheld when they remain unresolved"
+    },
+    {
+      "decision": "did not rebuild missing atoms or hydrogens",
+      "actor": "ligand coordinate reconciliation",
+      "rationale": "missing component atoms are reported from the deposition rather than invented"
+    },
+    {
+      "decision": "used broad geometry sanity bounds, not force-field targets",
+      "actor": "ligand coordinate reconciliation",
+      "rationale": "the checks detect gross inconsistencies without pretending to be a parameterised geometry validation"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited coordinates",
+        "detail": "Selected STI coordinates from the 2HYY deposition.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "coordinate mapping and geometry",
+        "detail": "37 atom records, 41 bonds, 56 angles, 3 ring systems.",
+        "actor": "ligand coordinate reconciliation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No docking pose, affinity, or free-energy estimate is produced.",
+        "actor": "ligand coordinate reconciliation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "none",
+        "detail": "No mechanistic interpretation is made from the coordinates.",
+        "actor": "ligand coordinate reconciliation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "coordinates.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "source manifest and identity record are recorded",
+        "observed": "both record paths present",
+        "expected": "manifest and identity record",
+        "detail": "the coordinate record is traceable to both prior artifacts"
+      },
+      {
+        "check_id": "coordinates.mapped_atoms_complete",
+        "category": "coordinate_mapping",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "every identity-mapped atom has a coordinate record",
+        "observed": "0 missing coordinate records",
+        "expected": "0 missing",
+        "detail": "all mapped atoms have deposited coordinates"
+      },
+      {
+        "check_id": "coordinates.alternate_locations_documented",
+        "category": "coordinate_mapping",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "alternate locations are preserved and not silently chosen",
+        "observed": "no alternate-location duplicates",
+        "expected": "none, or explicit records",
+        "detail": "each atom name appears once"
+      },
+      {
+        "check_id": "coordinates.occupancies_recorded",
+        "category": "coordinate_quality",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "occupancy is recorded for every deposited atom",
+        "observed": "37 of 37",
+        "expected": "all atoms",
+        "detail": "occupancies recorded without averaging"
+      },
+      {
+        "check_id": "coordinates.b_factors_recorded",
+        "category": "coordinate_quality",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "B-factor or displacement parameter is recorded for every atom",
+        "observed": "37 of 37",
+        "expected": "all atoms",
+        "detail": "per-atom displacement parameters recorded"
+      },
+      {
+        "check_id": "geometry.bond_lengths_in_range",
+        "category": "geometry",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "bond lengths fall within broad sanity bounds",
+        "observed": "0 outside 0.5-2.5 A",
+        "expected": "0 outside",
+        "detail": "broad physical sanity bounds, not force-field target lengths"
+      },
+      {
+        "check_id": "geometry.angles_in_range",
+        "category": "geometry",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "bond angles fall within broad sanity bounds",
+        "observed": "0 outside 30.0-180.0 degrees",
+        "expected": "0 outside",
+        "detail": "broad physical sanity bounds, not force-field target angles"
+      },
+      {
+        "check_id": "geometry.ring_planarity",
+        "category": "geometry",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "aromatic ring systems are approximately planar",
+        "observed": "0 above RMSD threshold",
+        "expected": "RMSD <= 0.2 A",
+        "detail": "3 aromatic ring system(s) assessed"
+      },
+      {
+        "check_id": "geometry.close_contacts",
+        "category": "geometry",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "no nonbonded 1-4-or-greater contact is unusually short",
+        "observed": "0 below 1.5 A",
+        "expected": "0 unusually short contacts",
+        "detail": "bonded and 1-3 pairs are excluded"
+      },
+      {
+        "check_id": "coordinates.missing_heavy_atoms",
+        "category": "completeness",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "all heavy component atoms are observed",
+        "observed": "0 missing",
+        "expected": "0 missing heavy atoms",
+        "detail": "all heavy component atoms have coordinates"
+      },
+      {
+        "check_id": "coordinates.missing_hydrogens",
+        "category": "completeness",
+        "status": "not_applicable",
+        "subject": "STI",
+        "criterion": "hydrogen coordinates are present",
+        "observed": "31 component atoms absent",
+        "expected": "hydrogens are not required in this batch",
+        "detail": "missing atoms are reported, not rebuilt"
+      },
+      {
+        "check_id": "coordinates.stereochemistry",
+        "category": "stereochemistry",
+        "status": "not_applicable",
+        "subject": "STI",
+        "criterion": "coordinate-derived chirality matches the reference",
+        "observed": "no reference stereocentres",
+        "expected": "not applicable when reference has no stereocentres",
+        "detail": "no stereochemical comparison is meaningful for this reference"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "missing_hydrogens",
+      "status": "not_applicable",
+      "detail": "Hydrogen atoms in the component dictionary are absent from the coordinates.",
+      "observed": "31 component atoms absent",
+      "expected": "heavy-atom coordinate record only",
+      "resolution": "No hydrogens were added."
+    }
+  ]
+}

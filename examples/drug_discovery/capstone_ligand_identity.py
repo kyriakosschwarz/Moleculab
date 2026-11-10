@@ -19,7 +19,7 @@ import argparse
 from collections import Counter
 from pathlib import Path
 
-from rdkit import Chem
+from rdkit import Chem, rdBase
 from rdkit.Chem import FindMolChiralCenters, rdMolDescriptors
 
 import gemmi
@@ -28,6 +28,7 @@ from moleculab import (
     DepositedAtom,
     DepositedBond,
     DepositedLigand,
+    NormalizationRecord,
     ReferenceAtom,
     ReferenceBond,
     ReferenceLigand,
@@ -94,6 +95,27 @@ def _chem_comp(block: gemmi.cif.Block, component_id: str) -> tuple[str, str]:
     raise ValueError(f"_chem_comp has no record for component {component_id!r}.")
 
 
+def _component_atoms(
+    block: gemmi.cif.Block,
+    component_id: str,
+) -> dict[str, tuple[str, str | None]]:
+    atoms = {}
+    for row in block.find(
+        "_chem_comp_atom.",
+        ["comp_id", "atom_id", "type_symbol", "pdbx_stereo_config"],
+    ):
+        values = [_unquote(value) for value in row]
+        if values[0] != component_id:
+            continue
+        stereo = None if values[3] in ("N", "?", ".") else values[3]
+        atoms[values[1]] = (values[2], stereo)
+    if not atoms:
+        raise ValueError(
+            f"_chem_comp_atom has no records for component {component_id!r}."
+        )
+    return atoms
+
+
 def _deposited_ligand(
     block: gemmi.cif.Block,
     selection,
@@ -132,6 +154,7 @@ def _deposited_ligand(
             "the Batch 1 ligand selection did not match any deposited atom records."
         )
 
+    component_atoms = _component_atoms(block, selection.component_id)
     atoms = tuple(
         DepositedAtom(
             atom_name=values[6],
@@ -144,7 +167,8 @@ def _deposited_ligand(
     )
     atom_names = {atom.atom_name for atom in atoms}
     bond_rows = []
-    omitted_hydrogen_bonds = 0
+    omitted_bond_records = 0
+    omitted_atom_names: set[str] = set()
     for row in block.find(
         "_chem_comp_bond.",
         ["comp_id", "atom_id_1", "atom_id_2", "value_order", "pdbx_aromatic_flag"],
@@ -155,7 +179,19 @@ def _deposited_ligand(
         if values[1] in atom_names and values[2] in atom_names:
             bond_rows.append(values)
         else:
-            omitted_hydrogen_bonds += 1
+            omitted_bond_records += 1
+            omitted_atom_names.update(
+                name for name in (values[1], values[2]) if name not in atom_names
+            )
+    omitted_bond_atom_elements = tuple(
+        sorted(
+            {
+                component_atoms[name][0]
+                for name in omitted_atom_names
+                if name in component_atoms
+            }
+        )
+    )
 
     bonds = tuple(
         DepositedBond(
@@ -180,8 +216,15 @@ def _deposited_ligand(
         atoms_are_heavy=all(atom.element.upper() != "H" for atom in atoms),
         formal_charges_present=any(atom.formal_charge is not None for atom in atoms),
         hydrogen_atoms_present=any(atom.element.upper() == "H" for atom in atoms),
-        omitted_hydrogen_bonds=omitted_hydrogen_bonds,
-        stereochemistry=(),
+        omitted_bond_records=omitted_bond_records,
+        omitted_bond_atom_elements=omitted_bond_atom_elements,
+        stereochemistry=tuple(
+            sorted(
+                f"{name}:{config}"
+                for name, (_element, config) in component_atoms.items()
+                if name in atom_names and config is not None
+            )
+        ),
     )
 
 
@@ -312,6 +355,18 @@ def main() -> None:
         deposited=deposited,
         reference=reference,
         candidate_mappings=candidates,
+        normalization=NormalizationRecord(
+            bond_order_rule=(
+                "raw Kekule orders are compared first; aromatic bonds are "
+                "treated as equivalent only in the separate aromatic-normalized "
+                "comparison"
+            ),
+            aromaticity_method=(
+                "RDKit sanitization and built-in aromaticity perception"
+            ),
+            toolkit="RDKit",
+            toolkit_version=rdBase.rdkitVersion,
+        ),
     )
     errors = validate_ligand_identity(record)
     if errors:
@@ -330,14 +385,22 @@ def main() -> None:
         f"{record.selection.label_asym_id} auth {record.selection.auth_asym_id} "
         f"seq {record.selection.auth_seq_id}"
     )
+    omitted_elements = ", ".join(deposited.omitted_bond_atom_elements) or "none"
     print(
         f"  deposited: {len(deposited.atoms)} atoms, {len(deposited.bonds)} heavy-atom "
-        f"bonds, {deposited.omitted_hydrogen_bonds} hydrogen bonds omitted"
+        f"bonds, {deposited.omitted_bond_records} component bond records omitted "
+        f"(atoms absent from coordinates: {omitted_elements})"
     )
     print(f"  reference: {reference.name}, {reference.formula}, charge {reference.formal_charge}")
     print(
         f"  mapping: {record.mapping.candidate_count} candidate(s), "
-        f"ambiguous={record.mapping.ambiguous}"
+        f"ambiguous={record.mapping.ambiguous}, "
+        f"ordering={record.mapping.ordering_basis}"
+    )
+    print(
+        f"  normalization: {record.normalization.toolkit} "
+        f"{record.normalization.toolkit_version} "
+        f"({record.normalization.aromaticity_method})"
     )
     print(
         f"  validation: {statuses['pass']} pass, {statuses['fail']} fail, "

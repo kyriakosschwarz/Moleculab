@@ -63,6 +63,7 @@ The reproducible anchors are:
 uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
 uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
+uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -70,7 +71,9 @@ ledger. The second retrieves the deposited 2HYY mmCIF, keeps it unchanged, and
 writes `data/structures/2HYY.manifest.json` with the exact source, checksum,
 protein chain, and ligand instance. The third reconciles the selected `STI`
 ligand with the imatinib reference and writes
-`data/structures/2HYY.ligand-identity.json`. None of the commands docks a
+`data/structures/2HYY.ligand-identity.json`. The fourth connects that atom
+mapping to the deposited coordinates and writes
+`data/structures/2HYY.ligand-coordinates.json`. None of the commands docks a
 ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -276,10 +279,11 @@ For 2HYY the record establishes:
 | Result | Value |
 | --- | --- |
 | Deposited graph | 37 heavy atoms, 41 heavy-atom bonds |
-| Hydrogen bond records omitted | 31; the deposited coordinates contain no hydrogens |
+| Component bond records omitted | 31 `_chem_comp_bond` records involve hydrogen atoms absent from the coordinate file |
 | Reference | imatinib, `C29H31N7O`, formal charge 0, 31 hydrogens |
 | Mapping candidates | 4 symmetry-equivalent graph isomorphisms |
-| Selected mapping | representative chosen by a recorded lexicographic rule |
+| Selected mapping | representative chosen by a recorded lexicographic rule over `deposited.atoms` order |
+| Normalisation | raw Kekulé comparison first; RDKit aromaticity comparison recorded with toolkit version |
 | Validation | 11 pass, 0 fail, 2 not run |
 
 The two `not_run` checks are formal charge and hydrogen count. The deposited
@@ -298,6 +302,51 @@ The raw difference is retained in the record and reported as a resolved
 discrepancy. The deposited bond orders are not rewritten. Formal charge remains
 an open discrepancy, and the absence of hydrogens is recorded as not applicable
 to the heavy-atom identity mapping.
+
+“Component bond records omitted” counts `_chem_comp_bond` rows, not hydrogen
+bonds. In 2HYY those rows involve hydrogen atoms that are present in the
+component dictionary but absent from the coordinate file.
+
+### 4.5 Batch 3: ligand coordinate reconciliation
+
+Batch 3 connects the validated chemical graph to the deposited coordinates. It
+does not prepare the ligand for simulation.
+
+```bash
+uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
+```
+
+The workflow reads the atom mapping from the Batch 2 identity record, preserves
+the deposited coordinates, occupancy, B-factors, and alternate locations, and
+writes `data/structures/2HYY.ligand-coordinates.json`.
+
+For 2HYY the record establishes:
+
+| Result | Value |
+| --- | --- |
+| Coordinates | 37 atoms; 41 bonds; 56 angles |
+| Aromatic ring systems | 3 |
+| Bond lengths | 1.232–1.576 Å, inside the broad 0.5–2.5 Å sanity range |
+| Bond angles | 106.8–127.7°, inside the broad 30–180° sanity range |
+| Ring planarity | maximum RMSD 0.097 Å; threshold 0.2 Å |
+| Close contacts | 0 below 1.5 Å, excluding bonded and 1–3 pairs |
+| Missing component atoms | 31, all hydrogen; 0 missing heavy atoms |
+| Alternate locations | 0 |
+| Validation | 10 pass, 0 fail, 2 not applicable |
+
+The two `not_applicable` checks are hydrogen coordinates and coordinate-derived
+stereochemistry. The component dictionary has hydrogens but the coordinate file
+does not, and the imatinib reference has no stereocentres. Neither condition is
+converted into a pass by inventing data.
+
+The geometry criteria are deliberately broad sanity bounds, not force-field
+target values. They detect gross inconsistencies in bond lengths, angles, ring
+planarity, and close contacts without pretending to validate a parameterised
+force field. The record preserves per-atom occupancy and displacement
+parameters; it does not choose or average alternate conformers.
+
+Batch 3 still does not add hydrogens, assign protonation states, type force-field
+atoms, minimise, dock, or estimate affinity.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
@@ -344,6 +393,7 @@ synthetic teaching data; they do not run an imatinib pipeline.
 uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
 uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
+uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -362,6 +412,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | chemical identity and descriptors | `capstone_imatinib.py` | calculated |
 | structure retrieval and selection manifest | `capstone_structure.py` | experimental + calculated |
 | ligand identity reconciliation | `capstone_ligand_identity.py` | experimental + calculated |
+| ligand coordinate reconciliation | `capstone_ligand_coordinates.py` | experimental + calculated |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

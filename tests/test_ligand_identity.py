@@ -68,7 +68,8 @@ def deposited_ligand(
         atoms_are_heavy=True,
         formal_charges_present=False,
         hydrogen_atoms_present=False,
-        omitted_hydrogen_bonds=0,
+        omitted_bond_records=0,
+        omitted_bond_atom_elements=(),
         stereochemistry=(),
     )
 
@@ -156,7 +157,11 @@ def test_reference_2hyy_identity_record_is_reproducible():
     assert result.selection.label_asym_id == "E"
     assert len(result.deposited.atoms) == 37
     assert len(result.deposited.bonds) == 41
-    assert result.deposited.omitted_hydrogen_bonds == 31
+    assert result.deposited.omitted_bond_records == 31
+    assert result.deposited.omitted_bond_atom_elements == ("H",)
+    assert result.mapping.ordering_basis == "deposited.atoms order"
+    assert result.normalization.toolkit == "RDKit"
+    assert result.normalization.toolkit_version is not None
     assert result.reference.formula == "C29H31N7O"
     assert result.mapping.candidate_count == 4
     assert result.mapping.ambiguous is True

@@ -10,13 +10,17 @@ and its provenance manifest.
 - `2HYY.ligand-identity.json` is the Batch 2 reconciliation record. It preserves
   the deposited heavy-atom graph, the reference graph, the explicit atom
   mapping, and every discrepancy.
+- `2HYY.ligand-coordinates.json` is the Batch 3 coordinate record. It preserves
+  coordinates, occupancy, displacement parameters, alternate locations, bond
+  lengths, angles, ring planarity, and close contacts.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
 
-Regenerate the records with:
+Regenerate the records in order:
 
 ```bash
 uv run --with gemmi python examples/drug_discovery/capstone_structure.py
 uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
+uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
 ```

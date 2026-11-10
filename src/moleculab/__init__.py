@@ -22,7 +22,8 @@ The source is organised by architecture layer:
     dipole moments, and LogD conversion;
 ``applications``
     docking, solvent, water, free energy, acid-base, QM/MM,
-    experimental-structure provenance, and ligand identity reconciliation.
+    experimental-structure provenance, ligand identity reconciliation, and
+    ligand coordinate reconciliation.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -167,6 +168,7 @@ from .applications.ligand_identity import (
     DepositedLigand,
     IdentityDiscrepancy,
     LigandIdentityRecord,
+    NormalizationRecord,
     ReferenceAtom,
     ReferenceBond,
     ReferenceLigand,
@@ -174,6 +176,21 @@ from .applications.ligand_identity import (
     reconcile_ligand_identity,
     validate_ligand_identity,
     write_ligand_identity,
+)
+from .applications.ligand_coordinates import (
+    LIGAND_COORDINATE_SCHEMA_VERSION,
+    AngleGeometry,
+    BondGeometry,
+    CloseContact,
+    CoordinateAtom,
+    CoordinateDiscrepancy,
+    GeometryCriteria,
+    LigandCoordinateRecord,
+    RingPlanarity,
+    load_ligand_coordinates,
+    reconcile_ligand_coordinates,
+    validate_ligand_coordinates,
+    write_ligand_coordinates,
 )
 from .applications.lj_alchemy import MultistageFEPResult, SoftCoreLennardJones
 from .applications.mbar import MBARResult, mbar, mbar_harmonic
@@ -297,6 +314,7 @@ __all__ = [
     "SPCE_WATER",
     "AnalysisRecord",
     "Angle",
+    "AngleGeometry",
     "AnglePotential",
     "AssayMeasurement",
     "AtomMapping",
@@ -305,10 +323,14 @@ __all__ = [
     "BindingModeComparison",
     "BindingSiteGeometry",
     "Bond",
+    "BondGeometry",
     "BondPotential",
     "BondedLennardJonesMC",
     "Box",
     "ChemicalIdentityRecord",
+    "CloseContact",
+    "CoordinateAtom",
+    "CoordinateDiscrepancy",
     "CoulombPotential",
     "DEBYE_PER_E_NM",
     "DecisionRecord",
@@ -325,6 +347,7 @@ __all__ = [
     "FEPResult",
     "FingerprintSchema",
     "FlexibleDockingPose",
+    "GeometryCriteria",
     "FlexibleDockingResult",
     "HarmonicAnglePotential",
     "HarmonicBondPotential",
@@ -336,9 +359,11 @@ __all__ = [
     "InteractionFeature",
     "InteractionFingerprint",
     "InteractionPatternComparison",
+    "LIGAND_COORDINATE_SCHEMA_VERSION",
     "LIGAND_IDENTITY_SCHEMA_VERSION",
     "LennardJonesParameters",
     "LennardJonesPotential",
+    "LigandCoordinateRecord",
     "LigandIdentityRecord",
     "LigandPose",
     "LigandSelection",
@@ -350,6 +375,7 @@ __all__ = [
     "MinimizationResult",
     "MultistageFEPResult",
     "NeighbourList",
+    "NormalizationRecord",
     "NonbondedModel",
     "OccupancyResult",
     "PairPotential",
@@ -374,6 +400,7 @@ __all__ = [
     "ReferenceLigand",
     "ResidueContactMatrix",
     "RigidLigand",
+    "RingPlanarity",
     "ShakeResult",
     "SideChain",
     "SoftCoreLennardJones",
@@ -440,6 +467,7 @@ __all__ = [
     "kinetic_pressure",
     "kinetic_temperature",
     "ligand_efficiency",
+    "load_ligand_coordinates",
     "load_ligand_identity",
     "load_manifest",
     "logd_from_logp",
@@ -463,6 +491,7 @@ __all__ = [
     "protonation_microstates",
     "radial_distribution_function",
     "rattle_velocities",
+    "reconcile_ligand_coordinates",
     "reconcile_ligand_identity",
     "receptor_strain_score",
     "sample_harmonic_positions",
@@ -488,11 +517,13 @@ __all__ = [
     "total_energy",
     "use_backend",
     "validate_atom_mapping",
+    "validate_ligand_coordinates",
     "validate_ligand_identity",
     "validate_manifest",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
     "virial_pressure",
+    "write_ligand_coordinates",
     "write_ligand_identity",
     "write_manifest",
 ]

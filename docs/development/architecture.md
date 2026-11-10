@@ -71,7 +71,7 @@ src/moleculab/
 ├── protocols/        thermostat, barostat
 ├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR, ADME
 ├── applications/     docking, solvent, water, free energy, acid-base, QM/MM,
-│                     structure provenance, ligand identity
+│                     structure provenance, ligand identity, ligand coordinates
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -142,6 +142,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
 | `applications.structure_manifest` | Python standard library only | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.ligand_identity` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.ligand_coordinates` | `applications.ligand_identity`, `applications.structure_manifest`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -168,12 +169,13 @@ integrator or thermostat.
 finite-difference Schrödinger equation with fixed point charges. It is not a
 classical potential and is deliberately isolated.
 
-`structure_manifest` and `ligand_identity` are **record layers**. They accept
-plain, already-parsed data and do not import `gemmi`, RDKit, or any coordinate
-reader. The capstone adapters in `examples/drug_discovery/` own those optional
-dependencies and pass explicit records, graphs, and candidate mappings into the
-library. This keeps the core installable with NumPy alone and keeps file-format
-decisions outside the physics and analysis layers.
+`structure_manifest`, `ligand_identity`, and `ligand_coordinates` are **record
+layers**. They accept plain, already-parsed data and do not import `gemmi`,
+RDKit, or any coordinate reader. The capstone adapters in
+`examples/drug_discovery/` own those optional dependencies and pass explicit
+records, graphs, candidate mappings, and coordinate records into the library.
+This keeps the core installable with NumPy alone and keeps file-format decisions
+outside the physics and analysis layers.
 
 ## 5. Core data structures and contracts
 
@@ -568,9 +570,12 @@ revision metadata, explicit selections, processing decisions, actors, and
 machine-readable validation checks. `applications/ligand_identity.py` compares
 supplied deposited and reference graphs, preserves mapping ambiguity, keeps raw
 bond orders before any aromatic-normalized comparison, and reports unresolved
-discrepancies. The capstone consumes these records rather than hard-coding a
-residue lookup. The records are JSON-serialisable and validated independently of
-the scientific success of the analysis.
+discrepancies. `applications/ligand_coordinates.py` attaches deposited
+coordinates to that mapping and records occupancy, displacement parameters,
+alternate locations, bond lengths, angles, ring planarity, and close contacts
+against broad sanity bounds. The capstone consumes these records rather than
+hard-coding a residue lookup. The records are JSON-serialisable and validated
+independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
 schema changes need migration or a version bump. The alternative is a workflow
@@ -682,7 +687,7 @@ geometry with exact or residue-level interaction patterns, and summarizes
 docking benchmarks with separate valid and invalid cases. It does not search
 poses or parse docking-program files.
 
-### 7.7 Structure ingestion and ligand identity
+### 7.7 Structure ingestion, identity, and coordinates
 
 The capstone adds a record-first control flow before any structural analysis:
 
@@ -692,6 +697,8 @@ mmCIF file (adapter: gemmi)
     → selected ligand atoms and bonds (adapter: gemmi)
     → reference graph and candidate mappings (adapter: RDKit)
     → LigandIdentityRecord
+    → deposited coordinates (adapter: gemmi)
+    → LigandCoordinateRecord
     → binding-site and interaction analysis
 ```
 
@@ -702,12 +709,15 @@ decisions, actors, and validation checks. `ligand_identity` selects a
 representative mapping, records mapping ambiguity, compares raw bond orders
 before a separate aromatic-normalized comparison, and reports formal-charge,
 hydrogen, and stereochemistry limits as `not_run` or open discrepancies rather
-than repairing them.
+than repairing them. `ligand_coordinates` attaches the deposited coordinates to
+that mapping and records occupancy, displacement parameters, alternate
+locations, bond lengths, angles, aromatic-ring planarity, and close contacts
+against broad sanity bounds.
 
 The reference records live in [`data/structures/`](../../data/structures/README.md):
-the manifest and identity record are committed, while the downloaded coordinate
-file is cached and ignored. A checksum mismatch stops the workflow instead of
-replacing the provenance record silently.
+the manifest, identity record, and coordinate record are committed, while the
+downloaded coordinate file is cached and ignored. A checksum mismatch stops the
+workflow instead of replacing the provenance record silently.
 
 This flow does not prepare a force-field-ready ligand, add hydrogens, assign
 protonation states, or claim affinity. Those remain later decisions with their
@@ -745,7 +755,7 @@ forking the codebase.
 | --- | --- | --- | --- |
 | A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
 | B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
-| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity | turns structural observations into auditable records without claiming affinity |
+| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates | turns structural observations into auditable records without claiming affinity |
 
 The capstone is the integration point:
 
@@ -753,6 +763,7 @@ The capstone is the integration point:
 experimental structure
     → structure manifest (source, selection, decisions, validation)
     → ligand identity record (reference graph, mapping, discrepancies)
+    → ligand coordinate record (occupancy, alternate locations, geometry)
     → binding-site and interaction analysis
     → explicit limitations; no affinity or free-energy claim
 ```
@@ -857,6 +868,8 @@ structure manifest (source, selection, decisions, checks)
         ↓
 ligand identity record (reference graph, atom mapping, discrepancies)
         ↓
+ligand coordinate record (occupancy, alternate locations, geometry)
+        ↓
 binding-site and interaction analysis
         ↓
 later decision: System preparation and force-field parameters
@@ -876,6 +889,8 @@ Every stage is already represented by a module:
   and ligand copy.
 - `ligand_identity` reconciles the deposited ligand graph with a reference and
   records mapping ambiguity and discrepancies.
+- `ligand_coordinates` attaches deposited coordinates to the identity mapping
+  and records occupancy, alternate locations, and geometry.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -896,6 +911,7 @@ The architecture makes common drug-discovery extensions additive:
 | new backend | `backend.py` | model APIs |
 | new structure format | an example/adapter plus `structure_manifest` | record schema, core physics |
 | new identity comparison | `applications/ligand_identity.py` | core physics, coordinate parsing |
+| new coordinate geometry check | `applications/ligand_coordinates.py` | core physics, identity schema |
 | new analysis | `analysis/trajectory.py` | simulation state |
 | larger short-range pair screen | `composition/neighbour.py` | default pair-loop semantics |
 
@@ -1015,6 +1031,7 @@ These are the rules that keep the layers honest.
 | opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
 | structure manifests require a checksum, explicit selection, decisions, and labelled checks | `tests/test_structure_manifest.py` |
 | ligand identity records preserve ambiguity, raw bond orders, mapping completeness, and unresolved discrepancies | `tests/test_ligand_identity.py` |
+| coordinate records preserve occupancy, alternate locations, missing atoms, and geometry sanity checks | `tests/test_ligand_coordinates.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1039,9 +1056,10 @@ For a new contributor, the source is best read in this order:
     `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/adme.py`,
     `analysis/docking/` — trajectory, contact, binding-site, interaction,
     fingerprint, SAR, ADME, and pose measurements.
-11. `applications/structure_manifest.py`, `applications/ligand_identity.py` —
-    provenance, explicit selection, atom mapping, and chemical-identity
-    discrepancies.
+11. `applications/structure_manifest.py`, `applications/ligand_identity.py`,
+    `applications/ligand_coordinates.py` — provenance, explicit selection, atom
+    mapping, chemical-identity discrepancies, occupancy, alternate locations,
+    and coordinate geometry.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.
@@ -1063,8 +1081,8 @@ The tutorials follow the same order, which is not a coincidence.
 - Constraints are data applied by algorithms.
 - Tests are the executable specification of the architecture.
 - The tutorials are a layer-by-layer tour of the same structure.
-- Experimental provenance and ligand identity are first-class records, separate
-  from the physics and from any affinity claim.
+- Experimental provenance, ligand identity, and coordinate geometry are
+  first-class records, separate from the physics and from any affinity claim.
 - The composition path from particle to force field to solvent to docking to
   free energy is already present, with explicit limitations.
 - The design is a good basis for drug discovery because new physics and new
