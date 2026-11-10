@@ -85,6 +85,10 @@ After part 10, continue with the [main tutorial](../tutorial.md) through
 solvent, water, docking, Ewald, pressure, and free energy. The sequence ends
 with the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
 
+The parallel chemistry track starts with
+[chemical structure and conformational behaviour](../chemistry/01_chemical_structure.md);
+see [the three learning tracks](../tracks.md) for prerequisites.
+
 ## Tutorial to package map
 
 | Tutorial | Package |

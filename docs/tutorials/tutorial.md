@@ -28,6 +28,8 @@ Companion guides:
 - [Troubleshooting and error diagnosis](troubleshooting.md)
 - [Notebook and visualization prompts](visualization_prompts.md)
 - [Answer keys and expected magnitudes](answer_keys.md)
+- [Three learning tracks](tracks.md)
+- [Chemistry track](chemistry/README.md)
 
 ## 1. Units first
 

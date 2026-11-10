@@ -301,6 +301,8 @@ There are five entry points:
 | [`troubleshooting.md`](troubleshooting.md) | symptom table and diagnostic recipes |
 | [`visualization_prompts.md`](visualization_prompts.md) | notebook-sized plotting prompts |
 | [`answer_keys.md`](answer_keys.md) | answer sketches and expected magnitudes |
+| [`tracks.md`](tracks.md) | the three learning tracks and prerequisites |
+| [`chemistry/`](chemistry/README.md) | chemical structure and molecular properties |
 | [`../architecture.md`](../architecture.md) | how the software is structured and why |
 | [`../validation.md`](../validation.md) | how correctness is checked |
 

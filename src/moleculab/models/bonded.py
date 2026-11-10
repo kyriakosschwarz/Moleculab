@@ -271,8 +271,18 @@ class PeriodicTorsionPotential:
             r_ij + r_jk,
             r_ij + r_jk + r_kl,
         )
+        return self.energy_from_angle(angle)
+
+    def energy_from_angle(self, angle: float) -> float:
+        """Return the torsion energy for a dihedral angle in radians.
+
+        This is useful for conformational scans, where the geometry is varied
+        directly rather than reconstructed from three bond vectors.
+        """
+
         return float(
-            self.barrier * (1.0 + np.cos(self.periodicity * angle - self.phase))
+            self.barrier
+            * (1.0 + np.cos(self.periodicity * float(angle) - self.phase))
         )
 
     def forces(

@@ -88,7 +88,11 @@ architecture is described in [`docs/architecture.md`](docs/architecture.md).
 [`docs/tutorials/introduction.md`](docs/tutorials/introduction.md) explains how
 the tutorial sequence connects to CADD applications and ends with the
 [`docs/tutorials/capstone_imatinib.md`](docs/tutorials/capstone_imatinib.md).
-The first implementation notes are in [`docs/energies.md`](docs/energies.md),
+[`docs/tutorials/tracks.md`](docs/tutorials/tracks.md) describes the three
+parallel learning tracks, and
+[`docs/tutorials/chemistry/`](docs/tutorials/chemistry/README.md) begins the
+chemistry companion track. The first implementation notes are in
+[`docs/energies.md`](docs/energies.md),
 [`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
 from one particle to a small molecular simulation,
 [`docs/tutorials/individual/`](docs/tutorials/individual/) contains deeper

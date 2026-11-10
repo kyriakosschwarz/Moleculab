@@ -21,6 +21,7 @@ uv run python examples/bonded_molecule.py
 uv run python examples/harmonic_oscillator.py
 uv run python examples/harmonic_validation.py
 uv run python examples/chemical_examples.py
+uv run python examples/chemical_structure.py
 uv run python examples/trajectory_analysis.py
 uv run python examples/solvent_box.py
 uv run python examples/free_energy_perturbation.py
@@ -96,4 +97,4 @@ uv run python docs/generate_architecture_visuals.py
 - Code blocks in `docs/` are AI-exported and often have newlines/indentation collapsed. Treat them as intent, not copy-paste source; write clean, PEP 8 code matching the described behavior.
 - Tutorial math must render on GitHub and in VS Code. Keep display math on one `$$ ... $$` line, use `\ ` rather than `\,` or `~` for spaces inside math, avoid math inside italics, and use `\lvert ... \rvert` instead of literal `|` in table math.
 - `docs/all.md` is internal background material and is not part of the user-facing documentation. Do not link it from READMEs or tutorials; use `docs/tutorials/capstone_imatinib.md` for the user-facing imatinib capstone.
-- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The guided tutorial is `docs/tutorials/tutorial.md`; the CADD-focused overview is `docs/tutorials/introduction.md`; deeper visual tutorials for sections 1–10 are in `docs/tutorials/individual/`.
+- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The guided tutorial is `docs/tutorials/tutorial.md`; the CADD-focused overview is `docs/tutorials/introduction.md`; the three-track curriculum is `docs/tutorials/tracks.md`; the chemistry companion starts at `docs/tutorials/chemistry/01_chemical_structure.md`; deeper visual tutorials for sections 1–10 are in `docs/tutorials/individual/`.

@@ -59,6 +59,15 @@ def test_dihedral_angle_known_geometries():
     ) == pytest.approx(np.pi)
 
 
+def test_energy_from_angle_matches_the_threefold_curve():
+    potential = torsion_potential()
+
+    assert potential.energy_from_angle(0.0) == pytest.approx(4.0)
+    assert potential.energy_from_angle(np.deg2rad(60.0)) == pytest.approx(0.0)
+    assert potential.energy_from_angle(np.deg2rad(120.0)) == pytest.approx(4.0)
+    assert potential.energy_from_angle(np.deg2rad(180.0)) == pytest.approx(0.0)
+
+
 def test_periodic_torsion_energy_at_known_angles():
     potential = PeriodicTorsionPotential(barrier=2.0, periodicity=1, phase=0.0)
 
