@@ -113,6 +113,7 @@
         "mean_error_kj_per_mol": -0.002300104497817035,
         "confidence_interval_coverage": 0.8
       },
+      "seed": 2024,
       "note": "The exact free-energy change is positive and the distributions overlap well."
     },
     {
@@ -208,6 +209,7 @@
         "mean_error_kj_per_mol": 0.1226815795554355,
         "confidence_interval_coverage": 0.55
       },
+      "seed": 4048,
       "note": "The exact free-energy difference is zero because the center shift does not change the partition function; forward FEP still has poor overlap and high variance."
     }
   ],

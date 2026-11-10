@@ -59,6 +59,7 @@ uv run pytest tests/test_water_evidence.py -q
 uv run pytest tests/test_interaction_robustness.py -q
 uv run pytest tests/test_thermodynamic_interpretation.py -q
 uv run pytest tests/test_free_energy_study.py -q
+uv run pytest tests/test_scientific_audit.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -87,6 +88,8 @@ Covered:
   and an explicitly null free-energy value;
 - exact harmonic partition functions, FEP convergence, effective sample size,
   weight concentration, and replicate uncertainty;
+- final documentation, provenance-chain, constant, gradient, boundary, checksum,
+  seed, and end-to-end audit checks;
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - dipole moments, origin dependence, and charge/position validation;
 - pH-dependent LogD corrections for monoprotic acids and bases;
@@ -239,6 +242,7 @@ point when a single operator typo could corrupt every downstream result.
 | invariant, assumption-sensitive, unsupported, and unknown conclusions keep consistent support sets and no composite score | `tests/test_interaction_robustness.py` |
 | structural counts, missing thermodynamic terms, and preparation/sampling requirements are separated from a null free energy | `tests/test_thermodynamic_interpretation.py` |
 | exact partition functions reproduce harmonic free-energy differences and FEP convergence reports overlap and replicate spread | `tests/test_free_energy_study.py` |
+| the final audit checks documentation links, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end demonstration | `tests/test_scientific_audit.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

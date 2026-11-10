@@ -41,7 +41,7 @@ observations to thermodynamics.
 2. Track B, modules 01–08.
 3. Track A, sections 11–24.
 4. Track C, modules 01–10.
-5. The [capstone](capstone_imatinib.md).
+5. The [capstone](capstone_imatinib.md), including the final scientific audit.
 
 For the longer rationale, see the [CADD overview](overview.md). For the detailed
 prerequisite and module-status tables, see the

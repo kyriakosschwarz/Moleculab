@@ -117,7 +117,8 @@ algorithms (integrators, minimization) + protocols (thermostats, pressure)
 analysis (trajectory, binding sites)
     + applications (docking, solvent, water, free energy, acid-base, QM/MM,
                     structure provenance, ligand identity, hydrogen and water
-                    evidence, interaction robustness, thermodynamic boundaries)
+                    evidence, interaction robustness, thermodynamic boundaries,
+                    scientific audit)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -162,6 +163,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.interaction_robustness` | `applications.combination_interactions`, `applications.hydrogen_evidence`, `applications.water_evidence`, `analysis.interactions` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.thermodynamic_interpretation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators, free-energy estimators |
 | `applications.free_energy_study` | `applications.fep`, `models.potentials`, `foundation.units`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.scientific_audit` | `applications.free_energy_study`, `applications.structure_manifest`, `foundation.units`, `models.potentials`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -193,8 +195,8 @@ classical potential and is deliberately isolated.
 `interaction_evidence`, `chemical_preparation`,
 `chemical_state_enumeration`, `state_interactions`, `protein_preparation`,
 `combination_interactions`, `hydrogen_evidence`, `water_evidence`,
-`interaction_robustness`, and `thermodynamic_interpretation` are **record
-layers**. They accept plain,
+`interaction_robustness`, `thermodynamic_interpretation`, and
+`scientific_audit` are **record layers**. They accept plain,
 already-parsed data and do not import `gemmi`, RDKit, or any coordinate reader.
 The capstone adapters in `examples/drug_discovery/` own those optional
 dependencies and pass explicit records, graphs, candidate mappings, coordinate
@@ -634,10 +636,13 @@ and never collapses them into a confidence score.
 `applications/thermodynamic_interpretation.py` separates structural counts from
 thermodynamic claims, lists the interaction, desolvation, entropy, water,
 strain, standard-state, sampling, and uncertainty requirements that are still
-missing, and leaves the binding free energy explicitly `not_computed`. The
-capstone consumes these records rather than hard-coding a residue lookup. The
-records are JSON-serialisable and validated independently of the scientific
-success of the analysis.
+missing, and leaves the binding free energy explicitly `not_computed`.
+`applications/scientific_audit.py` checks documentation links, constants,
+derivatives, state provenance, the structural and thermodynamic boundaries,
+artifact checksums, study seeds, and an end-to-end configuration → Boltzmann →
+ensemble → exact/FEP demonstration. The capstone consumes these records rather
+than hard-coding a residue lookup. The records are JSON-serialisable and
+validated independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
 schema changes need migration or a version bump. The alternative is a workflow
@@ -691,7 +696,10 @@ The estimators do not know whether the model is harmonic, Lennard-Jones, or a
 solvated ligand. They depend on energies and sample labels. `free_energy_study`
 is a controlled validation layer, not a protein-ligand affinity calculation:
 it separates estimator error from model error and demonstrates why poor overlap
-can defeat a formally correct exponential average.
+can defeat a formally correct exponential average. `scientific_audit` then
+checks the record chain, documentation, constants, derivatives, provenance,
+boundaries, checksums, seeds, and a controlled configuration → Boltzmann →
+ensemble → free-energy demonstration.
 
 ### 7.4 Docking
 
@@ -782,6 +790,7 @@ mmCIF file (adapter: gemmi)
     → WaterEvidenceRecord (deposited waters and geometric bridges)
     → InteractionRobustnessRecord (independent assumption axes)
     → ThermodynamicInterpretationRecord (missing terms and requirements)
+    → ScientificAuditRecord (integration, checksums, and stop-line)
     → later population or free-energy pass
 ```
 
@@ -896,6 +905,7 @@ experimental structure
     → deposited-water evidence (geometric bridge plausibility)
     → interaction robustness (invariant / sensitive / unsupported / unknown)
     → thermodynamic boundaries (missing terms and requirements; ΔG not computed)
+    → scientific audit (checksums, documentation, and end-to-end stop-line)
     → explicit limitations; no affinity or free-energy claim
 ```
 
@@ -1027,6 +1037,8 @@ interaction robustness (independent assumption axes, no composite score)
         ↓
 thermodynamic interpretation (missing terms and requirements; ΔG not computed)
         ↓
+scientific audit (checksums, documentation, end-to-end stop-line)
+        ↓
 later decision: System preparation and force-field parameters
 ```
 
@@ -1070,6 +1082,8 @@ Every stage is already represented by a module:
   invariant, assumption-sensitive, unsupported, and unknown conclusions apart.
 - `thermodynamic_interpretation` records missing thermodynamic terms and
   preparation/sampling requirements while leaving ΔG explicitly uncomputed.
+- `scientific_audit` checks the record chain, documentation, constants,
+  derivatives, boundaries, checksums, seeds, and the final stop-line.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1224,6 +1238,7 @@ These are the rules that keep the layers honest.
 | robustness conclusions keep consistent support sets and no composite confidence score | `tests/test_interaction_robustness.py` |
 | thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
 | exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
+| the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/test_scientific_audit.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1261,14 +1276,16 @@ For a new contributor, the source is best read in this order:
     `applications/hydrogen_evidence.py`,
     `applications/water_evidence.py`,
     `applications/interaction_robustness.py`,
-    `applications/thermodynamic_interpretation.py` — provenance, explicit selection,
+    `applications/thermodynamic_interpretation.py`,
+    `applications/scientific_audit.py` — provenance, explicit selection,
     atom mapping, chemical-identity discrepancies, occupancy, alternate
     locations, coordinate geometry, pocket selection, contacts, evidence-gated
     interaction classification, three-state fingerprints, separate prepared
     chemical states, protonation/tautomer alternatives, state-aware contact
     assessment, protein-pocket template chemistry, state-pair interaction
     matrices, generated-hydrogen geometry, deposited-water evidence,
-    assumption-sensitivity records, and structural-to-thermodynamic boundaries.
+    assumption-sensitivity records, structural-to-thermodynamic boundaries, and
+    the final scientific audit.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py`, `applications/free_energy_study.py` — free energy and exact-reference convergence diagnostics.

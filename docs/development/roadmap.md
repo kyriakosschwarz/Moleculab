@@ -3,6 +3,11 @@
 > the long-term roadmap. For the three-track tutorial entry, see
 > [`tutorials/README.md`](../tutorials/README.md); for the CADD-focused course
 > overview, see [`tutorials/overview.md`](../tutorials/overview.md).
+>
+> **Current educational status:** the planned 16-batch capstone is complete
+> through the scientific audit. The milestones below describe the broader
+> long-term roadmap; they are not a claim that every later milestone is
+> implemented.
 
 Building a molecular simulation library from scratch: From physics to drug discovery
 I think this is an excellent way to learn computational drug discovery. Rather than treating GROMACS, OpenMM, ORCA or AutoDock as black boxes, we'll gradually build our own small molecular simulation engine and understand exactly what happens inside it.

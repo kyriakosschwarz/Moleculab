@@ -1020,6 +1020,73 @@ first controlled demonstration that the free-energy machinery produces the
 right answer when the reference is known, and that poor overlap can defeat a
 formally correct estimator.
 
+### 4.19 Batch 16: integration and scientific audit
+
+Batch 16 is the final planned milestone. It does not add another physical model;
+it audits the chain and demonstrates the statistical-mechanics path end to end.
+
+```bash
+uv run python examples/drug_discovery/capstone_final_audit.py
+```
+
+The audit record is written to
+`data/free_energy/capstone-scientific-audit.json`.
+
+The demonstration follows one controlled chain:
+
+```text
+configuration
+  -> potential energy
+  -> Boltzmann weight
+  -> ensemble average
+  -> exact partition function
+  -> FEP estimate
+  -> overlap and uncertainty diagnostics
+```
+
+For the harmonic model at 300 K, the sampled mean potential energy is compared
+with equipartition, the exact free-energy difference is compared with FEP, and
+the two-state degeneracy example is rechecked. The chain then stops at an
+explicit boundary:
+
+- the harmonic model has an exact Hamiltonian, partition function, and
+  Boltzmann sampler;
+- the protein-ligand record has no force-field-ready model, explicit solvent,
+  ion environment, or protonation population;
+- no conformational or alchemical sampling has been run for the complex;
+- structural evidence is not converted into a binding free energy.
+
+The audit covers:
+
+| Area | Check |
+| --- | --- |
+| Learning paths | Track A, B, C, capstone, validation, examples, and data documentation exist; relative links resolve |
+| Physics | units and constants, harmonic partition function, analytic free energy, force-gradient sign |
+| Chemistry | unselected state hypotheses, no implied protein hydrogens, generated/deposited hydrogen provenance, unassigned water roles |
+| Drug discovery | contact and water observations, complete 8×2 matrix, four distinct robustness statuses, structural thermodynamic boundary |
+| Thermodynamics | exact two-state reference, good- and poor-overlap cases, FEP reference agreement, ensemble average |
+| Reproducibility | source checksum, manifest chain, inter-record checksum chain, study seeds, artifact existence |
+| Documentation | milestone chain and relative-link integrity |
+
+The audit record is not a claim that the project is a validated drug-discovery
+platform. It is a machine-readable statement of which invariants were checked
+and which limitations remain. In particular:
+
+- effective sample size and maximum weight fraction diagnose observed weights;
+  they do not prove that every important region of configuration space was
+  sampled;
+- confidence-interval coverage is empirical, and exponential estimators can
+  have strongly skewed finite-sample distributions;
+- a passed audit does not establish experimental affinity, population accuracy,
+  or transferability;
+- the capstone still lacks force-field parameters, explicit solvent, and
+  alchemical sampling for imatinib.
+
+The final educational claim is therefore narrow and explicit: Moleculab can
+build an auditable structural argument, explain why it is not a binding free
+energy, and demonstrate free-energy estimation on a model with a known exact
+answer. It cannot yet calculate the imatinib binding free energy.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -1331,6 +1398,7 @@ number:
 | water record | deposited identity, coordinates, occupancy, B-factor, unassigned roles, bridge geometry versus chemical classification |
 | robustness record | separate assumption axes, invariant/sensitive/unsupported/unknown conclusions, no composite confidence score |
 | thermodynamic boundary record | structural counts kept separate from energies, missing terms and requirements, explicit null free energy |
+| scientific audit record | documentation, constants, derivatives, provenance chain, boundaries, checksums, seeds, and end-to-end stop-line |
 | pose record | atom mapping, symmetry handling, RMSD, threshold, score provenance |
 | SAR record | measured activity type, descriptor changes, docking scores, separated hypothesis |
 | thermodynamics note | method, standard state, uncertainty, sampling limitations |
@@ -1353,6 +1421,8 @@ Acceptance criteria:
   unknown statuses rather than a composite confidence score;
 - a structural count is never converted into a binding free energy without an
   explicit model, sampling, and uncertainty analysis;
+- the final audit states which invariants were checked and which limitations
+  remain;
 - a geometric contact is never presented as a thermodynamic contribution;
 - a failed or invalid benchmark case is reported, not hidden;
 - the capstone states what further experiments or calculations would establish.

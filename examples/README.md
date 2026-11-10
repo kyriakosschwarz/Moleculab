@@ -67,6 +67,7 @@ linked from the relevant tutorial or reference page.
 | [`capstone_water_evidence.py`](drug_discovery/capstone_water_evidence.py) | deposited-water identity, occupancy, and geometric [bridge plausibility](../data/structures/2HYY.water-evidence.json) |
 | [`capstone_interaction_robustness.py`](drug_discovery/capstone_interaction_robustness.py) | independent assumption axes and [interaction robustness](../data/structures/2HYY.interaction-robustness.json); no confidence score |
 | [`capstone_thermodynamic_interpretation.py`](drug_discovery/capstone_thermodynamic_interpretation.py) | structural-to-thermodynamic [boundaries](../data/structures/2HYY.thermodynamic-interpretation.json); free energy explicitly not computed |
+| [`capstone_final_audit.py`](drug_discovery/capstone_final_audit.py) | final integration [audit](../data/free_energy/capstone-scientific-audit.json) and configuration → ensemble → free-energy demonstration |
 
 ## Advanced
 

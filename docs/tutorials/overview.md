@@ -76,12 +76,17 @@ The current implementation includes classical molecular mechanics, MD,
 minimisation, thermostats, periodic boundaries, trajectory analysis, solvent
 and water models, docking, Ewald electrostatics, pressure coupling, FEP/TI/MBAR,
 alchemical soft-core models, a finite-difference QM/MM model, acid-base
-protonation and tautomer population bookkeeping, and an optional PyTorch Ewald
-backend.
+protonation and tautomer population bookkeeping, a provenance-led imatinib
+capstone, a controlled harmonic free-energy study, and a final scientific audit.
+An optional PyTorch Ewald backend accelerates the reciprocal Ewald path.
 
 The roadmap includes more realistic force fields, particle-mesh Ewald,
 triclinic boxes, enhanced sampling, trained scoring functions, and real quantum
 chemistry. Those are explicitly **not** part of the current tutorial's claims.
+The planned 16-batch educational foundation is complete through the scientific
+audit; more ambitious molecular force fields, explicit-solvent MD, alchemical
+protein-ligand transformations, and BAR/MBAR uncertainty analysis would be a new
+development phase with its own scientific validation criteria.
 
 ## 4. The three learning paths
 

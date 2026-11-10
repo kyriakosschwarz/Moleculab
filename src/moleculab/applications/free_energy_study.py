@@ -288,6 +288,7 @@ class HarmonicFEPCase:
     exact_delta_g_kj_per_mol: float
     convergence: tuple[FEPConvergencePoint, ...]
     replicates: FEPReplicateSummary
+    seed: int
     note: str
 
     def to_dict(self) -> dict[str, Any]:
@@ -309,6 +310,7 @@ class HarmonicFEPCase:
             "exact_delta_g_kj_per_mol": self.exact_delta_g_kj_per_mol,
             "convergence": [item.to_dict() for item in self.convergence],
             "replicates": self.replicates.to_dict(),
+            "seed": self.seed,
             "note": self.note,
         }
 
@@ -360,6 +362,7 @@ class HarmonicFEPCase:
             replicates=FEPReplicateSummary.from_dict(
                 _as_mapping(data.get("replicates"), "replicates")
             ),
+            seed=_required_int(data, "seed"),
             note=_optional_string(data, "note") or "",
         )
 
@@ -739,6 +742,7 @@ def run_harmonic_fep_case(
         exact_delta_g_kj_per_mol=exact_delta_g,
         convergence=convergence,
         replicates=_replicate_summary(replicate_results, exact_delta_g),
+        seed=int(seed),
         note=note,
     )
 
@@ -1055,6 +1059,8 @@ def validate_harmonic_fep_study(
             errors.append(f"cases[{index}] partition functions must be positive.")
         if not math.isfinite(case.exact_delta_g_kj_per_mol):
             errors.append(f"cases[{index}] exact delta G must be finite.")
+        if case.seed < 0:
+            errors.append(f"cases[{index}] seed must be non-negative.")
         if tuple(point.n_samples for point in case.convergence) != record.sample_sizes:
             errors.append(f"cases[{index}] convergence grid does not match sample_sizes.")
         for point_index, point in enumerate(case.convergence):

@@ -1,0 +1,322 @@
+{
+  "schema_version": "1.0",
+  "audited_artifacts": [
+    "data/structures/2HYY.manifest.json",
+    "data/structures/2HYY.ligand-identity.json",
+    "data/structures/2HYY.ligand-coordinates.json",
+    "data/structures/2HYY.binding-site.json",
+    "data/structures/2HYY.chemical-states.json",
+    "data/structures/2HYY.protein-preparation.json",
+    "data/structures/2HYY.hydrogen-evidence.json",
+    "data/structures/2HYY.water-evidence.json",
+    "data/structures/2HYY.combination-interactions.json",
+    "data/structures/2HYY.interaction-robustness.json",
+    "data/structures/2HYY.thermodynamic-interpretation.json",
+    "data/free_energy/harmonic-fep-study.json"
+  ],
+  "checks": [
+    {
+      "check_id": "documentation.paths",
+      "category": "documentation",
+      "status": "pass",
+      "subject": "learning paths",
+      "criterion": "all track, capstone, validation, and data documentation files exist",
+      "observed": "10/10 present",
+      "detail": "Track A, Track B, Track C, capstone, validation, examples, and data records are present"
+    },
+    {
+      "check_id": "documentation.links",
+      "category": "documentation",
+      "status": "pass",
+      "subject": "documentation links",
+      "criterion": "relative links in the audited documents resolve",
+      "observed": "0 broken links",
+      "detail": "checked documentation, examples, data, and AGENTS links; SMILES parentheses are ignored"
+    },
+    {
+      "check_id": "documentation.capstone_batches",
+      "category": "documentation",
+      "status": "pass",
+      "subject": "capstone",
+      "criterion": "the capstone documents the completed milestone chain",
+      "observed": "milestone sections present",
+      "detail": "the capstone is the integration narrative, not only a result table"
+    },
+    {
+      "check_id": "physics.constants",
+      "category": "physics",
+      "status": "pass",
+      "subject": "units",
+      "criterion": "golden constants retain their documented values",
+      "observed": "R=0.008314462618, kC=138.935458",
+      "detail": "the compatibility alias BOLTZMANN_CONSTANT remains the molar gas constant"
+    },
+    {
+      "check_id": "physics.harmonic_exact",
+      "category": "physics",
+      "status": "pass",
+      "subject": "harmonic model",
+      "criterion": "partition-function and analytic free-energy differences agree",
+      "observed": "exact=2.593415844692, partition=2.593415844692",
+      "detail": "the center shift cancels from the configurational partition function"
+    },
+    {
+      "check_id": "physics.force_gradient",
+      "category": "physics",
+      "status": "pass",
+      "subject": "harmonic force",
+      "criterion": "analytic force matches a central finite difference",
+      "observed": "max error=9.960e-10",
+      "detail": "derivative and force sign conventions are audited on a controlled potential"
+    },
+    {
+      "check_id": "chemistry.state_hypotheses",
+      "category": "chemistry",
+      "status": "pass",
+      "subject": "ligand states",
+      "criterion": "multiple ligand states remain unselected and unpopulated",
+      "observed": "8 states",
+      "detail": "state hypotheses are not silently converted into populations"
+    },
+    {
+      "check_id": "chemistry.protein_hydrogens",
+      "category": "chemistry",
+      "status": "pass",
+      "subject": "protein states",
+      "criterion": "protein states remain unselected and no hydrogens are implied",
+      "observed": "2 states",
+      "detail": "protein-donor hydrogen bonds must remain unknown"
+    },
+    {
+      "check_id": "chemistry.hydrogen_provenance",
+      "category": "chemistry",
+      "status": "pass",
+      "subject": "hydrogen evidence",
+      "criterion": "generated ligand hydrogens remain distinct from deposited heavy atoms",
+      "observed": "2 generated ligand hydrogens",
+      "detail": "protein hydrogens remain not_run"
+    },
+    {
+      "check_id": "chemistry.water_roles",
+      "category": "chemistry",
+      "status": "pass",
+      "subject": "water evidence",
+      "criterion": "water orientation and roles remain unassigned",
+      "observed": "4 deposited waters",
+      "detail": "proximity is not converted into water chemistry"
+    },
+    {
+      "check_id": "drug_discovery.contacts",
+      "category": "drug_discovery",
+      "status": "pass",
+      "subject": "binding site",
+      "criterion": "the structural record contains contacts and nearby waters",
+      "observed": "112 contacts, 4 nearby waters",
+      "detail": "the interaction layer has explicit geometric observations to consume"
+    },
+    {
+      "check_id": "drug_discovery.matrix",
+      "category": "drug_discovery",
+      "status": "pass",
+      "subject": "state matrix",
+      "criterion": "the 8x2 state matrix is complete and count-stable",
+      "observed": "16 combinations",
+      "detail": "equal category counts do not make specific participants identical"
+    },
+    {
+      "check_id": "drug_discovery.robustness",
+      "category": "drug_discovery",
+      "status": "pass",
+      "subject": "interaction robustness",
+      "criterion": "all four robustness statuses remain distinct",
+      "observed": "assumption_sensitive, invariant, unknown, unsupported",
+      "detail": "no composite confidence score is present"
+    },
+    {
+      "check_id": "drug_discovery.thermodynamic_boundary",
+      "category": "drug_discovery",
+      "status": "pass",
+      "subject": "structural thermodynamics",
+      "criterion": "structural counts are not converted into a binding free energy",
+      "observed": "free energy not_computed; all terms unestimated",
+      "detail": "missing requirements remain explicit"
+    },
+    {
+      "check_id": "thermodynamics.free_energy_study",
+      "category": "thermodynamics",
+      "status": "pass",
+      "subject": "harmonic FEP study",
+      "criterion": "good- and poor-overlap cases are both present and distinguish overlap",
+      "observed": "mild and poor-overlap cases present",
+      "detail": "effective sample size is a weight diagnostic, not proof of phase-space coverage"
+    },
+    {
+      "check_id": "thermodynamics.two_state",
+      "category": "thermodynamics",
+      "status": "pass",
+      "subject": "two-state model",
+      "criterion": "populations and free-energy difference agree with the exact formula",
+      "observed": "p0+p1=1.000000000000, dG=-6.486855",
+      "detail": "degeneracy is a dimensionless count in this discrete model"
+    },
+    {
+      "check_id": "end_to_end.boltzmann_average",
+      "category": "thermodynamics",
+      "status": "pass",
+      "subject": "configuration -> ensemble",
+      "criterion": "sampled mean potential energy agrees with equipartition",
+      "observed": "sampled=3.759703, analytic=3.741508",
+      "detail": "the harmonic sampler has a known Boltzmann distribution"
+    },
+    {
+      "check_id": "end_to_end.fep_reference",
+      "category": "thermodynamics",
+      "status": "pass",
+      "subject": "ensemble -> free energy",
+      "criterion": "finite-sample FEP agrees with the exact harmonic reference",
+      "observed": "FEP=2.595457, exact=2.593416",
+      "detail": "the agreement is specific to this controlled model and sample size"
+    },
+    {
+      "check_id": "reproducibility.source_checksum",
+      "category": "reproducibility",
+      "status": "pass",
+      "subject": "deposited structure",
+      "criterion": "the cached source matches the manifest checksum and size",
+      "observed": "sha256=4845da16db0c..., size=899620",
+      "detail": "the experimental source has not been edited in place"
+    },
+    {
+      "check_id": "reproducibility.manifest_chain",
+      "category": "reproducibility",
+      "status": "pass",
+      "subject": "record provenance",
+      "criterion": "every structural record references the current manifest checksum",
+      "observed": "0 mismatches",
+      "detail": "the record chain shares one source manifest"
+    },
+    {
+      "check_id": "reproducibility.reference_chain",
+      "category": "reproducibility",
+      "status": "pass",
+      "subject": "record references",
+      "criterion": "referenced input checksums match the current artifacts",
+      "observed": "0 mismatches",
+      "detail": "identity, coordinates, site, states, matrix, robustness, and thermodynamics form a checksum chain"
+    },
+    {
+      "check_id": "reproducibility.study_seeds",
+      "category": "reproducibility",
+      "status": "pass",
+      "subject": "free-energy study",
+      "criterion": "every study case stores a distinct deterministic seed",
+      "observed": "2 seeds",
+      "detail": "the numerical experiment is reproducible from the record"
+    },
+    {
+      "check_id": "reproducibility.artifacts",
+      "category": "reproducibility",
+      "status": "pass",
+      "subject": "artifacts",
+      "criterion": "every audited artifact exists",
+      "observed": "12/12 present",
+      "detail": "the audit references concrete files rather than in-memory state only"
+    }
+  ],
+  "pass_count": 23,
+  "fail_count": 0,
+  "not_run_count": 0,
+  "status": "pass",
+  "demonstration": {
+    "temperature_kelvin": 300.0,
+    "sample_count": 50000,
+    "mean_potential_energy_kj_per_mol": 3.7597026612004907,
+    "analytic_mean_potential_energy_kj_per_mol": 3.7415081781,
+    "proposal_effective_sample_fraction": 0.052106799644782494,
+    "proposal_maximum_weight_fraction": 0.0010864579238476532,
+    "exact_delta_g_kj_per_mol": 2.5934158446919926,
+    "fep_delta_g_kj_per_mol": 2.595456730037175,
+    "fep_standard_error_kj_per_mol": 0.008208569605932548,
+    "overlap": {
+      "n_samples": 50000,
+      "effective_sample_size": 32436.281443698877,
+      "effective_sample_fraction": 0.6487256288739776,
+      "maximum_weight_fraction": 5.655734703558136e-05,
+      "work_mean_kj_per_mol": 3.7523281131193773,
+      "work_standard_deviation_kj_per_mol": 3.068372123583672
+    },
+    "two_state_reference": {
+      "energy0_kj_per_mol": 0.0,
+      "energy1_kj_per_mol": 5.0,
+      "degeneracy0": 1,
+      "degeneracy1": 100,
+      "partition_function": 14.472235462158485,
+      "population0": 0.06909782546136473,
+      "population1": 0.9309021745386353,
+      "delta_g_kj_per_mol": -6.486854608277829
+    },
+    "stop_line": [
+      "The harmonic model has an exact Hamiltonian, partition function, and Boltzmann sampler.",
+      "The protein-ligand record has no force-field-ready model, explicit solvent, ion environment, or protonation population.",
+      "No conformational or alchemical sampling has been run for the complex.",
+      "The structural evidence is not converted into a binding free energy."
+    ]
+  },
+  "limitations": [
+    "The audit checks recorded invariants and documentation links; it does not prove scientific correctness.",
+    "The harmonic demonstration is a controlled model, not a protein-ligand force field or binding calculation.",
+    "Effective sample size and maximum weight fraction are observed-weight diagnostics, not proof of complete phase-space coverage.",
+    "A passed audit does not establish experimental affinity, population accuracy, or transferability.",
+    "The structural chain remains dependent on the deposited structure, chemical-state hypotheses, and explicit criteria."
+  ],
+  "decisions": [
+    {
+      "decision": "audited the recorded evidence chain rather than rerunning every example",
+      "actor": "scientific audit",
+      "rationale": "the records expose provenance, criteria, and boundaries that a summary would hide"
+    },
+    {
+      "decision": "kept exact statistical mechanics, numerical estimates, and reliability diagnostics separate",
+      "actor": "scientific audit",
+      "rationale": "an estimate must not silently become an exact result"
+    },
+    {
+      "decision": "treated overlap diagnostics as observed-weight evidence, not proof of sampling completeness",
+      "actor": "scientific audit",
+      "rationale": "a finite sample can look internally consistent while missing a rare region"
+    },
+    {
+      "decision": "did not convert the harmonic result into a binding affinity",
+      "actor": "scientific audit",
+      "rationale": "the protein-ligand model lacks force field, solvent, populations, and alchemical sampling"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited structure and waters",
+        "detail": "The audit checks the source checksum and the structural record chain.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "audit checks and harmonic demonstration",
+        "detail": "The audit recomputes selected constants, gradients, ensemble averages, and exact references.",
+        "actor": "scientific audit"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No binding affinity, population, or molecular property is predicted.",
+        "actor": "scientific audit"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "chemical states and free-energy requirements",
+        "detail": "State hypotheses and missing thermodynamic requirements remain explicit.",
+        "actor": "scientific audit"
+      }
+    ]
+  }
+}
