@@ -205,6 +205,11 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+# Downloaded experimental structures. The manifest records the exact
+# checksum; the deposited coordinate file is intentionally not bundled.
+data/structures/*.cif
+data/structures/*.pdb
+
 # Ruff stuff:
 .ruff_cache/
 

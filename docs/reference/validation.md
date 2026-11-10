@@ -43,6 +43,7 @@ uv run pytest tests/test_pose_comparison.py -q
 uv run pytest tests/test_docking_benchmark.py -q
 uv run pytest tests/test_trajectory_contacts.py -q
 uv run pytest tests/test_sar.py -q
+uv run pytest tests/test_structure_manifest.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -200,6 +201,7 @@ point when a single operator typo could corrupt every downstream result.
 | constraint satisfaction after state updates | `tests/test_constraints.py` |
 | cell-list candidates contain every true pair | `tests/test_neighbour.py` |
 | opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
+| manifest checksums, selections, decisions, actors, and machine-readable checks are validated | `tests/test_structure_manifest.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

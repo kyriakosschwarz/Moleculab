@@ -21,7 +21,8 @@ The source is organised by architecture layer:
     interaction records, fingerprints, external pose analysis, SAR comparison,
     dipole moments, and LogD conversion;
 ``applications``
-    docking, solvent, water, free energy, acid-base, and QM/MM.
+    docking, solvent, water, free energy, acid-base, QM/MM, and
+    experimental-structure provenance.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -163,6 +164,26 @@ from .applications.mbar import MBARResult, mbar, mbar_harmonic
 from .applications.mc_alchemy import BondedLennardJonesMC, SoftCoreLennardJonesPair
 from .applications.qm_mm import MMPointCharge, ParticleInBox, QMResult
 from .applications.solvated_alchemy import SolvatedLigandAlchemy
+from .applications.structure_manifest import (
+    SCHEMA_VERSION,
+    AnalysisRecord,
+    ChemicalIdentityRecord,
+    DecisionRecord,
+    LigandSelection,
+    ProcessingRecord,
+    ProteinSelection,
+    ProvenanceEntry,
+    ProvenanceRecord,
+    StructureManifest,
+    StructureSelection,
+    StructureSource,
+    ValidationCheck,
+    ValidationRecord,
+    load_manifest,
+    sha256_file,
+    validate_manifest,
+    write_manifest,
+)
 from .applications.solvent import (
     ARGON,
     COARSE_GRAINED_WATER,
@@ -256,7 +277,9 @@ __all__ = [
     "ContactLifetimeResult",
     "ContactOccupancyResult",
     "ELECTRON_MASS_DA",
+    "SCHEMA_VERSION",
     "SPCE_WATER",
+    "AnalysisRecord",
     "Angle",
     "AnglePotential",
     "AssayMeasurement",
@@ -268,8 +291,10 @@ __all__ = [
     "BondPotential",
     "BondedLennardJonesMC",
     "Box",
+    "ChemicalIdentityRecord",
     "CoulombPotential",
     "DEBYE_PER_E_NM",
+    "DecisionRecord",
     "DipoleMoment",
     "DistanceConstraint",
     "DockingBenchmark",
@@ -293,6 +318,7 @@ __all__ = [
     "LennardJonesParameters",
     "LennardJonesPotential",
     "LigandPose",
+    "LigandSelection",
     "MatchedMolecularPair",
     "MatchedPairComparison",
     "MBARResult",
@@ -312,6 +338,10 @@ __all__ = [
     "PoseGeometryComparison",
     "PoseRecovery",
     "Potential",
+    "ProcessingRecord",
+    "ProteinSelection",
+    "ProvenanceEntry",
+    "ProvenanceRecord",
     "QMResult",
     "RDFResult",
     "RattleResult",
@@ -324,6 +354,9 @@ __all__ = [
     "SoftCoreLennardJonesPair",
     "SolvatedLigandAlchemy",
     "SolventModel",
+    "StructureManifest",
+    "StructureSelection",
+    "StructureSource",
     "SymmetryAwareRMSD",
     "System",
     "SystemTrajectory",
@@ -332,6 +365,8 @@ __all__ = [
     "Torsion",
     "TorsionPotential",
     "Trajectory",
+    "ValidationCheck",
+    "ValidationRecord",
     "WaterModel",
     "acceleration",
     "aggregate_contacts_by_residue",
@@ -379,6 +414,7 @@ __all__ = [
     "kinetic_pressure",
     "kinetic_temperature",
     "ligand_efficiency",
+    "load_manifest",
     "logd_from_logp",
     "make_receptor_conformer",
     "max_force_magnitude",
@@ -407,6 +443,7 @@ __all__ = [
     "select_pocket_atoms",
     "set_backend",
     "set_precision",
+    "sha256_file",
     "shake_positions",
     "simulate_velocity_verlet",
     "simulate_velocity_verlet_system",
@@ -423,7 +460,9 @@ __all__ = [
     "total_energy",
     "use_backend",
     "validate_atom_mapping",
+    "validate_manifest",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
     "virial_pressure",
+    "write_manifest",
 ]

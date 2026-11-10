@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "database": "RCSB PDB",
+    "accession": "2HYY",
+    "record_url": "https://www.rcsb.org/structure/2HYY",
+    "download_url": "https://files.rcsb.org/download/2HYY.cif",
+    "retrieval_date": "2026-11-10",
+    "revision": "1.4",
+    "revision_date": "2023-08-30",
+    "experimental_method": "X-RAY DIFFRACTION",
+    "resolution_angstrom": 2.4,
+    "coordinate_format": "mmCIF",
+    "file_name": "2HYY.cif",
+    "sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+    "file_size_bytes": 899620,
+    "deposited_asymmetric_unit": true,
+    "biological_assembly": null
+  },
+  "selection": {
+    "model_number": 1,
+    "protein": {
+      "label_asym_id": "A",
+      "auth_asym_id": "A"
+    },
+    "ligand": {
+      "component_id": "STI",
+      "label_asym_id": "E",
+      "auth_asym_id": "A",
+      "instance": "E",
+      "auth_seq_id": "600",
+      "label_seq_id": null,
+      "insertion_code": null,
+      "alternate_location": null,
+      "available_instances": [
+        "E",
+        "F",
+        "G",
+        "H"
+      ]
+    }
+  },
+  "processing": {
+    "coordinate_transforms": [],
+    "removed_waters": [],
+    "removed_ions": [],
+    "removed_cofactors": [],
+    "alternate_location_policy": "No selection applied; deposited alternate locations remain unchanged in the cached source file.",
+    "hydrogen_addition": "None; deposited atoms retained as-is.",
+    "waters": "retained",
+    "ions_cofactors": "retained",
+    "missing_atoms_or_residues": "Not assessed in batch 1; no atoms or residues were rebuilt or removed.",
+    "assembly_id": null,
+    "assembly_transformations_applied": false,
+    "original_coordinate_frame_preserved": true,
+    "translation_applied": null,
+    "rotation_applied": null
+  },
+  "decisions": [
+    {
+      "decision": "selected one protein chain and one ligand copy",
+      "actor": "capstone_structure.py command configuration",
+      "rationale": "protein auth chain A and ligand component STI label chain E; the other deposited copies remain in the source file but are excluded from this selection record."
+    },
+    {
+      "decision": "retained the deposited asymmetric unit without transforming coordinates",
+      "actor": "capstone_structure.py",
+      "rationale": "no biological assembly expansion, translation, or rotation was applied; the deposited coordinate frame is preserved."
+    },
+    {
+      "decision": "deferred formal charge, stereochemistry, and atom mapping",
+      "actor": "capstone_structure.py",
+      "rationale": "these chemical-identity decisions require the ligand reconciliation workflow planned for batch 2."
+    }
+  ],
+  "chemical_identity": {
+    "reference": "imatinib",
+    "component_id": "STI",
+    "name": "4-(4-METHYL-PIPERAZIN-1-YLMETHYL)-N-[4-METHYL-3-(4-PYRIDIN-3-YL-PYRIMIDIN-2-YLAMINO)-PHENYL]-BENZAMIDE",
+    "formula": "C29H31N7O",
+    "formal_charge": null,
+    "stereochemistry": null,
+    "atom_mapping": null,
+    "notes": "The deposited _chem_comp category does not provide a formal charge, and atom_site formal charges are not populated. No charge or stereochemistry assignment was applied in batch 1."
+  },
+  "analysis": {
+    "coordinate_unit": "angstrom",
+    "internal_distance_unit": "nm",
+    "force_field": null,
+    "charge_model": null,
+    "interaction_criteria": null
+  },
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "coordinate file",
+        "detail": "RCSB PDB 2HYY revision 1.4 dated 2023-08-30; downloaded from https://files.rcsb.org/download/2HYY.cif.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "experimental",
+        "subject": "ligand component description",
+        "detail": "Component STI with deposited formula C29 H31 N7 O and name 4-(4-METHYL-PIPERAZIN-1-YLMETHYL)-N-[4-METHYL-3-(4-PYRIDIN-3-YL-PYRIMIDIN-2-YLAMINO)-PHENYL]-BENZAMIDE.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "file integrity",
+        "detail": "SHA-256 4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018; 899620 bytes; retrieval date 2026-11-10.",
+        "actor": "capstone_structure.py"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No docking pose, affinity, or free-energy estimate is produced in this batch.",
+        "actor": "capstone_structure.py"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "none",
+        "detail": "No mechanistic interpretation is made from the selected coordinates in this batch.",
+        "actor": "capstone_structure.py"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "source.accession_matches_deposition",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "_entry.id equals the requested accession",
+        "observed": "2HYY",
+        "expected": "2HYY",
+        "detail": "requested 2HYY; file _entry.id is 2HYY"
+      },
+      {
+        "check_id": "source.checksum_recorded",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "SHA-256 digest is a lowercase 64-character hex string",
+        "observed": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "expected": "64 lowercase hexadecimal characters",
+        "detail": "the digest is recorded for later file-identity checks"
+      },
+      {
+        "check_id": "source.coordinate_format",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "the deposited file is parsed as mmCIF",
+        "observed": "mmCIF",
+        "expected": "mmCIF",
+        "detail": "parsed as mmCIF"
+      },
+      {
+        "check_id": "source.revision_recorded",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "entry revision and revision date are present",
+        "observed": "1.4 (2023-08-30)",
+        "expected": "revision with ISO date",
+        "detail": "revision 1.4 dated 2023-08-30"
+      },
+      {
+        "check_id": "source.experimental_method",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "experimental method is present",
+        "observed": "X-RAY DIFFRACTION",
+        "expected": "not null",
+        "detail": "method X-RAY DIFFRACTION"
+      },
+      {
+        "check_id": "source.resolution_recorded",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "deposited resolution is positive",
+        "observed": "2.4 angstrom",
+        "expected": "> 0 angstrom",
+        "detail": "resolution 2.4 angstrom"
+      },
+      {
+        "check_id": "source.structure_scope",
+        "category": "source_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "coordinate scope is stated explicitly",
+        "observed": "deposited asymmetric unit; no transformation",
+        "expected": "deposited asymmetric unit",
+        "detail": "no biological assembly expansion, translation, or rotation was applied"
+      },
+      {
+        "check_id": "selection.protein_chain_present",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "A:A",
+        "criterion": "selected chain exists and contains polymer residues",
+        "observed": "263 polymer residues",
+        "expected": "at least one polymer residue",
+        "detail": "auth chain A, label chain A, 263 polymer residues"
+      },
+      {
+        "check_id": "selection.ligand_instance_present",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "selected ligand instance exists exactly once",
+        "observed": "1 copy; auth chain A, auth seq 600",
+        "expected": "exactly one copy",
+        "detail": "component STI label chain E, auth chain A, auth seq 600"
+      },
+      {
+        "check_id": "selection.single_ligand_copy_selected",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "the selection names one deposited ligand copy",
+        "observed": "1 matching copy",
+        "expected": "1",
+        "detail": "available label chains E, F, G, H; selected E"
+      },
+      {
+        "check_id": "selection.ligand_associated_with_protein_chain",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "ligand author chain matches the selected protein chain",
+        "observed": "A",
+        "expected": "A",
+        "detail": "ligand auth chain A, protein auth chain A"
+      },
+      {
+        "check_id": "selection.ligand_atoms_present",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "selected ligand has deposited atoms",
+        "observed": "37",
+        "expected": "> 0",
+        "detail": "37 deposited ligand atoms"
+      },
+      {
+        "check_id": "selection.alternate_locations_recorded",
+        "category": "structural_integrity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "alternate locations are recorded and not discarded",
+        "observed": "ligand 0, protein 0 altloc atoms",
+        "expected": "recorded; none discarded",
+        "detail": "ligand altloc atoms 0, protein altloc atoms 0; no alternate location selected"
+      },
+      {
+        "check_id": "chemical.formula_matches_reference",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "deposited formula equals the intended imatinib formula",
+        "observed": "C29H31N7O",
+        "expected": "C29H31N7O",
+        "detail": "deposited C29 H31 N7 O normalized to C29H31N7O; reference C29H31N7O"
+      },
+      {
+        "check_id": "chemical.formal_charge_assessed",
+        "category": "chemical_identity",
+        "status": "not_run",
+        "subject": "STI:E",
+        "criterion": "formal charge is compared with the reference",
+        "observed": "not provided",
+        "expected": "reference formal charge or documented assignment method",
+        "detail": "no formal charge is provided in _chem_comp and atom_site charges are unpopulated"
+      },
+      {
+        "check_id": "chemical.stereochemistry_assessed",
+        "category": "chemical_identity",
+        "status": "not_run",
+        "subject": "STI:E",
+        "criterion": "stereochemistry and atom mapping are compared with the reference",
+        "observed": "not assessed",
+        "expected": "reference stereochemistry comparison",
+        "detail": "stereochemistry and atom mapping are deferred to batch 2"
+      },
+      {
+        "check_id": "analysis.coordinate_conversion_boundary",
+        "category": "analysis_integrity",
+        "status": "pass",
+        "subject": "2HYY.cif",
+        "criterion": "deposited coordinates remain in angstrom until analysis",
+        "observed": "source angstrom; internal nm",
+        "expected": "convert only at the analysis boundary",
+        "detail": "deposited coordinates remain in angstrom; conversion to nm is deferred to the analysis boundary"
+      },
+      {
+        "check_id": "analysis.interaction_criteria_defined",
+        "category": "analysis_integrity",
+        "status": "not_run",
+        "subject": "interaction analysis",
+        "criterion": "distance and angle criteria are defined",
+        "observed": "not defined",
+        "expected": "explicit distance and angle criteria",
+        "detail": "no interaction criteria are defined in the retrieval batch"
+      },
+      {
+        "check_id": "analysis.docking_or_affinity_computed",
+        "category": "analysis_integrity",
+        "status": "not_run",
+        "subject": "docking and affinity",
+        "criterion": "docking or binding free energy is computed",
+        "observed": "not computed",
+        "expected": "out of scope for this milestone",
+        "detail": "not computed; out of scope for this milestone"
+      }
+    ]
+  }
+}

@@ -52,6 +52,7 @@ linked from the relevant tutorial or reference page.
 | [`matched_molecular_pairs.py`](drug_discovery/matched_molecular_pairs.py) | matched-pair SAR with separated evidence categories |
 | [`structural_observations_thermodynamics.py`](drug_discovery/structural_observations_thermodynamics.py) | why contact counts do not determine free energy |
 | [`capstone_imatinib.py`](drug_discovery/capstone_imatinib.py) | reproducible imatinib chemical record and provenance ledger |
+| [`capstone_structure.py`](drug_discovery/capstone_structure.py) | 2HYY retrieval, immutable source file, and [provenance manifest](../data/structures/2HYY.manifest.json) ([cache policy](../data/structures/README.md)) |
 
 ## Advanced
 
