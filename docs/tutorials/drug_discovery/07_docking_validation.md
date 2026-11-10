@@ -280,7 +280,7 @@ Cases
 ### 10.3 Tests
 
 ```bash
-uv run pytest tests/test_docking_benchmark.py -v
+uv run pytest tests/analysis/test_docking_benchmark.py -v
 ```
 
 The tests cover:
@@ -358,4 +358,4 @@ A docking-benchmark module is correct when:
 
 **Previous:** [06 — Comparing binding modes](06_comparing_binding_modes.md).
 
-**Next:** Trajectory contact analysis (module 08, planned).
+**Next:** [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md).

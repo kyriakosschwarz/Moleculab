@@ -9,8 +9,8 @@
 > protonation state.
 >
 > **Status.** All ten structural and thermodynamic modules are available. The
-> [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md) is the integration
-> exercise, and its [visual learning layer](visualizations/README.md) now
+> [imatinib–BCR-ABL1 capstone](../capstone/README.md) is the integration
+> exercise, and its [visual learning layer](../capstone/visualizations/README.md) now
 > includes molecular, binding-site, evidence, sensitivity, and thermodynamic
 > figures.
 
@@ -44,7 +44,7 @@ with geometry and representation before it introduces scoring.
 | [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | available |
 | [09 — Lead optimisation and SAR](09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | available |
 | [10 — Structural observations to thermodynamics](10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy, and why contacts are not affinities | available |
-| [Visual learning layer](visualizations/README.md) | reproducible molecular, evidence, sensitivity, and thermodynamic figures | Batches 1–3 available |
+| [Visual learning layer](../capstone/visualizations/README.md) | reproducible molecular, evidence, sensitivity, and thermodynamic figures | nine figures available |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
 representation and import boundary that the later modules assume.
@@ -65,8 +65,8 @@ The supporting physics is in:
 - [Ewald summation for periodic charges](../physics/tutorial.md#16-ewald-summation-for-periodic-charges);
 - [Trajectory analysis](../physics/tutorial.md#11-trajectory-analysis).
 
-The applied module code is in `src/moleculab/applications/docking.py` and
-`src/moleculab/applications/flexible_docking.py`. Examples are
+The applied module code is in `src/moleculab/applications/docking/docking.py` and
+`src/moleculab/applications/docking/flexible_docking.py`. Examples are
 `examples/drug_discovery/rigid_docking.py` and `examples/drug_discovery/flexible_docking.py`.
 
 ### 2.2 Module 01: protein structure fundamentals
@@ -280,4 +280,4 @@ A Track C module is complete when:
 
 **Previous:** [Track B — Chemical structure and properties](../chemistry/README.md).
 
-**Next:** [Capstone — imatinib and BCR-ABL1](../capstone_imatinib.md).
+**Next:** [Capstone — imatinib and BCR-ABL1](../capstone/README.md).

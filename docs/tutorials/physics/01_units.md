@@ -439,7 +439,7 @@ Coulomb      = 138.9354576444
 Run the unit tests:
 
 ```bash
-uv run pytest tests/test_units.py tests/test_particles.py -q
+uv run pytest tests/foundation/test_units.py tests/foundation/test_particles.py -q
 ```
 
 The particle tests belong here too, because they enforce the shape and unit

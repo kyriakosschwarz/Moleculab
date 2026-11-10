@@ -293,7 +293,7 @@ Contact lifetimes (frame spacing = 0.1 ns)
 ### 9.3 Tests
 
 ```bash
-uv run pytest tests/test_trajectory_contacts.py -v
+uv run pytest tests/analysis/test_trajectory_contacts.py -v
 ```
 
 The tests cover:

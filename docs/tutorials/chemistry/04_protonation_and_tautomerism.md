@@ -467,11 +467,11 @@ can draw a charged form has not thereby predicted which form dominates at pH 7.4
 
 ## 11. Validation and acceptance criteria
 
-The implementation in `src/moleculab/applications/acid_base.py` is checked
+The implementation in `src/moleculab/applications/chemistry/acid_base.py` is checked
 against closed-form values, not against itself:
 
 ```bash
-uv run pytest tests/test_acid_base.py -v
+uv run pytest tests/applications/chemistry/test_acid_base.py -v
 uv run python examples/chemistry/protonation.py
 ```
 

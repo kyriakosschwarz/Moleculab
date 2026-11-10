@@ -1,22 +1,33 @@
 # SPDX-FileCopyrightText: 2026 Moleculab Contributors
 # SPDX-License-Identifier: MIT OR Apache-2.0
 
-"""Applications: docking, solvent, water, free energy, acid-base, QM/MM, provenance, and structural records.
+"""Applications grouped by scientific domain.
 
 Applications answer scientific questions using the lower layers. They may
 combine models, algorithms, and protocols, but they do not redefine the core
-physics.  Structure manifests record experimental inputs and explicit
-selections; ligand identity records compare supplied deposited and reference
-graphs; ligand coordinate records attach deposited coordinates to that mapping
-and record occupancy, alternate locations, and geometry; binding-site records
-select the explicit protein environment and atom contacts; interaction records
-classify only explicitly supplied chemical evidence; evidence fingerprints keep
-present, absent, and unknown distinct; preparation records hold separate
-chemical states without mutating the experimental inputs; state enumeration
-keeps protonation and tautomer alternatives unselected; state-aware assessment
-applies selected states to the same experimental contacts without ranking them;
-protein preparation records explicit pocket-side template chemistry; combination
-matrices cross ligand and protein states without ranking them. None of them
-parses coordinates, chooses a structure, or invents an atom mapping on the
-caller's behalf.
+physics. The subpackages are:
+
+``structure``
+    experimental-structure manifests, ligand identity and coordinate records,
+    and binding-site reconciliation;
+``chemistry``
+    acid-base bookkeeping, chemical-state preparation and enumeration, and
+    protein-pocket template chemistry;
+``interactions``
+    evidence-gated interaction interpretation, three-state fingerprints,
+    hydrogen and water evidence, state-aware assessment, and robustness records;
+``thermodynamics``
+    FEP/TI/MBAR, harmonic and soft-core alchemy studies, and explicit
+    structural-to-thermodynamic boundaries;
+``docking``
+    rigid and flexible receptor-ligand docking;
+``solvents``
+    coarse-grained solvent and three-site water builders;
+``qmmm``
+    the finite-difference QM/MM model;
+``audit``
+    the final scientific audit and integration records.
+
+None of the record layers parses coordinates, chooses a structure, or invents
+an atom mapping on the caller's behalf.
 """

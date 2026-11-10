@@ -403,7 +403,7 @@ force would be caught immediately.
 ### 9.2 What the tests protect
 
 ```bash
-uv run pytest tests/test_potentials.py tests/test_physics.py -q
+uv run pytest tests/models/test_potentials.py tests/models/test_physics.py -q
 ```
 
 - energy is zero at the equilibrium centre;

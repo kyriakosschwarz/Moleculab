@@ -78,7 +78,7 @@ $$
 without an extra conversion constant.  The constants live in
 `src/moleculab/foundation/units.py`.
 
-Check: `uv run pytest tests/test_units.py -q`.
+Check: `uv run pytest tests/foundation/test_units.py -q`.
 
 Deep dive: [01 — Units and scales](01_units.md).
 
@@ -105,7 +105,7 @@ $$
 
 For this particle, `K = 0.06 kJ/mol`.
 
-Check: `uv run pytest tests/test_particles.py tests/test_physics.py -q`.
+Check: `uv run pytest tests/foundation/test_particles.py tests/models/test_physics.py -q`.
 
 Deep dive: [02 — Particles and kinetic energy](02_particle_energy.md).
 
@@ -130,7 +130,7 @@ The force is not invented separately: it is the negative gradient of the
 energy.  The test suite verifies this with a finite-difference derivative.
 
 Run: `uv run python examples/physics/first_particle.py`.
-Check: `uv run pytest tests/test_potentials.py -q`.
+Check: `uv run pytest tests/models/test_potentials.py -q`.
 
 Deep dive: [03 — Potential energy and force](03_potential_force.md).
 
@@ -155,7 +155,7 @@ For an independent check, run
 trajectory with the analytic solution and reports second-order convergence as
 the timestep is halved.
 
-Check: `uv run pytest tests/test_integrators.py tests/test_harmonic_validation.py -q`.
+Check: `uv run pytest tests/algorithms/test_integrators.py tests/algorithms/test_harmonic_validation.py -q`.
 
 Deep dive: [04 — Velocity Verlet and energy conservation](04_velocity_verlet.md).
 
@@ -188,7 +188,7 @@ In Moleculab units, `k_e = COULOMB_CONSTANT = 138.935456 kJ nm/(mol e²)`.
 Like charges repel; opposite charges attract.
 
 Run: `uv run python examples/physics/nonbonded_interactions.py`.
-Check: `uv run pytest tests/test_pair_potentials.py -q`.
+Check: `uv run pytest tests/models/test_pair_potentials.py -q`.
 
 Deep dive: [05 — Nonbonded interactions](05_nonbonded.md).
 
@@ -218,7 +218,7 @@ print(system.potential_energy())
 print(system.forces())
 ```
 
-Check: `uv run pytest tests/test_system.py tests/test_system_integrator.py -q`.
+Check: `uv run pytest tests/composition/test_system.py tests/composition/test_system_integrator.py -q`.
 
 Deep dive: [06 — Many particles and the System](06_system.md).
 
@@ -259,7 +259,7 @@ Important conventions:
 
 Run: `uv run python examples/physics/bonded_molecule.py` and
 `uv run python examples/physics/torsion_scan.py`.
-Check: `uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_torsion.py -q`.
+Check: `uv run pytest tests/models/test_bonded.py tests/models/test_topology.py tests/models/test_torsion.py -q`.
 
 Deep dive: [07 — Bonds, angles, and torsions](07_bonded.md).
 
@@ -276,7 +276,7 @@ $$
 trial move raises the energy.
 
 Run: `uv run python examples/physics/minimization.py`.
-Check: `uv run pytest tests/test_minimization.py -q`.
+Check: `uv run pytest tests/algorithms/test_minimization.py -q`.
 
 Deep dive: [08 — Energy minimization](08_minimization.md).
 
@@ -299,7 +299,7 @@ $$
 $$
 
 Run: `uv run python examples/physics/thermostat.py`.
-Check: `uv run pytest tests/test_thermostats.py -q`.
+Check: `uv run pytest tests/protocols/test_thermostats.py -q`.
 
 Deep dive: [09 — Temperature and thermostats](09_thermostats.md).
 
@@ -313,7 +313,7 @@ When `System.box` is set, nonbonded interactions use the minimum image.
 Bonded terms use the stored coordinates directly.
 
 Run: `uv run python examples/physics/periodic_box.py`.
-Check: `uv run pytest tests/test_box.py -q`.
+Check: `uv run pytest tests/foundation/test_box.py -q`.
 
 Deep dive: [10 — Periodic boundaries](10_periodic.md).
 
@@ -353,7 +353,7 @@ rdf = radial_distribution_function(trajectory, box=box, r_max=0.55, n_bins=40)
 ```
 
 Run: `uv run python examples/physics/trajectory_analysis.py`.
-Check: `uv run pytest tests/test_analysis.py -q`.
+Check: `uv run pytest tests/analysis/test_analysis.py -q`.
 
 ## 12. Explicit solvent
 
@@ -390,7 +390,7 @@ would require per-atom types, charges, intramolecular exclusions, and
 long-range electrostatics.
 
 Run: `uv run python examples/advanced/solvent_box.py`.
-Check: `uv run pytest tests/test_solvent.py -q`.
+Check: `uv run pytest tests/applications/solvents/test_solvent.py -q`.
 
 ## 13. Free-energy perturbation
 
@@ -434,7 +434,7 @@ practical alchemical calculations use many intermediate states, bidirectional
 estimators, or MBAR instead of a single large perturbation.
 
 Run: `uv run python examples/advanced/free_energy_perturbation.py`.
-Check: `uv run pytest tests/test_fep.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_fep.py -q`.
 
 The convergence study first shows an exact two-state model, then adds the exact
 configurational partition function
@@ -447,7 +447,7 @@ center shift whose exact free-energy difference is zero but whose forward FEP
 overlap is poor.
 
 Run: `uv run python examples/advanced/free_energy_convergence.py`.
-Check: `uv run pytest tests/test_free_energy_study.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_free_energy_study.py -q`.
 Record: `data/free_energy/harmonic-fep-study.json`.
 
 ## 14. Atomistic water, atom types, and exclusions
@@ -504,7 +504,7 @@ flexible water for comparison.
 
 Run: `uv run python examples/advanced/water_box.py` and
 `uv run python examples/advanced/rigid_water.py`.
-Check: `uv run pytest tests/test_nonbonded.py tests/test_water.py tests/test_constraints.py -q`.
+Check: `uv run pytest tests/models/test_nonbonded.py tests/applications/solvents/test_water.py tests/composition/test_constraints.py -q`.
 
 ## 15. Rigid-ligand docking
 
@@ -542,7 +542,7 @@ energy.  A real docking workflow also treats receptor flexibility, solvation,
 entropy, and local pose refinement.
 
 Run: `uv run python examples/drug_discovery/rigid_docking.py`.
-Check: `uv run pytest tests/test_docking.py -q`.
+Check: `uv run pytest tests/analysis/test_docking.py -q`.
 
 ## 16. Ewald summation for periodic charges
 
@@ -604,7 +604,7 @@ system = build_water_box(
 
 Run: `uv run python examples/advanced/ewald.py` and
 `uv run python examples/advanced/water_ewald.py`.
-Check: `uv run pytest tests/test_ewald.py tests/test_water.py -q`.
+Check: `uv run pytest tests/models/test_ewald.py tests/applications/solvents/test_water.py -q`.
 
 ## 17. Pressure coupling and NPT
 
@@ -652,7 +652,7 @@ Real water has `kappa ~ 4.5e-5 bar^-1` and needs much longer coupling times.
 The barostat scales positions and the box but leaves velocities unchanged.
 
 Run: `uv run python examples/advanced/barostat.py`.
-Check: `uv run pytest tests/test_pressure.py -q`.
+Check: `uv run pytest tests/protocols/test_pressure.py -q`.
 
 ## 18. Thermodynamic integration
 
@@ -697,7 +697,7 @@ quickly for this smooth path; molecular alchemical transformations may need
 many more windows and better overlap between neighboring states.
 
 Run: `uv run python examples/advanced/thermodynamic_integration.py`.
-Check: `uv run pytest tests/test_ti.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_ti.py -q`.
 
 ## 19. MBAR over alchemical windows
 
@@ -729,7 +729,7 @@ uncertainties or the overlap matrix.  Molecular applications need many more
 windows and careful overlap diagnostics.
 
 Run: `uv run python examples/advanced/mbar.py`.
-Check: `uv run pytest tests/test_mbar.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_mbar.py -q`.
 
 ## 20. Molecular FEP/TI/MBAR with a soft-core Lennard-Jones pair
 
@@ -771,7 +771,7 @@ print(pair.mbar(n_windows=11, n_samples=20_000, seed=303).delta_g[-1])
 ```
 
 Run: `uv run python examples/advanced/lj_alchemy.py`.
-Check: `uv run pytest tests/test_lj_alchemy.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_lj_alchemy.py -q`.
 
 ## 21. Minimal QM/MM
 
@@ -817,7 +817,7 @@ it is one-dimensional, uses fixed MM charges, and does not solve
 Hartree-Fock or DFT.
 
 Run: `uv run python examples/advanced/qm_mm.py`.
-Check: `uv run pytest tests/test_qm_mm.py -q`.
+Check: `uv run pytest tests/applications/qmmm/test_qm_mm.py -q`.
 
 ## 22. Multi-particle Monte Carlo alchemy
 
@@ -853,7 +853,7 @@ e^{-[U_{\mathrm{bond}}(r)+U_{\mathrm{LJ}}(r,\lambda)]/(RT)}dr.
 $$
 
 Run: `uv run python examples/advanced/mc_alchemy.py`.
-Check: `uv run pytest tests/test_mc_alchemy.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_mc_alchemy.py -q`.
 
 ## 23. Solvated-ligand free energy with Ewald water
 
@@ -895,7 +895,7 @@ There is no simple analytic reference for the solvated system, so the three
 estimators are cross-validated against one another.
 
 Run: `uv run python examples/advanced/solvated_alchemy.py`.
-Check: `uv run pytest tests/test_solvated_alchemy.py -q`.
+Check: `uv run pytest tests/applications/thermodynamics/test_solvated_alchemy.py -q`.
 
 ## 24. Flexible-receptor docking
 
@@ -932,7 +932,7 @@ docking scores a huge positive energy; flexible docking moves the side chain
 and recovers a favorable pose.
 
 Run: `uv run python examples/drug_discovery/flexible_docking.py`.
-Check: `uv run pytest tests/test_flexible_docking.py -q`.
+Check: `uv run pytest tests/applications/docking/test_flexible_docking.py -q`.
 
 ## 25. CPU and optional acceleration
 
@@ -994,7 +994,7 @@ uv run python examples/performance/backend_benchmark.py --backend auto
 NPUs are not supported by this backend layer yet, and all other modules remain
 CPU/NumPy.
 
-Check: `uv run pytest tests/test_backend.py -q`.
+Check: `uv run pytest tests/performance/test_backend.py -q`.
 
 ## Suggested exercises
 
@@ -1031,16 +1031,16 @@ Check: `uv run pytest tests/test_backend.py -q`.
     endpoint free-energy error grows.
 17. Run `water_ewald.py` with a different Ewald cutoff and compare the
     potential energy and runtime.
-18. Compare FEP, TI, and MBAR in `applications/lj_alchemy.py` using different numbers of
+18. Compare FEP, TI, and MBAR in `applications/thermodynamics/lj_alchemy.py` using different numbers of
     windows and samples.
-19. Vary the QM grid spacing in `applications/qm_mm.py` and confirm that the box energies
+19. Vary the QM grid spacing in `applications/qmmm/qm_mm.py` and confirm that the box energies
     converge quadratically toward the analytic result.
-20. Run `applications/mc_alchemy.py` with different Monte Carlo step sizes and sample
+20. Run `applications/thermodynamics/mc_alchemy.py` with different Monte Carlo step sizes and sample
     counts, and compare the acceptance/variance behavior.
 21. Change the solvated ligand's size or charge and observe how the
     ligand-water decoupling free energy and estimator spread change.
 22. Vary the side-chain stiffness and maximum displacement in
-    `applications/flexible_docking.py` and compare the gain over rigid docking.
+    `applications/docking/flexible_docking.py` and compare the gain over rigid docking.
 23. Run `backend_benchmark.py` with CPU and the available backend and compare
     the Ewald timing and checksum.
 
@@ -1052,7 +1052,7 @@ You have reached the end of the Track A main path. Continue along the tracks:
   the chemical identity and protonation state that the engine does not infer.
 - [Track C — structure-based drug discovery](../drug_discovery/README.md) turns
   the engine into protein-ligand recognition questions.
-- The [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md) integrates all three
+- The [imatinib–BCR-ABL1 capstone](../capstone/README.md) integrates all three
   tracks. It connects the disease biology, kinase inhibition, force fields,
   water, docking, MD, free energy, and resistance mutations to the components
   you have built.

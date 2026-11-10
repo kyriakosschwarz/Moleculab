@@ -303,7 +303,7 @@ The numbers are teaching values, not a binding-affinity predictor.
 The capstone adds a record-based version:
 
 ```bash
-uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
+uv run python examples/drug_discovery/capstone/capstone_thermodynamic_interpretation.py
 ```
 
 It consumes the imatinib structural, interaction, hydrogen, water, and
@@ -364,4 +364,4 @@ record, not an affinity calculation.
 
 **Previous:** [09 — Lead optimisation and structure–activity relationships](09_lead_optimisation_sar.md).
 
-**Next:** [Imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
+**Next:** [Imatinib–BCR-ABL1 capstone](../capstone/README.md).

@@ -414,7 +414,7 @@ max |E-E0| = small (on the order of 1e-6)
 ## 12. Tests and verification
 
 ```bash
-uv run pytest tests/test_integrators.py -q
+uv run pytest tests/algorithms/test_integrators.py -q
 ```
 
 What the tests protect:
@@ -463,7 +463,7 @@ can keep the energy bounded while still accumulating a phase error. Comparing
 the trajectory with the analytic solution checks the motion itself.
 
 The permanent tests are in
-[`tests/test_harmonic_validation.py`](../../../tests/test_harmonic_validation.py).
+[`tests/algorithms/test_harmonic_validation.py`](../../../tests/algorithms/test_harmonic_validation.py).
 They cover a general initial phase, a multidimensional oscillator, second-order
 convergence of position, velocity, and energy, numerical period measurement, and
 the small-timestep limit.

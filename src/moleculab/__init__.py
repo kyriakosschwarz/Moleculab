@@ -24,13 +24,10 @@ The source is organised by architecture layer:
     interaction records, binary and three-state evidence fingerprints, external
     pose analysis, SAR comparison, dipole moments, and LogD conversion;
 ``applications``
-    docking, solvent, water, free energy, acid-base, QM/MM,
-    experimental-structure provenance, ligand identity reconciliation,
-    ligand coordinate reconciliation, binding-site reconciliation,
-    evidence-gated interaction interpretation, three-state evidence
-    fingerprints, separate chemical-state preparation, protonation/tautomer
-    enumeration, state-aware interaction assessment, protein-pocket
-    preparation, and ligand/protein state-pair interaction matrices.
+    domain subpackages for structure provenance and coordinates, chemistry
+    and chemical states, interaction interpretation and evidence,
+    free-energy estimators and thermodynamic boundaries, docking, solvents,
+    QM/MM, and the final scientific audit.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -147,7 +144,7 @@ from .analysis.trajectory_contacts import (
     calculate_contact_matrix,
     calculate_contact_occupancy,
 )
-from .applications.acid_base import (
+from .applications.chemistry.acid_base import (
     boltzmann_populations,
     deprotonated_fraction,
     mean_net_charge,
@@ -156,7 +153,7 @@ from .applications.acid_base import (
     protonation_microstates,
     tautomer_populations,
 )
-from .applications.chemical_preparation import (
+from .applications.chemistry.chemical_preparation import (
     CHEMICAL_PREPARATION_SCHEMA_VERSION,
     ChemicalPreparationRecord,
     PreparationDiscrepancy,
@@ -169,7 +166,7 @@ from .applications.chemical_preparation import (
     validate_chemical_preparation,
     write_chemical_preparation,
 )
-from .applications.combination_interactions import (
+from .applications.interactions.combination_interactions import (
     COMBINATION_SCHEMA_VERSION,
     CombinationAssessment,
     CombinationInteractionRecord,
@@ -179,7 +176,7 @@ from .applications.combination_interactions import (
     validate_combination_record,
     write_combination_record,
 )
-from .applications.interaction_robustness import (
+from .applications.interactions.interaction_robustness import (
     ROBUSTNESS_SCHEMA_VERSION,
     CategoryStatusCount,
     ClassificationCount,
@@ -209,7 +206,7 @@ from .applications.interaction_robustness import (
     validate_interaction_robustness,
     write_interaction_robustness,
 )
-from .applications.thermodynamic_interpretation import (
+from .applications.thermodynamics.thermodynamic_interpretation import (
     THERMODYNAMIC_INTERPRETATION_SCHEMA_VERSION,
     FreeEnergyRequirement,
     FreeEnergyTerm,
@@ -226,7 +223,7 @@ from .applications.thermodynamic_interpretation import (
     validate_thermodynamic_interpretation,
     write_thermodynamic_interpretation,
 )
-from .applications.chemical_state_enumeration import (
+from .applications.chemistry.chemical_state_enumeration import (
     CHEMICAL_STATE_SCHEMA_VERSION,
     ChemicalState,
     ChemicalStateEnumerationRecord,
@@ -237,7 +234,7 @@ from .applications.chemical_state_enumeration import (
     validate_chemical_state_enumeration,
     write_chemical_state_enumeration,
 )
-from .applications.protein_preparation import (
+from .applications.chemistry.protein_preparation import (
     PROTEIN_PREPARATION_SCHEMA_VERSION,
     PreparedProteinAtom,
     PreparedProteinRing,
@@ -252,7 +249,7 @@ from .applications.protein_preparation import (
     validate_protein_preparation,
     write_protein_preparation,
 )
-from .applications.state_interactions import (
+from .applications.interactions.state_interactions import (
     STATE_INTERACTION_SCHEMA_VERSION,
     FeatureSummary,
     StateInteractionAssessment,
@@ -266,14 +263,14 @@ from .applications.state_interactions import (
     validate_state_interactions,
     write_state_interactions,
 )
-from .applications.docking import (
+from .applications.docking.docking import (
     DockingPose,
     DockingResult,
     RigidLigand,
     dock_rigid_ligand,
     score_pose,
 )
-from .applications.fep import (
+from .applications.thermodynamics.fep import (
     FEPResult,
     fep_between_potentials,
     fep_harmonic_oscillator,
@@ -281,7 +278,7 @@ from .applications.fep import (
     harmonic_free_energy_difference,
     sample_harmonic_positions,
 )
-from .applications.free_energy_study import (
+from .applications.thermodynamics.free_energy_study import (
     FREE_ENERGY_STUDY_SCHEMA_VERSION,
     FEPConvergencePoint,
     FEPOverlapDiagnostics,
@@ -302,7 +299,7 @@ from .applications.free_energy_study import (
     validate_harmonic_fep_study,
     write_harmonic_fep_study,
 )
-from .applications.scientific_audit import (
+from .applications.audit.scientific_audit import (
     SCIENTIFIC_AUDIT_SCHEMA_VERSION,
     AuditCheck,
     EndToEndDemonstration,
@@ -313,7 +310,7 @@ from .applications.scientific_audit import (
     validate_scientific_audit,
     write_scientific_audit,
 )
-from .applications.flexible_docking import (
+from .applications.docking.flexible_docking import (
     FlexibleDockingPose,
     FlexibleDockingResult,
     SideChain,
@@ -322,7 +319,7 @@ from .applications.flexible_docking import (
     receptor_strain_score,
     score_flexible_pose,
 )
-from .applications.ligand_identity import (
+from .applications.structure.ligand_identity import (
     LIGAND_IDENTITY_SCHEMA_VERSION,
     AtomMapping,
     DepositedAtom,
@@ -339,7 +336,7 @@ from .applications.ligand_identity import (
     validate_ligand_identity,
     write_ligand_identity,
 )
-from .applications.binding_site_reconciliation import (
+from .applications.structure.binding_site_reconciliation import (
     BINDING_SITE_SCHEMA_VERSION,
     BindingSiteCriteria,
     BindingSiteDiscrepancy,
@@ -355,7 +352,7 @@ from .applications.binding_site_reconciliation import (
     validate_binding_site,
     write_binding_site,
 )
-from .applications.hydrogen_evidence import (
+from .applications.interactions.hydrogen_evidence import (
     HYDROGEN_EVIDENCE_SCHEMA_VERSION,
     HydrogenBondEvidence,
     HydrogenEvidenceDiscrepancy,
@@ -367,7 +364,7 @@ from .applications.hydrogen_evidence import (
     validate_hydrogen_evidence,
     write_hydrogen_evidence,
 )
-from .applications.interaction_evidence import (
+from .applications.interactions.interaction_evidence import (
     INTERACTION_EVIDENCE_SCHEMA_VERSION,
     EvidenceDiscrepancy,
     InteractionEvidenceRecord,
@@ -376,7 +373,7 @@ from .applications.interaction_evidence import (
     validate_interaction_evidence,
     write_interaction_evidence,
 )
-from .applications.interaction_interpretation import (
+from .applications.interactions.interaction_interpretation import (
     INTERACTION_SCHEMA_VERSION,
     AtomFeature,
     AromaticRing,
@@ -389,7 +386,7 @@ from .applications.interaction_interpretation import (
     validate_interactions,
     write_interactions,
 )
-from .applications.ligand_coordinates import (
+from .applications.structure.ligand_coordinates import (
     LIGAND_COORDINATE_SCHEMA_VERSION,
     AngleGeometry,
     BondGeometry,
@@ -405,12 +402,12 @@ from .applications.ligand_coordinates import (
     validate_ligand_coordinates,
     write_ligand_coordinates,
 )
-from .applications.lj_alchemy import MultistageFEPResult, SoftCoreLennardJones
-from .applications.mbar import MBARResult, mbar, mbar_harmonic
-from .applications.mc_alchemy import BondedLennardJonesMC, SoftCoreLennardJonesPair
-from .applications.qm_mm import MMPointCharge, ParticleInBox, QMResult
-from .applications.solvated_alchemy import SolvatedLigandAlchemy
-from .applications.structure_manifest import (
+from .applications.thermodynamics.lj_alchemy import MultistageFEPResult, SoftCoreLennardJones
+from .applications.thermodynamics.mbar import MBARResult, mbar, mbar_harmonic
+from .applications.thermodynamics.mc_alchemy import BondedLennardJonesMC, SoftCoreLennardJonesPair
+from .applications.qmmm.qm_mm import MMPointCharge, ParticleInBox, QMResult
+from .applications.thermodynamics.solvated_alchemy import SolvatedLigandAlchemy
+from .applications.structure.structure_manifest import (
     SCHEMA_VERSION,
     AnalysisRecord,
     ChemicalIdentityRecord,
@@ -430,19 +427,19 @@ from .applications.structure_manifest import (
     validate_manifest,
     write_manifest,
 )
-from .applications.solvent import (
+from .applications.solvents.solvent import (
     ARGON,
     COARSE_GRAINED_WATER,
     SolventModel,
     build_solvent_box,
 )
-from .applications.ti import (
+from .applications.thermodynamics.ti import (
     TIResult,
     integrate_thermodynamic_derivative,
     thermodynamic_integration_harmonic,
 )
-from .applications.water import SPCE_WATER, WaterModel, build_water_box
-from .applications.water_evidence import (
+from .applications.solvents.water import SPCE_WATER, WaterModel, build_water_box
+from .applications.interactions.water_evidence import (
     WATER_EVIDENCE_SCHEMA_VERSION,
     WaterAtomRecord,
     WaterBridgeEvidence,

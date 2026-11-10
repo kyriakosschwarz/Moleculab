@@ -314,7 +314,7 @@ example is designed to make the distinction impossible to miss.
 ### 10.3 Tests
 
 ```bash
-uv run pytest tests/test_pose_comparison.py -v
+uv run pytest tests/analysis/test_pose_comparison.py -v
 ```
 
 The tests cover:

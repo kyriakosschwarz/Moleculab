@@ -345,7 +345,7 @@ Run:
 ```bash
 uv run python examples/physics/bonded_molecule.py
 uv run python examples/physics/torsion_scan.py
-uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_torsion.py -q
+uv run pytest tests/models/test_bonded.py tests/models/test_topology.py tests/models/test_torsion.py -q
 ```
 
 The tests check:

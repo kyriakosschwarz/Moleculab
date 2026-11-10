@@ -49,7 +49,7 @@ prerequisites and the full curriculum, see [the learning tracks](../curriculum.m
 - Read [medicinal chemistry and ADME fundamentals](08_medicinal_chemistry_adme.md)
   after the protonation, polarity, and hydrogen-bonding modules.
 - Then continue to [Track C](../drug_discovery/README.md) and the
-  [capstone](../capstone_imatinib.md).
+  [capstone](../capstone/README.md).
 - Solvation, LogP/LogD, and ADME-Tox are proposed modules, not implemented
   tutorials.
 

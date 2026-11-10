@@ -401,7 +401,7 @@ the result.
 ### 12.4 Tests
 
 ```bash
-uv run pytest tests/test_interactions.py -v
+uv run pytest tests/analysis/test_interactions.py -v
 ```
 
 The tests cover:

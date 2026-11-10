@@ -198,7 +198,7 @@ For this threefold term, the stronger statement is
 
 $$ U(\phi)=U(\phi+120^\circ). $$
 
-The tests in `tests/test_torsion.py` check periodicity, the three minima, the
+The tests in `tests/models/test_torsion.py` check periodicity, the three minima, the
 three barriers, and the barrier height.
 
 The generalized force conjugate to the dihedral coordinate is

@@ -8,9 +8,9 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from ..applications.hydrogen_evidence import HydrogenEvidenceRecord
-from ..applications.structure_manifest import StructureManifest
-from ..applications.water_evidence import WaterEvidenceRecord
+from ..applications.interactions.hydrogen_evidence import HydrogenEvidenceRecord
+from ..applications.structure.structure_manifest import StructureManifest
+from ..applications.interactions.water_evidence import WaterEvidenceRecord
 from .metadata import FigureContext, FigureMetadata
 from .protein_ligand import _pymol_selection, _run_script
 

@@ -252,7 +252,7 @@ will change with the charge model and conformer.
 
 The dipole calculation is implemented in
 `src/moleculab/analysis/electrostatics.py` and tested in
-`tests/test_electrostatics.py`.
+`tests/models/test_electrostatics.py`.
 
 ### 10.1 Acceptance criteria
 

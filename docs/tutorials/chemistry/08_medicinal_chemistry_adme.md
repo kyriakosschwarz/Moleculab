@@ -350,4 +350,4 @@ An ADME fundamentals module is correct when:
 **Previous:** [07 — Hydrogen bonding and molecular recognition](07_hydrogen_bonding.md).
 
 **Next:** [Learning tracks](../curriculum.md) and the
-[imatinib capstone](../capstone_imatinib.md).
+[imatinib capstone](../capstone/README.md).

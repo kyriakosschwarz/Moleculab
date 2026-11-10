@@ -275,7 +275,7 @@ Forces: [[ 240.    0.    0.]
 Run:
 
 ```bash
-uv run pytest tests/test_box.py -q
+uv run pytest tests/foundation/test_box.py -q
 ```
 
 The tests check:

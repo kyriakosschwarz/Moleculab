@@ -65,19 +65,19 @@ and its provenance manifest.
 Regenerate the records in order:
 
 ```bash
-uv run --with gemmi python examples/drug_discovery/capstone_structure.py
-uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
-uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.py
-uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
-uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
-uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
-uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
-uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
-uv run python examples/drug_discovery/capstone_state_interactions.py
-uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
-uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
-uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
-uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
-uv run python examples/drug_discovery/capstone_interaction_robustness.py
-uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_structure.py
+uv run --with gemmi --with rdkit python examples/drug_discovery/capstone/capstone_ligand_identity.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_ligand_coordinates.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_binding_site.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_interactions.py
+uv run python examples/drug_discovery/capstone/capstone_evidence_fingerprint.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone/capstone_chemical_preparation.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone/capstone_chemical_states.py
+uv run python examples/drug_discovery/capstone/capstone_state_interactions.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_protein_preparation.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_combination_interactions.py
+uv run python examples/drug_discovery/capstone/capstone_hydrogen_evidence.py
+uv run --with gemmi python examples/drug_discovery/capstone/capstone_water_evidence.py
+uv run python examples/drug_discovery/capstone/capstone_interaction_robustness.py
+uv run python examples/drug_discovery/capstone/capstone_thermodynamic_interpretation.py
 ```

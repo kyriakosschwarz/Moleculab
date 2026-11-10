@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ..applications.free_energy_study import HarmonicFEPStudyRecord
+from ..applications.thermodynamics.free_energy_study import HarmonicFEPStudyRecord
 from .metadata import FigureContext, FigureMetadata
 from .styles import configure_matplotlib, save_figure, style_axes
 

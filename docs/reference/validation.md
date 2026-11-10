@@ -30,39 +30,39 @@ quantitatively.
 input validation reject invalid states?
 
 ```bash
-uv run pytest tests/test_units.py tests/test_particles.py -q
-uv run pytest tests/test_potentials.py tests/test_pair_potentials.py -q
-uv run pytest tests/test_force_gradients.py -q
-uv run pytest tests/test_nonbonded.py tests/test_bonded.py tests/test_torsion.py -q
-uv run pytest tests/test_acid_base.py -q
-uv run pytest tests/test_binding_site.py -q
-uv run pytest tests/test_interactions.py -q
-uv run pytest tests/test_fingerprints.py -q
-uv run pytest tests/test_docking_poses.py -q
-uv run pytest tests/test_pose_comparison.py -q
-uv run pytest tests/test_docking_benchmark.py -q
-uv run pytest tests/test_trajectory_contacts.py -q
-uv run pytest tests/test_sar.py -q
-uv run pytest tests/test_structure_manifest.py -q
-uv run pytest tests/test_ligand_identity.py -q
-uv run pytest tests/test_ligand_coordinates.py -q
-uv run pytest tests/test_binding_site_reconciliation.py -q
-uv run pytest tests/test_interaction_interpretation.py -q
-uv run pytest tests/test_evidence_fingerprint.py -q
-uv run pytest tests/test_chemical_preparation.py -q
-uv run pytest tests/test_chemical_state_enumeration.py -q
-uv run pytest tests/test_state_interactions.py -q
-uv run pytest tests/test_protein_preparation.py -q
-uv run pytest tests/test_combination_interactions.py -q
-uv run pytest tests/test_hydrogen_evidence.py -q
-uv run pytest tests/test_water_evidence.py -q
-uv run pytest tests/test_interaction_robustness.py -q
-uv run pytest tests/test_thermodynamic_interpretation.py -q
-uv run pytest tests/test_free_energy_study.py -q
-uv run pytest tests/test_scientific_audit.py -q
-uv run pytest tests/test_visualization.py -q
-uv run pytest tests/test_electrostatics.py -q
-uv run pytest tests/test_adme.py -q
+uv run pytest tests/foundation/test_units.py tests/foundation/test_particles.py -q
+uv run pytest tests/models/test_potentials.py tests/models/test_pair_potentials.py -q
+uv run pytest tests/models/test_force_gradients.py -q
+uv run pytest tests/models/test_nonbonded.py tests/models/test_bonded.py tests/models/test_torsion.py -q
+uv run pytest tests/applications/chemistry/test_acid_base.py -q
+uv run pytest tests/analysis/test_binding_site.py -q
+uv run pytest tests/analysis/test_interactions.py -q
+uv run pytest tests/analysis/test_fingerprints.py -q
+uv run pytest tests/analysis/test_docking_poses.py -q
+uv run pytest tests/analysis/test_pose_comparison.py -q
+uv run pytest tests/analysis/test_docking_benchmark.py -q
+uv run pytest tests/analysis/test_trajectory_contacts.py -q
+uv run pytest tests/analysis/test_sar.py -q
+uv run pytest tests/applications/structure/test_structure_manifest.py -q
+uv run pytest tests/applications/structure/test_ligand_identity.py -q
+uv run pytest tests/applications/structure/test_ligand_coordinates.py -q
+uv run pytest tests/applications/structure/test_binding_site_reconciliation.py -q
+uv run pytest tests/applications/interactions/test_interaction_interpretation.py -q
+uv run pytest tests/applications/interactions/test_evidence_fingerprint.py -q
+uv run pytest tests/applications/chemistry/test_chemical_preparation.py -q
+uv run pytest tests/applications/chemistry/test_chemical_state_enumeration.py -q
+uv run pytest tests/applications/interactions/test_state_interactions.py -q
+uv run pytest tests/applications/chemistry/test_protein_preparation.py -q
+uv run pytest tests/applications/interactions/test_combination_interactions.py -q
+uv run pytest tests/applications/interactions/test_hydrogen_evidence.py -q
+uv run pytest tests/applications/interactions/test_water_evidence.py -q
+uv run pytest tests/applications/interactions/test_interaction_robustness.py -q
+uv run pytest tests/applications/thermodynamics/test_thermodynamic_interpretation.py -q
+uv run pytest tests/applications/thermodynamics/test_free_energy_study.py -q
+uv run pytest tests/applications/audit/test_scientific_audit.py -q
+uv run pytest tests/visualization/test_visualization.py -q
+uv run pytest tests/models/test_electrostatics.py -q
+uv run pytest tests/analysis/test_adme.py -q
 ```
 
 Covered:
@@ -111,9 +111,9 @@ derivative. It never calls the analytical force internally.
 **Question:** do many-particle sums and symmetries behave correctly?
 
 ```bash
-uv run pytest tests/test_system.py tests/test_system_integrator.py -q
-uv run pytest tests/test_symmetry.py tests/test_box.py -q
-uv run pytest tests/test_neighbour.py -q
+uv run pytest tests/composition/test_system.py tests/composition/test_system_integrator.py -q
+uv run pytest tests/composition/test_symmetry.py tests/foundation/test_box.py -q
+uv run pytest tests/composition/test_neighbour.py -q
 ```
 
 Covered:
@@ -133,8 +133,8 @@ Covered:
 **Question:** does the dynamics behave as the numerical analysis predicts?
 
 ```bash
-uv run pytest tests/test_integrators.py tests/test_harmonic_validation.py -q
-uv run pytest tests/test_minimization.py tests/test_thermostats.py -q
+uv run pytest tests/algorithms/test_integrators.py tests/algorithms/test_harmonic_validation.py -q
+uv run pytest tests/algorithms/test_minimization.py tests/protocols/test_thermostats.py -q
 ```
 
 Covered:
@@ -170,7 +170,7 @@ uv run --with rdkit python examples/chemistry/stereochemistry.py
 uv run --with rdkit python examples/chemistry/molecular_polarity.py
 uv run --with rdkit python examples/chemistry/hydrogen_bonding.py
 uv run --with rdkit python examples/chemistry/adme_tradeoffs.py
-uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
+uv run --with rdkit python examples/drug_discovery/capstone/capstone_imatinib.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
 uv run python examples/drug_discovery/binding_site.py
 uv run python examples/drug_discovery/interactions.py
@@ -205,7 +205,7 @@ four independent layers:
 | magnitude bounds | is the value in the right order of magnitude? | $100<k_e<200$ |
 
 These live in
-[`tests/test_physical_benchmarks.py`](../../tests/test_physical_benchmarks.py).
+[`tests/foundation/test_physical_benchmarks.py`](../../tests/foundation/test_physical_benchmarks.py).
 They are deliberately redundant with the derivation tests: redundancy is the
 point when a single operator typo could corrupt every downstream result.
 
@@ -213,81 +213,86 @@ point when a single operator typo could corrupt every downstream result.
 
 | Invariant | Test |
 | --- | --- |
-| dimensional consistency | `tests/test_units.py` |
-| golden constants and magnitude bounds | `tests/test_physical_benchmarks.py` |
-| closed-form Coulomb and Lennard-Jones references | `tests/test_physical_benchmarks.py` |
-| Coulomb sign and direction | `tests/test_physical_benchmarks.py`, `tests/test_pair_potentials.py` |
-| non-negative kinetic energy | `tests/test_physics.py` |
-| force is negative energy gradient | `tests/test_force_gradients.py` |
-| double-well minima, barrier, and gradient | `tests/test_potentials.py`, `tests/test_force_gradients.py` |
-| second-order convergence | `tests/test_harmonic_validation.py` |
-| bounded oscillator energy | `tests/test_integrators.py` |
-| equal-and-opposite pair forces | `tests/test_pair_potentials.py`, `tests/test_symmetry.py` |
-| zero total internal force | `tests/test_symmetry.py` |
-| translation and rotation invariance | `tests/test_symmetry.py` |
-| periodic wrapping invariance | `tests/test_symmetry.py`, `tests/test_box.py` |
-| force-based minimisation convergence | `tests/test_minimization.py` |
-| thermostat heating and cooling | `tests/test_thermostats.py` |
-| state and identity preservation | `tests/test_state_preservation.py` |
-| constraint satisfaction after state updates | `tests/test_constraints.py` |
-| cell-list candidates contain every true pair | `tests/test_neighbour.py` |
-| opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
-| manifest checksums, selections, decisions, actors, and machine-readable checks are validated | `tests/test_structure_manifest.py` |
-| ligand formula, connectivity, bond orders, mapping ambiguity, and unresolved discrepancies are tested | `tests/test_ligand_identity.py` |
-| coordinate mapping, occupancy, alternate locations, geometry, and missing atoms are tested | `tests/test_ligand_coordinates.py` |
-| pocket selection, residue namespaces, water policy, contacts, and proximity boundaries are tested | `tests/test_binding_site_reconciliation.py` |
-| interaction classification, missing evidence, and the no-affinity boundary are tested | `tests/test_interaction_interpretation.py` |
-| three-state evidence, assessable denominators, schema compatibility, and unknown-not-zero comparisons are tested | `tests/test_evidence_fingerprint.py` |
-| prepared states, generated hydrogens, explicit assumptions, and unselected alternatives are tested | `tests/test_chemical_preparation.py` |
-| protonation/tautomer enumeration, pKa provenance, and no-population assumptions are tested | `tests/test_chemical_state_enumeration.py` |
-| state-aware contact interpretation preserves state differences without ranking or affinity inference | `tests/test_state_interactions.py` |
-| protein-pocket preparation preserves templates, multiple states, and unassigned water/hetero roles | `tests/test_protein_preparation.py` |
-| ligand/protein state matrix completeness and no-ranking interaction classification are tested | `tests/test_combination_interactions.py` |
-| generated hydrogens keep generated provenance, donor–hydrogen connectivity is checked, and D–H···A geometry is tested | `tests/test_hydrogen_evidence.py` |
-| deposited water identity, occupancy, B-factor, unassigned roles, and geometric-only bridge status are tested | `tests/test_water_evidence.py` |
-| contact cutoffs, hydrogen angles, hydrogen-placement perturbations, state patterns, and water cutoffs are tested as independent sensitivity axes | `tests/test_interaction_robustness.py` |
-| invariant, assumption-sensitive, unsupported, and unknown conclusions keep consistent support sets and no composite score | `tests/test_interaction_robustness.py` |
-| structural counts, missing thermodynamic terms, and preparation/sampling requirements are separated from a null free energy | `tests/test_thermodynamic_interpretation.py` |
-| exact partition functions reproduce harmonic free-energy differences and FEP convergence reports overlap and replicate spread | `tests/test_free_energy_study.py` |
-| the final audit checks documentation links, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end demonstration | `tests/test_scientific_audit.py` |
-| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, deterministic PyMOL scripts, RDKit state comparisons, Matplotlib evidence matrices, sensitivity plots, FEP convergence, thermodynamic boundaries, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
-| acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
-| protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
-| Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |
-| binding-site distances match hand calculations | `tests/test_binding_site.py` |
-| pocket selection is translation- and rotation-invariant | `tests/test_binding_site.py` |
-| residue aggregation preserves residue identity without duplicates | `tests/test_binding_site.py` |
-| hydrogen-bond distance and angle boundaries are explicit | `tests/test_interactions.py` |
-| hydrogen-bond direction and invalid chemistry are tested | `tests/test_interactions.py` |
-| interaction detection is rigid-motion and ordering invariant | `tests/test_interactions.py` |
-| fingerprint features are deterministic and duplicate-safe | `tests/test_fingerprints.py` |
-| occupancy distinguishes missing frames from absent features | `tests/test_fingerprints.py` |
-| pose RMSD is zero for identical mapped coordinates and rigid-motion invariant | `tests/test_docking_poses.py` |
-| symmetry-aware pose comparison uses explicit mappings | `tests/test_docking_poses.py` |
-| pose clustering is deterministic for a fixed distance matrix | `tests/test_pose_comparison.py` |
-| geometry and interaction similarity are reported separately | `tests/test_pose_comparison.py` |
-| benchmark success rate excludes invalid cases from the denominator | `tests/test_docking_benchmark.py` |
-| benchmark statuses agree with pose-recovery results | `tests/test_docking_benchmark.py` |
-| contact occupancy excludes missing frames and reports them | `tests/test_trajectory_contacts.py` |
-| equal occupancy can yield different contact lifetimes | `tests/test_trajectory_contacts.py` |
-| pIC50 and fold changes agree with the concentration ratio | `tests/test_sar.py` |
-| matched-pair activity, descriptors, and docking scores stay separate | `tests/test_sar.py` |
-| neutral dipoles are origin-independent; charged dipoles require an origin | `tests/test_electrostatics.py` |
-| dipole vectors rotate with coordinates and preserve magnitude | `tests/test_electrostatics.py` |
-| dipole magnitudes convert between e nm and Debye | `tests/test_electrostatics.py` |
-| LogD differs from LogP by the ionisation correction | `tests/test_adme.py` |
-| acid and base LogD corrections have the correct pH direction | `tests/test_adme.py` |
-| LogD limiting behavior and extreme-pH stability are tested | `tests/test_adme.py` |
+| dimensional consistency | `tests/foundation/test_units.py` |
+| golden constants and magnitude bounds | `tests/foundation/test_physical_benchmarks.py` |
+| closed-form Coulomb and Lennard-Jones references | `tests/foundation/test_physical_benchmarks.py` |
+| Coulomb sign and direction | `tests/foundation/test_physical_benchmarks.py`, `tests/models/test_pair_potentials.py` |
+| non-negative kinetic energy | `tests/models/test_physics.py` |
+| force is negative energy gradient | `tests/models/test_force_gradients.py` |
+| double-well minima, barrier, and gradient | `tests/models/test_potentials.py`, `tests/models/test_force_gradients.py` |
+| second-order convergence | `tests/algorithms/test_harmonic_validation.py` |
+| bounded oscillator energy | `tests/algorithms/test_integrators.py` |
+| equal-and-opposite pair forces | `tests/models/test_pair_potentials.py`, `tests/composition/test_symmetry.py` |
+| zero total internal force | `tests/composition/test_symmetry.py` |
+| translation and rotation invariance | `tests/composition/test_symmetry.py` |
+| periodic wrapping invariance | `tests/composition/test_symmetry.py`, `tests/foundation/test_box.py` |
+| force-based minimisation convergence | `tests/algorithms/test_minimization.py` |
+| thermostat heating and cooling | `tests/protocols/test_thermostats.py` |
+| state and identity preservation | `tests/composition/test_state_preservation.py` |
+| constraint satisfaction after state updates | `tests/composition/test_constraints.py` |
+| cell-list candidates contain every true pair | `tests/composition/test_neighbour.py` |
+| opt-in neighbour-list energies and forces match the default path | `tests/composition/test_neighbour.py` |
+| manifest checksums, selections, decisions, actors, and machine-readable checks are validated | `tests/applications/structure/test_structure_manifest.py` |
+| ligand formula, connectivity, bond orders, mapping ambiguity, and unresolved discrepancies are tested | `tests/applications/structure/test_ligand_identity.py` |
+| coordinate mapping, occupancy, alternate locations, geometry, and missing atoms are tested | `tests/applications/structure/test_ligand_coordinates.py` |
+| pocket selection, residue namespaces, water policy, contacts, and proximity boundaries are tested | `tests/applications/structure/test_binding_site_reconciliation.py` |
+| interaction classification, missing evidence, and the no-affinity boundary are tested | `tests/applications/interactions/test_interaction_interpretation.py` |
+| three-state evidence, assessable denominators, schema compatibility, and unknown-not-zero comparisons are tested | `tests/applications/interactions/test_evidence_fingerprint.py` |
+| prepared states, generated hydrogens, explicit assumptions, and unselected alternatives are tested | `tests/applications/chemistry/test_chemical_preparation.py` |
+| protonation/tautomer enumeration, pKa provenance, and no-population assumptions are tested | `tests/applications/chemistry/test_chemical_state_enumeration.py` |
+| state-aware contact interpretation preserves state differences without ranking or affinity inference | `tests/applications/interactions/test_state_interactions.py` |
+| protein-pocket preparation preserves templates, multiple states, and unassigned water/hetero roles | `tests/applications/chemistry/test_protein_preparation.py` |
+| ligand/protein state matrix completeness and no-ranking interaction classification are tested | `tests/applications/interactions/test_combination_interactions.py` |
+| generated hydrogens keep generated provenance, donor–hydrogen connectivity is checked, and D–H···A geometry is tested | `tests/applications/interactions/test_hydrogen_evidence.py` |
+| deposited water identity, occupancy, B-factor, unassigned roles, and geometric-only bridge status are tested | `tests/applications/interactions/test_water_evidence.py` |
+| contact cutoffs, hydrogen angles, hydrogen-placement perturbations, state patterns, and water cutoffs are tested as independent sensitivity axes | `tests/applications/interactions/test_interaction_robustness.py` |
+| invariant, assumption-sensitive, unsupported, and unknown conclusions keep consistent support sets and no composite score | `tests/applications/interactions/test_interaction_robustness.py` |
+| structural counts, missing thermodynamic terms, and preparation/sampling requirements are separated from a null free energy | `tests/applications/thermodynamics/test_thermodynamic_interpretation.py` |
+| exact partition functions reproduce harmonic free-energy differences and FEP convergence reports overlap and replicate spread | `tests/applications/thermodynamics/test_free_energy_study.py` |
+| the final audit checks documentation links, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end demonstration | `tests/applications/audit/test_scientific_audit.py` |
+| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, deterministic PyMOL scripts, RDKit state comparisons, Matplotlib evidence matrices, sensitivity plots, FEP convergence, thermodynamic boundaries, and hydrogen/water script generation are tested | `tests/visualization/test_visualization.py` |
+| acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/applications/chemistry/test_acid_base.py` |
+| protonation microstates sum to one and match site marginals | `tests/applications/chemistry/test_acid_base.py` |
+| Boltzmann ratios match known free-energy differences | `tests/applications/chemistry/test_acid_base.py` |
+| binding-site distances match hand calculations | `tests/analysis/test_binding_site.py` |
+| pocket selection is translation- and rotation-invariant | `tests/analysis/test_binding_site.py` |
+| residue aggregation preserves residue identity without duplicates | `tests/analysis/test_binding_site.py` |
+| hydrogen-bond distance and angle boundaries are explicit | `tests/analysis/test_interactions.py` |
+| hydrogen-bond direction and invalid chemistry are tested | `tests/analysis/test_interactions.py` |
+| interaction detection is rigid-motion and ordering invariant | `tests/analysis/test_interactions.py` |
+| fingerprint features are deterministic and duplicate-safe | `tests/analysis/test_fingerprints.py` |
+| occupancy distinguishes missing frames from absent features | `tests/analysis/test_fingerprints.py` |
+| pose RMSD is zero for identical mapped coordinates and rigid-motion invariant | `tests/analysis/test_docking_poses.py` |
+| symmetry-aware pose comparison uses explicit mappings | `tests/analysis/test_docking_poses.py` |
+| pose clustering is deterministic for a fixed distance matrix | `tests/analysis/test_pose_comparison.py` |
+| geometry and interaction similarity are reported separately | `tests/analysis/test_pose_comparison.py` |
+| benchmark success rate excludes invalid cases from the denominator | `tests/analysis/test_docking_benchmark.py` |
+| benchmark statuses agree with pose-recovery results | `tests/analysis/test_docking_benchmark.py` |
+| contact occupancy excludes missing frames and reports them | `tests/analysis/test_trajectory_contacts.py` |
+| equal occupancy can yield different contact lifetimes | `tests/analysis/test_trajectory_contacts.py` |
+| pIC50 and fold changes agree with the concentration ratio | `tests/analysis/test_sar.py` |
+| matched-pair activity, descriptors, and docking scores stay separate | `tests/analysis/test_sar.py` |
+| neutral dipoles are origin-independent; charged dipoles require an origin | `tests/models/test_electrostatics.py` |
+| dipole vectors rotate with coordinates and preserve magnitude | `tests/models/test_electrostatics.py` |
+| dipole magnitudes convert between e nm and Debye | `tests/models/test_electrostatics.py` |
+| LogD differs from LogP by the ionisation correction | `tests/analysis/test_adme.py` |
+| acid and base LogD corrections have the correct pH direction | `tests/analysis/test_adme.py` |
+| LogD limiting behavior and extreme-pH stability are tested | `tests/analysis/test_adme.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-536 passed, 1 skipped
+705 passed, 3 skipped
 ```
 
-The skip is the PyTorch-unavailable test; PyTorch is installed in this
-environment, so the backend path is exercised.
+The three default-suite skips cover the backend branch that is skipped when
+PyTorch is installed and two optional RDKit rendering checks. With the optional
+dependencies present, the same suite reports `707 passed, 1 skipped`:
+
+```bash
+uv run --with rdkit pytest -q
+```
 
 All core examples listed in Level 4 run successfully, and the visual generator
 reproduces the tutorial assets.

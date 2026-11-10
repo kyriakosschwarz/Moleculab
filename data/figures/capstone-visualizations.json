@@ -4,7 +4,7 @@
     {
       "figure_id": "capstone-ligand-2d",
       "title": "Imatinib reference-neutral chemical state",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-2d.svg",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-imatinib-2d.svg",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -49,7 +49,7 @@
     {
       "figure_id": "capstone-abl1-overview",
       "title": "Imatinib in the ABL1 binding site",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-abl1-overview.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-imatinib-abl1-overview.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -112,7 +112,7 @@
     {
       "figure_id": "capstone-binding-pocket",
       "title": "Imatinib binding-pocket contacts",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-binding-pocket.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-imatinib-binding-pocket.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -178,7 +178,7 @@
     {
       "figure_id": "capstone-chemical-states",
       "title": "Selected imatinib chemical-state alternatives",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-chemical-states.svg",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-imatinib-chemical-states.svg",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -223,7 +223,7 @@
     {
       "figure_id": "capstone-evidence-matrix",
       "title": "8 x 2 interaction-evidence matrix",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-interaction-evidence-matrix.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-interaction-evidence-matrix.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -266,7 +266,7 @@
     {
       "figure_id": "capstone-hydrogen-water",
       "title": "Generated hydrogens and deposited water evidence",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-hydrogen-water-evidence.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-hydrogen-water-evidence.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -336,7 +336,7 @@
     {
       "figure_id": "capstone-interaction-sensitivity",
       "title": "Interaction sensitivity across tested assumptions",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-interaction-sensitivity.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-interaction-sensitivity.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -379,7 +379,7 @@
     {
       "figure_id": "harmonic-fep-convergence",
       "title": "Exact versus estimated harmonic free energy",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/harmonic-fep-convergence.png",
+      "image_path": "docs/tutorials/capstone/visualizations/harmonic-fep-convergence.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
@@ -421,7 +421,7 @@
     {
       "figure_id": "capstone-structural-vs-thermodynamics",
       "title": "Structural evidence is not binding free energy",
-      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-structural-vs-thermodynamics.png",
+      "image_path": "docs/tutorials/capstone/visualizations/2HYY-structural-vs-thermodynamics.png",
       "context": {
         "source_structure": "2HYY",
         "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",

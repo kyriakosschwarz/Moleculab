@@ -94,7 +94,7 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 After part 10, continue with the [Track A main path](tutorial.md) through
 solvent, water, docking, Ewald, pressure, and free energy. Then continue with
 [Track B](../chemistry/README.md), [Track C](../drug_discovery/README.md), and
-the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
+the [imatinib–BCR-ABL1 capstone](../capstone/README.md).
 
 Track B starts with
 [chemical structure and conformational behaviour](../chemistry/01_chemical_structure.md).
@@ -219,17 +219,17 @@ convergence order. Halving the timestep reduces the position, velocity, and
 energy errors by about four, as expected for a second-order method.
 
 The permanent checks are in
-[`tests/test_harmonic_validation.py`](../../../tests/test_harmonic_validation.py),
+[`tests/algorithms/test_harmonic_validation.py`](../../../tests/algorithms/test_harmonic_validation.py),
 together with the state-preservation tests in
-[`tests/test_state_preservation.py`](../../../tests/test_state_preservation.py).
+[`tests/composition/test_state_preservation.py`](../../../tests/composition/test_state_preservation.py).
 
 Every core potential is also covered by a consolidated force-gradient audit in
-[`tests/test_force_gradients.py`](../../../tests/test_force_gradients.py). It
+[`tests/models/test_force_gradients.py`](../../../tests/models/test_force_gradients.py). It
 numerically differentiates the energy and compares the result with the
 analytical force.
 
 Full-system symmetries and combined-system behaviour are checked in
-[`tests/test_symmetry.py`](../../../tests/test_symmetry.py). The complete
+[`tests/composition/test_symmetry.py`](../../../tests/composition/test_symmetry.py). The complete
 validation plan is in [`docs/reference/validation.md`](../../reference/validation.md).
 
 ## Visual conventions

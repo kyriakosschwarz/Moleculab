@@ -21,9 +21,9 @@ Before changing parameters at random, ask:
 The relevant tests are:
 
 ```bash
-uv run pytest tests/test_units.py tests/test_force_gradients.py -q
-uv run pytest tests/test_integrators.py tests/test_constraints.py -q
-uv run pytest tests/test_box.py tests/test_neighbour.py -q
+uv run pytest tests/foundation/test_units.py tests/models/test_force_gradients.py -q
+uv run pytest tests/algorithms/test_integrators.py tests/composition/test_constraints.py -q
+uv run pytest tests/foundation/test_box.py tests/composition/test_neighbour.py -q
 ```
 
 ## 2. Symptom table

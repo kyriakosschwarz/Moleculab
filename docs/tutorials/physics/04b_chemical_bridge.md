@@ -256,7 +256,7 @@ It demonstrates:
 ## 7. Tests and verification
 
 ```bash
-uv run pytest tests/test_potentials.py tests/test_force_gradients.py -q
+uv run pytest tests/models/test_potentials.py tests/models/test_force_gradients.py -q
 ```
 
 The tests check:

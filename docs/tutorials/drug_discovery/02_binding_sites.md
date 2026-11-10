@@ -341,7 +341,7 @@ The output above comes from this example.
 ### 11.3 Tests
 
 ```bash
-uv run pytest tests/test_binding_site.py -v
+uv run pytest tests/analysis/test_binding_site.py -v
 ```
 
 The tests cover:

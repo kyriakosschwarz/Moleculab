@@ -1,7 +1,7 @@
 # Figure metadata
 
-`capstone-visualizations.json` describes the Visualization Batch 1–3 figures
-stored in `docs/tutorials/drug_discovery/visualizations/`.
+`capstone-visualizations.json` describes the nine capstone figures stored in
+`docs/tutorials/capstone/visualizations/`.
 
 Each entry records:
 
@@ -22,13 +22,13 @@ environments.
 The code-level registry in `src/moleculab/visualization/registry.py` defines
 the authoritative figure IDs, paths, generation functions, source records, and
 teaching anchors. The generated gallery at
-`docs/tutorials/drug_discovery/visualizations/gallery.md` is built from that
+`docs/tutorials/capstone/visualizations/gallery.md` is built from that
 registry and the metadata.
 
 The metadata and gallery are rewritten by:
 
 ```bash
-uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
+uv run --with rdkit python examples/drug_discovery/capstone/capstone_visualizations.py
 ```
 
 The figures are derived from the deposited structure and validated chemical

@@ -70,12 +70,16 @@ src/moleculab/
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
 ├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR, ADME
-├── applications/     docking, solvent, water, free energy, acid-base, QM/MM,
-│                     structure provenance, ligand identity, ligand coordinates,
-│                     binding-site reconciliation, interaction interpretation,
-│                     evidence fingerprints, chemical-state preparation,
-│                     protonation/tautomer enumeration, state-aware interactions,
-│                     protein-pocket preparation, evidence-complete matrices
+├── applications/
+│   ├── structure/    manifest, ligand identity/coordinates, binding sites
+│   ├── chemistry/    chemical preparation, enumeration, protonation, proteins
+│   ├── interactions/ interpretation, evidence, hydrogen/water, robustness
+│   ├── thermodynamics/ FEP/TI/MBAR, alchemy, free-energy studies, boundaries
+│   ├── docking/      rigid and flexible docking
+│   ├── solvents/     coarse-grained solvent and atomistic water
+│   ├── qmmm/         finite-difference QM/MM
+│   └── audit/        scientific audit and integration
+├── visualization/    scientific figures, registry, styles, metadata
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -114,11 +118,9 @@ composition (system, neighbour, constraints)
     |
 algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
-analysis (trajectory, binding sites)
-    + applications (docking, solvent, water, free energy, acid-base, QM/MM,
-                    structure provenance, ligand identity, hydrogen and water
-                    evidence, interaction robustness, thermodynamic boundaries,
-                    scientific audit)
+analysis (trajectory, binding sites, evidence, SAR, ADME)
+    + applications (structure, chemistry, interactions, thermodynamics,
+                    docking, solvents, qmmm, audit)
     + visualization (RDKit 2D, PyMOL 3D, Matplotlib plots, metadata)
 ```
 
@@ -146,25 +148,25 @@ The actual imports are visible in the source. The important rules are:
 | `analysis.adme` | NumPy only | pKa prediction, ADME prediction |
 | `analysis.docking` | Python and NumPy only | `System`, integrators, docking parsers or search engines |
 | `analysis.evidence` | Python standard library only | `System`, integrators, structure parsers, chemistry toolkits |
-| `applications.docking` | `composition.system`, foundation | integrators, thermostats |
-| `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
-| `applications.structure_manifest` | Python standard library only | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.ligand_identity` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.ligand_coordinates` | `applications.ligand_identity`, `applications.structure_manifest`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.binding_site_reconciliation` | `analysis.binding_site`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.interaction_interpretation` | `analysis.interactions`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.interaction_evidence` | `analysis.evidence`, `applications.interaction_interpretation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.chemical_preparation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.chemical_state_enumeration` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.state_interactions` | `analysis.evidence`, `applications.chemical_state_enumeration`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.protein_preparation` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.combination_interactions` | `applications.interaction_interpretation`, `applications.chemical_state_enumeration`, `applications.protein_preparation`, `analysis.evidence` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.hydrogen_evidence` | `analysis.interactions`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.water_evidence` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.interaction_robustness` | `applications.combination_interactions`, `applications.hydrogen_evidence`, `applications.water_evidence`, `analysis.interactions` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.thermodynamic_interpretation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators, free-energy estimators |
-| `applications.free_energy_study` | `applications.fep`, `models.potentials`, `foundation.units`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
-| `applications.scientific_audit` | `applications.free_energy_study`, `applications.structure_manifest`, `foundation.units`, `models.potentials`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.docking.docking` | `composition.system`, foundation | integrators, thermostats |
+| `applications.chemistry.acid_base` | `foundation.units` | `System`, integrators, toolkits |
+| `applications.structure.structure_manifest` | Python standard library only | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.structure.ligand_identity` | `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.structure.ligand_coordinates` | `applications.structure.ligand_identity`, `applications.structure.structure_manifest`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.structure.binding_site_reconciliation` | `analysis.binding_site`, `applications.structure.ligand_coordinates`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.interaction_interpretation` | `analysis.interactions`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.interaction_evidence` | `analysis.evidence`, `applications.interactions.interaction_interpretation`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.chemistry.chemical_preparation` | `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.chemistry.chemical_state_enumeration` | `applications.chemistry.chemical_preparation`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.state_interactions` | `analysis.evidence`, `applications.chemistry.chemical_state_enumeration`, `applications.structure.ligand_coordinates`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.chemistry.protein_preparation` | `applications.chemistry.chemical_preparation`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.combination_interactions` | `applications.interactions.interaction_interpretation`, `applications.chemistry.chemical_state_enumeration`, `applications.chemistry.protein_preparation`, `analysis.evidence` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.hydrogen_evidence` | `analysis.interactions`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.water_evidence` | `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.interactions.interaction_robustness` | `applications.interactions.combination_interactions`, `applications.interactions.hydrogen_evidence`, `applications.interactions.water_evidence`, `analysis.interactions` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.thermodynamics.thermodynamic_interpretation` | `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators, free-energy estimators |
+| `applications.thermodynamics.free_energy_study` | `applications.thermodynamics.fep`, `models.potentials`, `foundation.units`, `applications.structure.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.audit.scientific_audit` | `applications.thermodynamics.free_energy_study`, `applications.structure.structure_manifest`, `foundation.units`, `models.potentials`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `visualization` | validated application records, foundation, optional RDKit/PyMOL | scientific inference, record mutation, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
@@ -192,19 +194,14 @@ integrator or thermostat.
 finite-difference Schrödinger equation with fixed point charges. It is not a
 classical potential and is deliberately isolated.
 
-`structure_manifest`, `ligand_identity`, `ligand_coordinates`,
-`binding_site_reconciliation`, `interaction_interpretation`,
-`interaction_evidence`, `chemical_preparation`,
-`chemical_state_enumeration`, `state_interactions`, `protein_preparation`,
-`combination_interactions`, `hydrogen_evidence`, `water_evidence`,
-`interaction_robustness`, `thermodynamic_interpretation`, and
-`scientific_audit` are **record layers**. They accept plain,
-already-parsed data and do not import `gemmi`, RDKit, or any coordinate reader.
-The capstone adapters in `examples/drug_discovery/` own those optional
-dependencies and pass explicit records, graphs, candidate mappings, coordinate
-records, and protein/water records into the library. This keeps the core
-installable with NumPy alone and keeps file-format decisions outside the physics
-and analysis layers.
+`structure/`, `chemistry/`, `interactions/`, `thermodynamics/`, and `audit/`
+contain the **record layers**. They accept plain, already-parsed data and do not
+import `gemmi`, RDKit, or any coordinate reader. The capstone adapters in
+`examples/drug_discovery/capstone/` own those optional dependencies and pass
+explicit records, graphs, candidate mappings, coordinate records, and
+protein/water records into the library. This keeps the core installable with
+NumPy alone and keeps file-format decisions outside the physics and analysis
+layers.
 
 `visualization` is a separate consumer layer. `molecular_2d` takes the validated
 reference graph and a selected chemical state and produces an RDKit diagram;
@@ -248,7 +245,7 @@ consistent with the state.
 
 `atom_type` and `charge` are not mechanical state, but they are part of the
 model's identity. Every rebuild path must preserve them. This is enforced by
-`tests/test_state_preservation.py`.
+`tests/composition/test_state_preservation.py`.
 
 ### 5.2 `System`
 
@@ -325,7 +322,7 @@ The most important contract is:
 **For every potential, the force must be the negative gradient of the same
 energy model.**
 
-This is checked by `tests/test_force_gradients.py` for every core potential.
+This is checked by `tests/models/test_force_gradients.py` for every core potential.
 The test differentiates the energy numerically and compares it with the
 analytical force. It never calls the analytical force inside the numerical
 derivative, so a sign error or missing factor cannot hide.
@@ -368,7 +365,7 @@ conversion factor. The same cancellation makes $K = \frac12 m v^2$ direct.
 Conversion constants live in `foundation/units.py`, not in potentials or integrators.
 
 **Trade-off.** Readers must learn the unit system. The tutorials do that in
-part 01, and `tests/test_units.py` checks the conversion factors.
+part 01, and `tests/foundation/test_units.py` checks the conversion factors.
 
 ### ADR-002: Energy and force in the same model
 
@@ -549,7 +546,7 @@ documented examples.
 **Context.** A finite result can still be wrong. A tutorial claim is only
 credible if the library reproduces it.
 
-**Consequences.** `tests/test_force_gradients.py`, `test_harmonic_validation.py`,
+**Consequences.** `tests/models/test_force_gradients.py`, `test_harmonic_validation.py`,
 `test_symmetry.py`, `test_state_preservation.py`, and
 `test_physical_benchmarks.py` form an executable specification.
 [`validation.md`](../reference/validation.md) maps the levels. Constants are checked against
@@ -595,7 +592,7 @@ outside the screen.
 
 **Trade-off.** The cell list is a second code path and adds a set of candidate
 pairs. It is validated against the default O(N²) path in
-`tests/test_neighbour.py`. The default path remains the explicit teaching loop;
+`tests/composition/test_neighbour.py`. The default path remains the explicit teaching loop;
 the opt-in path is for larger systems.
 
 ### ADR-016: Provenance and chemical identity are explicit records
@@ -610,52 +607,52 @@ transformations it applied, and whether the deposited ligand actually
 corresponds to the intended chemical identity. Those are separate questions
 from energy evaluation and should be inspectable without rerunning an analysis.
 
-**Consequences.** `applications/structure_manifest.py` records source checksums,
+**Consequences.** `applications/structure/structure_manifest.py` records source checksums,
 revision metadata, explicit selections, processing decisions, actors, and
-machine-readable validation checks. `applications/ligand_identity.py` compares
+machine-readable validation checks. `applications/structure/ligand_identity.py` compares
 supplied deposited and reference graphs, preserves mapping ambiguity, keeps raw
 bond orders before any aromatic-normalized comparison, and reports unresolved
-discrepancies. `applications/ligand_coordinates.py` attaches deposited
+discrepancies. `applications/structure/ligand_coordinates.py` attaches deposited
 coordinates to that mapping and records occupancy, displacement parameters,
 alternate locations, bond lengths, angles, ring planarity, and close contacts
-against broad sanity bounds. `applications/binding_site_reconciliation.py`
+against broad sanity bounds. `applications/structure/binding_site_reconciliation.py`
 selects a protein pocket with an explicit cutoff and records residue identities,
 contacts, waters, hetero residues, and missing records without turning proximity
-into an affinity claim. `applications/interaction_interpretation.py` classifies
+into an affinity claim. `applications/interactions/interaction_interpretation.py` classifies
 interaction types only when explicit chemical features and geometry are supplied;
 unknown chemistry remains unknown. `analysis/evidence.py` represents
-present/absent/unknown states, and `applications/interaction_evidence.py` maps
+present/absent/unknown states, and `applications/interactions/interaction_evidence.py` maps
 interaction categories into an assessable fingerprint without encoding unknown
-as zero. `applications/chemical_preparation.py` stores separate prepared states
+as zero. `applications/chemistry/chemical_preparation.py` stores separate prepared states
 with explicit protonation, tautomer, hydrogen, charge, feature, water-role,
 toolkit, and assumption provenance; it never modifies the earlier records.
-`applications/chemical_state_enumeration.py` holds protonation and tautomer
+`applications/chemistry/chemical_state_enumeration.py` holds protonation and tautomer
 alternatives with state-specific graphs, proton counts, charges, and features;
 it records pKa provenance where supplied and never estimates populations.
-`applications/state_interactions.py` maps state atoms back to deposited ligand
+`applications/interactions/state_interactions.py` maps state atoms back to deposited ligand
 atoms and assesses the same experimental contacts under each explicitly selected
 state; it compares feature evidence without ranking states or claiming affinity.
-`applications/protein_preparation.py` prepares explicit protein-pocket states
+`applications/chemistry/protein_preparation.py` prepares explicit protein-pocket states
 from residue templates, keeps multiple protonation hypotheses unselected, and
 records no hydrogens or assigned water/hetero roles.
-`applications/combination_interactions.py` crosses ligand and protein states on
+`applications/interactions/combination_interactions.py` crosses ligand and protein states on
 the same contacts and summarizes hypothesis-conditioned classifications without
-ranking combinations. `applications/hydrogen_evidence.py` records generated
+ranking combinations. `applications/interactions/hydrogen_evidence.py` records generated
 hydrogen positions separately from deposited heavy atoms, validates
 donor–hydrogen connectivity, and evaluates D–H···A geometry against explicit
-criteria. `applications/water_evidence.py` preserves deposited water identity,
+criteria. `applications/interactions/water_evidence.py` preserves deposited water identity,
 coordinates, occupancy, and B-factors, keeps orientation and roles unassigned,
 and reports geometric bridge plausibility separately from a chemically
-classified water-mediated interaction. `applications/interaction_robustness.py`
+classified water-mediated interaction. `applications/interactions/interaction_robustness.py`
 re-evaluates the existing conclusions under independent contact-cutoff,
 angular, hydrogen-placement, state, and water-cutoff assumptions. It keeps
 invariant, assumption-sensitive, unsupported, and unknown conclusions separate
 and never collapses them into a confidence score.
-`applications/thermodynamic_interpretation.py` separates structural counts from
+`applications/thermodynamics/thermodynamic_interpretation.py` separates structural counts from
 thermodynamic claims, lists the interaction, desolvation, entropy, water,
 strain, standard-state, sampling, and uncertainty requirements that are still
 missing, and leaves the binding free energy explicitly `not_computed`.
-`applications/scientific_audit.py` checks documentation links, constants,
+`applications/audit/scientific_audit.py` checks documentation links, constants,
 derivatives, state provenance, the structural and thermodynamic boundaries,
 artifact checksums, study seeds, and an end-to-end configuration → Boltzmann →
 ensemble → exact/FEP demonstration. The capstone consumes these records rather
@@ -900,7 +897,7 @@ forking the codebase.
 | Track | Architectural focus | Main modules | Capstone contribution |
 | --- | --- | --- | --- |
 | A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR, exact harmonic convergence study | supplies the physical model and the limits of energy calculations |
-| B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
+| B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.chemistry.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
 | C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration, state-aware interactions, protein-pocket preparation, combination interaction matrices | turns structural observations into auditable records without claiming affinity |
 
 The capstone is the integration point:
@@ -958,11 +955,11 @@ tutorial from turning into a tour of the entire library.
 
 The tutorials cite the tests that protect each claim:
 
-- `tests/test_force_gradients.py` — every core potential;
-- `tests/test_harmonic_validation.py` — analytic oscillator and convergence;
-- `tests/test_symmetry.py` — translation, rotation, total force, wrapping;
-- `tests/test_state_preservation.py` — chemical identity through rebuilds;
-- `tests/test_units.py` — unit coherence.
+- `tests/models/test_force_gradients.py` — every core potential;
+- `tests/algorithms/test_harmonic_validation.py` — analytic oscillator and convergence;
+- `tests/composition/test_symmetry.py` — translation, rotation, total force, wrapping;
+- `tests/composition/test_state_preservation.py` — chemical identity through rebuilds;
+- `tests/foundation/test_units.py` — unit coherence.
 
 An instructor can break a line of code, run the relevant test, and let the
 failure teach the invariant. That is more instructive than a passing example.
@@ -1118,13 +1115,13 @@ The architecture makes common drug-discovery extensions additive:
 | new bonded term | `models/bonded.py` + `Topology` | integrator, thermostat |
 | new scoring function | a new application module using `System` | core potentials |
 | new free-energy estimator | `fep`/`ti`/`mbar` style module | model definitions |
-| new solvent model | `applications/solvent.py` or `applications/water.py` | integrator, analysis |
+| new solvent model | `applications/solvents/solvent.py` or `applications/solvents/water.py` | integrator, analysis |
 | new thermostat | `protocols/thermostats.py` | forces, potentials |
 | new barostat | `protocols/pressure.py` | forces, potentials |
 | new backend | `backend.py` | model APIs |
 | new structure format | an example/adapter plus `structure_manifest` | record schema, core physics |
-| new identity comparison | `applications/ligand_identity.py` | core physics, coordinate parsing |
-| new coordinate geometry check | `applications/ligand_coordinates.py` | core physics, identity schema |
+| new identity comparison | `applications/structure/ligand_identity.py` | core physics, coordinate parsing |
+| new coordinate geometry check | `applications/structure/ligand_coordinates.py` | core physics, identity schema |
 | new analysis | `analysis/trajectory.py` | simulation state |
 | larger short-range pair screen | `composition/neighbour.py` | default pair-loop semantics |
 
@@ -1140,7 +1137,8 @@ production drug-discovery engine. Missing pieces include:
 - particle-mesh Ewald and neighbour lists;
 - triclinic boxes and full pressure coupling;
 - enhanced sampling and automated free-energy workflows;
-- explicit protein preparation, protonation, and ion placement;
+- full atomistic protein preparation (missing atoms, hydrogens, and ions) and
+  protonation-population assignment;
 - force-field-ready ligand parameterization, including hydrogen and protonation
   assignment;
 - entropy, desolvation, and trained binding-affinity scoring;
@@ -1150,9 +1148,10 @@ production drug-discovery engine. Missing pieces include:
 
 These are roadmap items, not hidden assumptions. The current modules are a
 correct foundation for them because the interfaces and invariants are already
-in place. The capstone deliberately stops at provenance and chemical-identity
-records; it does not claim to produce a force-field-ready ligand, a docking
-score, or a binding free energy.
+in place. The capstone deliberately stops at evidence-complete structural
+records, an explicit interaction-robustness record, and a thermodynamic
+boundary at which binding free energy is `not_computed`; it does not claim to
+produce a force-field-ready ligand, a docking score, or a binding free energy.
 
 ### 9.4 What production would change
 
@@ -1177,7 +1176,7 @@ reads trajectories without changing them.
 
 1. Implement `energy` and `force` in `models/potentials.py` or `models/bonded.py`.
 2. Ensure the force is $-\nabla U$ for the same model.
-3. Add a finite-difference test in `tests/test_force_gradients.py` or a focused
+3. Add a finite-difference test in `tests/models/test_force_gradients.py` or a focused
    test file.
 4. Add a runnable example under `examples/`.
 5. Add a tutorial section or a new tutorial if the concept is new.
@@ -1230,37 +1229,37 @@ These are the rules that keep the layers honest.
 
 | Invariant | Enforced by |
 | --- | --- |
-| every potential's force is its energy gradient | `tests/test_force_gradients.py` |
-| every pair force is equal and opposite | `tests/test_pair_potentials.py`, `tests/test_symmetry.py` |
-| total internal force is zero | `tests/test_symmetry.py` |
-| translation and rotation preserve internal energy | `tests/test_symmetry.py` |
-| wrapping preserves periodic interactions | `tests/test_symmetry.py`, `tests/test_box.py` |
-| integrator matches the analytic oscillator | `tests/test_harmonic_validation.py` |
-| minimisation lowers energy and converges on force | `tests/test_minimization.py` |
-| thermostat heats and cools as intended | `tests/test_thermostats.py` |
-| chemical identity survives every rebuild | `tests/test_state_preservation.py` |
-| constraints remain satisfied after every state-advancing algorithm | `tests/test_constraints.py` |
-| cell-list candidates contain every true pair within the cutoff | `tests/test_neighbour.py` |
-| opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
-| structure manifests require a checksum, explicit selection, decisions, and labelled checks | `tests/test_structure_manifest.py` |
-| ligand identity records preserve ambiguity, raw bond orders, mapping completeness, and unresolved discrepancies | `tests/test_ligand_identity.py` |
-| coordinate records preserve occupancy, alternate locations, missing atoms, and geometry sanity checks | `tests/test_ligand_coordinates.py` |
-| binding-site records preserve cutoff policy, residue namespaces, waters, contacts, and the proximity/affinity boundary | `tests/test_binding_site_reconciliation.py` |
-| interaction interpretation preserves missing chemistry as unknown and does not claim affinity | `tests/test_interaction_interpretation.py` |
-| evidence fingerprints keep unknown distinct from absent, use assessable denominators, and reject incompatible schemas | `tests/test_evidence_fingerprint.py` |
-| prepared states preserve generated-vs-deposited provenance, assumptions, and unselected alternatives | `tests/test_chemical_preparation.py` |
-| protonation/tautomer enumeration keeps alternatives unselected and does not estimate populations | `tests/test_chemical_state_enumeration.py` |
-| state-aware assessment maps state atoms to contacts, preserves feature differences, and does not rank states | `tests/test_state_interactions.py` |
-| protein-pocket preparation keeps template states unselected and water/hetero roles unassigned | `tests/test_protein_preparation.py` |
-| ligand/protein state matrices are complete, preserve missing hydrogen/water evidence, and do not rank combinations | `tests/test_combination_interactions.py` |
-| hydrogen evidence separates generated positions from deposited atoms and checks connectivity before geometry | `tests/test_hydrogen_evidence.py` |
-| water evidence preserves deposited observations, leaves roles unassigned, and reports geometry without chemical classification | `tests/test_water_evidence.py` |
-| robustness conclusions keep consistent support sets and no composite confidence score | `tests/test_interaction_robustness.py` |
-| thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
-| exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
-| the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/test_scientific_audit.py` |
-| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, semantic status mappings, deterministic render scripts, RDKit state comparisons, Matplotlib evidence/sensitivity/FEP/thermodynamic figures, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
-| units and constants are coherent | `tests/test_units.py` |
+| every potential's force is its energy gradient | `tests/models/test_force_gradients.py` |
+| every pair force is equal and opposite | `tests/models/test_pair_potentials.py`, `tests/composition/test_symmetry.py` |
+| total internal force is zero | `tests/composition/test_symmetry.py` |
+| translation and rotation preserve internal energy | `tests/composition/test_symmetry.py` |
+| wrapping preserves periodic interactions | `tests/composition/test_symmetry.py`, `tests/foundation/test_box.py` |
+| integrator matches the analytic oscillator | `tests/algorithms/test_harmonic_validation.py` |
+| minimisation lowers energy and converges on force | `tests/algorithms/test_minimization.py` |
+| thermostat heats and cools as intended | `tests/protocols/test_thermostats.py` |
+| chemical identity survives every rebuild | `tests/composition/test_state_preservation.py` |
+| constraints remain satisfied after every state-advancing algorithm | `tests/composition/test_constraints.py` |
+| cell-list candidates contain every true pair within the cutoff | `tests/composition/test_neighbour.py` |
+| opt-in neighbour-list energies and forces match the default path | `tests/composition/test_neighbour.py` |
+| structure manifests require a checksum, explicit selection, decisions, and labelled checks | `tests/applications/structure/test_structure_manifest.py` |
+| ligand identity records preserve ambiguity, raw bond orders, mapping completeness, and unresolved discrepancies | `tests/applications/structure/test_ligand_identity.py` |
+| coordinate records preserve occupancy, alternate locations, missing atoms, and geometry sanity checks | `tests/applications/structure/test_ligand_coordinates.py` |
+| binding-site records preserve cutoff policy, residue namespaces, waters, contacts, and the proximity/affinity boundary | `tests/applications/structure/test_binding_site_reconciliation.py` |
+| interaction interpretation preserves missing chemistry as unknown and does not claim affinity | `tests/applications/interactions/test_interaction_interpretation.py` |
+| evidence fingerprints keep unknown distinct from absent, use assessable denominators, and reject incompatible schemas | `tests/applications/interactions/test_evidence_fingerprint.py` |
+| prepared states preserve generated-vs-deposited provenance, assumptions, and unselected alternatives | `tests/applications/chemistry/test_chemical_preparation.py` |
+| protonation/tautomer enumeration keeps alternatives unselected and does not estimate populations | `tests/applications/chemistry/test_chemical_state_enumeration.py` |
+| state-aware assessment maps state atoms to contacts, preserves feature differences, and does not rank states | `tests/applications/interactions/test_state_interactions.py` |
+| protein-pocket preparation keeps template states unselected and water/hetero roles unassigned | `tests/applications/chemistry/test_protein_preparation.py` |
+| ligand/protein state matrices are complete, preserve missing hydrogen/water evidence, and do not rank combinations | `tests/applications/interactions/test_combination_interactions.py` |
+| hydrogen evidence separates generated positions from deposited atoms and checks connectivity before geometry | `tests/applications/interactions/test_hydrogen_evidence.py` |
+| water evidence preserves deposited observations, leaves roles unassigned, and reports geometry without chemical classification | `tests/applications/interactions/test_water_evidence.py` |
+| robustness conclusions keep consistent support sets and no composite confidence score | `tests/applications/interactions/test_interaction_robustness.py` |
+| thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/applications/thermodynamics/test_thermodynamic_interpretation.py` |
+| exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/applications/thermodynamics/test_free_energy_study.py` |
+| the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/applications/audit/test_scientific_audit.py` |
+| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, semantic status mappings, deterministic render scripts, RDKit state comparisons, Matplotlib evidence/sensitivity/FEP/thermodynamic figures, and hydrogen/water script generation are tested | `tests/visualization/test_visualization.py` |
+| units and constants are coherent | `tests/foundation/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
 
@@ -1284,21 +1283,21 @@ For a new contributor, the source is best read in this order:
     `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/adme.py`,
     `analysis/docking/` — trajectory, contact, binding-site, interaction,
     fingerprint, SAR, ADME, and pose measurements.
-11. `applications/structure_manifest.py`, `applications/ligand_identity.py`,
-    `applications/ligand_coordinates.py`,
-    `applications/binding_site_reconciliation.py`,
-    `applications/interaction_interpretation.py`,
-    `applications/interaction_evidence.py`, `analysis/evidence.py`,
-    `applications/chemical_preparation.py`,
-    `applications/chemical_state_enumeration.py`,
-    `applications/state_interactions.py`,
-    `applications/protein_preparation.py`,
-    `applications/combination_interactions.py`,
-    `applications/hydrogen_evidence.py`,
-    `applications/water_evidence.py`,
-    `applications/interaction_robustness.py`,
-    `applications/thermodynamic_interpretation.py`,
-    `applications/scientific_audit.py` — provenance, explicit selection,
+11. `applications/structure/structure_manifest.py`, `applications/structure/ligand_identity.py`,
+    `applications/structure/ligand_coordinates.py`,
+    `applications/structure/binding_site_reconciliation.py`,
+    `applications/interactions/interaction_interpretation.py`,
+    `applications/interactions/interaction_evidence.py`, `analysis/evidence.py`,
+    `applications/chemistry/chemical_preparation.py`,
+    `applications/chemistry/chemical_state_enumeration.py`,
+    `applications/interactions/state_interactions.py`,
+    `applications/chemistry/protein_preparation.py`,
+    `applications/interactions/combination_interactions.py`,
+    `applications/interactions/hydrogen_evidence.py`,
+    `applications/interactions/water_evidence.py`,
+    `applications/interactions/interaction_robustness.py`,
+    `applications/thermodynamics/thermodynamic_interpretation.py`,
+    `applications/audit/scientific_audit.py` — provenance, explicit selection,
     atom mapping, chemical-identity discrepancies, occupancy, alternate
     locations, coordinate geometry, pocket selection, contacts, evidence-gated
     interaction classification, three-state fingerprints, separate prepared
@@ -1307,10 +1306,10 @@ For a new contributor, the source is best read in this order:
     matrices, generated-hydrogen geometry, deposited-water evidence,
     assumption-sensitivity records, structural-to-thermodynamic boundaries, and
     the final scientific audit.
-12. `applications/solvent.py`, `applications/water.py` — environment builders.
-13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
-    `applications/solvated_alchemy.py`, `applications/free_energy_study.py` — free energy and exact-reference convergence diagnostics.
-14. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
+12. `applications/solvents/solvent.py`, `applications/solvents/water.py` — environment builders.
+13. `applications/thermodynamics/fep.py`, `applications/thermodynamics/ti.py`, `applications/thermodynamics/mbar.py`, `applications/thermodynamics/lj_alchemy.py`, `applications/thermodynamics/mc_alchemy.py`,
+    `applications/thermodynamics/solvated_alchemy.py`, `applications/thermodynamics/free_energy_study.py` — free energy and exact-reference convergence diagnostics.
+14. `applications/docking/docking.py`, `applications/docking/flexible_docking.py`, `applications/qmmm/qm_mm.py` — applications and the
     quantum model.
 15. `visualization/` — reproducible 2D, 3D, and analytical figures, shared
     semantic styles, and metadata.
@@ -1350,5 +1349,5 @@ prerequisites, [`tutorials/physics/tutorial.md`](../tutorials/physics/tutorial.m
 main path, the
 [Track A physics deep dives](../tutorials/physics/README.md) for the
 layer-by-layer course, and the
-[imatinib–BCR-ABL1 capstone](../tutorials/capstone_imatinib.md) for the
+[imatinib–BCR-ABL1 capstone](../tutorials/capstone/README.md) for the
 integration project that consumes the provenance and identity records.

@@ -268,7 +268,7 @@ After minimization
 Run:
 
 ```bash
-uv run pytest tests/test_minimization.py -q
+uv run pytest tests/algorithms/test_minimization.py -q
 ```
 
 The tests check:

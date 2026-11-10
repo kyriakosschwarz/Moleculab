@@ -352,7 +352,7 @@ denominator.
 ### 11.3 Tests
 
 ```bash
-uv run pytest tests/test_fingerprints.py -v
+uv run pytest tests/analysis/test_fingerprints.py -v
 ```
 
 The tests cover:

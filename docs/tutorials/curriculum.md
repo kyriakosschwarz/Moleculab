@@ -35,7 +35,7 @@ unrelated subjects.
 | chemistry-first | Track B 01–04, then Track A 1–10 and 14–17, then Track C |
 | drug-discovery focus | Track A 1–10 and 14–17, Track B 01–04, Track C 01–05, then the capstone |
 | software and architecture | Track A 1–10, then [the architecture](../development/architecture.md), then selected application sections |
-| just want the integration story | [Introduction](overview.md), then the [capstone](capstone_imatinib.md) |
+| just want the integration story | [Introduction](overview.md), then the [capstone](capstone/README.md) |
 
 The default order is not arbitrary. Track A sections 1–10 establish the energy,
 force, integration, and molecular-mechanics vocabulary. Track B supplies the
@@ -116,13 +116,14 @@ also uses Track A sections 15–17 and the free-energy material.
 | [09 — Lead optimisation and SAR](drug_discovery/09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | Track B and Track C | available |
 | [10 — Structural observations to thermodynamics](drug_discovery/10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy, and contact interpretation | Track A free energy | available |
 
-The current library supports the geometric and scoring pieces of Track C. It
-does not provide protein preparation, a trained affinity model, or a validated
-prospective docking pipeline.
+The current library supports the geometric, scoring, and record-level chemical
+preparation pieces of Track C. It does not provide full atomistic protein
+preparation (missing atoms, hydrogens, and ions), a trained affinity model, or a
+validated prospective docking pipeline.
 
 ## 5. Where the tracks meet
 
-The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) is the integration
+The [imatinib–BCR-ABL1 capstone](capstone/README.md) is the integration
 exercise. It uses all three tracks:
 
 | Capstone question | Track A | Track B | Track C |

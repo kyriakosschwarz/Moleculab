@@ -16,8 +16,8 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from ..applications.binding_site_reconciliation import BindingSiteRecord
-from ..applications.structure_manifest import StructureManifest
+from ..applications.structure.binding_site_reconciliation import BindingSiteRecord
+from ..applications.structure.structure_manifest import StructureManifest
 from .metadata import FigureContext, FigureMetadata
 
 _PYMOL_PATH = Path("/usr/lib/python3/dist-packages/pymol")

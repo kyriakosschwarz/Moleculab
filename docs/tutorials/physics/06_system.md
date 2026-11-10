@@ -280,7 +280,7 @@ faster.
 Run:
 
 ```bash
-uv run pytest tests/test_system.py tests/test_system_integrator.py -q
+uv run pytest tests/composition/test_system.py tests/composition/test_system_integrator.py -q
 ```
 
 The tests check:

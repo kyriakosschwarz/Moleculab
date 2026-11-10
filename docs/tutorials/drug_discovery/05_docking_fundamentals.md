@@ -362,7 +362,7 @@ The explicit symmetry mapping recovers the equivalent pose.
 ### 11.4 Validation and acceptance criteria
 
 ```bash
-uv run pytest tests/test_docking_poses.py -v
+uv run pytest tests/analysis/test_docking_poses.py -v
 ```
 
 The tests cover:

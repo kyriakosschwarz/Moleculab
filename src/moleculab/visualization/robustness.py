@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from ..applications.interaction_robustness import InteractionRobustnessRecord
+from ..applications.interactions.interaction_robustness import InteractionRobustnessRecord
 from .metadata import FigureContext, FigureMetadata
 from .styles import (
     ROBUSTNESS_STATUSES,

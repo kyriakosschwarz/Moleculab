@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ..applications.thermodynamic_interpretation import (
+from ..applications.thermodynamics.thermodynamic_interpretation import (
     ThermodynamicInterpretationRecord,
 )
 from .metadata import FigureContext, FigureMetadata

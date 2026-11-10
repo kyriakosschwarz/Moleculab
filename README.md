@@ -21,8 +21,9 @@ The source follows the architecture layers:
 | `src/moleculab/composition/` | `System`, neighbour screening, constraints |
 | `src/moleculab/algorithms/` | Velocity Verlet, minimisation |
 | `src/moleculab/protocols/` | thermostat, barostat |
-| `src/moleculab/analysis/` | MSD, RDF |
-| `src/moleculab/applications/` | docking, solvent, water, free energy, QM/MM |
+| `src/moleculab/analysis/` | trajectories, binding sites, interactions, evidence, docking poses, SAR, ADME |
+| `src/moleculab/applications/` | `structure/`, `chemistry/`, `interactions/`, `thermodynamics/`, `docking/`, `solvents/`, `qmmm/`, and `audit/` |
+| `src/moleculab/visualization/` | RDKit, PyMOL, and Matplotlib figures, registry, metadata |
 | `src/moleculab/backend.py` | optional CPU/ROCm/PyTorch dispatch |
 
 The public API remains the flat `from moleculab import ...` interface.
@@ -105,15 +106,41 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   toxicity, and the limits of drug-likeness rules.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
+- Parser-independent experimental-structure manifests with immutable source
+  checksums and explicit chain/ligand-copy selection.
+- Ligand identity reconciliation with explicit atom mappings, preserved raw bond
+  orders, and unresolved discrepancies.
+- Ligand coordinate reconciliation with occupancy, alternate locations, and
+  geometry sanity checks.
+- Binding-site reconciliation with explicit pocket cutoffs, residue namespaces,
+  waters, and ligand-protein contacts.
+- Chemistry-aware interaction interpretation and three-state evidence
+  fingerprints that keep unknown distinct from absent.
+- Separate chemical-state preparation, protonation/tautomer enumeration, state-
+  aware assessment, protein-pocket template chemistry, and complete ligand/
+  protein state-pair matrices without ranking.
+- Generated-hydrogen and deposited-water evidence records with explicit
+  geometry criteria and unassigned chemical roles.
+- Independent interaction-sensitivity and robustness records without a
+  composite confidence score.
+- Structural-to-thermodynamic boundary records that leave binding free energy
+  explicitly uncomputed.
+- Exact-versus-FEP harmonic convergence studies with overlap, effective sample
+  size, and replicate diagnostics.
+- A final scientific audit with a controlled configuration-to-free-energy
+  demonstration.
+- Reproducible RDKit/PyMOL/Matplotlib visualizations with figure metadata,
+  source checksums, and a generated gallery.
 - Tests that check physical relationships, not just that code runs.
 
 This is still an educational engine, not a production molecular-dynamics
-package.  Solvent models, free-energy methods, docking, and quantum chemistry
-remain on the roadmap.
+package. Molecular FEP/TI/MBAR for complex systems, BAR/MBAR uncertainty and
+overlap analysis, trained binding-affinity scoring, real QM/MM/DFT, and
+NPU-specific acceleration remain deferred.
 
 ## Documentation
 
-Moleculab has three entry points:
+Moleculab has four entry points:
 
 | Goal | Entry point |
 | --- | --- |
@@ -131,7 +158,7 @@ The tutorial hub maps the three tracks and links their landing pages. See the
 [CADD overview](docs/tutorials/overview.md) for the longer rationale, the
 [curriculum reference](docs/tutorials/curriculum.md) for prerequisites and
 module status, and the
-[imatinib–BCR-ABL1 capstone](docs/tutorials/capstone_imatinib.md) for the
+[imatinib–BCR-ABL1 capstone](docs/tutorials/capstone/README.md) for the
 integration project.
 
 Reference material includes the
@@ -197,8 +224,8 @@ uv run pytest -v
 Run one test or one file while developing:
 
 ```bash
-uv run pytest tests/test_integrators.py::test_velocity_verlet_conserves_energy_for_a_harmonic_oscillator -v
-uv run pytest tests/test_potentials.py -v
+uv run pytest tests/algorithms/test_integrators.py::test_velocity_verlet_conserves_energy_for_a_harmonic_oscillator -v
+uv run pytest tests/models/test_potentials.py -v
 ```
 
 ## CPU and optional acceleration
@@ -315,7 +342,7 @@ uv run python examples/performance/amd_gpu_tuning.py --backend auto
   angle.
 - `torsion_scan.py` rotates a four-atom chain and prints the periodic torsion
   energy.
-- `algorithms/minimization.py` relaxes a distorted molecule to its equilibrium geometry.
+- `minimization.py` relaxes a distorted molecule to its equilibrium geometry.
 - `thermostat.py` runs a short NVT-like loop with the Berendsen thermostat.
 - `periodic_box.py` demonstrates minimum-image distances across a box face.
 - `trajectory_analysis.py` simulates a periodic Lennard-Jones fluid and
@@ -332,23 +359,23 @@ uv run python examples/performance/amd_gpu_tuning.py --backend auto
   correction on a rigid-water trajectory.
 - `rigid_docking.py` docks a rigid two-atom ligand into a typed receptor pocket
   and prints the best ranked poses.
-- `models/ewald.py` computes Ewald energies for a periodic ionic system and shows
+- `ewald.py` computes Ewald energies for a periodic ionic system and shows
   convergence with the reciprocal-space cutoff.
 - `barostat.py` runs a short NPT-like argon simulation and reports pressure,
   temperature, and box volume before and after coupling.
 - `thermodynamic_integration.py` integrates a harmonic alchemical path and
   shows convergence with the number of λ windows.
-- `applications/mbar.py` combines samples from several harmonic alchemical states and
-  compares MBAR free energies with the exact result.
-- `applications/lj_alchemy.py` compares FEP, TI, and MBAR for a soft-core Lennard-Jones pair
+- `mbar.py` combines samples from several harmonic alchemical states and compares
+  MBAR free energies with the exact result.
+- `lj_alchemy.py` compares FEP, TI, and MBAR for a soft-core Lennard-Jones pair
   against a high-accuracy radial-quadrature reference.
-- `applications/mc_alchemy.py` runs actual Metropolis MC on a bonded two-particle System and
-  compares FEP, TI, and MBAR with the same reference.
-- `applications/solvated_alchemy.py` decouples a neutral ligand from an Ewald water box and
+- `mc_alchemy.py` runs actual Metropolis MC on a bonded two-particle `System`
+  and compares FEP, TI, and MBAR with the same reference.
+- `solvated_alchemy.py` decouples a neutral ligand from an Ewald water box and
   cross-validates FEP, TI, and MBAR.
-- `applications/flexible_docking.py` relaxes a clashing receptor side chain and compares the
+- `flexible_docking.py` relaxes a clashing receptor side chain and compares the
   calibrated flexible score with rigid-receptor docking.
-- `applications/qm_mm.py` solves a finite-difference electron-in-a-box model and perturbs it
+- `qm_mm.py` solves a finite-difference electron-in-a-box model and perturbs it
   with fixed MM point charges.
 - `backend_benchmark.py` benchmarks CPU versus optional PyTorch Ewald
   reciprocal energy/forces.

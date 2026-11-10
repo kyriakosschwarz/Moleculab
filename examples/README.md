@@ -51,24 +51,24 @@ linked from the relevant tutorial or reference page.
 | [`trajectory_contacts.py`](drug_discovery/trajectory_contacts.py) | contact occupancy and lifetimes |
 | [`matched_molecular_pairs.py`](drug_discovery/matched_molecular_pairs.py) | matched-pair SAR with separated evidence categories |
 | [`structural_observations_thermodynamics.py`](drug_discovery/structural_observations_thermodynamics.py) | why contact counts do not determine free energy |
-| [`capstone_imatinib.py`](drug_discovery/capstone_imatinib.py) | reproducible imatinib chemical record and provenance ledger |
-| [`capstone_structure.py`](drug_discovery/capstone_structure.py) | 2HYY retrieval, immutable source file, and [provenance manifest](../data/structures/2HYY.manifest.json) ([cache policy](../data/structures/README.md)) |
-| [`capstone_ligand_identity.py`](drug_discovery/capstone_ligand_identity.py) | deposited-ligand to imatinib identity reconciliation and [atom mapping](../data/structures/2HYY.ligand-identity.json) |
-| [`capstone_ligand_coordinates.py`](drug_discovery/capstone_ligand_coordinates.py) | coordinate reconciliation, occupancy, B-factors, and ligand [geometry](../data/structures/2HYY.ligand-coordinates.json) |
-| [`capstone_binding_site.py`](drug_discovery/capstone_binding_site.py) | protein pocket, residues, waters, and ligand–protein [contacts](../data/structures/2HYY.binding-site.json) |
-| [`capstone_interactions.py`](drug_discovery/capstone_interactions.py) | chemistry-aware interaction [classification](../data/structures/2HYY.interactions.json), preserving unknown evidence |
-| [`capstone_evidence_fingerprint.py`](drug_discovery/capstone_evidence_fingerprint.py) | three-state [evidence fingerprint](../data/structures/2HYY.evidence-fingerprint.json); unknown is not zero |
-| [`capstone_chemical_preparation.py`](drug_discovery/capstone_chemical_preparation.py) | separate [chemical-state preparation](../data/structures/2HYY.chemical-preparation.json) with explicit assumptions |
-| [`capstone_chemical_states.py`](drug_discovery/capstone_chemical_states.py) | protonation and tautomer [state enumeration](../data/structures/2HYY.chemical-states.json); no population estimate |
-| [`capstone_state_interactions.py`](drug_discovery/capstone_state_interactions.py) | state-aware [interaction eligibility](../data/structures/2HYY.state-interactions.json); no ranking |
-| [`capstone_protein_preparation.py`](drug_discovery/capstone_protein_preparation.py) | protein-pocket [chemical preparation](../data/structures/2HYY.protein-preparation.json) with explicit templates |
-| [`capstone_combination_interactions.py`](drug_discovery/capstone_combination_interactions.py) | 8×2 ligand/protein [state interaction matrix](../data/structures/2HYY.combination-interactions.json) |
-| [`capstone_hydrogen_evidence.py`](drug_discovery/capstone_hydrogen_evidence.py) | generated-hydrogen provenance and D–H···A [geometry](../data/structures/2HYY.hydrogen-evidence.json) |
-| [`capstone_water_evidence.py`](drug_discovery/capstone_water_evidence.py) | deposited-water identity, occupancy, and geometric [bridge plausibility](../data/structures/2HYY.water-evidence.json) |
-| [`capstone_interaction_robustness.py`](drug_discovery/capstone_interaction_robustness.py) | independent assumption axes and [interaction robustness](../data/structures/2HYY.interaction-robustness.json); no confidence score |
-| [`capstone_thermodynamic_interpretation.py`](drug_discovery/capstone_thermodynamic_interpretation.py) | structural-to-thermodynamic [boundaries](../data/structures/2HYY.thermodynamic-interpretation.json); free energy explicitly not computed |
-| [`capstone_final_audit.py`](drug_discovery/capstone_final_audit.py) | final integration [audit](../data/free_energy/capstone-scientific-audit.json) and configuration → ensemble → free-energy demonstration |
-| [`capstone_visualizations.py`](drug_discovery/capstone_visualizations.py) | reproducible RDKit/PyMOL/Matplotlib [visual learning layer](../docs/tutorials/drug_discovery/visualizations/README.md) with [figure metadata](../data/figures/capstone-visualizations.json) |
+| [`capstone_imatinib.py`](drug_discovery/capstone/capstone_imatinib.py) | reproducible imatinib chemical record and provenance ledger |
+| [`capstone_structure.py`](drug_discovery/capstone/capstone_structure.py) | 2HYY retrieval, immutable source file, and [provenance manifest](../data/structures/2HYY.manifest.json) ([cache policy](../data/structures/README.md)) |
+| [`capstone_ligand_identity.py`](drug_discovery/capstone/capstone_ligand_identity.py) | deposited-ligand to imatinib identity reconciliation and [atom mapping](../data/structures/2HYY.ligand-identity.json) |
+| [`capstone_ligand_coordinates.py`](drug_discovery/capstone/capstone_ligand_coordinates.py) | coordinate reconciliation, occupancy, B-factors, and ligand [geometry](../data/structures/2HYY.ligand-coordinates.json) |
+| [`capstone_binding_site.py`](drug_discovery/capstone/capstone_binding_site.py) | protein pocket, residues, waters, and ligand–protein [contacts](../data/structures/2HYY.binding-site.json) |
+| [`capstone_interactions.py`](drug_discovery/capstone/capstone_interactions.py) | chemistry-aware interaction [classification](../data/structures/2HYY.interactions.json), preserving unknown evidence |
+| [`capstone_evidence_fingerprint.py`](drug_discovery/capstone/capstone_evidence_fingerprint.py) | three-state [evidence fingerprint](../data/structures/2HYY.evidence-fingerprint.json); unknown is not zero |
+| [`capstone_chemical_preparation.py`](drug_discovery/capstone/capstone_chemical_preparation.py) | separate [chemical-state preparation](../data/structures/2HYY.chemical-preparation.json) with explicit assumptions |
+| [`capstone_chemical_states.py`](drug_discovery/capstone/capstone_chemical_states.py) | protonation and tautomer [state enumeration](../data/structures/2HYY.chemical-states.json); no population estimate |
+| [`capstone_state_interactions.py`](drug_discovery/capstone/capstone_state_interactions.py) | state-aware [interaction eligibility](../data/structures/2HYY.state-interactions.json); no ranking |
+| [`capstone_protein_preparation.py`](drug_discovery/capstone/capstone_protein_preparation.py) | protein-pocket [chemical preparation](../data/structures/2HYY.protein-preparation.json) with explicit templates |
+| [`capstone_combination_interactions.py`](drug_discovery/capstone/capstone_combination_interactions.py) | 8×2 ligand/protein [state interaction matrix](../data/structures/2HYY.combination-interactions.json) |
+| [`capstone_hydrogen_evidence.py`](drug_discovery/capstone/capstone_hydrogen_evidence.py) | generated-hydrogen provenance and D–H···A [geometry](../data/structures/2HYY.hydrogen-evidence.json) |
+| [`capstone_water_evidence.py`](drug_discovery/capstone/capstone_water_evidence.py) | deposited-water identity, occupancy, and geometric [bridge plausibility](../data/structures/2HYY.water-evidence.json) |
+| [`capstone_interaction_robustness.py`](drug_discovery/capstone/capstone_interaction_robustness.py) | independent assumption axes and [interaction robustness](../data/structures/2HYY.interaction-robustness.json); no confidence score |
+| [`capstone_thermodynamic_interpretation.py`](drug_discovery/capstone/capstone_thermodynamic_interpretation.py) | structural-to-thermodynamic [boundaries](../data/structures/2HYY.thermodynamic-interpretation.json); free energy explicitly not computed |
+| [`capstone_final_audit.py`](drug_discovery/capstone/capstone_final_audit.py) | final integration [audit](../data/free_energy/capstone-scientific-audit.json) and configuration → ensemble → free-energy demonstration |
+| [`capstone_visualizations.py`](drug_discovery/capstone/capstone_visualizations.py) | reproducible RDKit/PyMOL/Matplotlib [visual learning layer](../docs/tutorials/capstone/visualizations/README.md) with [figure metadata](../data/figures/capstone-visualizations.json) |
 
 ## Advanced
 

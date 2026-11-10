@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
 
-from ..applications.chemical_state_enumeration import ChemicalState
-from ..applications.ligand_identity import LigandIdentityRecord
+from ..applications.chemistry.chemical_state_enumeration import ChemicalState
+from ..applications.structure.ligand_identity import LigandIdentityRecord
 from .metadata import FigureContext, FigureMetadata
 from .styles import clean_svg_file
 

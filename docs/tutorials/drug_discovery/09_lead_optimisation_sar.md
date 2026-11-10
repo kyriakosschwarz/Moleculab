@@ -325,7 +325,7 @@ and the mechanistic hypothesis separate.
 ### 10.4 Tests
 
 ```bash
-uv run pytest tests/test_sar.py -v
+uv run pytest tests/analysis/test_sar.py -v
 ```
 
 The tests cover:

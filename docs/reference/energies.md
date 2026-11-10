@@ -621,7 +621,7 @@ We'll start with three tests.
 
 ## Test 1: Kinetic energy
 
-File: `tests/test_physics.py`
+File: `tests/models/test_physics.py`
 
 ```
 import numpy as npfrom moleculab import Particlefrom moleculab import kinetic_energydef test_kinetic_energy():    particle = Particle(        mass=12.0,        position=[0.0, 0.0, 0.0],        velocity=[0.1, 0.0, 0.0]    )    energy = kinetic_energy(particle)    assert np.isclose(energy, 0.06)
@@ -633,7 +633,7 @@ This verifies that our implementation follows:
 
 ## Test 2: Potential energy at equilibrium
 
-File: `tests/test_potentials.py`
+File: `tests/models/test_potentials.py`
 
 ```
 import numpy as npfrom moleculab import HarmonicPotentialdef test_energy_at_equilibrium():    potential = HarmonicPotential(        stiffness=100.0,        center=[0.0, 0.0, 0.0]    )    energy = potential.energy(        np.array([0.0, 0.0, 0.0])    )    assert np.isclose(energy, 0.0)

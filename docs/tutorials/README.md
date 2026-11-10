@@ -10,7 +10,7 @@ drug discovery through three connected tracks.
 | **C — Structure-based drug discovery** | What does the physics mean for a drug? | [Drug-discovery curriculum](drug_discovery/README.md) |
 
 They meet in the provenance-led
-[imatinib–BCR-ABL1 capstone](capstone_imatinib.md).
+[imatinib–BCR-ABL1 capstone](capstone/README.md).
 
 ## Track A — Molecular physics and simulation
 
@@ -41,7 +41,7 @@ observations to thermodynamics.
 2. Track B, modules 01–08.
 3. Track A, sections 11–24.
 4. Track C, modules 01–10.
-5. The [capstone](capstone_imatinib.md), including the final scientific audit.
+5. The [capstone](capstone/README.md), including the final scientific audit.
 
 For the longer rationale, see the [CADD overview](overview.md). For the detailed
 prerequisite and module-status tables, see the

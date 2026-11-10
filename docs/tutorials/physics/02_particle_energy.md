@@ -444,7 +444,7 @@ kinetic energy: 0.06
 Run the tests:
 
 ```bash
-uv run pytest tests/test_particles.py tests/test_physics.py -q
+uv run pytest tests/foundation/test_particles.py tests/models/test_physics.py -q
 ```
 
 What the tests protect:
@@ -611,7 +611,7 @@ will turn that force into an acceleration.
    300 K.
 3. Modify the animation idea: what would the velocity arrow look like if a
    constant force acted? Sketch it before coding.
-4. Read `tests/test_particles.py` and list the invalid states it rejects.
+4. Read `tests/foundation/test_particles.py` and list the invalid states it rejects.
 5. Extend the particle example with a `momentum()` property returning
    $m\mathbf v$, and test it.
 

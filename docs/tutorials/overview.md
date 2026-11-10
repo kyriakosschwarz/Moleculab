@@ -219,7 +219,7 @@ without pretending it has an independently measurable binding energy.
 
 ### Integration
 
-The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) is where the three tracks
+The [imatinib–BCR-ABL1 capstone](capstone/README.md) is where the three tracks
 meet. It uses the Track A engine, the Track B chemical state, and the Track C
 recognition analysis to discuss one real drug-discovery problem.
 
@@ -263,7 +263,7 @@ their own entry pages.
 ### 5.1 The capstone: imatinib and BCR-ABL1
 
 The sequence is designed to end with a real case study, not a new API. The
-[imatinib–BCR-ABL1 capstone](capstone_imatinib.md) walks through imatinib
+[imatinib–BCR-ABL1 capstone](capstone/README.md) walks through imatinib
 (Gleevec) and the BCR-ABL1 fusion protein:
 
 - chronic myeloid leukemia and the Philadelphia chromosome;
@@ -307,10 +307,10 @@ This is why the same water model appears in several places:
 
 | Topic | Where it appears |
 | --- | --- |
-| solvent boxes | `applications/solvent.py` |
-| atomistic water | `applications/water.py` |
+| solvent boxes | `applications/solvents/solvent.py` |
+| atomistic water | `applications/solvents/water.py` |
 | long-range electrostatics | `models/ewald.py` |
-| ligand-water decoupling | `applications/solvated_alchemy.py`, `applications/fep.py` |
+| ligand-water decoupling | `applications/thermodynamics/solvated_alchemy.py`, `applications/thermodynamics/fep.py` |
 | binding thermodynamics | the imatinib case study |
 
 A gas-phase docking score omits desolvation and water entropy. That is one
@@ -328,13 +328,13 @@ When you open a production tool, you will recognize the layers:
 | integrator and timestep | `algorithms/integrators.py` |
 | thermostat and barostat | `protocols/thermostats.py`, `protocols/pressure.py` |
 | periodic electrostatics | `models/ewald.py` |
-| binding pose scoring | `applications/docking.py`, `applications/flexible_docking.py` |
-| alchemical free energy | `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, alchemy modules |
+| binding pose scoring | `applications/docking/docking.py`, `applications/docking/flexible_docking.py` |
+| alchemical free energy | `applications/thermodynamics/fep.py`, `applications/thermodynamics/ti.py`, `applications/thermodynamics/mbar.py`, alchemy modules |
 | trajectory observables | `analysis/trajectory.py` |
-| QM/MM coupling | `applications/qm_mm.py` |
+| QM/MM coupling | `applications/qmmm/qm_mm.py` |
 | chemical perception and standardisation | Track B and the optional RDKit adapter |
-| protonation and tautomer state | `applications/acid_base.py` |
-| protein structure and interaction fingerprints | Track C (planned) |
+| protonation and tautomer state | `applications/chemistry/acid_base.py` |
+| protein structure and interaction fingerprints | `analysis/binding_site.py`, `analysis/fingerprints.py`, and Track C |
 
 You will also recognize the approximations: cutoffs, finite timesteps, local
 minima, classical point charges, and the difference between an interaction
@@ -385,7 +385,7 @@ There are several entry points:
 | [Track B](chemistry/README.md) | chemical structure, representation, properties, and protonation |
 | [Track C](drug_discovery/README.md) | protein structure, binding sites, interactions, and docking |
 | [Track C units](../reference/units.md) | Angstrom, nm, kcal/mol, affinity, and structural units |
-| [Capstone](capstone_imatinib.md) | the imatinib–BCR-ABL1 cross-track integration |
+| [Capstone](capstone/README.md) | the imatinib–BCR-ABL1 cross-track integration |
 | [Troubleshooting](../reference/troubleshooting.md) | symptom table and diagnostic recipes |
 | [Visualization prompts](../reference/visualization_prompts.md) | notebook-sized plotting prompts |
 | [Answer keys](../reference/answer_keys.md) | answer sketches and expected magnitudes |

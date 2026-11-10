@@ -301,7 +301,7 @@ temperature fluctuates as the particles move.
 Run:
 
 ```bash
-uv run pytest tests/test_thermostats.py -q
+uv run pytest tests/protocols/test_thermostats.py -q
 ```
 
 The tests check:

@@ -366,7 +366,7 @@ Run the example and tests:
 
 ```bash
 uv run python examples/physics/nonbonded_interactions.py
-uv run pytest tests/test_pair_potentials.py tests/test_nonbonded.py -q
+uv run pytest tests/models/test_pair_potentials.py tests/models/test_nonbonded.py -q
 ```
 
 The tests check, among other things:
