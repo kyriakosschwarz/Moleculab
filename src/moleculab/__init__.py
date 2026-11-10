@@ -23,8 +23,9 @@ The source is organised by architecture layer:
 ``applications``
     docking, solvent, water, free energy, acid-base, QM/MM,
     experimental-structure provenance, ligand identity reconciliation,
-    ligand coordinate reconciliation, binding-site reconciliation, and
-    evidence-gated interaction interpretation.
+    ligand coordinate reconciliation, binding-site reconciliation,
+    evidence-gated interaction interpretation, three-state evidence
+    fingerprints, and separate chemical-state preparation.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -149,6 +150,19 @@ from .applications.acid_base import (
     protonated_fraction,
     protonation_microstates,
     tautomer_populations,
+)
+from .applications.chemical_preparation import (
+    CHEMICAL_PREPARATION_SCHEMA_VERSION,
+    ChemicalPreparationRecord,
+    PreparationDiscrepancy,
+    PreparedAtom,
+    PreparedRing,
+    PreparedState,
+    PreparedWaterRole,
+    build_chemical_preparation_record,
+    load_chemical_preparation,
+    validate_chemical_preparation,
+    write_chemical_preparation,
 )
 from .applications.docking import (
     DockingPose,
@@ -386,7 +400,9 @@ __all__ = [
     "BondPotential",
     "BondedLennardJonesMC",
     "Box",
+    "CHEMICAL_PREPARATION_SCHEMA_VERSION",
     "ChemicalIdentityRecord",
+    "ChemicalPreparationRecord",
     "CloseContact",
     "CoordinateAtom",
     "CoordinateDiscrepancy",
@@ -465,6 +481,11 @@ __all__ = [
     "PoseGeometryComparison",
     "PocketResidueRecord",
     "PoseRecovery",
+    "PreparationDiscrepancy",
+    "PreparedAtom",
+    "PreparedRing",
+    "PreparedState",
+    "PreparedWaterRole",
     "Potential",
     "ProteinAtomRecord",
     "ProcessingRecord",
@@ -513,6 +534,7 @@ __all__ = [
     "berendsen_thermostat",
     "binding_site_geometry",
     "boltzmann_populations",
+    "build_chemical_preparation_record",
     "build_evidence_fingerprint",
     "build_fingerprint",
     "build_interaction_evidence",
@@ -555,6 +577,7 @@ __all__ = [
     "kinetic_temperature",
     "ligand_efficiency",
     "load_binding_site",
+    "load_chemical_preparation",
     "load_interaction_evidence",
     "load_interactions",
     "load_ligand_coordinates",
@@ -609,6 +632,7 @@ __all__ = [
     "use_backend",
     "validate_atom_mapping",
     "validate_binding_site",
+    "validate_chemical_preparation",
     "validate_interaction_evidence",
     "validate_interactions",
     "validate_ligand_coordinates",
@@ -618,6 +642,7 @@ __all__ = [
     "velocity_verlet_step_system",
     "virial_pressure",
     "write_binding_site",
+    "write_chemical_preparation",
     "write_interaction_evidence",
     "write_interactions",
     "write_ligand_coordinates",

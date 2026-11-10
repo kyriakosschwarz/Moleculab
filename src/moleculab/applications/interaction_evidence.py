@@ -257,6 +257,7 @@ def build_interaction_evidence(
     category_statuses: list[tuple[str, str]] = []
     for interaction_type in INTERACTION_TYPES:
         items = by_type.get(interaction_type, [])
+        applicable = True
         if not items:
             status = "unknown"
             state = "unknown"
@@ -285,6 +286,7 @@ def build_interaction_evidence(
                 status = "not_applicable"
                 state = "unknown"
                 assessable = False
+                applicable = False
                 evidence = "not applicable: " + items[0].evidence
             else:
                 status = "unknown"
@@ -302,19 +304,24 @@ def build_interaction_evidence(
                 evidence=evidence,
                 criteria=criteria,
                 provenance="interaction interpretation record",
+                applicable=applicable,
             )
         )
 
-    criteria_fp = criteria_fingerprint(interaction_record.criteria.to_dict())
+    criteria_payload = interaction_record.criteria.to_dict()
+    criteria_fp = criteria_fingerprint(criteria_payload)
+    criteria_json = json.dumps(criteria_payload, sort_keys=True, separators=(",", ":"))
     schema = EvidenceSchema.from_observations(
         observations,
         schema_id="interaction-category-v1",
         criteria_fingerprint=criteria_fp,
+        criteria_json=criteria_json,
     )
     fingerprint = build_evidence_fingerprint(
         observations,
         schema_id="interaction-category-v1",
         criteria_fingerprint=criteria_fp,
+        criteria_json=criteria_json,
     )
     if fingerprint.schema != schema:
         raise ValueError("fingerprint schema does not match constructed schema.")

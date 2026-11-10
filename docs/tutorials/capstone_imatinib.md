@@ -67,6 +67,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.p
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -82,7 +83,9 @@ pocket and atom-level contacts and writes
 only where explicit chemical evidence is available and writes
 `data/structures/2HYY.interactions.json`. The seventh builds a three-state
 interaction-evidence fingerprint and writes
-`data/structures/2HYY.evidence-fingerprint.json`. None of the commands docks a
+`data/structures/2HYY.evidence-fingerprint.json`. The eighth prepares separate
+chemical states and writes
+`data/structures/2HYY.chemical-preparation.json`. None of the commands docks a
 ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -465,7 +468,8 @@ For 2HYY the result is:
 | Category features | 6 |
 | Present | 0 |
 | Absent | 0 |
-| Unknown | 6 |
+| Unknown | 5 |
+| Not applicable | 1 |
 | Assessable denominator | 0 of 6 |
 
 The five unknown chemistry categories and the not-applicable metal category all
@@ -489,15 +493,57 @@ Unknown features are excluded from assessable denominators. Occupancy and
 comparison therefore report how many observations could actually be assessed,
 not how many files were processed.
 
-Schema compatibility is explicit: the schema identifier, criteria fingerprint,
-and ordered feature identities must match before comparison or aggregation. This
-prevents records with different distance, angle, or chemical-feature rules from
-being compared as if they were the same measurement. Water-mediated features
-retain the water identifier and are not merged with direct protein–ligand
-features.
+Schema compatibility is explicit: the schema identifier, canonical criteria,
+criteria fingerprint, and ordered feature identities must match before
+comparison or aggregation. This prevents records with different distance,
+angle, or chemical-feature rules from being compared as if they were the same
+measurement. The canonical criteria are retained alongside their hash so two
+incompatible records can be compared to explain why they differ. Water-mediated
+features retain the water identifier and are not merged with direct
+protein–ligand features. Applicability is carried separately, so a
+not-applicable category is not confused with an assessable absence.
 
 The fingerprint is a structural representation, not a similarity score or a
 binding free energy.
+
+### 4.9 Batch 7: chemical-state preparation
+
+Batch 7 supplies separate, explicitly prepared chemical states without changing
+the experimental records.
+
+```bash
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
+```
+
+The record is written to `data/structures/2HYY.chemical-preparation.json`. It
+contains two coexisting states and selects neither automatically:
+
+| State | Contents |
+| --- | --- |
+| `deposited-only` | 37 heavy atoms, no protonation, tautomer, charge, hydrogen, or feature assignment |
+| `reference-neutral` | 37 heavy atoms, neutral reference formal charges, 31 generated hydrogens, 4 aromatic rings, 4 donors, 4 acceptors |
+
+The prepared state is built on the deposited heavy-atom conformer. Formal
+charges are transferred from the validated imatinib reference graph. Hydrogens
+are generated with `RDKit AddHs(addCoords=True)`. Donor, acceptor, and
+hydrophobic features come from `RDKit BaseFeatures.fdef`. Aromatic rings come
+from RDKit aromaticity perception; their centroids and normals are computed from
+the prepared heavy-atom coordinates. The toolkit version and all parameters are
+recorded.
+
+The four experimental waters are preserved and their roles are explicitly
+`unassigned`. No water is automatically labelled a donor, acceptor, or bridge.
+
+The original deposited coordinates, identity record, coordinate record, and
+binding-site record are untouched. Generated hydrogens are labelled as
+generated, not as experimental observations. The record also preserves the
+`deposited-only` state, so the difference between experimental evidence and
+computational preparation remains visible.
+
+This is still not a force-field-ready ligand: atom typing, parameters, and
+gradient-ready topology remain later decisions. It supplies the chemistry that a
+future interaction pass can consume without silently rewriting the experimental
+evidence.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
@@ -548,6 +594,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_ligand_coordinates.p
 uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -570,6 +617,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | binding-site reconciliation | `capstone_binding_site.py` | experimental + calculated |
 | interaction interpretation | `capstone_interactions.py` | calculated, with explicit evidence |
 | evidence-aware fingerprint | `capstone_evidence_fingerprint.py` | calculated, with unknown states preserved |
+| chemical-state preparation | `capstone_chemical_preparation.py` | prepared: calculated assumptions kept separate |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

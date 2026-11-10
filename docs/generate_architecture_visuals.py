@@ -77,7 +77,7 @@ def architecture_layers():
                 "solvent and\nwater boxes",
                 "MSD / RDF",
                 "QM/MM",
-                "structural records,\nevidence fingerprints",
+                "structural records,\nevidence, preparation",
             ],
             RED,
         ),

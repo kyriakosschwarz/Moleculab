@@ -1,0 +1,1583 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "ligand_coordinate_record_path": "data/structures/2HYY.ligand-coordinates.json",
+  "ligand_coordinate_record_sha256": "eae85cb84fa3faa25d4ba8ead2853b153ac84fd1e1f8ea22716438f3cdd74b4c",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "accession": "2HYY",
+  "selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "toolkit": "RDKit",
+  "toolkit_version": "2026.09.1",
+  "parameters": [
+    "formal charges transferred from the validated reference graph",
+    "hydrogens generated with RDKit AddHs(addCoords=True)",
+    "donor/acceptor/hydrophobic features from RDKit BaseFeatures.fdef",
+    "aromatic rings from RDKit aromaticity perception",
+    "ring centroids and normals from prepared heavy-atom coordinates",
+    "no pH-specific protonation or tautomer enumeration"
+  ],
+  "states": [
+    {
+      "state_id": "deposited-only",
+      "label": "Deposited heavy-atom state without chemical assignment",
+      "protonation_state": "unknown",
+      "tautomer": "unknown",
+      "formal_charge": null,
+      "hydrogen_method": null,
+      "feature_source": null,
+      "assumptions": [
+        "No protonation, tautomer, hydrogen, formal-charge, donor/acceptor, hydrophobic, or aromatic feature assignment was made.",
+        "Only deposited heavy-atom coordinates are represented."
+      ],
+      "atoms": [
+        {
+          "atom_id": "C1",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C6",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C5",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C4",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N3",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C2",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C7",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C12",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C11",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N10",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C9",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N8",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N13",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C14",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C19",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C18",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C17",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C16",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C15",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N21",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C22",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C23",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C25",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C26",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C27",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C28",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C29",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C46",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N48",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C53",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C52",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "N51",
+          "element": "N",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C54",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C50",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C49",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "O29",
+          "element": "O",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        },
+        {
+          "atom_id": "C20",
+          "element": "C",
+          "formal_charge": null,
+          "is_donor": null,
+          "is_acceptor": null,
+          "is_hydrophobic": null,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": null
+        }
+      ],
+      "rings": [],
+      "water_roles": [
+        {
+          "water_id": "A:146:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:87:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:37:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:175:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        }
+      ]
+    },
+    {
+      "state_id": "reference-neutral",
+      "label": "Neutral imatinib reference state on the deposited heavy-atom conformer",
+      "protonation_state": "reference neutral; no pH-specific protonation selection",
+      "tautomer": "reference tautomer from validated SMILES; alternatives not enumerated",
+      "formal_charge": 0,
+      "hydrogen_method": "RDKit AddHs(addCoords=True)",
+      "feature_source": "RDKit BaseFeatures.fdef, aromaticity perception, and validated reference formal charges",
+      "assumptions": [
+        "Formal charges are taken from the validated imatinib reference graph.",
+        "Hydrogen coordinates are generated, not experimentally observed.",
+        "No pH-specific protonation or alternative tautomer enumeration was performed.",
+        "Water roles remain unassigned; experimental waters are preserved separately."
+      ],
+      "atoms": [
+        {
+          "atom_id": "C1",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              2.3893540095557997,
+              1.198006904746287,
+              1.3693790919309343
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C6",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              2.2482941923552655,
+              1.2834344013000922,
+              1.5599356341160444
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C5",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C4",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.908160402102148,
+              1.0705816869033151,
+              1.3998622387340243
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N3",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": true,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C2",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-5"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              2.276359085856335,
+              1.0573153712588823,
+              1.1983697595530096
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C7",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C12",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              2.1343461242510706,
+              1.3014157357989165,
+              1.734809458336567
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C11",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.9705105544697916,
+              1.3645043940068424,
+              1.916381391517453
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N10",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": true,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C9",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N8",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": true,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [
+            "aromatic-4"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N13",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": true,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.595126150922784,
+              1.1830756763819377,
+              1.5755494638564023
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C14",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C19",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C18",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.417022244080087,
+              1.0809872819183797,
+              2.052959773546725
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C17",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.2711587729217375,
+              1.2846000036285972,
+              2.0500037129693753
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C16",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C15",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-3"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.4593542153853565,
+              1.4118969258625955,
+              1.6859231929327163
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N21",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": true,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.205327723632345,
+              1.48096793171367,
+              1.9643712560563018
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C22",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C23",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C25",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.1631779438688181,
+              1.71226069300121,
+              1.5784871233780262
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C26",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              0.9744522166411929,
+              1.8806313264628263,
+              1.5745336168459014
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C27",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C28",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              0.909767386541338,
+              1.8061416548018352,
+              1.9986148407929296
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C29",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [
+            "aromatic-2"
+          ],
+          "hydrogen_count": 1,
+          "hydrogen_positions_nm": [
+            [
+              1.1001862052753388,
+              1.6399966432616573,
+              2.005073279654938
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C46",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 2,
+          "hydrogen_positions_nm": [
+            [
+              0.8305968974409501,
+              2.014260233565583,
+              1.6925689347770296
+            ],
+            [
+              0.7247566781546305,
+              1.897180378455137,
+              1.783460914225189
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N48",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": true,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C53",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 2,
+          "hydrogen_positions_nm": [
+            [
+              1.0291522041694323,
+              2.0439984844983132,
+              1.91631427404476
+            ],
+            [
+              0.9568601942662657,
+              2.1800826974598606,
+              1.8225024316081033
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C52",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 2,
+          "hydrogen_positions_nm": [
+            [
+              0.9535436129275893,
+              2.141222360611307,
+              2.1294676171680194
+            ],
+            [
+              1.0296466685360715,
+              2.2748762875007777,
+              2.0381114536302634
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "N51",
+          "element": "N",
+          "formal_charge": 0,
+          "is_donor": true,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C54",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 3,
+          "hydrogen_positions_nm": [
+            [
+              0.8156310180558954,
+              2.2966312597305314,
+              2.2525034919029676
+            ],
+            [
+              0.9106338072271234,
+              2.421672884472577,
+              2.16529241045044
+            ],
+            [
+              0.7311548011398874,
+              2.4290121746843223,
+              2.1652924104504403
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C50",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 2,
+          "hydrogen_positions_nm": [
+            [
+              0.6879627884110399,
+              2.133652184644058,
+              2.1233307767014518
+            ],
+            [
+              0.6046907797476437,
+              2.268646292510166,
+              2.041767005135312
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C49",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 2,
+          "hydrogen_positions_nm": [
+            [
+              0.6932596574218965,
+              2.192940858445999,
+              1.8204206067969597
+            ],
+            [
+              0.6072376930218799,
+              2.057106696929107,
+              1.9007497075374904
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "O29",
+          "element": "O",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": true,
+          "is_hydrophobic": false,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 0,
+          "hydrogen_positions_nm": [],
+          "coordinate_source": "deposited",
+          "hydrogen_source": null,
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        },
+        {
+          "atom_id": "C20",
+          "element": "C",
+          "formal_charge": 0,
+          "is_donor": false,
+          "is_acceptor": false,
+          "is_hydrophobic": true,
+          "aromatic_ring_ids": [],
+          "hydrogen_count": 3,
+          "hydrogen_positions_nm": [
+            [
+              1.624736803415813,
+              0.9796395031193845,
+              1.9870671895422274
+            ],
+            [
+              1.5549478216444848,
+              0.922462413375431,
+              1.8317385410954714
+            ],
+            [
+              1.7040591403324172,
+              1.0226242496506317,
+              1.8317385410954712
+            ]
+          ],
+          "coordinate_source": "deposited",
+          "hydrogen_source": "RDKit AddHs(addCoords=True)",
+          "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+        }
+      ],
+      "rings": [
+        {
+          "ring_id": "aromatic-2",
+          "atom_ids": [
+            "C23",
+            "C25",
+            "C26",
+            "C27",
+            "C28",
+            "C29"
+          ],
+          "centroid_nm": [
+            1.0372666666666668,
+            1.7592499999999998,
+            1.7889499999999998
+          ],
+          "normal": [
+            -0.6414199120811087,
+            -0.7340950879881735,
+            -0.222901095056751
+          ],
+          "source": "RDKit aromaticity perception; SVD plane from prepared heavy atoms"
+        },
+        {
+          "ring_id": "aromatic-3",
+          "atom_ids": [
+            "C14",
+            "C19",
+            "C18",
+            "C17",
+            "C16",
+            "C15"
+          ],
+          "centroid_nm": [
+            1.4397,
+            1.2474666666666667,
+            1.8706833333333333
+          ],
+          "normal": [
+            0.679884781022488,
+            0.49963423435085796,
+            0.5367702640782517
+          ],
+          "source": "RDKit aromaticity perception; SVD plane from prepared heavy atoms"
+        },
+        {
+          "ring_id": "aromatic-4",
+          "atom_ids": [
+            "C7",
+            "C12",
+            "C11",
+            "N10",
+            "C9",
+            "N8"
+          ],
+          "centroid_nm": [
+            1.891066666666667,
+            1.2602333333333335,
+            1.7098500000000003
+          ],
+          "normal": [
+            -0.11035222755125097,
+            0.9027194062311656,
+            -0.41583657786217987
+          ],
+          "source": "RDKit aromaticity perception; SVD plane from prepared heavy atoms"
+        },
+        {
+          "ring_id": "aromatic-5",
+          "atom_ids": [
+            "C1",
+            "C6",
+            "C5",
+            "C4",
+            "N3",
+            "C2"
+          ],
+          "centroid_nm": [
+            2.1456500000000003,
+            1.1368833333333332,
+            1.3878500000000003
+          ],
+          "normal": [
+            -0.25436306836268574,
+            0.8140713337500618,
+            -0.5220989302991487
+          ],
+          "source": "RDKit aromaticity perception; SVD plane from prepared heavy atoms"
+        }
+      ],
+      "water_roles": [
+        {
+          "water_id": "A:146:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:87:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:37:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        },
+        {
+          "water_id": "A:175:O",
+          "role": "unassigned",
+          "source": "experimental water; no interaction role assigned"
+        }
+      ]
+    }
+  ],
+  "selected_state_id": null,
+  "decisions": [
+    {
+      "decision": "created a separate preparation record",
+      "actor": "chemical-state preparation",
+      "rationale": "deposited coordinates, identity, and binding-site records were not modified"
+    },
+    {
+      "decision": "preserved multiple states without silent selection",
+      "actor": "chemical-state preparation",
+      "rationale": "preparation assumptions and generated chemistry remain separate from experimental observations"
+    },
+    {
+      "decision": "recorded toolkit, version, parameters, and assumptions",
+      "actor": "chemical-state preparation",
+      "rationale": "prepared features must be reproducible and auditable"
+    },
+    {
+      "decision": "did not convert preparation into affinity",
+      "actor": "chemical-state preparation",
+      "rationale": "prepared chemistry is not a binding free energy"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "input structural records",
+        "detail": "Preparation references the manifest, identity, coordinate, and binding-site records.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "prepared chemical states",
+        "detail": "2 state(s) from RDKit 2026.09.1; parameters: formal charges transferred from the validated reference graph; hydrogens generated with RDKit AddHs(addCoords=True); donor/acceptor/hydrophobic features from RDKit BaseFeatures.fdef; aromatic rings from RDKit aromaticity perception; ring centroids and normals from prepared heavy-atom coordinates; no pH-specific protonation or tautomer enumeration.",
+        "actor": "chemical-state preparation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity or free-energy prediction is produced.",
+        "actor": "chemical-state preparation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "none",
+        "detail": "No mechanism is inferred from a prepared state.",
+        "actor": "chemical-state preparation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "preparation.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "all experimental and identity inputs are recorded",
+        "observed": "four input record paths present",
+        "expected": "manifest, identity, coordinate, and binding-site records",
+        "detail": "preparation references the prior evidence chain"
+      },
+      {
+        "check_id": "preparation.toolkit_recorded",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "toolkit, version, and parameters are explicit",
+        "observed": "RDKit 2026.09.1",
+        "expected": "documented preparation method",
+        "detail": "formal charges transferred from the validated reference graph; hydrogens generated with RDKit AddHs(addCoords=True); donor/acceptor/hydrophobic features from RDKit BaseFeatures.fdef; aromatic rings from RDKit aromaticity perception; ring centroids and normals from prepared heavy-atom coordinates; no pH-specific protonation or tautomer enumeration"
+      },
+      {
+        "check_id": "preparation.multiple_states_preserved",
+        "category": "states",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "plausible states can coexist without silent selection",
+        "observed": "2 states; selected=None",
+        "expected": "one or more states; explicit selection or none",
+        "detail": "no state is selected unless the caller says so"
+      },
+      {
+        "check_id": "preparation.unknown_features_preserved",
+        "category": "states",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "unsupported chemistry remains unknown",
+        "observed": "unknown flags are retained where supplied",
+        "expected": "no element-based inference",
+        "detail": "unknown remains distinct from false"
+      },
+      {
+        "check_id": "preparation.no_affinity",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "preparation is not converted into affinity",
+        "observed": "no affinity or free-energy estimate is produced",
+        "expected": "chemical-state preparation only",
+        "detail": "prepared features are inputs to later analysis"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "state_selection",
+      "status": "not_applicable",
+      "detail": "No prepared state was selected.",
+      "observed": "selected_state_id is null",
+      "expected": "explicit selection or coexistence of states",
+      "resolution": "The record preserves all states without choosing one."
+    }
+  ]
+}

@@ -137,6 +137,7 @@ class EvidenceObservation:
     evidence: str
     criteria: str
     provenance: str
+    applicable: bool = True
     distance_nm: float | None = None
     angle_degrees: float | None = None
 
@@ -145,6 +146,8 @@ class EvidenceObservation:
             raise ValueError(f"state must be one of {EVIDENCE_STATES}.")
         if self.state in ("present", "absent") and not self.assessable:
             raise ValueError("present/absent observations must be assessable.")
+        if self.state in ("present", "absent") and not self.applicable:
+            raise ValueError("present/absent observations must be applicable.")
         if self.state == "unknown" and self.assessable:
             raise ValueError("unknown observations must not be assessable.")
         if not self.evidence.strip():
@@ -166,6 +169,7 @@ class EvidenceObservation:
             "evidence": self.evidence,
             "criteria": self.criteria,
             "provenance": self.provenance,
+            "applicable": self.applicable,
             "distance_nm": self.distance_nm,
             "angle_degrees": self.angle_degrees,
         }
@@ -180,6 +184,7 @@ class EvidenceObservation:
             evidence=_required_string(data, "evidence"),
             criteria=_required_string(data, "criteria"),
             provenance=_required_string(data, "provenance"),
+            applicable=bool(data.get("applicable", True)),
             distance_nm=(
                 None if data.get("distance_nm") is None else float(data["distance_nm"])
             ),
@@ -195,6 +200,7 @@ class EvidenceObservation:
 class EvidenceSchema:
     schema_id: str
     criteria_fingerprint: str
+    criteria_json: str
     features: tuple[EvidenceFeature, ...]
 
     def __post_init__(self) -> None:
@@ -202,6 +208,8 @@ class EvidenceSchema:
             raise ValueError("schema_id must be a non-empty string.")
         if not self.criteria_fingerprint.strip():
             raise ValueError("criteria_fingerprint must be a non-empty string.")
+        if not self.criteria_json.strip():
+            raise ValueError("criteria_json must be a non-empty string.")
         keys = [feature.key for feature in self.features]
         if len(set(keys)) != len(keys):
             raise ValueError("evidence features must be unique.")
@@ -209,10 +217,11 @@ class EvidenceSchema:
             raise ValueError("evidence features must be sorted by key.")
 
     @property
-    def compatibility_key(self) -> tuple[str, str, tuple[tuple[str, ...], ...]]:
+    def compatibility_key(self) -> tuple[str, str, str, tuple[tuple[str, ...], ...]]:
         return (
             self.schema_id,
             self.criteria_fingerprint,
+            self.criteria_json,
             tuple(feature.key for feature in self.features),
         )
 
@@ -223,12 +232,13 @@ class EvidenceSchema:
         *,
         schema_id: str,
         criteria_fingerprint: str,
+        criteria_json: str,
     ) -> EvidenceSchema:
         features = sorted(
             {observation.feature for observation in observations},
             key=lambda feature: feature.key,
         )
-        return cls(schema_id, criteria_fingerprint, tuple(features))
+        return cls(schema_id, criteria_fingerprint, criteria_json, tuple(features))
 
     def index(self, feature: EvidenceFeature) -> int:
         for index, candidate in enumerate(self.features):
@@ -240,6 +250,7 @@ class EvidenceSchema:
         return {
             "schema_id": self.schema_id,
             "criteria_fingerprint": self.criteria_fingerprint,
+            "criteria_json": self.criteria_json,
             "features": [feature.to_dict() for feature in self.features],
         }
 
@@ -249,6 +260,7 @@ class EvidenceSchema:
         return cls(
             schema_id=_required_string(data, "schema_id"),
             criteria_fingerprint=_required_string(data, "criteria_fingerprint"),
+            criteria_json=_required_string(data, "criteria_json"),
             features=tuple(
                 EvidenceFeature.from_dict(_as_mapping(item, "evidence feature"))
                 for item in _as_list(data.get("features"), "features")
@@ -261,6 +273,7 @@ class EvidenceFingerprint:
     schema: EvidenceSchema
     states: tuple[str, ...]
     assessable: tuple[bool, ...]
+    applicable: tuple[bool, ...] | None = None
     observations: tuple[EvidenceObservation, ...] = ()
 
     def __post_init__(self) -> None:
@@ -268,13 +281,23 @@ class EvidenceFingerprint:
             raise ValueError("states must have one entry per schema feature.")
         if len(self.assessable) != len(self.schema.features):
             raise ValueError("assessable must have one entry per schema feature.")
-        for state, assessable in zip(self.states, self.assessable):
+        applicable = (
+            tuple(True for _ in self.states) if self.applicable is None else self.applicable
+        )
+        if len(applicable) != len(self.schema.features):
+            raise ValueError("applicable must have one entry per schema feature.")
+        object.__setattr__(self, "applicable", applicable)
+        for state, is_assessable, is_applicable in zip(
+            self.states, self.assessable, applicable, strict=True
+        ):
             if state not in EVIDENCE_STATES:
                 raise ValueError(f"invalid evidence state {state!r}.")
-            if (state == "unknown") == assessable:
+            if (state == "unknown") == is_assessable:
                 raise ValueError(
                     "unknown states must be unassessable and present/absent assessable."
                 )
+            if state in ("present", "absent") and not is_applicable:
+                raise ValueError("present/absent states must be applicable.")
 
     def index(self, feature: EvidenceFeature) -> int:
         return self.schema.index(feature)
@@ -295,7 +318,17 @@ class EvidenceFingerprint:
 
     @property
     def unknown_count(self) -> int:
-        return sum(state == "unknown" for state in self.states)
+        return sum(
+            state == "unknown" and applicable
+            for state, applicable in zip(self.states, self.applicable, strict=True)
+        )
+
+    @property
+    def not_applicable_count(self) -> int:
+        return sum(
+            state == "unknown" and not applicable
+            for state, applicable in zip(self.states, self.applicable, strict=True)
+        )
 
     @property
     def assessable_count(self) -> int:
@@ -306,6 +339,7 @@ class EvidenceFingerprint:
             "schema": self.schema.to_dict(),
             "states": list(self.states),
             "assessable": list(self.assessable),
+            "applicable": list(self.applicable),
             "observations": [observation.to_dict() for observation in self.observations],
         }
 
@@ -316,6 +350,11 @@ class EvidenceFingerprint:
             schema=EvidenceSchema.from_dict(_as_mapping(data.get("schema"), "schema")),
             states=tuple(str(state) for state in _as_list(data.get("states"), "states")),
             assessable=tuple(bool(value) for value in _as_list(data.get("assessable"), "assessable")),
+            applicable=(
+                None
+                if data.get("applicable") is None
+                else tuple(bool(value) for value in _as_list(data.get("applicable"), "applicable"))
+            ),
             observations=tuple(
                 EvidenceObservation.from_dict(_as_mapping(item, "evidence observation"))
                 for item in _as_list(data.get("observations"), "observations")
@@ -329,6 +368,7 @@ class EvidenceOccupancy:
     present_counts: tuple[int, ...]
     absent_counts: tuple[int, ...]
     unknown_counts: tuple[int, ...]
+    not_applicable_counts: tuple[int, ...]
     assessable_counts: tuple[int, ...]
 
     def __post_init__(self) -> None:
@@ -337,16 +377,16 @@ class EvidenceOccupancy:
             ("present_counts", self.present_counts),
             ("absent_counts", self.absent_counts),
             ("unknown_counts", self.unknown_counts),
+            ("not_applicable_counts", self.not_applicable_counts),
             ("assessable_counts", self.assessable_counts),
         ):
             if len(values) != size:
                 raise ValueError(f"{name} must have one entry per feature.")
             if any(value < 0 for value in values):
                 raise ValueError(f"{name} cannot contain negative values.")
-        for present, absent, unknown, assessable in zip(
+        for present, absent, assessable in zip(
             self.present_counts,
             self.absent_counts,
-            self.unknown_counts,
             self.assessable_counts,
             strict=True,
         ):
@@ -368,6 +408,7 @@ class EvidenceOccupancy:
             "present_counts": list(self.present_counts),
             "absent_counts": list(self.absent_counts),
             "unknown_counts": list(self.unknown_counts),
+            "not_applicable_counts": list(self.not_applicable_counts),
             "assessable_counts": list(self.assessable_counts),
             "present_fractions": list(self.present_fractions),
         }
@@ -380,6 +421,7 @@ class EvidenceOccupancy:
             present_counts=tuple(int(value) for value in _as_list(data.get("present_counts"), "present_counts")),
             absent_counts=tuple(int(value) for value in _as_list(data.get("absent_counts"), "absent_counts")),
             unknown_counts=tuple(int(value) for value in _as_list(data.get("unknown_counts"), "unknown_counts")),
+            not_applicable_counts=tuple(int(value) for value in _as_list(data.get("not_applicable_counts"), "not_applicable_counts")),
             assessable_counts=tuple(int(value) for value in _as_list(data.get("assessable_counts"), "assessable_counts")),
         )
 
@@ -393,6 +435,7 @@ class EvidenceComparison:
     first_only_present: int
     second_only_present: int
     unknown_involved: int
+    not_applicable_involved: int
     assessable_both: int
 
 
@@ -401,6 +444,7 @@ def build_evidence_fingerprint(
     *,
     schema_id: str,
     criteria_fingerprint: str,
+    criteria_json: str,
 ) -> EvidenceFingerprint:
     """Combine observations into one three-state fingerprint.
 
@@ -416,6 +460,7 @@ def build_evidence_fingerprint(
         values,
         schema_id=schema_id,
         criteria_fingerprint=criteria_fingerprint,
+        criteria_json=criteria_json,
     )
     by_feature: dict[EvidenceFeature, list[EvidenceObservation]] = {}
     for observation in values:
@@ -423,21 +468,31 @@ def build_evidence_fingerprint(
 
     states = []
     assessable = []
+    applicable = []
     for feature in schema.features:
         feature_observations = by_feature[feature]
         if any(observation.state == "present" for observation in feature_observations):
             state = "present"
+            feature_applicable = True
         elif any(observation.state == "unknown" for observation in feature_observations):
             state = "unknown"
+            feature_applicable = any(
+                observation.applicable
+                for observation in feature_observations
+                if observation.state == "unknown"
+            )
         else:
             state = "absent"
+            feature_applicable = True
         states.append(state)
         assessable.append(state != "unknown")
+        applicable.append(feature_applicable)
 
     return EvidenceFingerprint(
         schema=schema,
         states=tuple(states),
         assessable=tuple(assessable),
+        applicable=tuple(applicable),
         observations=values,
     )
 
@@ -458,17 +513,25 @@ def aggregate_evidence(
     present = [0] * len(schema.features)
     absent = [0] * len(schema.features)
     unknown = [0] * len(schema.features)
+    not_applicable = [0] * len(schema.features)
     assessable = [0] * len(schema.features)
     for fingerprint in values:
-        for index, (state, is_assessable) in enumerate(
-            zip(fingerprint.states, fingerprint.assessable, strict=True)
+        for index, (state, is_assessable, is_applicable) in enumerate(
+            zip(
+                fingerprint.states,
+                fingerprint.assessable,
+                fingerprint.applicable,
+                strict=True,
+            )
         ):
             if state == "present":
                 present[index] += 1
             elif state == "absent":
                 absent[index] += 1
-            else:
+            elif is_applicable:
                 unknown[index] += 1
+            else:
+                not_applicable[index] += 1
             if is_assessable:
                 assessable[index] += 1
     return EvidenceOccupancy(
@@ -476,6 +539,7 @@ def aggregate_evidence(
         present_counts=tuple(present),
         absent_counts=tuple(absent),
         unknown_counts=tuple(unknown),
+        not_applicable_counts=tuple(not_applicable),
         assessable_counts=tuple(assessable),
     )
 
@@ -488,10 +552,17 @@ def compare_evidence_fingerprints(
 
     if first.schema.compatibility_key != second.schema.compatibility_key:
         raise ValueError("fingerprints have incompatible evidence schemas.")
-    both_present = both_absent = first_only = second_only = unknown = assessable_both = 0
-    for first_state, second_state in zip(
-        first.states, second.states, strict=True
+    both_present = both_absent = first_only = second_only = unknown = not_applicable = assessable_both = 0
+    for first_state, second_state, first_applicable, second_applicable in zip(
+        first.states,
+        second.states,
+        first.applicable,
+        second.applicable,
+        strict=True,
     ):
+        if not first_applicable or not second_applicable:
+            not_applicable += 1
+            continue
         if first_state == "unknown" or second_state == "unknown":
             unknown += 1
             continue
@@ -512,6 +583,7 @@ def compare_evidence_fingerprints(
         first_only_present=first_only,
         second_only_present=second_only,
         unknown_involved=unknown,
+        not_applicable_involved=not_applicable,
         assessable_both=assessable_both,
     )
 

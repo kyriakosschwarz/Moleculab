@@ -74,7 +74,8 @@ def main() -> None:
     print(
         f"  features: {len(fingerprint.schema.features)} category features "
         f"({fingerprint.present_count} present, {fingerprint.absent_count} absent, "
-        f"{fingerprint.unknown_count} unknown)"
+        f"{fingerprint.unknown_count} unknown, "
+        f"{fingerprint.not_applicable_count} not applicable)"
     )
     print(
         f"  assessable denominator: {fingerprint.assessable_count} of "

@@ -50,10 +50,12 @@ def fingerprint(features_states):
     observations = [
         observation(feature, state) for feature, state in features_states
     ]
+    payload = {"test": "criteria"}
     return build_evidence_fingerprint(
         observations,
         schema_id="test-schema",
-        criteria_fingerprint=criteria_fingerprint({"test": "criteria"}),
+        criteria_fingerprint=criteria_fingerprint(payload),
+        criteria_json='{"test":"criteria"}',
     )
 
 
@@ -113,6 +115,28 @@ def test_duplicate_observations_merge_conservatively():
     assert result.states == ("present",)
 
 
+def test_not_applicable_is_distinct_from_unknown():
+    feature = category_feature("metal_coordination")
+    not_applicable = EvidenceObservation(
+        feature=feature,
+        state="unknown",
+        assessable=False,
+        applicable=False,
+        evidence="no metal present",
+        criteria="test criteria",
+        provenance="test fixture",
+    )
+    result = build_evidence_fingerprint(
+        [not_applicable],
+        schema_id="test-schema",
+        criteria_fingerprint=criteria_fingerprint({"test": "criteria"}),
+        criteria_json='{"test":"criteria"}',
+    )
+
+    assert result.unknown_count == 0
+    assert result.not_applicable_count == 1
+
+
 def test_occupancy_uses_only_assessable_observations():
     feature = atom_feature()
     first = fingerprint([(feature, "unknown")])
@@ -122,6 +146,7 @@ def test_occupancy_uses_only_assessable_observations():
 
     assert occupancy.present_counts == (1,)
     assert occupancy.unknown_counts == (1,)
+    assert occupancy.not_applicable_counts == (0,)
     assert occupancy.assessable_counts == (1,)
     assert occupancy.present_fractions == (1.0,)
 
@@ -161,6 +186,7 @@ def test_incompatible_schemas_are_rejected():
         [observation(atom_feature("hydrogen_bond"), "present")],
         schema_id="test-schema",
         criteria_fingerprint=criteria_fingerprint({"different": "criteria"}),
+        criteria_json='{"different":"criteria"}',
     )
 
     with pytest.raises(ValueError, match="incompatible"):
@@ -182,8 +208,10 @@ def test_reference_2hyy_evidence_fingerprint_is_unassessable():
     assert all(feature.scope == "category" for feature in result.schema.features)
     assert result.fingerprint.present_count == 0
     assert result.fingerprint.absent_count == 0
-    assert result.fingerprint.unknown_count == 6
+    assert result.fingerprint.unknown_count == 5
+    assert result.fingerprint.not_applicable_count == 1
     assert result.fingerprint.assessable_count == 0
+    assert result.schema.criteria_json
     statuses = dict(result.category_statuses)
     assert statuses["hydrogen_bond"] == "unknown"
     assert statuses["metal_coordination"] == "not_applicable"

@@ -58,6 +58,7 @@ linked from the relevant tutorial or reference page.
 | [`capstone_binding_site.py`](drug_discovery/capstone_binding_site.py) | protein pocket, residues, waters, and ligand–protein [contacts](../data/structures/2HYY.binding-site.json) |
 | [`capstone_interactions.py`](drug_discovery/capstone_interactions.py) | chemistry-aware interaction [classification](../data/structures/2HYY.interactions.json), preserving unknown evidence |
 | [`capstone_evidence_fingerprint.py`](drug_discovery/capstone_evidence_fingerprint.py) | three-state [evidence fingerprint](../data/structures/2HYY.evidence-fingerprint.json); unknown is not zero |
+| [`capstone_chemical_preparation.py`](drug_discovery/capstone_chemical_preparation.py) | separate [chemical-state preparation](../data/structures/2HYY.chemical-preparation.json) with explicit assumptions |
 
 ## Advanced
 
