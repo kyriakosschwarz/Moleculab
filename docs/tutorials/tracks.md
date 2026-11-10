@@ -1,100 +1,131 @@
-# Learning tracks
+# Curriculum and learning tracks
 
-Moleculab's material is easier to follow when it is split into three connected
-tracks rather than one ever-growing tutorial.
+Moleculab is organized as three connected tracks rather than one ever-growing
+tutorial. The [tutorial map](README.md) is the quick entry point; this page is
+the detailed curriculum, prerequisite map, and status table.
 
-| Track | Question | Core material |
-| --- | --- | --- |
-| **A — Molecular physics and simulation** | How does the physical model work? | units, particles, potentials, integrators, molecular mechanics, MD, thermodynamics, free energy, QM/MM |
-| **B — Chemical structure and properties** | What is the molecule? | functional groups, rings, stereochemistry, conformations, protonation, tautomers, descriptors, similarity, solvation, ADME |
-| **C — Structure-based drug discovery** | What does the physics mean for a drug? | protein structures, binding sites, docking, pharmacophores, interaction fingerprints, trajectory analysis, lead optimization |
+```text
+Track A — Molecular physics and simulation
+    units → particles → forces → integration → molecular mechanics
+          → environment → electrostatics → free energy
 
-The tracks are not isolated. They share the same molecule and the same physical
-engine. The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) is the point
-where all three meet.
+Track B — Chemical structure and properties
+    structure → representation → properties → protonation states
 
-## Prerequisites and entry points
+Track C — Structure-based drug discovery
+    protein structure → binding site → interactions → fingerprints → docking
 
-| Material | Prerequisite | Outcome |
-| --- | --- | --- |
-| Physics parts 01–10 | basic vectors and Python | build and run a molecular-mechanics system |
-| [Chemical structure](chemistry/01_chemical_structure.md) | parts 03, 04b, 07 | reason about functional groups, rings, stereochemistry, and conformations |
-| Cheminformatics module | chemical structure | descriptors, fingerprints, similarity |
-| pKa and protonation module | electrostatics and water | choose chemically realistic protonation states |
-| Structural biology module | docking and proteins | judge experimental versus predicted structures |
-| Interaction fingerprints | docking | residue-level geometric contacts and occupancy |
-| Solvation, LogP/LogD | free energy | connect solvation thermodynamics to lipophilicity |
-| ADME-Tox | properties and similarity | separate physical simulation from empirical prediction |
+                    \ | /
+                     capstone
+             imatinib and BCR-ABL1
+```
 
-## Track A — molecular physics and simulation
+The tracks share the same molecule and the same physical engine. They are
+separated by the question being asked, not by a software boundary between
+unrelated subjects.
 
-This is the existing sequence:
+## 1. Choosing a path
 
-1. units and scales;
-2. particle state and kinetic energy;
-3. potential energy and force;
-4. Velocity Verlet;
-5. checkpoint;
-6. chemical bridge: Lennard-Jones, rotamers, double wells;
-7. nonbonded interactions;
-8. many-particle systems;
-9. bonds, angles, torsions;
-10. minimisation;
-11. temperature and thermostats;
-12. periodic boundaries.
+| Background or goal | Recommended path |
+| --- | --- |
+| new to molecular simulation | Track A sections 1–10, then Track B 01–04, then Track A 11–24, then Track C |
+| chemistry-first | Track B 01–04, then Track A 1–10 and 14–17, then Track C |
+| drug-discovery focus | Track A 1–10 and 14–17, Track B 01–04, Track C 01–05, then the capstone |
+| software and architecture | Track A 1–10, then [the architecture](../architecture.md), then selected application sections |
+| just want the integration story | [Introduction](introduction.md), then the [capstone](capstone_imatinib.md) |
 
-The main tutorial then continues through trajectory analysis, solvent, water,
-docking, Ewald, pressure, free energy, FEP/TI/MBAR, QM/MM, and flexible docking.
+The default order is not arbitrary. Track A sections 1–10 establish the energy,
+force, integration, and molecular-mechanics vocabulary. Track B supplies the
+chemical identity and state of the molecule. Track A sections 11–24 add the
+environment and thermodynamics. Track C then asks recognition questions with
+those tools.
 
-## Track B — chemical structure and properties
+## 2. Track A — Molecular physics and simulation
 
-The companion track begins with
-[Chemical structure and conformational behaviour](chemistry/01_chemical_structure.md).
-It covers:
+**Question:** how does the physical model work?
 
-- functional groups and their structural consequences;
-- rings, aromaticity, and restricted rotation;
-- stereochemistry;
-- ethane and butane rotamers;
-- ring strain;
-- the difference between a force-field torsion term and the electronic effects
-  it represents.
+**Entry point:** [From one particle to a small simulation](tutorial.md)
 
-The current status of the track is:
+**Slower visual path:** [Physics deep dives 1–10](physics/README.md)
 
-| Module | Focus | Status |
-| --- | --- | --- |
-| [Chemical structure](chemistry/01_chemical_structure.md) | functional groups, rings, stereochemistry, conformations | available |
-| [Molecular representation](chemistry/02_molecular_representation.md) | graphs, SMILES, aromaticity, conformers | available |
-| [Molecular properties](chemistry/03_molecular_properties.md) | descriptors, fingerprints, Tanimoto | available |
-| [Protonation and tautomerism](chemistry/04_protonation_and_tautomerism.md) | pKa, pH populations, microstates, tautomers | available |
-| Solvation and LogP/LogD | transfer free energy, neutral versus ionized distribution | proposed |
-| ADME-Tox | lipophilicity, solubility, permeability, metabolic soft spots | proposed |
+**Prerequisites:** basic vectors, calculus, and Python. No prior MD experience
+is assumed.
 
-These modules should use established chemistry toolkits such as RDKit where
-appropriate rather than reimplementing cheminformatics algorithms.
+| Stage | Material | Covers | Status |
+| --- | --- | --- | --- |
+| Foundations | [tutorial sections 1–4](tutorial.md), [physics 01–04](physics/README.md), [checkpoint](physics/checkpoint_04.md) | units, particle state, energy and force, Velocity Verlet, analytic validation | available |
+| Chemical bridge | [tutorial section 4b](physics/04b_chemical_bridge.md) | Lennard-Jones dissociation, torsional rotamers, double wells | available |
+| Molecular mechanics | [tutorial sections 5–10](tutorial.md), [physics 05–10](physics/README.md) | nonbonded interactions, `System`, bonds/angles/torsions, minimisation, thermostats, periodic boundaries | available |
+| Environment and analysis | [tutorial sections 11–14 and 16–17](tutorial.md) | MSD, RDF, solvent, atomistic water, Ewald, pressure/NPT | available |
+| Free energy and alchemy | [tutorial sections 18–23](tutorial.md) | FEP, TI, MBAR, soft-core LJ, Monte Carlo alchemy, solvated-ligand decoupling | available |
+| Track C bridge | [tutorial sections 15 and 24](tutorial.md) | rigid-ligand and flexible-receptor docking | available |
+| Performance | [tutorial section 25](tutorial.md) | CPU default and optional PyTorch Ewald backend | available |
 
-## Track C — structure-based drug discovery
+Track A is the dependency chain for the other tracks. The physics deep dives
+expand the first ten concepts into a slower, figure-rich path. The main
+tutorial keeps the same section numbering for stable links.
 
-This track starts from the docking material and adds:
+## 3. Track B — Chemical structure and properties
 
-- protein structure quality and preparation;
-- binding-site inspection;
-- geometric interaction fingerprints;
-- hydrogen-bond, salt-bridge, hydrophobic, and aromatic contacts;
-- contact occupancy over an MD trajectory;
-- pharmacophore hypotheses and pose validation.
+**Question:** what is the molecule, and what state is it in?
 
-Two distinctions are essential:
+**Entry point:** [Chemical structure and properties](chemistry/README.md)
 
-1. **Geometric fingerprints are not energy decomposition.** A contact table says
-   which residues are near which ligand groups and for how long. It does not
-   prove that those residues dominate the binding free energy.
-2. **Per-residue energy contributions are model-dependent.** Solvent
-   reorganisation, entropy, polarisation, and cooperativity mean the total
-   binding free energy is not a simple sum of independent residue terms.
+**Prerequisites:** Track A sections 3, 4b, and 7 are useful for the first
+module; Track A electrostatics and water are useful for protonation.
 
-## Cross-cutting corrections
+| Module | Focus | Prerequisite | Status |
+| --- | --- | --- | --- |
+| [01 — Chemical structure](chemistry/01_chemical_structure.md) | functional groups, rings, stereochemistry, conformations | Track A 3, 4b, 7 | available |
+| [02 — Molecular representation](chemistry/02_molecular_representation.md) | graphs, SMILES, aromaticity, stereochemistry, 3D conformers | module 01 | available |
+| [03 — Molecular properties](chemistry/03_molecular_properties.md) | descriptors, fingerprints, Tanimoto, chemical space | module 02 | available |
+| [04 — Protonation and tautomerism](chemistry/04_protonation_and_tautomerism.md) | pKa, pH populations, microstates, tautomers | modules 02–03; Track A 14, 16 | available |
+| Solvation and LogP/LogD | transfer free energy, neutral versus ionized distribution | module 04; Track A free energy | proposed |
+| ADME-Tox | lipophilicity, solubility, permeability, metabolic soft spots | modules 03–04 | proposed |
+
+Track B uses RDKit as an optional external toolkit for chemical perception.
+Moleculab's force field receives atom types, charges, and topology; it does not
+import RDKit types.
+
+## 4. Track C — Structure-based drug discovery
+
+**Question:** what does the physics mean for a drug?
+
+**Entry point:** [Structure-based drug discovery](drug_discovery/README.md)
+
+**Prerequisites:** Track A sections 1–14 and Track B modules 01–04. Docking
+also uses Track A sections 15–17 and the free-energy material.
+
+| Module | Focus | Foundation | Status |
+| --- | --- | --- | --- |
+| 01 — Protein structure fundamentals | chains, residues, coordinates, missing atoms, structure quality | Track A particles and topology | planned |
+| 02 — Binding sites and cavities | pocket geometry, waters, volume, complementarity | Track A periodic box and nonbonded model | planned |
+| 03 — Protein–ligand interaction geometry | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | Track A electrostatics and water | planned |
+| 04 — Interaction fingerprints | residue-ligand contacts and trajectory occupancy | Track A trajectory analysis | planned |
+| 05 — Docking foundations | search, scoring, poses, limitations | Track A sections 15 and 24 | available |
+| 06 — Trajectory contact analysis | contact timelines and persistence | Track A analysis | planned |
+
+The current library supports the geometric and scoring pieces of Track C. It
+does not provide protein preparation, a trained affinity model, or a validated
+prospective docking pipeline.
+
+## 5. Where the tracks meet
+
+The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) is the integration
+exercise. It uses all three tracks:
+
+| Capstone question | Track A | Track B | Track C |
+| --- | --- | --- | --- |
+| What is imatinib? | molecular mechanics | identity, tautomer, protonation | ligand representation |
+| Where does it bind? | periodic box, water, electrostatics | chemical state | protein structure, binding site |
+| Which contacts matter? | nonbonded interactions | hydrogen-bond donors and acceptors | interaction geometry, fingerprints |
+| How stable is the complex? | MD, free energy | protonation-coupled states | pose comparison, occupancy |
+| Why do mutations resist? | force-field changes | chemical-state changes | binding-site geometry changes |
+
+The capstone is not a turnkey pipeline. It is a guided map from the tutorial
+components to a realistic problem.
+
+## 6. Cross-cutting corrections
 
 Several common simplifications are deliberately avoided:
 
@@ -113,14 +144,30 @@ Several common simplifications are deliberately avoided:
   Waals interactions.
 - **Water is part of the thermodynamics.** Desolvation and water networks can
   decide whether an apparently favourable contact actually helps binding.
+- **A geometric interaction is not an energy contribution.** A contact table
+  says what is near what. It does not prove what dominates the binding free
+  energy.
 
-## Recommended implementation order
+## 7. Recommended study and development order
 
-1. Chemical structure and conformational behaviour (this track's first module).
-2. Cheminformatics representations and similarity.
-3. pKa, protonation, and tautomerism.
-4. Protein–ligand geometric interaction fingerprints.
-5. Solvation, desolvation, LogP/LogD, and free energy.
+For a reader:
+
+1. Track A foundations and molecular mechanics.
+2. Track B chemical structure, representation, properties, and protonation.
+3. Track A environment, electrostatics, and free energy.
+4. Track C protein structure, binding sites, interaction geometry, and
+   fingerprints.
+5. The capstone.
+
+For a module author:
+
+1. Define the question and the track it belongs to.
+2. State prerequisites and the model boundary.
+3. Derive the equation or the geometric criterion.
+4. Implement only the part that belongs to that layer.
+5. Add an independent test and a runnable example.
+6. Add the module to the track table and the tutorial map.
+7. Check links and math rendering on GitHub and in VS Code.
 
 The chemistry layer should remain separate from the physics engine: chemical
 perception identifies an amide or an aromatic ring, the force field computes its

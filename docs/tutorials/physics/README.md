@@ -1,14 +1,21 @@
-# Individual tutorials 1–10 and the chemical bridge
+# Track A physics deep dives: tutorials 1–10 and the chemical bridge
 
-**New here?** Read the [general introduction](../introduction.md) first. It
-explains how the tutorial sequence connects to CADD applications such as force
-fields, molecular dynamics, docking, free energy, and QM/MM.
+> **Where this fits.** These are the slower, visual deep dives for Track A.
+> Start with the [tutorial map](../README.md) for the three-track overview.
+>
+> **Companion tracks.** [Track B — chemical structure and properties](../chemistry/README.md)
+> · [Track C — structure-based drug discovery](../drug_discovery/README.md)
 
-These ten tutorials, plus the chemical bridge after part 4, expand the first ten
-sections of [`../tutorial.md`](../tutorial.md) into a slower, more visual path
-from units to interacting molecular systems.
+**New here?** Read the [tutorial map](../README.md) and the
+[general introduction](../introduction.md) first. They explain how the tracks
+connect to CADD applications such as force fields, molecular dynamics, docking,
+free energy, and QM/MM.
 
-![The tutorial sequence](assets/course_map.svg)
+These ten deep dives, plus the chemical bridge after part 4, expand the first ten
+sections of the [Track A main path](../tutorial.md) into a slower, more visual
+path from units to interacting molecular systems.
+
+![Track A course map](assets/course_map.svg)
 
 The corresponding software layers, module dependency rules, and decision
 records are described in [`../../architecture.md`](../../architecture.md).
@@ -65,7 +72,7 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 | an argon-like pair | temperature and thermostat |
 | a two-particle periodic box | minimum image and cutoffs |
 
-## The tutorials
+## The deep dives
 
 | Tutorial | Physics | Code | Visuals |
 | --- | --- | --- | --- |
@@ -81,15 +88,17 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 | [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
 | [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
 
-After part 10, continue with the [main tutorial](../tutorial.md) through
-solvent, water, docking, Ewald, pressure, and free energy. The sequence ends
-with the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
+After part 10, continue with the [Track A main path](../tutorial.md) through
+solvent, water, docking, Ewald, pressure, and free energy. Then continue with
+[Track B](../chemistry/README.md), [Track C](../drug_discovery/README.md), and
+the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
 
-The parallel chemistry track starts with
-[chemical structure and conformational behaviour](../chemistry/01_chemical_structure.md);
-see [the three learning tracks](../tracks.md) for prerequisites.
+Track B starts with
+[chemical structure and conformational behaviour](../chemistry/01_chemical_structure.md).
+See the [tutorial map](../README.md) and [learning tracks](../tracks.md) for
+prerequisites and study orders.
 
-## Tutorial to package map
+## Deep dive to package map
 
 | Tutorial | Package |
 | --- | --- |
@@ -148,7 +157,7 @@ The recurring question is:
 
 ## Models, algorithms, and protocols
 
-The tutorials distinguish three kinds of statement:
+The deep dives distinguish three kinds of statement:
 
 | Concept | Category |
 | --- | --- |
@@ -239,13 +248,17 @@ Static figures are SVG; animations are GIF. They are generated from the actual
 library using:
 
 ```bash
-uv run python docs/tutorials/individual/generate_visuals.py
+uv run python docs/tutorials/physics/generate_visuals.py
 ```
 
 The assets are in [`assets/`](assets/).
 
 ## Companion guides
 
+- [Tutorial map and three tracks](../README.md)
+- [Curriculum and prerequisites](../tracks.md)
+- [Track B — chemical structure and properties](../chemistry/README.md)
+- [Track C — structure-based drug discovery](../drug_discovery/README.md)
 - [Troubleshooting and error diagnosis](../troubleshooting.md)
 - [Notebook and visualization prompts](../visualization_prompts.md)
 - [Answer keys and expected magnitudes](../answer_keys.md)

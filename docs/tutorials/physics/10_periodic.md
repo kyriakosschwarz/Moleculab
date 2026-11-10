@@ -423,4 +423,4 @@ and using the minimum image. Which is correct? Why?
 
 **Previous:** [09 — Temperature and thermostats](09_thermostats.md).
 
-**Return to the individual tutorial index:** [README](README.md).
+**Return to the physics tutorial index:** [README](README.md).

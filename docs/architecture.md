@@ -597,8 +597,9 @@ requires a box for volume normalisation.
 
 ## 8. How the architecture supports education and the tutorials
 
-The ten individual tutorials are a guided tour of the architecture, one layer
-at a time.
+The ten physics deep dives are Track A's guided tour of the architecture, one
+layer at a time. Track B and Track C build on the same layers without changing
+the dependency direction.
 
 | Tutorial | Architecture layer | Code introduced | Invariant |
 | --- | --- | --- | --- |
@@ -892,8 +893,10 @@ The tutorials follow the same order, which is not a coincidence.
 
 **Related documents:** [`lib.md`](lib.md) for the roadmap,
 [`validation.md`](validation.md) for the validation levels,
+[`tutorials/README.md`](tutorials/README.md) for the three-track tutorial map,
 [`tutorials/introduction.md`](tutorials/introduction.md) for the CADD-focused
-course overview, [`tutorials/tutorial.md`](tutorials/tutorial.md) for the
-guided path, and the
-[individual tutorials](tutorials/individual/README.md) for the layer-by-layer
-course.
+overview, [`tutorials/tracks.md`](tutorials/tracks.md) for the curriculum and
+prerequisites, [`tutorials/tutorial.md`](tutorials/tutorial.md) for the Track A
+main path, and the
+[Track A physics deep dives](tutorials/physics/README.md) for the
+layer-by-layer course.

@@ -1,9 +1,10 @@
 # Protonation and tautomerism: chemical states at a given pH
 
-> **Where this fits.** Modules 02 and 03 established molecular identity,
-> representation, descriptors, and similarity. This module adds the chemical
-> state: which protons are attached, which charges are present, and how those
-> populations change with pH.
+> **Where this fits.** Modules 02 and 03 of
+> [Track B](README.md) established molecular identity, representation,
+> descriptors, and similarity. This module adds the chemical state: which
+> protons are attached, which charges are present, and how those populations
+> change with pH.
 >
 > **What you should already know.** Formal charge, molecular graphs, SMILES,
 > and the Boltzmann distribution from the conformational-entropy discussion.
@@ -545,4 +546,4 @@ Acceptance criteria for this module:
   engine.
 
 **Previous:** [03 — Molecular properties](03_molecular_properties.md).  
-**Next:** [Learning tracks](../tracks.md).
+**Next:** [Track C — structure-based drug discovery](../drug_discovery/README.md).

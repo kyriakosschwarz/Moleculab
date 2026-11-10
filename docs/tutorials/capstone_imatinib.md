@@ -1,12 +1,27 @@
 # Capstone: imatinib and BCR-ABL1
 
-> **Where this fits.** This is the integration exercise at the end of the
-> tutorial sequence. It does not introduce a new module. It asks you to connect
-> the physics, force fields, water, docking, dynamics, and free-energy ideas to
-> one real drug-discovery story.
+> **Where this fits.** This is the integration exercise at the end of all three
+> tracks. It does not introduce a new module. It asks you to connect the
+> physics, chemical state, protein structure, docking, dynamics, and
+> free-energy ideas to one real drug-discovery story.
 >
-> **What you need.** The core tutorials, especially 05–10, plus the main
-> tutorial sections on solvent, water, docking, Ewald, and free energy.
+> **What you need.** The core Track A tutorials, especially 05–10 and the
+> sections on solvent, water, docking, Ewald, and free energy; Track B modules
+> 01–04 for chemical identity and protonation; and the
+> [Track C index](drug_discovery/README.md) for protein-structure and
+> recognition material. The docking foundations themselves are available in
+> Track A sections 15 and 24.
+
+The capstone is the point where the tracks meet:
+
+| Track | Contribution to the case study |
+| --- | --- |
+| [A — molecular physics](tutorial.md) | force field, water, MD, docking score, free energy |
+| [B — chemical structure and properties](chemistry/README.md) | molecular identity, tautomer and protonation state, descriptors |
+| [C — structure-based drug discovery](drug_discovery/README.md) | protein structure, binding site, interactions, pose interpretation |
+
+For the three-track overview, see the [tutorial map](README.md); for the full
+curriculum, see [the learning tracks](tracks.md).
 
 ## 1. Why imatinib?
 
@@ -301,6 +316,8 @@ To go beyond the educational engine:
 The goal is not to replace these tools. The goal is to understand what they are
 doing.
 
-**Related:** [introduction](introduction.md), [main tutorial](tutorial.md),
-[individual tutorials](individual/README.md),
-[architecture](../architecture.md), and [validation](../validation.md).
+**Related:** [tutorial map](README.md), [introduction](introduction.md),
+[Track A main path](tutorial.md), [Track A physics deep dives](physics/README.md),
+[Track B](chemistry/README.md), [Track C](drug_discovery/README.md),
+[learning tracks](tracks.md), [architecture](../architecture.md), and
+[validation](../validation.md).

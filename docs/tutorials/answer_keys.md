@@ -2,7 +2,8 @@
 
 > **Use this after trying the exercises.** These are answer sketches and
 > order-of-magnitude checks, not a substitute for running the code. Stochastic
-> exercises depend on seeds, sample counts, and system size.
+> exercises depend on seeds, sample counts, and system size. For the three-track
+> map, see [`README.md`](README.md).
 
 ## 1. Magnitude benchmarks
 
@@ -184,7 +185,8 @@ For example, “the energy went down” is weaker than “the accepted steps low
 the energy and the maximum force fell below $10^{-3}$ kJ/(mol nm), which is the
 stated convergence criterion.”
 
-**Related:** [tutorial](tutorial.md),
+**Related:** [tutorial map](README.md), [learning tracks](tracks.md),
+[Track A main path](tutorial.md),
 [troubleshooting](troubleshooting.md),
 [visualization prompts](visualization_prompts.md), and
 [validation](../validation.md).

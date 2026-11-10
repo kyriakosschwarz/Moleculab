@@ -1,8 +1,9 @@
 # Chemical structure and conformational behaviour
 
-> **Where this fits.** This is the first module in the chemistry track. It
-> follows the physics of bonds, angles, and torsions (parts 04b and 07) and
-> asks a chemical question: why do real molecules prefer particular shapes?
+> **Where this fits.** This is the first module in
+> [Track B — chemical structure and properties](README.md). It follows the
+> physics of bonds, angles, and torsions (Track A parts 04b and 07) and asks a
+> chemical question: why do real molecules prefer particular shapes?
 >
 > **What you should already know.** Atoms, bonds, angles, torsions, and the
 > periodic torsion potential.
@@ -297,8 +298,8 @@ stability of polar and nonpolar groups. A folded conformation that buries a
 charged group may be favourable in vacuum but costly in water. Desolvation is
 therefore part of the conformational and binding story.
 
-This is why the chemistry track connects to the water, solvent, and free-energy
-modules. A gas-phase torsion scan is a starting point, not the final answer.
+This is why Track B connects to the water, solvent, and free-energy modules of
+Track A. A gas-phase torsion scan is a starting point, not the final answer.
 
 ## 9. Common misconceptions
 
@@ -357,5 +358,6 @@ modules. A gas-phase torsion scan is a starting point, not the final answer.
 - The first chemistry module is a bridge from molecular mechanics to medicinal
   chemistry, not a replacement for the physics sequence.
 
-**Previous:** [04b — From springs to chemistry](../individual/04b_chemical_bridge.md).  
+**Previous:** [04b — From springs to chemistry](../physics/04b_chemical_bridge.md).
+
 **Next:** [02 — Molecular representation](02_molecular_representation.md).

@@ -1,8 +1,8 @@
-"""Generate the figures and animations used by the individual tutorials.
+"""Generate the figures and animations used by the physics deep dives.
 
 Run from the repository root:
 
-    uv run python docs/tutorials/individual/generate_visuals.py
+    uv run python docs/tutorials/physics/generate_visuals.py
 """
 
 from __future__ import annotations

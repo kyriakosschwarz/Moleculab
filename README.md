@@ -75,6 +75,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   receptor-strain calibration term.
 - A minimal finite-difference QM/MM particle-in-a-box model coupled to fixed
   MM point charges, validated against analytic and perturbative references.
+- Acid-base, protonation, and tautomer population bookkeeping for discrete
+  chemical states.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.
@@ -85,20 +87,25 @@ remain on the roadmap.
 
 The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The as-built
 architecture is described in [`docs/architecture.md`](docs/architecture.md).
+
+The tutorial entry point is
+[`docs/tutorials/README.md`](docs/tutorials/README.md), which maps the three
+connected tracks:
+
+- Track A, the physics engine:
+  [`tutorial.md`](docs/tutorials/tutorial.md) and the
+  [`physics/`](docs/tutorials/physics/README.md) deep dives;
+- Track B, chemical structure and state:
+  [`chemistry/`](docs/tutorials/chemistry/README.md);
+- Track C, structure-based drug discovery:
+  [`drug_discovery/`](docs/tutorials/drug_discovery/README.md).
+
 [`docs/tutorials/introduction.md`](docs/tutorials/introduction.md) explains how
-the tutorial sequence connects to CADD applications and ends with the
-[`docs/tutorials/capstone_imatinib.md`](docs/tutorials/capstone_imatinib.md).
-[`docs/tutorials/tracks.md`](docs/tutorials/tracks.md) describes the three
-parallel learning tracks, and
-[`docs/tutorials/chemistry/`](docs/tutorials/chemistry/README.md) is the
-chemistry companion track, covering chemical structure, representation,
-molecular properties, and protonation states. The first implementation notes
-are in
-[`docs/energies.md`](docs/energies.md),
-[`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
-from one particle to a small molecular simulation,
-[`docs/tutorials/individual/`](docs/tutorials/individual/) contains deeper
-visual tutorials for the first ten concepts,
+the tracks connect to CADD applications, and
+[`docs/tutorials/tracks.md`](docs/tutorials/tracks.md) gives the prerequisites
+and full curriculum. The tracks meet in the
+[`imatinib–BCR-ABL1 capstone`](docs/tutorials/capstone_imatinib.md). The first
+implementation notes are in [`docs/energies.md`](docs/energies.md);
 [`docs/validation.md`](docs/validation.md) documents the component,
 combined-system, numerical, and reproducibility checks, and
 [`docs/acceleration.md`](docs/acceleration.md) covers CPU/ROCm/NPU backend

@@ -4,9 +4,9 @@
 > to understand what molecular simulation and scoring software actually does
 > before treating it as a black box.
 >
-> **What this is.** A guide to the Moleculab tutorial sequence: why it starts
-> with units and one particle, how it reaches protein-ligand binding and free
-> energy, and what each stage prepares you to understand.
+> **What this is.** A guide to the Moleculab tutorial tracks: why the physics
+> starts with units and one particle, how Track B describes the molecule, and
+> how Track C turns both into molecular recognition.
 
 ## 1. Why learn the foundations?
 
@@ -32,7 +32,7 @@ equation has:
 4. a Python implementation;
 5. a unit test and a numerical experiment.
 
-That is also the structure of the tutorial sequence.
+That is also the structure of the tutorial tracks.
 
 ## 2. What CADD actually relies on
 
@@ -72,19 +72,24 @@ Moleculab is not:
 The current implementation includes classical molecular mechanics, MD,
 minimisation, thermostats, periodic boundaries, trajectory analysis, solvent
 and water models, docking, Ewald electrostatics, pressure coupling, FEP/TI/MBAR,
-alchemical soft-core models, a finite-difference QM/MM model, and an optional
-PyTorch Ewald backend.
+alchemical soft-core models, a finite-difference QM/MM model, acid-base
+protonation and tautomer population bookkeeping, and an optional PyTorch Ewald
+backend.
 
 The roadmap includes more realistic force fields, particle-mesh Ewald,
 triclinic boxes, enhanced sampling, trained scoring functions, and real quantum
 chemistry. Those are explicitly **not** part of the current tutorial's claims.
 
-## 4. The learning path
+## 4. The three learning paths
 
-The sequence is deliberately cumulative. Each stage depends on the previous
-one.
+Read the [tutorial map](README.md) for the quick entry points. This section
+describes the longer curriculum. Track A is the core dependency chain; Tracks B
+and C build on it and connect at the capstone.
 
-### Part I — the physics of one particle
+The track sequences are deliberately cumulative. Each stage depends on the
+previous one.
+
+### Track A, part I — the physics of one particle
 
 | Tutorial | What it builds |
 | --- | --- |
@@ -95,14 +100,14 @@ one.
 | Checkpoint 04 | one oscillator, end to end |
 | 04b Chemical bridge | Lennard-Jones dissociation, rotamers, double wells |
 
-**After Part I and the bridge:** you can explain why a particle accelerates, why
+**After Track A, part I and the bridge:** you can explain why a particle accelerates, why
 kinetic and potential energy exchange, why energy is bounded, and why the
 numerical trajectory differs slightly from the analytic one. You can also
 explain why the harmonic oscillator is a validation instrument rather than a
 chemical model, and read the dissociation, rotamer, and barrier landscapes that
 come next.
 
-### Part II — molecular mechanics and many particles
+### Track A, part II — molecular mechanics and many particles
 
 | Tutorial | What it builds |
 | --- | --- |
@@ -113,10 +118,10 @@ come next.
 | 09 Temperature and thermostats | statistical temperature control |
 | 10 Periodic boundaries | a bulk-like environment without walls |
 
-**After Part II:** you can read a force field, build a molecular system, explain
+**After Track A, part II:** you can read a force field, build a molecular system, explain
 how interactions are summed, and run a basic MD or minimisation protocol.
 
-### Part III — simulation, environment, and recognition
+### Track A, part III — simulation, environment, and recognition
 
 | Main tutorial section | What it adds |
 | --- | --- |
@@ -128,10 +133,10 @@ how interactions are summed, and run a basic MD or minimisation protocol.
 | 16 Ewald summation | long-range periodic electrostatics |
 | 17 Pressure coupling | NPT and the barostat |
 
-**After Part III:** you can move from a gas-phase toy system to a solvated,
+**After Track A, part III:** you can move from a gas-phase toy system to a solvated,
 periodic, thermostatted system and score a ligand pose.
 
-### Part IV — free energy, alchemy, and quantum effects
+### Track A, part IV — free energy, alchemy, and quantum effects
 
 | Main tutorial section | What it adds |
 | --- | --- |
@@ -143,51 +148,100 @@ periodic, thermostatted system and score a ligand pose.
 | 23 Solvated-ligand free energy | ligand decoupling in Ewald water |
 | 24 Flexible-receptor docking | side-chain flexibility and strain |
 
-**After Part IV:** you can explain the difference between an interaction energy
+**After Track A, part IV:** you can explain the difference between an interaction energy
 and a binding free energy, and you can read the structure of an alchemical
 calculation.
 
-### Part V — performance and production awareness
+### Track A, part V — performance and production awareness
 
 | Main tutorial section | What it adds |
 | --- | --- |
 | 25 CPU and optional acceleration | backend selection and the Ewald kernel |
 
-**After Part V:** you know which parts of the engine are Python, which can use
+**After Track A, part V:** you know which parts of the engine are Python, which can use
 PyTorch, and why production performance is a separate engineering problem.
+
+Two Track A sections, 15 and 24, are shared with Track C: they apply Track A
+physics to receptor-ligand scoring and side-chain flexibility.
+
+### Track B — chemical structure and properties
+
+Track B answers a different question: **what is the molecule, and what state is
+it in?** Start with [Track B](chemistry/README.md) after Track A section 4b or
+7. The modules are:
+
+| Module | What it adds |
+| --- | --- |
+| 01 Chemical structure | functional groups, rings, stereochemistry, conformations |
+| 02 Molecular representation | graphs, SMILES, aromaticity, conformers |
+| 03 Molecular properties | descriptors, fingerprints, similarity |
+| 04 Protonation and tautomerism | pKa, pH populations, microstates, tautomers |
+
+Track B supplies the chemical identity and state that the force field cannot
+infer. It uses RDKit as an optional external toolkit for chemical perception;
+the physics engine remains independent of it.
+
+### Track C — structure-based drug discovery
+
+Track C asks: **what does the physics mean for a drug?** Start with
+[Track C](drug_discovery/README.md) after Track A sections 1–14 and Track B
+modules 01–04. The track covers:
+
+| Module | What it adds | Status |
+| --- | --- | --- |
+| 01 Protein structure fundamentals | chains, residues, coordinates, structure quality | planned |
+| 02 Binding sites and cavities | pocket geometry, waters, complementarity | planned |
+| 03 Protein–ligand interaction geometry | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | planned |
+| 04 Interaction fingerprints | residue-level contacts and occupancy | planned |
+| 05 Docking foundations | search, scoring, poses, limitations | available in Track A |
+| 06 Trajectory contact analysis | contact timelines and persistence | planned |
+
+The important distinction is that a geometric interaction is not an energy
+contribution. Track C starts from geometry because a contact can be identified
+without pretending it has an independently measurable binding energy.
+
+### Integration
+
+The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) is where the three tracks
+meet. It uses the Track A engine, the Track B chemical state, and the Track C
+recognition analysis to discuss one real drug-discovery problem.
 
 ## 5. How the pieces connect
 
-The conceptual chain is:
+The three tracks connect like this:
 
 ```text
-units
-  → particle state
-  → energy and force
-  → time integration
-  → nonbonded interactions
-  → many-particle systems
-  → bonded molecular graph
-  → minimisation
-  → temperature control
-  → periodic boundaries
-  → trajectory analysis
-  → solvent and water
-  → free energy
-  → docking
-  → Ewald and pressure
-  → TI, MBAR, and alchemy
-  → QM/MM
+Track A — the engine
+units → particle state → energy and force → time integration
+      → nonbonded interactions → many-particle systems → bonded graph
+      → minimisation → temperature → periodic boundaries
+      → environment → electrostatics → free energy
+
+Track B — the molecule
+chemical structure → representation → properties → protonation states
+
+Track C — recognition
+protein structure → binding site → interaction geometry
+                 → interaction fingerprints → docking
+
+                            ↓
+                  imatinib–BCR-ABL1 capstone
 ```
 
-This is also the dependency order of the library. The software layers are
-described in [`../architecture.md`](../architecture.md).
+Track A is also the dependency order of the library. Track B uses the engine
+for coordinates, energies, and dynamics, but delegates chemical perception to a
+toolkit. Track C uses both: the protein and ligand are chemical objects, and
+their recognition is a physical calculation interpreted in a drug-discovery
+context.
 
-![The first ten tutorials](individual/assets/course_map.svg)
+The software layers are described in [`../architecture.md`](../architecture.md).
 
-The individual tutorials expand the first ten stages. The main tutorial then
-continues into analysis, solvent, free energy, water, docking, Ewald, pressure,
-TI, MBAR, soft-core alchemy, QM/MM, and flexible docking.
+![Track A course map](physics/assets/course_map.svg)
+
+The physics deep dives expand the first ten Track A stages. The main Track A
+tutorial then continues into analysis, solvent, water, Ewald, pressure, free
+energy, alchemy, QM/MM, docking, and flexible docking. Track B and Track C have
+their own entry pages.
 
 ### 5.1 The capstone: imatinib and BCR-ABL1
 
@@ -261,6 +315,9 @@ When you open a production tool, you will recognize the layers:
 | alchemical free energy | `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, alchemy modules |
 | trajectory observables | `analysis/trajectory.py` |
 | QM/MM coupling | `applications/qm_mm.py` |
+| chemical perception and standardisation | Track B and the optional RDKit adapter |
+| protonation and tautomer state | `applications/acid_base.py` |
+| protein structure and interaction fingerprints | Track C (planned) |
 
 You will also recognize the approximations: cutoffs, finite timesteps, local
 minima, classical point charges, and the difference between an interaction
@@ -268,7 +325,7 @@ energy and a free energy.
 
 ## 7. What you will be able to do
 
-By the end of the core sequence, you should be able to:
+By the end of Track A, you should be able to:
 
 - read a molecular-mechanics equation and identify its units;
 - explain why force is the negative energy gradient and test it numerically;
@@ -289,22 +346,33 @@ By the end of the core sequence, you should be able to:
 - state the limitations of the current models without confusing them with
   validated drug-discovery predictions.
 
+Track B adds molecular identity: formula, graph, SMILES, stereochemistry,
+conformers, descriptors, similarity, and discrete protonation and tautomer
+states. Track C adds recognition: protein structure, binding-site geometry,
+interaction types, and the distinction between a geometric contact and an
+energy contribution.
+
+The three tracks together should let you explain both what a calculation does
+and which chemical and structural assumptions it depends on.
+
 ## 8. How to use the materials
 
-There are five entry points:
+There are several entry points:
 
 | Material | Use it for |
 | --- | --- |
-| [`tutorial.md`](tutorial.md) | the guided path through the implemented library |
-| [`individual/`](individual/README.md) | slower, visual deep dives for parts 1–10 |
-| [`capstone_imatinib.md`](capstone_imatinib.md) | the imatinib–BCR-ABL1 capstone and CADD integration |
-| [`troubleshooting.md`](troubleshooting.md) | symptom table and diagnostic recipes |
-| [`visualization_prompts.md`](visualization_prompts.md) | notebook-sized plotting prompts |
-| [`answer_keys.md`](answer_keys.md) | answer sketches and expected magnitudes |
-| [`tracks.md`](tracks.md) | the three learning tracks and prerequisites |
-| [`chemistry/`](chemistry/README.md) | chemical structure, properties, and protonation states |
-| [`../architecture.md`](../architecture.md) | how the software is structured and why |
-| [`../validation.md`](../validation.md) | how correctness is checked |
+| [Tutorial map](README.md) | the three-track overview and quick start |
+| [Learning tracks](tracks.md) | prerequisites, module tables, and study orders |
+| [Track A main path](tutorial.md) | the guided physics and simulation sequence |
+| [Track A physics deep dives](physics/README.md) | slower, visual deep dives for parts 1–10 |
+| [Track B](chemistry/README.md) | chemical structure, representation, properties, and protonation |
+| [Track C](drug_discovery/README.md) | protein structure, binding sites, interactions, and docking |
+| [Capstone](capstone_imatinib.md) | the imatinib–BCR-ABL1 cross-track integration |
+| [Troubleshooting](troubleshooting.md) | symptom table and diagnostic recipes |
+| [Visualization prompts](visualization_prompts.md) | notebook-sized plotting prompts |
+| [Answer keys](answer_keys.md) | answer sketches and expected magnitudes |
+| [Architecture](../architecture.md) | how the software is structured and why |
+| [Validation](../validation.md) | how correctness is checked |
 
 A practical pace is:
 
@@ -368,8 +436,11 @@ Learning the foundations includes learning where the models stop.
 
 ## 12. Where to start
 
-Start with the [main tutorial](tutorial.md), or with
-[01 — Units and scales](individual/01_units.md) if you want the slowest path.
+Start with the [tutorial map](README.md). From there, choose
+[Track A](tutorial.md) for the physics engine, [Track B](chemistry/README.md)
+for chemical structure and state, or [Track C](drug_discovery/README.md) for
+protein-ligand recognition. If you want the slowest Track A path, start with
+[01 — Units and scales](physics/01_units.md).
 
 If you want the software context first, read
 [the architecture](../architecture.md). If you want to know how correctness is

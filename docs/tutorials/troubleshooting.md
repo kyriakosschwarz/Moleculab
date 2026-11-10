@@ -1,9 +1,9 @@
 # Troubleshooting and error diagnosis
 
-> **Use this with the main tutorial and the individual tutorials.** Most
-> molecular-simulation failures are not mysterious. They fall into a small
-> number of categories: wrong units, wrong forces, an unstable timestep,
-> inconsistent boundaries, or invalid input geometry.
+> **Use this with the [tutorial map](README.md), the Track A main path, and the
+> physics deep dives.** Most molecular-simulation failures are not mysterious.
+> They fall into a small number of categories: wrong units, wrong forces, an
+> unstable timestep, inconsistent boundaries, or invalid input geometry.
 
 ## 1. First diagnostic questions
 

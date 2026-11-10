@@ -1,15 +1,23 @@
-# Moleculab tutorial: from one particle to a small simulation
+# Track A — Molecular physics and simulation
 
-**New here?** Read the [introduction](introduction.md) first. It explains why
-the sequence starts with units and one particle and how it connects to force
-fields, MD, docking, free energy, and QM/MM.
+> **Where this fits.** This is the main Track A path: the physical engine that
+> Track B and Track C use. Start with the [tutorial map](README.md) for the
+> three-track overview, or [the curriculum](tracks.md) for prerequisites.
+>
+> **Companion tracks.** [Track B — chemical structure and properties](chemistry/README.md)
+> · [Track C — structure-based drug discovery](drug_discovery/README.md)
 
-This tutorial is a guided path through the implemented library.  It is meant
-to be read with the code open.  Each section answers three questions:
+This tutorial is a guided path through the implemented library. It is meant to
+be read with the code open. Each section answers three questions:
 
 1. What is the physical idea?
 2. Where is it implemented?
 3. How can I check that it is correct?
+
+The later sections include two Track C bridge topics: rigid-ligand docking
+(section 15) and flexible-receptor docking (section 24). They use the Track A
+engine but ask a molecular-recognition question, so they are also linked from
+the [Track C index](drug_discovery/README.md).
 
 Run everything from the repository root with the uv-managed environment:
 
@@ -19,17 +27,33 @@ uv run pytest -q
 ```
 
 For a slower, more visual path through sections 1–10, see
-[`individual/README.md`](individual/README.md) and the ten deep-dive tutorials
-inside `individual/`. The corresponding software layers, module dependencies,
+[`physics/README.md`](physics/README.md) and the ten deep-dive tutorials
+inside `physics/`. The corresponding software layers, module dependencies,
 and design decisions are in [`../architecture.md`](../architecture.md).
 
 Companion guides:
 
+- [Tutorial map and three tracks](README.md)
+- [Curriculum and prerequisites](tracks.md)
+- [Track B — chemical structure and properties](chemistry/README.md)
+- [Track C — structure-based drug discovery](drug_discovery/README.md)
 - [Troubleshooting and error diagnosis](troubleshooting.md)
 - [Notebook and visualization prompts](visualization_prompts.md)
 - [Answer keys and expected magnitudes](answer_keys.md)
-- [Three learning tracks](tracks.md)
-- [Chemistry track](chemistry/README.md)
+
+## Track A route
+
+| Sections | Stage | Also relevant to |
+| --- | --- | --- |
+| 1–4 | units, particles, force, and Velocity Verlet | Track B prerequisites |
+| 4b | chemical bridge: Lennard-Jones, rotamers, double wells | Track B module 01 |
+| 5–10 | nonbonded interactions, `System`, bonded terms, minimisation, thermostats, periodic boundaries | Track B and Track C |
+| 11–14 | trajectory analysis, solvent, water | Track B protonation; Track C binding sites |
+| 15 | rigid-ligand docking | Track C |
+| 16–17 | Ewald electrostatics and pressure coupling | Track C |
+| 18–23 | FEP, TI, MBAR, soft-core alchemy, solvated ligands | Track C thermodynamics |
+| 24 | flexible-receptor docking | Track C |
+| 25 | CPU and optional acceleration | implementation details |
 
 ## 1. Units first
 
@@ -56,7 +80,7 @@ without an extra conversion constant.  The constants live in
 
 Check: `uv run pytest tests/test_units.py -q`.
 
-Deep dive: [01 — Units and scales](individual/01_units.md).
+Deep dive: [01 — Units and scales](physics/01_units.md).
 
 ## 2. A particle and its energy
 
@@ -83,7 +107,7 @@ For this particle, `K = 0.06 kJ/mol`.
 
 Check: `uv run pytest tests/test_particles.py tests/test_physics.py -q`.
 
-Deep dive: [02 — Particles and kinetic energy](individual/02_particle_energy.md).
+Deep dive: [02 — Particles and kinetic energy](physics/02_particle_energy.md).
 
 ## 3. A potential must provide energy and force
 
@@ -108,22 +132,16 @@ energy.  The test suite verifies this with a finite-difference derivative.
 Run: `uv run python examples/first_particle.py`.
 Check: `uv run pytest tests/test_potentials.py -q`.
 
-Deep dive: [03 — Potential energy and force](individual/03_potential_force.md).
+Deep dive: [03 — Potential energy and force](physics/03_potential_force.md).
 
 ## 4. Time integration and energy conservation
 
 Velocity Verlet updates position with the current acceleration and velocity
 with the average of the old and new accelerations:
 
-$$
-\mathbf r_{n+1} = \mathbf r_n + \mathbf v_n \Delta t
-+ \tfrac{1}{2}\mathbf a_n \Delta t^2,
-$$
+$$ \mathbf r_{n+1} = \mathbf r_n + \mathbf v_n \Delta t + \tfrac{1}{2}\mathbf a_n \Delta t^2. $$
 
-$$
-\mathbf v_{n+1} = \mathbf v_n
-+ \tfrac{1}{2}(\mathbf a_n + \mathbf a_{n+1})\Delta t.
-$$
+$$ \mathbf v_{n+1} = \mathbf v_n + \tfrac{1}{2}(\mathbf a_n + \mathbf a_{n+1})\Delta t. $$
 
 For a harmonic oscillator with `m = 12 Da` and `k = 12*pi^2`, the period is
 2 ps.  The example starts at `x = 0.1 nm` and integrates 2000 steps of
@@ -139,11 +157,11 @@ the timestep is halved.
 
 Check: `uv run pytest tests/test_integrators.py tests/test_harmonic_validation.py -q`.
 
-Deep dive: [04 — Velocity Verlet and energy conservation](individual/04_velocity_verlet.md).
+Deep dive: [04 — Velocity Verlet and energy conservation](physics/04_velocity_verlet.md).
 
-Checkpoint: [one oscillator, end to end](individual/checkpoint_04.md).
+Checkpoint: [one oscillator, end to end](physics/checkpoint_04.md).
 
-Bridge: [04b — From springs to chemistry](individual/04b_chemical_bridge.md).
+Bridge: [04b — From springs to chemistry](physics/04b_chemical_bridge.md).
 It keeps the harmonic oscillator as a validation tool and introduces
 Lennard-Jones dissociation, torsional rotamers, and double-well transitions.
 
@@ -153,11 +171,7 @@ Two pair potentials are implemented.
 
 ### Lennard-Jones
 
-$$
-U(r) = 4\epsilon
-\left[\left(\frac{\sigma}{r}\right)^{12}
-- \left(\frac{\sigma}{r}\right)^6\right].
-$$
+$$ U(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]. $$
 
 - `U = 0` at `r = sigma`.
 - The minimum is at `r = 2^(1/6) sigma`.
@@ -176,7 +190,7 @@ Like charges repel; opposite charges attract.
 Run: `uv run python examples/nonbonded_interactions.py`.
 Check: `uv run pytest tests/test_pair_potentials.py -q`.
 
-Deep dive: [05 — Nonbonded interactions](individual/05_nonbonded.md).
+Deep dive: [05 — Nonbonded interactions](physics/05_nonbonded.md).
 
 ## 6. Many particles: `System`
 
@@ -206,7 +220,7 @@ print(system.forces())
 
 Check: `uv run pytest tests/test_system.py tests/test_system_integrator.py -q`.
 
-Deep dive: [06 — Many particles and the System](individual/06_system.md).
+Deep dive: [06 — Many particles and the System](physics/06_system.md).
 
 ## 7. Bonds, angles, and torsions
 
@@ -247,7 +261,7 @@ Run: `uv run python examples/bonded_molecule.py` and
 `uv run python examples/torsion_scan.py`.
 Check: `uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_torsion.py -q`.
 
-Deep dive: [07 — Bonds, angles, and torsions](individual/07_bonded.md).
+Deep dive: [07 — Bonds, angles, and torsions](physics/07_bonded.md).
 
 ## 8. Energy minimization
 
@@ -264,7 +278,7 @@ trial move raises the energy.
 Run: `uv run python examples/minimization.py`.
 Check: `uv run pytest tests/test_minimization.py -q`.
 
-Deep dive: [08 — Energy minimization](individual/08_minimization.md).
+Deep dive: [08 — Energy minimization](physics/08_minimization.md).
 
 ## 9. Temperature control
 
@@ -287,16 +301,13 @@ $$
 Run: `uv run python examples/thermostat.py`.
 Check: `uv run pytest tests/test_thermostats.py -q`.
 
-Deep dive: [09 — Temperature and thermostats](individual/09_thermostats.md).
+Deep dive: [09 — Temperature and thermostats](physics/09_thermostats.md).
 
 ## 10. Periodic boundaries
 
 An orthorhombic `Box` uses the minimum-image convention:
 
-$$
-\mathbf d_{\min} = \mathbf d
-- \operatorname{round}(\mathbf d / \mathbf L) \odot \mathbf L.
-$$
+$$ \mathbf d_{\min} = \mathbf d - \operatorname{round}(\mathbf d / \mathbf L) \odot \mathbf L. $$
 
 When `System.box` is set, nonbonded interactions use the minimum image.
 Bonded terms use the stored coordinates directly.
@@ -304,7 +315,7 @@ Bonded terms use the stored coordinates directly.
 Run: `uv run python examples/periodic_box.py`.
 Check: `uv run pytest tests/test_box.py -q`.
 
-Deep dive: [10 — Periodic boundaries](individual/10_periodic.md).
+Deep dive: [10 — Periodic boundaries](physics/10_periodic.md).
 
 ## 11. Trajectory analysis
 
@@ -349,10 +360,7 @@ Check: `uv run pytest tests/test_analysis.py -q`.
 `build_solvent_box` creates an explicit coarse-grained solvent in a periodic
 box.  Each solvent molecule is one Lennard-Jones particle:
 
-$$
-U(r) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12}
-- \left(\frac{\sigma}{r}\right)^6\right].
-$$
+$$ U(r) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]. $$
 
 The builder can size the box from a target number density,
 
@@ -458,13 +466,7 @@ nonbonded model uses:
   each angle;
 - reaction-field electrostatics with cutoff `R_c`:
 
-$$
-U(r) = k_e q_i q_j \left[
-\frac{1}{r}
-+ \frac{\epsilon_{rf}-1}{2\epsilon_{rf}+1}\frac{r^2}{R_c^3}
-- \frac{3\epsilon_{rf}}{2\epsilon_{rf}+1}\frac{1}{R_c}
-\right].
-$$
+$$ U(r) = k_e q_i q_j \left[\frac{1}{r} + \frac{\epsilon_{rf}-1}{2\epsilon_{rf}+1}\frac{r^2}{R_c^3} - \frac{3\epsilon_{rf}}{2\epsilon_{rf}+1}\frac{1}{R_c}\right]. $$
 
 The potential is shifted to zero at the cutoff.  This is a minimal
 reaction-field treatment.  For long-range electrostatics, pass an
@@ -535,10 +537,7 @@ every charge interacts with every periodic image.  Ewald summation splits the
 lattice sum into a short-range real-space part and a long-range reciprocal-space
 part:
 
-$$
-U = U_{\mathrm{real}} + U_{\mathrm{recip}} + U_{\mathrm{self}}
-+ U_{\mathrm{charge}}.
-$$
+$$ U = U_{\mathrm{real}} + U_{\mathrm{recip}} + U_{\mathrm{self}} + U_{\mathrm{charge}}. $$
 
 The real-space part uses
 
@@ -890,10 +889,7 @@ Rigid docking assumes the receptor is fixed.  `SideChain` adds explicit
 side-chain flexibility: a group of receptor atoms is translated as a rigid
 block during the search.  The calibrated score adds a harmonic strain penalty:
 
-$$
-S = E_{\mathrm{interaction}}
-+ \sum_s \frac{1}{2}k_s|\Delta \mathbf r_s|^2.
-$$
+$$ S = E_{\mathrm{interaction}} + \sum_s \frac{1}{2}k_s|\Delta \mathbf r_s|^2. $$
 
 The interaction energy is still the typed Lennard-Jones/Coulomb energy
 between the ligand and receptor.  The strain term penalizes large side-chain
@@ -1036,11 +1032,19 @@ Check: `uv run pytest tests/test_backend.py -q`.
 
 ## Where to go next
 
-Before extending the library, work through the
-[imatinib–BCR-ABL1 capstone](capstone_imatinib.md). It connects the disease
-biology, kinase inhibition, force fields, water, docking, MD, free energy, and
-resistance mutations to the components you have built. Use the tutorials as the foundations and the case
-study as the integration exercise.
+You have reached the end of the Track A main path. Continue along the tracks:
+
+- [Track B — chemical structure and properties](chemistry/README.md) supplies
+  the chemical identity and protonation state that the engine does not infer.
+- [Track C — structure-based drug discovery](drug_discovery/README.md) turns
+  the engine into protein-ligand recognition questions.
+- The [imatinib–BCR-ABL1 capstone](capstone_imatinib.md) integrates all three
+  tracks. It connects the disease biology, kinase inhibition, force fields,
+  water, docking, MD, free energy, and resistance mutations to the components
+  you have built.
+
+Use the tutorials as the foundations and the case study as the integration
+exercise.
 
 Water deserves special attention throughout. It screens electrostatics, forms
 hydrogen bonds, fills pockets, and contributes entropy when displaced. The

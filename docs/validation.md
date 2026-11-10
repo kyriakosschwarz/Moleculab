@@ -112,12 +112,12 @@ uv run python examples/thermostat.py
 uv run python examples/periodic_box.py
 uv run python examples/protonation.py
 
-uv run python docs/tutorials/individual/generate_visuals.py
+uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
 ```
 
 The checkpoint in
-[`tutorials/individual/checkpoint_04.md`](tutorials/individual/checkpoint_04.md)
+[`tutorials/physics/checkpoint_04.md`](tutorials/physics/checkpoint_04.md)
 reproduces the analytic oscillator table independently.
 
 ## Independent physical benchmarks
@@ -199,7 +199,7 @@ conventions are enforced:
 - **Avoid uncommon macros** such as `\boxed` when a plain display equation is
   sufficient.
 
-All 947 math expressions in the individual tutorials are checked against both
+All 947 math expressions in the physics deep dives are checked against both
 KaTeX and MathJax, and the GitHub Markdown API is used to confirm that every
 expression is recognised as math.
 
