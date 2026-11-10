@@ -28,6 +28,7 @@ prerequisites and the full curriculum, see [the learning tracks](../tracks.md).
 | [05 — Stereochemistry and molecular recognition](05_stereochemistry.md) | R/S, E/Z, enantiomers, diastereomers, meso compounds | modules 01–02 | available |
 | [06 — Molecular polarity and electronic properties](06_molecular_polarity.md) | electronegativity, formal and partial charge, dipoles, Coulomb connection | modules 02 and 04 | available |
 | [07 — Hydrogen bonding and molecular recognition](07_hydrogen_bonding.md) | donors/acceptors, geometry, solvent competition, force-field connection | modules 04 and 06 | available |
+| [08 — Medicinal chemistry and ADME fundamentals](08_medicinal_chemistry_adme.md) | solubility, permeability, LogP/LogD, metabolism, toxicity, and trade-offs | modules 03–07 | available |
 | Solvation and LogP/LogD | transfer free energy and lipophilicity | module 04; Track A free energy | proposed |
 | ADME-Tox | properties, metabolism, and empirical prediction | modules 03–04 | proposed |
 
@@ -45,6 +46,8 @@ prerequisites and the full curriculum, see [the learning tracks](../tracks.md).
   alongside the electrostatics material in Track A.
 - Continue with [hydrogen bonding and molecular recognition](07_hydrogen_bonding.md)
   before the interaction-analysis modules in Track C.
+- Read [medicinal chemistry and ADME fundamentals](08_medicinal_chemistry_adme.md)
+  after the protonation, polarity, and hydrogen-bonding modules.
 - Then continue to [Track C](../drug_discovery/README.md) and the
   [capstone](../capstone_imatinib.md).
 - Solvation, LogP/LogD, and ADME-Tox are proposed modules, not implemented

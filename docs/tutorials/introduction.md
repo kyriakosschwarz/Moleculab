@@ -179,6 +179,7 @@ it in?** Start with [Track B](chemistry/README.md) after Track A section 4b or
 | 05 Stereochemistry and molecular recognition | R/S, E/Z, enantiomers, diastereomers, meso compounds |
 | 06 Molecular polarity and electronic properties | formal/partial charge, dipoles, electrostatics |
 | 07 Hydrogen bonding and molecular recognition | donors/acceptors, geometry, solvent competition |
+| 08 Medicinal chemistry and ADME | solubility, permeability, LogP/LogD, metabolism, toxicity |
 
 Track B supplies the chemical identity and state that the force field cannot
 infer. It uses RDKit as an optional external toolkit for chemical perception;

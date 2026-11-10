@@ -44,6 +44,7 @@ uv run pytest tests/test_docking_benchmark.py -q
 uv run pytest tests/test_trajectory_contacts.py -q
 uv run pytest tests/test_sar.py -q
 uv run pytest tests/test_electrostatics.py -q
+uv run pytest tests/test_adme.py -q
 ```
 
 Covered:
@@ -66,6 +67,8 @@ Covered:
 - contact matrices, occupancy, missing frames, and lifetime run lengths;
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - dipole moments, origin dependence, and charge/position validation;
+- pH-dependent LogD corrections for monoprotic acids and bases;
+- limiting behavior and numerical stability at extreme pH;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -134,6 +137,7 @@ uv run python examples/protonation.py
 uv run --with rdkit python examples/stereochemistry.py
 uv run --with rdkit python examples/molecular_polarity.py
 uv run --with rdkit python examples/hydrogen_bonding.py
+uv run --with rdkit python examples/adme_tradeoffs.py
 uv run --with gemmi python examples/protein_structure.py
 uv run python examples/binding_site.py
 uv run python examples/interactions.py
@@ -219,12 +223,15 @@ point when a single operator typo could corrupt every downstream result.
 | neutral dipoles are origin-independent; charged dipoles require an origin | `tests/test_electrostatics.py` |
 | dipole vectors rotate with coordinates and preserve magnitude | `tests/test_electrostatics.py` |
 | dipole magnitudes convert between e nm and Debye | `tests/test_electrostatics.py` |
+| LogD differs from LogP by the ionisation correction | `tests/test_adme.py` |
+| acid and base LogD corrections have the correct pH direction | `tests/test_adme.py` |
+| LogD limiting behavior and extreme-pH stability are tested | `tests/test_adme.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-529 passed, 1 skipped
+536 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

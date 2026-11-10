@@ -340,4 +340,4 @@ A hydrogen-bond chemistry module is correct when:
 
 **Previous:** [06 — Molecular polarity and electronic properties](06_molecular_polarity.md).
 
-**Next:** Medicinal chemistry and ADME fundamentals (module 08, planned).
+**Next:** [08 — Medicinal chemistry and ADME fundamentals](08_medicinal_chemistry_adme.md).

@@ -101,6 +101,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   dipole moments, and the connection to Coulomb electrostatics.
 - Hydrogen-bonding chemistry: donors/acceptors, geometric criteria, solvent
   competition, and force-field electrostatics.
+- ADME trade-off coverage: solubility, permeability, LogP/LogD, metabolism,
+  toxicity, and the limits of drug-likeness rules.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

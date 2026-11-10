@@ -9,5 +9,6 @@ from. Trajectory contacts consume coordinate-derived matrices supplied by the
 caller. Docking pose analysis consumes externally generated coordinates and
 scores; it is not a docking search engine. SAR analysis consumes prepared assay
 values, descriptors, and docking scores without predicting activity. Dipole
-analysis consumes charges and positions without choosing a charge model.
+analysis consumes charges and positions without choosing a charge model. ADME
+helpers convert neutral-form LogP to pH-dependent LogD without predicting pKa.
 """

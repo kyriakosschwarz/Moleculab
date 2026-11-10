@@ -69,7 +69,7 @@ src/moleculab/
 ├── composition/      System, neighbour list, constraints
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
-├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR
+├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR, ADME
 ├── applications/     docking, solvent, water, free energy, acid-base, QM/MM
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
@@ -133,6 +133,7 @@ The actual imports are visible in the source. The important rules are:
 | `analysis.interactions` | Python and NumPy only | `System`, integrators, structure or chemistry toolkits |
 | `analysis.fingerprints` | `analysis.interactions` | `System`, integrators, trajectory I/O, MD assumptions |
 | `analysis.sar` | foundation units and NumPy only | structure or chemistry toolkits, activity prediction |
+| `analysis.adme` | NumPy only | pKa prediction, ADME prediction |
 | `analysis.docking` | Python and NumPy only | `System`, integrators, docking parsers or search engines |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
@@ -616,6 +617,10 @@ trajectories or infer chemical interaction types.
 calculated descriptors, and optional docking scores. It keeps those categories
 separate and does not detect matched pairs or predict activity.
 
+`analysis.adme` converts a neutral-form LogP to a pH-dependent LogD for a
+monoprotic acid or base. It does not predict pKa, permeability, or oral
+bioavailability.
+
 `analysis.interactions` consumes prepared `InteractionAtom` features and
 returns typed geometric interaction records. The first detector covers
 hydrogen bonds; it requires donor/acceptor flags and hydrogen positions and
@@ -905,9 +910,9 @@ For a new contributor, the source is best read in this order:
    protocols.
 10. `analysis/trajectory.py`, `analysis/trajectory_contacts.py`,
     `analysis/binding_site.py`, `analysis/interactions.py`,
-    `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/docking/` —
-    trajectory, contact, binding-site, interaction, fingerprint, SAR, and pose
-    measurements.
+    `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/adme.py`,
+    `analysis/docking/` — trajectory, contact, binding-site, interaction,
+    fingerprint, SAR, ADME, and pose measurements.
 11. `applications/solvent.py`, `applications/water.py` — environment builders.
 12. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.

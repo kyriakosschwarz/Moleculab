@@ -19,7 +19,7 @@ The source is organised by architecture layer:
 ``analysis``
     trajectory measurements, contact persistence, binding-site geometry,
     interaction records, fingerprints, external pose analysis, SAR comparison,
-    and dipole moments;
+    dipole moments, and LogD conversion;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -49,6 +49,7 @@ from .algorithms.minimization import (
     minimize_energy,
     steepest_descent_step,
 )
+from .analysis.adme import logd_from_logp
 from .analysis.binding_site import (
     BindingSiteGeometry,
     binding_site_geometry,
@@ -378,6 +379,7 @@ __all__ = [
     "kinetic_pressure",
     "kinetic_temperature",
     "ligand_efficiency",
+    "logd_from_logp",
     "make_receptor_conformer",
     "max_force_magnitude",
     "mbar",
