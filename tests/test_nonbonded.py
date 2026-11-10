@@ -103,6 +103,16 @@ def test_nonbonded_model_reproduces_typed_lennard_jones_energy():
     assert model.energy("O", "O", 0.0, 0.0, displacement) == pytest.approx(expected)
 
 
+def test_nonbonded_parameters_are_read_only():
+    model = NonbondedModel(
+        parameters={"C": LennardJonesParameters(epsilon=0.5, sigma=0.34)},
+        cutoff=1.0,
+    )
+
+    with pytest.raises(TypeError):
+        model.parameters["C"] = LennardJonesParameters(epsilon=1.0, sigma=0.4)
+
+
 def test_nonbonded_model_combines_lennard_jones_and_electrostatics():
     model = NonbondedModel(
         parameters={

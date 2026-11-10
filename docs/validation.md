@@ -163,7 +163,7 @@ point when a single operator typo could corrupt every downstream result.
 
 ```text
 $ uv run pytest -q
-381 passed, 1 skipped
+382 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

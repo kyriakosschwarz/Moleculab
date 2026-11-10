@@ -263,13 +263,18 @@ class System:
                 for j in range(i + 1, self.n_particles)
             )
 
+        positions = self.positions
+        atom_types = self.atom_types
+        charges = self.charges
+        cutoff_squared = None if cutoff_value is None else cutoff_value**2
+
         for i, j in pairs:
-            displacement = self.particles[i].position - self.particles[j].position
+            displacement = positions[i] - positions[j]
             if self.box is not None:
                 displacement = self.box.minimum_image(displacement)
             if (
-                cutoff_value is not None
-                and np.linalg.norm(displacement) >= cutoff_value
+                cutoff_squared is not None
+                and float(np.dot(displacement, displacement)) >= cutoff_squared
             ):
                 continue
             for potential in self.pair_potentials:
@@ -279,26 +284,26 @@ class System:
                 and (i, j) not in self._excluded_pairs
             ):
                 total += self.nonbonded_model.energy(
-                    self.particles[i].atom_type,
-                    self.particles[j].atom_type,
-                    self.particles[i].charge,
-                    self.particles[j].charge,
+                    atom_types[i],
+                    atom_types[j],
+                    charges[i],
+                    charges[j],
                     displacement,
                 )
         for i, j, potential in self.indexed_pair_potentials:
-            displacement = self.particles[i].position - self.particles[j].position
+            displacement = positions[i] - positions[j]
             if self.box is not None:
                 displacement = self.box.minimum_image(displacement)
             total += potential.energy(displacement)
         if self._ewald is not None:
             total += self._ewald.global_energy(
-                self.positions,
-                self.charges,
+                positions,
+                charges,
                 self.box,
             )
             total += self._ewald.exclusion_energy(
-                self.positions,
-                self.charges,
+                positions,
+                charges,
                 self.box,
                 self._excluded_pairs,
             )
@@ -347,13 +352,18 @@ class System:
                 for j in range(i + 1, self.n_particles)
             )
 
+        positions = self.positions
+        atom_types = self.atom_types
+        charges = self.charges
+        cutoff_squared = None if cutoff_value is None else cutoff_value**2
+
         for i, j in pairs:
-            displacement = self.particles[i].position - self.particles[j].position
+            displacement = positions[i] - positions[j]
             if self.box is not None:
                 displacement = self.box.minimum_image(displacement)
             if (
-                cutoff_value is not None
-                and np.linalg.norm(displacement) >= cutoff_value
+                cutoff_squared is not None
+                and float(np.dot(displacement, displacement)) >= cutoff_squared
             ):
                 continue
             for potential in self.pair_potentials:
@@ -365,17 +375,17 @@ class System:
                 and (i, j) not in self._excluded_pairs
             ):
                 pair_force = self.nonbonded_model.force(
-                    self.particles[i].atom_type,
-                    self.particles[j].atom_type,
-                    self.particles[i].charge,
-                    self.particles[j].charge,
+                    atom_types[i],
+                    atom_types[j],
+                    charges[i],
+                    charges[j],
                     displacement,
                 )
                 forces[i] += pair_force
                 forces[j] -= pair_force
 
         for i, j, potential in self.indexed_pair_potentials:
-            displacement = self.particles[i].position - self.particles[j].position
+            displacement = positions[i] - positions[j]
             if self.box is not None:
                 displacement = self.box.minimum_image(displacement)
             pair_force = potential.force(displacement)
@@ -384,19 +394,19 @@ class System:
 
         if self._ewald is not None:
             forces += self._ewald.global_forces(
-                self.positions,
-                self.charges,
+                positions,
+                charges,
                 self.box,
             )
             forces += self._ewald.exclusion_forces(
-                self.positions,
-                self.charges,
+                positions,
+                charges,
                 self.box,
                 self._excluded_pairs,
             )
 
         if self.topology is not None:
-            forces += self.topology.forces(self.positions)
+            forces += self.topology.forces(positions)
 
         return forces
 

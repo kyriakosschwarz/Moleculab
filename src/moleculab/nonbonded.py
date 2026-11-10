@@ -34,6 +34,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass, field
+from types import MappingProxyType
 
 import numpy as np
 
@@ -218,8 +219,9 @@ class NonbondedModel:
             normalized[type_name] = parameters
         if not normalized:
             raise ValueError("parameters must contain at least one atom type.")
-        object.__setattr__(self, "parameters", normalized)
+        object.__setattr__(self, "parameters", MappingProxyType(normalized))
         object.__setattr__(self, "cutoff", as_positive_float(self.cutoff, "cutoff"))
+        object.__setattr__(self, "_combined_cache", {})
 
         if self.electrostatics is not None and not isinstance(
             self.electrostatics,
@@ -259,12 +261,18 @@ class NonbondedModel:
     ) -> LennardJonesParameters:
         """Return the Lorentz-Berthelot parameters for a pair of types."""
 
+        key = (type_i, type_j) if type_i <= type_j else (type_j, type_i)
+        cached = self._combined_cache.get(key)
+        if cached is not None:
+            return cached
         try:
             first = self.parameters[type_i]
             second = self.parameters[type_j]
         except KeyError as exc:
             raise ValueError(f"No parameters for atom type {exc.args[0]!r}.") from exc
-        return combine_lorentz_berthelot(first, second)
+        combined = combine_lorentz_berthelot(first, second)
+        self._combined_cache[key] = combined
+        return combined
 
     def energy(
         self,

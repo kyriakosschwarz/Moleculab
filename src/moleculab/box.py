@@ -48,7 +48,8 @@ class Box:
     def minimum_image(self, displacement: np.ndarray) -> np.ndarray:
         """Return the shortest periodic image of *displacement*."""
 
-        return self.minimum_image_array(as_vector3(displacement, "displacement"))
+        vector = as_vector3(displacement, "displacement")
+        return vector - np.round(vector / self.lengths) * self.lengths
 
     def minimum_image_array(self, displacements: np.ndarray) -> np.ndarray:
         """Return minimum-image vectors for an array of displacements.

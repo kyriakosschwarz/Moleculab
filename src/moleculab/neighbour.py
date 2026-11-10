@@ -103,21 +103,6 @@ def _nonperiodic_cell_count(extent: float, cutoff: float) -> int:
     return max(1, int(np.floor(extent / cutoff + 1e-12)))
 
 
-def _cell_index(
-    coordinate: float,
-    origin: float,
-    cell_size: float,
-    n_cells: int,
-    periodic: bool,
-) -> int:
-    if periodic:
-        return int(np.floor((coordinate - origin) / cell_size)) % n_cells
-    return min(
-        max(int(np.floor((coordinate - origin) / cell_size)), 0),
-        n_cells - 1,
-    )
-
-
 def build_neighbour_list(
     positions: np.ndarray,
     cutoff: float,
@@ -186,17 +171,16 @@ def build_neighbour_list(
         periodic = True
 
     cells: dict[tuple[int, int, int], list[int]] = {}
-    for index, position in enumerate(coordinates):
-        cell = tuple(
-            _cell_index(
-                float(position[axis]),
-                float(origin[axis]),
-                float(cell_size[axis]),
-                int(n_cells[axis]),
-                periodic,
-            )
-            for axis in range(3)
-        )
+    origin_array = np.asarray(origin, dtype=float)
+    cell_size_array = np.asarray(cell_size, dtype=float)
+    n_cells_array = np.asarray(n_cells, dtype=np.int64)
+    scaled = (coordinates - origin_array) / cell_size_array
+    cell_indices = np.floor(scaled).astype(np.int64)
+    if periodic:
+        cell_indices %= n_cells_array
+    else:
+        cell_indices = np.clip(cell_indices, 0, n_cells_array - 1)
+    for index, cell in enumerate(map(tuple, cell_indices)):
         cells.setdefault(cell, []).append(index)
 
     offsets = tuple(product((-1, 0, 1), repeat=3))

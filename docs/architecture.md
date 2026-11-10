@@ -504,12 +504,14 @@ short-range pair screen. Making it mandatory too early would hide the pair
 logic that the tutorials are designed to teach.
 
 **Consequences.** `build_neighbour_list` returns a duplicate-free candidate set
-of `(i, j)` pairs. It guarantees that every true pair within the cutoff is
-present, but it may include extra candidates. `System.forces`, `nonbonded_energy`,
-`potential_energy`, and `total_energy` accept `cutoff` and
-`use_neighbour_list`; with `use_neighbour_list=True` they screen candidates and
-still compute the exact minimum-image distance. Exclusions, indexed pairs, and
-global Ewald terms remain outside the screen.
+of `(i, j)` pairs. Cell assignment is vectorized with NumPy; candidate
+enumeration stays an explicit Python loop for inspectability. It guarantees that
+every true pair within the cutoff is present, but it may include extra
+candidates. `System.forces`, `nonbonded_energy`, `potential_energy`, and
+`total_energy` accept `cutoff` and `use_neighbour_list`; with
+`use_neighbour_list=True` they screen candidates and still compute the exact
+minimum-image distance. Exclusions, indexed pairs, and global Ewald terms remain
+outside the screen.
 
 **Trade-off.** The cell list is a second code path and adds a set of candidate
 pairs. It is validated against the default O(N²) path in
