@@ -5,7 +5,8 @@ goal is to establish that the library behaves correctly as a connected physical
 system, not merely that individual functions return finite numbers.
 
 The tutorials teach the physics; this milestone checks that the implementation
-keeps its promises.
+keeps its promises. The architectural context is in
+[`architecture.md`](architecture.md).
 
 ## Guiding distinction
 
@@ -107,6 +108,7 @@ uv run python examples/thermostat.py
 uv run python examples/periodic_box.py
 
 uv run python docs/tutorials/individual/generate_visuals.py
+uv run python docs/generate_architecture_visuals.py
 ```
 
 The checkpoint in

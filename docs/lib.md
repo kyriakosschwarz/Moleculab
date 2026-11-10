@@ -1,3 +1,7 @@
+> **As-built architecture:** see [`architecture.md`](architecture.md) for the
+> implemented layers, module dependencies, and decision records. This file is
+> the long-term roadmap.
+
 Building a molecular simulation library from scratch: From physics to drug discovery
 I think this is an excellent way to learn computational drug discovery. Rather than treating GROMACS, OpenMM, ORCA or AutoDock as black boxes, we'll gradually build our own small molecular simulation engine and understand exactly what happens inside it.
 
@@ -140,29 +144,23 @@ Energy	kJ/mol
 Mass	Da
 Force	kJ/(mol nm)
 Temperature	K
-Charge	Elementary charge \(e\)
+Charge	Elementary charge $e$
 
 Why these units?
 
 They are widely used in biomolecular simulation and are convenient for molecular dynamics.
 
 For example:
-\[
-1\ \mathrm{nm}=10^{-9}\ \mathrm m
-\]
 
-\[
-1\ \mathrm{ps}=10^{-12}\ \mathrm s
-\]
+$$ 1\ \mathrm{nm}=10^{-9}\ \mathrm m $$
 
-\[
-1\ \mathrm{Da}\approx1.66054\times10^{-27}\ \mathrm{kg}
-\]
+$$ 1\ \mathrm{ps}=10^{-12}\ \mathrm s $$
+
+$$ 1\ \mathrm{Da}\approx1.66054\times10^{-27}\ \mathrm{kg} $$
 
 An interesting property of this unit system is that the numerical Newtonian acceleration equation becomes particularly convenient:
-\[
-\boxed{a_i=\frac{F_i}{m_i}}
-\]
+
+$$ a_i=\frac{F_i}{m_i} $$
 
 when force, mass and acceleration are expressed in our selected simulation units.
 

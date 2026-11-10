@@ -37,6 +37,7 @@ uv run python examples/solvated_alchemy.py
 uv run python examples/qm_mm.py
 uv run python examples/flexible_docking.py
 uv run python examples/backend_benchmark.py --backend cpu
+uv run python docs/generate_architecture_visuals.py
 ```
 
 - CPU is the default backend. `moleculab.backend.set_backend("cpu"|"auto"|"torch")` and `MOLECULAB_BACKEND` select it; PyTorch is lazy and optional (`uv sync --extra rocm`). Only the Ewald reciprocal energy/force path is accelerated. `auto` picks a CUDA/ROCm or MPS device only when PyTorch reports one; otherwise CPU. Vendor NPUs are not supported. `set_precision("float32")` enables the faster ROCm path; `to_torch`/`to_numpy` provide zero-copy CPU handoff before non-blocking device moves.
@@ -91,4 +92,4 @@ uv run python examples/backend_benchmark.py --backend cpu
 
 - Code blocks in `docs/` are AI-exported and often have newlines/indentation collapsed. Treat them as intent, not copy-paste source; write clean, PEP 8 code matching the described behavior.
 - Tutorial math must render on GitHub and in VS Code. Keep display math on one `$$ ... $$` line, use `\ ` rather than `\,` or `~` for spaces inside math, avoid math inside italics, and use `\lvert ... \rvert` instead of literal `|` in table math.
-- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values. The guided tutorial is `docs/tutorials/tutorial.md`; deeper visual tutorials for sections 1–10 are in `docs/tutorials/individual/`.
+- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The guided tutorial is `docs/tutorials/tutorial.md`; deeper visual tutorials for sections 1–10 are in `docs/tutorials/individual/`.

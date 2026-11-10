@@ -6,6 +6,9 @@ to interacting molecular systems.
 
 ![The tutorial sequence](assets/course_map.svg)
 
+The corresponding software layers, module dependency rules, and decision
+records are described in [`../../architecture.md`](../../architecture.md).
+
 ## A consistent course structure
 
 Every tutorial follows the same pattern:

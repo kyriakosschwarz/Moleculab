@@ -66,8 +66,9 @@ This is still an educational engine, not a production molecular-dynamics
 package.  Solvent models, free-energy methods, docking, and quantum chemistry
 remain on the roadmap.
 
-The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The first
-implementation notes are in [`docs/energies.md`](docs/energies.md),
+The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The as-built
+architecture is described in [`docs/architecture.md`](docs/architecture.md).
+The first implementation notes are in [`docs/energies.md`](docs/energies.md),
 [`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
 from one particle to a small molecular simulation,
 [`docs/tutorials/individual/`](docs/tutorials/individual/) contains deeper

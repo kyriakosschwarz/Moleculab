@@ -16,7 +16,8 @@ uv run pytest -q
 
 For a slower, more visual path through sections 1–10, see
 [`individual/README.md`](individual/README.md) and the ten deep-dive tutorials
-inside `individual/`.
+inside `individual/`. The corresponding software layers, module dependencies,
+and design decisions are in [`../architecture.md`](../architecture.md).
 
 ## 1. Units first
 
