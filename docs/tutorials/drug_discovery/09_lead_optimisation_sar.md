@@ -408,5 +408,4 @@ A matched-pair comparison module is correct when:
 
 **Previous:** [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md).
 
-**Next:** [Learning tracks](../tracks.md) and the
-[imatinib capstone](../capstone_imatinib.md).
+**Next:** [10 — From structural observations to thermodynamics](10_structural_observations_to_thermodynamics.md).

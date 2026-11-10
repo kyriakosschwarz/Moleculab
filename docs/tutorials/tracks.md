@@ -107,6 +107,7 @@ also uses Track A sections 15–17 and the free-energy material.
 | [07 — Docking validation and benchmarking](drug_discovery/07_docking_validation.md) | redocking, cross-docking, pose recovery, score interpretation | Track C modules 04–06 | available |
 | [08 — Trajectory contact analysis](drug_discovery/08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | Track A trajectory analysis | available |
 | [09 — Lead optimisation and SAR](drug_discovery/09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | Track B and Track C | available |
+| [10 — Structural observations to thermodynamics](drug_discovery/10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy, and contact interpretation | Track A free energy | available |
 
 The current library supports the geometric and scoring pieces of Track C. It
 does not provide protein preparation, a trained affinity model, or a validated

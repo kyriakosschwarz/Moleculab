@@ -198,6 +198,7 @@ modules 01–04. The track covers:
 | [07 Docking validation and benchmarking](drug_discovery/07_docking_validation.md) | redocking, cross-docking, pose recovery | available |
 | [08 Trajectory contact analysis](drug_discovery/08_trajectory_contact_analysis.md) | contact matrices, occupancy, lifetimes | available |
 | [09 Lead optimisation and SAR](drug_discovery/09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency | available |
+| [10 Structural observations to thermodynamics](drug_discovery/10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy | available |
 
 The important distinction is that a geometric interaction is not an energy
 contribution. Track C starts from geometry because a contact can be identified

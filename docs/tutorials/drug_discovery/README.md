@@ -42,6 +42,7 @@ with geometry and representation before it introduces scoring.
 | [07 — Docking validation and benchmarking](07_docking_validation.md) | redocking, cross-docking, pose recovery, score interpretation | available |
 | [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | available |
 | [09 — Lead optimisation and SAR](09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | available |
+| [10 — Structural observations to thermodynamics](10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy, and why contacts are not affinities | available |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
 representation and import boundary that the later modules assume.
@@ -200,6 +201,22 @@ medicinal-chemistry decisions:
 
 The comparison layer is parser-independent; RDKit or another chemistry toolkit
 provides descriptors and matched-pair detection at the boundary.
+
+### 2.11 Module 10: structural observations to thermodynamics
+
+[Module 10](10_structural_observations_to_thermodynamics.md) is the conceptual
+bridge to Track A's free-energy material:
+
+- structural observations versus thermodynamic quantities;
+- ensemble populations and the partition function;
+- energy, degeneracy, and entropy;
+- desolvation, water reorganisation, and conformational entropy;
+- binding free energy and the dissociation constant;
+- why occupancy and contact lifetime are not binding free energy;
+- a two-ligand demonstration where contact count and free-energy components
+  disagree.
+
+It does not introduce a new free-energy method.
 
 ## 3. What you can do now
 

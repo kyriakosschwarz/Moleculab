@@ -138,6 +138,7 @@ uv run python examples/compare_binding_modes.py
 uv run python examples/docking_benchmark.py
 uv run python examples/trajectory_contacts.py
 uv run python examples/matched_molecular_pairs.py
+uv run python examples/structural_observations_thermodynamics.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py

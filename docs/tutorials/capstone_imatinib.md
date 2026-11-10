@@ -7,10 +7,9 @@
 >
 > **What you need.** The core Track A tutorials, especially 05–10 and the
 > sections on solvent, water, docking, Ewald, and free energy; Track B modules
-> 01–04 for chemical identity and protonation; and the
-> [Track C index](drug_discovery/README.md) for protein-structure and
-> recognition material. The docking foundations themselves are available in
-> Track A sections 15 and 24.
+> 01–04 for chemical identity and protonation; and Track C modules 01–10 for
+> protein structure, binding sites, interactions, docking, validation,
+> trajectory contacts, SAR, and the structure–thermodynamics bridge.
 
 The capstone is the point where the tracks meet:
 

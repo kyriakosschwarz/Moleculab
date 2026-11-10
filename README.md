@@ -92,6 +92,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
 - Trajectory contact matrices, sampled-frame occupancy, and contact lifetimes.
 - Parser-independent matched-pair SAR comparison with separate activity,
   descriptor, docking, and hypothesis fields.
+- A conceptual bridge from structural observations to binding thermodynamics,
+  including ensemble populations and the limits of contact occupancy.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

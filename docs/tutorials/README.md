@@ -90,8 +90,10 @@ Modules [01](drug_discovery/01_protein_structure.md),
 [05](drug_discovery/05_docking_fundamentals.md),
 [06](drug_discovery/06_comparing_binding_modes.md),
 [07](drug_discovery/07_docking_validation.md),
-[08](drug_discovery/08_trajectory_contact_analysis.md), and
-[09](drug_discovery/09_lead_optimisation_sar.md) are available. The docking foundations are already available as Track A
+[08](drug_discovery/08_trajectory_contact_analysis.md),
+[09](drug_discovery/09_lead_optimisation_sar.md), and
+[10](drug_discovery/10_structural_observations_to_thermodynamics.md) are
+available. The docking foundations are already available as Track A
 sections 15 and 24. [Units and conventions](drug_discovery/units.md) collects
 the common structural and affinity units.
 
