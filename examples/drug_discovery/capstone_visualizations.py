@@ -1,12 +1,15 @@
 # SPDX-FileCopyrightText: 2026 Moleculab Contributors
 # SPDX-License-Identifier: MIT OR Apache-2.0
 
-"""Generate the three Visualization Batch 1 figures from the 2HYY records.
+"""Generate the Visualization Batch 1 and 2 figures from the 2HYY records.
 
 The figures are:
 1. an RDKit 2D diagram of the reference-neutral imatinib state;
 2. a PyMOL overview of imatinib in the ABL1 binding site;
-3. a PyMOL binding-pocket close-up with measured contacts.
+3. a PyMOL binding-pocket close-up with measured contacts;
+4. an RDKit comparison of selected chemical-state alternatives;
+5. an interaction-evidence matrix across eight ligand and two protein states;
+6. a PyMOL view of generated hydrogens, acceptor geometry, and deposited waters.
 
 Every figure is written with source, tool-version, camera, and limitation
 metadata.  Geometry comes from the deposited structure and validated records;
@@ -24,15 +27,22 @@ from pathlib import Path
 
 from moleculab import (
     FigureContext,
+    draw_chemical_state_comparison,
     draw_ligand_2d,
     load_binding_site,
     load_chemical_state_enumeration,
+    load_combination_record,
     load_figure_metadata,
+    load_hydrogen_evidence,
     load_ligand_identity,
     load_manifest,
+    load_water_evidence,
+    plot_evidence_matrix,
     pymol_available,
     render_binding_pocket_closeup,
+    render_hydrogen_water_evidence,
     render_protein_ligand_overview,
+    sha256_file,
     validate_figure_metadata,
     write_figure_metadata,
 )
@@ -100,6 +110,32 @@ def main() -> None:
     views = _existing_views(args.metadata, structure_sha256)
     args.figure_directory.mkdir(parents=True, exist_ok=True)
 
+    source_paths = {
+        "manifest": "data/structures/2HYY.manifest.json",
+        "identity": "data/structures/2HYY.ligand-identity.json",
+        "site": "data/structures/2HYY.binding-site.json",
+        "states": "data/structures/2HYY.chemical-states.json",
+        "hydrogen": "data/structures/2HYY.hydrogen-evidence.json",
+        "water": "data/structures/2HYY.water-evidence.json",
+        "combination": "data/structures/2HYY.combination-interactions.json",
+        "robustness": "data/structures/2HYY.interaction-robustness.json",
+    }
+    source_hashes = {
+        name: sha256_file(ROOT / path) for name, path in source_paths.items()
+    }
+
+    def records(*names: str) -> tuple[str, ...]:
+        return tuple(source_paths[name] for name in names)
+
+    def checksums(*names: str) -> tuple[tuple[str, str], ...]:
+        return tuple(
+            (source_paths[name], source_hashes[name]) for name in names
+        )
+
+    hydrogen = load_hydrogen_evidence(ROOT / source_paths["hydrogen"])
+    water = load_water_evidence(ROOT / source_paths["water"])
+    combination = load_combination_record(ROOT / source_paths["combination"])
+
     context = FigureContext(
         source_structure=manifest.source.accession,
         structure_sha256=structure_sha256,
@@ -107,12 +143,6 @@ def main() -> None:
         ligand_instance=manifest.selection.ligand.instance,
         model_number=manifest.selection.model_number,
         coordinate_units="angstrom",
-        generated_from=(
-            "data/structures/2HYY.manifest.json",
-            "data/structures/2HYY.ligand-identity.json",
-            "data/structures/2HYY.binding-site.json",
-            "data/structures/2HYY.chemical-states.json",
-        ),
     )
 
     two_d_svg = args.figure_directory / "2HYY-imatinib-2d.svg"
@@ -134,6 +164,8 @@ def main() -> None:
             "Two-dimensional chemical structure of imatinib with donor and "
             "acceptor atoms highlighted and reference atom indices shown."
         ),
+        source_records=records("identity", "states"),
+        source_checksums=checksums("identity", "states"),
     )
 
     overview_path = args.figure_directory / "2HYY-imatinib-abl1-overview.png"
@@ -154,6 +186,8 @@ def main() -> None:
             "Protein cartoon of ABL1 with a yellow imatinib molecule in the "
             "binding pocket and a pale transparent surface around nearby residues."
         ),
+        source_records=records("manifest", "site"),
+        source_checksums=checksums("manifest", "site"),
         camera_view=views.get("capstone-abl1-overview"),
     )
 
@@ -189,12 +223,104 @@ def main() -> None:
             "a yellow ligand, blue waters, and gray dashed distance measurements "
             "for three polar contacts."
         ),
+        source_records=records("manifest", "site", "hydrogen"),
+        source_checksums=checksums("manifest", "site", "hydrogen"),
         contacts=pocket_contacts,
         max_contacts=3,
         camera_view=views.get("capstone-binding-pocket"),
     )
 
-    figures = (two_d, overview, pocket)
+    comparison_ids = ("reference-neutral", "tautomer-3", "protonation-1")
+    comparison_states = tuple(
+        next(state for state in states.states if state.state_id == state_id)
+        for state_id in comparison_ids
+    )
+    comparison_svg = args.figure_directory / "2HYY-imatinib-chemical-states.svg"
+    comparison_png = args.figure_directory / "2HYY-imatinib-chemical-states.png"
+    comparison = draw_chemical_state_comparison(
+        ligand_identity=identity,
+        states=comparison_states,
+        context=context,
+        output_svg=comparison_svg,
+        output_png=comparison_png,
+        figure_id="capstone-chemical-states",
+        title="Selected imatinib chemical-state alternatives",
+        caption=(
+            "Reference-neutral, tautomer-3, and protonation-1 states shown side "
+            "by side. Magenta marks formal-charge changes, purple marks "
+            "donor/acceptor changes, and green marks hydrogen-count changes. "
+            "No state is selected as dominant and no populations are shown."
+        ),
+        alt_text=(
+            "Three side-by-side imatinib diagrams comparing a reference-neutral "
+            "state, a tautomer, and a protonated state with changed atoms highlighted."
+        ),
+        source_records=records("identity", "states"),
+        source_checksums=checksums("identity", "states"),
+    )
+
+    matrix_png = args.figure_directory / "2HYY-interaction-evidence-matrix.png"
+    matrix_svg = args.figure_directory / "2HYY-interaction-evidence-matrix.svg"
+    evidence_matrix = plot_evidence_matrix(
+        combination_record=combination,
+        context=context,
+        output_png=matrix_png,
+        output_svg=matrix_svg,
+        figure_id="capstone-evidence-matrix",
+        title="8 x 2 interaction-evidence matrix",
+        caption=(
+            "Six interaction categories for eight ligand states and two protein "
+            "preparation states. Present, absent, unknown, and not-applicable "
+            "statuses remain distinct; unknown is not zero."
+        ),
+        alt_text=(
+            "Six-panel grid showing present, absent, unknown, and not-applicable "
+            "interaction evidence for eight ligand and two protein states."
+        ),
+        source_records=records("combination"),
+        source_checksums=checksums("combination"),
+    )
+
+    angle_text = "; ".join(
+        f"{bond.donor_atom_id}-H...{bond.acceptor_atom_id} "
+        f"{bond.angle_degrees:.1f} deg"
+        for bond in hydrogen.bonds
+    )
+    supported_bonds = tuple(
+        bond for bond in hydrogen.bonds if bond.status == "supported"
+    )
+    hydrogen_water_path = (
+        args.figure_directory / "2HYY-hydrogen-water-evidence.png"
+    )
+    hydrogen_water = render_hydrogen_water_evidence(
+        structure_path=args.structure,
+        manifest=manifest,
+        hydrogen=hydrogen,
+        water=water,
+        context=context,
+        output_path=hydrogen_water_path,
+        figure_id="capstone-hydrogen-water",
+        title="Generated hydrogens and deposited water evidence",
+        caption=(
+            "Dark gray spheres are generated ligand hydrogens, cyan sticks are "
+            "acceptor residues, and blue spheres are deposited waters with "
+            "unassigned orientation and roles. Only the two supported "
+            "candidates are drawn; the third recorded contact fails the default "
+            "angle criterion. D-H...A angles from the record: "
+            f"{angle_text}. Distances and angles are geometric evidence, not "
+            "classified interactions."
+        ),
+        alt_text=(
+            "Close-up with yellow ligand sticks, dark gray generated hydrogens, "
+            "cyan acceptor residues, blue waters, and labeled donor-acceptor distances."
+        ),
+        source_records=records("manifest", "site", "hydrogen", "water"),
+        source_checksums=checksums("manifest", "site", "hydrogen", "water"),
+        bonds=supported_bonds,
+        camera_view=views.get("capstone-hydrogen-water"),
+    )
+
+    figures = (two_d, overview, pocket, comparison, evidence_matrix, hydrogen_water)
     errors = validate_figure_metadata(figures)
     if errors:
         for error in errors:
@@ -202,7 +328,7 @@ def main() -> None:
         raise SystemExit(2)
     metadata_path = write_figure_metadata(args.metadata, figures)
 
-    print("Visualization Batch 1")
+    print("Visualization Batches 1 and 2")
     for figure in figures:
         print(
             f"  {figure.figure_id}: {figure.image_path} "

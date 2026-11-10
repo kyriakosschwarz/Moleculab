@@ -1,7 +1,7 @@
 # Figure metadata
 
-`capstone-visualizations.json` describes the Visualization Batch 1 figures
-stored in `docs/tutorials/drug_discovery/visualizations/`.
+`capstone-visualizations.json` describes the Visualization Batch 1 and 2
+figures stored in `docs/tutorials/drug_discovery/visualizations/`.
 
 Each entry records:
 
@@ -9,9 +9,15 @@ Each entry records:
 - source structure, source checksum, protein chain, ligand instance, model, and
   coordinate units;
 - visualization tool and exact tool version;
-- generated-from records;
+- per-record source paths and checksums;
+- the rendering configuration and its SHA-256 fingerprint;
 - scientific limitations, caption, and alt text;
 - the PyMOL camera view when applicable.
+
+The camera and rendering fingerprint make the visual settings inspectable.
+Scientific reproducibility means the same atoms, coordinates, and measurements
+are represented; pixel identity is not guaranteed across rendering
+environments.
 
 The metadata is rewritten by:
 

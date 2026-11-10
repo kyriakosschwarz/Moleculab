@@ -117,8 +117,8 @@ seventeenth runs the controlled harmonic free-energy study and writes
 `data/free_energy/harmonic-fep-study.json`; it is not an imatinib calculation.
 The eighteenth runs the final scientific audit and writes
 `data/free_energy/capstone-scientific-audit.json`. The nineteenth generates the
-three visual-learning figures and their metadata. None of the structural
-commands docks a ligand, predicts affinity, or estimates a binding free energy.
+visual-learning figures and their metadata. None of the structural commands
+docks a ligand, predicts affinity, or estimates a binding free energy.
 
 ## 1. Why imatinib?
 
@@ -1145,11 +1145,52 @@ No color means “energetically favourable.” No nearby contact is drawn as a
 hydrogen bond merely because it is close. The figures are static documentation
 first; interactive 3D exploration remains optional future work.
 
-This is Visualization Batch 1. Later batches can add chemical-state
-comparisons, evidence matrices, robustness plots, exact-versus-sampled
-free-energy figures, and a browser-based structure viewer. They should follow
-the same rule: consume validated records, teach one scientific idea, distinguish
-observation from hypothesis, and state what the figure does not establish.
+This is Visualization Batch 1. Batch 2 adds chemical-state and evidence views
+below. Later batches can add robustness plots, exact-versus-sampled free-energy
+figures, and a browser-based structure viewer. They should follow the same rule:
+consume validated records, teach one scientific idea, distinguish observation
+from hypothesis, and state what the figure does not establish.
+
+### 4.21 Visual learning layer: chemical states and evidence
+
+The second visualization batch makes the capstone's central uncertainty visible.
+
+![Selected imatinib chemical-state alternatives](drug_discovery/visualizations/2HYY-imatinib-chemical-states.svg)
+
+The chemical-state comparison shows the reference-neutral state, `tautomer-3`,
+and `protonation-1` side by side. Magenta marks formal-charge changes, purple
+marks donor/acceptor changes, and green marks hydrogen-count changes. Each panel
+reports formal charge and proton count. No state is selected as dominant, and no
+populations are shown.
+
+![8 x 2 interaction-evidence matrix](drug_discovery/visualizations/2HYY-interaction-evidence-matrix.png)
+
+The evidence matrix shows six interaction categories for eight ligand states and
+two protein preparation states. Present, absent, unknown, and not-applicable
+statuses remain visually distinct. The matrix makes the negative result visible:
+the classified pattern is stable across the 16 state combinations even while the
+feature inventories differ. Unknown is not rendered as zero or absence.
+
+![Generated hydrogens and deposited water evidence](drug_discovery/visualizations/2HYY-hydrogen-water-evidence.png)
+
+The hydrogen/water view distinguishes evidence levels:
+
+- yellow sticks: deposited ligand heavy atoms;
+- dark gray spheres: generated ligand hydrogens;
+- cyan sticks: acceptor residues;
+- blue spheres: deposited waters with unassigned orientation and roles;
+- gray dashed lines: measured donor–acceptor distances for the two supported
+  hydrogen-bond candidates.
+
+The third recorded contact fails the default angular criterion and is not drawn.
+The recorded D–H···A angles are reported in the caption and metadata. The figure
+does not show experimental hydrogen positions, classified hydrogen bonds, water
+roles, interaction energies, or affinity.
+
+These figures are generated from the same validated records as the numerical
+analysis. Their companion metadata now records per-source checksums and a
+rendering-configuration fingerprint in addition to the structure checksum, camera
+view, tool versions, alt text, and limitations.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction

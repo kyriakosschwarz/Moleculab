@@ -206,13 +206,17 @@ records, and protein/water records into the library. This keeps the core
 installable with NumPy alone and keeps file-format decisions outside the physics
 and analysis layers.
 
-`visualization` is a separate consumer layer. `visualization.molecular_2d`
-takes the validated reference graph and a selected chemical state and produces
-an RDKit diagram; `visualization.protein_ligand` takes the manifest, binding-site
-record, and explicit source path and produces deterministic PyMOL renders.
-Every figure writes metadata with source checksum, tool version, camera view,
-alt text, and scientific limitations. The layer does not assign protonation,
-infer interactions, classify favourability, or modify scientific geometry.
+`visualization` is a separate consumer layer. `molecular_2d` takes the validated
+reference graph and a selected chemical state and produces an RDKit diagram;
+`chemical_states` compares selected states with change annotations;
+`interaction_evidence` plots the 8×2 evidence matrix; `hydrogen_water` renders
+generated hydrogens, acceptor geometry, and deposited waters; and
+`protein_ligand` takes the manifest, binding-site record, and explicit source
+path and produces deterministic PyMOL renders. Every figure writes metadata with
+per-record source checksums, tool version, rendering-configuration fingerprint,
+camera view, alt text, and scientific limitations. The layer does not assign
+protonation, infer interactions, classify favourability, or modify scientific
+geometry.
 
 ## 5. Core data structures and contracts
 

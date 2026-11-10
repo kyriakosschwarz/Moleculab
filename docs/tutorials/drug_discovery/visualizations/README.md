@@ -6,9 +6,12 @@ and they do not perform new chemical interpretation.
 
 The companion metadata is
 [`data/figures/capstone-visualizations.json`](../../../../data/figures/capstone-visualizations.json).
-It records the source structure checksum, protein chain, ligand instance, model
-number, tool versions, camera view, generated-from records, alt text, and
-scientific limitations.
+Each figure records the source structure checksum, protein chain, ligand
+instance, model number, tool and version, per-record source checksums, the
+rendering configuration and its fingerprint, the PyMOL camera view, alt text,
+caption, and scientific limitations. Scientific reproducibility means the same
+atoms, coordinates, and measurements are represented. Pixel identity is not
+guaranteed across rendering environments.
 
 ## Figure 1 — Imatinib chemical identity
 
@@ -61,9 +64,65 @@ water-mediated interaction, or an affinity. Dashed lines are distances, not
 interaction classifications. Generated hydrogens and angular criteria are not
 shown in this figure.
 
+## Figure 4 — Chemical-state alternatives
+
+![Selected imatinib chemical states](2HYY-imatinib-chemical-states.svg)
+
+The RDKit comparison shows the reference-neutral state, `tautomer-3`, and
+`protonation-1` side by side. Atom notes mark changes relative to the
+reference-neutral state:
+
+- magenta: formal charge;
+- purple: donor/acceptor assignment;
+- green: hydrogen count.
+
+Each panel reports formal charge and proton count.
+
+**Teaches:** protonation and tautomerism change the available chemistry.
+
+**Does not establish:** a dominant state, a population, or a free energy. All
+states remain unselected. Generated 3D hydrogen positions are not drawn in this
+2D comparison.
+
+## Figure 5 — 8 × 2 interaction-evidence matrix
+
+![Interaction evidence matrix](2HYY-interaction-evidence-matrix.png)
+
+The Matplotlib matrix shows six interaction categories for eight ligand states
+and two protein preparation states. Present, absent, unknown, and
+not-applicable statuses are distinct.
+
+**Teaches:** conclusions depend on chemical-state assumptions, and unknown is
+not zero.
+
+**Does not establish:** a ranking, population, energy, or affinity. N/A means
+outside the assessed feature model, not a negative result.
+
+## Figure 6 — Hydrogen and water evidence
+
+![Generated hydrogens and deposited water evidence](2HYY-hydrogen-water-evidence.png)
+
+The PyMOL close-up shows:
+
+- yellow: deposited ligand heavy atoms;
+- dark gray spheres: generated ligand hydrogens;
+- cyan: acceptor residues;
+- blue spheres: deposited waters with unassigned orientation and roles;
+- gray dashed lines: measured donor–acceptor distances for the two supported
+  hydrogen-bond candidates.
+
+The third recorded contact fails the default angular criterion and is not drawn.
+The recorded D–H···A angles are listed in the caption and metadata.
+
+**Teaches:** generated and measured positions are different evidence levels;
+water proximity is not a water-mediated interaction.
+
+**Does not establish:** experimental hydrogen positions, classified hydrogen
+bonds, water roles, interaction energies, or affinity.
+
 ## Evidence and visual language
 
-The first visualization batch uses a restrained legend:
+The figures use a restrained legend:
 
 | Visual cue | Meaning |
 | --- | --- |
@@ -71,11 +130,15 @@ The first visualization batch uses a restrained legend:
 | yellow sticks | deposited ligand geometry |
 | cyan sticks | selected contact residues |
 | blue spheres | deposited nearby waters |
+| dark gray spheres | generated ligand hydrogens |
 | gray dashed lines | measured atom–atom distances |
-| blue/orange/purple atom highlights | donor/acceptor/both features from the selected chemical state |
+| blue/orange/purple highlights | donor/acceptor/both features in the selected state |
+| magenta/purple/green highlights | charge/role/hydrogen-count changes between states |
+| green/light gray/amber/dark gray cells | present/absent/unknown/N/A evidence |
 
 No color means “energetically favourable.” No nearby contact is drawn as a
-hydrogen bond merely because it is close.
+hydrogen bond merely because it is close. Unknown evidence is never rendered as
+zero or as an absent interaction.
 
 ## Regeneration
 
@@ -85,23 +148,24 @@ Run from the repository root:
 uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
 ```
 
-RDKit produces the 2D diagram. PyMOL produces the two 3D renders. The script is
-deterministic: when metadata for the same structure checksum already exists, the
-stored PyMOL camera view is reused. The metadata file is rewritten with the tool
-versions and camera views actually used.
+RDKit produces the molecular diagrams, PyMOL produces the 3D renders, and
+Matplotlib produces the evidence matrix. The script is deterministic: when
+metadata for the same structure checksum already exists, the stored PyMOL camera
+view is reused. The metadata file is rewritten with the tool versions, source
+checksums, rendering-configuration fingerprints, and camera views actually used.
 
 If PyMOL is unavailable, the example stops with a clear error rather than
 silently producing a different kind of figure.
 
 ## Scope
 
-Visualization Batch 1 covers molecular identity and structure. Later batches can
-add:
+Visualization Batches 1 and 2 cover molecular identity, structure, chemical-state
+alternatives, interaction evidence, and hydrogen/water evidence. Later batches
+can add:
 
-- chemical-state comparisons and population-independent highlighting;
-- interaction-evidence matrices and uncertainty views;
 - robustness and sensitivity plots;
 - exact-versus-sampled free-energy figures;
+- the structural-to-thermodynamic boundary;
 - optional interactive 3D exploration.
 
 All later figures should follow the same rule: consume validated records, state
