@@ -19,7 +19,13 @@ Scientific reproducibility means the same atoms, coordinates, and measurements
 are represented; pixel identity is not guaranteed across rendering
 environments.
 
-The metadata is rewritten by:
+The code-level registry in `src/moleculab/visualization/registry.py` defines
+the authoritative figure IDs, paths, generation functions, source records, and
+teaching anchors. The generated gallery at
+`docs/tutorials/drug_discovery/visualizations/gallery.md` is built from that
+registry and the metadata.
+
+The metadata and gallery are rewritten by:
 
 ```bash
 uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py

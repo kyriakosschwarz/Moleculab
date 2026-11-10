@@ -215,11 +215,12 @@ the independent sensitivity axes; `free_energy` plots exact-versus-FEP harmonic
 convergence; `thermodynamics` plots the structural-evidence/thermodynamic-
 requirement boundary; and `protein_ligand` takes the manifest, binding-site
 record, and explicit source path and produces deterministic PyMOL renders.
-`styles` centralises semantic colors, labels, and export conventions. Every
-figure writes metadata with per-record source checksums, tool version,
-rendering-configuration fingerprint, camera view, alt text, and scientific
-limitations. The layer does not assign protonation, infer interactions, classify
-favourability, or modify scientific geometry.
+`styles` centralises semantic colors, labels, and export conventions; `registry`
+is the authoritative figure registry and generates the gallery page from figure
+metadata. Every figure writes metadata with per-record source checksums, tool
+version, rendering-configuration fingerprint, camera view, alt text, and
+scientific limitations. The layer does not assign protonation, infer
+interactions, classify favourability, or modify scientific geometry.
 
 ## 5. Core data structures and contracts
 
@@ -1258,7 +1259,7 @@ These are the rules that keep the layers honest.
 | thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
 | exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
 | the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/test_scientific_audit.py` |
-| figure metadata, rendering fingerprints, semantic status mappings, deterministic render scripts, RDKit state comparisons, Matplotlib evidence/sensitivity/FEP/thermodynamic figures, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
+| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, semantic status mappings, deterministic render scripts, RDKit state comparisons, Matplotlib evidence/sensitivity/FEP/thermodynamic figures, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.

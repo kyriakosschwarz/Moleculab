@@ -106,7 +106,7 @@ def plot_evidence_matrix(
                     ha="center",
                     va="center",
                     fontsize=7.5,
-                    color="black",
+                    color=status_styles[value].text_colour,
                 )
     handles = [
         Patch(facecolor=style.colour, edgecolor="none", label=style.label)

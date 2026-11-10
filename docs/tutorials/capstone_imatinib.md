@@ -1226,8 +1226,10 @@ The visualization package now has a shared style module,
 `src/moleculab/visualization/styles.py`. Evidence, robustness, requirement, and
 thermodynamic-term mappings are centralised and tested, so an unknown status
 always receives the unknown style regardless of its position in a matrix. The
-figures remain static documentation first; interactive exploration is optional
-future work.
+[generated gallery](drug_discovery/visualizations/gallery.md) is the
+authoritative index of all nine figures, captions, source records, teaching
+points, and limitations. The figures remain static documentation first;
+interactive exploration is optional future work.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction

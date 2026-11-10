@@ -29,10 +29,11 @@ class StatusStyle:
     label: str
     colour: str
     symbol: str
+    text_colour: str = "#1a202c"
 
 
 EVIDENCE_STYLES = {
-    "present": StatusStyle("present", "present", "#2f855a", "P"),
+    "present": StatusStyle("present", "present", "#2f855a", "P", "#ffffff"),
     "absent": StatusStyle("absent", "absent", "#cbd5e0", "A"),
     "unknown": StatusStyle("unknown", "unknown", "#d69e2e", "U"),
     "not_applicable": StatusStyle(
@@ -41,16 +42,18 @@ EVIDENCE_STYLES = {
 }
 
 ROBUSTNESS_STYLES = {
-    "invariant": StatusStyle("invariant", "invariant", "#2f855a", "I"),
+    "invariant": StatusStyle("invariant", "invariant", "#2f855a", "I", "#ffffff"),
     "assumption_sensitive": StatusStyle(
         "assumption_sensitive", "assumption-sensitive", "#d69e2e", "S"
     ),
-    "unsupported": StatusStyle("unsupported", "unsupported", "#c53030", "U"),
-    "unknown": StatusStyle("unknown", "unknown", "#805ad5", "?"),
+    "unsupported": StatusStyle(
+        "unsupported", "unsupported", "#c53030", "U", "#ffffff"
+    ),
+    "unknown": StatusStyle("unknown", "unknown", "#805ad5", "?", "#ffffff"),
 }
 
 REQUIREMENT_STYLES = {
-    "met": StatusStyle("met", "met", "#2f855a", "M"),
+    "met": StatusStyle("met", "met", "#2f855a", "M", "#ffffff"),
     "partial": StatusStyle("partial", "partial", "#d69e2e", "P"),
     "not_run": StatusStyle("not_run", "not run", "#cbd5e0", "N"),
     "not_available": StatusStyle(
@@ -69,6 +72,27 @@ TERM_STYLES = {
         "not_applicable", "not applicable", "#a0aec0", "N/A"
     ),
 }
+
+
+def contrast_ratio(foreground: str, background: str) -> float:
+    """Return the WCAG contrast ratio between two hex colours."""
+
+    def _relative_luminance(colour: str) -> float:
+        value = colour.lstrip("#")
+        if len(value) != 6:
+            raise ValueError(f"expected a six-digit hex colour, got {colour!r}.")
+        components = [int(value[index : index + 2], 16) / 255.0 for index in (0, 2, 4)]
+
+        def linear(channel: float) -> float:
+            return channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+
+        red, green, blue = (linear(channel) for channel in components)
+        return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+    first = _relative_luminance(foreground)
+    second = _relative_luminance(background)
+    lighter, darker = sorted((first, second), reverse=True)
+    return (lighter + 0.05) / (darker + 0.05)
 
 
 def evidence_style(status: str) -> StatusStyle:

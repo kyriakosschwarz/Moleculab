@@ -29,6 +29,7 @@ import argparse
 from pathlib import Path
 
 from moleculab import (
+    GALLERY_RELATIVE_PATH,
     FigureContext,
     draw_chemical_state_comparison,
     draw_ligand_2d,
@@ -53,7 +54,9 @@ from moleculab import (
     render_protein_ligand_overview,
     sha256_file,
     validate_figure_metadata,
+    validate_figure_registry,
     write_figure_metadata,
+    write_gallery,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -426,11 +429,13 @@ def main() -> None:
         thermo,
     )
     errors = validate_figure_metadata(figures)
+    errors.extend(validate_figure_registry(figures))
     if errors:
         for error in errors:
             print(f"visualization metadata error: {error}")
         raise SystemExit(2)
     metadata_path = write_figure_metadata(args.metadata, figures)
+    gallery_path = write_gallery(GALLERY_RELATIVE_PATH, figures)
 
     print("Visualization Batches 1, 2, and 3")
     for figure in figures:
@@ -439,6 +444,7 @@ def main() -> None:
             f"({figure.visualization_tool} {figure.tool_version})"
         )
     print(f"  metadata: {metadata_path}")
+    print(f"  gallery: {gallery_path}")
     print("  scope: structure and chemistry only; no interaction or affinity inference")
 
 

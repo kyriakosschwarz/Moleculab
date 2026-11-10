@@ -4,6 +4,10 @@ These figures are generated directly from the 2HYY provenance chain and the
 validated chemical-state records. They are not AI-generated molecular images
 and they do not perform new chemical interpretation.
 
+The generated [gallery](gallery.md) is the authoritative index of all nine
+figures, captions, source records, teaching points, and limitations. It is
+produced from the figure registry and metadata, not maintained by hand.
+
 The companion metadata is
 [`data/figures/capstone-visualizations.json`](../../../../data/figures/capstone-visualizations.json).
 Each figure records the source structure checksum, protein chain, ligand

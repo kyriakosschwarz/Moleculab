@@ -92,10 +92,11 @@ Covered:
 - final documentation, provenance-chain, constant, gradient, boundary, checksum,
   seed, and end-to-end audit checks;
 - figure metadata, per-record checksums, rendering fingerprints, deterministic
-  render-script selections, RDKit state comparisons, Matplotlib evidence
-  matrices, sensitivity plots, FEP convergence, thermodynamic boundaries, and
-  hydrogen/water script generation (optional RDKit/Matplotlib tests skip when
-  their dependencies are absent);
+  render-script selections, figure-registry/gallery coverage, contrast and
+  alt-text accessibility, deterministic SVG cleanup, RDKit state comparisons,
+  Matplotlib evidence matrices, sensitivity plots, FEP convergence,
+  thermodynamic boundaries, and hydrogen/water script generation (optional
+  RDKit/Matplotlib tests skip when their dependencies are absent);
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - dipole moments, origin dependence, and charge/position validation;
 - pH-dependent LogD corrections for monoprotic acids and bases;
@@ -249,7 +250,7 @@ point when a single operator typo could corrupt every downstream result.
 | structural counts, missing thermodynamic terms, and preparation/sampling requirements are separated from a null free energy | `tests/test_thermodynamic_interpretation.py` |
 | exact partition functions reproduce harmonic free-energy differences and FEP convergence reports overlap and replicate spread | `tests/test_free_energy_study.py` |
 | the final audit checks documentation links, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end demonstration | `tests/test_scientific_audit.py` |
-| figure metadata, rendering fingerprints, deterministic PyMOL scripts, RDKit state comparisons, Matplotlib evidence matrices, sensitivity plots, FEP convergence, thermodynamic boundaries, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
+| figure metadata, registry/gallery coverage, contrast and alt-text accessibility, deterministic SVGs, deterministic PyMOL scripts, RDKit state comparisons, Matplotlib evidence matrices, sensitivity plots, FEP convergence, thermodynamic boundaries, and hydrogen/water script generation are tested | `tests/test_visualization.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

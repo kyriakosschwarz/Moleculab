@@ -7,16 +7,21 @@ from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
+import re
 
 import pytest
 
 from moleculab import (
     FIGURE_METADATA_SCHEMA_VERSION,
     EVIDENCE_STYLES,
+    FIGURE_REGISTRY,
     ROBUSTNESS_STYLES,
     FigureContext,
     FigureMetadata,
     build_hydrogen_water_script,
+    clean_svg_file,
+    contrast_ratio,
+    figure_spec,
     build_overview_script,
     build_pocket_script,
     draw_chemical_state_comparison,
@@ -37,10 +42,12 @@ from moleculab import (
     plot_free_energy_convergence,
     plot_interaction_sensitivity,
     plot_structural_thermodynamics_boundary,
+    render_gallery_markdown,
     requirement_style,
     robustness_style,
     term_style,
     validate_figure_metadata,
+    validate_figure_registry,
     write_figure_metadata,
 )
 
@@ -87,6 +94,79 @@ def test_evidence_and_robustness_semantics_are_stable():
     assert requirement_style("not_run").label == "not run"
     assert term_style("not_estimated").label == "not estimated"
     assert term_style("not_estimated").colour != term_style("not_available").colour
+
+
+def test_registry_and_gallery_cover_every_figure():
+    metadata_path = (
+        ROOT / "data/figures/capstone-visualizations.json"
+    )
+    figures = load_figure_metadata(metadata_path)
+
+    assert validate_figure_registry(figures) == []
+    assert len(figures) == 9
+    assert len(FIGURE_REGISTRY) == 9
+    assert figure_spec("capstone-ligand-2d").figure_number == 1
+    gallery = render_gallery_markdown(figures)
+    gallery_path = ROOT / "docs/tutorials/drug_discovery/visualizations/gallery.md"
+    assert gallery_path.read_text(encoding="utf-8") == gallery
+    for spec in FIGURE_REGISTRY:
+        assert spec.source_records
+        assert spec.teaches
+        assert spec.generation_function
+        assert f"## Figure {spec.figure_number}" in gallery
+        assert Path(figure_spec(spec.figure_id).image_path).name in gallery
+    with pytest.raises(ValueError):
+        figure_spec("missing")
+
+
+def test_registry_tutorial_anchors_resolve():
+    gallery_directory = ROOT / "docs/tutorials/drug_discovery/visualizations"
+    for spec in FIGURE_REGISTRY:
+        path_text, fragment = spec.tutorial_anchor.split("#", 1)
+        target = (gallery_directory / path_text).resolve()
+        assert target.exists()
+        headings = [
+            line.lstrip("#").strip()
+            for line in target.read_text(encoding="utf-8").splitlines()
+            if line.startswith("#")
+        ]
+        slugs = {
+            re.sub(r"[^a-z0-9 -]", "", heading.lower()).replace(" ", "-")
+            for heading in headings
+        }
+        assert fragment in slugs
+
+
+def test_accessibility_contrast_and_alt_text():
+    for style in (
+        *EVIDENCE_STYLES.values(),
+        *ROBUSTNESS_STYLES.values(),
+    ):
+        assert contrast_ratio(style.text_colour, style.colour) >= 4.5
+    figures = load_figure_metadata(
+        ROOT / "data/figures/capstone-visualizations.json"
+    )
+    for figure in figures:
+        assert len(figure.alt_text) >= 20
+        assert figure.caption
+        assert figure.scientific_limitations
+
+
+def test_svg_cleanup_is_deterministic(tmp_path):
+    path = tmp_path / "test.svg"
+    path.write_text(
+        "<svg>\n  <dc:date>2026-01-01T00:00:00</dc:date>  \n"
+        "  <path d='M 0 0 ' />  \n</svg>\n",
+        encoding="utf-8",
+    )
+    clean_svg_file(path)
+    text = path.read_text(encoding="utf-8")
+    assert "<dc:date>" not in text
+    assert all(not line.endswith(" ") for line in text.splitlines())
+    first = text
+    path.write_text(first, encoding="utf-8")
+    clean_svg_file(path)
+    assert path.read_text(encoding="utf-8") == first
 
 
 def test_metadata_round_trip_and_validation(tmp_path):
