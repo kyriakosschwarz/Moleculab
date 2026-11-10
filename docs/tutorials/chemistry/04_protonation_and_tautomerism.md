@@ -472,7 +472,7 @@ against closed-form values, not against itself:
 
 ```bash
 uv run pytest tests/test_acid_base.py -v
-uv run python examples/protonation.py
+uv run python examples/chemistry/protonation.py
 ```
 
 Key checks:
@@ -528,7 +528,7 @@ Acceptance criteria for this module:
 
 ### Implementation
 
-1. Run `examples/protonation.py` and reproduce the tables.
+1. Run `examples/chemistry/protonation.py` and reproduce the tables.
 2. Change the acetic-acid pKa and observe how the titration curve moves.
 3. Add a third ionizable site to the microstate calculation and explain the
    growth from four to eight states.

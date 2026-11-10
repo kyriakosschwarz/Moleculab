@@ -16,12 +16,12 @@ The capstone is the point where the tracks meet:
 
 | Track | Contribution to the case study |
 | --- | --- |
-| [A — molecular physics](tutorial.md) | force field, water, MD, docking score, free energy |
+| [A — molecular physics](physics/tutorial.md) | force field, water, MD, docking score, free energy |
 | [B — chemical structure and properties](chemistry/README.md) | molecular identity, tautomer and protonation state, descriptors |
 | [C — structure-based drug discovery](drug_discovery/README.md) | protein structure, binding site, interactions, pose interpretation |
 
 For the three-track overview, see the [tutorial map](README.md); for the full
-curriculum, see [the learning tracks](tracks.md).
+curriculum, see [the learning tracks](curriculum.md).
 
 ## Project contract: provenance and reproducibility
 
@@ -60,7 +60,7 @@ structure is an explicit provenance step.
 The reproducible offline anchor is:
 
 ```bash
-uv run --with rdkit python examples/capstone_imatinib.py
+uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
 ```
 
 It calculates the imatinib chemical record and prints a provenance ledger. It
@@ -224,18 +224,18 @@ Run these commands from the repository root. They exercise the workflow on
 synthetic teaching data; they do not run an imatinib pipeline.
 
 ```bash
-uv run --with rdkit python examples/capstone_imatinib.py
-uv run --with rdkit python examples/molecular_properties.py
-uv run python examples/protonation.py
-uv run --with gemmi python examples/protein_structure.py
-uv run python examples/binding_site.py
-uv run python examples/interactions.py
-uv run python examples/interaction_fingerprints.py
-uv run python examples/docking_pose_analysis.py
-uv run python examples/docking_benchmark.py
-uv run python examples/matched_molecular_pairs.py
-uv run --with rdkit python examples/adme_tradeoffs.py
-uv run python examples/structural_observations_thermodynamics.py
+uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
+uv run --with rdkit python examples/chemistry/molecular_properties.py
+uv run python examples/chemistry/protonation.py
+uv run --with gemmi python examples/drug_discovery/protein_structure.py
+uv run python examples/drug_discovery/binding_site.py
+uv run python examples/drug_discovery/interactions.py
+uv run python examples/drug_discovery/interaction_fingerprints.py
+uv run python examples/drug_discovery/docking_pose_analysis.py
+uv run python examples/drug_discovery/docking_benchmark.py
+uv run python examples/drug_discovery/matched_molecular_pairs.py
+uv run --with rdkit python examples/chemistry/adme_tradeoffs.py
+uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 ```
 
 | Step | Example | Result category |
@@ -496,8 +496,8 @@ To go beyond the educational engine:
 The goal is not to replace these tools. The goal is to understand what they are
 doing.
 
-**Related:** [tutorial map](README.md), [introduction](introduction.md),
-[Track A main path](tutorial.md), [Track A physics deep dives](physics/README.md),
+**Related:** [tutorial map](README.md), [introduction](overview.md),
+[Track A main path](physics/tutorial.md), [Track A physics deep dives](physics/README.md),
 [Track B](chemistry/README.md), [Track C](drug_discovery/README.md),
-[learning tracks](tracks.md), [architecture](../architecture.md), and
-[validation](../validation.md).
+[learning tracks](curriculum.md), [architecture](../development/architecture.md), and
+[validation](../reference/validation.md).

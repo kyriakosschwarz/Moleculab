@@ -240,7 +240,7 @@ indexed pair potentials. Minimisation changes positions, not chemical identity.
 ### 7.3 Run the example
 
 ```bash
-uv run python examples/minimization.py
+uv run python examples/physics/minimization.py
 ```
 
 Expected output includes:

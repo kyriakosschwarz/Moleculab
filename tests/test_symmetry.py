@@ -9,7 +9,7 @@ These tests check properties that are deeper than a single force gradient:
 * wrapping and lattice translations preserve periodic pair interactions.
 
 The exact identities are separated from numerical expectations in the tutorials
-and in ``docs/validation.md``.
+and in ``docs/reference/validation.md``.
 """
 
 import numpy as np

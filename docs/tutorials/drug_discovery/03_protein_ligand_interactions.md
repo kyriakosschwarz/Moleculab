@@ -270,7 +270,7 @@ Track C uses nm for internal coordinates and degrees for reported angles. The
 wider drug-discovery literature uses Angstrom, kcal/mol, micromolar and
 nanomolar concentrations, and pIC50 values.
 
-The reference page [Units and conventions](units.md) covers:
+The reference page [Units and conventions](../../reference/units.md) covers:
 
 - Angstrom to nm;
 - degrees and radians;
@@ -359,7 +359,7 @@ bonds = detect_hydrogen_bonds(
 The runnable example is:
 
 ```bash
-uv run python examples/interactions.py
+uv run python examples/drug_discovery/interactions.py
 ```
 
 Observed output:
@@ -462,7 +462,7 @@ A hydrogen-bond detector is correct when:
 
 ### Implementation
 
-1. Run `examples/interactions.py` and reproduce the output.
+1. Run `examples/drug_discovery/interactions.py` and reproduce the output.
 2. Add a negative example with two donors and no acceptor.
 3. Add a second ligand acceptor and verify the sorted result order.
 4. Replace the hydrogen position and observe the angle change.

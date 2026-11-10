@@ -111,36 +111,37 @@ This is still an educational engine, not a production molecular-dynamics
 package.  Solvent models, free-energy methods, docking, and quantum chemistry
 remain on the roadmap.
 
-The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The as-built
-architecture is described in [`docs/architecture.md`](docs/architecture.md).
+## Documentation
 
-The tutorial entry point is
-[`docs/tutorials/README.md`](docs/tutorials/README.md), which maps the three
-connected tracks:
+Moleculab has three entry points:
 
-- Track A, the physics engine:
-  [`tutorial.md`](docs/tutorials/tutorial.md) and the
-  [`physics/`](docs/tutorials/physics/README.md) deep dives;
-- Track B, chemical structure and state:
-  [`chemistry/`](docs/tutorials/chemistry/README.md);
-- Track C, structure-based drug discovery:
-  [`drug_discovery/`](docs/tutorials/drug_discovery/README.md).
+| Goal | Entry point |
+| --- | --- |
+| Learn computational drug discovery | [`docs/tutorials/README.md`](docs/tutorials/README.md) |
+| Develop Moleculab | [`docs/development/README.md`](docs/development/README.md) |
+| Look up units, validation, or troubleshooting | [`docs/reference/README.md`](docs/reference/README.md) |
+| Browse runnable examples | [`examples/README.md`](examples/README.md) |
 
-[`docs/tutorials/introduction.md`](docs/tutorials/introduction.md) explains how
-the tracks connect to CADD applications, and
-[`docs/tutorials/tracks.md`](docs/tutorials/tracks.md) gives the prerequisites
-and full curriculum. The tracks meet in the
-[`imatinib–BCR-ABL1 capstone`](docs/tutorials/capstone_imatinib.md). The first
-implementation notes are in [`docs/energies.md`](docs/energies.md);
-[`docs/validation.md`](docs/validation.md) documents the component,
-combined-system, numerical, and reproducibility checks, and
-[`docs/acceleration.md`](docs/acceleration.md) covers CPU/ROCm/NPU backend
-choices.
+The full documentation map is in [`docs/README.md`](docs/README.md).
 
-Companion guides for the tutorial sequence:
-[`troubleshooting.md`](docs/tutorials/troubleshooting.md),
-[`visualization_prompts.md`](docs/tutorials/visualization_prompts.md), and
-[`answer_keys.md`](docs/tutorials/answer_keys.md).
+The longer roadmap lives in [`docs/development/roadmap.md`](docs/development/roadmap.md).  The as-built
+architecture is described in [`docs/development/architecture.md`](docs/development/architecture.md).
+
+The tutorial hub maps the three tracks and links their landing pages. See the
+[CADD overview](docs/tutorials/overview.md) for the longer rationale, the
+[curriculum reference](docs/tutorials/curriculum.md) for prerequisites and
+module status, and the
+[imatinib–BCR-ABL1 capstone](docs/tutorials/capstone_imatinib.md) for the
+integration project.
+
+Reference material includes the
+[first milestone derivation](docs/reference/energies.md),
+[validation plan](docs/reference/validation.md),
+[troubleshooting guide](docs/reference/troubleshooting.md),
+[visualization prompts](docs/reference/visualization_prompts.md), and
+[answer keys](docs/reference/answer_keys.md). The
+[acceleration guide](docs/development/acceleration.md) covers CPU/ROCm/NPU
+backend choices.
 
 ## Install with uv
 
@@ -213,7 +214,7 @@ print(backend_info())
 Or set the environment variable:
 
 ```bash
-MOLECULAB_BACKEND=auto uv run python examples/backend_benchmark.py --backend auto
+MOLECULAB_BACKEND=auto uv run python examples/performance/backend_benchmark.py --backend auto
 ```
 
 `--backend torch` forces PyTorch even on CPU for benchmarking; `auto` stays on
@@ -224,7 +225,7 @@ NumPy/CPU and convert at their boundaries.
 For APUs, `set_precision("float32")` enables the faster half-width ROCm path,
 and `to_torch`/`to_numpy` use a zero-copy `torch.from_numpy` handoff before the
 non-blocking device move.  The CPU thread limits and a vectorized GPU pairwise
-example are in `examples/amd_gpu_tuning.py`.
+example are in `examples/performance/amd_gpu_tuning.py`.
 
 ### AMD ROCm on this machine
 
@@ -276,32 +277,32 @@ and are inference-oriented; they are not exposed as a native PyTorch device.
 ## Try it
 
 ```bash
-uv run python examples/first_particle.py
-uv run python examples/harmonic_oscillator.py
-uv run python examples/nonbonded_interactions.py
-uv run python examples/bonded_molecule.py
-uv run python examples/torsion_scan.py
-uv run python examples/minimization.py
-uv run python examples/thermostat.py
-uv run python examples/periodic_box.py
-uv run python examples/trajectory_analysis.py
-uv run python examples/solvent_box.py
-uv run python examples/free_energy_perturbation.py
-uv run python examples/water_box.py
-uv run python examples/water_ewald.py
-uv run python examples/rigid_water.py
-uv run python examples/rigid_docking.py
-uv run python examples/ewald.py
-uv run python examples/barostat.py
-uv run python examples/thermodynamic_integration.py
-uv run python examples/mbar.py
-uv run python examples/lj_alchemy.py
-uv run python examples/mc_alchemy.py
-uv run python examples/solvated_alchemy.py
-uv run python examples/qm_mm.py
-uv run python examples/flexible_docking.py
-uv run python examples/backend_benchmark.py --backend cpu
-uv run python examples/amd_gpu_tuning.py --backend auto
+uv run python examples/physics/first_particle.py
+uv run python examples/physics/harmonic_oscillator.py
+uv run python examples/physics/nonbonded_interactions.py
+uv run python examples/physics/bonded_molecule.py
+uv run python examples/physics/torsion_scan.py
+uv run python examples/physics/minimization.py
+uv run python examples/physics/thermostat.py
+uv run python examples/physics/periodic_box.py
+uv run python examples/physics/trajectory_analysis.py
+uv run python examples/advanced/solvent_box.py
+uv run python examples/advanced/free_energy_perturbation.py
+uv run python examples/advanced/water_box.py
+uv run python examples/advanced/water_ewald.py
+uv run python examples/advanced/rigid_water.py
+uv run python examples/drug_discovery/rigid_docking.py
+uv run python examples/advanced/ewald.py
+uv run python examples/advanced/barostat.py
+uv run python examples/advanced/thermodynamic_integration.py
+uv run python examples/advanced/mbar.py
+uv run python examples/advanced/lj_alchemy.py
+uv run python examples/advanced/mc_alchemy.py
+uv run python examples/advanced/solvated_alchemy.py
+uv run python examples/advanced/qm_mm.py
+uv run python examples/drug_discovery/flexible_docking.py
+uv run python examples/performance/backend_benchmark.py --backend cpu
+uv run python examples/performance/amd_gpu_tuning.py --backend auto
 ```
 
 - `first_particle.py` reproduces the hand calculation from the first tutorial.

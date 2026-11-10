@@ -51,21 +51,21 @@ representation and import boundary that the later modules assume.
 
 The docking foundations live in the Track A main tutorial:
 
-- [Rigid-ligand docking](../tutorial.md#15-rigid-ligand-docking) introduces
+- [Rigid-ligand docking](../physics/tutorial.md#15-rigid-ligand-docking) introduces
   receptor-ligand interaction scoring, translation/rotation sampling, and the
   distinction between an interaction energy and a binding free energy.
-- [Flexible-receptor docking](../tutorial.md#24-flexible-receptor-docking) adds
+- [Flexible-receptor docking](../physics/tutorial.md#24-flexible-receptor-docking) adds
   explicit side-chain displacement and a harmonic strain penalty.
 
 The supporting physics is in:
 
-- [Atomistic water, atom types, and exclusions](../tutorial.md#14-atomistic-water-atom-types-and-exclusions);
-- [Ewald summation for periodic charges](../tutorial.md#16-ewald-summation-for-periodic-charges);
-- [Trajectory analysis](../tutorial.md#11-trajectory-analysis).
+- [Atomistic water, atom types, and exclusions](../physics/tutorial.md#14-atomistic-water-atom-types-and-exclusions);
+- [Ewald summation for periodic charges](../physics/tutorial.md#16-ewald-summation-for-periodic-charges);
+- [Trajectory analysis](../physics/tutorial.md#11-trajectory-analysis).
 
 The applied module code is in `src/moleculab/applications/docking.py` and
 `src/moleculab/applications/flexible_docking.py`. Examples are
-`examples/rigid_docking.py` and `examples/flexible_docking.py`.
+`examples/drug_discovery/rigid_docking.py` and `examples/drug_discovery/flexible_docking.py`.
 
 ### 2.2 Module 01: protein structure fundamentals
 
@@ -84,7 +84,7 @@ The acceptance criterion is representational: a reader should be able to
 identify the chains, residues, ligands, waters, and missing regions in a real
 structure, and explain which of them are safe to use in a calculation.
 
-Runnable inspection: `uv run --with gemmi python examples/protein_structure.py`.
+Runnable inspection: `uv run --with gemmi python examples/drug_discovery/protein_structure.py`.
 
 ### 2.3 Module 02: binding sites and cavities
 
@@ -261,7 +261,7 @@ model's limitations.
 
 ## 6. Reference
 
-- [Units and conventions](units.md) — Angstrom, nm, degrees, kJ/mol,
+- [Units and conventions](../../reference/units.md) — Angstrom, nm, degrees, kJ/mol,
   kcal/mol, molar concentrations, pIC50, pH, pressure, and structural units.
 
 ## 7. Acceptance criteria

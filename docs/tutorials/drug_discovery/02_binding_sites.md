@@ -333,7 +333,7 @@ only on NumPy and Cartesian positions.
 ### 11.2 Runnable example
 
 ```bash
-uv run python examples/binding_site.py
+uv run python examples/drug_discovery/binding_site.py
 ```
 
 The output above comes from this example.
@@ -395,7 +395,7 @@ A binding-site geometry module is correct when:
 
 ### Implementation
 
-1. Run `examples/binding_site.py` and reproduce the output.
+1. Run `examples/drug_discovery/binding_site.py` and reproduce the output.
 2. Add a water position and decide whether it belongs in the selection.
 3. Add residue labels with insertion codes and verify that grouping remains
    unambiguous.

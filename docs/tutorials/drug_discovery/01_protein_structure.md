@@ -230,7 +230,7 @@ provenance, and any import decisions.
 The runnable example uses `gemmi`, an optional external structure toolkit:
 
 ```bash
-uv run --with gemmi python examples/protein_structure.py
+uv run --with gemmi python examples/drug_discovery/protein_structure.py
 ```
 
 It reads a small synthetic PDB excerpt and reports the hierarchy, alternate
@@ -333,7 +333,7 @@ A protein-structure import is correct when:
 
 ### Inspection
 
-1. Run `examples/protein_structure.py` and reproduce the output.
+1. Run `examples/drug_discovery/protein_structure.py` and reproduce the output.
 2. Change the PDB excerpt to add a second model. How should the structure record
    represent both models?
 3. Add an insertion code to a residue and explain why `chain + number` is no

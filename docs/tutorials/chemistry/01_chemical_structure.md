@@ -149,7 +149,7 @@ periodic torsion. It starts near an eclipsed geometry, minimises the energy,
 and relaxes to a staggered dihedral.
 
 ```bash
-uv run python examples/chemical_structure.py
+uv run python examples/chemistry/chemical_structure.py
 ```
 
 Observed output:
@@ -338,7 +338,7 @@ Track A. A gas-phase torsion scan is a starting point, not the final answer.
 
 ### Implementation
 
-1. Run `examples/chemical_structure.py` and change the initial geometry.
+1. Run `examples/chemistry/chemical_structure.py` and change the initial geometry.
 2. Scan the torsion energy from -180° to 180° and plot it.
 3. Add a second torsion term and observe the new minima and barriers.
 4. Minimise the chain from several starting dihedrals and compare the final

@@ -1,24 +1,27 @@
-# Track A physics deep dives: tutorials 1–10 and the chemical bridge
+# Track A — Molecular physics and simulation
 
-> **Where this fits.** These are the slower, visual deep dives for Track A.
-> Start with the [tutorial map](../README.md) for the three-track overview.
+> **Question.** How does the physical model work?
+>
+> **Main path.** [From one particle to a small simulation](tutorial.md)
+>
+> **Deep dives.** The ten visual tutorials below expand the first ten sections
+> of the main path.
 >
 > **Companion tracks.** [Track B — chemical structure and properties](../chemistry/README.md)
 > · [Track C — structure-based drug discovery](../drug_discovery/README.md)
 
 **New here?** Read the [tutorial map](../README.md) and the
-[general introduction](../introduction.md) first. They explain how the tracks
-connect to CADD applications such as force fields, molecular dynamics, docking,
-free energy, and QM/MM.
+[CADD overview](../overview.md) first. They explain how the tracks connect to
+force fields, molecular dynamics, docking, free energy, and QM/MM.
 
-These ten deep dives, plus the chemical bridge after part 4, expand the first ten
-sections of the [Track A main path](../tutorial.md) into a slower, more visual
-path from units to interacting molecular systems.
+The main path is the complete Track A sequence. These ten deep dives, plus the
+chemical bridge after part 4, expand the first ten sections into a slower, more
+visual path from units to interacting molecular systems.
 
 ![Track A course map](assets/course_map.svg)
 
 The corresponding software layers, module dependency rules, and decision
-records are described in [`../../architecture.md`](../../architecture.md).
+records are described in [`../../development/architecture.md`](../../development/architecture.md).
 
 ## A consistent course structure
 
@@ -88,14 +91,14 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 | [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
 | [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
 
-After part 10, continue with the [Track A main path](../tutorial.md) through
+After part 10, continue with the [Track A main path](tutorial.md) through
 solvent, water, docking, Ewald, pressure, and free energy. Then continue with
 [Track B](../chemistry/README.md), [Track C](../drug_discovery/README.md), and
 the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
 
 Track B starts with
 [chemical structure and conformational behaviour](../chemistry/01_chemical_structure.md).
-See the [tutorial map](../README.md) and [learning tracks](../tracks.md) for
+See the [tutorial map](../README.md) and [learning tracks](../curriculum.md) for
 prerequisites and study orders.
 
 ## Deep dive to package map
@@ -118,7 +121,7 @@ For larger systems, [`src/moleculab/composition/neighbour.py`](../../../src/mole
 provides an optional cell-list candidate screen. Use
 `system.forces(cutoff=..., use_neighbour_list=True)`; the default `System` path
 remains the explicit O(N²) teaching loop. See
-[`examples/neighbour_list.py`](../../../examples/neighbour_list.py).
+[`examples/physics/neighbour_list.py`](../../../examples/physics/neighbour_list.py).
 
 ## Checkpoint after part 4
 
@@ -207,7 +210,7 @@ Tutorial 04 is backed by an independent analytic check, not only by energy
 conservation. Run:
 
 ```bash
-uv run python examples/harmonic_validation.py
+uv run python examples/physics/harmonic_validation.py
 ```
 
 The script compares the numerical trajectory with
@@ -227,7 +230,7 @@ analytical force.
 
 Full-system symmetries and combined-system behaviour are checked in
 [`tests/test_symmetry.py`](../../../tests/test_symmetry.py). The complete
-validation plan is in [`docs/validation.md`](../../validation.md).
+validation plan is in [`docs/reference/validation.md`](../../reference/validation.md).
 
 ## Visual conventions
 
@@ -256,9 +259,9 @@ The assets are in [`assets/`](assets/).
 ## Companion guides
 
 - [Tutorial map and three tracks](../README.md)
-- [Curriculum and prerequisites](../tracks.md)
+- [Curriculum and prerequisites](../curriculum.md)
 - [Track B — chemical structure and properties](../chemistry/README.md)
 - [Track C — structure-based drug discovery](../drug_discovery/README.md)
-- [Troubleshooting and error diagnosis](../troubleshooting.md)
-- [Notebook and visualization prompts](../visualization_prompts.md)
-- [Answer keys and expected magnitudes](../answer_keys.md)
+- [Troubleshooting and error diagnosis](../../reference/troubleshooting.md)
+- [Notebook and visualization prompts](../../reference/visualization_prompts.md)
+- [Answer keys and expected magnitudes](../../reference/answer_keys.md)

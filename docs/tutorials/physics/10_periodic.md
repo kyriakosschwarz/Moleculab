@@ -256,7 +256,7 @@ If not, it raises an error. This catches a common and subtle modelling mistake.
 ### 7.3 Run the example
 
 ```bash
-uv run python examples/periodic_box.py
+uv run python examples/physics/periodic_box.py
 ```
 
 Expected essentials:

@@ -365,7 +365,7 @@ them instead.
 Run the example and tests:
 
 ```bash
-uv run python examples/nonbonded_interactions.py
+uv run python examples/physics/nonbonded_interactions.py
 uv run pytest tests/test_pair_potentials.py tests/test_nonbonded.py -q
 ```
 

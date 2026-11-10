@@ -329,7 +329,7 @@ The score is metadata, not a binding free energy.
 ### 11.3 Example
 
 ```bash
-uv run python examples/docking_pose_analysis.py
+uv run python examples/drug_discovery/docking_pose_analysis.py
 ```
 
 Observed output:
@@ -452,7 +452,7 @@ A docking score is a hypothesis generator. It is not a measured affinity.
 
 ### Implementation
 
-1. Run `examples/docking_pose_analysis.py` and reproduce the output.
+1. Run `examples/drug_discovery/docking_pose_analysis.py` and reproduce the output.
 2. Swap the two equivalent ligand atoms in the reference and confirm the
    symmetry-aware RMSD remains small.
 3. Apply the same rotation and translation to both pose and reference and

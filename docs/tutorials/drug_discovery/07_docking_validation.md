@@ -252,7 +252,7 @@ visible in the case records.
 ### 10.2 Example
 
 ```bash
-uv run python examples/docking_benchmark.py
+uv run python examples/drug_discovery/docking_benchmark.py
 ```
 
 Observed output:
@@ -335,7 +335,7 @@ A docking-benchmark module is correct when:
 
 ### Implementation
 
-1. Run `examples/docking_benchmark.py` and reproduce the output.
+1. Run `examples/drug_discovery/docking_benchmark.py` and reproduce the output.
 2. Add a valid failure and recompute the success rate.
 3. Add an invalid case and confirm the denominator is unchanged.
 4. Add protocol metadata and confirm it survives summarization.

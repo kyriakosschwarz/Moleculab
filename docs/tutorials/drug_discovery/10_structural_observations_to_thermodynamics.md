@@ -288,7 +288,7 @@ This module intentionally adds no large analysis API.
 The illustrative example is:
 
 ```bash
-uv run python examples/structural_observations_thermodynamics.py
+uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 ```
 
 It demonstrates:

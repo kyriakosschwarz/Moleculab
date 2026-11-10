@@ -251,7 +251,7 @@ The example computes descriptors for several compounds and compares LogP with
 LogD at pH 7.4:
 
 ```bash
-uv run --with rdkit python examples/adme_tradeoffs.py
+uv run --with rdkit python examples/chemistry/adme_tradeoffs.py
 ```
 
 Observed output:
@@ -329,7 +329,7 @@ An ADME fundamentals module is correct when:
 
 ### Implementation
 
-1. Run `examples/adme_tradeoffs.py` and reproduce the output.
+1. Run `examples/chemistry/adme_tradeoffs.py` and reproduce the output.
 2. Add another compound and interpret its physicochemical trade-offs.
 3. Change the pH and observe how LogD changes for an acid and a base.
 4. Compare a compound with high TPSA and one with low TPSA.
@@ -349,5 +349,5 @@ An ADME fundamentals module is correct when:
 
 **Previous:** [07 — Hydrogen bonding and molecular recognition](07_hydrogen_bonding.md).
 
-**Next:** [Learning tracks](../tracks.md) and the
+**Next:** [Learning tracks](../curriculum.md) and the
 [imatinib capstone](../capstone_imatinib.md).

@@ -158,7 +158,7 @@ Do this by hand before trusting a toolkit result.
 The example compares aspirin, ibuprofen, naproxen, acetaminophen, and caffeine.
 
 ```bash
-uv run --with rdkit python examples/molecular_properties.py
+uv run --with rdkit python examples/chemistry/molecular_properties.py
 ```
 
 Descriptor output:
@@ -255,7 +255,7 @@ A molecular-properties module is correct when:
 
 ### Implementation
 
-1. Run `examples/molecular_properties.py`.
+1. Run `examples/chemistry/molecular_properties.py`.
 2. Add another molecule and extend the similarity matrix.
 3. Vary the Morgan radius and observe how the matrix changes.
 4. Compare ECFP-like Morgan fingerprints with a simple atom-count descriptor.

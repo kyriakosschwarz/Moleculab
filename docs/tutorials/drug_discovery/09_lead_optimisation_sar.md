@@ -292,7 +292,7 @@ Do not build a custom matched-pair or ADME engine inside the comparison layer.
 ### 10.3 Example
 
 ```bash
-uv run python examples/matched_molecular_pairs.py
+uv run python examples/drug_discovery/matched_molecular_pairs.py
 ```
 
 Observed output:
@@ -384,7 +384,7 @@ A matched-pair comparison module is correct when:
 
 ### Implementation
 
-1. Run `examples/matched_molecular_pairs.py` and reproduce the output.
+1. Run `examples/drug_discovery/matched_molecular_pairs.py` and reproduce the output.
 2. Add a second matched pair with a different transformation.
 3. Add a missing assay value and confirm the activity delta is missing.
 4. Add a descriptor and propagate its delta.

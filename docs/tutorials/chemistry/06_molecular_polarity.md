@@ -9,7 +9,7 @@
 >
 > **What you will be able to do afterwards.** Distinguish formal charge, partial
 > charge, and protonation state; compute a dipole moment; explain what the
-> \(q_i\) values in a force field do and do not represent.
+> $q_i$ values in a force field do and do not represent.
 
 ## 1. Learning objectives
 
@@ -118,12 +118,12 @@ fixed graph.
 
 ## 6. Dipole moment
 
-For charges \(q_i\) at positions \(\mathbf r_i\), the dipole moment about an
-origin \(\mathbf r_0\) is
+For charges $q_i$ at positions $\mathbf r_i$, the dipole moment about an
+origin $\mathbf r_0$ is
 
 $$ \boldsymbol\mu = \sum_i q_i(\mathbf r_i-\mathbf r_0). $$
 
-The magnitude is \(|\boldsymbol\mu|\).
+The magnitude is $|\boldsymbol\mu|$.
 
 For a neutral system, the result is independent of the chosen origin. For a
 charged system, it is origin-dependent, so an explicit origin is required.
@@ -197,10 +197,10 @@ Track A's Coulomb term is
 
 $$ U_{ij}(r)=k_e\frac{q_iq_j}{r}, $$
 
-where \(q_i\) and \(q_j\) are the charges in elementary-charge units and \(r\)
+where $q_i$ and $q_j$ are the charges in elementary-charge units and $r$
 is in nm.
 
-The \(q_i\) values are force-field parameters. They are chosen to reproduce
+The $q_i$ values are force-field parameters. They are chosen to reproduce
 selected properties, not measured directly.
 
 Consequences:
@@ -218,7 +218,7 @@ charge model.
 The runnable example is:
 
 ```bash
-uv run --with rdkit python examples/molecular_polarity.py
+uv run --with rdkit python examples/chemistry/molecular_polarity.py
 ```
 
 It demonstrates:
@@ -293,9 +293,9 @@ A molecular-polarity module is correct when:
 
 ### Calculation
 
-1. Two charges \(+1e\) and \(-1e\) are separated by 0.2 nm. Compute the dipole
+1. Two charges $+1e$ and $-1e$ are separated by 0.2 nm. Compute the dipole
    magnitude in e nm and Debye.
-2. Repeat with charges \(+0.5e\) and \(-0.5e\).
+2. Repeat with charges $+0.5e$ and $-0.5e$.
 3. For a neutral system, shift all coordinates by 1 nm and confirm the dipole is
    unchanged.
 4. For a charged system, compute the dipole about two different origins and
@@ -304,7 +304,7 @@ A molecular-polarity module is correct when:
 
 ### Implementation
 
-1. Run `examples/molecular_polarity.py` and reproduce the output.
+1. Run `examples/chemistry/molecular_polarity.py` and reproduce the output.
 2. Change the protonation state of acetic acid and compare formal charges.
 3. Compare the Gasteiger charges of water and ammonia.
 4. Embed and optimise water with two seeds and compare the dipole magnitudes.

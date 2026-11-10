@@ -7,7 +7,7 @@
 > **Prerequisites.** Track A sections 3, 4b, and 7 for the first module;
 > Track A sections 14 and 16 for protonation and electrostatics.
 >
-> **Companion tracks.** [Track A — molecular physics](../tutorial.md) ·
+> **Companion tracks.** [Track A — molecular physics](../physics/tutorial.md) ·
 > [Track C — structure-based drug discovery](../drug_discovery/README.md)
 
 This track connects molecular structure and chemical properties to the physics
@@ -15,7 +15,7 @@ engine. It does not replace the physics sequence. Track A supplies the energy
 model; Track B supplies the chemical object, its identity, and its state.
 
 For the three-track overview, see the [tutorial map](../README.md). For
-prerequisites and the full curriculum, see [the learning tracks](../tracks.md).
+prerequisites and the full curriculum, see [the learning tracks](../curriculum.md).
 
 ## Modules
 
@@ -78,6 +78,6 @@ one monolithic class.
 RDKit is an optional external toolkit for chemical perception. Moleculab's
 physics layer must not depend on RDKit types.
 
-**Previous:** [Track A — molecular physics and simulation](../tutorial.md).
+**Previous:** [Track A — molecular physics and simulation](../physics/tutorial.md).
 
 **Next:** [Track C — structure-based drug discovery](../drug_discovery/README.md).

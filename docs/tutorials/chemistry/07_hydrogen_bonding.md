@@ -237,7 +237,7 @@ Consequences:
 The runnable example is:
 
 ```bash
-uv run --with rdkit python examples/hydrogen_bonding.py
+uv run --with rdkit python examples/chemistry/hydrogen_bonding.py
 ```
 
 It uses RDKit for donor/acceptor counts and Track C's
@@ -318,7 +318,7 @@ A hydrogen-bond chemistry module is correct when:
 
 ### Implementation
 
-1. Run `examples/hydrogen_bonding.py` and reproduce the output.
+1. Run `examples/chemistry/hydrogen_bonding.py` and reproduce the output.
 2. Change the distance cutoff and observe which contacts survive.
 3. Change the angle cutoff and observe which contacts survive.
 4. Add a donor without hydrogen positions and confirm that it is skipped.

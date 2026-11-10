@@ -1,4 +1,4 @@
-"""Generate the architecture diagram used by docs/architecture.md.
+"""Generate the architecture diagram used by docs/development/architecture.md.
 
 Run from the repository root:
 

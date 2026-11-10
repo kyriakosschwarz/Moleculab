@@ -263,7 +263,7 @@ does not load trajectory files.
 ### 9.2 Example
 
 ```bash
-uv run python examples/trajectory_contacts.py
+uv run python examples/drug_discovery/trajectory_contacts.py
 ```
 
 Observed output:
@@ -351,7 +351,7 @@ A trajectory-contact module is correct when:
 
 ### Implementation
 
-1. Run `examples/trajectory_contacts.py` and reproduce the output.
+1. Run `examples/drug_discovery/trajectory_contacts.py` and reproduce the output.
 2. Change the cutoff and observe how contacts and lifetimes change.
 3. Add a missing frame and confirm the denominator changes.
 4. Add a residue with two contacting atoms and verify aggregation.

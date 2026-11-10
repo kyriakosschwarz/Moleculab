@@ -314,7 +314,7 @@ The example uses ten frames: eight valid and two missing. It has hand-checkable
 occupancies.
 
 ```bash
-uv run python examples/interaction_fingerprints.py
+uv run python examples/drug_discovery/interaction_fingerprints.py
 ```
 
 Output:
@@ -418,7 +418,7 @@ keeping the same schema, fingerprint, and sampled-frame occupancy interfaces.
 
 ### Implementation
 
-1. Run `examples/interaction_fingerprints.py` and reproduce every sampled-frame
+1. Run `examples/drug_discovery/interaction_fingerprints.py` and reproduce every sampled-frame
    occupancy by hand.
 2. Add a feature that is present in every valid frame and verify sampled-frame
    occupancy 1.

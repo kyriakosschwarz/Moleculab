@@ -3,7 +3,7 @@
 ## Repository status
 
 - Moleculab is a working **educational** molecular physics/simulation library. Optimize for scientific correctness and readable, inspectable code, not production hardening.
-- The code in `src/moleculab/` is now the executable source of truth. `docs/lib.md` describes the long-term architecture/roadmap; `docs/energies.md` preserves the first-milestone derivation and expected numbers. Reconcile docs with code rather than assuming the docs are implemented.
+- The code in `src/moleculab/` is now the executable source of truth. `docs/development/roadmap.md` describes the long-term architecture/roadmap; `docs/reference/energies.md` preserves the first-milestone derivation and expected numbers. Reconcile docs with code rather than assuming the docs are implemented.
 - Implemented: units, typed `Particle` state, `HarmonicPotential`, double-well external potential, Lennard-Jones/Coulomb pair potentials, `System` with pair-indexed potentials, bonds/angles/torsions, Velocity Verlet, analytic validation of the Velocity Verlet harmonic oscillator, an optional cell-list neighbour screen with opt-in `System` parity, SHAKE/RATTLE distance constraints, steepest-descent minimization, Berendsen thermostat, orthorhombic PBC, MSD, RDF, coarse-grained solvent boxes, harmonic FEP/TI/MBAR, molecular soft-core Lennard-Jones FEP/TI/MBAR, multi-particle Monte Carlo FEP/TI/MBAR, solvated-ligand Ewald decoupling, typed nonbonded interactions with 1-2/1-3 exclusions, reaction-field electrostatics, a three-site rigid water model, rigid-ligand docking, flexible-receptor docking with explicit side-chain sampling, Ewald summation with intramolecular-exclusion corrections, pressure/Berendsen NPT coupling, a finite-difference QM/MM particle-in-a-box model, acid-base/protonation and tautomer population bookkeeping, parser-independent binding-site geometry, hydrogen-bond interaction geometry, interaction fingerprints and sampled-frame occupancy, external docking pose analysis, pose clustering and binding-mode comparison, reproducible docking benchmark records, trajectory contact occupancy and lifetimes, matched-pair SAR comparison, and a CPU-default optional PyTorch Ewald backend.
 - Deferred: molecular FEP/TI/MBAR for complex systems, trained/empirical binding-affinity scoring, real QM/MM/DFT, and NPU-specific acceleration. Do not add these without tests and a numerical example.
 - Python + NumPy first. Rust/PyO3 is explicitly a later optimization, not part of the current implementation.
@@ -26,45 +26,45 @@ uv run pytest tests/test_docking_benchmark.py -v # benchmark metrics
 uv run pytest tests/test_trajectory_contacts.py -v # contact occupancy and lifetimes
 uv run pytest tests/test_sar.py -v # matched-pair SAR comparison
 uv run pytest tests/test_box.py::test_minimum_image_uses_the_shortest_separation -v
-uv run python examples/bonded_molecule.py
-uv run python examples/harmonic_oscillator.py
-uv run python examples/harmonic_validation.py
-uv run python examples/chemical_examples.py
-uv run python examples/chemical_structure.py
-uv run python examples/trajectory_analysis.py
-uv run python examples/solvent_box.py
-uv run python examples/free_energy_perturbation.py
-uv run python examples/water_box.py
-uv run python examples/water_ewald.py
-uv run python examples/rigid_water.py
-uv run python examples/rigid_docking.py
-uv run python examples/ewald.py
-uv run python examples/barostat.py
-uv run python examples/thermodynamic_integration.py
-uv run python examples/mbar.py
-uv run python examples/lj_alchemy.py
-uv run python examples/mc_alchemy.py
-uv run python examples/solvated_alchemy.py
-uv run python examples/qm_mm.py
-uv run python examples/protonation.py
-uv run --with rdkit python examples/stereochemistry.py
-uv run --with rdkit python examples/molecular_polarity.py
-uv run --with rdkit python examples/hydrogen_bonding.py
-uv run --with rdkit python examples/adme_tradeoffs.py
-uv run --with rdkit python examples/capstone_imatinib.py
-uv run --with gemmi python examples/protein_structure.py
-uv run python examples/binding_site.py
-uv run python examples/interactions.py
-uv run python examples/interaction_fingerprints.py
-uv run python examples/docking_pose_analysis.py
-uv run python examples/compare_binding_modes.py
-uv run python examples/docking_benchmark.py
-uv run python examples/trajectory_contacts.py
-uv run python examples/matched_molecular_pairs.py
-uv run python examples/structural_observations_thermodynamics.py
-uv run python examples/flexible_docking.py
-uv run python examples/backend_benchmark.py --backend cpu
-uv run python examples/neighbour_list.py
+uv run python examples/physics/bonded_molecule.py
+uv run python examples/physics/harmonic_oscillator.py
+uv run python examples/physics/harmonic_validation.py
+uv run python examples/chemistry/chemical_examples.py
+uv run python examples/chemistry/chemical_structure.py
+uv run python examples/physics/trajectory_analysis.py
+uv run python examples/advanced/solvent_box.py
+uv run python examples/advanced/free_energy_perturbation.py
+uv run python examples/advanced/water_box.py
+uv run python examples/advanced/water_ewald.py
+uv run python examples/advanced/rigid_water.py
+uv run python examples/drug_discovery/rigid_docking.py
+uv run python examples/advanced/ewald.py
+uv run python examples/advanced/barostat.py
+uv run python examples/advanced/thermodynamic_integration.py
+uv run python examples/advanced/mbar.py
+uv run python examples/advanced/lj_alchemy.py
+uv run python examples/advanced/mc_alchemy.py
+uv run python examples/advanced/solvated_alchemy.py
+uv run python examples/advanced/qm_mm.py
+uv run python examples/chemistry/protonation.py
+uv run --with rdkit python examples/chemistry/stereochemistry.py
+uv run --with rdkit python examples/chemistry/molecular_polarity.py
+uv run --with rdkit python examples/chemistry/hydrogen_bonding.py
+uv run --with rdkit python examples/chemistry/adme_tradeoffs.py
+uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
+uv run --with gemmi python examples/drug_discovery/protein_structure.py
+uv run python examples/drug_discovery/binding_site.py
+uv run python examples/drug_discovery/interactions.py
+uv run python examples/drug_discovery/interaction_fingerprints.py
+uv run python examples/drug_discovery/docking_pose_analysis.py
+uv run python examples/drug_discovery/compare_binding_modes.py
+uv run python examples/drug_discovery/docking_benchmark.py
+uv run python examples/drug_discovery/trajectory_contacts.py
+uv run python examples/drug_discovery/matched_molecular_pairs.py
+uv run python examples/drug_discovery/structural_observations_thermodynamics.py
+uv run python examples/drug_discovery/flexible_docking.py
+uv run python examples/performance/backend_benchmark.py --backend cpu
+uv run python examples/physics/neighbour_list.py
 uv run python docs/generate_architecture_visuals.py
 ```
 
@@ -112,7 +112,7 @@ uv run python docs/generate_architecture_visuals.py
 ## Testing and examples
 
 - Every physical equation needs an implementation, a unit test, and a numerical experiment.
-- Test **physics relationships**, not just that functions run: equilibrium values, symmetry, Newton's third law, energy conservation, infinite-dilution limits, and analytical force vs. central finite difference (`h=1e-6`, `atol=1e-6`). The validation levels are documented in `docs/validation.md`.
+- Test **physics relationships**, not just that functions run: equilibrium values, symmetry, Newton's third law, energy conservation, infinite-dilution limits, and analytical force vs. central finite difference (`h=1e-6`, `atol=1e-6`). The validation levels are documented in `docs/reference/validation.md`.
 - Fundamental constants need independent golden values, closed-form checks, sign invariants, and order-of-magnitude bounds in `tests/test_physical_benchmarks.py`; do not rely only on self-consistency tests.
 - Use `np.testing.assert_allclose` for arrays and `pytest.approx` for scalars. Preserve documented exact examples (e.g. kinetic energy `0.06`, total energy `0.56`).
 - Tests are fast (<1 s); run the full suite before finishing. Add a focused test file for each new module and a runnable example under `examples/`.
@@ -121,5 +121,5 @@ uv run python docs/generate_architecture_visuals.py
 
 - Code blocks in `docs/` are AI-exported and often have newlines/indentation collapsed. Treat them as intent, not copy-paste source; write clean, PEP 8 code matching the described behavior.
 - Tutorial math must render on GitHub and in VS Code. Keep display math on one `$$ ... $$` line, use `\ ` rather than `\,` or `~` for spaces inside math, avoid math inside italics, and use `\lvert ... \rvert` instead of literal `|` in table math.
-- `docs/all.md` is internal background material and is not part of the user-facing documentation. Do not link it from READMEs or tutorials; use `docs/tutorials/capstone_imatinib.md` for the user-facing imatinib capstone.
-- `docs/lib.md` is authoritative for long-term architecture, units, and roadmap; `docs/energies.md` is authoritative for the first milestone's equations and expected values; `docs/architecture.md` describes the architecture as implemented. The tutorial entry point is `docs/tutorials/README.md`; the CADD-focused overview is `docs/tutorials/introduction.md`; the curriculum and prerequisites are in `docs/tutorials/tracks.md`. Track A is `docs/tutorials/tutorial.md` plus `docs/tutorials/physics/`; Track B starts at `docs/tutorials/chemistry/01_chemical_structure.md` and continues through `02_molecular_representation.md`, `03_molecular_properties.md`, `04_protonation_and_tautomerism.md`, `05_stereochemistry.md`, `06_molecular_polarity.md`, `07_hydrogen_bonding.md`, and `08_medicinal_chemistry_adme.md`; Track C starts at `docs/tutorials/drug_discovery/README.md` and its first ten modules are `docs/tutorials/drug_discovery/01_protein_structure.md`, `docs/tutorials/drug_discovery/02_binding_sites.md`, `docs/tutorials/drug_discovery/03_protein_ligand_interactions.md`, `docs/tutorials/drug_discovery/04_interaction_fingerprints.md`, `docs/tutorials/drug_discovery/05_docking_fundamentals.md`, `docs/tutorials/drug_discovery/06_comparing_binding_modes.md`, `docs/tutorials/drug_discovery/07_docking_validation.md`, `docs/tutorials/drug_discovery/08_trajectory_contact_analysis.md`, `docs/tutorials/drug_discovery/09_lead_optimisation_sar.md`, and `docs/tutorials/drug_discovery/10_structural_observations_to_thermodynamics.md`; `docs/tutorials/drug_discovery/units.md` is the Track C unit reference. The tracks meet in `docs/tutorials/capstone_imatinib.md`.
+- `docs/internal/all.md` is internal background material and is not part of the user-facing documentation. Do not link it from READMEs or tutorials; use `docs/tutorials/capstone_imatinib.md` for the user-facing imatinib capstone.
+- `docs/development/roadmap.md` is authoritative for long-term architecture, units, and roadmap; `docs/reference/energies.md` is authoritative for the first milestone's equations and expected values; `docs/development/architecture.md` describes the architecture as implemented. The tutorial entry point is `docs/tutorials/README.md`; the CADD-focused overview is `docs/tutorials/overview.md`; the curriculum and prerequisites are in `docs/tutorials/curriculum.md`. Track A is `docs/tutorials/physics/tutorial.md` plus `docs/tutorials/physics/`; Track B starts at `docs/tutorials/chemistry/01_chemical_structure.md` and continues through `02_molecular_representation.md`, `03_molecular_properties.md`, `04_protonation_and_tautomerism.md`, `05_stereochemistry.md`, `06_molecular_polarity.md`, `07_hydrogen_bonding.md`, and `08_medicinal_chemistry_adme.md`; Track C starts at `docs/tutorials/drug_discovery/README.md` and its first ten modules are `docs/tutorials/drug_discovery/01_protein_structure.md`, `docs/tutorials/drug_discovery/02_binding_sites.md`, `docs/tutorials/drug_discovery/03_protein_ligand_interactions.md`, `docs/tutorials/drug_discovery/04_interaction_fingerprints.md`, `docs/tutorials/drug_discovery/05_docking_fundamentals.md`, `docs/tutorials/drug_discovery/06_comparing_binding_modes.md`, `docs/tutorials/drug_discovery/07_docking_validation.md`, `docs/tutorials/drug_discovery/08_trajectory_contact_analysis.md`, `docs/tutorials/drug_discovery/09_lead_optimisation_sar.md`, and `docs/tutorials/drug_discovery/10_structural_observations_to_thermodynamics.md`; `docs/reference/units.md` is the Track C unit reference. The tracks meet in `docs/tutorials/capstone_imatinib.md`.

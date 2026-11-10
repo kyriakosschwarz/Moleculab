@@ -278,7 +278,7 @@ The thermostat does not change positions or forces directly.
 ### 7.2 Run the example
 
 ```bash
-uv run python examples/thermostat.py
+uv run python examples/physics/thermostat.py
 ```
 
 Expected output:

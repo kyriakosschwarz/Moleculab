@@ -212,7 +212,7 @@ molecule.
 RDKit can assign and validate stereochemistry. The runnable example is:
 
 ```bash
-uv run --with rdkit python examples/stereochemistry.py
+uv run --with rdkit python examples/chemistry/stereochemistry.py
 ```
 
 ### 9.1 Reading stereochemistry
@@ -361,7 +361,7 @@ A stereochemistry module is correct when:
 
 ### Implementation
 
-1. Run `examples/stereochemistry.py` and reproduce the output.
+1. Run `examples/chemistry/stereochemistry.py` and reproduce the output.
 2. Change the atom order in a chiral SMILES and confirm that the R/S label is
    unchanged after assignment.
 3. Compare canonical SMILES and InChIKey for R- and S-lactic acid.

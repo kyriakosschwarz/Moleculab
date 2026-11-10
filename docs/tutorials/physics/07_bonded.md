@@ -343,8 +343,8 @@ do.
 Run:
 
 ```bash
-uv run python examples/bonded_molecule.py
-uv run python examples/torsion_scan.py
+uv run python examples/physics/bonded_molecule.py
+uv run python examples/physics/torsion_scan.py
 uv run pytest tests/test_bonded.py tests/test_topology.py tests/test_torsion.py -q
 ```
 

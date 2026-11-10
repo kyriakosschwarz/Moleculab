@@ -278,7 +278,7 @@ The implementation is in `src/moleculab/analysis/docking/`.
 ### 10.2 Example
 
 ```bash
-uv run python examples/compare_binding_modes.py
+uv run python examples/drug_discovery/compare_binding_modes.py
 ```
 
 Observed output:
@@ -371,7 +371,7 @@ A binding-mode comparison module is correct when:
 
 ### Implementation
 
-1. Run `examples/compare_binding_modes.py` and reproduce the output.
+1. Run `examples/drug_discovery/compare_binding_modes.py` and reproduce the output.
 2. Add a third interaction feature and recompute the exact Jaccard value.
 3. Change the clustering threshold and identify when the chain breaks.
 4. Add a symmetry-aware distance function and cluster two equivalent poses.

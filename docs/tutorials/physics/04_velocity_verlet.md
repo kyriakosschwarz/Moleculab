@@ -380,7 +380,7 @@ Four design choices are worth noticing:
 Run the example:
 
 ```bash
-uv run python examples/harmonic_oscillator.py
+uv run python examples/physics/harmonic_oscillator.py
 ```
 
 A compact check:
@@ -443,7 +443,7 @@ $$ x(t)=x_0\cos(\omega t)+\frac{v_0}{\omega}\sin(\omega t), $$
 which reduces to $0.1\cos(\pi t)$ when $v_0=0$. We can compare every numerical
 snapshot with this formula, not just the final energy.
 
-Running `examples/harmonic_validation.py` over two periods gives:
+Running `examples/physics/harmonic_validation.py` over two periods gives:
 
 | $\Delta t$ (ps) | steps/period | max $\lvert x-x_{\text{exact}}\rvert$ | max $\lvert v-v_{\text{exact}}\rvert$ | max $\lvert E-E_0\rvert$ | observed order |
 | --- | --- | --- | --- | --- | --- |
@@ -734,4 +734,4 @@ constraints, thermostats, and analysis.
 
 **Next:** [Checkpoint after part 4](checkpoint_04.md).
 
-**Return to the tutorial index:** [Moleculab tutorial](../tutorial.md).
+**Return to the tutorial index:** [Moleculab tutorial](tutorial.md).

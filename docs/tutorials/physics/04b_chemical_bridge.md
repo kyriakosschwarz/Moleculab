@@ -244,7 +244,7 @@ force field.
 ### 6.1 Run the example
 
 ```bash
-uv run python examples/chemical_examples.py
+uv run python examples/chemistry/chemical_examples.py
 ```
 
 It demonstrates:
@@ -366,7 +366,7 @@ minimum do you reach? This is the simplest example of a local minimum.
 
 ### Implementation
 
-1. Run `examples/chemical_examples.py` and change the Lennard-Jones velocity.
+1. Run `examples/chemistry/chemical_examples.py` and change the Lennard-Jones velocity.
 2. Scan the torsion energy and plot it.
 3. Simulate the double well below and above the barrier.
 4. Add a small damping term and observe the double-well relaxation.
