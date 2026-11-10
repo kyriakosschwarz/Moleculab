@@ -479,4 +479,4 @@ A docking score is a hypothesis generator. It is not a measured affinity.
 
 **Previous:** [04 — Interaction fingerprints and sampled-frame occupancy](04_interaction_fingerprints.md).
 
-**Next:** Comparing docking poses and ligand binding modes (module 06, planned).
+**Next:** [06 — Comparing binding modes](06_comparing_binding_modes.md).

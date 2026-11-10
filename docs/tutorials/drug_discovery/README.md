@@ -38,7 +38,10 @@ with geometry and representation before it introduces scoring.
 | [03 — Protein–ligand interaction geometry](03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
 | [04 — Interaction fingerprints](04_interaction_fingerprints.md) | residue-ligand contact features and sampled-frame occupancy | available |
 | [05 — Docking foundations](05_docking_fundamentals.md) | search, scoring, poses, and limitations | available |
-| 06 — Trajectory contact analysis | contact timelines and persistence | planned |
+| [06 — Comparing binding modes](06_comparing_binding_modes.md) | pose clustering, geometry, interaction-pattern comparison | available |
+| 07 — Docking validation and benchmarking | redocking, cross-docking, pose recovery, score interpretation | planned |
+| 08 — Trajectory contact analysis | contact timelines and persistence | planned |
+| 09 — Lead optimisation and structure–activity relationships | multi-ligand comparison and SAR | planned |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
 representation and import boundary that the later modules assume.
@@ -144,6 +147,37 @@ ranking, not as a direct binding-free-energy method:
 
 The existing Track A docking examples remain the simple search/scoring
 demonstrations. Module 05 adds the conceptual and pose-analysis layer.
+
+### 2.7 Module 06: comparing binding modes
+
+[Module 06](06_comparing_binding_modes.md) compares poses and interaction
+patterns:
+
+- single-linkage pose clustering with explicit distance functions;
+- symmetry-aware clustering;
+- RMSD and centroid displacement;
+- exact-feature and residue-pattern Jaccard comparison;
+- cases where geometric similarity and interaction similarity disagree.
+
+It reports geometry and interaction patterns separately and does not create a
+single binding-mode score.
+
+### 2.8 Module 07: docking validation and benchmarking
+
+This planned module will cover redocking, cross-docking, pose-recovery
+thresholds, symmetry-aware RMSD, and the difference between pose recovery,
+chemical plausibility, and affinity prediction.
+
+### 2.9 Module 08: trajectory contact analysis
+
+This planned module will use the fingerprint and occupancy infrastructure to
+analyse contact timelines and persistence over a trajectory.
+
+### 2.10 Module 09: lead optimisation and structure–activity relationships
+
+This planned module will extend multi-ligand comparison towards
+structure–activity relationships, while keeping empirical affinity models
+separate from the physical analysis layers.
 
 ## 3. What you can do now
 

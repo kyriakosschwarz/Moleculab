@@ -85,6 +85,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   occupancy with missing-frame handling.
 - External docking pose records, explicit atom mapping, symmetry-aware ligand
   RMSD, and pose-recovery thresholds.
+- Pose clustering and binding-mode comparison, separating geometry from
+  residue-level interaction patterns.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

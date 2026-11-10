@@ -103,7 +103,10 @@ also uses Track A sections 15–17 and the free-energy material.
 | [03 — Protein–ligand interaction geometry](drug_discovery/03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | Track A electrostatics and water | available |
 | [04 — Interaction fingerprints](drug_discovery/04_interaction_fingerprints.md) | residue-ligand contacts and sampled-frame occupancy | Track A trajectory analysis | available |
 | [05 — Docking foundations](drug_discovery/05_docking_fundamentals.md) | search, scoring, poses, limitations | Track A sections 15 and 24 | available |
-| 06 — Trajectory contact analysis | contact timelines and persistence | Track A analysis | planned |
+| [06 — Comparing binding modes](drug_discovery/06_comparing_binding_modes.md) | pose clustering, geometry, and interaction patterns | Track C modules 04–05 | available |
+| 07 — Docking validation and benchmarking | redocking, cross-docking, pose recovery, score interpretation | Track C modules 04–06 | planned |
+| 08 — Trajectory contact analysis | contact timelines and persistence | Track A analysis | planned |
+| 09 — Lead optimisation and SAR | multi-ligand comparison and structure–activity relationships | Track B and Track C | planned |
 
 The current library supports the geometric and scoring pieces of Track C. It
 does not provide protein preparation, a trained affinity model, or a validated

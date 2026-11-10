@@ -39,6 +39,7 @@ uv run pytest tests/test_binding_site.py -q
 uv run pytest tests/test_interactions.py -q
 uv run pytest tests/test_fingerprints.py -q
 uv run pytest tests/test_docking_poses.py -q
+uv run pytest tests/test_pose_comparison.py -q
 ```
 
 Covered:
@@ -56,6 +57,7 @@ Covered:
 - fingerprint schema determinism, duplicate handling, and occupancy;
 - pose RMSD, explicit atom mappings, symmetry-aware mapping, and recovery
   thresholds;
+- pose clustering, centroid comparison, and interaction-pattern Jaccard;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -126,6 +128,7 @@ uv run python examples/binding_site.py
 uv run python examples/interactions.py
 uv run python examples/interaction_fingerprints.py
 uv run python examples/docking_pose_analysis.py
+uv run python examples/compare_binding_modes.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -190,12 +193,14 @@ point when a single operator typo could corrupt every downstream result.
 | occupancy distinguishes missing frames from absent features | `tests/test_fingerprints.py` |
 | pose RMSD is zero for identical mapped coordinates and rigid-motion invariant | `tests/test_docking_poses.py` |
 | symmetry-aware pose comparison uses explicit mappings | `tests/test_docking_poses.py` |
+| pose clustering is deterministic for a fixed distance matrix | `tests/test_pose_comparison.py` |
+| geometry and interaction similarity are reported separately | `tests/test_pose_comparison.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-463 passed, 1 skipped
+479 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

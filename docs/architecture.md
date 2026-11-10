@@ -89,7 +89,7 @@ The most important distinctions are summarised below.
 | data structure | how is the state represented? | `Particle`, `System`, `Topology`, `Box`, `Trajectory` | contain a hidden integration loop |
 | numerical algorithm | how are the equations solved? | Velocity Verlet, steepest descent, SHAKE/RATTLE | define a new force field |
 | simulation protocol | how is the state prepared or sampled? | Berendsen thermostat, barostat | change the potential energy function |
-| analysis | what does a trajectory or structure mean? | MSD, RDF, binding-site geometry, interaction records, fingerprints, pose RMSD | modify the trajectory, forces, or structure |
+| analysis | what does a trajectory or structure mean? | MSD, RDF, binding-site geometry, interaction records, fingerprints, pose RMSD, pose clustering | modify the trajectory, forces, or structure |
 | application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations | duplicate core physics |
 | backend | where does a numerical kernel run? | CPU, optional PyTorch Ewald | leak device details into models |
 
@@ -617,9 +617,10 @@ not read trajectory files or assume that frames came from MD; frames are
 supplied by the caller.
 
 `analysis.docking` records external ligand poses, validates explicit atom
-mappings, computes RMSD, supports symmetry-equivalent mappings, and reports
-pose-recovery thresholds. It does not search poses or parse docking-program
-files.
+mappings, computes RMSD, supports symmetry-equivalent mappings, reports
+pose-recovery thresholds, clusters poses by explicit distance, and compares
+geometry with exact or residue-level interaction patterns. It does not search
+poses or parse docking-program files.
 
 ## 8. How the architecture supports education and the tutorials
 

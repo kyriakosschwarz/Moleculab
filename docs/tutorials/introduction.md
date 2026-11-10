@@ -194,7 +194,10 @@ modules 01–04. The track covers:
 | [03 Protein–ligand interaction geometry](drug_discovery/03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
 | [04 Interaction fingerprints](drug_discovery/04_interaction_fingerprints.md) | residue-level contacts and sampled-frame occupancy | available |
 | [05 Docking foundations](drug_discovery/05_docking_fundamentals.md) | search, scoring, poses, limitations | available |
-| 06 Trajectory contact analysis | contact timelines and persistence | planned |
+| [06 Comparing binding modes](drug_discovery/06_comparing_binding_modes.md) | pose clustering and interaction-pattern comparison | available |
+| 07 Docking validation and benchmarking | redocking, cross-docking, pose recovery | planned |
+| 08 Trajectory contact analysis | contact timelines and persistence | planned |
+| 09 Lead optimisation and SAR | multi-ligand comparison and SAR | planned |
 
 The important distinction is that a geometric interaction is not an energy
 contribution. Track C starts from geometry because a contact can be identified
