@@ -43,6 +43,7 @@ uv run pytest tests/test_pose_comparison.py -q
 uv run pytest tests/test_docking_benchmark.py -q
 uv run pytest tests/test_trajectory_contacts.py -q
 uv run pytest tests/test_sar.py -q
+uv run pytest tests/test_electrostatics.py -q
 ```
 
 Covered:
@@ -64,6 +65,7 @@ Covered:
 - benchmark statuses, valid-case denominators, and protocol retention;
 - contact matrices, occupancy, missing frames, and lifetime run lengths;
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
+- dipole moments, origin dependence, and charge/position validation;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -130,6 +132,7 @@ uv run python examples/thermostat.py
 uv run python examples/periodic_box.py
 uv run python examples/protonation.py
 uv run --with rdkit python examples/stereochemistry.py
+uv run --with rdkit python examples/molecular_polarity.py
 uv run --with gemmi python examples/protein_structure.py
 uv run python examples/binding_site.py
 uv run python examples/interactions.py
@@ -212,12 +215,15 @@ point when a single operator typo could corrupt every downstream result.
 | equal occupancy can yield different contact lifetimes | `tests/test_trajectory_contacts.py` |
 | pIC50 and fold changes agree with the concentration ratio | `tests/test_sar.py` |
 | matched-pair activity, descriptors, and docking scores stay separate | `tests/test_sar.py` |
+| neutral dipoles are origin-independent; charged dipoles require an origin | `tests/test_electrostatics.py` |
+| dipole vectors rotate with coordinates and preserve magnitude | `tests/test_electrostatics.py` |
+| dipole magnitudes convert between e nm and Debye | `tests/test_electrostatics.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-521 passed, 1 skipped
+529 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

@@ -391,4 +391,4 @@ A stereochemistry module is correct when:
 
 **Previous:** [04 — Protonation and tautomerism](04_protonation_and_tautomerism.md).
 
-**Next:** Molecular polarity and electronic properties (module 06, planned).
+**Next:** [06 — Molecular polarity and electronic properties](06_molecular_polarity.md).

@@ -97,6 +97,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
 - Stereochemistry and molecular-recognition tutorial coverage: R/S, E/Z,
   enantiomers, diastereomers, meso compounds, and conformational versus
   configurational isomerism.
+- Molecular-polarity coverage: formal versus partial charge, protonation state,
+  dipole moments, and the connection to Coulomb electrostatics.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

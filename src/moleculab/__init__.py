@@ -18,7 +18,8 @@ The source is organised by architecture layer:
     thermostats and pressure coupling;
 ``analysis``
     trajectory measurements, contact persistence, binding-site geometry,
-    interaction records, fingerprints, external pose analysis, and SAR comparison;
+    interaction records, fingerprints, external pose analysis, SAR comparison,
+    and dipole moments;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -79,6 +80,11 @@ from .analysis.docking import (
     summarize_benchmark,
     symmetry_aware_rmsd,
     validate_atom_mapping,
+)
+from .analysis.electrostatics import (
+    DEBYE_PER_E_NM,
+    DipoleMoment,
+    dipole_moment,
 )
 from .analysis.fingerprints import (
     FingerprintSchema,
@@ -262,6 +268,8 @@ __all__ = [
     "BondedLennardJonesMC",
     "Box",
     "CoulombPotential",
+    "DEBYE_PER_E_NM",
+    "DipoleMoment",
     "DistanceConstraint",
     "DockingBenchmark",
     "DockingPose",
@@ -353,6 +361,7 @@ __all__ = [
     "deprotonated_fraction",
     "detect_hydrogen_bonds",
     "dihedral_angle",
+    "dipole_moment",
     "dock_flexible_receptor",
     "dock_rigid_ligand",
     "evaluate_pose_recovery",

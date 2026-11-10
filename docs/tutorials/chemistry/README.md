@@ -26,6 +26,7 @@ prerequisites and the full curriculum, see [the learning tracks](../tracks.md).
 | [03 — Molecular properties](03_molecular_properties.md) | descriptors, fingerprints, Tanimoto, chemical space | module 02 | available |
 | [04 — Protonation and tautomerism](04_protonation_and_tautomerism.md) | pKa, pH populations, microstates, tautomers | modules 02–03; Track A 14, 16 | available |
 | [05 — Stereochemistry and molecular recognition](05_stereochemistry.md) | R/S, E/Z, enantiomers, diastereomers, meso compounds | modules 01–02 | available |
+| [06 — Molecular polarity and electronic properties](06_molecular_polarity.md) | electronegativity, formal and partial charge, dipoles, Coulomb connection | modules 02 and 04 | available |
 | Solvation and LogP/LogD | transfer free energy and lipophilicity | module 04; Track A free energy | proposed |
 | ADME-Tox | properties, metabolism, and empirical prediction | modules 03–04 | proposed |
 
@@ -39,6 +40,8 @@ prerequisites and the full curriculum, see [the learning tracks](../tracks.md).
   Track A electrostatics and water, or alongside them.
 - Continue with [stereochemistry and molecular recognition](05_stereochemistry.md)
   after the representation module.
+- Read [molecular polarity and electronic properties](06_molecular_polarity.md)
+  alongside the electrostatics material in Track A.
 - Then continue to [Track C](../drug_discovery/README.md) and the
   [capstone](../capstone_imatinib.md).
 - Solvation, LogP/LogD, and ADME-Tox are proposed modules, not implemented

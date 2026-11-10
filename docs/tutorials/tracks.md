@@ -81,6 +81,7 @@ module; Track A electrostatics and water are useful for protonation.
 | [03 — Molecular properties](chemistry/03_molecular_properties.md) | descriptors, fingerprints, Tanimoto, chemical space | module 02 | available |
 | [04 — Protonation and tautomerism](chemistry/04_protonation_and_tautomerism.md) | pKa, pH populations, microstates, tautomers | modules 02–03; Track A 14, 16 | available |
 | [05 — Stereochemistry and molecular recognition](chemistry/05_stereochemistry.md) | R/S, E/Z, enantiomers, diastereomers, meso compounds | modules 01–02 | available |
+| [06 — Molecular polarity and electronic properties](chemistry/06_molecular_polarity.md) | electronegativity, formal/partial charge, dipoles, Coulomb connection | modules 02 and 04 | available |
 | Solvation and LogP/LogD | transfer free energy, neutral versus ionized distribution | module 04; Track A free energy | proposed |
 | ADME-Tox | lipophilicity, solubility, permeability, metabolic soft spots | modules 03–04 | proposed |
 
