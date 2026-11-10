@@ -70,7 +70,7 @@ src/moleculab/
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
 ├── analysis/         MSD, RDF
-├── applications/     docking, solvent, water, free energy, QM/MM
+├── applications/     docking, solvent, water, free energy, acid-base, QM/MM
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -90,7 +90,7 @@ The most important distinctions are summarised below.
 | numerical algorithm | how are the equations solved? | Velocity Verlet, steepest descent, SHAKE/RATTLE | define a new force field |
 | simulation protocol | how is the state prepared or sampled? | Berendsen thermostat, barostat | change the potential energy function |
 | analysis | what does a trajectory mean? | MSD, RDF | modify the trajectory or the forces |
-| application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation | duplicate core physics |
+| application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations | duplicate core physics |
 | backend | where does a numerical kernel run? | CPU, optional PyTorch Ewald | leak device details into models |
 
 This separation is not cosmetic. It determines what can be tested independently
@@ -109,7 +109,7 @@ composition (system, neighbour, constraints)
     |
 algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
-analysis (trajectory) + applications (docking, solvent, water, free energy, QM/MM)
+analysis (trajectory) + applications (docking, solvent, water, free energy, acid-base, QM/MM)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -129,6 +129,7 @@ The actual imports are visible in the source. The important rules are:
 | `protocols.thermostats`, `protocols.pressure` | `composition.system`, foundation | potentials directly |
 | `analysis.trajectory` | `foundation.box` only | `System`, integrators |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
+| `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -579,7 +580,15 @@ solvated ligand. They depend on energies and sample labels.
 4. The score is an interaction energy, not a binding free energy. The tutorial
    and module docstring state this limitation.
 
-### 7.5 Analysis
+### 7.5 Protonation
+
+`acid_base` converts pH and pKa values into discrete-state populations. It does
+not predict pKa or modify a force field. Independent sites factorise; coupled
+sites use explicit microstate free energies. The module depends only on the
+molar gas constant and NumPy, so it can be tested without a cheminformatics
+toolkit.
+
+### 7.6 Analysis
 
 `analysis` accepts positions shaped `(n_frames, n_particles, 3)` and an optional
 `Box`. It does not import `System`, so it can analyse simulations from any

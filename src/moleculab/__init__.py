@@ -19,7 +19,7 @@ The source is organised by architecture layer:
 ``analysis``
     trajectory measurements;
 ``applications``
-    docking, solvent, water, free energy, and QM/MM.
+    docking, solvent, water, free energy, acid-base, and QM/MM.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -52,6 +52,15 @@ from .analysis.trajectory import (
     RDFResult,
     mean_squared_displacement,
     radial_distribution_function,
+)
+from .applications.acid_base import (
+    boltzmann_populations,
+    deprotonated_fraction,
+    mean_net_charge,
+    mean_protonation,
+    protonated_fraction,
+    protonation_microstates,
+    tautomer_populations,
 )
 from .applications.docking import (
     DockingPose,
@@ -230,12 +239,14 @@ __all__ = [
     "backend_info",
     "berendsen_barostat",
     "berendsen_thermostat",
+    "boltzmann_populations",
     "build_neighbour_list",
     "build_solvent_box",
     "build_water_box",
     "combine_lorentz_berthelot",
     "constraint_error",
     "degrees_of_freedom",
+    "deprotonated_fraction",
     "dihedral_angle",
     "dock_flexible_receptor",
     "dock_rigid_ligand",
@@ -254,11 +265,15 @@ __all__ = [
     "max_force_magnitude",
     "mbar",
     "mbar_harmonic",
+    "mean_net_charge",
+    "mean_protonation",
     "mean_squared_displacement",
     "minimize_energy",
     "potential_energy",
     "pressure",
     "pressure_bar",
+    "protonated_fraction",
+    "protonation_microstates",
     "radial_distribution_function",
     "rattle_velocities",
     "receptor_strain_score",
@@ -271,6 +286,7 @@ __all__ = [
     "simulate_velocity_verlet",
     "simulate_velocity_verlet_system",
     "steepest_descent_step",
+    "tautomer_populations",
     "thermodynamic_integration_harmonic",
     "to_numpy",
     "to_torch",

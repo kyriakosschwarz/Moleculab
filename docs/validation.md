@@ -34,6 +34,7 @@ uv run pytest tests/test_units.py tests/test_particles.py -q
 uv run pytest tests/test_potentials.py tests/test_pair_potentials.py -q
 uv run pytest tests/test_force_gradients.py -q
 uv run pytest tests/test_nonbonded.py tests/test_bonded.py tests/test_torsion.py -q
+uv run pytest tests/test_acid_base.py -q
 ```
 
 Covered:
@@ -43,6 +44,8 @@ Covered:
 - harmonic, Lennard-Jones, Coulomb, bond, angle, torsion, reaction-field, and
   typed nonbonded gradients;
 - Lorentz-Berthelot combining and exclusions;
+- Henderson-Hasselbalch limits, microstate normalisation, and Boltzmann
+  populations;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -107,6 +110,7 @@ uv run python examples/bonded_molecule.py
 uv run python examples/minimization.py
 uv run python examples/thermostat.py
 uv run python examples/periodic_box.py
+uv run python examples/protonation.py
 
 uv run python docs/tutorials/individual/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -158,12 +162,15 @@ point when a single operator typo could corrupt every downstream result.
 | constraint satisfaction after state updates | `tests/test_constraints.py` |
 | cell-list candidates contain every true pair | `tests/test_neighbour.py` |
 | opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
+| acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
+| protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
+| Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-385 passed, 1 skipped
+401 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

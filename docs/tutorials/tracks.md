@@ -48,7 +48,7 @@ docking, Ewald, pressure, free energy, FEP/TI/MBAR, QM/MM, and flexible docking.
 
 ## Track B — chemical structure and properties
 
-The first companion module is
+The companion track begins with
 [Chemical structure and conformational behaviour](chemistry/01_chemical_structure.md).
 It covers:
 
@@ -60,12 +60,14 @@ It covers:
 - the difference between a force-field torsion term and the electronic effects
   it represents.
 
-Later modules in this track are proposed, not yet implemented:
+The current status of the track is:
 
 | Module | Focus | Status |
 | --- | --- | --- |
-| Cheminformatics | representations, descriptors, fingerprints, Tanimoto similarity | proposed |
-| pKa, protonation, tautomerism | discrete chemical states and pH populations | proposed |
+| [Chemical structure](chemistry/01_chemical_structure.md) | functional groups, rings, stereochemistry, conformations | available |
+| [Molecular representation](chemistry/02_molecular_representation.md) | graphs, SMILES, aromaticity, conformers | available |
+| [Molecular properties](chemistry/03_molecular_properties.md) | descriptors, fingerprints, Tanimoto | available |
+| [Protonation and tautomerism](chemistry/04_protonation_and_tautomerism.md) | pKa, pH populations, microstates, tautomers | available |
 | Solvation and LogP/LogD | transfer free energy, neutral versus ionized distribution | proposed |
 | ADME-Tox | lipophilicity, solubility, permeability, metabolic soft spots | proposed |
 

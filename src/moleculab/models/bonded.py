@@ -285,6 +285,18 @@ class PeriodicTorsionPotential:
             * (1.0 + np.cos(self.periodicity * float(angle) - self.phase))
         )
 
+    def force_from_angle(self, angle: float) -> float:
+        """Return the generalized torsional force in kJ/(mol rad).
+
+        This is :math:`-dU/d\\phi`, not a Cartesian force in kJ/(mol nm).
+        """
+
+        return float(
+            self.barrier
+            * self.periodicity
+            * np.sin(self.periodicity * float(angle) - self.phase)
+        )
+
     def forces(
         self,
         r_ij: np.ndarray,

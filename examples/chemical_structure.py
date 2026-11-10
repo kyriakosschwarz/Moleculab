@@ -85,6 +85,32 @@ def main() -> None:
         energy = torsion.energy_from_angle(np.deg2rad(angle))
         print(f"  phi = {angle:5.1f} deg: U = {energy:5.2f} kJ/mol")
     print()
+
+    angles = np.linspace(0.0, 360.0, 361)
+    energies = np.array(
+        [torsion.energy_from_angle(np.deg2rad(angle)) for angle in angles]
+    )
+    print("Full rotational scan")
+    print(f"  minimum: {np.min(energies):5.2f} kJ/mol")
+    print(f"  maximum: {np.max(energies):5.2f} kJ/mol")
+    print(f"  barrier: {np.max(energies) - np.min(energies):5.2f} kJ/mol")
+    print(f"  U(0) = U(360): {energies[0]:.2f} = {energies[-1]:.2f} kJ/mol")
+    print()
+
+    print("Conformational entropy: anti/gauche toy model at 300 K")
+    state_energies = np.array([0.0, 0.9, 0.9])
+    rt = 0.008314462618 * 300.0
+    weights = np.exp(-state_energies / rt)
+    probabilities = weights / np.sum(weights)
+    entropy_j_per_mol_k = -0.008314462618 * 1000.0 * np.sum(
+        probabilities * np.log(probabilities)
+    )
+    for index, (energy, probability) in enumerate(
+        zip(state_energies, probabilities)
+    ):
+        print(f"  state {index}: E = {energy:4.1f} kJ/mol, p = {probability:.3f}")
+    print(f"  conformational entropy = {entropy_j_per_mol_k:.2f} J/(mol K)")
+    print()
     print("Minima are staggered; the eclipsed barriers are 2k.")
 
 

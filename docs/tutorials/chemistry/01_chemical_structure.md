@@ -164,10 +164,49 @@ phi =   0.0 deg: U = 4.00 kJ/mol
 phi =  60.0 deg: U = 0.00 kJ/mol
 phi = 120.0 deg: U = 4.00 kJ/mol
 phi = 180.0 deg: U = 0.00 kJ/mol
+
+Full rotational scan
+  minimum: 0.00 kJ/mol
+  maximum: 4.00 kJ/mol
+  barrier: 4.00 kJ/mol
+  U(0) = U(360): 4.00 = 4.00 kJ/mol
+
+Conformational entropy: anti/gauche toy model at 300 K
+  state 0: E = 0.0 kJ/mol, p = 0.418
+  state 1: E = 0.9 kJ/mol, p = 0.291
+  state 2: E = 0.9 kJ/mol, p = 0.291
+  conformational entropy = 9.01 J/(mol K)
 ```
 
-The minimiser does not know chemistry. It follows the force gradient. The
-torsion term creates the conformational preference.
+The phase convention matters. The implementation uses
+
+$$ U(\phi)=k\left[1+\cos(n\phi-\delta)\right]. $$
+
+For the example, $k=2$ kJ/mol, $n=3$, and $\delta=0$. Here $k$ is the
+**energy amplitude** of the torsion term, not a harmonic force constant. Its
+unit is kJ/mol. The minima are at 60°, 180°, and 300°, where
+$\cos(3\phi)=-1$. The maxima are at 0°, 120°, and 240°. The energy ranges from
+0 to $2k=4$ kJ/mol. The minimum being zero is an energy reference choice, not a
+claim that the conformation has zero absolute energy.
+
+The full scan checks the physical periodic property
+
+$$ U(\phi)=U(\phi+360^\circ). $$
+
+For this threefold term, the stronger statement is
+
+$$ U(\phi)=U(\phi+120^\circ). $$
+
+The tests in `tests/test_torsion.py` check periodicity, the three minima, the
+three barriers, and the barrier height.
+
+The generalized force conjugate to the dihedral coordinate is
+
+$$ F_\phi=-\frac{dU}{d\phi}=kn\sin(n\phi-\delta). $$
+
+This is a force in kJ/(mol rad), not a Cartesian force in kJ/(mol nm). The
+tests compare it with a central finite difference at asymmetric angles, where
+the derivative is not trivially zero.
 
 ### 6.1 Why the starting geometry matters
 
@@ -178,9 +217,54 @@ double-well tutorial, now with a chemical interpretation.
 ### 6.2 Conformational entropy
 
 A molecule with several low-energy rotamers has more conformational entropy
-than a rigid molecule. When it binds, it may lose some of that freedom. The
-resulting entropy penalty is part of the binding free energy. A ring or a
-constrained bond reduces the number of rotamers and can change that penalty.
+than a rigid molecule. For a simplified set of states with energies $E_i$, the
+Boltzmann probability is
+
+$$ p_i=\frac{e^{-E_i/(RT)}}{\sum_j e^{-E_j/(RT)}}. $$
+
+The molar conformational entropy is
+
+$$ S=-R\sum_i p_i\ln p_i. $$
+
+For a toy butane model with one anti state at 0 kJ/mol and two gauche states at
+0.9 kJ/mol, at 300 K:
+
+```text
+state 0: E = 0.0 kJ/mol, p = 0.418
+state 1: E = 0.9 kJ/mol, p = 0.291
+state 2: E = 0.9 kJ/mol, p = 0.291
+conformational entropy = 9.01 J/(mol K)
+```
+
+For comparison, three equally populated states would give $R\ln 3\approx9.13$
+J/(mol K). The lower value reflects the anti preference.
+
+This is a **discrete three-state toy model**, not a quantitative prediction of
+butane's conformational entropy. Real conformational basins occupy continuous
+regions of configuration space, and a basin's statistical weight depends on its
+energy and the volume of configurations it contains. The continuous
+configurational partition function is
+
+$$ Z_{\mathrm{conf}}=\int e^{-U(\mathbf R)/(RT)}d\mathbf R. $$
+
+The toy model is a bridge to that idea, not a replacement for it.
+
+The entropy result is also the bridge to binding thermodynamics: a flexible
+ligand can lose conformational entropy when it binds. The lowest-energy
+conformer alone does not determine the population or the free energy.
+
+### 6.3 The ideal model versus real butane
+
+The threefold term is an idealised model. Real butane has:
+
+- one anti minimum;
+- two gauche minima at higher energy than anti;
+- different eclipsed barriers;
+- steric and electronic contributions beyond a single cosine.
+
+A real force field combines several torsional and nonbonded terms. The tutorial
+uses the simple term because it makes the periodicity, minima, and barriers
+visible. It should not be read as a quantitative butane potential.
 
 ## 7. What a force field does and does not represent
 
@@ -274,5 +358,4 @@ modules. A gas-phase torsion scan is a starting point, not the final answer.
   chemistry, not a replacement for the physics sequence.
 
 **Previous:** [04b — From springs to chemistry](../individual/04b_chemical_bridge.md).  
-**Next:** [Learning tracks](../tracks.md) and the main tutorial's docking and
-free-energy sections.
+**Next:** [02 — Molecular representation](02_molecular_representation.md).

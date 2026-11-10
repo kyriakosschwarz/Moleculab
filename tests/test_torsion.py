@@ -95,6 +95,45 @@ def test_periodic_torsion_energy_at_known_angles():
     assert potential.energy(*bond_vectors(pi_positions)) == pytest.approx(0.0, abs=1e-12)
 
 
+def test_energy_from_angle_is_periodic_over_a_full_rotation():
+    potential = PeriodicTorsionPotential(barrier=2.0, periodicity=3)
+
+    for angle in np.linspace(-np.pi, np.pi, 17):
+        assert potential.energy_from_angle(angle) == pytest.approx(
+            potential.energy_from_angle(angle + 2.0 * np.pi),
+            abs=1e-12,
+        )
+
+
+def test_energy_from_angle_has_the_expected_threefold_barriers():
+    potential = PeriodicTorsionPotential(barrier=2.0, periodicity=3)
+    angles = np.linspace(0.0, 2.0 * np.pi, 3601)
+    energies = np.array(
+        [potential.energy_from_angle(angle) for angle in angles]
+    )
+
+    assert float(np.max(energies) - np.min(energies)) == pytest.approx(4.0)
+    for minimum in [np.deg2rad(60.0), np.deg2rad(180.0), np.deg2rad(300.0)]:
+        assert potential.energy_from_angle(minimum) == pytest.approx(0.0, abs=1e-12)
+    for maximum in [0.0, np.deg2rad(120.0), np.deg2rad(240.0)]:
+        assert potential.energy_from_angle(maximum) == pytest.approx(4.0, abs=1e-12)
+
+
+def test_generalized_torsion_force_matches_the_energy_derivative():
+    potential = PeriodicTorsionPotential(barrier=2.0, periodicity=3, phase=0.3)
+    h = 1e-6
+
+    for angle in [np.deg2rad(30.0), np.deg2rad(100.0), np.deg2rad(-40.0)]:
+        numerical_force = -(
+            potential.energy_from_angle(angle + h)
+            - potential.energy_from_angle(angle - h)
+        ) / (2.0 * h)
+        assert potential.force_from_angle(angle) == pytest.approx(
+            numerical_force,
+            abs=1e-6,
+        )
+
+
 def test_periodic_torsion_energy_is_periodic():
     potential = PeriodicTorsionPotential(barrier=2.0, periodicity=2, phase=0.3)
     r_ij = np.array([0.0, 1.0, 0.0])
