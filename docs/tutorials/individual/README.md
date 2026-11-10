@@ -1,5 +1,9 @@
 # Individual tutorials 1–10
 
+**New here?** Read the [general introduction](../introduction.md) first. It
+explains how the tutorial sequence connects to CADD applications such as force
+fields, molecular dynamics, docking, free energy, and QM/MM.
+
 These ten tutorials expand the first ten sections of
 [`../tutorial.md`](../tutorial.md) into a slower, more visual path from units
 to interacting molecular systems.
@@ -73,6 +77,10 @@ From tutorial 05 onward, the recurring cast grows:
 | [08 — Energy minimization](08_minimization.md) | steepest descent, backtracking, convergence | `minimize_energy`, `steepest_descent_step` | energy and force histories |
 | [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
 | [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
+
+After part 10, continue with the [main tutorial](../tutorial.md) through
+solvent, water, docking, Ewald, pressure, and free energy. The sequence ends
+with the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
 
 For larger systems, [`src/moleculab/neighbour.py`](../../../src/moleculab/neighbour.py)
 provides an optional cell-list candidate screen. Use
@@ -210,3 +218,9 @@ uv run python docs/tutorials/individual/generate_visuals.py
 ```
 
 The assets are in [`assets/`](assets/).
+
+## Companion guides
+
+- [Troubleshooting and error diagnosis](../troubleshooting.md)
+- [Notebook and visualization prompts](../visualization_prompts.md)
+- [Answer keys and expected magnitudes](../answer_keys.md)

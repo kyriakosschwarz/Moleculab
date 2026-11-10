@@ -1,5 +1,9 @@
 # Moleculab tutorial: from one particle to a small simulation
 
+**New here?** Read the [introduction](introduction.md) first. It explains why
+the sequence starts with units and one particle and how it connects to force
+fields, MD, docking, free energy, and QM/MM.
+
 This tutorial is a guided path through the implemented library.  It is meant
 to be read with the code open.  Each section answers three questions:
 
@@ -18,6 +22,12 @@ For a slower, more visual path through sections 1–10, see
 [`individual/README.md`](individual/README.md) and the ten deep-dive tutorials
 inside `individual/`. The corresponding software layers, module dependencies,
 and design decisions are in [`../architecture.md`](../architecture.md).
+
+Companion guides:
+
+- [Troubleshooting and error diagnosis](troubleshooting.md)
+- [Notebook and visualization prompts](visualization_prompts.md)
+- [Answer keys and expected magnitudes](answer_keys.md)
 
 ## 1. Units first
 
@@ -1019,6 +1029,17 @@ Check: `uv run pytest tests/test_backend.py -q`.
     the Ewald timing and checksum.
 
 ## Where to go next
+
+Before extending the library, work through the
+[imatinib–BCR-ABL1 capstone](capstone_imatinib.md). It connects the disease
+biology, kinase inhibition, force fields, water, docking, MD, free energy, and
+resistance mutations to the components you have built. Use the tutorials as the foundations and the case
+study as the integration exercise.
+
+Water deserves special attention throughout. It screens electrostatics, forms
+hydrogen bonds, fills pockets, and contributes entropy when displaced. The
+water, solvent, Ewald, and solvated-alchemy modules exist because binding is an
+aqueous process; a gas-phase interaction energy is not a binding free energy.
 
 The remaining roadmap items are molecular FEP/TI/MBAR for complex systems,
 trained/empirical binding-affinity scoring, and real QM/MM/DFT.

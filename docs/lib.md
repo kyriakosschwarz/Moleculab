@@ -1,6 +1,7 @@
 > **As-built architecture:** see [`architecture.md`](architecture.md) for the
 > implemented layers, module dependencies, and decision records. This file is
-> the long-term roadmap.
+> the long-term roadmap. For the CADD-focused course overview, see
+> [`tutorials/introduction.md`](tutorials/introduction.md).
 
 Building a molecular simulation library from scratch: From physics to drug discovery
 I think this is an excellent way to learn computational drug discovery. Rather than treating GROMACS, OpenMM, ORCA or AutoDock as black boxes, we'll gradually build our own small molecular simulation engine and understand exactly what happens inside it.

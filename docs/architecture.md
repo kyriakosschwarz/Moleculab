@@ -871,6 +871,8 @@ The tutorials follow the same order, which is not a coincidence.
 
 **Related documents:** [`lib.md`](lib.md) for the roadmap,
 [`validation.md`](validation.md) for the validation levels,
-[`tutorials/tutorial.md`](tutorials/tutorial.md) for the guided path, and the
+[`tutorials/introduction.md`](tutorials/introduction.md) for the CADD-focused
+course overview, [`tutorials/tutorial.md`](tutorials/tutorial.md) for the
+guided path, and the
 [individual tutorials](tutorials/individual/README.md) for the layer-by-layer
 course.

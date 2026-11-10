@@ -68,6 +68,9 @@ remain on the roadmap.
 
 The longer roadmap lives in [`docs/lib.md`](docs/lib.md).  The as-built
 architecture is described in [`docs/architecture.md`](docs/architecture.md).
+[`docs/tutorials/introduction.md`](docs/tutorials/introduction.md) explains how
+the tutorial sequence connects to CADD applications and ends with the
+[`docs/tutorials/capstone_imatinib.md`](docs/tutorials/capstone_imatinib.md).
 The first implementation notes are in [`docs/energies.md`](docs/energies.md),
 [`docs/tutorials/tutorial.md`](docs/tutorials/tutorial.md) is a guided path
 from one particle to a small molecular simulation,
@@ -77,6 +80,11 @@ visual tutorials for the first ten concepts,
 combined-system, numerical, and reproducibility checks, and
 [`docs/acceleration.md`](docs/acceleration.md) covers CPU/ROCm/NPU backend
 choices.
+
+Companion guides for the tutorial sequence:
+[`troubleshooting.md`](docs/tutorials/troubleshooting.md),
+[`visualization_prompts.md`](docs/tutorials/visualization_prompts.md), and
+[`answer_keys.md`](docs/tutorials/answer_keys.md).
 
 ## Install with uv
 
