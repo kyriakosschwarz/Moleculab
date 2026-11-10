@@ -77,8 +77,9 @@ minimisation, thermostats, periodic boundaries, trajectory analysis, solvent
 and water models, docking, Ewald electrostatics, pressure coupling, FEP/TI/MBAR,
 alchemical soft-core models, a finite-difference QM/MM model, acid-base
 protonation and tautomer population bookkeeping, a provenance-led imatinib
-capstone, a controlled harmonic free-energy study, and a final scientific audit.
-An optional PyTorch Ewald backend accelerates the reciprocal Ewald path.
+capstone, a controlled harmonic free-energy study, a final scientific audit, and
+a reproducible RDKit/PyMOL visual learning layer. An optional PyTorch Ewald
+backend accelerates the reciprocal Ewald path.
 
 The roadmap includes more realistic force fields, particle-mesh Ewald,
 triclinic boxes, enhanced sampling, trained scoring functions, and real quantum

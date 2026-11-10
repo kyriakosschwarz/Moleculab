@@ -119,6 +119,7 @@ analysis (trajectory, binding sites)
                     structure provenance, ligand identity, hydrogen and water
                     evidence, interaction robustness, thermodynamic boundaries,
                     scientific audit)
+    + visualization (RDKit 2D, PyMOL 3D, figure metadata)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -164,6 +165,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.thermodynamic_interpretation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators, free-energy estimators |
 | `applications.free_energy_study` | `applications.fep`, `models.potentials`, `foundation.units`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.scientific_audit` | `applications.free_energy_study`, `applications.structure_manifest`, `foundation.units`, `models.potentials`, NumPy | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `visualization` | validated application records, foundation, optional RDKit/PyMOL | scientific inference, record mutation, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -203,6 +205,14 @@ dependencies and pass explicit records, graphs, candidate mappings, coordinate
 records, and protein/water records into the library. This keeps the core
 installable with NumPy alone and keeps file-format decisions outside the physics
 and analysis layers.
+
+`visualization` is a separate consumer layer. `visualization.molecular_2d`
+takes the validated reference graph and a selected chemical state and produces
+an RDKit diagram; `visualization.protein_ligand` takes the manifest, binding-site
+record, and explicit source path and produces deterministic PyMOL renders.
+Every figure writes metadata with source checksum, tool version, camera view,
+alt text, and scientific limitations. The layer does not assign protonation,
+infer interactions, classify favourability, or modify scientific geometry.
 
 ## 5. Core data structures and contracts
 
@@ -1084,6 +1094,8 @@ Every stage is already represented by a module:
   preparation/sampling requirements while leaving ΔG explicitly uncomputed.
 - `scientific_audit` checks the record chain, documentation, constants,
   derivatives, boundaries, checksums, seeds, and the final stop-line.
+- `visualization` turns validated records into reproducible 2D and 3D figures
+  with evidence legends and metadata.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1239,6 +1251,7 @@ These are the rules that keep the layers honest.
 | thermodynamic boundaries keep structural counts separate from a null free energy and report unmet requirements | `tests/test_thermodynamic_interpretation.py` |
 | exact harmonic partition functions reproduce free-energy differences and FEP convergence reports overlap and replicate uncertainty | `tests/test_free_energy_study.py` |
 | the final audit checks documentation, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end stop-line | `tests/test_scientific_audit.py` |
+| figure metadata, deterministic render scripts, and RDKit 2D output are tested | `tests/test_visualization.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1291,7 +1304,8 @@ For a new contributor, the source is best read in this order:
     `applications/solvated_alchemy.py`, `applications/free_energy_study.py` — free energy and exact-reference convergence diagnostics.
 14. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
     quantum model.
-15. `backend.py` — optional acceleration.
+15. `visualization/` — reproducible 2D and 3D figures and metadata.
+16. `backend.py` — optional acceleration.
 
 The tutorials follow the same order, which is not a coincidence.
 

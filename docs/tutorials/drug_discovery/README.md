@@ -8,10 +8,10 @@
 > water, and electrostatics; Track B modules 01–04 for chemical identity and
 > protonation state.
 >
-> **Status.** The docking foundations are available. Protein-structure and
-> interaction-fingerprint modules are planned. The
-> [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md) is the current
-> integration exercise.
+> **Status.** All ten structural and thermodynamic modules are available. The
+> [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md) is the integration
+> exercise, and its [visual learning layer](visualizations/README.md) now
+> includes reproducible molecular and binding-site figures.
 
 Track C is where the engine becomes a molecular-recognition argument. A
 protein structure is not just a large collection of particles, and a docking
@@ -43,6 +43,7 @@ with geometry and representation before it introduces scoring.
 | [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | available |
 | [09 — Lead optimisation and SAR](09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | available |
 | [10 — Structural observations to thermodynamics](10_structural_observations_to_thermodynamics.md) | occupancy, ensembles, free energy, and why contacts are not affinities | available |
+| [Visual learning layer](visualizations/README.md) | reproducible 2D chemical and 3D protein–ligand figures with evidence legends | Batch 1 available |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
 representation and import boundary that the later modules assume.

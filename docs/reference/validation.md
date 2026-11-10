@@ -60,6 +60,7 @@ uv run pytest tests/test_interaction_robustness.py -q
 uv run pytest tests/test_thermodynamic_interpretation.py -q
 uv run pytest tests/test_free_energy_study.py -q
 uv run pytest tests/test_scientific_audit.py -q
+uv run pytest tests/test_visualization.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -90,6 +91,9 @@ Covered:
   weight concentration, and replicate uncertainty;
 - final documentation, provenance-chain, constant, gradient, boundary, checksum,
   seed, and end-to-end audit checks;
+- figure metadata, deterministic render-script selections, and RDKit 2D
+  accessibility output (RDKit test skipped when the optional dependency is
+  absent);
 - pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - dipole moments, origin dependence, and charge/position validation;
 - pH-dependent LogD corrections for monoprotic acids and bases;
@@ -243,6 +247,7 @@ point when a single operator typo could corrupt every downstream result.
 | structural counts, missing thermodynamic terms, and preparation/sampling requirements are separated from a null free energy | `tests/test_thermodynamic_interpretation.py` |
 | exact partition functions reproduce harmonic free-energy differences and FEP convergence reports overlap and replicate spread | `tests/test_free_energy_study.py` |
 | the final audit checks documentation links, constants, derivatives, provenance, boundaries, checksums, seeds, and the end-to-end demonstration | `tests/test_scientific_audit.py` |
+| figure metadata, deterministic PyMOL scripts, and RDKit 2D accessibility output are tested | `tests/test_visualization.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

@@ -77,6 +77,8 @@ uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 uv run python examples/drug_discovery/capstone_interaction_robustness.py
 uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
 uv run python examples/advanced/free_energy_convergence.py
+uv run python examples/drug_discovery/capstone_final_audit.py
+uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -113,8 +115,10 @@ structural evidence to the requirements for a binding free-energy calculation
 and writes `data/structures/2HYY.thermodynamic-interpretation.json`. The
 seventeenth runs the controlled harmonic free-energy study and writes
 `data/free_energy/harmonic-fep-study.json`; it is not an imatinib calculation.
-None of the structural commands docks a ligand, predicts affinity, or estimates
-a binding free energy.
+The eighteenth runs the final scientific audit and writes
+`data/free_energy/capstone-scientific-audit.json`. The nineteenth generates the
+three visual-learning figures and their metadata. None of the structural
+commands docks a ligand, predicts affinity, or estimates a binding free energy.
 
 ## 1. Why imatinib?
 
@@ -1086,6 +1090,66 @@ The final educational claim is therefore narrow and explicit: Moleculab can
 build an auditable structural argument, explain why it is not a binding free
 energy, and demonstrate free-energy estimation on a model with a known exact
 answer. It cannot yet calculate the imatinib binding free energy.
+
+### 4.20 Visual learning layer: molecular identity and structure
+
+The first visualization batch adds three reproducible figures generated from
+the existing records:
+
+```bash
+uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
+```
+
+The companion metadata is
+`data/figures/capstone-visualizations.json`. It records the source checksum,
+protein chain, ligand instance, model number, tool versions, camera view,
+generated-from records, alt text, and scientific limitations. The detailed
+visual legend and regeneration notes are in
+[`drug_discovery/visualizations/README.md`](drug_discovery/visualizations/README.md).
+
+![Reference-neutral imatinib with donor and acceptor atoms highlighted](drug_discovery/visualizations/2HYY-imatinib-2d.svg)
+
+The RDKit diagram shows the reference-neutral chemical state. Blue atoms are
+hydrogen-bond donors, orange atoms are acceptors, and purple atoms are both.
+Atom labels are reference graph indices. Hydrogens are omitted. This figure
+teaches molecular identity and functional features; it does not assign a
+conformer, a protonation population, or an interaction.
+
+![Imatinib in the ABL1 binding site](drug_discovery/visualizations/2HYY-imatinib-abl1-overview.png)
+
+The PyMOL overview shows the selected protein cartoon, imatinib as yellow
+sticks, a restrained surface over residues within 4 Å of the ligand, and nearby
+waters as blue spheres. This figure teaches binding-site location and molecular
+recognition context; it does not establish affinity, a unique binding mode, or
+an equilibrium ensemble.
+
+![Imatinib binding-pocket contacts](drug_discovery/visualizations/2HYY-imatinib-binding-pocket.png)
+
+The close-up shows selected contact residues, the ligand, nearby waters, and
+gray dashed lines for three measured donor–acceptor distances. The dashed lines
+are geometric distances, not classified hydrogen bonds. The figure does not show
+generated hydrogens, angular criteria, interaction energies, or water roles.
+
+The visual language is deliberately restrained:
+
+| Visual cue | Meaning |
+| --- | --- |
+| gray cartoon and pale surface | deposited protein structure |
+| yellow sticks | deposited ligand geometry |
+| cyan sticks | selected contact residues |
+| blue spheres | deposited nearby waters |
+| gray dashed lines | measured atom–atom distances |
+| blue/orange/purple atom highlights | donor/acceptor/both features in the selected state |
+
+No color means “energetically favourable.” No nearby contact is drawn as a
+hydrogen bond merely because it is close. The figures are static documentation
+first; interactive 3D exploration remains optional future work.
+
+This is Visualization Batch 1. Later batches can add chemical-state
+comparisons, evidence matrices, robustness plots, exact-versus-sampled
+free-energy figures, and a browser-based structure viewer. They should follow
+the same rule: consume validated records, teach one scientific idea, distinguish
+observation from hypothesis, and state what the figure does not establish.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction

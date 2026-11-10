@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "figures": [
+    {
+      "figure_id": "capstone-ligand-2d",
+      "title": "Imatinib reference-neutral chemical state",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-2d.svg",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom",
+        "generated_from": [
+          "data/structures/2HYY.manifest.json",
+          "data/structures/2HYY.ligand-identity.json",
+          "data/structures/2HYY.binding-site.json",
+          "data/structures/2HYY.chemical-states.json"
+        ]
+      },
+      "visualization_tool": "RDKit",
+      "tool_version": "2026.09.1",
+      "scientific_limitations": [
+        "2D depiction of the selected chemical state, not a conformer.",
+        "Generated hydrogen positions and state populations are not shown.",
+        "Atom labels are reference-graph indices, not deposited atom names.",
+        "The drawing is not an interaction, energy, or affinity diagram.",
+        "Selected state donors/acceptors: 4/4 atoms highlighted."
+      ],
+      "alt_text": "Two-dimensional chemical structure of imatinib with donor and acceptor atoms highlighted and reference atom indices shown.",
+      "caption": "Reference-neutral imatinib graph. Blue atoms are hydrogen-bond donors, orange atoms are acceptors, and purple atoms are both. Atom labels are reference indices; hydrogens are omitted.",
+      "camera_view": null
+    },
+    {
+      "figure_id": "capstone-abl1-overview",
+      "title": "Imatinib in the ABL1 binding site",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-abl1-overview.png",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom",
+        "generated_from": [
+          "data/structures/2HYY.manifest.json",
+          "data/structures/2HYY.ligand-identity.json",
+          "data/structures/2HYY.binding-site.json",
+          "data/structures/2HYY.chemical-states.json"
+        ]
+      },
+      "visualization_tool": "PyMOL",
+      "tool_version": "3.1.0",
+      "scientific_limitations": [
+        "One crystallographic structure and one selected ligand copy.",
+        "Cartoon and surface are representations of the deposited coordinates, not new data.",
+        "The ligand orientation is from the crystal structure, not a predicted pose.",
+        "No binding free energy or interaction favourability is shown."
+      ],
+      "alt_text": "Protein cartoon of ABL1 with a yellow imatinib molecule in the binding pocket and a pale transparent surface around nearby residues.",
+      "caption": "Imatinib (yellow sticks) in the ABL1 binding site, chain A. The pale surface marks protein residues within 4 \u00c5 of the ligand. This is one crystallographic observation, not an ensemble or an affinity estimate.",
+      "camera_view": [
+        0.6957817673683167,
+        0.5440349578857422,
+        0.4689495861530304,
+        -0.6882851123809814,
+        0.6916530728340149,
+        0.2188141644001007,
+        -0.20530785620212555,
+        -0.4750179350376129,
+        0.8556907176971436,
+        0.0,
+        0.0,
+        -98.46599578857422,
+        14.655990600585938,
+        14.902788162231445,
+        17.53592872619629,
+        77.63134002685547,
+        119.30065155029297,
+        -20.0
+      ]
+    },
+    {
+      "figure_id": "capstone-binding-pocket",
+      "title": "Imatinib binding-pocket contacts",
+      "image_path": "docs/tutorials/drug_discovery/visualizations/2HYY-imatinib-binding-pocket.png",
+      "context": {
+        "source_structure": "2HYY",
+        "structure_sha256": "4845da16db0c39e36f8531657c955dff7e92b78be02fa55c4d50eed4425de018",
+        "protein_chain": "A",
+        "ligand_instance": "E",
+        "model_number": 1,
+        "coordinate_units": "angstrom",
+        "generated_from": [
+          "data/structures/2HYY.manifest.json",
+          "data/structures/2HYY.ligand-identity.json",
+          "data/structures/2HYY.binding-site.json",
+          "data/structures/2HYY.chemical-states.json"
+        ]
+      },
+      "visualization_tool": "PyMOL",
+      "tool_version": "3.1.0",
+      "scientific_limitations": [
+        "Dashed lines are measured atom-atom contacts, not classified hydrogen bonds.",
+        "The figure does not show hydrogen positions or angular criteria.",
+        "Nearby waters are geometric observations; water roles remain unassigned.",
+        "The figure does not imply energetic favourability or binding affinity."
+      ],
+      "alt_text": "Close-up of the imatinib binding pocket with cyan contact residues, a yellow ligand, blue waters, and gray dashed distance measurements for three polar contacts.",
+      "caption": "Binding-pocket close-up. Cyan residues are contact residues, yellow sticks are the ligand, and blue spheres are nearby waters. Gray dashed lines are measured donor-acceptor distances for three polar contacts; they are not classified hydrogen bonds. No energetic interpretation is implied.",
+      "camera_view": [
+        0.7547577023506165,
+        0.3951947093009949,
+        0.5236048102378845,
+        -0.6028028130531311,
+        0.7326815724372864,
+        0.3159217834472656,
+        -0.2587849199771881,
+        -0.5540748238563538,
+        0.7912214994430542,
+        0.0,
+        0.0,
+        -59.97748565673828,
+        14.251351356506348,
+        15.282540321350098,
+        17.63226890563965,
+        47.286705017089844,
+        72.66826629638672,
+        -20.0
+      ]
+    }
+  ]
+}
