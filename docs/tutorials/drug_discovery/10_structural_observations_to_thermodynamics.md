@@ -300,6 +300,20 @@ It demonstrates:
 
 The numbers are teaching values, not a binding-affinity predictor.
 
+The capstone adds a record-based version:
+
+```bash
+uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
+```
+
+It consumes the imatinib structural, interaction, hydrogen, water, and
+robustness records and writes
+`data/structures/2HYY.thermodynamic-interpretation.json`. The record separates
+structural counts from thermodynamic claims, lists the missing interaction,
+desolvation, entropy, water, strain, standard-state, sampling, and uncertainty
+terms, and leaves `binding_free_energy_kj_per_mol` null. It is a boundary
+record, not an affinity calculation.
+
 ## 13. Exercises
 
 ### Reasoning

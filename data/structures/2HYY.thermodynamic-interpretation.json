@@ -1,0 +1,491 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "ligand_coordinate_record_path": "data/structures/2HYY.ligand-coordinates.json",
+  "ligand_coordinate_record_sha256": "eae85cb84fa3faa25d4ba8ead2853b153ac84fd1e1f8ea22716438f3cdd74b4c",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "chemical_state_record_path": "data/structures/2HYY.chemical-states.json",
+  "chemical_state_record_sha256": "c34dfcdcd5070f136d9374340c56971aa349eccf8400d9e6749d3f7407ba727a",
+  "protein_preparation_record_path": "data/structures/2HYY.protein-preparation.json",
+  "protein_preparation_record_sha256": "5950b4a2545796816a154629e964f82fecad7ec2abd9ef6f66311e4b6563218a",
+  "hydrogen_evidence_record_path": "data/structures/2HYY.hydrogen-evidence.json",
+  "hydrogen_evidence_record_sha256": "d1e0e30631bf3f1f25a662274beceb67258082dc0bd9138bc2b2854d6a72da32",
+  "water_evidence_record_path": "data/structures/2HYY.water-evidence.json",
+  "water_evidence_record_sha256": "15b94681941ed31180865d875481c8876576982f2dec0e0a3ac9db9ac730ff23",
+  "combination_interaction_record_path": "data/structures/2HYY.combination-interactions.json",
+  "combination_interaction_record_sha256": "615d6c836143dfef0123f08848a3cc66ae0fe2d09f48e87ee22cc3d7b172c067",
+  "interaction_robustness_record_path": "data/structures/2HYY.interaction-robustness.json",
+  "interaction_robustness_record_sha256": "7b39117b5bcdf79c0baf56b5d63f67f1e0d9014546136ad2cbebdf5a8c2fda93",
+  "accession": "2HYY",
+  "protein_selection": {
+    "label_asym_id": "A",
+    "auth_asym_id": "A"
+  },
+  "ligand_selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "reference_ligand_state_id": "reference-neutral",
+  "reference_protein_state_id": "standard-templates",
+  "structural_summary": {
+    "ligand_state_count": 8,
+    "protein_state_count": 2,
+    "combination_count": 16,
+    "ligand_contact_atom_count": 34,
+    "protein_contact_atom_count": 53,
+    "hydrophobic_pair_count": 18,
+    "aromatic_pair_count": 1,
+    "supported_hydrogen_bond_count": 2,
+    "plausible_water_bridge_count": 1,
+    "robustness_conclusion_counts": [
+      {
+        "status": "invariant",
+        "count": 4
+      },
+      {
+        "status": "assumption_sensitive",
+        "count": 8
+      },
+      {
+        "status": "unsupported",
+        "count": 3
+      },
+      {
+        "status": "unknown",
+        "count": 2
+      }
+    ]
+  },
+  "ensemble_status": "not_available",
+  "ensemble_detail": "The deposited crystal structure is one structural observation, not an equilibrium Boltzmann ensemble.",
+  "free_energy_status": "not_computed",
+  "binding_free_energy_kj_per_mol": null,
+  "boundaries": [
+    {
+      "boundary_id": "hydrophobic_pairs_not_energy",
+      "structural_observation": "18 hydrophobic atom pairs are classified in the reference state combination.",
+      "thermodynamic_claim": "Each pair contributes a known favourable binding enthalpy.",
+      "status": "not_established",
+      "reason": "Interaction classification is geometric and template-conditioned; no pair energy, desolvation, entropy, or ensemble average is available.",
+      "required_evidence": [
+        "force-field interaction energy",
+        "desolvation free energy",
+        "conformational entropy",
+        "equilibrium ensemble"
+      ]
+    },
+    {
+      "boundary_id": "aromatic_pair_not_energy",
+      "structural_observation": "1 aromatic ring pair is classified.",
+      "thermodynamic_claim": "The ring pair contributes a known ring-stacking free energy.",
+      "status": "not_established",
+      "reason": "Robustness across the tested cutoffs does not supply an energy or a population.",
+      "required_evidence": [
+        "ring interaction energy",
+        "solvation free energy",
+        "configurational population"
+      ]
+    },
+    {
+      "boundary_id": "hydrogen_bonds_not_energy",
+      "structural_observation": "2 ligand-donor candidates satisfy the tested D-H...A criteria.",
+      "thermodynamic_claim": "These candidates contribute a known hydrogen-bond free energy.",
+      "status": "not_established",
+      "reason": "Hydrogen positions are generated, protein-donor hydrogens are unavailable, and geometric criteria are not energies.",
+      "required_evidence": [
+        "experimental or converged hydrogen positions",
+        "hydrogen-bond energy model",
+        "solvent and entropy contributions"
+      ]
+    },
+    {
+      "boundary_id": "water_bridge_not_energy",
+      "structural_observation": "1 water bridge is geometrically plausible.",
+      "thermodynamic_claim": "The water-mediated interaction has a known free-energy contribution.",
+      "status": "not_established",
+      "reason": "Water orientation and roles are unassigned, crystallographic occupancy is not an equilibrium probability, and no displacement free energy is available.",
+      "required_evidence": [
+        "water orientation and chemical roles",
+        "equilibrium water occupancy",
+        "water displacement free energy"
+      ]
+    },
+    {
+      "boundary_id": "counts_not_ranking",
+      "structural_observation": "16 state combinations each classify 19 interactions.",
+      "thermodynamic_claim": "A combination with more classified interactions binds more strongly.",
+      "status": "not_established",
+      "reason": "Counts are not additive energies, and chemical-state hypotheses are not equilibrium populations.",
+      "required_evidence": [
+        "free-energy calculation per state",
+        "state populations",
+        "experimental affinity validation"
+      ]
+    },
+    {
+      "boundary_id": "snapshot_not_ensemble",
+      "structural_observation": "The deposited crystal structure supplies one structural observation.",
+      "thermodynamic_claim": "The crystal structure defines the equilibrium Boltzmann population.",
+      "status": "not_established",
+      "reason": "A crystal structure is a structural observation; no ensemble or partition function is available.",
+      "required_evidence": [
+        "equilibrium sampling",
+        "configurational partition function",
+        "population estimates with uncertainty"
+      ]
+    },
+    {
+      "boundary_id": "robustness_not_certainty",
+      "structural_observation": "Robustness conclusions: 4 invariant, 8 assumption-sensitive, 3 unsupported, 2 unknown.",
+      "thermodynamic_claim": "Invariant classifications are experimentally validated or physically certain.",
+      "status": "not_established",
+      "reason": "Invariance is only with respect to the tested assumption range; it is not an energy or an experimental validation.",
+      "required_evidence": [
+        "experimental validation",
+        "free-energy calculation",
+        "tested-range justification"
+      ]
+    },
+    {
+      "boundary_id": "states_not_populations",
+      "structural_observation": "8 ligand states and 2 protein states are enumerated.",
+      "thermodynamic_claim": "Their relative populations or free energies are known.",
+      "status": "not_estimated",
+      "reason": "No pKa/population model or state free energies are supplied.",
+      "required_evidence": [
+        "state free energies",
+        "pKa and tautomer populations",
+        "experimental state validation"
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "term_id": "interaction_enthalpy",
+      "name": "Interaction enthalpy",
+      "status": "not_estimated",
+      "detail": "Requires a force field and an ensemble average of ligand-protein interaction energies in the bound state.",
+      "required_evidence": [
+        "force-field parameters",
+        "bound-state ensemble",
+        "interaction energy decomposition"
+      ]
+    },
+    {
+      "term_id": "desolvation",
+      "name": "Desolvation",
+      "status": "not_estimated",
+      "detail": "Requires solvation free energies for the ligand, protein, and complex, including polar and nonpolar contributions.",
+      "required_evidence": [
+        "solvent model",
+        "solvation free-energy calculation",
+        "water and ion preparation"
+      ]
+    },
+    {
+      "term_id": "ligand_conformational_entropy",
+      "name": "Ligand conformational entropy",
+      "status": "not_estimated",
+      "detail": "Requires conformational sampling of the free and bound ligand and an entropy estimator.",
+      "required_evidence": [
+        "ligand force field",
+        "conformational sampling",
+        "entropy estimation"
+      ]
+    },
+    {
+      "term_id": "protein_conformational_entropy",
+      "name": "Protein conformational entropy",
+      "status": "not_estimated",
+      "detail": "Requires sampling of protein side chains, loops, and possible conformational changes.",
+      "required_evidence": [
+        "protein force field",
+        "protein conformational sampling",
+        "entropy estimation"
+      ]
+    },
+    {
+      "term_id": "water_reorganisation",
+      "name": "Water reorganisation",
+      "status": "not_estimated",
+      "detail": "Requires water roles, residence behaviour, and the free-energy cost of displacing or reorganising waters.",
+      "required_evidence": [
+        "water model and roles",
+        "equilibrium water occupancy",
+        "water displacement free energy"
+      ]
+    },
+    {
+      "term_id": "translational_rotational_entropy",
+      "name": "Translational and rotational entropy",
+      "status": "not_estimated",
+      "detail": "Requires a defined standard state and a free-energy method that treats the loss of translational and rotational freedom.",
+      "required_evidence": [
+        "standard-state definition",
+        "free-energy estimator",
+        "symmetry and degeneracy treatment"
+      ]
+    },
+    {
+      "term_id": "protonation_tautomer_populations",
+      "name": "Protonation and tautomer populations",
+      "status": "not_estimated",
+      "detail": "The state hypotheses are enumerated, but no state free energies or populations are available.",
+      "required_evidence": [
+        "state free energies",
+        "pKa and tautomer populations",
+        "experimental state validation"
+      ]
+    },
+    {
+      "term_id": "conformational_strain",
+      "name": "Conformational strain",
+      "status": "not_estimated",
+      "detail": "Requires a force field and a bound-versus-free strain energy calculation.",
+      "required_evidence": [
+        "ligand and protein force fields",
+        "free and bound conformer ensembles",
+        "strain energy calculation"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "requirement_id": "molecular_model",
+      "name": "Defensible molecular model",
+      "status": "partial",
+      "detail": "Deposited heavy atoms and explicit chemical-state hypotheses are available; no force-field-ready model is defined."
+    },
+    {
+      "requirement_id": "protein_preparation",
+      "name": "Protein preparation",
+      "status": "partial",
+      "detail": "Pocket atoms and residue-template chemistry are available; protein hydrogens, protonation populations, and force-field parameters are not."
+    },
+    {
+      "requirement_id": "ligand_preparation",
+      "name": "Ligand preparation",
+      "status": "partial",
+      "detail": "The ligand graph and generated hydrogens are available; force-field charges, parameters, and a validated protonation population are not."
+    },
+    {
+      "requirement_id": "water_ion_preparation",
+      "name": "Water and ion preparation",
+      "status": "not_run",
+      "detail": "Deposited waters are preserved with unassigned roles; no equilibrated water or ion environment has been prepared."
+    },
+    {
+      "requirement_id": "force_field_parameters",
+      "name": "Force-field parameters",
+      "status": "not_run",
+      "detail": "No ligand, protein, water, or ion force-field parameter set has been assigned or validated."
+    },
+    {
+      "requirement_id": "conformational_sampling",
+      "name": "Conformational sampling",
+      "status": "not_run",
+      "detail": "No MD, Monte Carlo, or alchemical sampling has been performed for this complex."
+    },
+    {
+      "requirement_id": "thermodynamic_states",
+      "name": "Defined thermodynamic states",
+      "status": "partial",
+      "detail": "Ligand and protein chemical-state hypotheses exist, but the bound/free endpoints and any alchemical path are not defined."
+    },
+    {
+      "requirement_id": "standard_state",
+      "name": "Standard state and temperature",
+      "status": "not_run",
+      "detail": "No standard-state concentration or temperature convention has been fixed for a binding free-energy calculation."
+    },
+    {
+      "requirement_id": "convergence_uncertainty",
+      "name": "Convergence and uncertainty",
+      "status": "not_run",
+      "detail": "No free-energy estimate, replicate analysis, or uncertainty propagation is available."
+    },
+    {
+      "requirement_id": "experimental_affinity_validation",
+      "name": "Experimental affinity validation",
+      "status": "not_available",
+      "detail": "No matched assay and affinity record is part of this capstone record."
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "did not convert interaction counts into a binding free energy",
+      "actor": "thermodynamic interpretation",
+      "rationale": "counts lack energies, desolvation, entropy, populations, and a defined thermodynamic path"
+    },
+    {
+      "decision": "kept structural evidence and thermodynamic terms separate",
+      "actor": "thermodynamic interpretation",
+      "rationale": "a geometric classification is not an energy or a free-energy contribution"
+    },
+    {
+      "decision": "treated the crystal structure as one observation, not an equilibrium ensemble",
+      "actor": "thermodynamic interpretation",
+      "rationale": "populations require a partition function and adequate sampling"
+    },
+    {
+      "decision": "reported unmet free-energy requirements explicitly",
+      "actor": "thermodynamic interpretation",
+      "rationale": "a defensible affinity calculation needs a model, parameters, sampling, and uncertainty"
+    },
+    {
+      "decision": "did not rank ligand or protein states",
+      "actor": "thermodynamic interpretation",
+      "rationale": "state hypotheses are not populations or free energies"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited structure and waters",
+        "detail": "Structural observations and water records retain deposited provenance.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "structural and robustness summary",
+        "detail": "Interaction counts, geometric candidates, and robustness statuses are summarized from prior records.",
+        "actor": "thermodynamic interpretation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity, population, or free-energy estimate is produced.",
+        "actor": "thermodynamic interpretation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "chemical states and thermodynamic requirements",
+        "detail": "Chemical-state hypotheses and the requirements checklist are explicit assumptions, not measured thermodynamics.",
+        "actor": "thermodynamic interpretation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "thermodynamics.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "all structural, interaction, and robustness records are referenced",
+        "observed": "ten input records present",
+        "expected": "manifest, identity, coordinates, binding site, ligand states, protein states, hydrogen evidence, water evidence, state matrix, and robustness record",
+        "detail": "the thermodynamic interpretation references prior records without modifying them"
+      },
+      {
+        "check_id": "thermodynamics.free_energy_not_computed",
+        "category": "thermodynamics",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "no binding free energy is estimated from structural evidence",
+        "observed": "free_energy_status=not_computed; value is null",
+        "expected": "no numeric affinity or free-energy estimate",
+        "detail": "interaction counts, geometric candidates, and robustness statuses are not thermodynamic quantities"
+      },
+      {
+        "check_id": "thermodynamics.ensemble_not_available",
+        "category": "thermodynamics",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "the crystal structure is not treated as an equilibrium ensemble",
+        "observed": "ensemble_status=not_available",
+        "expected": "explicit sampling and a partition function for populations",
+        "detail": "a structural snapshot is not a Boltzmann distribution"
+      },
+      {
+        "check_id": "thermodynamics.terms_not_estimated",
+        "category": "thermodynamics",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "missing thermodynamic terms remain unestimated",
+        "observed": "8 terms",
+        "expected": "interaction, desolvation, entropy, water, strain, and standard-state terms",
+        "detail": "no term is filled with an illustrative or fitted number"
+      },
+      {
+        "check_id": "thermodynamics.requirements_incomplete",
+        "category": "thermodynamics",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "unmet free-energy requirements are reported",
+        "observed": "10 requirements",
+        "expected": "at least one preparation, sampling, or validation requirement",
+        "detail": "missing requirements are not silently treated as satisfied"
+      },
+      {
+        "check_id": "thermodynamics.no_affinity_ranking",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "states and interactions are not ranked by affinity",
+        "observed": "no rank, score, or affinity field is produced",
+        "expected": "structural and thermodynamic boundaries only",
+        "detail": "interaction counts are not binding free energies"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "ensemble",
+      "status": "not_applicable",
+      "detail": "No equilibrium ensemble or partition function is available.",
+      "observed": "one deposited structural observation",
+      "expected": "sampled equilibrium distribution",
+      "resolution": "Populations remain unestimated."
+    },
+    {
+      "category": "energetics",
+      "status": "not_applicable",
+      "detail": "No force field or energy model has been assigned.",
+      "observed": "geometric classifications only",
+      "expected": "interaction and desolvation energies",
+      "resolution": "All free-energy terms remain not_estimated."
+    },
+    {
+      "category": "entropy",
+      "status": "not_applicable",
+      "detail": "No conformational-entropy estimate is available.",
+      "observed": "single structural model",
+      "expected": "free and bound conformational ensembles",
+      "resolution": "Entropic terms remain unestimated."
+    },
+    {
+      "category": "water_populations",
+      "status": "not_applicable",
+      "detail": "Crystallographic occupancy is not an equilibrium probability and water roles remain unassigned.",
+      "observed": "deposited water occupancy and B-factor",
+      "expected": "equilibrium water populations and role assignments",
+      "resolution": "Water reorganisation remains unestimated."
+    },
+    {
+      "category": "standard_state",
+      "status": "not_applicable",
+      "detail": "No standard state, temperature, or concentration convention is fixed.",
+      "observed": "not defined",
+      "expected": "explicit thermodynamic standard state",
+      "resolution": "No free-energy comparison is made."
+    }
+  ]
+}

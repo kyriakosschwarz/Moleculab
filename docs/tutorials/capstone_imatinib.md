@@ -75,6 +75,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_combination_interact
 uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
 uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 uv run python examples/drug_discovery/capstone_interaction_robustness.py
+uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -106,8 +107,10 @@ generated ligand hydrogens from deposited heavy atoms and writes
 deposited waters and reports geometric bridge plausibility in
 `data/structures/2HYY.water-evidence.json`. The fifteenth varies analysis
 assumptions and writes
-`data/structures/2HYY.interaction-robustness.json`. None of the commands docks
-a ligand, predicts affinity, or estimates a free energy.
+`data/structures/2HYY.interaction-robustness.json`. The sixteenth relates the
+structural evidence to the requirements for a binding free-energy calculation
+and writes `data/structures/2HYY.thermodynamic-interpretation.json`. None of
+the commands docks a ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -858,6 +861,92 @@ and are not presented as alternative chemical states. The record therefore
 keeps generated-hydrogen conclusions conditioned on the original preparation
 and reports where a modest orientation change would alter the classification.
 
+### 4.17 Batch 14: thermodynamic interpretation
+
+Batch 14 connects the structural record to the thermodynamics that would be
+needed for an affinity claim. It is deliberately non-quantitative.
+
+```bash
+uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
+```
+
+The record is written to
+`data/structures/2HYY.thermodynamic-interpretation.json`.
+
+It summarizes the structural evidence:
+
+| Evidence | Count |
+| --- | --- |
+| Ligand/protein state combinations | 16 |
+| Classified hydrophobic pairs | 18 |
+| Classified aromatic ring pairs | 1 |
+| Supported ligand-donor hydrogen bonds | 2 |
+| Geometrically plausible water bridges | 1 |
+| Robustness conclusions | 4 invariant, 8 sensitive, 3 unsupported, 2 unknown |
+
+Those numbers are then separated from thermodynamic claims. The record contains
+eight explicit boundaries, including:
+
+- 18 hydrophobic pairs do not supply 18 interaction energies;
+- one aromatic pair does not supply a ring-stacking free energy;
+- two hydrogen-bond candidates do not supply a hydrogen-bond energy;
+- one plausible water bridge does not supply a water-displacement free energy;
+- 19 classified interactions do not rank the 16 state combinations;
+- one crystal structure is not an equilibrium Boltzmann ensemble;
+- an invariant classification is not experimental validation;
+- eight ligand states and two protein states are not populations.
+
+It also lists the missing free-energy terms:
+
+```text
+interaction enthalpy
+desolvation
+ligand conformational entropy
+protein conformational entropy
+water reorganisation
+translational/rotational entropy
+protonation/tautomer populations
+conformational strain
+```
+
+and the preparation and sampling requirements:
+
+| Requirement | Status |
+| --- | --- |
+| Molecular model | partial |
+| Protein preparation | partial |
+| Ligand preparation | partial |
+| Thermodynamic states | partial |
+| Water/ion preparation | not run |
+| Force-field parameters | not run |
+| Conformational sampling | not run |
+| Standard state | not run |
+| Convergence and uncertainty | not run |
+| Experimental affinity validation | not available |
+
+The central thermodynamic fields are explicit:
+
+```text
+free_energy_status = "not_computed"
+binding_free_energy_kj_per_mol = null
+ensemble_status = "not_available"
+```
+
+The record therefore answers the question “what would be required to calculate
+binding free energy?” without pretending that the current structural evidence
+already answers it. The relationship between interaction energy, entropy, and
+free energy is
+
+$$ \Delta G = \Delta H - T\Delta S, $$
+
+and the equilibrium population of a configuration is
+
+$$ p(\mathbf R)=\frac{e^{-\beta U(\mathbf R)}}{Z}. $$
+
+Neither quantity is obtained by counting contacts. The existing
+`structural_observations_thermodynamics.py` example and Track C module 10
+provide the broader conceptual background.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -891,6 +980,7 @@ pipeline.
 | long-range electrostatics | reaction field, Ewald |
 | binding pose | rigid and flexible docking |
 | binding affinity | FEP, TI, MBAR, alchemical decoupling |
+| thermodynamic interpretation | Track C module 10; ΔG = ΔH − TΔS, partition function, missing-term checklist |
 | assumption sensitivity | interaction-robustness record; invariant, sensitive, unsupported, and unknown stay separate |
 | SAR and ADME context | Track B module 08; Track C module 09 |
 | electronic effects | QM/MM concepts |
@@ -1166,6 +1256,7 @@ number:
 | hydrogen record | generated-versus-deposited provenance, generation method and toolkit, donor–hydrogen validation, D–H···A geometry |
 | water record | deposited identity, coordinates, occupancy, B-factor, unassigned roles, bridge geometry versus chemical classification |
 | robustness record | separate assumption axes, invariant/sensitive/unsupported/unknown conclusions, no composite confidence score |
+| thermodynamic boundary record | structural counts kept separate from energies, missing terms and requirements, explicit null free energy |
 | pose record | atom mapping, symmetry handling, RMSD, threshold, score provenance |
 | SAR record | measured activity type, descriptor changes, docking scores, separated hypothesis |
 | thermodynamics note | method, standard state, uncertainty, sampling limitations |
@@ -1186,6 +1277,8 @@ Acceptance criteria:
   water-mediated interaction;
 - sensitivity conclusions retain separate invariant, sensitive, unsupported, and
   unknown statuses rather than a composite confidence score;
+- a structural count is never converted into a binding free energy without an
+  explicit model, sampling, and uncertainty analysis;
 - a geometric contact is never presented as a thermodynamic contribution;
 - a failed or invalid benchmark case is reported, not hidden;
 - the capstone states what further experiments or calculations would establish.

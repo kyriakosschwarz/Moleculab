@@ -53,6 +53,11 @@ and its provenance manifest.
   ligand/protein states, and water cutoffs independently, then labels each
   conclusion invariant, assumption-sensitive, unsupported, or unknown. It
   contains no composite confidence score, ranking, or affinity estimate.
+- `2HYY.thermodynamic-interpretation.json` is the Batch 14 boundary record. It
+  separates structural counts from thermodynamic claims, lists the missing
+  interaction, desolvation, entropy, water, strain, standard-state, sampling,
+  and uncertainty terms, and leaves `binding_free_energy_kj_per_mol` null with
+  `free_energy_status = "not_computed"`.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -74,4 +79,5 @@ uv run --with gemmi python examples/drug_discovery/capstone_combination_interact
 uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
 uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 uv run python examples/drug_discovery/capstone_interaction_robustness.py
+uv run python examples/drug_discovery/capstone_thermodynamic_interpretation.py
 ```
