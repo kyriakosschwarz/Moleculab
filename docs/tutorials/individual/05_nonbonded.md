@@ -282,7 +282,7 @@ nonbonded interactions at contact distances, and screening is essential.
 ## 7. Python implementation
 
 The pair potentials are in
-[`src/moleculab/potentials.py`](../../../src/moleculab/potentials.py):
+[`src/moleculab/models/potentials.py`](../../../src/moleculab/models/potentials.py):
 
 ```python
 @dataclass
@@ -331,7 +331,7 @@ class CoulombPotential:
 ### 7.1 Typed nonbonded parameters
 
 A force field needs different parameters for different atom types. The typed
-path is in [`src/moleculab/nonbonded.py`](../../../src/moleculab/nonbonded.py):
+path is in [`src/moleculab/models/nonbonded.py`](../../../src/moleculab/models/nonbonded.py):
 
 ```python
 parameters = {

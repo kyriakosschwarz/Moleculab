@@ -2481,7 +2481,7 @@ moleculab/
     └── 01_lennard_jones.ipynb
 ```
 
-For the first milestone, we only need `potentials.py`\.
+For the first milestone, we only need `models/potentials.py`\.
 
 Install our numerical dependencies\:
 
@@ -2489,7 +2489,7 @@ Install our numerical dependencies\:
 pip install numpy matplotlib pytest
 ```
 
-Create `src/moleculab/potentials.py`\:
+Create `src/moleculab/models/potentials.py`\:
 
 ```python
 import numpy as np
@@ -5070,7 +5070,7 @@ We will use your proposed unit system\:
 
 Let's put these conventions in one place.
 
-**File: `src/moleculab/units.py`**
+**File: `src/moleculab/foundation/units.py`**
 
 ```python
 # Distance
@@ -5190,7 +5190,7 @@ No additional numerical conversion factor is needed.
 
 ## Implementing kinetic energy
 
-**File: `src/moleculab/physics.py`**
+**File: `src/moleculab/models/physics.py`**
 
 ```python
 def kinetic_energy(particle):
@@ -5344,7 +5344,7 @@ A separate physics function can calculate the potential energy of a particle usi
 
 Let's create a new file.
 
-**File: `src/moleculab/potentials.py`**
+**File: `src/moleculab/models/potentials.py`**
 
 ```python
 import numpy as np
@@ -5478,7 +5478,7 @@ $$
 
 We can implement this as a general physics function.
 
-Add this to `physics.py`\:
+Add this to `models/physics.py`\:
 
 ```python
 def acceleration(particle, force):
@@ -5530,7 +5530,7 @@ This is the total energy of our particle in the harmonic potential, assuming no 
 
 Let's implement this relationship.
 
-Update `physics.py`\:
+Update `models/physics.py`\:
 
 ```python
 import numpy as np
@@ -5828,7 +5828,7 @@ moleculab/
 
 Let's complete the two remaining basic files.
 
-**File: `src/moleculab/particles.py`**
+**File: `src/moleculab/foundation/particles.py`**
 
 ```python
 import numpy as np

@@ -122,7 +122,7 @@ typical production workflow combines:
 - a water model such as TIP3P or SPC/E;
 - counterions and a periodic box.
 
-Moleculab's `NonbondedModel`, `Topology`, `water.py`, and `Box` show how those
+Moleculab's `NonbondedModel`, `Topology`, `applications/water.py`, and `Box` show how those
 pieces enter the energy function.
 
 ### Step 3 — minimise and equilibrate
@@ -149,7 +149,7 @@ A useful validation exercise is **redocking**:
 A pose RMSD around 2 Å is often used as a practical redocking benchmark, but
 symmetry, atom mapping, and alignment choices matter.
 
-Moleculab's `docking.py` and `flexible_docking.py` show how interaction-energy
+Moleculab's `applications/docking.py` and `applications/flexible_docking.py` show how interaction-energy
 scoring is constructed. They do not replace a production docking engine.
 
 ### Step 5 — run MD and analyse
@@ -164,7 +164,7 @@ A protein-ligand MD trajectory can be used to study:
 - RMSD and RMSF;
 - interactions with resistance mutations.
 
-Moleculab's `analysis.py` provides MSD and RDF; RMSD/RMSF and hydrogen-bond
+Moleculab's `analysis/trajectory.py` provides MSD and RDF; RMSD/RMSF and hydrogen-bond
 analysis are natural extensions.
 
 ### Step 6 — estimate a binding free energy
@@ -186,7 +186,7 @@ convergence analysis.
 Classical force fields use fixed charges and bonded parameters. For chemistry
 that depends on electronic structure, a QM/MM treatment may be needed.
 
-Moleculab's `qm_mm.py` is a one-dimensional finite-difference model, not a
+Moleculab's `applications/qm_mm.py` is a one-dimensional finite-difference model, not a
 production QM/MM engine. It teaches the coupling idea: a quantum region
 embedded in a classical environment.
 
@@ -209,11 +209,11 @@ Moleculab represents water in several ways:
 
 | Model | Role |
 | --- | --- |
-| `solvent.py` | coarse-grained solvent box |
-| `water.py` | three-site atomistic water with constraints |
-| `ewald.py` | long-range periodic electrostatics |
-| `solvated_alchemy.py` | ligand-water decoupling |
-| `fep.py`, `ti.py`, `mbar.py` | free-energy estimators |
+| `applications/solvent.py` | coarse-grained solvent box |
+| `applications/water.py` | three-site atomistic water with constraints |
+| `models/ewald.py` | long-range periodic electrostatics |
+| `applications/solvated_alchemy.py` | ligand-water decoupling |
+| `applications/fep.py`, `applications/ti.py`, `applications/mbar.py` | free-energy estimators |
 
 The library's default water model is SPC/E. TIP3P is another common choice.
 Both are models; neither is “the true water.”

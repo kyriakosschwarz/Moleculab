@@ -20,8 +20,7 @@ import math
 import numpy as np
 import pytest
 
-from moleculab import CoulombPotential, LennardJonesPotential
-from moleculab import units
+from moleculab import CoulombPotential, LennardJonesPotential, units
 
 
 def test_golden_si_constants():

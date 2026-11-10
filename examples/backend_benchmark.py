@@ -26,7 +26,7 @@ from moleculab import (
     torch_available,
     use_backend,
 )
-from moleculab.box import Box
+from moleculab.foundation.box import Box
 
 
 def ionic_system():

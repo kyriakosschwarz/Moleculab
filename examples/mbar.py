@@ -19,7 +19,7 @@ from moleculab import (
     harmonic_free_energy_difference,
     mbar_harmonic,
 )
-from moleculab.units import BOLTZMANN_CONSTANT
+from moleculab.foundation.units import BOLTZMANN_CONSTANT
 
 
 def main() -> None:

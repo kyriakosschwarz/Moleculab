@@ -232,7 +232,7 @@ Velocities grow by about 5.6% in one step, so the kinetic energy grows by about
 ## 7. Python implementation
 
 The thermostat is in
-[`src/moleculab/thermostats.py`](../../../src/moleculab/thermostats.py):
+[`src/moleculab/protocols/thermostats.py`](../../../src/moleculab/protocols/thermostats.py):
 
 ```python
 def kinetic_temperature(system, remove_com=True):

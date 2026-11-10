@@ -43,7 +43,7 @@ from moleculab import (
     torch_available,
 )
 from moleculab.backend import _load_torch, torch_device
-from moleculab.box import Box
+from moleculab.foundation.box import Box
 
 
 def ionic_system():

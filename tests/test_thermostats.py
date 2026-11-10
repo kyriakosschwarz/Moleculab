@@ -10,9 +10,9 @@ from moleculab import (
     System,
     Topology,
     berendsen_thermostat,
+    degrees_of_freedom,
     kinetic_temperature,
 )
-from moleculab.thermostats import degrees_of_freedom
 
 
 def two_particle_system(velocity_1=(0.1, 0.0, 0.0), velocity_2=(-0.1, 0.0, 0.0)):

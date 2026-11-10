@@ -3,13 +3,7 @@
 import numpy as np
 import pytest
 
-from moleculab import ELECTRON_MASS_DA, MMPointCharge, ParticleInBox
-from moleculab.units import (
-    AVOGADRO_CONSTANT,
-    COULOMB_CONSTANT,
-    DALTON_IN_KILOGRAMS,
-    H_BAR_J_S,
-)
+from moleculab import ELECTRON_MASS_DA, MMPointCharge, ParticleInBox, units
 
 
 def test_finite_difference_matches_analytic_particle_in_a_box():
@@ -52,7 +46,7 @@ def test_mm_potential_matches_point_charge_formula():
 
     potential = box.mm_potential([charge], qm_charge=-1.0)
 
-    expected = COULOMB_CONSTANT * (-1.0) * 0.5 / np.abs(box.grid[0] + 0.2)
+    expected = units.COULOMB_CONSTANT * (-1.0) * 0.5 / np.abs(box.grid[0] + 0.2)
     assert potential[0] == pytest.approx(expected)
 
 
@@ -88,10 +82,10 @@ def test_harmonic_well_matches_analytic_oscillator():
 
     result = box.solve(potential=potential, n_states=3)
 
-    stiffness_si = stiffness * 1000.0 / AVOGADRO_CONSTANT * 1.0e18
-    omega = np.sqrt(stiffness_si / (ELECTRON_MASS_DA * DALTON_IN_KILOGRAMS))
+    stiffness_si = stiffness * 1000.0 / units.AVOGADRO_CONSTANT * 1.0e18
+    omega = np.sqrt(stiffness_si / (ELECTRON_MASS_DA * units.DALTON_IN_KILOGRAMS))
     exact = (
-        (np.arange(3) + 0.5) * H_BAR_J_S * omega * AVOGADRO_CONSTANT / 1000.0
+        (np.arange(3) + 0.5) * units.H_BAR_J_S * omega * units.AVOGADRO_CONSTANT / 1000.0
     )
 
     np.testing.assert_allclose(result.energies, exact, atol=0.05)

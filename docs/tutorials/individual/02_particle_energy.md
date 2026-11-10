@@ -326,7 +326,7 @@ claim that one particle has a temperature.
 ## 7. Python implementation
 
 The particle representation is in
-[`src/moleculab/particles.py`](../../../src/moleculab/particles.py).
+[`src/moleculab/foundation/particles.py`](../../../src/moleculab/foundation/particles.py).
 
 A simplified version:
 

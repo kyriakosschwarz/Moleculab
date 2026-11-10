@@ -15,8 +15,8 @@ from moleculab import (
     System,
     dock_rigid_ligand,
     score_pose,
+    units,
 )
-from moleculab.units import COULOMB_CONSTANT
 
 
 def lj_receptor(charge=0.0):
@@ -126,7 +126,7 @@ def test_score_pose_includes_reaction_field_coulomb():
 
     pose = score_pose(receptor, ligand, [0.3, 0.0, 0.0], np.eye(3))
 
-    expected = -COULOMB_CONSTANT * (1.0 / 0.3 - 1.0)
+    expected = -units.COULOMB_CONSTANT * (1.0 / 0.3 - 1.0)
     assert pose.score == pytest.approx(expected)
 
 

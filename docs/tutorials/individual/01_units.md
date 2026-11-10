@@ -47,7 +47,7 @@ The same pattern appears in the library itself:
 | --- | --- | --- |
 | Physical meaning | What is the quantity? | prose in this tutorial |
 | Mathematics | What equation describes it? | equations below |
-| Units | What does each symbol carry? | this tutorial and `units.py` |
+| Units | What does each symbol carry? | this tutorial and `foundation/units.py` |
 | Implementation | How is it computed? | `src/moleculab/` |
 | Verification | How do we know it is right? | tests and experiments |
 
@@ -150,7 +150,7 @@ Think of this table as a contract:
 - if a velocity is updated, the result is in nm/ps.
 
 The contract is implemented in
-[`src/moleculab/units.py`](../../../src/moleculab/units.py):
+[`src/moleculab/foundation/units.py`](../../../src/moleculab/foundation/units.py):
 
 ```python
 DISTANCE_UNIT = "nm"
@@ -358,7 +358,7 @@ For historical reasons, the library calls the molar gas constant
 `BOLTZMANN_CONSTANT`:
 
 ```python
-# src/moleculab/units.py
+# src/moleculab/foundation/units.py
 BOLTZMANN_CONSTANT = 0.008314462618   # kJ/(mol K), despite the name
 MOLAR_GAS_CONSTANT = BOLTZMANN_CONSTANT
 ```
@@ -581,10 +581,10 @@ established here.
 1. Write a Python function that converts Å to nm and kcal/mol to kJ/mol. Add a
    test for each conversion.
 2. Derive the units of the harmonic stiffness $k$ from $U=\tfrac12kx^2$, then
-   verify them in code with `units.py`.
+   verify them in code with `foundation/units.py`.
 3. Add a small script that prints the kinetic energy of $P$ and checks it
    against the analytic value.
-4. Read `src/moleculab/units.py` and list every constant with its units. Mark
+4. Read `src/moleculab/foundation/units.py` and list every constant with its units. Mark
    which ones are conversion factors and which are physical constants.
 
 ## 15. Summary

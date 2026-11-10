@@ -207,7 +207,7 @@ direction.
 
 ## 7. Python implementation
 
-The box is in [`src/moleculab/box.py`](../../../src/moleculab/box.py):
+The box is in [`src/moleculab/foundation/box.py`](../../../src/moleculab/foundation/box.py):
 
 ```python
 @dataclass

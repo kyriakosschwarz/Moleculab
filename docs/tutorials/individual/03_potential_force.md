@@ -264,7 +264,7 @@ walk downhill until the gradient is zero.
 ## 8. Python implementation
 
 The harmonic model is in
-[`src/moleculab/potentials.py`](../../../src/moleculab/potentials.py):
+[`src/moleculab/models/potentials.py`](../../../src/moleculab/models/potentials.py):
 
 ```python
 from dataclasses import dataclass, field
@@ -291,7 +291,7 @@ that the centre has three components. It also copies the centre, so later
 mutation of the input array cannot silently move the equilibrium.
 
 The general physics functions are in
-[`src/moleculab/physics.py`](../../../src/moleculab/physics.py):
+[`src/moleculab/models/physics.py`](../../../src/moleculab/models/physics.py):
 
 ```python
 def potential_energy(particle, potential):

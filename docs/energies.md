@@ -42,25 +42,25 @@ We need three fundamental properties.
 
 Mass
 
-\\[ m \\]
+\$$ m \ $$
 
 Mass determines how strongly a particle responds to a given force.
 
 Position
 
-\\[ \mathbf r = \begin{pmatrix} x\\\y\\\z \end{pmatrix} \\]
+\$$ \mathbf r = \begin{pmatrix} x\\\y\\\z \end{pmatrix} \ $$
 
 Position describes where the particle is.
 
 Velocity
 
-\\[ \mathbf v = \begin{pmatrix} v_x\\\v_y\\\v_z \end{pmatrix} \\]
+\$$ \mathbf v = \begin{pmatrix} v_x\\\v_y\\\v_z \end{pmatrix} \ $$
 
 Velocity describes how its position changes over time.
 
 Together, these properties describe the mechanical state of our particle:
 
-\\[ \text{Particle state}=(m,\mathbf r,\mathbf v) \\]
+\$$ \text{Particle state}=(m,\mathbf r,\mathbf v) \ $$
 
 For now, we will not introduce acceleration as a stored property. We can calculate it from force and mass whenever we need it.
 
@@ -110,7 +110,7 @@ We will use your proposed unit system:
 
 Let's put these conventions in one place.
 
-File: `src/moleculab/units.py`
+File: `src/moleculab/foundation/units.py`
 
 ```
 # DistanceDISTANCE_UNIT = "nm"# TimeTIME_UNIT = "ps"# EnergyENERGY_UNIT = "kJ/mol"# MassMASS_UNIT = "Da"# ForceFORCE_UNIT = "kJ/(mol nm)"# TemperatureTEMPERATURE_UNIT = "K"# ChargeCHARGE_UNIT = "e"# Physical constantsBOLTZMANN_CONSTANT = 0.008314462618# kJ / (mol K)
@@ -120,15 +120,15 @@ Why store the Boltzmann constant?
 
 Because later we will need the relationship:
 
-\\[ k_BT \\]
+\$$ k_BT \ $$
 
 to understand thermal energy, temperature, and statistical mechanics.
 
 Notice that we express the Boltzmann constant per mole:
 
-\\[ R = 0.008314462618\ \mathrm{kJ/(mol\\,K)} \\]
+\$$ R = 0.008314462618\ \mathrm{kJ/(mol\\ K)} \ $$
 
-This is numerically the molar gas constant, \\(R=N_Ak_B\\), rather than the single-particle Boltzmann constant.
+This is numerically the molar gas constant, \$R=N_Ak_B\$, rather than the single-particle Boltzmann constant.
 
 For molecular simulation, this molar form is convenient because our energy unit is kJ/mol.
 
@@ -140,19 +140,19 @@ Kinetic energy is the energy associated with motion.
 
 For a particle:
 
-\\[ K=\frac12 mv^2 \\]
+\$$ K=\frac12 mv^2 \ $$
 
 In three dimensions, speed squared is:
 
-\\[ v^2=v_x^2+v_y^2+v_z^2 \\]
+\$$ v^2=v_x^2+v_y^2+v_z^2 \ $$
 
 Therefore:
 
-\\[ \boxed{ K=\frac12m(v_x^2+v_y^2+v_z^2) } \\]
+\$$  K=\frac12m(v_x^2+v_y^2+v_z^2)  \ $$
 
 Or, using vector notation:
 
-\\[ \boxed{ K=\frac12m\mathbf v\cdot\mathbf v } \\]
+\$$  K=\frac12m\mathbf v\cdot\mathbf v  \ $$
 
 The dot product is simply the sum of the squared velocity components.
 
@@ -164,23 +164,23 @@ This is particularly convenient.
 
 For example, a particle with:
 
-\\[ m=12\ \mathrm{Da} \\]
+\$$ m=12\ \mathrm{Da} \ $$
 
 and:
 
-\\[ \mathbf v=(0.1,0,0)\ \mathrm{nm/ps} \\]
+\$$ \mathbf v=(0.1,0,0)\ \mathrm{nm/ps} \ $$
 
 has kinetic energy:
 
-\\[ K=\frac12(12)(0.1)^2 \\]
+\$$ K=\frac12(12)(0.1)^2 \ $$
 
-\\[ \boxed{K=0.06\ \mathrm{kJ/mol}} \\]
+\$$ K=0.06\ \mathrm{kJ/mol} \ $$
 
 No additional numerical conversion factor is needed.
 
 ## Implementing kinetic energy
 
-File: `src/moleculab/physics.py`
+File: `src/moleculab/models/physics.py`
 
 ```
 def kinetic_energy(particle):    velocity_squared = np.dot(        particle.velocity,        particle.velocity    )    energy = 0.5 * particle.mass * velocity_squared    return energy
@@ -230,17 +230,17 @@ The farther we move it, the stronger the restoring force becomes.
 
 For a spring:
 
-\\[ F=-kx \\]
+\$$ F=-kx \ $$
 
 where:
 
-- \\(F\\) is the force.
-- \\(k\\) is the spring stiffness.
-- \\(x\\) is the displacement from equilibrium.
+- \$F\$ is the force.
+- \$k\$ is the spring stiffness.
+- \$x\$ is the displacement from equilibrium.
 
 The corresponding potential energy is:
 
-\\[ \boxed{U(x)=\frac12kx^2} \\]
+\$$ U(x)=\frac12kx^2 \ $$
 
 This equation is extremely useful because it connects three concepts:
 
@@ -254,19 +254,19 @@ Instead of one coordinate, we use a position vector.
 
 Let the equilibrium position be:
 
-\\[ \mathbf r_0 \\]
+\$$ \mathbf r_0 \ $$
 
 The displacement is:
 
-\\[ \Delta\mathbf r=\mathbf r-\mathbf r_0 \\]
+\$$ \Delta\mathbf r=\mathbf r-\mathbf r_0 \ $$
 
 The squared distance from equilibrium is:
 
-\\[ |\Delta\mathbf r|^2 = \Delta\mathbf r\cdot\Delta\mathbf r \\]
+\$$ |\Delta\mathbf r|^2 = \Delta\mathbf r\cdot\Delta\mathbf r \ $$
 
 Our potential energy becomes:
 
-\\[ \boxed{ U(\mathbf r)= \frac12 k|\mathbf r-\mathbf r_0|^2 } \\]
+\$$  U(\mathbf r)= \frac12 k|\mathbf r-\mathbf r_0|^2  \ $$
 
 This is the three-dimensional harmonic potential with equal stiffness in all directions.
 
@@ -302,7 +302,7 @@ A separate physics function can calculate the potential energy of a particle usi
 
 Let's create a new file.
 
-File: `src/moleculab/potentials.py`
+File: `src/moleculab/models/potentials.py`
 
 ```
 import numpy as npclass HarmonicPotential:    def __init__(self, stiffness, center):        self.stiffness = float(stiffness)        self.center = np.array(center, dtype=float)    def energy(self, position):        displacement = position - self.center        distance_squared = np.dot(            displacement,            displacement        )        return 0.5 * self.stiffness * distance_squared    def force(self, position):        displacement = position - self.center        return -self.stiffness * displacement
@@ -330,7 +330,7 @@ return 0.5 * self.stiffness * distance_squared
 
 This implements:
 
-\\[ U=\frac12k|\mathbf r-\mathbf r_0|^2 \\]
+\$$ U=\frac12k|\mathbf r-\mathbf r_0|^2 \ $$
 
 ### The force method
 
@@ -340,7 +340,7 @@ return -self.stiffness * displacement
 
 This implements:
 
-\\[ \boxed{\mathbf F=-k(\mathbf r-\mathbf r_0)} \\]
+\$$ \mathbf F=-k(\mathbf r-\mathbf r_0) \ $$
 
 The negative sign ensures that the force points toward the equilibrium position.
 
@@ -356,19 +356,19 @@ Let's connect this to the general equations we learned.
 
 Potential energy:
 
-\\[ U(\mathbf r)=\frac12k|\mathbf r-\mathbf r_0|^2 \\]
+\$$ U(\mathbf r)=\frac12k|\mathbf r-\mathbf r_0|^2 \ $$
 
 Force:
 
-\\[ \mathbf F=-\nabla U \\]
+\$$ \mathbf F=-\nabla U \ $$
 
 For our harmonic potential, taking the gradient gives:
 
-\\[ \nabla U=k(\mathbf r-\mathbf r_0) \\]
+\$$ \nabla U=k(\mathbf r-\mathbf r_0) \ $$
 
 Therefore:
 
-\\[ \mathbf F=-k(\mathbf r-\mathbf r_0) \\]
+\$$ \mathbf F=-k(\mathbf r-\mathbf r_0) \ $$
 
 This is exactly what our `force()` method implements.
 
@@ -382,15 +382,15 @@ In computational molecular physics, this is one of the most important correctnes
 
 Newton's second law tells us:
 
-\\[ \mathbf F=m\mathbf a \\]
+\$$ \mathbf F=m\mathbf a \ $$
 
 Rearranging:
 
-\\[ \boxed{\mathbf a=\frac{\mathbf F}{m}} \\]
+\$$ \mathbf a=\frac{\mathbf F}{m} \ $$
 
 We can implement this as a general physics function.
 
-Add this to `physics.py`:
+Add this to `models/physics.py`:
 
 ```
 def acceleration(particle, force):    return force / particle.mass
@@ -416,21 +416,21 @@ We now have two forms of mechanical energy.
 
 Kinetic energy:
 
-\\[ K=\frac12m|\mathbf v|^2 \\]
+\$$ K=\frac12m|\mathbf v|^2 \ $$
 
 Potential energy:
 
-\\[ U=U(\mathbf r) \\]
+\$$ U=U(\mathbf r) \ $$
 
 The total mechanical energy is:
 
-\\[ \boxed{E=K+U} \\]
+\$$ E=K+U \ $$
 
 This is the total energy of our particle in the harmonic potential, assuming no other energy contributions.
 
 Let's implement this relationship.
 
-Update `physics.py`:
+Update `models/physics.py`:
 
 ```
 import numpy as npdef kinetic_energy(particle):    velocity_squared = np.dot(        particle.velocity,        particle.velocity    )    return 0.5 * particle.mass * velocity_squareddef potential_energy(particle, potential):    return potential.energy(particle.position)def total_energy(particle, potential):    kinetic = kinetic_energy(particle)    potential_e = potential_energy(        particle,        potential    )    return kinetic + potential_edef acceleration(particle, force):    return force / particle.mass
@@ -440,10 +440,10 @@ We now have a small collection of functions corresponding directly to physical e
 
 | Function             | Physical concept        | Equation                    |
 | -------------------- | ----------------------- | --------------------------- |
-| `kinetic_energy()`   | Energy of motion        | \\(K=\frac12mv^2\\)         |
-| `potential_energy()` | Energy of configuration | \\(U=U(\mathbf r)\\)        |
-| `total_energy()`     | Total mechanical energy | \\(E=K+U\\)                 |
-| `acceleration()`     | Newton's second law     | \\(\mathbf a=\mathbf F/m\\) |
+| `kinetic_energy()`   | Energy of motion        | \$K=\frac12mv^2\$         |
+| `potential_energy()` | Energy of configuration | \$U=U(\mathbf r)\$        |
+| `total_energy()`     | Total mechanical energy | \$E=K+U\$                 |
+| `acceleration()`     | Newton's second law     | \$\mathbf a=\mathbf F/m\$ |
 
 # 8. A subtle but important point: our units
 
@@ -451,41 +451,41 @@ Let's examine the units of the harmonic potential.
 
 We defined:
 
-\\[ U=\frac12kr^2 \\]
+\$$ U=\frac12kr^2 \ $$
 
 Our energy is in kJ/mol, and distance is in nm.
 
 Therefore, stiffness must have units:
 
-\\[ [k]=\frac{\mathrm{kJ}}{\mathrm{mol\\,nm^2}} \\]
+\$$ [k]=\frac{\mathrm{kJ}}{\mathrm{mol\\ nm^2}} \ $$
 
 The force is:
 
-\\[ F=kr \\]
+\$$ F=kr \ $$
 
 Its units are therefore:
 
-\\[ [F]=\frac{\mathrm{kJ}}{\mathrm{mol\\,nm}} \\]
+\$$ [F]=\frac{\mathrm{kJ}}{\mathrm{mol\\ nm}} \ $$
 
 This matches our chosen force unit.
 
 Now consider acceleration:
 
-\\[ a=\frac Fm \\]
+\$$ a=\frac Fm \ $$
 
 Using our simulation units:
 
-\\[ \frac{ \mathrm{kJ/(mol\\,nm)} }{ \mathrm{Da} } \\]
+\$$ \frac{ \mathrm{kJ/(mol\\ nm)} }{ \mathrm{Da} } \ $$
 
 This may initially look like an unusual acceleration unit.
 
 But with the conversions between joules, moles, kilograms, nanometres, and picoseconds, it simplifies numerically to:
 
-\\[ \boxed{\mathrm{nm/ps^2}} \\]
+\$$ \mathrm{nm/ps^2} \ $$
 
 So, for our chosen units, the numerical equation is simply:
 
-\\[ \boxed{a\_{\mathrm{numeric}}= \frac{F\_{\mathrm{numeric}}}{m\_{\mathrm{numeric}}}} \\]
+\$$ a\_{\mathrm{numeric}}= \frac{F\_{\mathrm{numeric}}}{m\_{\mathrm{numeric}}} \ $$
 
 This is why we can implement acceleration without an additional conversion constant.
 
@@ -502,56 +502,56 @@ The particle also has an initial velocity.
 File: `examples/first_particle.py`
 
 ```
-import numpy as npfrom moleculab.particles import Particlefrom moleculab.potentials import HarmonicPotentialfrom moleculab.physics import (    kinetic_energy,    potential_energy,    total_energy,    acceleration,)# 1. Create a particleparticle = Particle(    mass=12.0,    position=[0.1, 0.0, 0.0],    velocity=[0.1, 0.0, 0.0])# 2. Define a potential energy modelpotential = HarmonicPotential(    stiffness=100.0,    center=[0.0, 0.0, 0.0])# 3. Calculate potential energyU = potential_energy(particle, potential)# 4. Calculate kinetic energy
+import numpy as npfrom moleculab.foundation.particles import Particlefrom moleculab.models.potentials import HarmonicPotentialfrom moleculab.models.physics import (    kinetic_energy,    potential_energy,    total_energy,    acceleration,)# 1. Create a particleparticle = Particle(    mass=12.0,    position=[0.1, 0.0, 0.0],    velocity=[0.1, 0.0, 0.0])# 2. Define a potential energy modelpotential = HarmonicPotential(    stiffness=100.0,    center=[0.0, 0.0, 0.0])# 3. Calculate potential energyU = potential_energy(particle, potential)# 4. Calculate kinetic energy
 ```
 
 Let's calculate the expected values by hand first.
 
 Our particle has:
 
-\\[ m=12\ \mathrm{Da} \\]
+\$$ m=12\ \mathrm{Da} \ $$
 
-\\[ \mathbf r=(0.1,0,0)\ \mathrm{nm} \\]
+\$$ \mathbf r=(0.1,0,0)\ \mathrm{nm} \ $$
 
-\\[ \mathbf v=(0.1,0,0)\ \mathrm{nm/ps} \\]
+\$$ \mathbf v=(0.1,0,0)\ \mathrm{nm/ps} \ $$
 
 Our harmonic potential has:
 
-\\[ k=100\ \mathrm{kJ/(mol\\,nm^2)} \\]
+\$$ k=100\ \mathrm{kJ/(mol\\ nm^2)} \ $$
 
 and:
 
-\\[ \mathbf r_0=(0,0,0) \\]
+\$$ \mathbf r_0=(0,0,0) \ $$
 
 Kinetic energy:
 
-\\[ K=\frac12(12)(0.1)^2 \\]
+\$$ K=\frac12(12)(0.1)^2 \ $$
 
-\\[ \boxed{K=0.06\ \mathrm{kJ/mol}} \\]
+\$$ K=0.06\ \mathrm{kJ/mol} \ $$
 
 Potential energy:
 
-\\[ U=\frac12(100)(0.1)^2 \\]
+\$$ U=\frac12(100)(0.1)^2 \ $$
 
-\\[ \boxed{U=0.5\ \mathrm{kJ/mol}} \\]
+\$$ U=0.5\ \mathrm{kJ/mol} \ $$
 
 Total energy:
 
-\\[ E=0.06+0.5 \\]
+\$$ E=0.06+0.5 \ $$
 
-\\[ \boxed{E=0.56\ \mathrm{kJ/mol}} \\]
+\$$ E=0.56\ \mathrm{kJ/mol} \ $$
 
 Force:
 
-\\[ F=-100(0.1) \\]
+\$$ F=-100(0.1) \ $$
 
-\\[ \boxed{\mathbf F=(-10,0,0)} \\]
+\$$ \mathbf F=(-10,0,0) \ $$
 
 Acceleration:
 
-\\[ a=\frac{-10}{12} \\]
+\$$ a=\frac{-10}{12} \ $$
 
-\\[ \boxed{\mathbf a=(-0.8333,0,0)\ \mathrm{nm/ps^2}} \\]
+\$$ \mathbf a=(-0.8333,0,0)\ \mathrm{nm/ps^2} \ $$
 
 The negative sign tells us that acceleration points toward the equilibrium position.
 
@@ -587,7 +587,7 @@ moleculab/
 
 Let's complete the two remaining basic files.
 
-File: `src/moleculab/particles.py`
+File: `src/moleculab/foundation/particles.py`
 
 ```
 import numpy as npclass Particle:    def __init__(self, mass, position, velocity):        if mass <= 0:            raise ValueError("Mass must be positive.")        self.mass = float(mass)        self.position = np.asarray(            position,            dtype=float        )        self.velocity = np.asarray(            velocity,            dtype=float        )        if self.position.shape != (3,):            raise ValueError("Position must have 3 components.")        if self.velocity.shape != (3,):            raise ValueError("Velocity must have 3 components.")
@@ -629,7 +629,7 @@ import numpy as npfrom moleculab import Particlefrom moleculab import kinetic_en
 
 This verifies that our implementation follows:
 
-\\[ K=\frac12mv^2 \\]
+\$$ K=\frac12mv^2 \ $$
 
 ## Test 2: Potential energy at equilibrium
 
@@ -641,11 +641,11 @@ import numpy as npfrom moleculab import HarmonicPotentialdef test_energy_at_equi
 
 At equilibrium:
 
-\\[ \mathbf r=\mathbf r_0 \\]
+\$$ \mathbf r=\mathbf r_0 \ $$
 
 Therefore:
 
-\\[ U=\frac12k(0)^2=0 \\]
+\$$ U=\frac12k(0)^2=0 \ $$
 
 ## Test 3: Force is the negative derivative of energy
 
@@ -653,13 +653,13 @@ This is our most interesting test.
 
 We know:
 
-\\[ F(x)=-\frac{dU}{dx} \\]
+\$$ F(x)=-\frac{dU}{dx} \ $$
 
 We can independently approximate the derivative numerically:
 
-\\[ F\_\mathrm{numerical}(x) \approx -\frac{U(x+h)-U(x-h)}{2h} \\]
+\$$ F\_\mathrm{numerical}(x) \approx -\frac{U(x+h)-U(x-h)}{2h} \ $$
 
-Here \\(h\\) is a very small displacement.
+Here \$h\$ is a very small displacement.
 
 Let's test whether the force returned by our potential agrees with this numerical derivative.
 
@@ -789,7 +789,7 @@ We already know its position, velocity, acceleration, kinetic energy, and potent
 
 We'll introduce the simplest numerical integration method needed to solve Newton's equation:
 
-\\[ m\frac{d^2x}{dt^2}=-kx \\]
+\$$ m\frac{d^2x}{dt^2}=-kx \ $$
 
 This is the harmonic oscillator.
 

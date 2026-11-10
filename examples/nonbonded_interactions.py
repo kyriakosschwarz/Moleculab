@@ -13,7 +13,7 @@ Run it with:
 import numpy as np
 
 from moleculab import CoulombPotential, LennardJonesPotential
-from moleculab.units import COULOMB_CONSTANT
+from moleculab.foundation.units import COULOMB_CONSTANT
 
 
 def main() -> None:

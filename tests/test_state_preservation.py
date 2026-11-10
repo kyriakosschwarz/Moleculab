@@ -84,3 +84,26 @@ def test_minimize_energy_preserves_identity():
     result = minimize_energy(system, step_size=1e-8, max_steps=2)
 
     assert_identity_preserved(result.system, system)
+
+
+def test_with_state_is_the_single_preserving_rebuild_path():
+    system = typed_pair_system()
+
+    updated = system.with_state(system.positions, system.velocities)
+
+    assert_identity_preserved(updated, system)
+    assert updated.pair_potentials == system.pair_potentials
+    assert updated.topology is system.topology
+    assert updated.box is system.box
+    assert updated.nonbonded_model is system.nonbonded_model
+    assert updated.constraints == system.constraints
+    assert updated.indexed_pair_potentials == system.indexed_pair_potentials
+
+
+def test_with_state_rejects_wrong_shapes():
+    system = typed_pair_system()
+
+    with pytest.raises(ValueError, match="positions"):
+        system.with_state([[0.0, 0.0, 0.0]], system.velocities)
+    with pytest.raises(ValueError, match="velocities"):
+        system.with_state(system.positions, [[0.0, 0.0, 0.0]])

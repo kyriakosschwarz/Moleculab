@@ -21,8 +21,8 @@ Examples
 from __future__ import annotations
 
 import os
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Iterator
 
 _BACKEND = os.environ.get("MOLECULAB_BACKEND", "cpu").strip().lower()
 _PRECISION = os.environ.get("MOLECULAB_PRECISION", "float64").strip().lower()

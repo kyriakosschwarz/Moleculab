@@ -138,13 +138,13 @@ def test_flexible_docking_relieves_a_side_chain_clash():
 def test_flexible_docking_is_reproducible_and_sorted():
     receptor, ligand = docking_setup()
     chain = SideChain((1,), max_displacement=0.2, stiffness=2.0)
-    kwargs = dict(
-        center=[0.3, 0.0, 0.0],
-        translation_radius=0.04,
-        n_ligand_samples=10,
-        n_receptor_samples=10,
-        seed=7,
-    )
+    kwargs = {
+        "center": [0.3, 0.0, 0.0],
+        "translation_radius": 0.04,
+        "n_ligand_samples": 10,
+        "n_receptor_samples": 10,
+        "seed": 7,
+    }
 
     first = dock_flexible_receptor(receptor, ligand, [chain], **kwargs)
     second = dock_flexible_receptor(receptor, ligand, [chain], **kwargs)

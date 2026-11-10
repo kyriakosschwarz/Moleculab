@@ -4,6 +4,8 @@ import numpy as np
 import pytest
 
 from moleculab import (
+    Box,
+    EwaldElectrostatics,
     available_backends,
     backend_info,
     get_backend,
@@ -16,8 +18,6 @@ from moleculab import (
     use_backend,
 )
 from moleculab.backend import _load_torch
-from moleculab.box import Box
-from moleculab.ewald import EwaldElectrostatics
 
 
 def ionic_system():
@@ -78,9 +78,8 @@ def test_zero_copy_cpu_tensor_when_available():
     if not torch_available():
         pytest.skip("PyTorch is not installed")
     import numpy as np
-    from moleculab.backend import _load_torch
 
-    torch = _load_torch()
+    _load_torch()
     array = np.ascontiguousarray(np.arange(12, dtype=np.float64).reshape(3, 4))
     set_precision("float64")
     tensor = to_torch(array, device="cpu")

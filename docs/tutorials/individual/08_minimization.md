@@ -185,7 +185,7 @@ is about $9.98\times10^{-4}$ kJ/(mol nm), just below the default tolerance.
 ## 7. Python implementation
 
 The minimiser is in
-[`src/moleculab/minimization.py`](../../../src/moleculab/minimization.py):
+[`src/moleculab/algorithms/minimization.py`](../../../src/moleculab/algorithms/minimization.py):
 
 ```python
 def steepest_descent_step(system, step_size):

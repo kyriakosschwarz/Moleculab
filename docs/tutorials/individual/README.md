@@ -69,7 +69,7 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 
 | Tutorial | Physics | Code | Visuals |
 | --- | --- | --- | --- |
-| [01 — Units and scales](01_units.md) | dimensions, SI-to-simulation conversions, molar energy | `units.py` | scale chart, unit bridge, course map |
+| [01 — Units and scales](01_units.md) | dimensions, SI-to-simulation conversions, molar energy | `foundation/units.py` | scale chart, unit bridge, course map |
 | [02 — Particles and kinetic energy](02_particle_energy.md) | position, velocity, speed, $K=\tfrac12mv^2$ | `Particle`, `kinetic_energy` | vector diagram, KE curves, stored/derived state, Maxwell distribution, motion GIF |
 | [03 — Potential energy and force](03_potential_force.md) | energy landscapes, gradient, harmonic model | `HarmonicPotential`, `potential_energy`, `acceleration` | energy/force curves, 2D quiver, finite-difference figures |
 | [04 — Velocity Verlet](04_velocity_verlet.md) | numerical integration, energy conservation, timesteps | `velocity_verlet_step`, `simulate_velocity_verlet` | algorithm flow, position/velocity, energy, phase space, oscillator GIF, drift plots |
@@ -85,7 +85,23 @@ After part 10, continue with the [main tutorial](../tutorial.md) through
 solvent, water, docking, Ewald, pressure, and free energy. The sequence ends
 with the [imatinib–BCR-ABL1 capstone](../capstone_imatinib.md).
 
-For larger systems, [`src/moleculab/neighbour.py`](../../../src/moleculab/neighbour.py)
+## Tutorial to package map
+
+| Tutorial | Package |
+| --- | --- |
+| 01 Units | `foundation/` |
+| 02 Particles and kinetic energy | `foundation/`, `models/physics.py` |
+| 03 Potential and force | `models/` |
+| 04 Velocity Verlet | `algorithms/` |
+| 04b Chemical bridge | `models/` |
+| 05 Nonbonded | `models/` |
+| 06 Many particles | `composition/` |
+| 07 Bonds, angles, torsions | `models/` |
+| 08 Minimisation | `algorithms/` |
+| 09 Temperature and thermostats | `protocols/` |
+| 10 Periodic boundaries | `foundation/`, `composition/` |
+
+For larger systems, [`src/moleculab/composition/neighbour.py`](../../../src/moleculab/composition/neighbour.py)
 provides an optional cell-list candidate screen. Use
 `system.forces(cutoff=..., use_neighbour_list=True)`; the default `System` path
 remains the explicit O(N²) teaching loop. See

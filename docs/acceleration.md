@@ -50,7 +50,7 @@ array-centric, and it keeps the physics readable.
 
 ### Algorithmic reduction: the cell list
 
-`neighbour.py` bins particles into cells and proposes candidate pairs. The
+`composition/neighbour.py` bins particles into cells and proposes candidate pairs. The
 `System` force/energy path still computes the exact minimum-image distance and
 applies the same potential; the cell list only removes pairs that cannot be
 within the cutoff. In the 300-particle example the candidate set is about 12.7%

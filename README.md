@@ -10,6 +10,23 @@ Moleculab is aimed at a new computational drug discovery (CADD) user who wants
 to understand what a molecular simulation engine actually does before treating
 it as a black box.
 
+## Repository layout
+
+The source follows the architecture layers:
+
+| Folder | Contents |
+| --- | --- |
+| `src/moleculab/foundation/` | units, validation, particles, box geometry |
+| `src/moleculab/models/` | potentials, bonded terms, topology, nonbonded, Ewald, physics |
+| `src/moleculab/composition/` | `System`, neighbour screening, constraints |
+| `src/moleculab/algorithms/` | Velocity Verlet, minimisation |
+| `src/moleculab/protocols/` | thermostat, barostat |
+| `src/moleculab/analysis/` | MSD, RDF |
+| `src/moleculab/applications/` | docking, solvent, water, free energy, QM/MM |
+| `src/moleculab/backend.py` | optional CPU/ROCm/PyTorch dispatch |
+
+The public API remains the flat `from moleculab import ...` interface.
+
 ## Current state
 
 Moleculab now implements a small but coherent molecular-mechanics engine:
@@ -257,7 +274,7 @@ uv run python examples/amd_gpu_tuning.py --backend auto
   angle.
 - `torsion_scan.py` rotates a four-atom chain and prints the periodic torsion
   energy.
-- `minimization.py` relaxes a distorted molecule to its equilibrium geometry.
+- `algorithms/minimization.py` relaxes a distorted molecule to its equilibrium geometry.
 - `thermostat.py` runs a short NVT-like loop with the Berendsen thermostat.
 - `periodic_box.py` demonstrates minimum-image distances across a box face.
 - `trajectory_analysis.py` simulates a periodic Lennard-Jones fluid and
@@ -274,23 +291,23 @@ uv run python examples/amd_gpu_tuning.py --backend auto
   correction on a rigid-water trajectory.
 - `rigid_docking.py` docks a rigid two-atom ligand into a typed receptor pocket
   and prints the best ranked poses.
-- `ewald.py` computes Ewald energies for a periodic ionic system and shows
+- `models/ewald.py` computes Ewald energies for a periodic ionic system and shows
   convergence with the reciprocal-space cutoff.
 - `barostat.py` runs a short NPT-like argon simulation and reports pressure,
   temperature, and box volume before and after coupling.
 - `thermodynamic_integration.py` integrates a harmonic alchemical path and
   shows convergence with the number of λ windows.
-- `mbar.py` combines samples from several harmonic alchemical states and
+- `applications/mbar.py` combines samples from several harmonic alchemical states and
   compares MBAR free energies with the exact result.
-- `lj_alchemy.py` compares FEP, TI, and MBAR for a soft-core Lennard-Jones pair
+- `applications/lj_alchemy.py` compares FEP, TI, and MBAR for a soft-core Lennard-Jones pair
   against a high-accuracy radial-quadrature reference.
-- `mc_alchemy.py` runs actual Metropolis MC on a bonded two-particle System and
+- `applications/mc_alchemy.py` runs actual Metropolis MC on a bonded two-particle System and
   compares FEP, TI, and MBAR with the same reference.
-- `solvated_alchemy.py` decouples a neutral ligand from an Ewald water box and
+- `applications/solvated_alchemy.py` decouples a neutral ligand from an Ewald water box and
   cross-validates FEP, TI, and MBAR.
-- `flexible_docking.py` relaxes a clashing receptor side chain and compares the
+- `applications/flexible_docking.py` relaxes a clashing receptor side chain and compares the
   calibrated flexible score with rigid-receptor docking.
-- `qm_mm.py` solves a finite-difference electron-in-a-box model and perturbs it
+- `applications/qm_mm.py` solves a finite-difference electron-in-a-box model and perturbs it
   with fixed MM point charges.
 - `backend_benchmark.py` benchmarks CPU versus optional PyTorch Ewald
   reciprocal energy/forces.

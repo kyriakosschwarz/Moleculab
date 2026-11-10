@@ -3,8 +3,7 @@
 import numpy as np
 import pytest
 
-from moleculab import CoulombPotential, LennardJonesPotential
-from moleculab.units import COULOMB_CONSTANT
+from moleculab import CoulombPotential, LennardJonesPotential, units
 
 
 def numerical_force(potential, displacement, h=1e-6):
@@ -91,7 +90,7 @@ def test_pair_potentials_reject_zero_separation():
 def test_coulomb_energy_of_two_unit_charges_at_one_nanometre():
     potential = CoulombPotential(charge_i=1.0, charge_j=1.0)
 
-    assert potential.energy([1.0, 0.0, 0.0]) == pytest.approx(COULOMB_CONSTANT)
+    assert potential.energy([1.0, 0.0, 0.0]) == pytest.approx(units.COULOMB_CONSTANT)
 
 
 def test_coulomb_like_charges_repel():
@@ -99,17 +98,17 @@ def test_coulomb_like_charges_repel():
 
     np.testing.assert_allclose(
         potential.force([1.0, 0.0, 0.0]),
-        [COULOMB_CONSTANT, 0.0, 0.0],
+        [units.COULOMB_CONSTANT, 0.0, 0.0],
     )
 
 
 def test_coulomb_opposite_charges_attract():
     potential = CoulombPotential(charge_i=1.0, charge_j=-1.0)
 
-    assert potential.energy([1.0, 0.0, 0.0]) == pytest.approx(-COULOMB_CONSTANT)
+    assert potential.energy([1.0, 0.0, 0.0]) == pytest.approx(-units.COULOMB_CONSTANT)
     np.testing.assert_allclose(
         potential.force([1.0, 0.0, 0.0]),
-        [-COULOMB_CONSTANT, 0.0, 0.0],
+        [-units.COULOMB_CONSTANT, 0.0, 0.0],
     )
 
 

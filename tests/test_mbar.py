@@ -8,8 +8,8 @@ from moleculab import (
     harmonic_free_energy_difference,
     mbar,
     mbar_harmonic,
+    units,
 )
-from moleculab.units import BOLTZMANN_CONSTANT
 
 
 def harmonic_potentials():
@@ -21,7 +21,7 @@ def harmonic_potentials():
 
 
 def exact_delta_g(potentials, temperature):
-    rt = BOLTZMANN_CONSTANT * temperature
+    rt = units.BOLTZMANN_CONSTANT * temperature
     return np.array(
         [
             1.5 * rt * np.log(potential.stiffness / potentials[0].stiffness)

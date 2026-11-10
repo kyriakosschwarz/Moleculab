@@ -50,15 +50,30 @@ Ewald, triclinic boxes, and GPU kernels are deliberately deferred.
 
 ## 2. The big picture
 
-Moleculab is organised into five layers.
+Moleculab is organised into five layers, plus the optional backend module.
 
-| Layer | Responsibility | Representative modules |
+| Layer | Responsibility | Package |
 | --- | --- | --- |
-| applications and analysis | answer a scientific question using the engine | `docking`, `flexible_docking`, `fep`, `ti`, `mbar`, `solvent`, `water`, `analysis`, `qm_mm` |
-| algorithms and protocols | advance, constrain, or sample a state | `integrators`, `minimization`, `constraints`, `thermostats`, `pressure` |
-| composition | assemble particles, models, topology, box, and global terms | `system`, `topology`, `nonbonded`, `box`, `neighbour`, `ewald` |
-| physical models | define what the system is and how its energy is defined | `particles`, `potentials`, `bonded`, `units` |
-| foundation | numerical and validation primitives | `units`, `_validation`, `backend` |
+| applications and analysis | answer a scientific question using the engine | `applications/`, `analysis/` |
+| algorithms and protocols | advance, constrain, or sample a state | `algorithms/`, `protocols/` |
+| composition | assemble particles, models, topology, box, and global terms | `composition/` |
+| physical models | define what the system is and how its energy is defined | `models/`, `foundation/particles.py` |
+| foundation | numerical and validation primitives | `foundation/`, `backend.py` |
+
+The package tree is:
+
+```text
+src/moleculab/
+├── foundation/       units, validation, particles, box
+├── models/           potentials, bonded terms, topology, nonbonded, Ewald, physics
+├── composition/      System, neighbour list, constraints
+├── algorithms/       Velocity Verlet, minimisation
+├── protocols/        thermostat, barostat
+├── analysis/         MSD, RDF
+├── applications/     docking, solvent, water, free energy, QM/MM
+├── backend.py        optional CPU/ROCm/PyTorch dispatch
+└── __init__.py       stable public API
+```
 
 The public API re-exports the user-facing names from
 [`src/moleculab/__init__.py`](../src/moleculab/__init__.py). Tutorials and
@@ -86,42 +101,34 @@ and what must be rewritten when a new model is added.
 The dependency graph is deliberately shallow.
 
 ```text
-units, _validation
+foundation (units, validation, particles, box)
     |
-particles, box, bonded, potentials, neighbour
+models (potentials, bonded, topology, nonbonded, ewald, physics)
     |
-topology
+composition (system, neighbour, constraints)
     |
-nonbonded, ewald
+algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
-physics
-    |
-system
-    |
-constraints, integrators, minimization, thermostats, pressure
-    |
-analysis, solvent, water, fep, ti, mbar, lj_alchemy, mc_alchemy
-    |
-docking, flexible_docking, solvated_alchemy, qm_mm
+analysis (trajectory) + applications (docking, solvent, water, free energy, QM/MM)
 ```
 
 The actual imports are visible in the source. The important rules are:
 
 | Module | May depend on | Must not depend on |
 | --- | --- | --- |
-| `units`, `_validation` | Python and NumPy only | any Moleculab model or algorithm |
-| `particles`, `box`, `bonded`, `potentials` | foundation | `System`, integrators, thermostats |
-| `topology` | `bonded` | coordinates, `System`, integrators |
-| `neighbour` | foundation, `box` | `System`, integrators |
-| `nonbonded` | foundation, `ewald` | `System`, integrators |
-| `ewald` | foundation, `backend`, `box`, `units` | `System`, integrators |
-| `physics` | `particles`, `potentials` | `System`, integrators |
-| `system` | models, topology, box, neighbour, nonbonded, Ewald, physics | integrators, thermostats, docking |
-| `integrators` | `system`, `physics`, `constraints`, `potentials` | docking, free energy, analysis |
-| `minimization` | `system`, `constraints` | thermostats, docking |
-| `thermostats`, `pressure` | `system`, `particles`, `box` | potentials directly |
-| `analysis` | `box` only | `System`, integrators |
-| `docking` | `system`, `particles`, nonbonded models | integrators, thermostats |
+| `foundation.units`, `foundation.validation` | Python and NumPy only | any model or algorithm |
+| `foundation.particles`, `foundation.box`, `models.potentials`, `models.bonded` | foundation | `System`, integrators, thermostats |
+| `models.topology` | `models.bonded` | coordinates, `System`, integrators |
+| `composition.neighbour` | foundation | `System`, integrators |
+| `models.nonbonded` | foundation, `models.ewald` | `System`, integrators |
+| `models.ewald` | `backend`, foundation | `System`, integrators |
+| `models.physics` | `foundation.particles`, `models.potentials` | `System`, integrators |
+| `composition.system` | foundation, models, `composition.neighbour`, `composition.constraints` | integrators, thermostats, docking |
+| `algorithms.integrators` | `composition.system`, `models.physics`, `models.potentials`, `composition.constraints` | docking, free energy, analysis |
+| `algorithms.minimization` | `composition.system`, `composition.constraints` | thermostats, docking |
+| `protocols.thermostats`, `protocols.pressure` | `composition.system`, foundation | potentials directly |
+| `analysis.trajectory` | `foundation.box` only | `System`, integrators |
+| `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -265,7 +272,7 @@ mutates a trajectory after creating it.
 
 ### 5.7 Validation at the boundary
 
-`_validation.py` provides small helpers such as `as_positive_float`,
+`foundation/validation.py` provides small helpers such as `as_positive_float`,
 `as_vector3`, `as_displacement`, and `as_finite_float`. Invalid shapes,
 non-finite values, zero distances, and negative masses fail at the boundary,
 where the error is easy to understand. They do not propagate into a force
@@ -285,7 +292,7 @@ Frequent conversions inside physics code invite errors.
 
 **Consequences.** In this system, $a = F / m$ is numerically correct without a
 conversion factor. The same cancellation makes $K = \frac12 m v^2$ direct.
-Conversion constants live in `units.py`, not in potentials or integrators.
+Conversion constants live in `foundation/units.py`, not in potentials or integrators.
 
 **Trade-off.** Readers must learn the unit system. The tutorials do that in
 part 01, and `tests/test_units.py` checks the conversion factors.
@@ -366,9 +373,9 @@ across a periodic boundary needs care. Those costs are real and documented.
 
 ### ADR-007: Models, algorithms, and protocols are separate
 
-**Decision.** Keep potentials in `potentials.py` and `bonded.py`, algorithms in
-`integrators.py` and `minimization.py`, and protocols in `thermostats.py` and
-`pressure.py`.
+**Decision.** Keep potentials in `models/potentials.py` and `models/bonded.py`, algorithms in
+`algorithms/integrators.py` and `algorithms/minimization.py`, and protocols in `protocols/thermostats.py` and
+`protocols/pressure.py`.
 
 **Context.** A thermostat is not a force field. An integrator is not a model.
 Confusing them makes it impossible to say what changing a parameter means.
@@ -496,7 +503,7 @@ default path.
 
 ### ADR-015: Optional cell-list neighbour screening
 
-**Decision.** Provide `neighbour.py` as an opt-in composition-layer utility. The
+**Decision.** Provide `composition/neighbour.py` as an opt-in composition-layer utility. The
 default `System` pair loop stays O(N²) and fully readable.
 
 **Context.** Explicit solvent boxes and larger solutes eventually need a
@@ -708,15 +715,15 @@ The architecture makes common drug-discovery extensions additive:
 | Extension | Where it goes | What must not change |
 | --- | --- | --- |
 | new atom types and parameters | `NonbondedModel` data | pair loop, integrator |
-| new bonded term | `bonded.py` + `Topology` | integrator, thermostat |
+| new bonded term | `models/bonded.py` + `Topology` | integrator, thermostat |
 | new scoring function | a new application module using `System` | core potentials |
 | new free-energy estimator | `fep`/`ti`/`mbar` style module | model definitions |
-| new solvent model | `solvent.py` or `water.py` | integrator, analysis |
-| new thermostat | `thermostats.py` | forces, potentials |
-| new barostat | `pressure.py` | forces, potentials |
+| new solvent model | `applications/solvent.py` or `applications/water.py` | integrator, analysis |
+| new thermostat | `protocols/thermostats.py` | forces, potentials |
+| new barostat | `protocols/pressure.py` | forces, potentials |
 | new backend | `backend.py` | model APIs |
-| new analysis | `analysis.py` | simulation state |
-| larger short-range pair screen | `neighbour.py` | default pair-loop semantics |
+| new analysis | `analysis/trajectory.py` | simulation state |
+| larger short-range pair screen | `composition/neighbour.py` | default pair-loop semantics |
 
 This is why the library can grow from one particle to a solvated ligand without
 a rewrite: each addition attaches at the layer where it belongs.
@@ -761,7 +768,7 @@ reads trajectories without changing them.
 
 ### 10.1 Add a potential
 
-1. Implement `energy` and `force` in `potentials.py` or `bonded.py`.
+1. Implement `energy` and `force` in `models/potentials.py` or `models/bonded.py`.
 2. Ensure the force is $-\nabla U$ for the same model.
 3. Add a finite-difference test in `tests/test_force_gradients.py` or a focused
    test file.
@@ -836,22 +843,22 @@ If a change violates one of these, the architecture is no longer doing its job.
 
 For a new contributor, the source is best read in this order:
 
-1. `units.py`, `_validation.py` — the foundation.
-2. `particles.py` — the smallest state object.
-3. `potentials.py`, `bonded.py` — the model contracts.
-4. `topology.py`, `box.py`, `neighbour.py` — molecular graph, geometry, and
+1. `foundation/units.py`, `foundation/validation.py` — the foundation.
+2. `foundation/particles.py` — the smallest state object.
+3. `models/potentials.py`, `models/bonded.py` — the model contracts.
+4. `models/topology.py`, `foundation/box.py`, `composition/neighbour.py` — molecular graph, geometry, and
    optional pair screening.
-5. `nonbonded.py`, `ewald.py` — typed interactions and long-range electrostatics.
-6. `physics.py` — the general equations.
-7. `system.py` — composition.
-8. `constraints.py`, `integrators.py` — time stepping.
-9. `minimization.py`, `thermostats.py`, `pressure.py` — other algorithms and
+5. `models/nonbonded.py`, `models/ewald.py` — typed interactions and long-range electrostatics.
+6. `models/physics.py` — the general equations.
+7. `composition/system.py` — composition.
+8. `composition/constraints.py`, `algorithms/integrators.py` — time stepping.
+9. `algorithms/minimization.py`, `protocols/thermostats.py`, `protocols/pressure.py` — other algorithms and
    protocols.
-10. `analysis.py` — trajectory measurements.
-11. `solvent.py`, `water.py` — environment builders.
-12. `fep.py`, `ti.py`, `mbar.py`, `lj_alchemy.py`, `mc_alchemy.py`,
-    `solvated_alchemy.py` — free energy.
-13. `docking.py`, `flexible_docking.py`, `qm_mm.py` — applications and the
+10. `analysis/trajectory.py` — trajectory measurements.
+11. `applications/solvent.py`, `applications/water.py` — environment builders.
+12. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
+    `applications/solvated_alchemy.py` — free energy.
+13. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
     quantum model.
 14. `backend.py` — optional acceleration.
 

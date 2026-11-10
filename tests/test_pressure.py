@@ -7,9 +7,7 @@ from moleculab import (
     Bond,
     Box,
     HarmonicBondPotential,
-    LennardJonesParameters,
     LennardJonesPotential,
-    NonbondedModel,
     Particle,
     System,
     Topology,
@@ -18,9 +16,9 @@ from moleculab import (
     kinetic_pressure,
     pressure,
     pressure_bar,
+    units,
     virial_pressure,
 )
-from moleculab.units import KILOJOULES_PER_MOLE_PER_NM3_TO_BAR
 
 
 def ideal_gas_system():
@@ -44,7 +42,7 @@ def lj_pair_system():
 
 
 def test_internal_pressure_to_bar_conversion():
-    assert KILOJOULES_PER_MOLE_PER_NM3_TO_BAR == pytest.approx(16.6054, rel=1e-5)
+    assert units.KILOJOULES_PER_MOLE_PER_NM3_TO_BAR == pytest.approx(16.6054, rel=1e-5)
 
 
 def test_ideal_gas_pressure_is_kinetic_only():
@@ -55,7 +53,7 @@ def test_ideal_gas_pressure_is_kinetic_only():
     assert virial_pressure(system) == pytest.approx(0.0, abs=1e-12)
     assert pressure(system) == pytest.approx(expected_kinetic)
     assert pressure_bar(system) == pytest.approx(
-        expected_kinetic * KILOJOULES_PER_MOLE_PER_NM3_TO_BAR
+        expected_kinetic * units.KILOJOULES_PER_MOLE_PER_NM3_TO_BAR
     )
 
 

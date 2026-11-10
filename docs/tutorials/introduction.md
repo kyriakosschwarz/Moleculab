@@ -236,10 +236,10 @@ This is why the same water model appears in several places:
 
 | Topic | Where it appears |
 | --- | --- |
-| solvent boxes | `solvent.py` |
-| atomistic water | `water.py` |
-| long-range electrostatics | `ewald.py` |
-| ligand-water decoupling | `solvated_alchemy.py`, `fep.py` |
+| solvent boxes | `applications/solvent.py` |
+| atomistic water | `applications/water.py` |
+| long-range electrostatics | `models/ewald.py` |
+| ligand-water decoupling | `applications/solvated_alchemy.py`, `applications/fep.py` |
 | binding thermodynamics | the imatinib case study |
 
 A gas-phase docking score omits desolvation and water entropy. That is one
@@ -253,14 +253,14 @@ When you open a production tool, you will recognize the layers:
 | Production concept | Moleculab foundation |
 | --- | --- |
 | topology and force-field parameters | `Topology`, `NonbondedModel`, atom types, charges |
-| cutoff and neighbour list | `Box`, `neighbour.py`, `nonbonded.py` |
-| integrator and timestep | `integrators.py` |
-| thermostat and barostat | `thermostats.py`, `pressure.py` |
-| periodic electrostatics | `ewald.py` |
-| binding pose scoring | `docking.py`, `flexible_docking.py` |
-| alchemical free energy | `fep.py`, `ti.py`, `mbar.py`, alchemy modules |
-| trajectory observables | `analysis.py` |
-| QM/MM coupling | `qm_mm.py` |
+| cutoff and neighbour list | `Box`, `composition/neighbour.py`, `models/nonbonded.py` |
+| integrator and timestep | `algorithms/integrators.py` |
+| thermostat and barostat | `protocols/thermostats.py`, `protocols/pressure.py` |
+| periodic electrostatics | `models/ewald.py` |
+| binding pose scoring | `applications/docking.py`, `applications/flexible_docking.py` |
+| alchemical free energy | `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, alchemy modules |
+| trajectory observables | `analysis/trajectory.py` |
+| QM/MM coupling | `applications/qm_mm.py` |
 
 You will also recognize the approximations: cutoffs, finite timesteps, local
 minima, classical point charges, and the difference between an interaction

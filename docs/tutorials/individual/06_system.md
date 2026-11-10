@@ -186,7 +186,7 @@ This is Newton's third law at the level of the whole system.
 
 ## 7. Python implementation
 
-The pair sums are in [`src/moleculab/system.py`](../../../src/moleculab/system.py):
+The pair sums are in [`src/moleculab/composition/system.py`](../../../src/moleculab/composition/system.py):
 
 ```python
 def nonbonded_energy(self):

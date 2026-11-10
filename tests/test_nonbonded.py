@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from moleculab import (
+    Bond,
     Box,
     HarmonicBondPotential,
     LennardJonesParameters,
@@ -13,11 +14,10 @@ from moleculab import (
     ReactionFieldElectrostatics,
     System,
     Topology,
-    Bond,
     combine_lorentz_berthelot,
+    units,
     velocity_verlet_step_system,
 )
-from moleculab.units import COULOMB_CONSTANT
 
 
 def numerical_force(energy_function, displacement, h=1e-6):
@@ -57,11 +57,11 @@ def test_reaction_field_with_unit_dielectric_is_shifted_coulomb():
 
     # U = k q_i q_j (1/r - 1/Rc), so at r=0.5 and Rc=1 the bracket is 1.
     assert electrostatics.energy(1.0, 1.0, 0.5, cutoff) == pytest.approx(
-        COULOMB_CONSTANT
+        units.COULOMB_CONSTANT
     )
     np.testing.assert_allclose(
         electrostatics.force(1.0, 1.0, [0.5, 0.0, 0.0], cutoff),
-        [4.0 * COULOMB_CONSTANT, 0.0, 0.0],
+        [4.0 * units.COULOMB_CONSTANT, 0.0, 0.0],
     )
 
 

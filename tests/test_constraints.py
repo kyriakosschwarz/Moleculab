@@ -20,15 +20,6 @@ from moleculab import (
 )
 
 
-def constraint_error(positions, constraints):
-    return max(
-        abs(
-            np.linalg.norm(positions[c.i] - positions[c.j]) - c.distance
-        )
-        for c in constraints
-    )
-
-
 def test_distance_constraint_validation():
     with pytest.raises(ValueError, match="different"):
         DistanceConstraint(0, 0, 1.0)

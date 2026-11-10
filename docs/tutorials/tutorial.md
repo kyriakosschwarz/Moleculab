@@ -50,7 +50,7 @@ a = F / m
 $$
 
 without an extra conversion constant.  The constants live in
-`src/moleculab/units.py`.
+`src/moleculab/foundation/units.py`.
 
 Check: `uv run pytest tests/test_units.py -q`.
 
@@ -1019,16 +1019,16 @@ Check: `uv run pytest tests/test_backend.py -q`.
     endpoint free-energy error grows.
 17. Run `water_ewald.py` with a different Ewald cutoff and compare the
     potential energy and runtime.
-18. Compare FEP, TI, and MBAR in `lj_alchemy.py` using different numbers of
+18. Compare FEP, TI, and MBAR in `applications/lj_alchemy.py` using different numbers of
     windows and samples.
-19. Vary the QM grid spacing in `qm_mm.py` and confirm that the box energies
+19. Vary the QM grid spacing in `applications/qm_mm.py` and confirm that the box energies
     converge quadratically toward the analytic result.
-20. Run `mc_alchemy.py` with different Monte Carlo step sizes and sample
+20. Run `applications/mc_alchemy.py` with different Monte Carlo step sizes and sample
     counts, and compare the acceptance/variance behavior.
 21. Change the solvated ligand's size or charge and observe how the
     ligand-water decoupling free energy and estimator spread change.
 22. Vary the side-chain stiffness and maximum displacement in
-    `flexible_docking.py` and compare the gain over rigid docking.
+    `applications/flexible_docking.py` and compare the gain over rigid docking.
 23. Run `backend_benchmark.py` with CPU and the available backend and compare
     the Ewald timing and checksum.
 

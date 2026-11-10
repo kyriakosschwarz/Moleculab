@@ -225,7 +225,7 @@ $\cos0=1$ and the energy is $4$ kJ/mol, the top of the barrier.
 ## 7. Python implementation
 
 The bonded potentials are in
-[`src/moleculab/bonded.py`](../../../src/moleculab/bonded.py):
+[`src/moleculab/models/bonded.py`](../../../src/moleculab/models/bonded.py):
 
 ```python
 @dataclass

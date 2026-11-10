@@ -316,7 +316,7 @@ integration algorithm.
 ## 11. Python implementation
 
 The integrator is in
-[`src/moleculab/integrators.py`](../../../src/moleculab/integrators.py):
+[`src/moleculab/algorithms/integrators.py`](../../../src/moleculab/algorithms/integrators.py):
 
 ```python
 def velocity_verlet_step(particle, potential, dt):
@@ -636,7 +636,7 @@ The four tutorials follow the library's own construction:
 
 | Layer | Code | Tutorial |
 | --- | --- | --- |
-| unit contract | `units.py` | 01 |
+| unit contract | `foundation/units.py` | 01 |
 | particle state | `Particle` | 02 |
 | kinetic energy | `kinetic_energy` | 02 |
 | potential model | `HarmonicPotential` | 03 |

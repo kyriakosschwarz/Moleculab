@@ -36,7 +36,7 @@ def run_oscillator(dt, periods=2.0, x0=0.1, v0=0.0):
         velocity=[v0, 0.0, 0.0],
     )
     potential = HarmonicPotential(stiffness=STIFFNESS, center=[0.0, 0.0, 0.0])
-    steps = int(round(periods * PERIOD / dt))
+    steps = round(periods * PERIOD / dt)
     return simulate_velocity_verlet(particle, potential, dt=dt, steps=steps)
 
 

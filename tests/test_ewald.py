@@ -15,8 +15,8 @@ from moleculab import (
     Particle,
     System,
     Topology,
+    units,
 )
-from moleculab.units import COULOMB_CONSTANT
 
 
 def ewald_real_space_energy(ewald, positions, charges, box, cutoff):
@@ -27,7 +27,7 @@ def ewald_real_space_energy(ewald, positions, charges, box, cutoff):
             distance = float(np.linalg.norm(displacement))
             if distance < cutoff:
                 total += (
-                    COULOMB_CONSTANT
+                    units.COULOMB_CONSTANT
                     * charges[i]
                     * charges[j]
                     * math.erfc(ewald.alpha * distance)
@@ -62,7 +62,7 @@ def direct_vacuum_lattice_energy(positions, charges, box, radius):
                             positions[i] - positions[j] + shift
                         )
                         total += charges[i] * charges[j] / distance
-    return 0.5 * COULOMB_CONSTANT * total
+    return 0.5 * units.COULOMB_CONSTANT * total
 
 
 def surface_correction(positions, charges, box):
@@ -70,7 +70,7 @@ def surface_correction(positions, charges, box):
     return (
         2.0
         * np.pi
-        * COULOMB_CONSTANT
+        * units.COULOMB_CONSTANT
         / (3.0 * box.volume)
         * float(np.dot(dipole, dipole))
     )
@@ -81,7 +81,7 @@ def test_ewald_real_space_energy_matches_erfc_formula():
     distance = 0.4
 
     expected = (
-        COULOMB_CONSTANT
+        units.COULOMB_CONSTANT
         * 1.0
         * -0.5
         * math.erfc(ewald.alpha * distance)
