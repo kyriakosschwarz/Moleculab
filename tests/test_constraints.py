@@ -7,8 +7,12 @@ from moleculab import (
     DistanceConstraint,
     Particle,
     System,
+    assert_constraints_satisfied,
+    berendsen_barostat,
     build_water_box,
+    constraint_error,
     minimize_energy,
+    pressure_bar,
     rattle_velocities,
     shake_positions,
     simulate_velocity_verlet_system,
@@ -165,6 +169,54 @@ def test_minimization_preserves_constraints():
     result = minimize_energy(system, step_size=1e-6, max_steps=5)
 
     assert constraint_error(result.system.positions, system.constraints) < 1e-9
+
+
+def test_barostat_preserves_constraints():
+    system = build_water_box(1, box_length=2.0, seed=6)
+
+    scaled = berendsen_barostat(
+        system,
+        target_pressure=pressure_bar(system) + 10.0,
+        coupling_time=0.5,
+        dt=0.001,
+    )
+
+    assert scaled.max_constraint_error() < 1e-9
+
+
+def test_constraint_guard_accepts_a_satisfied_system():
+    system = build_water_box(1, box_length=2.0, seed=7)
+
+    assert system.max_constraint_error() < 1e-9
+    assert assert_constraints_satisfied(system) < 1e-9
+
+
+def test_constraint_guard_rejects_a_forgotten_shake():
+    system = build_water_box(1, box_length=2.0, seed=8)
+    positions = system.positions.copy()
+    positions[1] += np.array([0.02, 0.01, 0.0])
+    broken = System(
+        particles=[
+            Particle(
+                particle.mass,
+                positions[index],
+                particle.velocity,
+                atom_type=particle.atom_type,
+                charge=particle.charge,
+            )
+            for index, particle in enumerate(system.particles)
+        ],
+        pair_potentials=system.pair_potentials,
+        topology=system.topology,
+        box=system.box,
+        nonbonded_model=system.nonbonded_model,
+        constraints=system.constraints,
+        indexed_pair_potentials=system.indexed_pair_potentials,
+    )
+
+    assert broken.max_constraint_error() > 1e-7
+    with pytest.raises(RuntimeError, match="constraints"):
+        assert_constraints_satisfied(broken)
 
 
 def test_flexible_water_has_no_constraints():

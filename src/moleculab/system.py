@@ -21,9 +21,11 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
+from ._validation import as_positive_float
 from .box import Box
-from .constraints import DistanceConstraint
+from .constraints import DistanceConstraint, constraint_error
 from .ewald import EwaldElectrostatics
+from .neighbour import build_neighbour_list
 from .nonbonded import NonbondedModel
 from .particles import Particle
 from .physics import kinetic_energy
@@ -176,33 +178,113 @@ class System:
 
         return tuple(particle.atom_type for particle in self.particles)
 
+    def max_constraint_error(self) -> float:
+        """Return the largest distance-constraint error in nm."""
+
+        return constraint_error(self.positions, self.constraints)
+
     def kinetic_energy(self) -> float:
         """Return total kinetic energy in kJ/mol."""
 
         return float(sum(kinetic_energy(particle) for particle in self.particles))
 
-    def nonbonded_energy(self) -> float:
-        """Return the sum of all pair-potential energies in kJ/mol."""
+    def _pair_indices(self, cutoff, use_neighbour_list):
+        """Return pair indices and the effective cutoff.
+
+        ``None`` means the default explicit O(N^2) loop over all unique pairs.
+        A neighbour list returns candidate pairs that are a superset of the
+        true pairs inside the cutoff.
+        """
+
+        if not self.pair_potentials and self.nonbonded_model is None:
+            return (), None
+
+        cutoff_value = None
+        if cutoff is not None:
+            cutoff_value = as_positive_float(cutoff, "cutoff")
+
+        if use_neighbour_list:
+            if cutoff_value is None:
+                if self.nonbonded_model is None:
+                    raise ValueError(
+                        "cutoff is required when using a neighbour list with "
+                        "pair_potentials."
+                    )
+                cutoff_value = self.nonbonded_model.cutoff
+            if (
+                self.nonbonded_model is not None
+                and cutoff_value < self.nonbonded_model.cutoff - 1e-12
+            ):
+                raise ValueError(
+                    "cutoff must be at least the nonbonded model cutoff "
+                    f"({self.nonbonded_model.cutoff:g} nm)."
+                )
+            return (
+                build_neighbour_list(self.positions, cutoff_value, self.box),
+                cutoff_value,
+            )
+
+        if (
+            self.nonbonded_model is not None
+            and cutoff_value is not None
+            and cutoff_value < self.nonbonded_model.cutoff - 1e-12
+        ):
+            raise ValueError(
+                "cutoff must be at least the nonbonded model cutoff "
+                f"({self.nonbonded_model.cutoff:g} nm)."
+            )
+        return None, cutoff_value
+
+    def nonbonded_energy(
+        self,
+        cutoff: float | None = None,
+        use_neighbour_list: bool = False,
+    ) -> float:
+        """Return the sum of all pair-potential energies in kJ/mol.
+
+        Parameters
+        ----------
+        cutoff:
+            Optional cutoff in nm.  When provided, ``pair_potentials`` are
+            evaluated only for pairs closer than the cutoff.  A typed
+            ``nonbonded_model`` already has its own cutoff; this value must not
+            be smaller than that cutoff.
+        use_neighbour_list:
+            Opt in to a cell-list candidate screen.  The default ``False``
+            preserves the explicit O(N^2) teaching loop.
+        """
 
         total = 0.0
-        for i in range(self.n_particles):
-            for j in range(i + 1, self.n_particles):
-                displacement = self.particles[i].position - self.particles[j].position
-                if self.box is not None:
-                    displacement = self.box.minimum_image(displacement)
-                for potential in self.pair_potentials:
-                    total += potential.energy(displacement)
-                if (
-                    self.nonbonded_model is not None
-                    and (i, j) not in self._excluded_pairs
-                ):
-                    total += self.nonbonded_model.energy(
-                        self.particles[i].atom_type,
-                        self.particles[j].atom_type,
-                        self.particles[i].charge,
-                        self.particles[j].charge,
-                        displacement,
-                    )
+        pairs, cutoff_value = self._pair_indices(cutoff, use_neighbour_list)
+        if pairs is None:
+            pairs = (
+                (i, j)
+                for i in range(self.n_particles)
+                for j in range(i + 1, self.n_particles)
+            )
+
+        for i, j in pairs:
+            displacement = self.particles[i].position - self.particles[j].position
+            if self.box is not None:
+                displacement = self.box.minimum_image(displacement)
+            if (
+                cutoff_value is not None
+                and np.linalg.norm(displacement) >= cutoff_value
+            ):
+                continue
+            for potential in self.pair_potentials:
+                total += potential.energy(displacement)
+            if (
+                self.nonbonded_model is not None
+                and (i, j) not in self._excluded_pairs
+            ):
+                total += self.nonbonded_model.energy(
+                    self.particles[i].atom_type,
+                    self.particles[j].atom_type,
+                    self.particles[i].charge,
+                    self.particles[j].charge,
+                    displacement,
+                )
         for i, j, potential in self.indexed_pair_potentials:
             displacement = self.particles[i].position - self.particles[j].position
             if self.box is not None:
@@ -229,41 +311,68 @@ class System:
             return 0.0
         return self.topology.energy(self.positions)
 
-    def potential_energy(self) -> float:
+    def potential_energy(
+        self,
+        cutoff: float | None = None,
+        use_neighbour_list: bool = False,
+    ) -> float:
         """Return nonbonded plus bonded potential energy in kJ/mol."""
 
-        return self.nonbonded_energy() + self.bonded_energy()
+        return (
+            self.nonbonded_energy(cutoff, use_neighbour_list)
+            + self.bonded_energy()
+        )
 
-    def forces(self) -> np.ndarray:
+    def forces(
+        self,
+        cutoff: float | None = None,
+        use_neighbour_list: bool = False,
+    ) -> np.ndarray:
         """Return forces on all particles in kJ/(mol nm).
 
         The result has shape ``(n_particles, 3)``.  Nonbonded and bonded
         contributions are added independently.
+
+        ``cutoff`` and ``use_neighbour_list`` have the same meaning as in
+        :meth:`nonbonded_energy`.  The default path is the explicit O(N^2)
+        loop.
         """
 
         forces = np.zeros((self.n_particles, 3), dtype=float)
-        for i in range(self.n_particles):
-            for j in range(i + 1, self.n_particles):
-                displacement = self.particles[i].position - self.particles[j].position
-                if self.box is not None:
-                    displacement = self.box.minimum_image(displacement)
-                for potential in self.pair_potentials:
-                    pair_force = potential.force(displacement)
-                    forces[i] += pair_force
-                    forces[j] -= pair_force
-                if (
-                    self.nonbonded_model is not None
-                    and (i, j) not in self._excluded_pairs
-                ):
-                    pair_force = self.nonbonded_model.force(
-                        self.particles[i].atom_type,
-                        self.particles[j].atom_type,
-                        self.particles[i].charge,
-                        self.particles[j].charge,
-                        displacement,
-                    )
-                    forces[i] += pair_force
-                    forces[j] -= pair_force
+        pairs, cutoff_value = self._pair_indices(cutoff, use_neighbour_list)
+        if pairs is None:
+            pairs = (
+                (i, j)
+                for i in range(self.n_particles)
+                for j in range(i + 1, self.n_particles)
+            )
+
+        for i, j in pairs:
+            displacement = self.particles[i].position - self.particles[j].position
+            if self.box is not None:
+                displacement = self.box.minimum_image(displacement)
+            if (
+                cutoff_value is not None
+                and np.linalg.norm(displacement) >= cutoff_value
+            ):
+                continue
+            for potential in self.pair_potentials:
+                pair_force = potential.force(displacement)
+                forces[i] += pair_force
+                forces[j] -= pair_force
+            if (
+                self.nonbonded_model is not None
+                and (i, j) not in self._excluded_pairs
+            ):
+                pair_force = self.nonbonded_model.force(
+                    self.particles[i].atom_type,
+                    self.particles[j].atom_type,
+                    self.particles[i].charge,
+                    self.particles[j].charge,
+                    displacement,
+                )
+                forces[i] += pair_force
+                forces[j] -= pair_force
 
         for i, j, potential in self.indexed_pair_potentials:
             displacement = self.particles[i].position - self.particles[j].position
@@ -291,10 +400,17 @@ class System:
 
         return forces
 
-    def total_energy(self) -> float:
+    def total_energy(
+        self,
+        cutoff: float | None = None,
+        use_neighbour_list: bool = False,
+    ) -> float:
         """Return kinetic plus potential energy in kJ/mol."""
 
-        return self.kinetic_energy() + self.potential_energy()
+        return self.kinetic_energy() + self.potential_energy(
+            cutoff,
+            use_neighbour_list,
+        )
 
     def __len__(self) -> int:
         return self.n_particles

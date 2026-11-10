@@ -115,10 +115,12 @@ def _validate_inputs(
     return coordinates, masses_array, constraint_tuple
 
 
-def _constraint_error(
+def constraint_error(
     positions: np.ndarray,
     constraints: Sequence[DistanceConstraint],
 ) -> float:
+    """Return the largest absolute distance-constraint error in nm."""
+
     maximum = 0.0
     for constraint in constraints:
         distance = float(
@@ -126,6 +128,31 @@ def _constraint_error(
         )
         maximum = max(maximum, abs(distance - constraint.distance))
     return maximum
+
+
+def assert_constraints_satisfied(
+    system,
+    tolerance: float = 1e-7,
+) -> float:
+    """Raise if a system's distance constraints are not satisfied.
+
+    This is a safety net for state-advancing algorithms.  Algorithms that move
+    positions must apply SHAKE (and RATTLE after a velocity update).  The guard
+    turns a forgotten projection into an explicit error instead of a slowly
+    drifting, silently wrong trajectory.
+    """
+
+    constraints = tuple(system.constraints)
+    if not constraints:
+        return 0.0
+    error = constraint_error(system.positions, constraints)
+    if error > tolerance:
+        raise RuntimeError(
+            "Distance constraints are not satisfied: "
+            f"maximum error {error:.3e} nm exceeds tolerance {tolerance:.3e} nm. "
+            "Apply SHAKE/RATTLE after advancing the state."
+        )
+    return error
 
 
 def shake_positions(
@@ -180,7 +207,7 @@ def shake_positions(
 
     return ShakeResult(
         positions=corrected,
-        max_error=_constraint_error(corrected, constraint_tuple),
+        max_error=constraint_error(corrected, constraint_tuple),
         iterations=iterations,
     )
 

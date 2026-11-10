@@ -74,6 +74,12 @@ From tutorial 05 onward, the recurring cast grows:
 | [09 — Temperature and thermostats](09_thermostats.md) | degrees of freedom, kinetic temperature, Berendsen coupling | `kinetic_temperature`, `berendsen_thermostat` | temperature relaxation at several coupling times |
 | [10 — Periodic boundaries](10_periodic.md) | minimum image, wrapping, cutoff rule | `Box` | periodic box and minimum-image diagram |
 
+For larger systems, [`src/moleculab/neighbour.py`](../../../src/moleculab/neighbour.py)
+provides an optional cell-list candidate screen. Use
+`system.forces(cutoff=..., use_neighbour_list=True)`; the default `System` path
+remains the explicit O(N²) teaching loop. See
+[`examples/neighbour_list.py`](../../../examples/neighbour_list.py).
+
 ## Checkpoint after part 4
 
 Before moving from one particle to interacting particles, complete the

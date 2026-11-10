@@ -27,7 +27,11 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .constraints import rattle_velocities, shake_positions
+from .constraints import (
+    assert_constraints_satisfied,
+    rattle_velocities,
+    shake_positions,
+)
 from .particles import Particle
 from .physics import acceleration, kinetic_energy, potential_energy
 from .potentials import Potential
@@ -236,7 +240,7 @@ def velocity_verlet_step_system(system: System, dt: float) -> System:
             system.constraints,
         ).velocities
 
-    return System(
+    updated = System(
         particles=[
             Particle(
                 mass=particle.mass,
@@ -254,6 +258,8 @@ def velocity_verlet_step_system(system: System, dt: float) -> System:
         constraints=system.constraints,
         indexed_pair_potentials=system.indexed_pair_potentials,
     )
+    assert_constraints_satisfied(updated)
+    return updated
 
 
 def simulate_velocity_verlet_system(

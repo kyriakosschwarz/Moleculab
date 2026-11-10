@@ -55,6 +55,7 @@ derivative. It never calls the analytical force internally.
 ```bash
 uv run pytest tests/test_system.py tests/test_system_integrator.py -q
 uv run pytest tests/test_symmetry.py tests/test_box.py -q
+uv run pytest tests/test_neighbour.py -q
 ```
 
 Covered:
@@ -131,12 +132,15 @@ reproduces the analytic oscillator table independently.
 | force-based minimisation convergence | `tests/test_minimization.py` |
 | thermostat heating and cooling | `tests/test_thermostats.py` |
 | state and identity preservation | `tests/test_state_preservation.py` |
+| constraint satisfaction after state updates | `tests/test_constraints.py` |
+| cell-list candidates contain every true pair | `tests/test_neighbour.py` |
+| opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-345 passed, 1 skipped
+361 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

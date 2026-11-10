@@ -47,6 +47,8 @@ from .constraints import (
     DistanceConstraint,
     RattleResult,
     ShakeResult,
+    assert_constraints_satisfied,
+    constraint_error,
     rattle_velocities,
     shake_positions,
 )
@@ -92,6 +94,7 @@ from .minimization import (
 )
 from .mbar import MBARResult, mbar, mbar_harmonic
 from .mc_alchemy import BondedLennardJonesMC, SoftCoreLennardJonesPair
+from .neighbour import NeighbourList, build_neighbour_list
 from .nonbonded import (
     LennardJonesParameters,
     NonbondedModel,
@@ -167,6 +170,7 @@ __all__ = [
     "MSDResult",
     "MinimizationResult",
     "MultistageFEPResult",
+    "NeighbourList",
     "NonbondedModel",
     "PairPotential",
     "Particle",
@@ -194,13 +198,16 @@ __all__ = [
     "Trajectory",
     "WaterModel",
     "acceleration",
+    "assert_constraints_satisfied",
     "available_backends",
     "backend_info",
     "berendsen_barostat",
     "berendsen_thermostat",
+    "build_neighbour_list",
     "build_solvent_box",
     "build_water_box",
     "combine_lorentz_berthelot",
+    "constraint_error",
     "degrees_of_freedom",
     "dihedral_angle",
     "dock_flexible_receptor",

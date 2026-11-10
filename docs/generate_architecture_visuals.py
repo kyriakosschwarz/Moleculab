@@ -102,6 +102,7 @@ def architecture_layers():
                 "Topology",
                 "NonbondedModel",
                 "Box",
+                "neighbour\nlist",
                 "Ewald",
             ],
             GREEN,

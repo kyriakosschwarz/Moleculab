@@ -37,7 +37,7 @@ import numpy as np
 
 from ._validation import as_nonnegative_float, as_positive_float
 from .box import Box
-from .constraints import shake_positions
+from .constraints import assert_constraints_satisfied, shake_positions
 from .particles import Particle
 from .system import System
 from .units import KILOJOULES_PER_MOLE_PER_NM3_TO_BAR
@@ -76,7 +76,7 @@ def _scaled_system(system: System, scale: float) -> System:
         )
         for index, particle in enumerate(system.particles)
     ]
-    return System(
+    updated = System(
         particles=scaled_particles,
         pair_potentials=system.pair_potentials,
         topology=system.topology,
@@ -85,6 +85,8 @@ def _scaled_system(system: System, scale: float) -> System:
         constraints=system.constraints,
         indexed_pair_potentials=system.indexed_pair_potentials,
     )
+    assert_constraints_satisfied(updated)
+    return updated
 
 
 def kinetic_pressure(system: System) -> float:

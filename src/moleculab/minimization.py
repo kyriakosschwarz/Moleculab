@@ -22,7 +22,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .constraints import shake_positions
+from .constraints import assert_constraints_satisfied, shake_positions
 from .particles import Particle
 from .system import System
 
@@ -75,7 +75,7 @@ def _with_positions(system: System, positions: np.ndarray) -> System:
             masses,
             system.constraints,
         ).positions
-    return System(
+    updated = System(
         particles=[
             Particle(
                 mass=particle.mass,
@@ -93,6 +93,8 @@ def _with_positions(system: System, positions: np.ndarray) -> System:
         constraints=system.constraints,
         indexed_pair_potentials=system.indexed_pair_potentials,
     )
+    assert_constraints_satisfied(updated)
+    return updated
 
 
 def max_force_magnitude(system: System) -> float:

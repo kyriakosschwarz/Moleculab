@@ -56,7 +56,7 @@ Moleculab is organised into five layers.
 | --- | --- | --- |
 | applications and analysis | answer a scientific question using the engine | `docking`, `flexible_docking`, `fep`, `ti`, `mbar`, `solvent`, `water`, `analysis`, `qm_mm` |
 | algorithms and protocols | advance, constrain, or sample a state | `integrators`, `minimization`, `constraints`, `thermostats`, `pressure` |
-| composition | assemble particles, models, topology, box, and global terms | `system`, `topology`, `nonbonded`, `box`, `ewald` |
+| composition | assemble particles, models, topology, box, and global terms | `system`, `topology`, `nonbonded`, `box`, `neighbour`, `ewald` |
 | physical models | define what the system is and how its energy is defined | `particles`, `potentials`, `bonded`, `units` |
 | foundation | numerical and validation primitives | `units`, `_validation`, `backend` |
 
@@ -88,7 +88,7 @@ The dependency graph is deliberately shallow.
 ```text
 units, _validation
     |
-particles, box, bonded, potentials
+particles, box, bonded, potentials, neighbour
     |
 topology
     |
@@ -112,10 +112,11 @@ The actual imports are visible in the source. The important rules are:
 | `units`, `_validation` | Python and NumPy only | any Moleculab model or algorithm |
 | `particles`, `box`, `bonded`, `potentials` | foundation | `System`, integrators, thermostats |
 | `topology` | `bonded` | coordinates, `System`, integrators |
+| `neighbour` | foundation, `box` | `System`, integrators |
 | `nonbonded` | foundation, `ewald` | `System`, integrators |
 | `ewald` | foundation, `backend`, `box`, `units` | `System`, integrators |
 | `physics` | `particles`, `potentials` | `System`, integrators |
-| `system` | models, topology, box, nonbonded, Ewald, physics | integrators, thermostats, docking |
+| `system` | models, topology, box, neighbour, nonbonded, Ewald, physics | integrators, thermostats, docking |
 | `integrators` | `system`, `physics`, `constraints`, `potentials` | docking, free energy, analysis |
 | `minimization` | `system`, `constraints` | thermostats, docking |
 | `thermostats`, `pressure` | `system`, `particles`, `box` | potentials directly |
@@ -418,11 +419,16 @@ RATTLE inside the system integrator, minimiser, and barostat.
 configuration manifold.
 
 **Consequences.** Constraints are reusable across algorithms and preserved
-through rebuilds. All algorithms that change positions must remember to apply
-them, which is tested.
+through rebuilds. Every state-advancing path ends with
+`assert_constraints_satisfied`, so a forgotten SHAKE or RATTLE projection
+becomes an explicit `RuntimeError` instead of a slowly drifting trajectory.
+`System.max_constraint_error()` exposes the same diagnostic for tests and
+debugging.
 
-**Trade-off.** The responsibility is distributed across algorithms. The
-alternative — a constraint solver inside every step — would couple more code.
+**Trade-off.** The responsibility is still distributed across algorithms, and
+the guard is a safety net rather than an automatic solver. The alternative — a
+constraint solver inside every step — would couple more code. The guard makes
+the cost of forgetting visible.
 
 ### ADR-011: Optional backend isolation
 
@@ -482,7 +488,30 @@ fast enough for the small systems used in the tutorials.
 explicit later milestone rather than an upfront complexity.
 
 **Trade-off.** O(N²) pair sums and Python loops are slow for large systems.
-Neighbour lists, vectorisation, and compiled kernels are future work.
+Neighbour lists, vectorisation, and compiled kernels remain future work for the
+default path.
+
+### ADR-015: Optional cell-list neighbour screening
+
+**Decision.** Provide `neighbour.py` as an opt-in composition-layer utility. The
+default `System` pair loop stays O(N²) and fully readable.
+
+**Context.** Explicit solvent boxes and larger solutes eventually need a
+short-range pair screen. Making it mandatory too early would hide the pair
+logic that the tutorials are designed to teach.
+
+**Consequences.** `build_neighbour_list` returns a duplicate-free candidate set
+of `(i, j)` pairs. It guarantees that every true pair within the cutoff is
+present, but it may include extra candidates. `System.forces`, `nonbonded_energy`,
+`potential_energy`, and `total_energy` accept `cutoff` and
+`use_neighbour_list`; with `use_neighbour_list=True` they screen candidates and
+still compute the exact minimum-image distance. Exclusions, indexed pairs, and
+global Ewald terms remain outside the screen.
+
+**Trade-off.** The cell list is a second code path and adds a set of candidate
+pairs. It is validated against the default O(N²) path in
+`tests/test_neighbour.py`. The default path remains the explicit teaching loop;
+the opt-in path is for larger systems.
 
 ## 7. Control flow
 
@@ -501,7 +530,8 @@ for step in range(n_steps):
 Mapping to modules:
 
 1. `System.forces()` sums pair, bonded, typed nonbonded, indexed, and Ewald
-   contributions.
+   contributions. The default path is the explicit O(N²) pair loop; a larger
+   system can opt in with `cutoff=...` and `use_neighbour_list=True`.
 2. `velocities` and `positions` are updated by `integrators`.
 3. `constraints` are applied after the position update and after the velocity
    update.
@@ -681,6 +711,7 @@ The architecture makes common drug-discovery extensions additive:
 | new barostat | `pressure.py` | forces, potentials |
 | new backend | `backend.py` | model APIs |
 | new analysis | `analysis.py` | simulation state |
+| larger short-range pair screen | `neighbour.py` | default pair-loop semantics |
 
 This is why the library can grow from one particle to a solvated ligand without
 a rewrite: each addition attaches at the layer where it belongs.
@@ -789,6 +820,9 @@ These are the rules that keep the layers honest.
 | minimisation lowers energy and converges on force | `tests/test_minimization.py` |
 | thermostat heats and cools as intended | `tests/test_thermostats.py` |
 | chemical identity survives every rebuild | `tests/test_state_preservation.py` |
+| constraints remain satisfied after every state-advancing algorithm | `tests/test_constraints.py` |
+| cell-list candidates contain every true pair within the cutoff | `tests/test_neighbour.py` |
+| opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -800,7 +834,8 @@ For a new contributor, the source is best read in this order:
 1. `units.py`, `_validation.py` — the foundation.
 2. `particles.py` — the smallest state object.
 3. `potentials.py`, `bonded.py` — the model contracts.
-4. `topology.py`, `box.py` — molecular graph and geometry.
+4. `topology.py`, `box.py`, `neighbour.py` — molecular graph, geometry, and
+   optional pair screening.
 5. `nonbonded.py`, `ewald.py` — typed interactions and long-range electrostatics.
 6. `physics.py` — the general equations.
 7. `system.py` — composition.
