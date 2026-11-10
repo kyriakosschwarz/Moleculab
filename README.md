@@ -99,6 +99,8 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   configurational isomerism.
 - Molecular-polarity coverage: formal versus partial charge, protonation state,
   dipole moments, and the connection to Coulomb electrostatics.
+- Hydrogen-bonding chemistry: donors/acceptors, geometric criteria, solvent
+  competition, and force-field electrostatics.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

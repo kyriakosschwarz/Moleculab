@@ -133,6 +133,7 @@ uv run python examples/periodic_box.py
 uv run python examples/protonation.py
 uv run --with rdkit python examples/stereochemistry.py
 uv run --with rdkit python examples/molecular_polarity.py
+uv run --with rdkit python examples/hydrogen_bonding.py
 uv run --with gemmi python examples/protein_structure.py
 uv run python examples/binding_site.py
 uv run python examples/interactions.py

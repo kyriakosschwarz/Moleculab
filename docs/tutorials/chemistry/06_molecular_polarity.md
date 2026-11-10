@@ -325,4 +325,4 @@ A molecular-polarity module is correct when:
 
 **Previous:** [05 — Stereochemistry and molecular recognition](05_stereochemistry.md).
 
-**Next:** Conformational analysis and molecular flexibility (module 07, planned).
+**Next:** [07 — Hydrogen bonding and molecular recognition](07_hydrogen_bonding.md).
