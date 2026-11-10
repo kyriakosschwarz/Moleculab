@@ -26,7 +26,8 @@ The source is organised by architecture layer:
     ligand coordinate reconciliation, binding-site reconciliation,
     evidence-gated interaction interpretation, three-state evidence
     fingerprints, separate chemical-state preparation, protonation/tautomer
-    enumeration, and state-aware interaction assessment.
+    enumeration, state-aware interaction assessment, and protein-pocket
+    preparation.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -175,6 +176,20 @@ from .applications.chemical_state_enumeration import (
     load_chemical_state_enumeration,
     validate_chemical_state_enumeration,
     write_chemical_state_enumeration,
+)
+from .applications.protein_preparation import (
+    PROTEIN_PREPARATION_SCHEMA_VERSION,
+    PreparedProteinAtom,
+    PreparedProteinRing,
+    PreparedProteinState,
+    ProteinHeteroRole,
+    ProteinPreparationDiscrepancy,
+    ProteinPreparationRecord,
+    ProteinResidueState,
+    build_protein_preparation_record,
+    load_protein_preparation,
+    validate_protein_preparation,
+    write_protein_preparation,
 )
 from .applications.state_interactions import (
     STATE_INTERACTION_SCHEMA_VERSION,
@@ -514,11 +529,19 @@ __all__ = [
     "PoseRecovery",
     "PreparationDiscrepancy",
     "PreparedAtom",
+    "PreparedProteinAtom",
+    "PreparedProteinRing",
+    "PreparedProteinState",
     "PreparedRing",
     "PreparedState",
     "PreparedWaterRole",
+    "PROTEIN_PREPARATION_SCHEMA_VERSION",
     "Potential",
     "ProteinAtomRecord",
+    "ProteinHeteroRole",
+    "ProteinPreparationDiscrepancy",
+    "ProteinPreparationRecord",
+    "ProteinResidueState",
     "ProcessingRecord",
     "ProteinSelection",
     "ProvenanceEntry",
@@ -578,6 +601,7 @@ __all__ = [
     "build_fingerprint",
     "build_interaction_evidence",
     "build_neighbour_list",
+    "build_protein_preparation_record",
     "build_state_interaction_record",
     "build_solvent_box",
     "build_water_box",
@@ -625,6 +649,7 @@ __all__ = [
     "load_ligand_coordinates",
     "load_ligand_identity",
     "load_manifest",
+    "load_protein_preparation",
     "load_state_interactions",
     "logd_from_logp",
     "make_receptor_conformer",
@@ -682,6 +707,7 @@ __all__ = [
     "validate_ligand_coordinates",
     "validate_ligand_identity",
     "validate_manifest",
+    "validate_protein_preparation",
     "validate_state_interactions",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
@@ -694,5 +720,6 @@ __all__ = [
     "write_ligand_coordinates",
     "write_ligand_identity",
     "write_manifest",
+    "write_protein_preparation",
     "write_state_interactions",
 ]

@@ -11,7 +11,8 @@ classify only explicitly supplied chemical evidence; evidence fingerprints keep
 present, absent, and unknown distinct; preparation records hold separate
 chemical states without mutating the experimental inputs; state enumeration
 keeps protonation and tautomer alternatives unselected; state-aware assessment
-applies selected states to the same experimental contacts without ranking them.
-None of them parses coordinates, chooses a structure, or invents an atom mapping
-on the caller's behalf.
+applies selected states to the same experimental contacts without ranking them;
+protein preparation records explicit pocket-side template chemistry. None of
+them parses coordinates, chooses a structure, or invents an atom mapping on the
+caller's behalf.
 """

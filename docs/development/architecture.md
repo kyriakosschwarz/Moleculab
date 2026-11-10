@@ -74,7 +74,8 @@ src/moleculab/
 │                     structure provenance, ligand identity, ligand coordinates,
 │                     binding-site reconciliation, interaction interpretation,
 │                     evidence fingerprints, chemical-state preparation,
-│                     protonation/tautomer enumeration, state-aware interactions
+│                     protonation/tautomer enumeration, state-aware interactions,
+│                     protein-pocket preparation
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -153,6 +154,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.chemical_preparation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.chemical_state_enumeration` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.state_interactions` | `analysis.evidence`, `applications.chemical_state_enumeration`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.protein_preparation` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -182,9 +184,9 @@ classical potential and is deliberately isolated.
 `structure_manifest`, `ligand_identity`, `ligand_coordinates`,
 `binding_site_reconciliation`, `interaction_interpretation`,
 `interaction_evidence`, `chemical_preparation`,
-`chemical_state_enumeration`, and `state_interactions` are **record layers**.
-They accept plain, already-parsed data and do not import `gemmi`, RDKit, or any
-coordinate reader.
+`chemical_state_enumeration`, `state_interactions`, and
+`protein_preparation` are **record layers**. They accept plain, already-parsed
+data and do not import `gemmi`, RDKit, or any coordinate reader.
 The capstone adapters in `examples/drug_discovery/` own those optional
 dependencies and pass explicit records, graphs, candidate mappings, coordinate
 records, and protein/water records into the library. This keeps the core
@@ -604,7 +606,10 @@ it records pKa provenance where supplied and never estimates populations.
 `applications/state_interactions.py` maps state atoms back to deposited ligand
 atoms and assesses the same experimental contacts under each explicitly selected
 state; it compares feature evidence without ranking states or claiming affinity.
-The capstone consumes these records rather than hard-coding a residue lookup. The records are JSON-serialisable and validated
+`applications/protein_preparation.py` prepares explicit protein-pocket states
+from residue templates, keeps multiple protonation hypotheses unselected, and
+records no hydrogens or assigned water/hetero roles. The capstone consumes these
+records rather than hard-coding a residue lookup. The records are JSON-serialisable and validated
 independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
@@ -738,6 +743,7 @@ mmCIF file (adapter: gemmi)
     → ChemicalPreparationRecord (separate states and assumptions)
     → ChemicalStateEnumerationRecord (protonation/tautomer alternatives)
     → StateInteractionRecord (same contacts, selected states)
+    → ProteinPreparationRecord (pocket template states)
     → later population or feature-aware interaction pass
 ```
 
@@ -768,6 +774,8 @@ record may contain several alternatives and no selected state.
 `state_interactions` applies each explicitly selected state to the same
 experimental contacts, preserving state-specific eligibility while leaving
 interaction classification unknown where protein chemistry is missing.
+`protein_preparation` supplies explicit pocket-side template chemistry without
+generating hydrogens, assigning water roles, or selecting a protonation state.
 
 The reference records live in [`data/structures/`](../../data/structures/README.md):
 the manifest, identity record, and coordinate record are committed, while the
@@ -810,7 +818,7 @@ forking the codebase.
 | --- | --- | --- | --- |
 | A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
 | B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
-| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration, state-aware interactions | turns structural observations into auditable records without claiming affinity |
+| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration, state-aware interactions, protein-pocket preparation | turns structural observations into auditable records without claiming affinity |
 
 The capstone is the integration point:
 
@@ -826,6 +834,7 @@ experimental structure
     → separate chemical-state preparation (assumptions explicit)
     → protonation/tautomer enumeration (no population estimate)
     → state-aware interaction assessment (same contacts, selected states)
+    → protein-pocket chemical preparation (template states)
     → explicit limitations; no affinity or free-energy claim
 ```
 
@@ -945,6 +954,8 @@ protonation/tautomer alternatives (no population model)
         ↓
 state-aware interaction assessment (same contacts, selected states)
         ↓
+protein-pocket chemical preparation (template states)
+        ↓
 later decision: System preparation and force-field parameters
 ```
 
@@ -976,6 +987,8 @@ Every stage is already represented by a module:
   without selecting one or estimating populations.
 - `state_interactions` applies explicitly selected states to the same
   experimental contacts without ranking them.
+- `protein_preparation` supplies explicit pocket-side template chemistry without
+  selecting a protonation state or generating hydrogens.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1123,6 +1136,7 @@ These are the rules that keep the layers honest.
 | prepared states preserve generated-vs-deposited provenance, assumptions, and unselected alternatives | `tests/test_chemical_preparation.py` |
 | protonation/tautomer enumeration keeps alternatives unselected and does not estimate populations | `tests/test_chemical_state_enumeration.py` |
 | state-aware assessment maps state atoms to contacts, preserves feature differences, and does not rank states | `tests/test_state_interactions.py` |
+| protein-pocket preparation keeps template states unselected and water/hetero roles unassigned | `tests/test_protein_preparation.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1154,11 +1168,13 @@ For a new contributor, the source is best read in this order:
     `applications/interaction_evidence.py`, `analysis/evidence.py`,
     `applications/chemical_preparation.py`,
     `applications/chemical_state_enumeration.py`,
-    `applications/state_interactions.py` — provenance, explicit selection, atom
+    `applications/state_interactions.py`,
+    `applications/protein_preparation.py` — provenance, explicit selection, atom
     mapping, chemical-identity discrepancies, occupancy, alternate locations,
     coordinate geometry, pocket selection, contacts, evidence-gated interaction
     classification, three-state fingerprints, separate prepared chemical states,
-    protonation/tautomer alternatives, and state-aware contact assessment.
+    protonation/tautomer alternatives, state-aware contact assessment, and
+    protein-pocket template chemistry.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.
@@ -1183,8 +1199,9 @@ The tutorials follow the same order, which is not a coincidence.
 - Experimental provenance, ligand identity, coordinate geometry, binding-site
   context, evidence-gated interaction interpretation, three-state evidence
   fingerprints, separate chemical-state preparation, protonation/tautomer
-  enumeration, and state-aware contact assessment are first-class records,
-  separate from the physics and from any affinity claim.
+  enumeration, state-aware contact assessment, and protein-pocket preparation
+  are first-class records, separate from the physics and from any affinity
+  claim.
 - The composition path from particle to force field to solvent to docking to
   free energy is already present, with explicit limitations.
 - The design is a good basis for drug discovery because new physics and new

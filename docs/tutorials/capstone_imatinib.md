@@ -70,6 +70,7 @@ uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run python examples/drug_discovery/capstone_state_interactions.py
+uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -91,7 +92,9 @@ chemical states and writes
 protonation and tautomer alternatives and writes
 `data/structures/2HYY.chemical-states.json`. The tenth interprets the same
 experimental contacts under each selected state and writes
-`data/structures/2HYY.state-interactions.json`. None of the commands docks a
+`data/structures/2HYY.state-interactions.json`. The eleventh prepares explicit
+protein-pocket chemistry and writes
+`data/structures/2HYY.protein-preparation.json`. None of the commands docks a
 ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -628,6 +631,44 @@ No state is selected as dominant, and no affinity is computed. The same
 experimental geometry is simply interpreted under different explicitly chosen
 chemical hypotheses.
 
+### 4.12 Batch 10: protein-pocket chemical preparation
+
+Batch 10 supplies the missing protein-side chemistry for the selected pocket.
+
+```bash
+uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
+```
+
+The record is written to `data/structures/2HYY.protein-preparation.json`.
+
+It prepares all atoms of the 23 pocket residues selected by the binding-site
+record, under two explicit residue-template states:
+
+| State | Atoms | Residues | Rings | Donors | Acceptors | Hydrophobic | Charged atoms |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `standard-templates` | 186 | 23 | 4 | 25 | 25 | 61 | 4 |
+| `histidine-protonated` | 186 | 23 | 4 | 26 | 25 | 61 | 5 |
+
+`selected_state_id` is `null`. The two states differ in the histidine 361
+protonation hypothesis; no state is chosen as correct.
+
+The record preserves:
+
+- protein atom identities in label and author chain/residue namespaces;
+- explicit residue protonation states and localized formal charges;
+- donor, acceptor, hydrophobic, and aromatic features from a documented
+  residue/atom template table;
+- four aromatic ring definitions built from experimental coordinates;
+- experimental waters with `unassigned` roles;
+- hetero residues with `unknown` roles;
+- no generated protein hydrogens.
+
+The template assignments are preparation hypotheses, not experimental facts.
+No protein hydrogens were generated, so angular hydrogen-bond geometry is still
+unavailable. No pH-dependent population model was supplied, and no affinity is
+computed. The original experimental and earlier preparation records are
+unchanged.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -680,6 +721,7 @@ uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run python examples/drug_discovery/capstone_state_interactions.py
+uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -705,6 +747,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | chemical-state preparation | `capstone_chemical_preparation.py` | prepared: calculated assumptions kept separate |
 | protonation and tautomer enumeration | `capstone_chemical_states.py` | enumerated alternatives; no population estimate |
 | state-aware interaction assessment | `capstone_state_interactions.py` | calculated, state-specific eligibility only |
+| protein-pocket chemical preparation | `capstone_protein_preparation.py` | prepared: template hypotheses kept separate |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

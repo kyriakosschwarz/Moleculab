@@ -167,6 +167,13 @@ class StateInteractionAssessment:
     ligand_feature_summary: FeatureSummary
     contact_feature_summary: FeatureSummary
     contact_atom_count: int
+    contact_atom_names: tuple[str, ...]
+    donor_contact_atoms: tuple[str, ...]
+    acceptor_contact_atoms: tuple[str, ...]
+    hydrophobic_contact_atoms: tuple[str, ...]
+    aromatic_contact_atoms: tuple[str, ...]
+    charged_contact_atoms: tuple[str, ...]
+    classified_interaction_participants: tuple[str, ...]
     fingerprint: EvidenceFingerprint
 
     def to_dict(self) -> dict[str, Any]:
@@ -180,6 +187,15 @@ class StateInteractionAssessment:
             "ligand_feature_summary": self.ligand_feature_summary.to_dict(),
             "contact_feature_summary": self.contact_feature_summary.to_dict(),
             "contact_atom_count": self.contact_atom_count,
+            "contact_atom_names": list(self.contact_atom_names),
+            "donor_contact_atoms": list(self.donor_contact_atoms),
+            "acceptor_contact_atoms": list(self.acceptor_contact_atoms),
+            "hydrophobic_contact_atoms": list(self.hydrophobic_contact_atoms),
+            "aromatic_contact_atoms": list(self.aromatic_contact_atoms),
+            "charged_contact_atoms": list(self.charged_contact_atoms),
+            "classified_interaction_participants": list(
+                self.classified_interaction_participants
+            ),
             "fingerprint": self.fingerprint.to_dict(),
         }
 
@@ -200,6 +216,15 @@ class StateInteractionAssessment:
                 _as_mapping(data.get("contact_feature_summary"), "contact_feature_summary")
             ),
             contact_atom_count=_required_int(data, "contact_atom_count"),
+            contact_atom_names=_string_tuple(data, "contact_atom_names"),
+            donor_contact_atoms=_string_tuple(data, "donor_contact_atoms"),
+            acceptor_contact_atoms=_string_tuple(data, "acceptor_contact_atoms"),
+            hydrophobic_contact_atoms=_string_tuple(data, "hydrophobic_contact_atoms"),
+            aromatic_contact_atoms=_string_tuple(data, "aromatic_contact_atoms"),
+            charged_contact_atoms=_string_tuple(data, "charged_contact_atoms"),
+            classified_interaction_participants=_string_tuple(
+                data, "classified_interaction_participants"
+            ),
             fingerprint=EvidenceFingerprint.from_dict(
                 _as_mapping(data.get("fingerprint"), "fingerprint")
             ),
@@ -454,13 +479,32 @@ def assess_state_features(
         for name in deposited_atoms
         if name in state_atoms_by_deposited
     )
-    contact_atoms = tuple(
-        state_atoms_by_deposited[name]
+    contact_pairs = tuple(
+        (name, state_atoms_by_deposited[name])
         for name in contact_ligand_atoms
         if name in state_atoms_by_deposited
     )
+    contact_atoms = tuple(atom for _, atom in contact_pairs)
     ligand_summary = _summary(mapped_atoms)
     contact_summary = _summary(contact_atoms)
+    contact_atom_names = tuple(name for name, _ in contact_pairs)
+    donor_contact_atoms = tuple(
+        name for name, atom in contact_pairs if atom.is_donor
+    )
+    acceptor_contact_atoms = tuple(
+        name for name, atom in contact_pairs if atom.is_acceptor
+    )
+    hydrophobic_contact_atoms = tuple(
+        name for name, atom in contact_pairs if atom.is_hydrophobic
+    )
+    aromatic_contact_atoms = tuple(
+        name for name, atom in contact_pairs if atom.aromatic_ring_ids
+    )
+    charged_contact_atoms = tuple(
+        name
+        for name, atom in contact_pairs
+        if atom.formal_charge is not None and atom.formal_charge != 0
+    )
 
     donor_acceptor_known = all(
         atom.is_donor is not None and atom.is_acceptor is not None
@@ -573,6 +617,13 @@ def assess_state_features(
         ligand_feature_summary=ligand_summary,
         contact_feature_summary=contact_summary,
         contact_atom_count=len(contact_ligand_atoms),
+        contact_atom_names=contact_atom_names,
+        donor_contact_atoms=donor_contact_atoms,
+        acceptor_contact_atoms=acceptor_contact_atoms,
+        hydrophobic_contact_atoms=hydrophobic_contact_atoms,
+        aromatic_contact_atoms=aromatic_contact_atoms,
+        charged_contact_atoms=charged_contact_atoms,
+        classified_interaction_participants=(),
         fingerprint=fingerprint,
     )
 
@@ -878,6 +929,22 @@ def validate_state_interactions(record: StateInteractionRecord) -> list[str]:
             errors.append(f"assessments[{index}] requires label and formula.")
         if assessment.contact_atom_count < 0:
             errors.append(f"assessments[{index}].contact_atom_count cannot be negative.")
+        if len(assessment.contact_atom_names) != assessment.contact_feature_summary.atom_count:
+            errors.append(
+                f"assessments[{index}] mapped contact names must match the contact feature count."
+            )
+        contact_names = set(assessment.contact_atom_names)
+        for field_name in (
+            "donor_contact_atoms",
+            "acceptor_contact_atoms",
+            "hydrophobic_contact_atoms",
+            "aromatic_contact_atoms",
+            "charged_contact_atoms",
+        ):
+            if not set(getattr(assessment, field_name)).issubset(contact_names):
+                errors.append(
+                    f"assessments[{index}].{field_name} must be a subset of contact atoms."
+                )
         if len(assessment.fingerprint.schema.features) != len(CATEGORY_ORDER):
             errors.append(f"assessments[{index}] has an unexpected feature count.")
 
