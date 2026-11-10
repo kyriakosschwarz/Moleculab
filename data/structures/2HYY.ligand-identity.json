@@ -1,0 +1,1282 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "accession": "2HYY",
+  "selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "deposited": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "formula": "C29 H31 N7 O",
+    "atoms": [
+      {
+        "atom_name": "C1",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C6",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C5",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C4",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N3",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C2",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C7",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C12",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C11",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N10",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C9",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N8",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N13",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C14",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C19",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C18",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C17",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C16",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C15",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N21",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C22",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C23",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C25",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C26",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C27",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C28",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C29",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C46",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N48",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C53",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C52",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "N51",
+        "element": "N",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C54",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C50",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C49",
+        "element": "C",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "O29",
+        "element": "O",
+        "formal_charge": null
+      },
+      {
+        "atom_name": "C20",
+        "element": "C",
+        "formal_charge": null
+      }
+    ],
+    "bonds": [
+      {
+        "atom_name_1": "C1",
+        "atom_name_2": "C6",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C1",
+        "atom_name_2": "C2",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C6",
+        "atom_name_2": "C5",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C5",
+        "atom_name_2": "C4",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C5",
+        "atom_name_2": "C7",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C4",
+        "atom_name_2": "N3",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "N3",
+        "atom_name_2": "C2",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C7",
+        "atom_name_2": "C12",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C7",
+        "atom_name_2": "N8",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C12",
+        "atom_name_2": "C11",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C11",
+        "atom_name_2": "N10",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "N10",
+        "atom_name_2": "C9",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C9",
+        "atom_name_2": "N8",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C9",
+        "atom_name_2": "N13",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N13",
+        "atom_name_2": "C14",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C14",
+        "atom_name_2": "C19",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C14",
+        "atom_name_2": "C15",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C19",
+        "atom_name_2": "C18",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C19",
+        "atom_name_2": "C20",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C18",
+        "atom_name_2": "C17",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C17",
+        "atom_name_2": "C16",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C16",
+        "atom_name_2": "C15",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C16",
+        "atom_name_2": "N21",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N21",
+        "atom_name_2": "C22",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C22",
+        "atom_name_2": "C23",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C22",
+        "atom_name_2": "O29",
+        "order": "DOUBLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C23",
+        "atom_name_2": "C25",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C23",
+        "atom_name_2": "C29",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C25",
+        "atom_name_2": "C26",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C26",
+        "atom_name_2": "C27",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C27",
+        "atom_name_2": "C28",
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C27",
+        "atom_name_2": "C46",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C28",
+        "atom_name_2": "C29",
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_name_1": "C46",
+        "atom_name_2": "N48",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N48",
+        "atom_name_2": "C53",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N48",
+        "atom_name_2": "C49",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C53",
+        "atom_name_2": "C52",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C52",
+        "atom_name_2": "N51",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N51",
+        "atom_name_2": "C54",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "N51",
+        "atom_name_2": "C50",
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_name_1": "C50",
+        "atom_name_2": "C49",
+        "order": "SINGLE",
+        "aromatic": false
+      }
+    ],
+    "atoms_are_heavy": true,
+    "formal_charges_present": false,
+    "hydrogen_atoms_present": false,
+    "omitted_hydrogen_bonds": 31,
+    "stereochemistry": []
+  },
+  "reference": {
+    "name": "imatinib",
+    "source": "imatinib reference SMILES used by the capstone chemical-record example; canonicalized and kekulized by RDKit",
+    "smiles": "Cc1ccc(NC(=O)c2ccc(CN3CCN(C)CC3)cc2)cc1Nc1nccc(-c2cccnc2)n1",
+    "formula": "C29H31N7O",
+    "formal_charge": 0,
+    "hydrogen_count": 31,
+    "atoms": [
+      {
+        "index": 0,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 1,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 2,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 3,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 4,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 5,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 6,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 7,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 8,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 9,
+        "element": "O",
+        "formal_charge": 0
+      },
+      {
+        "index": 10,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 11,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 12,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 13,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 14,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 15,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 16,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 17,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 18,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 19,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 20,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 21,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 22,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 23,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 24,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 25,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 26,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 27,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 28,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 29,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 30,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 31,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 32,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 33,
+        "element": "N",
+        "formal_charge": 0
+      },
+      {
+        "index": 34,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 35,
+        "element": "C",
+        "formal_charge": 0
+      },
+      {
+        "index": 36,
+        "element": "C",
+        "formal_charge": 0
+      }
+    ],
+    "bonds": [
+      {
+        "atom_index_1": 0,
+        "atom_index_2": 1,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 1,
+        "atom_index_2": 2,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 2,
+        "atom_index_2": 3,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 3,
+        "atom_index_2": 4,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 4,
+        "atom_index_2": 5,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 5,
+        "atom_index_2": 6,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 4,
+        "atom_index_2": 7,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 7,
+        "atom_index_2": 8,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 8,
+        "atom_index_2": 9,
+        "order": "DOUBLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 8,
+        "atom_index_2": 10,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 10,
+        "atom_index_2": 11,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 11,
+        "atom_index_2": 12,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 12,
+        "atom_index_2": 13,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 13,
+        "atom_index_2": 14,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 14,
+        "atom_index_2": 15,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 13,
+        "atom_index_2": 16,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 16,
+        "atom_index_2": 17,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 17,
+        "atom_index_2": 18,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 18,
+        "atom_index_2": 19,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 19,
+        "atom_index_2": 20,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 20,
+        "atom_index_2": 21,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 21,
+        "atom_index_2": 22,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 20,
+        "atom_index_2": 23,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 2,
+        "atom_index_2": 24,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 24,
+        "atom_index_2": 25,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 25,
+        "atom_index_2": 26,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 26,
+        "atom_index_2": 27,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 27,
+        "atom_index_2": 28,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 28,
+        "atom_index_2": 29,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 29,
+        "atom_index_2": 30,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 29,
+        "atom_index_2": 31,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 31,
+        "atom_index_2": 32,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 32,
+        "atom_index_2": 33,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 33,
+        "atom_index_2": 34,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 34,
+        "atom_index_2": 35,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 35,
+        "atom_index_2": 36,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 6,
+        "atom_index_2": 1,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 15,
+        "atom_index_2": 10,
+        "order": "DOUBLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 22,
+        "atom_index_2": 17,
+        "order": "SINGLE",
+        "aromatic": false
+      },
+      {
+        "atom_index_1": 30,
+        "atom_index_2": 25,
+        "order": "SINGLE",
+        "aromatic": true
+      },
+      {
+        "atom_index_1": 36,
+        "atom_index_2": 31,
+        "order": "DOUBLE",
+        "aromatic": true
+      }
+    ],
+    "atoms_are_heavy": true,
+    "stereocenters": []
+  },
+  "mapping": {
+    "pairs": [
+      {
+        "deposited_atom": "C1",
+        "reference_index": 35
+      },
+      {
+        "deposited_atom": "C6",
+        "reference_index": 36
+      },
+      {
+        "deposited_atom": "C5",
+        "reference_index": 31
+      },
+      {
+        "deposited_atom": "C4",
+        "reference_index": 32
+      },
+      {
+        "deposited_atom": "N3",
+        "reference_index": 33
+      },
+      {
+        "deposited_atom": "C2",
+        "reference_index": 34
+      },
+      {
+        "deposited_atom": "C7",
+        "reference_index": 29
+      },
+      {
+        "deposited_atom": "C12",
+        "reference_index": 28
+      },
+      {
+        "deposited_atom": "C11",
+        "reference_index": 27
+      },
+      {
+        "deposited_atom": "N10",
+        "reference_index": 26
+      },
+      {
+        "deposited_atom": "C9",
+        "reference_index": 25
+      },
+      {
+        "deposited_atom": "N8",
+        "reference_index": 30
+      },
+      {
+        "deposited_atom": "N13",
+        "reference_index": 24
+      },
+      {
+        "deposited_atom": "C14",
+        "reference_index": 2
+      },
+      {
+        "deposited_atom": "C19",
+        "reference_index": 1
+      },
+      {
+        "deposited_atom": "C18",
+        "reference_index": 6
+      },
+      {
+        "deposited_atom": "C17",
+        "reference_index": 5
+      },
+      {
+        "deposited_atom": "C16",
+        "reference_index": 4
+      },
+      {
+        "deposited_atom": "C15",
+        "reference_index": 3
+      },
+      {
+        "deposited_atom": "N21",
+        "reference_index": 7
+      },
+      {
+        "deposited_atom": "C22",
+        "reference_index": 8
+      },
+      {
+        "deposited_atom": "C23",
+        "reference_index": 10
+      },
+      {
+        "deposited_atom": "C25",
+        "reference_index": 11
+      },
+      {
+        "deposited_atom": "C26",
+        "reference_index": 12
+      },
+      {
+        "deposited_atom": "C27",
+        "reference_index": 13
+      },
+      {
+        "deposited_atom": "C28",
+        "reference_index": 14
+      },
+      {
+        "deposited_atom": "C29",
+        "reference_index": 15
+      },
+      {
+        "deposited_atom": "C46",
+        "reference_index": 16
+      },
+      {
+        "deposited_atom": "N48",
+        "reference_index": 17
+      },
+      {
+        "deposited_atom": "C53",
+        "reference_index": 18
+      },
+      {
+        "deposited_atom": "C52",
+        "reference_index": 19
+      },
+      {
+        "deposited_atom": "N51",
+        "reference_index": 20
+      },
+      {
+        "deposited_atom": "C54",
+        "reference_index": 23
+      },
+      {
+        "deposited_atom": "C50",
+        "reference_index": 21
+      },
+      {
+        "deposited_atom": "C49",
+        "reference_index": 22
+      },
+      {
+        "deposited_atom": "O29",
+        "reference_index": 9
+      },
+      {
+        "deposited_atom": "C20",
+        "reference_index": 0
+      }
+    ],
+    "candidate_count": 4,
+    "ambiguous": true,
+    "selection_rule": "lexicographically smallest reference-index tuple in deposited-atom order"
+  },
+  "decisions": [
+    {
+      "decision": "selected a representative atom mapping",
+      "actor": "ligand identity reconciliation",
+      "rationale": "4 valid candidate mappings; lexicographically smallest reference-index tuple in deposited-atom order. The record preserves the ambiguity and does not claim uniqueness."
+    },
+    {
+      "decision": "compared raw bond orders before aromatic normalization",
+      "actor": "ligand identity reconciliation",
+      "rationale": "raw deposited orders were preserved; aromatic perception was used only for a separate normalized comparison."
+    },
+    {
+      "decision": "did not add hydrogens, change protonation, or assign formal charges",
+      "actor": "ligand identity reconciliation",
+      "rationale": "missing deposited information is reported as not_run or open, not inferred from the reference."
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited ligand graph",
+        "detail": "Component STI from the selected structure record; atoms and bonds are taken from the deposited mmCIF.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "reference molecular graph",
+        "detail": "imatinib from imatinib reference SMILES used by the capstone chemical-record example; canonicalized and kekulized by RDKit; formula C29H31N7O, formal charge 0.",
+        "actor": "reference adapter"
+      },
+      {
+        "label": "calculated",
+        "subject": "identity comparison",
+        "detail": "4 valid mapping candidates; raw bond-order differences 18; unresolved normalized differences 0.",
+        "actor": "ligand identity reconciliation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No docking pose, affinity, or free-energy estimate is produced.",
+        "actor": "ligand identity reconciliation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "none",
+        "detail": "No mechanistic interpretation is made from the comparison.",
+        "actor": "ligand identity reconciliation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "selection.ligand_matches_record",
+        "category": "selection",
+        "status": "pass",
+        "subject": "STI:E",
+        "criterion": "deposited ligand identifiers match the Batch 1 selection",
+        "observed": "STI label E auth A seq 600",
+        "expected": "STI label E auth A seq 600",
+        "detail": "the identity record was built from the manifest selection"
+      },
+      {
+        "check_id": "chemical.formula_matches_reference",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "deposited formula equals the reference formula",
+        "observed": "C29 H31 N7 O",
+        "expected": "C29H31N7O",
+        "detail": "formula strings are compared after removing spaces"
+      },
+      {
+        "check_id": "chemical.heavy_atom_counts_match",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "deposited heavy atoms equal reference heavy atoms",
+        "observed": "37",
+        "expected": "37",
+        "detail": "hydrogen atoms are handled by a separate check"
+      },
+      {
+        "check_id": "chemical.element_counts_match",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "deposited element counts equal reference element counts",
+        "observed": "{'C': 29, 'N': 7, 'O': 1}",
+        "expected": "{'C': 29, 'N': 7, 'O': 1}",
+        "detail": "element symbols are compared without normalization"
+      },
+      {
+        "check_id": "chemical.connectivity_matches",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "mapped deposited bonds equal reference bonds",
+        "observed": "41 mapped bonds",
+        "expected": "41 reference bonds",
+        "detail": "connectivity is compared as an unordered edge set"
+      },
+      {
+        "check_id": "chemical.bond_orders_match",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "bond orders agree after explicit aromatic normalization",
+        "observed": "18 raw differences; 0 after aromatic normalization",
+        "expected": "0 unresolved differences",
+        "detail": "raw Kekule orders are recorded before aromatic perception is applied for the normalized comparison"
+      },
+      {
+        "check_id": "chemical.formal_charge_matches",
+        "category": "chemical_identity",
+        "status": "not_run",
+        "subject": "STI",
+        "criterion": "deposited formal charges equal reference formal charges",
+        "observed": "deposited formal charges are not populated",
+        "expected": "reference formal charge 0",
+        "detail": "missing deposited charges are not inferred"
+      },
+      {
+        "check_id": "chemical.stereochemistry_matches",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "deposited stereochemistry agrees with the reference",
+        "observed": "no stereocentres in reference",
+        "expected": "no stereocentres",
+        "detail": "unspecified deposited stereochemistry is not assigned"
+      },
+      {
+        "check_id": "chemical.hydrogens_match",
+        "category": "chemical_identity",
+        "status": "not_run",
+        "subject": "STI",
+        "criterion": "deposited hydrogen count agrees with the reference",
+        "observed": "no hydrogen atoms in deposited coordinates",
+        "expected": "31 hydrogens in reference formula",
+        "detail": "no hydrogens are added or removed by this module"
+      },
+      {
+        "check_id": "chemical.atom_mapping_complete",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "every deposited atom maps once to every reference heavy atom",
+        "observed": "37 mapped pairs",
+        "expected": "37 deposited and 37 reference atoms",
+        "detail": "mapping completeness is checked before chemical comparisons"
+      },
+      {
+        "check_id": "chemical.atom_mapping_elements_agree",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "each mapped atom pair has the same element",
+        "observed": "element agreement checked for selected mapping",
+        "expected": "all mapped pairs agree",
+        "detail": "atom names alone are not treated as chemical identifiers"
+      },
+      {
+        "check_id": "chemical.atom_mapping_ambiguity_documented",
+        "category": "chemical_identity",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "mapping ambiguity is absent or explicitly recorded",
+        "observed": "4 valid candidate mappings",
+        "expected": "one or more; ambiguity recorded when more than one",
+        "detail": "the selected mapping is representative, not a claim that it is unique"
+      },
+      {
+        "check_id": "reference.provenance_recorded",
+        "category": "reference",
+        "status": "pass",
+        "subject": "imatinib",
+        "criterion": "reference name, source, SMILES, and formula are recorded",
+        "observed": "imatinib reference SMILES used by the capstone chemical-record example; canonicalized and kekulized by RDKit",
+        "expected": "documented reference provenance",
+        "detail": "the reference graph is not treated as experimental data"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "bond_order_representation",
+      "status": "resolved",
+      "detail": "18 bonds differ in raw Kekule assignment; 0 remain after aromatic normalization.",
+      "observed": "18 raw differences",
+      "expected": "0 raw differences",
+      "resolution": "Aromatic perception was applied as a separate comparison; raw deposited bond orders remain in the record and were not rewritten."
+    },
+    {
+      "category": "formal_charge",
+      "status": "open",
+      "detail": "Deposited formal charges are unavailable, so charge identity is unverified.",
+      "observed": "formal charges not populated",
+      "expected": "reference formal charge 0",
+      "resolution": "No charge assignment was applied in batch 2."
+    },
+    {
+      "category": "hydrogen_atoms",
+      "status": "not_applicable",
+      "detail": "The deposited coordinates contain no hydrogen atoms.",
+      "observed": "0 hydrogen atoms",
+      "expected": "31 hydrogens in reference formula",
+      "resolution": "Identity mapping uses heavy atoms only; no hydrogens were added."
+    }
+  ]
+}

@@ -57,18 +57,21 @@ The project must also record:
 The repository does not bundle the experimental coordinates. Downloading a
 structure is an explicit provenance step.
 
-The two reproducible anchors are:
+The reproducible anchors are:
 
 ```bash
 uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
 uv run --with gemmi python examples/drug_discovery/capstone_structure.py
+uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
 ledger. The second retrieves the deposited 2HYY mmCIF, keeps it unchanged, and
 writes `data/structures/2HYY.manifest.json` with the exact source, checksum,
-protein chain, and ligand instance. Neither command docks a ligand, predicts
-affinity, or estimates a free energy.
+protein chain, and ligand instance. The third reconciles the selected `STI`
+ligand with the imatinib reference and writes
+`data/structures/2HYY.ligand-identity.json`. None of the commands docks a
+ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -253,6 +256,49 @@ The manifest reports validation as `pass`, `fail`, or `not_run`. Formal charge,
 stereochemistry, atom mapping, and interaction criteria are deliberately
 `not_run` in this batch; they are not silently inferred.
 
+### 4.4 Batch 2: ligand identity reconciliation
+
+Batch 2 answers one question: does the selected deposited ligand correspond to
+the intended imatinib identity, and can that correspondence be shown atom by
+atom?
+
+```bash
+uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
+```
+
+The workflow reads the ligand selection from the Batch 1 manifest, rather than
+looking up a hard-coded residue. It preserves the deposited atom and heavy-atom
+bond records, builds an explicit imatinib reference graph with RDKit, and writes
+`data/structures/2HYY.ligand-identity.json`.
+
+For 2HYY the record establishes:
+
+| Result | Value |
+| --- | --- |
+| Deposited graph | 37 heavy atoms, 41 heavy-atom bonds |
+| Hydrogen bond records omitted | 31; the deposited coordinates contain no hydrogens |
+| Reference | imatinib, `C29H31N7O`, formal charge 0, 31 hydrogens |
+| Mapping candidates | 4 symmetry-equivalent graph isomorphisms |
+| Selected mapping | representative chosen by a recorded lexicographic rule |
+| Validation | 11 pass, 0 fail, 2 not run |
+
+The two `not_run` checks are formal charge and hydrogen count. The deposited
+`_chem_comp` record does not include formal charges, and the coordinates contain
+no hydrogen atoms. Neither fact is repaired by copying values from the
+reference.
+
+The bond-order comparison preserves a useful distinction:
+
+- **raw Kekulé orders** differ on 18 bonds because the deposited and reference
+  aromatic rings use different resonance assignments;
+- after a separate, documented aromatic-perception comparison, **0 unresolved
+  bond-order differences** remain.
+
+The raw difference is retained in the record and reported as a resolved
+discrepancy. The deposited bond orders are not rewritten. Formal charge remains
+an open discrepancy, and the absence of hydrogens is recorded as not applicable
+to the heavy-atom identity mapping.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -297,6 +343,7 @@ synthetic teaching data; they do not run an imatinib pipeline.
 ```bash
 uv run --with rdkit python examples/drug_discovery/capstone_imatinib.py
 uv run --with gemmi python examples/drug_discovery/capstone_structure.py
+uv run --with gemmi --with rdkit python examples/drug_discovery/capstone_ligand_identity.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -314,6 +361,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | --- | --- | --- |
 | chemical identity and descriptors | `capstone_imatinib.py` | calculated |
 | structure retrieval and selection manifest | `capstone_structure.py` | experimental + calculated |
+| ligand identity reconciliation | `capstone_ligand_identity.py` | experimental + calculated |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

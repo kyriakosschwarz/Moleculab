@@ -21,8 +21,8 @@ The source is organised by architecture layer:
     interaction records, fingerprints, external pose analysis, SAR comparison,
     dipole moments, and LogD conversion;
 ``applications``
-    docking, solvent, water, free energy, acid-base, QM/MM, and
-    experimental-structure provenance.
+    docking, solvent, water, free energy, acid-base, QM/MM,
+    experimental-structure provenance, and ligand identity reconciliation.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -159,6 +159,22 @@ from .applications.flexible_docking import (
     receptor_strain_score,
     score_flexible_pose,
 )
+from .applications.ligand_identity import (
+    LIGAND_IDENTITY_SCHEMA_VERSION,
+    AtomMapping,
+    DepositedAtom,
+    DepositedBond,
+    DepositedLigand,
+    IdentityDiscrepancy,
+    LigandIdentityRecord,
+    ReferenceAtom,
+    ReferenceBond,
+    ReferenceLigand,
+    load_ligand_identity,
+    reconcile_ligand_identity,
+    validate_ligand_identity,
+    write_ligand_identity,
+)
 from .applications.lj_alchemy import MultistageFEPResult, SoftCoreLennardJones
 from .applications.mbar import MBARResult, mbar, mbar_harmonic
 from .applications.mc_alchemy import BondedLennardJonesMC, SoftCoreLennardJonesPair
@@ -283,6 +299,7 @@ __all__ = [
     "Angle",
     "AnglePotential",
     "AssayMeasurement",
+    "AtomMapping",
     "BenchmarkCase",
     "BenchmarkSummary",
     "BindingModeComparison",
@@ -295,6 +312,9 @@ __all__ = [
     "CoulombPotential",
     "DEBYE_PER_E_NM",
     "DecisionRecord",
+    "DepositedAtom",
+    "DepositedBond",
+    "DepositedLigand",
     "DipoleMoment",
     "DistanceConstraint",
     "DockingBenchmark",
@@ -311,12 +331,15 @@ __all__ = [
     "HarmonicPotential",
     "HydrogenBond",
     "HydrogenBondCriteria",
+    "IdentityDiscrepancy",
     "InteractionAtom",
     "InteractionFeature",
     "InteractionFingerprint",
     "InteractionPatternComparison",
+    "LIGAND_IDENTITY_SCHEMA_VERSION",
     "LennardJonesParameters",
     "LennardJonesPotential",
+    "LigandIdentityRecord",
     "LigandPose",
     "LigandSelection",
     "MatchedMolecularPair",
@@ -346,6 +369,9 @@ __all__ = [
     "RDFResult",
     "RattleResult",
     "ReactionFieldElectrostatics",
+    "ReferenceAtom",
+    "ReferenceBond",
+    "ReferenceLigand",
     "ResidueContactMatrix",
     "RigidLigand",
     "ShakeResult",
@@ -414,6 +440,7 @@ __all__ = [
     "kinetic_pressure",
     "kinetic_temperature",
     "ligand_efficiency",
+    "load_ligand_identity",
     "load_manifest",
     "logd_from_logp",
     "make_receptor_conformer",
@@ -436,6 +463,7 @@ __all__ = [
     "protonation_microstates",
     "radial_distribution_function",
     "rattle_velocities",
+    "reconcile_ligand_identity",
     "receptor_strain_score",
     "sample_harmonic_positions",
     "score_flexible_pose",
@@ -460,9 +488,11 @@ __all__ = [
     "total_energy",
     "use_backend",
     "validate_atom_mapping",
+    "validate_ligand_identity",
     "validate_manifest",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
     "virial_pressure",
+    "write_ligand_identity",
     "write_manifest",
 ]

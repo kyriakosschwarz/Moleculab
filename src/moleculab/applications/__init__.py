@@ -3,6 +3,7 @@
 Applications answer scientific questions using the lower layers. They may
 combine models, algorithms, and protocols, but they do not redefine the core
 physics.  Structure manifests record experimental inputs and explicit
-selections; they do not parse coordinates or choose a structure on the caller's
-behalf.
+selections; ligand identity records compare supplied deposited and reference
+graphs. Neither parses coordinates, chooses a structure, or invents an atom
+mapping on the caller's behalf.
 """

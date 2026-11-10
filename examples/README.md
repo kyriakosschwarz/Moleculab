@@ -53,6 +53,7 @@ linked from the relevant tutorial or reference page.
 | [`structural_observations_thermodynamics.py`](drug_discovery/structural_observations_thermodynamics.py) | why contact counts do not determine free energy |
 | [`capstone_imatinib.py`](drug_discovery/capstone_imatinib.py) | reproducible imatinib chemical record and provenance ledger |
 | [`capstone_structure.py`](drug_discovery/capstone_structure.py) | 2HYY retrieval, immutable source file, and [provenance manifest](../data/structures/2HYY.manifest.json) ([cache policy](../data/structures/README.md)) |
+| [`capstone_ligand_identity.py`](drug_discovery/capstone_ligand_identity.py) | deposited-ligand to imatinib identity reconciliation and [atom mapping](../data/structures/2HYY.ligand-identity.json) |
 
 ## Advanced
 
