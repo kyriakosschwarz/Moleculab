@@ -29,13 +29,14 @@
 - Salt bridges, aromatic interactions, cation–π contacts, hydrophobic contacts,
   and steric clashes each need a different geometric definition.
 - An interaction list is not an energy decomposition.
-- Interaction fingerprints, occupancy, and energy contributions answer
+- Interaction fingerprints, sampled-frame occupancy, and energy contributions
+  answer
   different questions.
 
 **Looking ahead**
 
 - Module 04 will turn interaction lists into residue-level fingerprints and
-  trajectory occupancy.
+  sampled-frame occupancy.
 - Docking will eventually score poses, but a pose score is still not a binding
   free energy.
 
@@ -257,7 +258,7 @@ Keep three concepts distinct:
 | Concept | Question |
 | --- | --- |
 | interaction fingerprint | which interactions are observed? |
-| interaction occupancy | how often does each interaction appear across frames? |
+| sampled-frame occupancy | how often does each interaction appear across frames? |
 | energy decomposition | how much does each term contribute under a physical model? |
 
 They are related but not interchangeable. A contact table does not prove an
@@ -318,6 +319,10 @@ provides the chemical-feature record and hydrogen-bond detection.
 - hydrogen positions for donors.
 
 The flags are supplied by the caller. The class does not infer chemistry.
+
+`HydrogenBond` records the chosen hydrogen position and its index in the
+donor's hydrogen list, so the selection of the most linear hydrogen can be
+reproduced.
 
 ### 12.2 Hydrogen-bond API
 
@@ -428,6 +433,7 @@ A hydrogen-bond detector is correct when:
 - it uses a documented distance and angle criterion;
 - it rejects a short contact with an unsuitable angle;
 - it chooses a hydrogen deterministically when several are present;
+- it records the chosen hydrogen position and index;
 - it reports distance, angle, atom identifiers, and criteria;
 - translation and rotation do not change the detected geometry;
 - atom ordering does not change the set of detected interactions;
@@ -473,13 +479,14 @@ A hydrogen-bond detector is correct when:
   placement.
 - Salt bridges, aromatic interactions, cation–π contacts, hydrophobic contacts,
   and steric clashes each need their own geometric definition.
-- Interaction fingerprints, occupancy, and energy decomposition are different
+- Interaction fingerprints, sampled-frame occupancy, and energy decomposition
+  are different
   concepts.
 - The first implementation provides a toolkit-independent feature record and a
   tested hydrogen-bond detector.
 - The next module will turn interaction lists into residue-level fingerprints
-  and trajectory occupancy.
+  and sampled-frame occupancy.
 
 **Previous:** [02 — Binding-site geometry](02_binding_sites.md).
 
-**Next:** Protein–ligand interaction fingerprints (module 04, planned).
+**Next:** [04 — Interaction fingerprints and sampled-frame occupancy](04_interaction_fingerprints.md).

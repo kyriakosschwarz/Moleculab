@@ -81,6 +81,10 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   cutoff selection, residue aggregation, and pocket centre/bounding box.
 - Toolkit-independent interaction features and hydrogen-bond geometry, with
   explicit distance and D-H...A angle criteria.
+- Interaction fingerprints, deterministic feature schemas, and sampled-frame
+  occupancy with missing-frame handling.
+- External docking pose records, explicit atom mapping, symmetry-aware ligand
+  RMSD, and pose-recovery thresholds.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

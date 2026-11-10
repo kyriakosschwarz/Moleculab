@@ -101,8 +101,8 @@ also uses Track A sections 15–17 and the free-energy material.
 | [01 — Protein structure fundamentals](drug_discovery/01_protein_structure.md) | chains, residues, coordinates, missing atoms, structure quality | Track A particles and topology | available |
 | [02 — Binding sites and cavities](drug_discovery/02_binding_sites.md) | pocket geometry, waters, volume, complementarity | Track A periodic box and nonbonded model | available |
 | [03 — Protein–ligand interaction geometry](drug_discovery/03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | Track A electrostatics and water | available |
-| 04 — Interaction fingerprints | residue-ligand contacts and trajectory occupancy | Track A trajectory analysis | planned |
-| 05 — Docking foundations | search, scoring, poses, limitations | Track A sections 15 and 24 | available |
+| [04 — Interaction fingerprints](drug_discovery/04_interaction_fingerprints.md) | residue-ligand contacts and sampled-frame occupancy | Track A trajectory analysis | available |
+| [05 — Docking foundations](drug_discovery/05_docking_fundamentals.md) | search, scoring, poses, limitations | Track A sections 15 and 24 | available |
 | 06 — Trajectory contact analysis | contact timelines and persistence | Track A analysis | planned |
 
 The current library supports the geometric and scoring pieces of Track C. It

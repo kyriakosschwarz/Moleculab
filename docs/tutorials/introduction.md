@@ -192,8 +192,8 @@ modules 01–04. The track covers:
 | [01 Protein structure fundamentals](drug_discovery/01_protein_structure.md) | chains, residues, coordinates, structure quality | available |
 | [02 Binding sites and cavities](drug_discovery/02_binding_sites.md) | pocket geometry, waters, complementarity | available |
 | [03 Protein–ligand interaction geometry](drug_discovery/03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
-| 04 Interaction fingerprints | residue-level contacts and occupancy | planned |
-| 05 Docking foundations | search, scoring, poses, limitations | available in Track A |
+| [04 Interaction fingerprints](drug_discovery/04_interaction_fingerprints.md) | residue-level contacts and sampled-frame occupancy | available |
+| [05 Docking foundations](drug_discovery/05_docking_fundamentals.md) | search, scoring, poses, limitations | available |
 | 06 Trajectory contact analysis | contact timelines and persistence | planned |
 
 The important distinction is that a geometric interaction is not an energy

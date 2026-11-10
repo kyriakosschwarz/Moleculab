@@ -25,7 +25,7 @@ with geometry and representation before it introduces scoring.
 | What does a protein structure contain? | chains, residues, coordinates, missing atoms, alternate locations |
 | Where is the binding site? | pockets, cavities, waters, shape and volume |
 | Which residues contact the ligand? | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts |
-| Which contacts persist? | residue-level interaction fingerprints and trajectory occupancy |
+| Which contacts persist? | residue-level interaction fingerprints and sampled-frame occupancy |
 | How are poses generated? | rigid and flexible docking |
 | What does a score mean? | interaction energy versus binding free energy |
 
@@ -36,8 +36,8 @@ with geometry and representation before it introduces scoring.
 | [01 — Protein structure fundamentals](01_protein_structure.md) | chains, residues, coordinates, structure quality | available |
 | [02 — Binding sites and cavities](02_binding_sites.md) | pocket geometry, waters, volume, complementarity | available |
 | [03 — Protein–ligand interaction geometry](03_protein_ligand_interactions.md) | hydrogen bonds, salt bridges, hydrophobic and aromatic contacts | available |
-| 04 — Interaction fingerprints | residue-ligand contact features and trajectory occupancy | planned |
-| 05 — Docking foundations | search, scoring, poses, and limitations | available in Track A |
+| [04 — Interaction fingerprints](04_interaction_fingerprints.md) | residue-ligand contact features and sampled-frame occupancy | available |
+| [05 — Docking foundations](05_docking_fundamentals.md) | search, scoring, poses, and limitations | available |
 | 06 — Trajectory contact analysis | contact timelines and persistence | planned |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
@@ -116,11 +116,11 @@ that each can have its own geometry and tests.
 
 ### 2.5 Module 04: interaction fingerprints
 
-A residue-level fingerprint should record which ligand atoms contact which
-protein residues and with which interaction type. Over a trajectory, the same
-representation supports:
+[Module 04](04_interaction_fingerprints.md) records which ligand atoms contact
+which protein residues and with which interaction type. Over a collection of
+frames, the same representation supports:
 
-- contact occupancy;
+- sampled-frame occupancy;
 - hydrogen-bond persistence;
 - residue interaction timelines;
 - pose comparison;
@@ -132,14 +132,18 @@ The essential distinction is:
 
 ### 2.6 Module 05: docking foundations
 
-This module is already covered by the Track A docking sections. It should be
-read as a Track C topic:
+[Module 05](05_docking_fundamentals.md) treats docking as pose generation and
+ranking, not as a direct binding-free-energy method:
 
 - rigid-body search;
 - scoring with the typed nonbonded model;
 - translation and rotation sampling;
 - flexible side chains and strain;
+- pose interpretation and symmetry-aware RMSD;
 - why the best score is a hypothesis, not a measured affinity.
+
+The existing Track A docking examples remain the simple search/scoring
+demonstrations. Module 05 adds the conceptual and pose-analysis layer.
 
 ## 3. What you can do now
 
@@ -195,7 +199,7 @@ A Track C module is complete when:
 - binding-site geometry is described without pretending it is an energy;
 - interaction types are assigned from clear geometric criteria;
 - a contact fingerprint can be reproduced from a known structure;
-- contact occupancy is checked against a manually constructed trajectory;
+- sampled-frame occupancy is checked against a manually constructed trajectory;
 - docking results are reported as poses and scores, not as binding affinities;
 - the link to the relevant Track A and Track B foundations is explicit.
 

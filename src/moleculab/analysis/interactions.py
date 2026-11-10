@@ -105,6 +105,7 @@ class HydrogenBond:
     distance: float
     angle_degrees: float
     hydrogen_position: np.ndarray
+    hydrogen_index: int
     criteria: HydrogenBondCriteria
 
     @property
@@ -177,11 +178,13 @@ def detect_hydrogen_bonds(
 
         best_angle = -1.0
         best_hydrogen = None
-        for hydrogen in donor.hydrogen_positions:
+        best_hydrogen_index = -1
+        for hydrogen_index, hydrogen in enumerate(donor.hydrogen_positions):
             angle = _angle_degrees(donor.position, hydrogen, acceptor.position)
             if angle > best_angle:
                 best_angle = angle
                 best_hydrogen = hydrogen
+                best_hydrogen_index = hydrogen_index
         if best_hydrogen is None or best_angle < criteria.min_angle_degrees:
             return
 
@@ -207,6 +210,7 @@ def detect_hydrogen_bonds(
             distance=distance,
             angle_degrees=best_angle,
             hydrogen_position=best_hydrogen.copy(),
+            hydrogen_index=best_hydrogen_index,
             criteria=criteria,
         )
 

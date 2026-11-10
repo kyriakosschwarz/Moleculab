@@ -37,6 +37,8 @@ uv run pytest tests/test_nonbonded.py tests/test_bonded.py tests/test_torsion.py
 uv run pytest tests/test_acid_base.py -q
 uv run pytest tests/test_binding_site.py -q
 uv run pytest tests/test_interactions.py -q
+uv run pytest tests/test_fingerprints.py -q
+uv run pytest tests/test_docking_poses.py -q
 ```
 
 Covered:
@@ -51,6 +53,9 @@ Covered:
 - binding-site distances, cutoff selection, residue aggregation, and
   rigid-motion invariance;
 - hydrogen-bond distance/angle criteria, donor direction, and negative cases;
+- fingerprint schema determinism, duplicate handling, and occupancy;
+- pose RMSD, explicit atom mappings, symmetry-aware mapping, and recovery
+  thresholds;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -119,6 +124,8 @@ uv run python examples/protonation.py
 uv run --with gemmi python examples/protein_structure.py
 uv run python examples/binding_site.py
 uv run python examples/interactions.py
+uv run python examples/interaction_fingerprints.py
+uv run python examples/docking_pose_analysis.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -179,12 +186,16 @@ point when a single operator typo could corrupt every downstream result.
 | hydrogen-bond distance and angle boundaries are explicit | `tests/test_interactions.py` |
 | hydrogen-bond direction and invalid chemistry are tested | `tests/test_interactions.py` |
 | interaction detection is rigid-motion and ordering invariant | `tests/test_interactions.py` |
+| fingerprint features are deterministic and duplicate-safe | `tests/test_fingerprints.py` |
+| occupancy distinguishes missing frames from absent features | `tests/test_fingerprints.py` |
+| pose RMSD is zero for identical mapped coordinates and rigid-motion invariant | `tests/test_docking_poses.py` |
+| symmetry-aware pose comparison uses explicit mappings | `tests/test_docking_poses.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-433 passed, 1 skipped
+463 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

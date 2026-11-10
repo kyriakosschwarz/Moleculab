@@ -153,6 +153,7 @@ def test_most_linear_hydrogen_is_selected():
 
     assert len(hydrogen_bonds) == 1
     assert hydrogen_bonds[0].angle_degrees == pytest.approx(180.0)
+    assert hydrogen_bonds[0].hydrogen_index == 0
     np.testing.assert_allclose(hydrogen_bonds[0].hydrogen_position, [0.1, 0.0, 0.0])
 
 

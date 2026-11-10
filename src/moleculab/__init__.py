@@ -17,7 +17,8 @@ The source is organised by architecture layer:
 ``protocols``
     thermostats and pressure coupling;
 ``analysis``
-    trajectory measurements, binding-site geometry, and interaction records;
+    trajectory measurements, binding-site geometry, interaction records,
+    fingerprints, and external pose analysis;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -54,6 +55,24 @@ from .analysis.binding_site import (
     minimum_distances,
     pocket_geometry,
     select_pocket_atoms,
+)
+from .analysis.docking import (
+    LigandPose,
+    PoseRecovery,
+    SymmetryAwareRMSD,
+    atom_id_mapping,
+    evaluate_pose_recovery,
+    pose_rmsd,
+    symmetry_aware_rmsd,
+    validate_atom_mapping,
+)
+from .analysis.fingerprints import (
+    FingerprintSchema,
+    InteractionFeature,
+    InteractionFingerprint,
+    OccupancyResult,
+    build_fingerprint,
+    calculate_occupancy,
 )
 from .analysis.interactions import (
     HydrogenBond,
@@ -210,6 +229,7 @@ __all__ = [
     "DoubleWellPotential",
     "EwaldElectrostatics",
     "FEPResult",
+    "FingerprintSchema",
     "FlexibleDockingPose",
     "FlexibleDockingResult",
     "HarmonicAnglePotential",
@@ -218,8 +238,11 @@ __all__ = [
     "HydrogenBond",
     "HydrogenBondCriteria",
     "InteractionAtom",
+    "InteractionFeature",
+    "InteractionFingerprint",
     "LennardJonesParameters",
     "LennardJonesPotential",
+    "LigandPose",
     "MBARResult",
     "MMPointCharge",
     "MSDResult",
@@ -227,10 +250,12 @@ __all__ = [
     "MultistageFEPResult",
     "NeighbourList",
     "NonbondedModel",
+    "OccupancyResult",
     "PairPotential",
     "Particle",
     "ParticleInBox",
     "PeriodicTorsionPotential",
+    "PoseRecovery",
     "Potential",
     "QMResult",
     "RDFResult",
@@ -243,6 +268,7 @@ __all__ = [
     "SoftCoreLennardJonesPair",
     "SolvatedLigandAlchemy",
     "SolventModel",
+    "SymmetryAwareRMSD",
     "System",
     "SystemTrajectory",
     "TIResult",
@@ -253,15 +279,18 @@ __all__ = [
     "WaterModel",
     "acceleration",
     "assert_constraints_satisfied",
+    "atom_id_mapping",
     "available_backends",
     "backend_info",
     "berendsen_barostat",
     "berendsen_thermostat",
     "binding_site_geometry",
     "boltzmann_populations",
+    "build_fingerprint",
     "build_neighbour_list",
     "build_solvent_box",
     "build_water_box",
+    "calculate_occupancy",
     "combine_lorentz_berthelot",
     "constraint_error",
     "degrees_of_freedom",
@@ -270,6 +299,7 @@ __all__ = [
     "dihedral_angle",
     "dock_flexible_receptor",
     "dock_rigid_ligand",
+    "evaluate_pose_recovery",
     "fep_between_potentials",
     "fep_harmonic_oscillator",
     "force_from_potential",
@@ -292,6 +322,7 @@ __all__ = [
     "minimize_energy",
     "minimum_distances",
     "pocket_geometry",
+    "pose_rmsd",
     "potential_energy",
     "pressure",
     "pressure_bar",
@@ -310,6 +341,7 @@ __all__ = [
     "simulate_velocity_verlet",
     "simulate_velocity_verlet_system",
     "steepest_descent_step",
+    "symmetry_aware_rmsd",
     "tautomer_populations",
     "thermodynamic_integration_harmonic",
     "to_numpy",
@@ -319,6 +351,7 @@ __all__ = [
     "torch_dtype",
     "total_energy",
     "use_backend",
+    "validate_atom_mapping",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
     "virial_pressure",

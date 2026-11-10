@@ -84,8 +84,10 @@ engine does not depend on it.
 Track C starts from protein structure and binding-site geometry, then builds
 towards interaction fingerprints, docking, and trajectory contact analysis.
 Modules [01](drug_discovery/01_protein_structure.md),
-[02](drug_discovery/02_binding_sites.md), and
-[03](drug_discovery/03_protein_ligand_interactions.md) are available; the later
+[02](drug_discovery/02_binding_sites.md),
+[03](drug_discovery/03_protein_ligand_interactions.md),
+[04](drug_discovery/04_interaction_fingerprints.md), and
+[05](drug_discovery/05_docking_fundamentals.md) are available; the later
 modules are planned. The docking foundations are already available as Track A
 sections 15 and 24. [Units and conventions](drug_discovery/units.md) collects
 the common structural and affinity units.
