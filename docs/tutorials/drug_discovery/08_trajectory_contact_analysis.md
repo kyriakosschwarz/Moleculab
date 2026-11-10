@@ -373,4 +373,4 @@ A trajectory-contact module is correct when:
 
 **Previous:** [07 — Docking validation and benchmarking](07_docking_validation.md).
 
-**Next:** Lead optimisation and structure–activity relationships (module 09, planned).
+**Next:** [09 — Lead optimisation and structure–activity relationships](09_lead_optimisation_sar.md).

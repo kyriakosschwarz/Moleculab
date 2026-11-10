@@ -69,7 +69,7 @@ src/moleculab/
 ├── composition/      System, neighbour list, constraints
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
-├── analysis/         MSD, RDF, contacts, binding/interaction geometry, fingerprints
+├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR
 ├── applications/     docking, solvent, water, free energy, acid-base, QM/MM
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
@@ -89,7 +89,7 @@ The most important distinctions are summarised below.
 | data structure | how is the state represented? | `Particle`, `System`, `Topology`, `Box`, `Trajectory` | contain a hidden integration loop |
 | numerical algorithm | how are the equations solved? | Velocity Verlet, steepest descent, SHAKE/RATTLE | define a new force field |
 | simulation protocol | how is the state prepared or sampled? | Berendsen thermostat, barostat | change the potential energy function |
-| analysis | what does a trajectory or structure mean? | MSD, RDF, contacts, binding-site geometry, interaction records, fingerprints, pose RMSD, pose clustering | modify the trajectory, forces, or structure |
+| analysis | what does a trajectory or structure mean? | MSD, RDF, contacts, binding-site geometry, interaction records, fingerprints, pose RMSD, pose clustering, SAR comparison | modify the trajectory, forces, or structure |
 | application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations | duplicate core physics |
 | backend | where does a numerical kernel run? | CPU, optional PyTorch Ewald | leak device details into models |
 
@@ -132,6 +132,7 @@ The actual imports are visible in the source. The important rules are:
 | `analysis.binding_site` | Python and NumPy only | `System`, integrators, structure toolkits |
 | `analysis.interactions` | Python and NumPy only | `System`, integrators, structure or chemistry toolkits |
 | `analysis.fingerprints` | `analysis.interactions` | `System`, integrators, trajectory I/O, MD assumptions |
+| `analysis.sar` | foundation units and NumPy only | structure or chemistry toolkits, activity prediction |
 | `analysis.docking` | Python and NumPy only | `System`, integrators, docking parsers or search engines |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
@@ -611,6 +612,10 @@ from coordinate frames, computes sampled-frame occupancy with explicit missing-
 frame handling, and reports contact run lengths and lifetimes. It does not load
 trajectories or infer chemical interaction types.
 
+`analysis.sar` compares prepared compound records with measured activity,
+calculated descriptors, and optional docking scores. It keeps those categories
+separate and does not detect matched pairs or predict activity.
+
 `analysis.interactions` consumes prepared `InteractionAtom` features and
 returns typed geometric interaction records. The first detector covers
 hydrogen bonds; it requires donor/acceptor flags and hydrogen positions and
@@ -900,8 +905,9 @@ For a new contributor, the source is best read in this order:
    protocols.
 10. `analysis/trajectory.py`, `analysis/trajectory_contacts.py`,
     `analysis/binding_site.py`, `analysis/interactions.py`,
-    `analysis/fingerprints.py`, `analysis/docking/` — trajectory, contact,
-    binding-site, interaction, fingerprint, and pose measurements.
+    `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/docking/` —
+    trajectory, contact, binding-site, interaction, fingerprint, SAR, and pose
+    measurements.
 11. `applications/solvent.py`, `applications/water.py` — environment builders.
 12. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.

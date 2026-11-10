@@ -41,7 +41,7 @@ with geometry and representation before it introduces scoring.
 | [06 — Comparing binding modes](06_comparing_binding_modes.md) | pose clustering, geometry, interaction-pattern comparison | available |
 | [07 — Docking validation and benchmarking](07_docking_validation.md) | redocking, cross-docking, pose recovery, score interpretation | available |
 | [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | available |
-| 09 — Lead optimisation and structure–activity relationships | multi-ligand comparison and SAR | planned |
+| [09 — Lead optimisation and SAR](09_lead_optimisation_sar.md) | matched pairs, activity scales, ligand efficiency, and evidence categories | available |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
 representation and import boundary that the later modules assume.
@@ -186,11 +186,20 @@ coordinate frames:
 
 It is parser-independent and does not load trajectory files.
 
-### 2.10 Module 09: lead optimisation and structure–activity relationships
+### 2.10 Module 09: lead optimisation and SAR
 
-This planned module will extend multi-ligand comparison towards
-structure–activity relationships, while keeping empirical affinity models
-separate from the physical analysis layers.
+[Module 09](09_lead_optimisation_sar.md) connects structural evidence to
+medicinal-chemistry decisions:
+
+- matched molecular pairs and activity changes;
+- pIC50, IC50, Ki, and Kd;
+- physicochemical descriptors;
+- ligand efficiency and its limitations;
+- docking and interaction evidence as mechanistic hypotheses;
+- selectivity, liabilities, and data-category separation.
+
+The comparison layer is parser-independent; RDKit or another chemistry toolkit
+provides descriptors and matched-pair detection at the boundary.
 
 ## 3. What you can do now
 

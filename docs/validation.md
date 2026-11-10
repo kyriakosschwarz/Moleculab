@@ -42,6 +42,7 @@ uv run pytest tests/test_docking_poses.py -q
 uv run pytest tests/test_pose_comparison.py -q
 uv run pytest tests/test_docking_benchmark.py -q
 uv run pytest tests/test_trajectory_contacts.py -q
+uv run pytest tests/test_sar.py -q
 ```
 
 Covered:
@@ -62,6 +63,7 @@ Covered:
 - pose clustering, centroid comparison, and interaction-pattern Jaccard;
 - benchmark statuses, valid-case denominators, and protocol retention;
 - contact matrices, occupancy, missing frames, and lifetime run lengths;
+- pIC50 conversion, ligand efficiency, and matched-pair category separation;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -135,6 +137,7 @@ uv run python examples/docking_pose_analysis.py
 uv run python examples/compare_binding_modes.py
 uv run python examples/docking_benchmark.py
 uv run python examples/trajectory_contacts.py
+uv run python examples/matched_molecular_pairs.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -205,12 +208,14 @@ point when a single operator typo could corrupt every downstream result.
 | benchmark statuses agree with pose-recovery results | `tests/test_docking_benchmark.py` |
 | contact occupancy excludes missing frames and reports them | `tests/test_trajectory_contacts.py` |
 | equal occupancy can yield different contact lifetimes | `tests/test_trajectory_contacts.py` |
+| pIC50 and fold changes agree with the concentration ratio | `tests/test_sar.py` |
+| matched-pair activity, descriptors, and docking scores stay separate | `tests/test_sar.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-506 passed, 1 skipped
+521 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

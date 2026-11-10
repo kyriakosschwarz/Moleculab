@@ -18,7 +18,7 @@ The source is organised by architecture layer:
     thermostats and pressure coupling;
 ``analysis``
     trajectory measurements, contact persistence, binding-site geometry,
-    interaction records, fingerprints, and external pose analysis;
+    interaction records, fingerprints, external pose analysis, and SAR comparison;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -93,6 +93,15 @@ from .analysis.interactions import (
     HydrogenBondCriteria,
     InteractionAtom,
     detect_hydrogen_bonds,
+)
+from .analysis.sar import (
+    AssayMeasurement,
+    CompoundRecord,
+    MatchedMolecularPair,
+    MatchedPairComparison,
+    compare_matched_pair,
+    ligand_efficiency,
+    pIC50,
 )
 from .analysis.trajectory import (
     MSDResult,
@@ -236,12 +245,14 @@ from .protocols.thermostats import (
 __all__ = [
     "ARGON",
     "COARSE_GRAINED_WATER",
+    "CompoundRecord",
     "ContactLifetimeResult",
     "ContactOccupancyResult",
     "ELECTRON_MASS_DA",
     "SPCE_WATER",
     "Angle",
     "AnglePotential",
+    "AssayMeasurement",
     "BenchmarkCase",
     "BenchmarkSummary",
     "BindingModeComparison",
@@ -273,6 +284,8 @@ __all__ = [
     "LennardJonesParameters",
     "LennardJonesPotential",
     "LigandPose",
+    "MatchedMolecularPair",
+    "MatchedPairComparison",
     "MBARResult",
     "MMPointCharge",
     "MSDResult",
@@ -333,6 +346,7 @@ __all__ = [
     "combine_lorentz_berthelot",
     "compare_binding_modes",
     "compare_interaction_patterns",
+    "compare_matched_pair",
     "compare_pose_geometry",
     "constraint_error",
     "degrees_of_freedom",
@@ -354,6 +368,7 @@ __all__ = [
     "kinetic_energy",
     "kinetic_pressure",
     "kinetic_temperature",
+    "ligand_efficiency",
     "make_receptor_conformer",
     "max_force_magnitude",
     "mbar",
@@ -363,6 +378,7 @@ __all__ = [
     "mean_squared_displacement",
     "minimize_energy",
     "minimum_distances",
+    "pIC50",
     "pocket_geometry",
     "pose_distance",
     "pose_rmsd",
