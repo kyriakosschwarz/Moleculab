@@ -21,6 +21,7 @@ import pytest
 
 from moleculab import (
     CoulombPotential,
+    DoubleWellPotential,
     HarmonicAnglePotential,
     HarmonicBondPotential,
     HarmonicPotential,
@@ -67,6 +68,25 @@ def assert_force_matches_gradient(analytical, energy, coordinates):
 )
 def test_harmonic_potential_force_matches_gradient(position):
     potential = HarmonicPotential(stiffness=100.0, center=[0.05, -0.02, 0.01])
+    position = np.asarray(position, dtype=float)
+
+    assert_force_matches_gradient(
+        potential.force(position),
+        potential.energy,
+        position,
+    )
+
+
+@pytest.mark.parametrize(
+    "position",
+    [
+        [0.35, 0.0, 0.0],
+        [-0.20, 0.03, -0.01],
+        [0.10, -0.02, 0.04],
+    ],
+)
+def test_double_well_force_matches_gradient(position):
+    potential = DoubleWellPotential(barrier=1.5, width=0.25, center=[0.05, 0.0, 0.0])
     position = np.asarray(position, dtype=float)
 
     assert_force_matches_gradient(

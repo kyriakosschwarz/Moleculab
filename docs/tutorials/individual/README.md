@@ -1,12 +1,12 @@
-# Individual tutorials 1–10
+# Individual tutorials 1–10 and the chemical bridge
 
 **New here?** Read the [general introduction](../introduction.md) first. It
 explains how the tutorial sequence connects to CADD applications such as force
 fields, molecular dynamics, docking, free energy, and QM/MM.
 
-These ten tutorials expand the first ten sections of
-[`../tutorial.md`](../tutorial.md) into a slower, more visual path from units
-to interacting molecular systems.
+These ten tutorials, plus the chemical bridge after part 4, expand the first ten
+sections of [`../tutorial.md`](../tutorial.md) into a slower, more visual path
+from units to interacting molecular systems.
 
 ![The tutorial sequence](assets/course_map.svg)
 
@@ -53,17 +53,19 @@ Tutorials 01–04 reuse one particle:
 It is an arithmetic example, not a typical room-temperature particle.
 Tutorial 02 compares its speed with the thermal speed of a 12 Da particle.
 
-From tutorial 05 onward, the recurring cast grows:
+From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 
 | Object | Purpose |
 | --- | --- |
 | a Lennard-Jones pair | nonbonded energy, force, cutoff |
+| a torsional rotor | rotamer minima and barriers |
+| a double-well particle | two states and a transition barrier |
 | a three-particle chain | pair sums and Newton's third law |
 | a distorted triatomic | bonds, angles, minimisation |
 | an argon-like pair | temperature and thermostat |
 | a two-particle periodic box | minimum image and cutoffs |
 
-## The ten tutorials
+## The tutorials
 
 | Tutorial | Physics | Code | Visuals |
 | --- | --- | --- | --- |
@@ -71,6 +73,7 @@ From tutorial 05 onward, the recurring cast grows:
 | [02 — Particles and kinetic energy](02_particle_energy.md) | position, velocity, speed, $K=\tfrac12mv^2$ | `Particle`, `kinetic_energy` | vector diagram, KE curves, stored/derived state, Maxwell distribution, motion GIF |
 | [03 — Potential energy and force](03_potential_force.md) | energy landscapes, gradient, harmonic model | `HarmonicPotential`, `potential_energy`, `acceleration` | energy/force curves, 2D quiver, finite-difference figures |
 | [04 — Velocity Verlet](04_velocity_verlet.md) | numerical integration, energy conservation, timesteps | `velocity_verlet_step`, `simulate_velocity_verlet` | algorithm flow, position/velocity, energy, phase space, oscillator GIF, drift plots |
+| [04b — Chemical bridge](04b_chemical_bridge.md) | Lennard-Jones dissociation, rotamers, double wells | `DoubleWellPotential`, `PeriodicTorsionPotential` | LJ dissociation, torsion minima, double-well barrier |
 | [05 — Nonbonded interactions](05_nonbonded.md) | Lennard-Jones, Coulomb, cutoffs, atom types | `LennardJonesPotential`, `CoulombPotential`, `NonbondedModel` | pair energy and force curves, Coulomb comparison |
 | [06 — Many particles](06_system.md) | pair sums, Newton's third law, `O(N²)` cost | `System`, `nonbonded_energy`, `forces` | unique-pair and force-cancellation diagrams |
 | [07 — Bonds, angles, torsions](07_bonded.md) | molecular graph, harmonic bond/angle, periodic torsion | `Topology`, bonded potentials | bond, angle, and torsion energy curves |
@@ -149,12 +152,14 @@ Each tutorial assumes the previous one:
 3. **Potential energy and force** explain where motion comes from.
 4. **Velocity Verlet** combines state, energy, and force into a trajectory.
 5. **Checkpoint** verifies the one-particle story end to end.
-6. **Nonbonded interactions** add Lennard-Jones and Coulomb physics.
-7. **`System`** sums those interactions over many particles.
-8. **Bonded terms** add the molecular graph.
-9. **Minimisation** finds a nearby low-energy structure.
-10. **Thermostats** control the statistical temperature.
-11. **Periodic boundaries** remove surfaces and prepare for bulk simulation.
+6. **Chemical bridge** moves from springs to Lennard-Jones, rotamers, and
+   double wells.
+7. **Nonbonded interactions** add Lennard-Jones and Coulomb physics.
+8. **`System`** sums those interactions over many particles.
+9. **Bonded terms** add the molecular graph.
+10. **Minimisation** finds a nearby low-energy structure.
+11. **Thermostats** control the statistical temperature.
+12. **Periodic boundaries** remove surfaces and prepare for bulk simulation.
 
 Do not skip ahead to the thermostat or periodic boundaries before the
 energy–force relationship and pair sums feel natural. The later molecular

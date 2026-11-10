@@ -97,6 +97,49 @@ class HarmonicPotential:
         return as_vector3(position, "position") - self.center
 
 
+@dataclass
+class DoubleWellPotential:
+    """A one-dimensional double-well potential along x.
+
+    The energy is
+
+    .. math::
+
+        U(x) = B \\left[\\left(\\frac{x-x_0}{w}\\right)^4
+        - 2\\left(\\frac{x-x_0}{w}\\right)^2\\right],
+
+    with minima at :math:`x_0 \\pm w` and an unstable barrier at
+    :math:`x_0`.  The well depth is :math:`B` and the barrier height from a
+    minimum to the top is also :math:`B`.
+
+    This is an *external* reaction-coordinate model: the potential is flat in
+    y and z.  It is intended for teaching transitions between two states, not
+    for representing a full molecular force field.
+    """
+
+    barrier: float
+    width: float
+    center: np.ndarray = field(default_factory=lambda: np.zeros(3))
+
+    def __post_init__(self) -> None:
+        self.barrier = as_positive_float(self.barrier, "barrier")
+        self.width = as_positive_float(self.width, "width")
+        self.center = as_vector3(self.center, "center").copy()
+
+    def energy(self, position: np.ndarray) -> float:
+        """Potential energy in kJ/mol at *position* (nm)."""
+
+        coordinate = (as_vector3(position, "position")[0] - self.center[0]) / self.width
+        return float(self.barrier * (coordinate**4 - 2.0 * coordinate**2))
+
+    def force(self, position: np.ndarray) -> np.ndarray:
+        """Force in kJ/(mol nm) at *position* (nm)."""
+
+        coordinate = (as_vector3(position, "position")[0] - self.center[0]) / self.width
+        gradient = self.barrier * (4.0 * coordinate**3 - 4.0 * coordinate) / self.width
+        return np.array([-gradient, 0.0, 0.0])
+
+
 def _pair_geometry(displacement: np.ndarray) -> tuple[np.ndarray, float]:
     """Return a validated displacement vector and its length."""
 

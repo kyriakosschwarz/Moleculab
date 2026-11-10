@@ -166,8 +166,9 @@ tolerance. Compare checksum, energy, force, and wall-clock time.
 
 ## 3. Individual tutorial self-checks
 
-Tutorials 01–10 already include detailed self-check answers at the end of each
-file. Use those for the one-particle and molecular-mechanics foundations.
+Tutorials 01–10 and the 04b chemical bridge already include detailed self-check
+answers at the end of each file. Use those for the one-particle and
+molecular-mechanics foundations.
 
 ## 4. What a good answer looks like
 

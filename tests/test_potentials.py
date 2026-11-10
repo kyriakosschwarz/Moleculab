@@ -9,7 +9,7 @@ exception while still producing physically wrong dynamics.
 import numpy as np
 import pytest
 
-from moleculab import HarmonicPotential
+from moleculab import DoubleWellPotential, HarmonicPotential
 
 
 def test_energy_is_zero_at_equilibrium():
@@ -73,3 +73,43 @@ def test_center_is_copied():
     center[0] = 5.0
 
     np.testing.assert_allclose(potential.center, [0.0, 0.0, 0.0])
+
+
+def test_double_well_has_two_minima_and_a_barrier():
+    potential = DoubleWellPotential(barrier=2.0, width=0.3)
+
+    assert potential.energy([0.0, 0.0, 0.0]) == pytest.approx(0.0)
+    assert potential.energy([0.3, 0.0, 0.0]) == pytest.approx(-2.0)
+    assert potential.energy([-0.3, 0.0, 0.0]) == pytest.approx(-2.0)
+    np.testing.assert_allclose(potential.force([0.3, 0.0, 0.0]), [0.0, 0.0, 0.0])
+    np.testing.assert_allclose(potential.force([0.0, 0.0, 0.0]), [0.0, 0.0, 0.0])
+
+
+def test_double_well_force_is_negative_energy_gradient():
+    potential = DoubleWellPotential(barrier=1.5, width=0.25, center=[0.1, 0.0, 0.0])
+    position = np.array([0.23, 0.04, -0.02])
+    h = 1e-6
+
+    numerical = np.empty(3)
+    for axis in range(3):
+        plus = position.copy()
+        minus = position.copy()
+        plus[axis] += h
+        minus[axis] -= h
+        numerical[axis] = -(potential.energy(plus) - potential.energy(minus)) / (
+            2.0 * h
+        )
+
+    np.testing.assert_allclose(potential.force(position), numerical, atol=1e-6)
+
+
+@pytest.mark.parametrize("barrier", [0.0, -1.0, float("nan")])
+def test_double_well_barrier_must_be_finite_and_positive(barrier):
+    with pytest.raises(ValueError, match="barrier"):
+        DoubleWellPotential(barrier=barrier, width=0.2)
+
+
+@pytest.mark.parametrize("width", [0.0, -0.2, float("inf")])
+def test_double_well_width_must_be_finite_and_positive(width):
+    with pytest.raises(ValueError, match="width"):
+        DoubleWellPotential(barrier=1.0, width=width)

@@ -526,6 +526,6 @@ not the same operation.
 - Typed models add per-atom-type parameters, combining rules, and exclusions.
 - Energy and force must be tested together.
 
-**Previous:** [04 — Velocity Verlet](04_velocity_verlet.md).
+**Previous:** [04b — From springs to chemistry](04b_chemical_bridge.md).
 
 **Next:** [06 — Many particles and the System](06_system.md).

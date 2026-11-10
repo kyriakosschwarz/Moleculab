@@ -123,6 +123,7 @@ reproduces the analytic oscillator table independently.
 | dimensional consistency | `tests/test_units.py` |
 | non-negative kinetic energy | `tests/test_physics.py` |
 | force is negative energy gradient | `tests/test_force_gradients.py` |
+| double-well minima, barrier, and gradient | `tests/test_potentials.py`, `tests/test_force_gradients.py` |
 | second-order convergence | `tests/test_harmonic_validation.py` |
 | bounded oscillator energy | `tests/test_integrators.py` |
 | equal-and-opposite pair forces | `tests/test_pair_potentials.py`, `tests/test_symmetry.py` |
@@ -140,7 +141,7 @@ reproduces the analytic oscillator table independently.
 
 ```text
 $ uv run pytest -q
-361 passed, 1 skipped
+372 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

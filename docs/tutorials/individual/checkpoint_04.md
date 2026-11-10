@@ -174,8 +174,8 @@ You are ready if you can do all of the following without looking at the notes:
 - [ ] Explain why the trajectory error scales as $\Delta t^2$.
 
 If one item is unclear, revisit the corresponding tutorial before starting
-[05 — Nonbonded interactions](05_nonbonded.md).
+[04b — From springs to chemistry](04b_chemical_bridge.md).
 
 **Previous:** [04 — Velocity Verlet](04_velocity_verlet.md).
 
-**Next:** [05 — Nonbonded interactions](05_nonbonded.md).
+**Next:** [04b — From springs to chemistry](04b_chemical_bridge.md).

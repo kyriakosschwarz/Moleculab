@@ -118,6 +118,22 @@ plt.axhline(0.0, color="gray")
 
 Ask: where is the minimum, and why is the force zero there?
 
+## Prompt 6b: double well and barrier crossing
+
+Plot a double-well trajectory below and above the barrier.
+
+```python
+from moleculab import DoubleWellPotential, Particle, simulate_velocity_verlet
+
+potential = DoubleWellPotential(barrier=1.0, width=0.25)
+particle = Particle(12.0, [0.25, 0.0, 0.0], [0.5, 0.0, 0.0])
+trajectory = simulate_velocity_verlet(particle, potential, dt=0.001, steps=8000)
+plt.plot(trajectory.time, trajectory.position[:, 0])
+```
+
+Ask: how many times does the particle cross the barrier? What changes when the
+initial velocity is below the barrier energy?
+
 ## Prompt 7: pair sums and Newton's third law
 
 Plot the net force on three collinear particles as the middle particle moves.

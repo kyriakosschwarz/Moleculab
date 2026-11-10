@@ -93,10 +93,14 @@ one.
 | 03 Potential and force | where motion comes from |
 | 04 Velocity Verlet | how to move forward in time |
 | Checkpoint 04 | one oscillator, end to end |
+| 04b Chemical bridge | Lennard-Jones dissociation, rotamers, double wells |
 
-**After Part I:** you can explain why a particle accelerates, why kinetic and
-potential energy exchange, why energy is bounded, and why the numerical
-trajectory differs slightly from the analytic one.
+**After Part I and the bridge:** you can explain why a particle accelerates, why
+kinetic and potential energy exchange, why energy is bounded, and why the
+numerical trajectory differs slightly from the analytic one. You can also
+explain why the harmonic oscillator is a validation instrument rather than a
+chemical model, and read the dissociation, rotamer, and barrier landscapes that
+come next.
 
 ### Part II — molecular mechanics and many particles
 
@@ -268,6 +272,8 @@ By the end of the core sequence, you should be able to:
 
 - read a molecular-mechanics equation and identify its units;
 - explain why force is the negative energy gradient and test it numerically;
+- explain why the harmonic oscillator is a validation tool and read
+  Lennard-Jones dissociation, torsional rotamer, and double-well landscapes;
 - build a `System` with nonbonded and bonded interactions;
 - run and diagnose a Velocity Verlet trajectory;
 - explain energy conservation, timestep error, and minimisation convergence;

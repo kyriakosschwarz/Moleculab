@@ -111,6 +111,7 @@ from .physics import (
 )
 from .potentials import (
     CoulombPotential,
+    DoubleWellPotential,
     HarmonicPotential,
     LennardJonesPotential,
     PairPotential,
@@ -155,6 +156,7 @@ __all__ = [
     "DistanceConstraint",
     "DockingPose",
     "DockingResult",
+    "DoubleWellPotential",
     "EwaldElectrostatics",
     "ELECTRON_MASS_DA",
     "FEPResult",

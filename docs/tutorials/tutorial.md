@@ -141,6 +141,10 @@ Deep dive: [04 — Velocity Verlet and energy conservation](individual/04_veloci
 
 Checkpoint: [one oscillator, end to end](individual/checkpoint_04.md).
 
+Bridge: [04b — From springs to chemistry](individual/04b_chemical_bridge.md).
+It keeps the harmonic oscillator as a validation tool and introduces
+Lennard-Jones dissociation, torsional rotamers, and double-well transitions.
+
 ## 5. Nonbonded interactions
 
 Two pair potentials are implemented.

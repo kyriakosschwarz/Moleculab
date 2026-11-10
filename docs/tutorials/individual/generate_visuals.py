@@ -23,6 +23,7 @@ from moleculab import (
     Bond,
     Box,
     CoulombPotential,
+    DoubleWellPotential,
     HarmonicAnglePotential,
     HarmonicBondPotential,
     HarmonicPotential,
@@ -1159,6 +1160,58 @@ def minimum_image_box():
     save_svg(fig, "minimum_image_box.svg")
 
 
+def chemical_bridge():
+    fig, (ax_lj, ax_torsion, ax_double) = plt.subplots(
+        1, 3, figsize=(13.0, 4.2)
+    )
+
+    r = np.linspace(0.30, 1.10, 500)
+    lj = LennardJonesPotential(epsilon=1.0, sigma=0.34)
+    energy = np.array([lj.energy([value, 0.0, 0.0]) for value in r])
+    minimum = 2.0 ** (1.0 / 6.0) * 0.34
+    ax_lj.plot(r, energy, color=BLUE, lw=2.2)
+    ax_lj.axhline(0.0, color=GRAY, lw=0.8)
+    ax_lj.axvline(minimum, color=GREEN, ls=":", lw=1.0)
+    ax_lj.plot([minimum], [-1.0], "o", color=GREEN, ms=6)
+    ax_lj.annotate("equilibrium", xy=(minimum, -1.0), xytext=(0.55, -0.75),
+                   arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_lj.annotate("dissociation\nlimit U → 0", xy=(0.95, -0.03), xytext=(0.72, 0.55),
+                   arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_lj.set_ylim(-1.2, 2.0)
+    ax_lj.set_xlabel("separation $r$ (nm)")
+    ax_lj.set_ylabel("$U_{\\mathrm{LJ}}$ (kJ/mol)")
+    ax_lj.set_title("Diatomic Lennard-Jones pair")
+
+    phi = np.linspace(-180.0, 180.0, 500)
+    torsion = 2.0 * (1.0 + np.cos(3.0 * np.deg2rad(phi)))
+    ax_torsion.plot(phi, torsion, color=ORANGE, lw=2.2)
+    for angle in [-60.0, 60.0, 180.0]:
+        ax_torsion.plot([angle], [0.0], "o", color=GREEN, ms=5)
+    ax_torsion.set_xticks([-180, -120, -60, 0, 60, 120, 180])
+    ax_torsion.set_xlabel("dihedral $\\phi$ (degrees)")
+    ax_torsion.set_ylabel("$U_{\\mathrm{torsion}}$ (kJ/mol)")
+    ax_torsion.set_title("Rotamers: three staggered minima")
+
+    x = np.linspace(-0.5, 0.5, 500)
+    double = DoubleWellPotential(barrier=1.0, width=0.25)
+    values = np.array([double.energy([value, 0.0, 0.0]) for value in x])
+    ax_double.plot(x, values, color=RED, lw=2.2)
+    ax_double.axhline(0.0, color=GRAY, lw=0.8)
+    ax_double.axvline(0.0, color=GRAY, ls=":", lw=1.0)
+    ax_double.plot([-0.25, 0.25], [-1.0, -1.0], "o", color=GREEN, ms=5)
+    ax_double.annotate("barrier", xy=(0.0, 0.0), xytext=(0.08, 0.55),
+                       arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_double.annotate("metastable\nstates", xy=(0.25, -1.0), xytext=(0.18, -1.55),
+                       arrowprops=dict(arrowstyle="->", color=GRAY), color=GRAY)
+    ax_double.set_ylim(-1.7, 1.4)
+    ax_double.set_xlabel("reaction coordinate $x$ (nm)")
+    ax_double.set_ylabel("$U_{\\mathrm{double}}$ (kJ/mol)")
+    ax_double.set_title("Double well: two states, one barrier")
+
+    fig.suptitle("Chemically intuitive landscapes beyond the harmonic oscillator", y=1.02)
+    save_svg(fig, "chemical_bridge.svg")
+
+
 def main():
     learning_ladder()
     stage_flow()
@@ -1186,6 +1239,7 @@ def main():
     dt_stability()
     verlet_flow()
     course_map()
+    chemical_bridge()
     nonbonded_pair()
     pair_sum()
     bonded_geometry()
