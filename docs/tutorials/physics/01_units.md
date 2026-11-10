@@ -58,8 +58,8 @@ Within each tutorial, material is also labelled by how much you need it:
 - **Looking ahead** — a preview of a concept developed in a later tutorial.
 
 You do not have to master every *deeper insight* on the first pass. The core
-path through this tutorial is: units → conversion → the acceleration shortcut →
-dimensional analysis.
+path through this tutorial is: base units → unit algebra → the acceleration
+bridge → kinetic energy → dimensional analysis.
 
 ## 2. The running example
 
@@ -129,7 +129,7 @@ A molecular simulation usually focuses on a small box: perhaps 5 nm on a side,
 containing a protein fragment, a ligand, water, and ions. The box is tiny by
 human standards but enormous by atomic standards.
 
-## 4. Mathematical description: the seven quantities
+## 4. The unit contract: seven base quantities
 
 Moleculab's internal system is:
 
@@ -166,21 +166,47 @@ CHARGE_UNIT = "e"
 
 The key idea is not that each unit is convenient in isolation. It is that the
 units are **internally coherent**: derived units follow from the base choices
-with no leftover numerical factor, apart from the roughly $10^{-9}$ difference
-between the dalton and one gram per mole.
+with no leftover numerical factor, apart from the small difference between the
+dalton and one gram per mole.
+
+Once the seven base units are fixed, most other units follow by ordinary
+algebra. You do not need a separate conversion rule for each one.
 
 | Derived quantity | Relation | Unit that follows |
 | --- | --- | --- |
 | velocity | distance / time | nm/ps |
+| acceleration | velocity / time | nm/ps² |
 | force | energy / distance | kJ/(mol nm) |
-| acceleration | force / mass | nm/ps² |
-| kinetic energy | mass × velocity² | Da (nm/ps)² |
+| stiffness | energy / distance² | kJ/(mol nm²) |
 
-The last row is not obviously kJ/mol. The next two sections show why it is.
-This is the whole reason the code can write `force / mass` and get an
-acceleration without a conversion constant.
+This unit algebra is enough for most bookkeeping. For example, the harmonic
+energy $U=\tfrac12kx^2$ immediately tells you that a stiffness $k$ is measured
+in kJ/(mol nm²), because $x^2$ carries nm².
 
-## 5. Units and dimensions: why $a=F/m$ needs no constant
+The one case that looks different is kinetic energy. Written as
+$\tfrac12m\lvert\mathbf v\rvert^2$, its unit is
+$\mathrm{Da\ (nm/ps)^2}$. That does not look like kJ/mol. The next section shows
+why it is the same thing.
+
+### 4.2 Three conversions you will use constantly
+
+Most input data arrive in units that are convenient for chemists, not for the
+simulation. These three conversions cover the common cases:
+
+| Input unit | Multiply by | Internal unit |
+| --- | --- | --- |
+| ångström (Å) | 0.1 | nm |
+| femtosecond (fs) | 0.001 | ps |
+| kilocalorie per mole (kcal/mol) | 4.184 | kJ/mol |
+
+For example, a 1.5 Å bond is $1.5\times0.1=0.15$ nm, a 2 fs timestep is
+$2\times0.001=0.002$ ps, and a 5 kcal/mol barrier is
+$5\times4.184=20.92$ kJ/mol.
+
+These are the only non-SI conversions you need in the first four tutorials.
+Everything else follows from unit algebra.
+
+## 5. Why $a=F/m$ needs no constant
 
 Newton's second law is
 
@@ -190,111 +216,131 @@ If force is in newtons and mass in kilograms, acceleration is in m/s². But
 Moleculab stores force in **kJ/(mol nm)**, mass in **Da**, and acceleration in
 **nm/ps²**. At first glance, those units look incompatible.
 
-The conversion factors cancel to about one part in $10^9$. Let us verify this
-carefully, because it is the foundation of the whole unit system.
+The resolution is not a new law of physics. It is a one-time conversion check,
+and it is easiest to do in three small steps. We will convert **one unit of
+each quantity**, then divide. Here is the whole bridge at a glance:
 
-### 5.1 Convert force to a per-particle force
+| Quantity | One internal unit | In SI |
+| --- | --- | --- |
+| force on one particle | 1 kJ/(mol nm) | $1.66054\times10^{-12}$ N |
+| mass | 1 Da | $1.66054\times10^{-27}$ kg |
+| acceleration | 1 nm/ps² | $10^{15}$ m/s² |
+
+The rest of this section derives each line. Notice that the force and mass rows
+contain the same factor, $1.66054$. That is why it cancels.
+
+### 5.1 Step 1: one force unit as a per-particle force
 
 A force of $1\ \mathrm{kJ/(mol\ nm)}$ means that moving one mole of particles
 by one nanometre changes the energy by one kilojoule.
 
-For a single particle, the energy change is divided by Avogadro's number, and
-the distance is converted from nm to m:
+For a single particle, the energy change is divided by Avogadro's number:
 
-$$ F_{\text{particle}} = F_{\text{molar}} \frac{1000}{N_A} \frac{1}{10^{-9}}\ \mathrm{N}. $$
+$$ \frac{1000}{N_A}\ \mathrm{J} \quad\text{over a distance of}\quad 10^{-9}\ \mathrm{m}. $$
 
-### 5.2 Convert mass to kilograms
+Dividing energy by distance gives force:
 
-$$ m_{\mathrm{kg}} = m_{\mathrm{Da}} \times1.66054\times10^{-27}\ \mathrm{kg}. $$
+$$ F_{\text{one particle}} = \frac{1000/N_A}{10^{-9}}\ \mathrm{N} \approx 1.66054\times10^{-12}\ \mathrm{N}. $$
 
-### 5.3 Convert acceleration back to nm/ps²
+So one internal force unit is about $1.66\times10^{-12}$ N acting on one
+particle. The large number of particles in a mole has already been divided out.
 
-One nm/ps² is
+### 5.2 Step 2: one mass unit in kilograms
+
+The dalton is defined so that one carbon-12 atom has a mass of 12 Da:
+
+$$ 1\ \mathrm{Da} = 1.66054\times10^{-27}\ \mathrm{kg}. $$
+
+You do not need to memorise this number. The important point is that it is
+close to the mass of one gram per mole divided by Avogadro's number.
+
+### 5.3 Step 3: divide and convert back
+
+Now divide one force unit by one mass unit:
+
+$$ \frac{1.66054\times10^{-12}\ \mathrm{N}}{1.66054\times10^{-27}\ \mathrm{kg}} = 10^{15}\ \mathrm{m/s^2}. $$
+
+The powers of ten have not disappeared; they have combined. Now convert that
+acceleration back to internal units. One nm/ps² is
 
 $$ \frac{10^{-9}\ \mathrm{m}}{(10^{-12}\ \mathrm{s})^2} = 10^{15}\ \mathrm{m/s^2}. $$
 
-So
+Therefore
 
-$$ a_{\mathrm{nm/ps^2}} = a_{\mathrm{m/s^2}}\times10^{-15}. $$
+$$ \frac{1\ \mathrm{kJ/(mol\ nm)}}{1\ \mathrm{Da}} = 1\ \mathrm{nm/ps^2}. $$
 
-### 5.4 Put the factors together
+One force unit divided by one mass unit gives one acceleration unit. That is
+the whole shortcut.
 
-The conversion factor between the numerical value of $F/m$ in internal units
-and the numerical value of acceleration in nm/ps² is
+### 5.4 The general acceleration rule
 
-$$ \frac{1000}{N_A} \frac{1}{10^{-9}} \frac{1}{1.66054\times10^{-27}} 10^{-15}. $$
-
-Using $N_A=6.02214076\times10^{23}$, this factor is one to about one part in
-$10^9$. The tiny residual comes from 1 Da being approximately, not exactly,
-1 g/mol. For molecular simulation this is far below the precision of the
-models. Therefore
+For arbitrary values, the same cancellation gives
 
 $$ a_{\mathrm{nm/ps^2}} = \frac{F_{\mathrm{kJ/(mol\ nm)}}}{m_{\mathrm{Da}}} $$
 
-numerically.
+numerically. The equality is accurate to about 3.5 parts in $10^{10}$. The tiny
+residual comes from 1 Da being approximately, not exactly, 1 g/mol. It is far
+below the precision of the molecular models.
 
 ![Why the internal unit system needs no acceleration constant](assets/unit_bridge.svg)
 
 *The conversion factors for kJ/mol, nm, ps, and Da cancel. This is why the code
 can write `force / mass` directly.*
 
-### 5.5 The same cancellation for kinetic energy
+**Stop and check.** Without looking back, explain why the factor
+$1.66054$ appears in both the force conversion and the mass conversion. If you
+can see that it cancels, you have understood the central idea of this tutorial.
 
-The same principle explains why $K=\tfrac12mv^2$ needs no constant. Let
+### 5.5 Kinetic energy uses the same bridge
 
-$$ m=1\ \mathrm{Da}, \qquad v=1\ \mathrm{nm/ps}. $$
+Kinetic energy is the same story. Start with one unit of speed:
 
-Then
+$$ 1\ \mathrm{nm/ps} = 10^3\ \mathrm{m/s}. $$
 
-$$ \frac12mv^2 = 0.5\ \mathrm{Da\ (nm/ps)^2}. $$
+Then one unit of the combination $m v^2$ is
 
-Convert to SI:
+$$ 1\ \mathrm{Da\ (nm/ps)^2} = 1.66054\times10^{-27}\ \mathrm{kg}\times(10^3\ \mathrm{m/s})^2 = 1.66054\times10^{-21}\ \mathrm{J}. $$
 
-$$ 0.5\times1.66054\times10^{-27}\ \mathrm{kg} \times\left(\frac{10^{-9}\ \mathrm{m}}{10^{-12}\ \mathrm{s}}\right)^2 = 8.3027\times10^{-22}\ \mathrm{J}. $$
+That is energy per particle. Multiply by Avogadro's number to get energy per
+mole:
 
-Multiply by Avogadro's number:
-
-$$ 8.3027\times10^{-22}\times6.02214\times10^{23} \approx500\ \mathrm{J/mol} = 0.5\ \mathrm{kJ/mol}. $$
+$$ 1.66054\times10^{-21}\times6.02214\times10^{23} \approx 1000\ \mathrm{J/mol} = 1\ \mathrm{kJ/mol}. $$
 
 So one $\mathrm{Da\ (nm/ps)^2}$ is one kJ/mol, and
 
-$$ K_{\mathrm{kJ/mol}} = \frac12 m_{\mathrm{Da}}|\mathbf v|^2_{\mathrm{nm/ps}} $$
+$$ K_{\mathrm{kJ/mol}} = \frac12 m_{\mathrm{Da}}\lvert\mathbf v\rvert^2_{\mathrm{nm/ps}} $$
 
 numerically.
 
-**Core takeaway.** The numerical shortcuts work because the conversion factors
-cancel. They are not permission to drop units. They are a consequence of
-choosing the units together.
+Notice what we did **not** do: we never converted each particle's mass and
+velocity separately inside the simulation. We checked the units once, then
+trusted the algebra.
 
 ### 5.6 Worked example: the running particle
 
-Take
+The running particle has $m=12$ Da and speed $0.1$ nm/ps. Its kinetic energy is
 
-$$ F=10\ \mathrm{kJ/(mol\ nm)}, \qquad m=12\ \mathrm{Da}. $$
+$$ K=\frac12(12)(0.1)^2 = 0.06\ \mathrm{kJ/mol}. $$
 
-The shortcut gives
+No conversion factor appears.
+
+For the force example, take $F=10$ kJ/(mol nm) and $m=12$ Da. The shortcut gives
 
 $$ a=\frac{10}{12}=0.8333\ \mathrm{nm/ps^2}. $$
 
-Check in SI. The force per particle is
+### 5.7 Optional: the full SI check
 
-$$ F_{\text{particle}} =10\frac{1000}{6.022\times10^{23}}\frac{1}{10^{-9}} \approx1.6605\times10^{-11}\ \mathrm{N}. $$
+If you want to see the two routes agree, convert the same numbers once:
 
-The mass is
+$$ F_{\text{particle}} = 10\times1.66054\times10^{-12} = 1.66054\times10^{-11}\ \mathrm{N}, $$
 
-$$ m=12\times1.66054\times10^{-27} \approx1.9926\times10^{-26}\ \mathrm{kg}. $$
+$$ m = 12\times1.66054\times10^{-27} = 1.99265\times10^{-26}\ \mathrm{kg}, $$
 
-Thus
+$$ a = \frac{1.66054\times10^{-11}}{1.99265\times10^{-26}} = 8.333\times10^{14}\ \mathrm{m/s^2}. $$
 
-$$ a=\frac{1.6605\times10^{-11}}{1.9926\times10^{-26}} \approx8.333\times10^{14}\ \mathrm{m/s^2}. $$
-
-Convert:
-
-$$ 8.333\times10^{14}\times10^{-15} =0.8333\ \mathrm{nm/ps^2}. $$
-
-The two routes agree. The shortcut is not a rough approximation; it is a
-consequence of the chosen units, accurate to about one part in $10^9$. The
-small residual is the difference between the dalton and one gram per mole.
+Converting back gives $8.333\times10^{14}\times10^{-15}=0.8333$ nm/ps², as
+before. The shortcut is not a rough approximation; it is the same conversion
+applied once instead of in every line of code.
 
 ## 6. Energy scales you should internalize
 
@@ -331,7 +377,7 @@ thermal motion.
 
 Moleculab expresses energy per mole. The molar gas constant is
 
-$$ R=0.008314462618\ \mathrm{kJ/(mol\ K)}. $$
+$$ R = 0.008314462618\ \mathrm{kJ/(mol\ K)}. $$
 
 At temperature $T$,
 
@@ -339,15 +385,18 @@ $$ RT = 0.008314462618\ T\ \mathrm{kJ/mol}. $$
 
 At 300 K,
 
-$$ RT=2.4943387854\ \mathrm{kJ/mol}. $$
+$$ RT = 2.494\ \mathrm{kJ/mol}, $$
+
+which is about 2.5 kJ/mol. A useful rule of thumb: room-temperature thermal
+energy is a few kJ/mol.
 
 The single-particle Boltzmann constant is
 
-$$ k_B=1.380649\times10^{-23}\ \mathrm{J/K}. $$
+$$ k_B = 1.380649\times10^{-23}\ \mathrm{J/K}. $$
 
 The relation is
 
-$$ R=N_Ak_B. $$
+$$ R = N_A k_B. $$
 
 Use $R$ when your energy is per mole. Use $k_B$ when your energy is per
 particle. Mixing them is a common source of factors of $N_A$.
@@ -378,25 +427,48 @@ Coulomb's law in SI is
 $$ U(r)=\frac{1}{4\pi\epsilon_0}\frac{q_iq_j}{r}. $$
 
 In Moleculab, charges are in units of the elementary charge $e$ and distance is
-in nm. The conversion is collected into one constant:
+in nm. All of the SI conversion is collected into one constant:
 
-$$ k_e = \frac{1}{4\pi\epsilon_0} e^2 \frac{1}{10^{-9}} \frac{N_A}{1000} \approx138.935456\ \mathrm{kJ\ nm/(mol\ e^2)}. $$
+$$ k_e = \frac{1}{4\pi\epsilon_0} e^2 \frac{1}{10^{-9}} \frac{N_A}{1000} \approx 138.935456\ \mathrm{kJ\ nm/(mol\ e^2)}. $$
 
-Then the internal-unit equation is simply
+The internal-unit equation is then simply
 
 $$ U(r)=k_e\frac{q_iq_j}{r}. $$
 
-For example, two unit charges at $r=1$ nm have
+A good anchor is two unit charges at 1 nm:
 
-$$ U\approx138.935\ \mathrm{kJ/mol}. $$
+$$ U(1\ \mathrm{nm}) \approx 138.935\ \mathrm{kJ/mol}. $$
 
-At $r=0.3$ nm the interaction is roughly $463$ kJ/mol.
+Because the energy falls as $1/r$, the rest is easy arithmetic:
 
-**Deeper insight.** That number is the *vacuum* interaction. Water has a large
-relative permittivity, so the effective attraction between ions in water is much
-weaker at the same separation. This is why molecular models use reaction-field
-or Ewald electrostatics instead of bare $1/r$ sums. The constant is still the
+| Separation | Coulomb energy for two unit charges (kJ/mol) |
+| --- | --- |
+| 1.0 nm | about 139 |
+| 0.5 nm | about 278 |
+| 0.3 nm | about 463 |
+
+The sign comes from the product $q_iq_j$: like charges give a positive energy,
+opposite charges give a negative energy. The magnitude still follows $1/r$.
+
+**Deeper insight.** These are *vacuum* values. Water has a large relative
+permittivity, so the effective attraction between ions in water is much weaker
+at the same separation. This is why molecular models use reaction-field or
+Ewald electrostatics instead of bare $1/r$ sums. The constant is still the
 right starting point; it is the surrounding model that changes.
+
+### 8.1 Optional: where 138.935 comes from
+
+The constant collects three conversions:
+
+| Factor | Why it appears |
+| --- | --- |
+| $1/(4\pi\epsilon_0)e^2$ | SI energy for two unit charges one metre apart |
+| $1/10^{-9}$ | distance is in nm, not m |
+| $N_A/1000$ | joules per particle to kJ per mole |
+
+Multiplying them gives the value stored in `COULOMB_CONSTANT`. This is the same
+kind of one-time conversion as the acceleration bridge. In normal use you call
+the stored constant rather than rebuilding it.
 
 ## 9. Python implementation and verification
 
@@ -482,9 +554,10 @@ interaction in water can be much smaller.
 
 ### Experiment 4: dimensional analysis of kinetic energy
 
-Start from $K=\tfrac12m|\mathbf v|^2$ with $m$ in Da and $\lvert\mathbf v\rvert$ in nm/ps.
-Show by explicit SI conversion that the result is in kJ/mol. Do not look at
-section 5.5 until you have tried it.
+Start from $K=\tfrac12m\lvert\mathbf v\rvert^2$ with $m$ in Da and
+$\lvert\mathbf v\rvert$ in nm/ps. Use the one-unit bridge: convert 1 Da to kg
+and 1 nm/ps to m/s, then show that $1\ \mathrm{Da\ (nm/ps)^2}$ is 1 kJ/mol. Do
+not look at section 5.5 until you have tried it.
 
 ### Experiment 5: the running particle
 
@@ -542,8 +615,9 @@ established here.
    $a=24/4=6$ nm/ps².
 
 6. **Why does $a=F/m$ not need a constant here?**
-   Because the conversion factors for kJ/mol, nm, ps, and Da cancel to about
-   one part in $10^9$.
+   One force unit becomes $1.66\times10^{-12}$ N on one particle, one mass unit
+   becomes $1.66\times10^{-27}$ kg, and their ratio is $10^{15}$ m/s², which is
+   exactly 1 nm/ps². The two $1.66$ factors cancel.
 
 7. **What is the value of `BOLTZMANN_CONSTANT`, and what is it really?**
    It is 0.008314462618, the molar gas constant $R$ in kJ/(mol K), not the
@@ -568,7 +642,7 @@ established here.
 ### Reasoning
 
 1. Why does $a=F/m$ not need a constant in this unit system? Explain in terms
-   of the conversion factors, not just “the units match.”
+   of the one-unit conversions, not just “the units match.”
 2. Why is it dangerous to compare a bare Coulomb energy with $RT$ and conclude
    that the interaction in a protein is always huge?
 3. Why is a variable named `BOLTZMANN_CONSTANT` allowed to hold the molar gas
@@ -590,10 +664,13 @@ established here.
 ## 15. Summary
 
 - Moleculab uses nm, ps, kJ/mol, Da, kJ/(mol nm), K, and e.
-- The units are chosen together, so derived units need no numerical factor.
-- The acceleration equation is numerically $a=F/m$ in these units because
-  the conversion factors cancel.
-- Kinetic energy is numerically $K=\tfrac12m|\mathbf v|^2$ for the same reason.
+- Unit algebra gives derived units such as nm/ps² for acceleration and
+  kJ/(mol nm²) for stiffness.
+- The acceleration shortcut follows from three one-unit conversions: one force
+  unit becomes $1.66\times10^{-12}$ N, one dalton becomes $1.66\times10^{-27}$
+  kg, and one nm/ps² is $10^{15}$ m/s².
+- Kinetic energy is numerically $K=\tfrac12m\lvert\mathbf v\rvert^2$ for the
+  same reason: $1\ \mathrm{Da\ (nm/ps)^2}$ is 1 kJ/mol.
 - Energy is molar; use $R$, not $k_B$, unless you explicitly convert.
 - `BOLTZMANN_CONSTANT` is a historical name for $R$; `MOLAR_GAS_CONSTANT` is the
   descriptive alias.

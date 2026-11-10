@@ -79,7 +79,7 @@ From the chemical bridge and tutorial 05 onward, the recurring cast grows:
 
 | Tutorial | Physics | Code | Visuals |
 | --- | --- | --- | --- |
-| [01 — Units and scales](01_units.md) | dimensions, SI-to-simulation conversions, molar energy | `foundation/units.py` | scale chart, unit bridge, course map |
+| [01 — Units and scales](01_units.md) | unit algebra, one-unit SI bridge, molar energy | `foundation/units.py` | scale chart, unit bridge, course map |
 | [02 — Particles and kinetic energy](02_particle_energy.md) | position, velocity, speed, $K=\tfrac12mv^2$ | `Particle`, `kinetic_energy` | vector diagram, KE curves, stored/derived state, Maxwell distribution, motion GIF |
 | [03 — Potential energy and force](03_potential_force.md) | energy landscapes, gradient, harmonic model | `HarmonicPotential`, `potential_energy`, `acceleration` | energy/force curves, 2D quiver, finite-difference figures |
 | [04 — Velocity Verlet](04_velocity_verlet.md) | numerical integration, energy conservation, timesteps | `velocity_verlet_step`, `simulate_velocity_verlet` | algorithm flow, position/velocity, energy, phase space, oscillator GIF, drift plots |
