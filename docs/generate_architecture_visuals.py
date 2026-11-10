@@ -77,6 +77,7 @@ def architecture_layers():
                 "solvent and\nwater boxes",
                 "MSD / RDF",
                 "QM/MM",
+                "provenance and\nligand identity",
             ],
             RED,
         ),

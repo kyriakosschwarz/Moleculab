@@ -1,8 +1,8 @@
 # Moleculab software architecture
 
 > **Status.** This document describes the architecture **as implemented** in
-> `src/moleculab/`. The long-term roadmap is in [`lib.md`](roadmap.md); when the
-> two differ, the code and this document win. The validation strategy is in
+> `src/moleculab/`. The long-term roadmap is in [`roadmap.md`](roadmap.md); when
+> the two differ, the code and this document win. The validation strategy is in
 > [`validation.md`](../reference/validation.md).
 
 Moleculab is an educational molecular physics and simulation library. It is
@@ -54,7 +54,7 @@ Moleculab is organised into five layers, plus the optional backend module.
 
 | Layer | Responsibility | Package |
 | --- | --- | --- |
-| applications and analysis | answer a scientific question using the engine | `applications/`, `analysis/` |
+| applications and analysis | answer a scientific question using the engine, and record how the answer was obtained | `applications/`, `analysis/` |
 | algorithms and protocols | advance, constrain, or sample a state | `algorithms/`, `protocols/` |
 | composition | assemble particles, models, topology, box, and global terms | `composition/` |
 | physical models | define what the system is and how its energy is defined | `models/`, `foundation/particles.py` |
@@ -70,7 +70,8 @@ src/moleculab/
 ├── algorithms/       Velocity Verlet, minimisation
 ├── protocols/        thermostat, barostat
 ├── analysis/         MSD, RDF, contacts, binding/interaction geometry, SAR, ADME
-├── applications/     docking, solvent, water, free energy, acid-base, QM/MM
+├── applications/     docking, solvent, water, free energy, acid-base, QM/MM,
+│                     structure provenance, ligand identity
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -90,7 +91,7 @@ The most important distinctions are summarised below.
 | numerical algorithm | how are the equations solved? | Velocity Verlet, steepest descent, SHAKE/RATTLE | define a new force field |
 | simulation protocol | how is the state prepared or sampled? | Berendsen thermostat, barostat | change the potential energy function |
 | analysis | what does a trajectory or structure mean? | MSD, RDF, contacts, binding-site geometry, interaction records, fingerprints, pose RMSD, pose clustering, SAR comparison | modify the trajectory, forces, or structure |
-| application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations | duplicate core physics |
+| application | what scientific question is being asked? | docking, FEP/TI/MBAR, solvation, acid-base populations, structure manifests, ligand identity reconciliation | duplicate core physics or parse external files |
 | backend | where does a numerical kernel run? | CPU, optional PyTorch Ewald | leak device details into models |
 
 This separation is not cosmetic. It determines what can be tested independently
@@ -109,7 +110,9 @@ composition (system, neighbour, constraints)
     |
 algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
-analysis (trajectory, binding sites) + applications (docking, solvent, water, free energy, acid-base, QM/MM)
+analysis (trajectory, binding sites)
+    + applications (docking, solvent, water, free energy, acid-base, QM/MM,
+                    structure provenance, ligand identity)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -137,6 +140,8 @@ The actual imports are visible in the source. The important rules are:
 | `analysis.docking` | Python and NumPy only | `System`, integrators, docking parsers or search engines |
 | `applications.docking` | `composition.system`, foundation | integrators, thermostats |
 | `applications.acid_base` | `foundation.units` | `System`, integrators, toolkits |
+| `applications.structure_manifest` | Python standard library only | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.ligand_identity` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -162,6 +167,13 @@ integrator or thermostat.
 `qm_mm` is a separate physical model. It solves a one-dimensional
 finite-difference Schrödinger equation with fixed point charges. It is not a
 classical potential and is deliberately isolated.
+
+`structure_manifest` and `ligand_identity` are **record layers**. They accept
+plain, already-parsed data and do not import `gemmi`, RDKit, or any coordinate
+reader. The capstone adapters in `examples/drug_discovery/` own those optional
+dependencies and pass explicit records, graphs, and candidate mappings into the
+library. This keeps the core installable with NumPy alone and keeps file-format
+decisions outside the physics and analysis layers.
 
 ## 5. Core data structures and contracts
 
@@ -285,6 +297,12 @@ mutates a trajectory after creating it.
 non-finite values, zero distances, and negative masses fail at the boundary,
 where the error is easy to understand. They do not propagate into a force
 calculation and produce a mysterious `NaN` later.
+
+The provenance and identity records follow the same boundary principle.
+`validate_manifest` and `validate_ligand_identity` check schema completeness,
+identifier consistency, and internal structure. They do not decide whether the
+science passed: a structurally valid record can contain a failed check or an
+open discrepancy, and that distinction is intentional.
 
 ## 6. Architectural decisions
 
@@ -533,6 +551,31 @@ pairs. It is validated against the default O(N²) path in
 `tests/test_neighbour.py`. The default path remains the explicit teaching loop;
 the opt-in path is for larger systems.
 
+### ADR-016: Provenance and chemical identity are explicit records
+
+**Decision.** Treat the experimental source record and the ligand identity
+reconciliation as first-class application records, not as comments inside a
+docking or analysis script.
+
+**Context.** A result is only reproducible if the workflow records which
+deposited file it used, which chain and ligand copy it selected, what
+transformations it applied, and whether the deposited ligand actually
+corresponds to the intended chemical identity. Those are separate questions
+from energy evaluation and should be inspectable without rerunning an analysis.
+
+**Consequences.** `applications/structure_manifest.py` records source checksums,
+revision metadata, explicit selections, processing decisions, actors, and
+machine-readable validation checks. `applications/ligand_identity.py` compares
+supplied deposited and reference graphs, preserves mapping ambiguity, keeps raw
+bond orders before any aromatic-normalized comparison, and reports unresolved
+discrepancies. The capstone consumes these records rather than hard-coding a
+residue lookup. The records are JSON-serialisable and validated independently of
+the scientific success of the analysis.
+
+**Trade-off.** The record schema is larger than a single result number, and
+schema changes need migration or a version bump. The alternative is a workflow
+whose inputs and assumptions disappear when the script exits.
+
 ## 7. Control flow
 
 ### 7.1 Molecular dynamics
@@ -639,6 +682,37 @@ geometry with exact or residue-level interaction patterns, and summarizes
 docking benchmarks with separate valid and invalid cases. It does not search
 poses or parse docking-program files.
 
+### 7.7 Structure ingestion and ligand identity
+
+The capstone adds a record-first control flow before any structural analysis:
+
+```text
+mmCIF file (adapter: gemmi)
+    → StructureManifest
+    → selected ligand atoms and bonds (adapter: gemmi)
+    → reference graph and candidate mappings (adapter: RDKit)
+    → LigandIdentityRecord
+    → binding-site and interaction analysis
+```
+
+The adapter owns file parsing and chemistry-toolkit calls. The library receives
+plain records and explicit candidate mappings. `structure_manifest` records the
+source checksum, revision, exact chain and ligand-copy selection, processing
+decisions, actors, and validation checks. `ligand_identity` selects a
+representative mapping, records mapping ambiguity, compares raw bond orders
+before a separate aromatic-normalized comparison, and reports formal-charge,
+hydrogen, and stereochemistry limits as `not_run` or open discrepancies rather
+than repairing them.
+
+The reference records live in [`data/structures/`](../../data/structures/README.md):
+the manifest and identity record are committed, while the downloaded coordinate
+file is cached and ignored. A checksum mismatch stops the workflow instead of
+replacing the provenance record silently.
+
+This flow does not prepare a force-field-ready ligand, add hydrogens, assign
+protonation states, or claim affinity. Those remain later decisions with their
+own provenance.
+
 ## 8. How the architecture supports education and the tutorials
 
 The ten physics deep dives are Track A's guided tour of the architecture, one
@@ -662,7 +736,33 @@ the dependency direction.
 This mapping is intentional. A reader who understands the tutorials understands
 the architecture, and vice versa.
 
-### 8.1 The tutorial structure mirrors the architecture
+### 8.1 The three tracks and the capstone
+
+The tracks share one architecture; they emphasize different layers rather than
+forking the codebase.
+
+| Track | Architectural focus | Main modules | Capstone contribution |
+| --- | --- | --- | --- |
+| A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
+| B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
+| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity | turns structural observations into auditable records without claiming affinity |
+
+The capstone is the integration point:
+
+```text
+experimental structure
+    → structure manifest (source, selection, decisions, validation)
+    → ligand identity record (reference graph, mapping, discrepancies)
+    → binding-site and interaction analysis
+    → explicit limitations; no affinity or free-energy claim
+```
+
+The provenance and identity steps are **not** a separate physics layer. They
+record the inputs and chemical correspondence that any later analysis consumes.
+This is why the capstone can use the same `analysis` and `applications` modules
+as Track C while keeping its evidence categories explicit.
+
+### 8.2 The tutorial structure mirrors the architecture
 
 Every tutorial uses the same five-stage pattern:
 
@@ -684,7 +784,7 @@ The **Core / Deeper insight / Looking ahead** labels separate what a reader
 needs now from what belongs to a later architecture layer. This prevents a
 tutorial from turning into a tour of the entire library.
 
-### 8.2 Tests are part of the teaching material
+### 8.3 Tests are part of the teaching material
 
 The tutorials cite the tests that protect each claim:
 
@@ -697,7 +797,7 @@ The tutorials cite the tests that protect each claim:
 An instructor can break a line of code, run the relevant test, and let the
 failure teach the invariant. That is more instructive than a passing example.
 
-### 8.3 Checkpoints and validation levels
+### 8.4 Checkpoints and validation levels
 
 The checkpoint after part 04 asks the reader to reproduce the analytic
 oscillator before adding interactions. The validation document defines four
@@ -711,7 +811,7 @@ levels:
 These levels correspond directly to the architecture: models, composition,
 algorithms, and the public workflow.
 
-### 8.4 Using the architecture in a course
+### 8.5 Using the architecture in a course
 
 A useful teaching sequence is:
 
@@ -748,6 +848,20 @@ System (receptor, ligand, solvent, ions)
 docking, MD, free energy, analysis
 ```
 
+The capstone adds a provenance and identity path alongside the physics path:
+
+```text
+deposited structure
+        ↓
+structure manifest (source, selection, decisions, checks)
+        ↓
+ligand identity record (reference graph, atom mapping, discrepancies)
+        ↓
+binding-site and interaction analysis
+        ↓
+later decision: System preparation and force-field parameters
+```
+
 Every stage is already represented by a module:
 
 - `Particle` carries atom type and charge, the minimum identity a force field
@@ -758,6 +872,10 @@ Every stage is already represented by a module:
   exclusions, the core of a classical force field.
 - `Box` and Ewald provide a periodic environment.
 - `water` and `solvent` build explicit environments.
+- `structure_manifest` records the experimental source and the selected chain
+  and ligand copy.
+- `ligand_identity` reconciles the deposited ligand graph with a reference and
+  records mapping ambiguity and discrepancies.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -776,6 +894,8 @@ The architecture makes common drug-discovery extensions additive:
 | new thermostat | `protocols/thermostats.py` | forces, potentials |
 | new barostat | `protocols/pressure.py` | forces, potentials |
 | new backend | `backend.py` | model APIs |
+| new structure format | an example/adapter plus `structure_manifest` | record schema, core physics |
+| new identity comparison | `applications/ligand_identity.py` | core physics, coordinate parsing |
 | new analysis | `analysis/trajectory.py` | simulation state |
 | larger short-range pair screen | `composition/neighbour.py` | default pair-loop semantics |
 
@@ -792,6 +912,8 @@ production drug-discovery engine. Missing pieces include:
 - triclinic boxes and full pressure coupling;
 - enhanced sampling and automated free-energy workflows;
 - explicit protein preparation, protonation, and ion placement;
+- force-field-ready ligand parameterization, including hydrogen and protonation
+  assignment;
 - entropy, desolvation, and trained binding-affinity scoring;
 - real quantum chemistry, Hartree-Fock, or DFT;
 - checkpointing, parallelism, and GPU kernels beyond the optional Ewald path;
@@ -799,7 +921,9 @@ production drug-discovery engine. Missing pieces include:
 
 These are roadmap items, not hidden assumptions. The current modules are a
 correct foundation for them because the interfaces and invariants are already
-in place.
+in place. The capstone deliberately stops at provenance and chemical-identity
+records; it does not claim to produce a force-field-ready ligand, a docking
+score, or a binding free energy.
 
 ### 9.4 What production would change
 
@@ -889,6 +1013,8 @@ These are the rules that keep the layers honest.
 | constraints remain satisfied after every state-advancing algorithm | `tests/test_constraints.py` |
 | cell-list candidates contain every true pair within the cutoff | `tests/test_neighbour.py` |
 | opt-in neighbour-list energies and forces match the default path | `tests/test_neighbour.py` |
+| structure manifests require a checksum, explicit selection, decisions, and labelled checks | `tests/test_structure_manifest.py` |
+| ligand identity records preserve ambiguity, raw bond orders, mapping completeness, and unresolved discrepancies | `tests/test_ligand_identity.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -913,12 +1039,15 @@ For a new contributor, the source is best read in this order:
     `analysis/fingerprints.py`, `analysis/sar.py`, `analysis/adme.py`,
     `analysis/docking/` — trajectory, contact, binding-site, interaction,
     fingerprint, SAR, ADME, and pose measurements.
-11. `applications/solvent.py`, `applications/water.py` — environment builders.
-12. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
+11. `applications/structure_manifest.py`, `applications/ligand_identity.py` —
+    provenance, explicit selection, atom mapping, and chemical-identity
+    discrepancies.
+12. `applications/solvent.py`, `applications/water.py` — environment builders.
+13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.
-13. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
+14. `applications/docking.py`, `applications/flexible_docking.py`, `applications/qm_mm.py` — applications and the
     quantum model.
-14. `backend.py` — optional acceleration.
+15. `backend.py` — optional acceleration.
 
 The tutorials follow the same order, which is not a coincidence.
 
@@ -934,17 +1063,21 @@ The tutorials follow the same order, which is not a coincidence.
 - Constraints are data applied by algorithms.
 - Tests are the executable specification of the architecture.
 - The tutorials are a layer-by-layer tour of the same structure.
+- Experimental provenance and ligand identity are first-class records, separate
+  from the physics and from any affinity claim.
 - The composition path from particle to force field to solvent to docking to
   free energy is already present, with explicit limitations.
 - The design is a good basis for drug discovery because new physics and new
   workflows are additive modules, not rewrites.
 
-**Related documents:** [`lib.md`](roadmap.md) for the roadmap,
+**Related documents:** [`roadmap.md`](roadmap.md) for the roadmap,
 [`validation.md`](../reference/validation.md) for the validation levels,
 [`tutorials/README.md`](../tutorials/README.md) for the three-track tutorial map,
 [`tutorials/overview.md`](../tutorials/overview.md) for the CADD-focused
 overview, [`tutorials/curriculum.md`](../tutorials/curriculum.md) for the curriculum and
 prerequisites, [`tutorials/physics/tutorial.md`](../tutorials/physics/tutorial.md) for the Track A
-main path, and the
+main path, the
 [Track A physics deep dives](../tutorials/physics/README.md) for the
-layer-by-layer course.
+layer-by-layer course, and the
+[imatinib–BCR-ABL1 capstone](../tutorials/capstone_imatinib.md) for the
+integration project that consumes the provenance and identity records.
