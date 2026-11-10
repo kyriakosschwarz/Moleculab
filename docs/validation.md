@@ -40,6 +40,7 @@ uv run pytest tests/test_interactions.py -q
 uv run pytest tests/test_fingerprints.py -q
 uv run pytest tests/test_docking_poses.py -q
 uv run pytest tests/test_pose_comparison.py -q
+uv run pytest tests/test_docking_benchmark.py -q
 ```
 
 Covered:
@@ -58,6 +59,7 @@ Covered:
 - pose RMSD, explicit atom mappings, symmetry-aware mapping, and recovery
   thresholds;
 - pose clustering, centroid comparison, and interaction-pattern Jaccard;
+- benchmark statuses, valid-case denominators, and protocol retention;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -129,6 +131,7 @@ uv run python examples/interactions.py
 uv run python examples/interaction_fingerprints.py
 uv run python examples/docking_pose_analysis.py
 uv run python examples/compare_binding_modes.py
+uv run python examples/docking_benchmark.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -195,12 +198,14 @@ point when a single operator typo could corrupt every downstream result.
 | symmetry-aware pose comparison uses explicit mappings | `tests/test_docking_poses.py` |
 | pose clustering is deterministic for a fixed distance matrix | `tests/test_pose_comparison.py` |
 | geometry and interaction similarity are reported separately | `tests/test_pose_comparison.py` |
+| benchmark success rate excludes invalid cases from the denominator | `tests/test_docking_benchmark.py` |
+| benchmark statuses agree with pose-recovery results | `tests/test_docking_benchmark.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-479 passed, 1 skipped
+492 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

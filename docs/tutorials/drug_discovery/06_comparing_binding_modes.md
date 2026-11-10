@@ -394,4 +394,4 @@ A binding-mode comparison module is correct when:
 
 **Previous:** [05 — Docking fundamentals and pose interpretation](05_docking_fundamentals.md).
 
-**Next:** Docking validation and benchmarking (module 07, planned).
+**Next:** [07 — Docking validation and benchmarking](07_docking_validation.md).

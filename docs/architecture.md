@@ -618,8 +618,9 @@ supplied by the caller.
 
 `analysis.docking` records external ligand poses, validates explicit atom
 mappings, computes RMSD, supports symmetry-equivalent mappings, reports
-pose-recovery thresholds, clusters poses by explicit distance, and compares
-geometry with exact or residue-level interaction patterns. It does not search
+pose-recovery thresholds, clusters poses by explicit distance, compares
+geometry with exact or residue-level interaction patterns, and summarizes
+docking benchmarks with separate valid and invalid cases. It does not search
 poses or parse docking-program files.
 
 ## 8. How the architecture supports education and the tutorials

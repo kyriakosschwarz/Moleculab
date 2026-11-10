@@ -39,7 +39,7 @@ with geometry and representation before it introduces scoring.
 | [04 — Interaction fingerprints](04_interaction_fingerprints.md) | residue-ligand contact features and sampled-frame occupancy | available |
 | [05 — Docking foundations](05_docking_fundamentals.md) | search, scoring, poses, and limitations | available |
 | [06 — Comparing binding modes](06_comparing_binding_modes.md) | pose clustering, geometry, interaction-pattern comparison | available |
-| 07 — Docking validation and benchmarking | redocking, cross-docking, pose recovery, score interpretation | planned |
+| [07 — Docking validation and benchmarking](07_docking_validation.md) | redocking, cross-docking, pose recovery, score interpretation | available |
 | 08 — Trajectory contact analysis | contact timelines and persistence | planned |
 | 09 — Lead optimisation and structure–activity relationships | multi-ligand comparison and SAR | planned |
 
@@ -164,9 +164,14 @@ single binding-mode score.
 
 ### 2.8 Module 07: docking validation and benchmarking
 
-This planned module will cover redocking, cross-docking, pose-recovery
-thresholds, symmetry-aware RMSD, and the difference between pose recovery,
-chemical plausibility, and affinity prediction.
+[Module 07](07_docking_validation.md) covers redocking, cross-docking,
+pose-recovery thresholds, benchmark composition, selection bias, protocol
+metadata, and the distinction between pose recovery, chemical plausibility, and
+affinity prediction.
+
+The benchmark layer records valid failures and invalid cases separately. The
+success rate uses only valid cases in the denominator; invalid cases remain
+visible in the report.
 
 ### 2.9 Module 08: trajectory contact analysis
 

@@ -57,7 +57,10 @@ from .analysis.binding_site import (
     select_pocket_atoms,
 )
 from .analysis.docking import (
+    BenchmarkCase,
+    BenchmarkSummary,
     BindingModeComparison,
+    DockingBenchmark,
     InteractionPatternComparison,
     LigandPose,
     PoseCluster,
@@ -73,6 +76,7 @@ from .analysis.docking import (
     evaluate_pose_recovery,
     pose_distance,
     pose_rmsd,
+    summarize_benchmark,
     symmetry_aware_rmsd,
     validate_atom_mapping,
 )
@@ -227,6 +231,8 @@ __all__ = [
     "SPCE_WATER",
     "Angle",
     "AnglePotential",
+    "BenchmarkCase",
+    "BenchmarkSummary",
     "BindingModeComparison",
     "BindingSiteGeometry",
     "Bond",
@@ -235,6 +241,7 @@ __all__ = [
     "Box",
     "CoulombPotential",
     "DistanceConstraint",
+    "DockingBenchmark",
     "DockingPose",
     "DockingResult",
     "DoubleWellPotential",
@@ -361,6 +368,7 @@ __all__ = [
     "simulate_velocity_verlet",
     "simulate_velocity_verlet_system",
     "steepest_descent_step",
+    "summarize_benchmark",
     "symmetry_aware_rmsd",
     "tautomer_populations",
     "thermodynamic_integration_harmonic",

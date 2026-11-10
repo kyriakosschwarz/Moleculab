@@ -5,6 +5,12 @@ search engine or a docking-program file parser. Scores are metadata with an
 explicit unit and source; they are not reinterpreted as binding free energies.
 """
 
+from .benchmark import (
+    BenchmarkCase,
+    BenchmarkSummary,
+    DockingBenchmark,
+    summarize_benchmark,
+)
 from .clustering import (
     PoseCluster,
     PoseClusteringResult,
@@ -30,7 +36,10 @@ from .rmsd import (
 from .validation import PoseRecovery, evaluate_pose_recovery
 
 __all__ = [
+    "BenchmarkCase",
+    "BenchmarkSummary",
     "BindingModeComparison",
+    "DockingBenchmark",
     "InteractionPatternComparison",
     "LigandPose",
     "PoseCluster",
@@ -46,6 +55,7 @@ __all__ = [
     "evaluate_pose_recovery",
     "pose_distance",
     "pose_rmsd",
+    "summarize_benchmark",
     "symmetry_aware_rmsd",
     "validate_atom_mapping",
 ]
