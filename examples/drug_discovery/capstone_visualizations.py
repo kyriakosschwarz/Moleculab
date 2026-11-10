@@ -268,7 +268,8 @@ def main() -> None:
         caption=(
             "Reference-neutral, tautomer-3, and protonation-1 states shown side "
             "by side. Magenta marks formal-charge changes, purple marks "
-            "donor/acceptor changes, and green marks hydrogen-count changes. "
+            "donor/acceptor changes, and green marks per-atom attached-hydrogen "
+            "count changes. "
             "No state is selected as dominant and no populations are shown."
         ),
         alt_text=(

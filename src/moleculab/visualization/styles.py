@@ -7,6 +7,7 @@ that the same status always receives the same visual treatment.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -108,6 +109,7 @@ def configure_matplotlib() -> None:
 
     plt.rcParams.update(
         {
+            "svg.hashsalt": "moleculab",
             "font.family": "DejaVu Sans",
             "font.size": 10,
             "axes.titlesize": 12,
@@ -129,6 +131,7 @@ def clean_svg_file(path: str | Path) -> None:
 
     destination = Path(path)
     text = destination.read_text(encoding="utf-8")
+    text = re.sub(r"\s*<dc:date>[^<]*</dc:date>", "", text)
     cleaned = "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
     if cleaned != text:
         destination.write_text(cleaned, encoding="utf-8")

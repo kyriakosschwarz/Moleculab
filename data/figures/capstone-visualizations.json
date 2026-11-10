@@ -70,7 +70,7 @@
       },
       "rendering_config": {
         "backend": "PyMOL",
-        "camera": "auto",
+        "camera": "stored",
         "dpi": "200",
         "height": "1200",
         "ligand": "sticks yellow",
@@ -79,7 +79,7 @@
         "waters": "spheres marine scale 0.30",
         "width": "1600"
       },
-      "rendering_config_sha256": "2e787ca934ee28977e66d15976dade0d9c093f18794ca5d26677ce44575c7825",
+      "rendering_config_sha256": "9f41ee9c83d4bcd0903592506bcfa12b7849aa2db448b1f40c8d380561541a8f",
       "scientific_limitations": [
         "One crystallographic structure and one selected ligand copy.",
         "Cartoon and surface are representations of the deposited coordinates, not new data.",
@@ -135,7 +135,7 @@
       },
       "rendering_config": {
         "backend": "PyMOL",
-        "camera": "auto",
+        "camera": "stored",
         "contacts": "sticks cyan, max 3",
         "distance_style": "gray30 dashed width 2",
         "dpi": "200",
@@ -145,7 +145,7 @@
         "waters": "spheres marine scale 0.28",
         "width": "1600"
       },
-      "rendering_config_sha256": "84687e974d952246e3a8db2a5977a4d7e260e9f846016123b7011070ae9a8b86",
+      "rendering_config_sha256": "1bfd91f3f480a414bf2941116f1bc8c41976b33e9e69e88eceba97411838f565",
       "scientific_limitations": [
         "Dashed lines are measured atom-atom contacts, not classified hydrogen bonds.",
         "The figure does not show hydrogen positions or angular criteria.",
@@ -198,7 +198,7 @@
         "data/structures/2HYY.ligand-identity.json": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70"
       },
       "rendering_config": {
-        "atom_notes": "formal charge, donor/acceptor, hydrogen count changes",
+        "atom_notes": "formal charge, donor/acceptor, per-atom attached hydrogen count changes",
         "backend": "RDKit",
         "charge_colour": "magenta",
         "height": "900",
@@ -207,16 +207,17 @@
         "role_colour": "purple",
         "width": "1800"
       },
-      "rendering_config_sha256": "de4fb7828d17a03d13d5cc21d18a8314c23dfc95989575ac5ab94f4c312df903",
+      "rendering_config_sha256": "a32fa9c7df8a8ee3ad7608e3042933d3deb1d1494a964c9cb3ffcb02acd99678",
       "scientific_limitations": [
         "States are compared side by side; no state is selected as dominant.",
         "No populations or free energies are shown.",
         "Atom notes mark changes relative to the reference-neutral state.",
+        "Hydrogen-count changes are attached hydrogens per atom, not total molecular hydrogen count.",
         "Generated 3D hydrogen positions are not drawn in this 2D comparison.",
         "The figure does not classify interactions or imply affinity."
       ],
       "alt_text": "Three side-by-side imatinib diagrams comparing a reference-neutral state, a tautomer, and a protonated state with changed atoms highlighted.",
-      "caption": "Reference-neutral, tautomer-3, and protonation-1 states shown side by side. Magenta marks formal-charge changes, purple marks donor/acceptor changes, and green marks hydrogen-count changes. No state is selected as dominant and no populations are shown.",
+      "caption": "Reference-neutral, tautomer-3, and protonation-1 states shown side by side. Magenta marks formal-charge changes, purple marks donor/acceptor changes, and green marks per-atom attached-hydrogen count changes. No state is selected as dominant and no populations are shown.",
       "camera_view": null
     },
     {
@@ -292,7 +293,7 @@
         "acceptors": "sticks cyan",
         "angles": "reported in caption and source record, not drawn",
         "backend": "PyMOL",
-        "camera": "auto",
+        "camera": "stored",
         "distance_style": "gray30 dashed width 2",
         "dpi": "200",
         "generated_hydrogens": "spheres gray20 scale 0.45",
@@ -302,7 +303,7 @@
         "waters": "spheres marine",
         "width": "1600"
       },
-      "rendering_config_sha256": "ab76e6f2ef2523f01ae1f93fe48e6bf3918429e6c1817e7a3e1db89b100276f0",
+      "rendering_config_sha256": "50513e737f8abbd71504a244c7e63eb2ade540534dc2a4119bc37d1ca78fe42a",
       "scientific_limitations": [
         "Ligand hydrogens are generated positions, not experimental observations.",
         "Water orientation and donor/acceptor roles remain unassigned.",

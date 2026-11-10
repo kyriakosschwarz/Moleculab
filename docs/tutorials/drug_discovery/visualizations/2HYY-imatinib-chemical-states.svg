@@ -4,7 +4,7 @@
                       xmlns:rdkit='http://www.rdkit.org/xml'
                       xmlns:xlink='http://www.w3.org/1999/xlink'
                   xml:space='preserve'
-width='1800px' height='900px' viewBox='0 0 1800 900'><title>Selected imatinib chemical-state alternatives</title><desc>Reference-neutral, tautomer-3, and protonation-1 states shown side by side. Magenta marks formal-charge changes, purple marks donor/acceptor changes, and green marks hydrogen-count changes. No state is selected as dominant and no populations are shown.</desc>
+width='1800px' height='900px' viewBox='0 0 1800 900'><title>Selected imatinib chemical-state alternatives</title><desc>Reference-neutral, tautomer-3, and protonation-1 states shown side by side. Magenta marks formal-charge changes, purple marks donor/acceptor changes, and green marks per-atom attached-hydrogen count changes. No state is selected as dominant and no populations are shown.</desc>
 <!-- END OF HEADER -->
 <rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='1800.0' height='900.0' x='0.0' y='0.0'> </rect>
 <path class='bond-0 atom-0 atom-1' d='M 72.3,280.1 L 113.5,295.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />

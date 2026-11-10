@@ -1159,8 +1159,8 @@ The second visualization batch makes the capstone's central uncertainty visible.
 
 The chemical-state comparison shows the reference-neutral state, `tautomer-3`,
 and `protonation-1` side by side. Magenta marks formal-charge changes, purple
-marks donor/acceptor changes, and green marks hydrogen-count changes. Each panel
-reports formal charge and proton count. No state is selected as dominant, and no
+marks donor/acceptor changes, and green marks per-atom attached-hydrogen count
+changes. Each panel reports formal charge and proton count. No state is selected as dominant, and no
 populations are shown.
 
 ![8 x 2 interaction-evidence matrix](drug_discovery/visualizations/2HYY-interaction-evidence-matrix.png)

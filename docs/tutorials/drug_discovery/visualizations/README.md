@@ -74,7 +74,8 @@ reference-neutral state:
 
 - magenta: formal charge;
 - purple: donor/acceptor assignment;
-- green: hydrogen count.
+- green: per-atom attached hydrogen count (not the total molecular hydrogen
+  count).
 
 Each panel reports formal charge and proton count.
 
@@ -211,9 +212,11 @@ uv run --with rdkit python examples/drug_discovery/capstone_visualizations.py
 RDKit produces the molecular diagrams, PyMOL produces the 3D renders, and
 Matplotlib produces the evidence, sensitivity, free-energy, and thermodynamic
 panels. The script is deterministic: when metadata for the same structure
-checksum already exists, the stored PyMOL camera view is reused. The metadata
-file is rewritten with the tool versions, source checksums,
-rendering-configuration fingerprints, and camera views actually used.
+checksum already exists, the stored PyMOL camera view is reused. Generated SVGs
+use a fixed Matplotlib hash salt and drop timestamp metadata, so repeated runs
+produce identical SVG text. The metadata file is rewritten with the tool
+versions, source checksums, rendering-configuration fingerprints, and camera
+views actually used.
 
 If PyMOL is unavailable, the example stops with a clear error rather than
 silently producing a different kind of figure.

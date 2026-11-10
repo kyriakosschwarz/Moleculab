@@ -218,13 +218,17 @@ def draw_chemical_state_comparison(
             ("charge_colour", "magenta"),
             ("role_colour", "purple"),
             ("hydrogen_colour", "green"),
-            ("atom_notes", "formal charge, donor/acceptor, hydrogen count changes"),
+            (
+                "atom_notes",
+                "formal charge, donor/acceptor, per-atom attached hydrogen count changes",
+            ),
         ),
         rendering_config_sha256=None,
         scientific_limitations=(
             "States are compared side by side; no state is selected as dominant.",
             "No populations or free energies are shown.",
             "Atom notes mark changes relative to the reference-neutral state.",
+            "Hydrogen-count changes are attached hydrogens per atom, not total molecular hydrogen count.",
             "Generated 3D hydrogen positions are not drawn in this 2D comparison.",
             "The figure does not classify interactions or imply affinity.",
         ),
