@@ -68,6 +68,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -85,7 +86,9 @@ only where explicit chemical evidence is available and writes
 interaction-evidence fingerprint and writes
 `data/structures/2HYY.evidence-fingerprint.json`. The eighth prepares separate
 chemical states and writes
-`data/structures/2HYY.chemical-preparation.json`. None of the commands docks a
+`data/structures/2HYY.chemical-preparation.json`. The ninth enumerates
+protonation and tautomer alternatives and writes
+`data/structures/2HYY.chemical-states.json`. None of the commands docks a
 ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -545,6 +548,43 @@ gradient-ready topology remain later decisions. It supplies the chemistry that a
 future interaction pass can consume without silently rewriting the experimental
 evidence.
 
+### 4.10 Batch 8: protonation and tautomer state enumeration
+
+Batch 8 enumerates chemically plausible alternatives without selecting or
+weighting one.
+
+```bash
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
+```
+
+The record is written to `data/structures/2HYY.chemical-states.json`.
+
+For 2HYY the enumeration contains:
+
+| Kind | Count | Proton count | Formal charge |
+| --- | --- | --- | --- |
+| Reference | 1 | 31 | 0 |
+| Tautomer | 5 | 31 | 0 |
+| Protonation | 2 | 32 | +1 |
+
+All eight states coexist. `selected_state_id` is `null`; no population model is
+supplied.
+
+Tautomers are generated with the RDKit `TautomerEnumerator`. Hypothetical
+protonation alternatives are generated at explicit RDKit `PosIonizable` sites.
+Each state records its molecular graph, formula, proton count, formal charge,
+state-specific donor/acceptor/hydrophobic features, aromatic rings, generated
+conformer, and assumptions.
+
+No pKa value is supplied for the protonation sites. The record says so
+explicitly, gives no pH assumption, and makes no population estimate. This keeps
+enumeration separate from thermodynamic weighting: protonation states have
+different proton counts and cannot be ranked without a defensible pH-dependent
+model. Tautomers share composition, but they are still not ranked in this
+batch.
+
+The experimental records and the Batch 7 preparation states are unchanged.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -595,6 +635,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -618,6 +659,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | interaction interpretation | `capstone_interactions.py` | calculated, with explicit evidence |
 | evidence-aware fingerprint | `capstone_evidence_fingerprint.py` | calculated, with unknown states preserved |
 | chemical-state preparation | `capstone_chemical_preparation.py` | prepared: calculated assumptions kept separate |
+| protonation and tautomer enumeration | `capstone_chemical_states.py` | enumerated alternatives; no population estimate |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

@@ -9,7 +9,8 @@ and record occupancy, alternate locations, and geometry; binding-site records
 select the explicit protein environment and atom contacts; interaction records
 classify only explicitly supplied chemical evidence; evidence fingerprints keep
 present, absent, and unknown distinct; preparation records hold separate
-chemical states without mutating the experimental inputs. None of them parses
+chemical states without mutating the experimental inputs; state enumeration
+keeps protonation and tautomer alternatives unselected. None of them parses
 coordinates, chooses a structure, or invents an atom mapping on the caller's
 behalf.
 """

@@ -25,7 +25,8 @@ The source is organised by architecture layer:
     experimental-structure provenance, ligand identity reconciliation,
     ligand coordinate reconciliation, binding-site reconciliation,
     evidence-gated interaction interpretation, three-state evidence
-    fingerprints, and separate chemical-state preparation.
+    fingerprints, separate chemical-state preparation, and protonation/tautomer
+    enumeration.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -163,6 +164,17 @@ from .applications.chemical_preparation import (
     load_chemical_preparation,
     validate_chemical_preparation,
     write_chemical_preparation,
+)
+from .applications.chemical_state_enumeration import (
+    CHEMICAL_STATE_SCHEMA_VERSION,
+    ChemicalState,
+    ChemicalStateEnumerationRecord,
+    IonizableSite,
+    StateEnumerationDiscrepancy,
+    build_chemical_state_enumeration_record,
+    load_chemical_state_enumeration,
+    validate_chemical_state_enumeration,
+    write_chemical_state_enumeration,
 )
 from .applications.docking import (
     DockingPose,
@@ -401,8 +413,11 @@ __all__ = [
     "BondedLennardJonesMC",
     "Box",
     "CHEMICAL_PREPARATION_SCHEMA_VERSION",
+    "CHEMICAL_STATE_SCHEMA_VERSION",
     "ChemicalIdentityRecord",
     "ChemicalPreparationRecord",
+    "ChemicalState",
+    "ChemicalStateEnumerationRecord",
     "CloseContact",
     "CoordinateAtom",
     "CoordinateDiscrepancy",
@@ -451,6 +466,7 @@ __all__ = [
     "InteractionRecord",
     "InteractionFingerprint",
     "InteractionPatternComparison",
+    "IonizableSite",
     "LIGAND_COORDINATE_SCHEMA_VERSION",
     "LIGAND_IDENTITY_SCHEMA_VERSION",
     "LennardJonesParameters",
@@ -506,6 +522,7 @@ __all__ = [
     "SideChain",
     "SoftCoreLennardJones",
     "SoftCoreLennardJonesPair",
+    "StateEnumerationDiscrepancy",
     "SolvatedLigandAlchemy",
     "SolventModel",
     "StructureManifest",
@@ -535,6 +552,7 @@ __all__ = [
     "binding_site_geometry",
     "boltzmann_populations",
     "build_chemical_preparation_record",
+    "build_chemical_state_enumeration_record",
     "build_evidence_fingerprint",
     "build_fingerprint",
     "build_interaction_evidence",
@@ -578,6 +596,7 @@ __all__ = [
     "ligand_efficiency",
     "load_binding_site",
     "load_chemical_preparation",
+    "load_chemical_state_enumeration",
     "load_interaction_evidence",
     "load_interactions",
     "load_ligand_coordinates",
@@ -633,6 +652,7 @@ __all__ = [
     "validate_atom_mapping",
     "validate_binding_site",
     "validate_chemical_preparation",
+    "validate_chemical_state_enumeration",
     "validate_interaction_evidence",
     "validate_interactions",
     "validate_ligand_coordinates",
@@ -643,6 +663,7 @@ __all__ = [
     "virial_pressure",
     "write_binding_site",
     "write_chemical_preparation",
+    "write_chemical_state_enumeration",
     "write_interaction_evidence",
     "write_interactions",
     "write_ligand_coordinates",

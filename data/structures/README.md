@@ -25,6 +25,9 @@ and its provenance manifest.
 - `2HYY.chemical-preparation.json` is the Batch 7 preparation record. It holds
   coexisting deposited-only and reference-neutral states without silently
   selecting one or modifying the earlier experimental records.
+- `2HYY.chemical-states.json` is the Batch 8 enumeration. It holds reference,
+  tautomer, and hypothetical protonation alternatives without selecting a state
+  or estimating populations.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -39,4 +42,5 @@ uv run --with gemmi python examples/drug_discovery/capstone_binding_site.py
 uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
+uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 ```

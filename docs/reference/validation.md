@@ -50,6 +50,7 @@ uv run pytest tests/test_binding_site_reconciliation.py -q
 uv run pytest tests/test_interaction_interpretation.py -q
 uv run pytest tests/test_evidence_fingerprint.py -q
 uv run pytest tests/test_chemical_preparation.py -q
+uv run pytest tests/test_chemical_state_enumeration.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -214,6 +215,7 @@ point when a single operator typo could corrupt every downstream result.
 | interaction classification, missing evidence, and the no-affinity boundary are tested | `tests/test_interaction_interpretation.py` |
 | three-state evidence, assessable denominators, schema compatibility, and unknown-not-zero comparisons are tested | `tests/test_evidence_fingerprint.py` |
 | prepared states, generated hydrogens, explicit assumptions, and unselected alternatives are tested | `tests/test_chemical_preparation.py` |
+| protonation/tautomer enumeration, pKa provenance, and no-population assumptions are tested | `tests/test_chemical_state_enumeration.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |
