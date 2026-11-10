@@ -152,6 +152,61 @@ class GeometryCriteria:
 
 
 @dataclass(frozen=True)
+class GeometryConvention:
+    ring_definition: str = "connected components of aromatic bonds"
+    plane_fit_method: str = "least-squares plane from SVD of centred coordinates"
+    planarity_metric: str = "RMSD of perpendicular distances to the fitted plane"
+    fused_ring_policy: str = (
+        "each connected aromatic component is treated as one ring system"
+    )
+    bond_length_source: str = "deposited coordinates in angstrom"
+    angle_source: str = "deposited coordinates in angstrom"
+    close_contact_definition: str = (
+        "nonbonded pairs excluding 1-2 and 1-3 contacts, below the threshold"
+    )
+    occupancy_interpretation: str = (
+        "crystallographic occupancy, not a binding-site population"
+    )
+    b_factor_interpretation: str = (
+        "displacement parameter, not a probability of correct placement"
+    )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "ring_definition": self.ring_definition,
+            "plane_fit_method": self.plane_fit_method,
+            "planarity_metric": self.planarity_metric,
+            "fused_ring_policy": self.fused_ring_policy,
+            "bond_length_source": self.bond_length_source,
+            "angle_source": self.angle_source,
+            "close_contact_definition": self.close_contact_definition,
+            "occupancy_interpretation": self.occupancy_interpretation,
+            "b_factor_interpretation": self.b_factor_interpretation,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> GeometryConvention:
+        data = _as_mapping(data, "geometry convention")
+        return cls(
+            ring_definition=_required_string(data, "ring_definition"),
+            plane_fit_method=_required_string(data, "plane_fit_method"),
+            planarity_metric=_required_string(data, "planarity_metric"),
+            fused_ring_policy=_required_string(data, "fused_ring_policy"),
+            bond_length_source=_required_string(data, "bond_length_source"),
+            angle_source=_required_string(data, "angle_source"),
+            close_contact_definition=_required_string(
+                data, "close_contact_definition"
+            ),
+            occupancy_interpretation=_required_string(
+                data, "occupancy_interpretation"
+            ),
+            b_factor_interpretation=_required_string(
+                data, "b_factor_interpretation"
+            ),
+        )
+
+
+@dataclass(frozen=True)
 class CoordinateAtom:
     atom_name: str
     element: str
@@ -340,6 +395,7 @@ class LigandCoordinateRecord:
     accession: str
     selection: LigandSelection
     criteria: GeometryCriteria
+    conventions: GeometryConvention
     atoms: tuple[CoordinateAtom, ...]
     bonds: tuple[BondGeometry, ...]
     angles: tuple[AngleGeometry, ...]
@@ -364,6 +420,7 @@ class LigandCoordinateRecord:
             "accession": self.accession,
             "selection": self.selection.to_dict(),
             "criteria": self.criteria.to_dict(),
+            "conventions": self.conventions.to_dict(),
             "atoms": [atom.to_dict() for atom in self.atoms],
             "bonds": [bond.to_dict() for bond in self.bonds],
             "angles": [angle.to_dict() for angle in self.angles],
@@ -390,6 +447,9 @@ class LigandCoordinateRecord:
             accession=_required_string(data, "accession"),
             selection=LigandSelection.from_dict(_as_mapping(data.get("selection"), "selection")),
             criteria=GeometryCriteria.from_dict(_as_mapping(data.get("criteria"), "criteria")),
+            conventions=GeometryConvention.from_dict(
+                _as_mapping(data.get("conventions"), "conventions")
+            ),
             atoms=tuple(
                 CoordinateAtom.from_dict(_as_mapping(item, "coordinate atom"))
                 for item in _as_list(data.get("atoms"), "atoms")
@@ -527,6 +587,7 @@ def reconcile_ligand_coordinates(
     reference_stereocenters: Sequence[str],
     deposited_stereochemistry: Sequence[str],
     criteria: GeometryCriteria | None = None,
+    conventions: GeometryConvention | None = None,
 ) -> LigandCoordinateRecord:
     """Reconcile supplied coordinates with the identity record's atom mapping."""
 
@@ -1093,6 +1154,7 @@ def reconcile_ligand_coordinates(
         accession=accession,
         selection=selection,
         criteria=criteria,
+        conventions=conventions or GeometryConvention(),
         atoms=tuple(atoms),
         bonds=tuple(bond_geometry),
         angles=tuple(angle_geometry),
@@ -1203,6 +1265,21 @@ def validate_ligand_coordinates(record: LigandCoordinateRecord) -> list[str]:
         errors.append("criteria.ring_planarity_rmsd_max_angstrom must be positive.")
     if criteria.close_contact_min_angstrom <= 0:
         errors.append("criteria.close_contact_min_angstrom must be positive.")
+
+    conventions = record.conventions
+    for field_name in (
+        "ring_definition",
+        "plane_fit_method",
+        "planarity_metric",
+        "fused_ring_policy",
+        "bond_length_source",
+        "angle_source",
+        "close_contact_definition",
+        "occupancy_interpretation",
+        "b_factor_interpretation",
+    ):
+        if not getattr(conventions, field_name):
+            errors.append(f"conventions.{field_name} is required.")
 
     if not record.decisions:
         errors.append("decisions must contain at least one record.")

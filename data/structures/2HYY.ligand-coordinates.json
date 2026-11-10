@@ -29,6 +29,17 @@
     "ring_planarity_rmsd_max_angstrom": 0.2,
     "close_contact_min_angstrom": 1.5
   },
+  "conventions": {
+    "ring_definition": "connected components of aromatic bonds",
+    "plane_fit_method": "least-squares plane from SVD of centred coordinates",
+    "planarity_metric": "RMSD of perpendicular distances to the fitted plane",
+    "fused_ring_policy": "each connected aromatic component is treated as one ring system",
+    "bond_length_source": "deposited coordinates in angstrom",
+    "angle_source": "deposited coordinates in angstrom",
+    "close_contact_definition": "nonbonded pairs excluding 1-2 and 1-3 contacts, below the threshold",
+    "occupancy_interpretation": "crystallographic occupancy, not a binding-site population",
+    "b_factor_interpretation": "displacement parameter, not a probability of correct placement"
+  },
   "atoms": [
     {
       "atom_name": "C1",

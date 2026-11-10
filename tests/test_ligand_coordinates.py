@@ -123,6 +123,8 @@ def test_coordinate_record_json_round_trip(tmp_path):
 
     assert loaded == result
     assert loaded.to_dict()["criteria"]["close_contact_min_angstrom"] == 1.5
+    assert "least-squares plane" in loaded.to_dict()["conventions"]["plane_fit_method"]
+    assert "1-2 and 1-3" in loaded.to_dict()["conventions"]["close_contact_definition"]
 
 
 def test_missing_coordinate_record_is_reported():
