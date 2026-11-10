@@ -7,9 +7,10 @@
 >
 > **What you need.** The core Track A tutorials, especially 05–10 and the
 > sections on solvent, water, docking, Ewald, and free energy; Track B modules
-> 01–04 for chemical identity and protonation; and Track C modules 01–10 for
-> protein structure, binding sites, interactions, docking, validation,
-> trajectory contacts, SAR, and the structure–thermodynamics bridge.
+> 01–08 for chemical identity, protonation, stereochemistry, polarity,
+> hydrogen bonding, and ADME context; and Track C modules 01–10 for protein
+> structure, binding sites, interactions, docking, validation, trajectory
+> contacts, SAR, and the structure–thermodynamics bridge.
 
 The capstone is the point where the tracks meet:
 
@@ -21,6 +22,49 @@ The capstone is the point where the tracks meet:
 
 For the three-track overview, see the [tutorial map](README.md); for the full
 curriculum, see [the learning tracks](tracks.md).
+
+## Project contract: provenance and reproducibility
+
+This capstone is an integration project, not a new feature module. Every result
+must carry one of four labels:
+
+| Label | Meaning | Example |
+| --- | --- | --- |
+| experimental | measured or deposited by an external source | PDB coordinates, assay IC50 |
+| calculated | computed deterministically from a defined representation | molecular weight, TPSA, pIC50 from IC50 |
+| predicted | produced by a model with assumptions | docking pose, MD-derived estimate, ADME prediction |
+| hypothesised | a mechanistic interpretation | “this hydrogen bond explains the potency” |
+
+The label identifies the **origin of the evidence**, not its certainty:
+
+- experimental coordinates are not exact atomic truth; they carry resolution,
+  uncertainty, refinement assumptions, and sometimes missing information;
+- a calculated result can be perfectly reproducible while still depending on an
+  imperfect physical model;
+- a predicted result is only as good as its assumptions and validation;
+- a hypothesis is not evidence until it is tested.
+
+The project must also record:
+
+- the source and access date of every experimental structure;
+- the exact molecular representation, including stereochemistry and
+  protonation/tautomer state;
+- the force field, charge model, and software version;
+- interaction criteria, atom mappings, and symmetry conventions;
+- the difference between a docking score, a pose RMSD, an occupancy, and a
+  binding free energy.
+
+The repository does not bundle the experimental coordinates. Downloading a
+structure is an explicit provenance step.
+
+The reproducible offline anchor is:
+
+```bash
+uv run --with rdkit python examples/capstone_imatinib.py
+```
+
+It calculates the imatinib chemical record and prints a provenance ledger. It
+does **not** download a structure, dock a ligand, or estimate a free energy.
 
 ## 1. Why imatinib?
 
@@ -78,6 +122,71 @@ Useful public structures include:
 
 The PDB chemical component identifier for imatinib is `STI`.
 
+Possible retrieval sources:
+
+- `https://files.rcsb.org/download/2HYY.cif`
+- `https://files.rcsb.org/download/1IEP.cif`
+
+These URLs are references, not bundled data. If you download a file, record:
+
+- the URL and exact downloaded file identifier;
+- the access date;
+- the format (PDB or mmCIF);
+- the file name and a SHA-256 checksum;
+- whether the file is the deposited asymmetric unit or a biological assembly;
+- any coordinate transformations, symmetry expansion, or chain renaming;
+- the chain and ligand copy selected;
+- any waters, ions, or cofactors removed.
+
+### 4.1 Manifest template
+
+A minimal structure manifest should contain:
+
+```text
+pdb_id:
+source_url:
+download_date:
+file_name:
+file_format: mmCIF | PDB
+sha256:
+deposited_asymmetric_unit: yes | no
+biological_assembly:
+coordinate_transformations:
+selected_chains:
+selected_ligand_copy:
+ligand_component_id:
+waters: retained | removed | partially retained
+ions_cofactors:
+missing_atoms_or_residues:
+notes:
+```
+
+A checksum is not ceremony. It detects a changed download, a different file
+version, or an accidental substitution.
+
+### 4.2 Ligand identity reconciliation
+
+The ligand coordinates in a structure do not by themselves establish the full
+chemical identity. Record how the deposited ligand was matched to the intended
+chemical record:
+
+- PDB chemical component identifier;
+- atom names and atom mapping to the input SMILES;
+- bond orders and aromaticity;
+- formal charge and protonation state;
+- stereochemistry;
+- missing atoms or modified residues;
+- any differences between the deposited ligand and the intended molecule.
+
+A ligand can have the right shape but the wrong bond orders, formal charge, or
+stereochemistry. Treat ligand reconciliation as a chemical-identity problem,
+not just a coordinate-matching problem.
+
+If network access is unavailable, the capstone can still be completed with the
+synthetic examples for structure inspection, binding-site geometry, interaction
+detection, pose analysis, and benchmarking. State clearly that the synthetic
+data are teaching stand-ins.
+
 Before simulating anything:
 
 1. inspect the chains, ligands, waters, ions, and missing atoms;
@@ -94,6 +203,8 @@ pipeline.
 | Case-study concept | Tutorial foundation |
 | --- | --- |
 | atoms, positions, charges | `Particle`, units |
+| chemical identity, stereochemistry, protonation | Track B modules 02, 04, 05 |
+| polarity, partial charge, hydrogen bonding | Track B modules 06, 07 |
 | bond, angle, torsion terms | `Topology`, bonded potentials |
 | Lennard-Jones and electrostatics | nonbonded interactions, `NonbondedModel` |
 | protein-ligand complex | `System` composition |
@@ -104,7 +215,46 @@ pipeline.
 | long-range electrostatics | reaction field, Ewald |
 | binding pose | rigid and flexible docking |
 | binding affinity | FEP, TI, MBAR, alchemical decoupling |
+| SAR and ADME context | Track B module 08; Track C module 09 |
 | electronic effects | QM/MM concepts |
+
+### 5.1 Reproducible teaching workflow
+
+Run these commands from the repository root. They exercise the workflow on
+synthetic teaching data; they do not run an imatinib pipeline.
+
+```bash
+uv run --with rdkit python examples/capstone_imatinib.py
+uv run --with rdkit python examples/molecular_properties.py
+uv run python examples/protonation.py
+uv run --with gemmi python examples/protein_structure.py
+uv run python examples/binding_site.py
+uv run python examples/interactions.py
+uv run python examples/interaction_fingerprints.py
+uv run python examples/docking_pose_analysis.py
+uv run python examples/docking_benchmark.py
+uv run python examples/matched_molecular_pairs.py
+uv run --with rdkit python examples/adme_tradeoffs.py
+uv run python examples/structural_observations_thermodynamics.py
+```
+
+| Step | Example | Result category |
+| --- | --- | --- |
+| chemical identity and descriptors | `capstone_imatinib.py` | calculated |
+| descriptors and similarity | `molecular_properties.py` | calculated |
+| protonation populations | `protonation.py` | calculated from pKa inputs |
+| structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |
+| pocket geometry | `binding_site.py` | calculated |
+| hydrogen-bond geometry | `interactions.py` | calculated |
+| interaction fingerprints | `interaction_fingerprints.py` | calculated |
+| pose RMSD and recovery | `docking_pose_analysis.py` | predicted/calculated |
+| docking benchmark | `docking_benchmark.py` | predicted/calculated |
+| matched-pair SAR | `matched_molecular_pairs.py` | measured + calculated + hypothesis |
+| ADME trade-offs | `adme_tradeoffs.py` | calculated, with pKa inputs |
+| structure versus thermodynamics | `structural_observations_thermodynamics.py` | illustrative |
+
+The examples are intentionally small. Their purpose is to show the data
+contract and the analysis boundaries, not to replace production workflows.
 
 ## 6. A realistic workflow
 
@@ -301,7 +451,38 @@ Moleculab cannot yet:
 The capstone is successful when you can explain **why** each production step
 exists and **which physical model** it is using.
 
-## 11. Further tools
+## 11. Capstone deliverables and acceptance criteria
+
+A complete capstone produces a small, inspectable record rather than a single
+number:
+
+| Deliverable | Must contain |
+| --- | --- |
+| chemical record | input SMILES, formula, stereochemistry, protonation/tautomer assumptions, descriptor provenance |
+| structure manifest | PDB ID or synthetic source, URL/access date, format, SHA-256, asymmetric unit versus assembly, chains, ligand copy, waters/ions, missing atoms, coordinate transformations |
+| ligand reconciliation | component ID, atom mapping, bond orders, formal charge, stereochemistry, modifications, missing atoms |
+| binding-site record | selection method, cutoff, residues, geometry, alternate-location policy |
+| interaction record | donor/acceptor assignments, distance/angle criteria, fingerprints, occupancy |
+| pose record | atom mapping, symmetry handling, RMSD, threshold, score provenance |
+| SAR record | measured activity type, descriptor changes, docking scores, separated hypothesis |
+| thermodynamics note | method, standard state, uncertainty, sampling limitations |
+| limitations note | what the data and models cannot establish |
+
+Acceptance criteria:
+
+- every result is labelled experimental, calculated, predicted, or hypothesised;
+- the source and access date of every experimental structure are recorded;
+- the file format, checksum, and asymmetric-unit/assembly choice are recorded;
+- the ligand is reconciled to the intended chemical identity, including atom
+  mapping, bond orders, formal charge, and stereochemistry;
+- the molecular representation includes stereochemistry and protonation state;
+- interaction criteria and atom mappings are explicit;
+- a docking score is never labelled a binding free energy;
+- a geometric contact is never presented as a thermodynamic contribution;
+- a failed or invalid benchmark case is reported, not hidden;
+- the capstone states what further experiments or calculations would establish.
+
+## 12. Further tools
 
 To go beyond the educational engine:
 

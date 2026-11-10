@@ -138,6 +138,7 @@ uv run --with rdkit python examples/stereochemistry.py
 uv run --with rdkit python examples/molecular_polarity.py
 uv run --with rdkit python examples/hydrogen_bonding.py
 uv run --with rdkit python examples/adme_tradeoffs.py
+uv run --with rdkit python examples/capstone_imatinib.py
 uv run --with gemmi python examples/protein_structure.py
 uv run python examples/binding_site.py
 uv run python examples/interactions.py
