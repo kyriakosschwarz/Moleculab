@@ -54,6 +54,8 @@ uv run pytest tests/test_chemical_state_enumeration.py -q
 uv run pytest tests/test_state_interactions.py -q
 uv run pytest tests/test_protein_preparation.py -q
 uv run pytest tests/test_combination_interactions.py -q
+uv run pytest tests/test_hydrogen_evidence.py -q
+uv run pytest tests/test_water_evidence.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -222,6 +224,8 @@ point when a single operator typo could corrupt every downstream result.
 | state-aware contact interpretation preserves state differences without ranking or affinity inference | `tests/test_state_interactions.py` |
 | protein-pocket preparation preserves templates, multiple states, and unassigned water/hetero roles | `tests/test_protein_preparation.py` |
 | ligand/protein state matrix completeness and no-ranking interaction classification are tested | `tests/test_combination_interactions.py` |
+| generated hydrogens keep generated provenance, donor–hydrogen connectivity is checked, and D–H···A geometry is tested | `tests/test_hydrogen_evidence.py` |
+| deposited water identity, occupancy, B-factor, unassigned roles, and geometric-only bridge status are tested | `tests/test_water_evidence.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

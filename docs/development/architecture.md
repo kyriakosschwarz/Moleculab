@@ -116,7 +116,8 @@ algorithms (integrators, minimization) + protocols (thermostats, pressure)
     |
 analysis (trajectory, binding sites)
     + applications (docking, solvent, water, free energy, acid-base, QM/MM,
-                    structure provenance, ligand identity)
+                    structure provenance, ligand identity, hydrogen and water
+                    evidence)
 ```
 
 The actual imports are visible in the source. The important rules are:
@@ -156,6 +157,8 @@ The actual imports are visible in the source. The important rules are:
 | `applications.state_interactions` | `analysis.evidence`, `applications.chemical_state_enumeration`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.protein_preparation` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.combination_interactions` | `applications.interaction_interpretation`, `applications.chemical_state_enumeration`, `applications.protein_preparation`, `analysis.evidence` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.hydrogen_evidence` | `analysis.interactions`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.water_evidence` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -612,9 +615,15 @@ from residue templates, keeps multiple protonation hypotheses unselected, and
 records no hydrogens or assigned water/hetero roles.
 `applications/combination_interactions.py` crosses ligand and protein states on
 the same contacts and summarizes hypothesis-conditioned classifications without
-ranking combinations. The capstone consumes these records rather than
-hard-coding a residue lookup. The records are JSON-serialisable and validated
-independently of the scientific success of the analysis.
+ranking combinations. `applications/hydrogen_evidence.py` records generated
+hydrogen positions separately from deposited heavy atoms, validates
+donor–hydrogen connectivity, and evaluates D–H···A geometry against explicit
+criteria. `applications/water_evidence.py` preserves deposited water identity,
+coordinates, occupancy, and B-factors, keeps orientation and roles unassigned,
+and reports geometric bridge plausibility separately from a chemically
+classified water-mediated interaction. The capstone consumes these records
+rather than hard-coding a residue lookup. The records are JSON-serialisable and
+validated independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
 schema changes need migration or a version bump. The alternative is a workflow
@@ -749,6 +758,8 @@ mmCIF file (adapter: gemmi)
     → StateInteractionRecord (same contacts, selected states)
     → ProteinPreparationRecord (pocket template states)
     → CombinationInteractionRecord (state-pair matrix)
+    → HydrogenEvidenceRecord (generated positions and D–H···A geometry)
+    → WaterEvidenceRecord (deposited waters and geometric bridges)
     → later population or free-energy pass
 ```
 
@@ -783,7 +794,13 @@ interaction classification unknown where protein chemistry is missing.
 generating hydrogens, assigning water roles, or selecting a protonation state.
 `combination_interactions` crosses ligand and protein states on the same
 experimental geometry and keeps hydrogen-bond/water evidence unknown where
-provenance is missing.
+provenance is missing. `hydrogen_evidence` distinguishes generated hydrogen
+positions from deposited heavy atoms and assesses only the geometry supported by
+those positions; protein-donor bonds remain unknown when no protein hydrogens
+were prepared. `water_evidence` keeps water identity, occupancy, and B-factors
+as experimental observations, leaves orientation and donor/acceptor roles
+unassigned, and reports geometric bridge plausibility without claiming a
+classified water-mediated interaction.
 
 The reference records live in [`data/structures/`](../../data/structures/README.md):
 the manifest, identity record, and coordinate record are committed, while the
@@ -844,6 +861,8 @@ experimental structure
     → state-aware interaction assessment (same contacts, selected states)
     → protein-pocket chemical preparation (template states)
     → combination interaction matrix (state-pair evidence)
+    → generated-hydrogen evidence (D–H···A geometry)
+    → deposited-water evidence (geometric bridge plausibility)
     → explicit limitations; no affinity or free-energy claim
 ```
 
@@ -967,6 +986,10 @@ protein-pocket chemical preparation (template states)
         ↓
 combination interaction matrix (state-pair evidence)
         ↓
+generated-hydrogen evidence (generated positions, D–H···A geometry)
+        ↓
+deposited-water evidence (identity, occupancy, geometric bridge)
+        ↓
 later decision: System preparation and force-field parameters
 ```
 
@@ -1002,6 +1025,10 @@ Every stage is already represented by a module:
   selecting a protonation state or generating hydrogens.
 - `combination_interactions` crosses every ligand and protein state on the same
   contacts without ranking combinations.
+- `hydrogen_evidence` separates generated hydrogen positions from deposited
+  heavy atoms and evaluates D–H···A geometry under explicit criteria.
+- `water_evidence` preserves deposited waters and reports geometric bridge
+  plausibility without assigning water roles or an interaction class.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1151,6 +1178,8 @@ These are the rules that keep the layers honest.
 | state-aware assessment maps state atoms to contacts, preserves feature differences, and does not rank states | `tests/test_state_interactions.py` |
 | protein-pocket preparation keeps template states unselected and water/hetero roles unassigned | `tests/test_protein_preparation.py` |
 | ligand/protein state matrices are complete, preserve missing hydrogen/water evidence, and do not rank combinations | `tests/test_combination_interactions.py` |
+| hydrogen evidence separates generated positions from deposited atoms and checks connectivity before geometry | `tests/test_hydrogen_evidence.py` |
+| water evidence preserves deposited observations, leaves roles unassigned, and reports geometry without chemical classification | `tests/test_water_evidence.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1184,13 +1213,15 @@ For a new contributor, the source is best read in this order:
     `applications/chemical_state_enumeration.py`,
     `applications/state_interactions.py`,
     `applications/protein_preparation.py`,
-    `applications/combination_interactions.py` — provenance, explicit selection,
+    `applications/combination_interactions.py`,
+    `applications/hydrogen_evidence.py`,
+    `applications/water_evidence.py` — provenance, explicit selection,
     atom mapping, chemical-identity discrepancies, occupancy, alternate
     locations, coordinate geometry, pocket selection, contacts, evidence-gated
     interaction classification, three-state fingerprints, separate prepared
     chemical states, protonation/tautomer alternatives, state-aware contact
-    assessment, protein-pocket template chemistry, and state-pair interaction
-    matrices.
+    assessment, protein-pocket template chemistry, state-pair interaction
+    matrices, generated-hydrogen geometry, and deposited-water evidence.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.

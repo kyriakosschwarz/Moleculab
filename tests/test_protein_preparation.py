@@ -7,6 +7,7 @@ from pathlib import Path
 
 from moleculab import (
     PROTEIN_PREPARATION_SCHEMA_VERSION,
+    residue_atom_features,
     PreparedProteinAtom,
     PreparedProteinRing,
     PreparedProteinState,
@@ -115,6 +116,20 @@ def record() -> ProteinPreparationRecord:
         ),
         selected_state_id=None,
     )
+
+
+def test_residue_templates_compose_backbone_and_sidechain_roles():
+    assert residue_atom_features("HIS", "O", "HIE")[2] is True
+    assert residue_atom_features("HIS", "ND1", "HIE")[2] is True
+    assert residue_atom_features("HIS", "NE2", "HIE")[1] is True
+    assert residue_atom_features("HIS", "O", "HIP")[2] is True
+    assert residue_atom_features("HIS", "ND1", "HIP")[:2] == (1, True)
+    assert residue_atom_features("HIS", "NE2", "HIP")[1] is True
+    assert residue_atom_features("ASP", "O")[2] is True
+    assert residue_atom_features("ASP", "OD1")[0] == -1
+    assert residue_atom_features("ASP", "OD1")[2] is True
+    assert residue_atom_features("LYS", "N")[1] is True
+    assert residue_atom_features("LYS", "NZ")[:2] == (1, True)
 
 
 def test_complete_protein_preparation_record_is_valid():

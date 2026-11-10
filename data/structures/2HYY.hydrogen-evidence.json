@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "ligand_coordinate_record_path": "data/structures/2HYY.ligand-coordinates.json",
+  "ligand_coordinate_record_sha256": "eae85cb84fa3faa25d4ba8ead2853b153ac84fd1e1f8ea22716438f3cdd74b4c",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "chemical_preparation_record_path": "data/structures/2HYY.chemical-preparation.json",
+  "chemical_preparation_record_sha256": "321034ab7d4384d92a5701210e83273b347873bfe5ab6580b94383ec1c9f983b",
+  "protein_preparation_record_path": "data/structures/2HYY.protein-preparation.json",
+  "protein_preparation_record_sha256": "5950b4a2545796816a154629e964f82fecad7ec2abd9ef6f66311e4b6563218a",
+  "accession": "2HYY",
+  "protein_selection": {
+    "label_asym_id": "A",
+    "auth_asym_id": "A"
+  },
+  "ligand_selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "ligand_state_id": "reference-neutral",
+  "protein_state_id": "standard-templates",
+  "criteria": {
+    "max_distance_nm": 0.35,
+    "min_angle_degrees": 120.0
+  },
+  "ligand_hydrogens": [
+    {
+      "hydrogen_id": "N13:H1",
+      "parent_atom_id": "N13",
+      "parent_side": "ligand",
+      "parent_element": "N",
+      "position_angstrom": [
+        15.951261509227841,
+        11.830756763819377,
+        15.755494638564024
+      ],
+      "parent_position_angstrom": [
+        16.254,
+        12.125,
+        16.695
+      ],
+      "donor_hydrogen_distance_angstrom": 1.0299999999999985,
+      "state_id": "reference-neutral",
+      "generation_method": "RDKit AddHs(addCoords=True)",
+      "toolkit": "RDKit",
+      "toolkit_version": "2026.09.1",
+      "coordinate_source": "generated",
+      "parent_coordinate_source": "deposited",
+      "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+    },
+    {
+      "hydrogen_id": "N21:H1",
+      "parent_atom_id": "N21",
+      "parent_side": "ligand",
+      "parent_element": "N",
+      "position_angstrom": [
+        12.05327723632345,
+        14.809679317136698,
+        19.643712560563017
+      ],
+      "parent_position_angstrom": [
+        12.659,
+        14.735,
+        18.814
+      ],
+      "donor_hydrogen_distance_angstrom": 1.0300000000000007,
+      "state_id": "reference-neutral",
+      "generation_method": "RDKit AddHs(addCoords=True)",
+      "toolkit": "RDKit",
+      "toolkit_version": "2026.09.1",
+      "coordinate_source": "generated",
+      "parent_coordinate_source": "deposited",
+      "feature_source": "RDKit BaseFeatures.fdef; formal charges from validated reference graph"
+    }
+  ],
+  "protein_hydrogen_status": "not_run",
+  "bonds": [
+    {
+      "donor_atom_id": "N13",
+      "hydrogen_id": "N13:H1",
+      "acceptor_atom_id": "A:315:OG1",
+      "donor_side": "ligand",
+      "acceptor_side": "protein",
+      "donor_acceptor_distance_angstrom": 3.0137322376083784,
+      "donor_acceptor_distance_nm": 0.30137322376083786,
+      "donor_hydrogen_distance_angstrom": 1.0299999999999985,
+      "angle_degrees": 123.62809249943989,
+      "status": "supported",
+      "criteria": "D-A <= 3.50 A; D-H...A >= 120.0 degrees",
+      "provenance": "generated ligand hydrogens; protein acceptor template",
+      "limitations": "ligand hydrogens are generated, not experimentally observed"
+    },
+    {
+      "donor_atom_id": "N21",
+      "hydrogen_id": "N21:H1",
+      "acceptor_atom_id": "A:286:OE2",
+      "donor_side": "ligand",
+      "acceptor_side": "protein",
+      "donor_acceptor_distance_angstrom": 3.0892798513569457,
+      "donor_acceptor_distance_nm": 0.3089279851356946,
+      "donor_hydrogen_distance_angstrom": 1.0300000000000007,
+      "angle_degrees": 142.40329715319888,
+      "status": "supported",
+      "criteria": "D-A <= 3.50 A; D-H...A >= 120.0 degrees",
+      "provenance": "generated ligand hydrogens; protein acceptor template",
+      "limitations": "ligand hydrogens are generated, not experimentally observed"
+    },
+    {
+      "donor_atom_id": "N21",
+      "hydrogen_id": "N21:H1",
+      "acceptor_atom_id": "A:381:O",
+      "donor_side": "ligand",
+      "acceptor_side": "protein",
+      "donor_acceptor_distance_angstrom": 3.4772589779882677,
+      "donor_acceptor_distance_nm": 0.3477258977988268,
+      "donor_hydrogen_distance_angstrom": 1.0300000000000007,
+      "angle_degrees": 68.11525127688682,
+      "status": "not_supported",
+      "criteria": "D-A <= 3.50 A; D-H...A >= 120.0 degrees",
+      "provenance": "generated ligand hydrogens; protein acceptor template",
+      "limitations": "ligand hydrogens are generated, not experimentally observed"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "kept generated and deposited coordinates separate",
+      "actor": "hydrogen evidence preparation",
+      "rationale": "ligand hydrogens are generated; heavy-atom parent coordinates are deposited"
+    },
+    {
+      "decision": "validated donor-hydrogen connectivity before geometry",
+      "actor": "hydrogen evidence preparation",
+      "rationale": "D-H distances are checked before D-H...A angles"
+    },
+    {
+      "decision": "did not generate protein hydrogens",
+      "actor": "hydrogen evidence preparation",
+      "rationale": "protein-donor hydrogen bonds remain unknown"
+    },
+    {
+      "decision": "did not convert hydrogen-bond geometry into affinity",
+      "actor": "hydrogen evidence preparation",
+      "rationale": "a geometric hydrogen bond is not a binding free energy"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited heavy atoms",
+        "detail": "Hydrogen parents retain deposited coordinates.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "generated ligand hydrogens",
+        "detail": "2 hydrogens from the selected ligand state; positions are computationally generated.",
+        "actor": "hydrogen evidence preparation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity or free-energy estimate is produced.",
+        "actor": "hydrogen evidence preparation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "hydrogen-bond evidence",
+        "detail": "D-H...A geometry is a structural criterion, not an energy.",
+        "actor": "hydrogen evidence preparation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "hydrogen.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "experimental and preparation records are referenced",
+        "observed": "records present",
+        "expected": "manifest, coordinates, binding site, and preparation records",
+        "detail": "generated hydrogens are separate from deposited heavy atoms"
+      },
+      {
+        "check_id": "hydrogen.generated_not_experimental",
+        "category": "hydrogen_provenance",
+        "status": "pass",
+        "subject": "reference-neutral",
+        "criterion": "generated hydrogens have generated provenance",
+        "observed": "2 ligand hydrogens",
+        "expected": "generated hydrogens labelled as such",
+        "detail": "parent heavy atoms retain deposited provenance"
+      },
+      {
+        "check_id": "hydrogen.donor_connectivity",
+        "category": "hydrogen_provenance",
+        "status": "fail",
+        "subject": "reference-neutral",
+        "criterion": "donor-hydrogen distances are in a covalent range",
+        "observed": "1.030-1.030 A",
+        "expected": "0.05-0.15 A",
+        "detail": "connectivity is checked before angular geometry"
+      },
+      {
+        "check_id": "hydrogen.protein_hydrogens_available",
+        "category": "protein_hydrogens",
+        "status": "not_run",
+        "subject": "standard-templates",
+        "criterion": "protein donor hydrogens are available",
+        "observed": "not_run",
+        "expected": "generated or explicitly unavailable",
+        "detail": "protein-donor hydrogen bonds remain unavailable without hydrogens"
+      },
+      {
+        "check_id": "hydrogen.no_affinity",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "hydrogen evidence is not converted into affinity",
+        "observed": "no affinity or free-energy estimate is produced",
+        "expected": "geometric hydrogen-bond evidence only",
+        "detail": "generated hydrogen positions are not experimental observations"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "protein_hydrogens",
+      "status": "not_applicable",
+      "detail": "Protein hydrogens were not generated.",
+      "observed": "not_run",
+      "expected": "generated protein hydrogens for protein-donor H-bonds",
+      "resolution": "Protein-donor hydrogen bonds remain unknown."
+    }
+  ]
+}

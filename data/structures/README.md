@@ -39,6 +39,15 @@ and its provenance manifest.
 - `2HYY.combination-interactions.json` is the Batch 11 matrix of all 16
   ligand/protein state combinations on the same experimental contacts, with
   hypothesis-conditioned interaction classification and no ranking.
+- `2HYY.hydrogen-evidence.json` is the Batch 12A hydrogen record. It separates
+  generated ligand hydrogens from deposited heavy atoms, validates donor–hydrogen
+  connectivity, and reports D–H···A geometry. Protein hydrogens are `not_run`
+  because Batch 10 generated none, so protein-donor hydrogen bonds remain
+  unknown.
+- `2HYY.water-evidence.json` is the Batch 12B water record. It preserves
+  deposited water identity, coordinates, occupancy, and B-factors, leaves
+  orientation and donor/acceptor roles unassigned, and reports geometric bridge
+  plausibility without classifying a water-mediated interaction.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -57,4 +66,6 @@ uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemica
 uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
 uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
+uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
+uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 ```

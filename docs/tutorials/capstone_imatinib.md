@@ -72,6 +72,8 @@ uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemica
 uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
 uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
+uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
+uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -97,8 +99,12 @@ experimental contacts under each selected state and writes
 protein-pocket chemistry and writes
 `data/structures/2HYY.protein-preparation.json`. The twelfth crosses ligand and
 protein states and writes
-`data/structures/2HYY.combination-interactions.json`. None of the commands
-docks a ligand, predicts affinity, or estimates a free energy.
+`data/structures/2HYY.combination-interactions.json`. The thirteenth separates
+generated ligand hydrogens from deposited heavy atoms and writes
+`data/structures/2HYY.hydrogen-evidence.json`. The fourteenth preserves
+deposited waters and reports geometric bridge plausibility in
+`data/structures/2HYY.water-evidence.json`. None of the commands docks a
+ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -711,14 +717,83 @@ useful negative result: changing the chemical hypothesis changes the available
 chemistry, but it does not automatically change which geometrically supported
 interactions are classified.
 
-Hydrogen bonds remain unknown because no ligand or protein hydrogens are aligned
-to the experimental frame. Water-mediated interactions remain unknown because
-water roles are unassigned. Template ionic, hydrophobic, and aromatic
-classifications are explicitly hypothesis-conditioned.
+At Batch 11, hydrogen bonds remain unknown because that matrix does not yet
+consume hydrogen positions. Batch 12A adds generated ligand hydrogens, but
+protein-donor bonds remain unknown because no protein hydrogens were prepared.
+Water-mediated interactions remain unknown because water roles are unassigned.
+Template ionic, hydrophobic, and aromatic classifications are explicitly
+hypothesis-conditioned.
 
 The matrix does not rank the 16 combinations, estimate populations, or treat a
 larger interaction count as stronger binding. It is a set of alternative
 chemical descriptions of one experimental structure.
+
+### 4.14 Batch 12A: generated-hydrogen evidence
+
+Batch 12A adds hydrogen positions without pretending they were observed.
+
+```bash
+uv run python examples/drug_discovery/capstone_hydrogen_evidence.py
+```
+
+The record is written to `data/structures/2HYY.hydrogen-evidence.json`.
+
+For the `reference-neutral` ligand state, the two hydrogens already generated in
+Batch 7 are carried into a separate record. Their parent heavy atoms keep
+deposited coordinates, while every hydrogen is labelled `generated`. The record
+validates each donor–hydrogen distance before using it, then evaluates
+ligand-donor to protein-acceptor geometry with the default criteria:
+
+```text
+D–A distance ≤ 0.35 nm
+D–H···A angle ≥ 120°
+```
+
+For 2HYY this gives:
+
+| Evidence | Result |
+| --- | --- |
+| Generated ligand hydrogens | 2 |
+| Protein hydrogens | `not_run` (none were generated in Batch 10) |
+| Donor–acceptor candidates | 3 |
+| Supported geometry | 2 |
+| Not supported | 1 |
+
+Because protein hydrogens were not prepared, protein-donor hydrogen bonds
+remain unknown rather than absent. A supported geometry is a structural
+criterion conditioned on a generated hydrogen position; it is not an
+experimental hydrogen position, an energy, or an affinity estimate.
+
+### 4.15 Batch 12B: deposited-water evidence
+
+Batch 12B treats crystallographic waters as experimental observations, not as
+automatically assigned hydrogen-bond partners.
+
+```bash
+uv run --with gemmi python examples/drug_discovery/capstone_water_evidence.py
+```
+
+The record is written to `data/structures/2HYY.water-evidence.json`.
+
+The four waters near the ligand keep their deposited identities, coordinates,
+occupancies, and B-factors. Water orientation remains unknown, and donor and
+acceptor roles remain unassigned. A bridge is reported as
+`geometrically_plausible` only when the water lies within 3.5 Å of both a polar
+ligand atom and a polar protein contact atom:
+
+| Evidence | Result |
+| --- | --- |
+| Deposited waters | 4 |
+| Geometric bridge cutoff | 3.5 Å |
+| `geometrically_plausible` | 1 |
+| `not_supported` | 3 |
+| `unknown` | 0 |
+
+Every bridge has `chemical_status = "not_assigned"`. A geometrically plausible
+bridge is not a classified water-mediated interaction: the water's chemical
+roles, orientation, and the complementarity of its partners have not been
+established. The record therefore adds traceable geometric evidence without
+resolving the missing chemistry, and it computes no affinity.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
@@ -1023,6 +1098,8 @@ number:
 | ligand reconciliation | component ID, atom mapping, bond orders, formal charge, stereochemistry, modifications, missing atoms |
 | binding-site record | selection method, cutoff, residues, geometry, alternate-location policy |
 | interaction record | donor/acceptor assignments, distance/angle criteria, fingerprints, occupancy |
+| hydrogen record | generated-versus-deposited provenance, generation method and toolkit, donor–hydrogen validation, D–H···A geometry |
+| water record | deposited identity, coordinates, occupancy, B-factor, unassigned roles, bridge geometry versus chemical classification |
 | pose record | atom mapping, symmetry handling, RMSD, threshold, score provenance |
 | SAR record | measured activity type, descriptor changes, docking scores, separated hypothesis |
 | thermodynamics note | method, standard state, uncertainty, sampling limitations |
@@ -1038,6 +1115,9 @@ Acceptance criteria:
 - the molecular representation includes stereochemistry and protonation state;
 - interaction criteria and atom mappings are explicit;
 - a docking score is never labelled a binding free energy;
+- generated hydrogen positions are never presented as experimentally observed;
+- a geometrically plausible water bridge is never presented as a classified
+  water-mediated interaction;
 - a geometric contact is never presented as a thermodynamic contribution;
 - a failed or invalid benchmark case is reported, not hidden;
 - the capstone states what further experiments or calculations would establish.

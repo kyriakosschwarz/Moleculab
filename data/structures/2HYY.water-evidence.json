@@ -1,0 +1,279 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "chemical_preparation_record_path": "data/structures/2HYY.chemical-preparation.json",
+  "chemical_preparation_record_sha256": "321034ab7d4384d92a5701210e83273b347873bfe5ab6580b94383ec1c9f983b",
+  "protein_preparation_record_path": "data/structures/2HYY.protein-preparation.json",
+  "protein_preparation_record_sha256": "5950b4a2545796816a154629e964f82fecad7ec2abd9ef6f66311e4b6563218a",
+  "accession": "2HYY",
+  "protein_selection": {
+    "label_asym_id": "A",
+    "auth_asym_id": "A"
+  },
+  "ligand_selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "ligand_state_id": "reference-neutral",
+  "protein_state_id": "standard-templates",
+  "bridge_cutoff_angstrom": 3.5,
+  "waters": [
+    {
+      "water_id": "I:146:O",
+      "label_asym_id": "I",
+      "auth_asym_id": "A",
+      "label_seq_id": null,
+      "auth_seq_id": "146",
+      "atom_name": "O",
+      "position_angstrom": [
+        14.706,
+        15.366,
+        21.146
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 55.67,
+      "orientation_known": false,
+      "donor_role": null,
+      "acceptor_role": null,
+      "source": "deposited HETATM HOH record"
+    },
+    {
+      "water_id": "I:87:O",
+      "label_asym_id": "I",
+      "auth_asym_id": "A",
+      "label_seq_id": null,
+      "auth_seq_id": "87",
+      "atom_name": "O",
+      "position_angstrom": [
+        12.738,
+        23.506,
+        20.773
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 34.48,
+      "orientation_known": false,
+      "donor_role": null,
+      "acceptor_role": null,
+      "source": "deposited HETATM HOH record"
+    },
+    {
+      "water_id": "I:37:O",
+      "label_asym_id": "I",
+      "auth_asym_id": "A",
+      "label_seq_id": null,
+      "auth_seq_id": "37",
+      "atom_name": "O",
+      "position_angstrom": [
+        11.289,
+        19.161,
+        22.18
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 41.76,
+      "orientation_known": false,
+      "donor_role": null,
+      "acceptor_role": null,
+      "source": "deposited HETATM HOH record"
+    },
+    {
+      "water_id": "I:175:O",
+      "label_asym_id": "I",
+      "auth_asym_id": "A",
+      "label_seq_id": null,
+      "auth_seq_id": "175",
+      "atom_name": "O",
+      "position_angstrom": [
+        3.809,
+        24.634,
+        20.584
+      ],
+      "occupancy": 1.0,
+      "b_iso_or_equiv": 37.64,
+      "orientation_known": false,
+      "donor_role": null,
+      "acceptor_role": null,
+      "source": "deposited HETATM HOH record"
+    }
+  ],
+  "bridges": [
+    {
+      "water_id": "I:146:O",
+      "ligand_atom_id": "N21",
+      "protein_atom_id": "A:381:O",
+      "ligand_distance_angstrom": 3.166479748869397,
+      "protein_distance_angstrom": 2.6698790234765335,
+      "status": "geometrically_plausible",
+      "chemical_status": "not_assigned",
+      "criteria": "both water contacts <= 3.5 A",
+      "provenance": "experimental water coordinates; template polar features",
+      "limitations": "water orientation and chemical roles are unassigned"
+    },
+    {
+      "water_id": "I:87:O",
+      "ligand_atom_id": "N51",
+      "protein_atom_id": "A:381:OD2",
+      "ligand_distance_angstrom": 4.651629391944288,
+      "protein_distance_angstrom": 2.478032283889781,
+      "status": "not_supported",
+      "chemical_status": "not_assigned",
+      "criteria": "both water contacts <= 3.5 A",
+      "provenance": "experimental water coordinates; template polar features",
+      "limitations": "one side exceeds the bridge distance cutoff"
+    },
+    {
+      "water_id": "I:37:O",
+      "ligand_atom_id": "N48",
+      "protein_atom_id": "A:381:OD2",
+      "ligand_distance_angstrom": 4.6191441848030665,
+      "protein_distance_angstrom": 2.9244710632864854,
+      "status": "not_supported",
+      "chemical_status": "not_assigned",
+      "criteria": "both water contacts <= 3.5 A",
+      "provenance": "experimental water coordinates; template polar features",
+      "limitations": "one side exceeds the bridge distance cutoff"
+    },
+    {
+      "water_id": "I:175:O",
+      "ligand_atom_id": "N51",
+      "protein_atom_id": "A:360:O",
+      "ligand_distance_angstrom": 4.70985498715194,
+      "protein_distance_angstrom": 3.828532094680675,
+      "status": "not_supported",
+      "chemical_status": "not_assigned",
+      "criteria": "both water contacts <= 3.5 A",
+      "provenance": "experimental water coordinates; template polar features",
+      "limitations": "one side exceeds the bridge distance cutoff"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "preserved deposited water identity and coordinates",
+      "actor": "water evidence preparation",
+      "rationale": "water residue identifiers and coordinates are experimental observations"
+    },
+    {
+      "decision": "kept water orientation and roles unassigned",
+      "actor": "water evidence preparation",
+      "rationale": "proximity alone does not establish donor/acceptor roles"
+    },
+    {
+      "decision": "reported bridge geometry without chemical classification",
+      "actor": "water evidence preparation",
+      "rationale": "a geometrically plausible bridge is not a classified interaction"
+    },
+    {
+      "decision": "did not convert water evidence into affinity",
+      "actor": "water evidence preparation",
+      "rationale": "water displacement thermodynamics is not established"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "deposited water coordinates",
+        "detail": "4 waters preserved with occupancy and B-factors.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "geometric bridge plausibility",
+        "detail": "4 water bridge records under a 3.5 A cutoff.",
+        "actor": "water evidence preparation"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity or free-energy estimate is produced.",
+        "actor": "water evidence preparation"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "water roles",
+        "detail": "Water donor/acceptor roles remain hypotheses and are left unassigned.",
+        "actor": "water evidence preparation"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "water.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "experimental and preparation records are referenced",
+        "observed": "records present",
+        "expected": "manifest, binding site, ligand, and protein preparation",
+        "detail": "water coordinates remain experimental observations"
+      },
+      {
+        "check_id": "water.identity_and_coordinates",
+        "category": "water_observation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "every water has a stable residue identity and coordinates",
+        "observed": "4 waters",
+        "expected": "one identity per deposited water",
+        "detail": "waters are not merged or renumbered"
+      },
+      {
+        "check_id": "water.roles_unassigned",
+        "category": "water_chemistry",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "water orientation and roles remain unknown",
+        "observed": "unassigned",
+        "expected": "explicit assignment before chemical classification",
+        "detail": "a nearby water is not automatically a donor or acceptor"
+      },
+      {
+        "check_id": "water.bridge_geometry_only",
+        "category": "water_geometry",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "bridges are geometric evidence only",
+        "observed": "4 geometric bridge records",
+        "expected": "no chemical water-mediated classification",
+        "detail": "geometric plausibility is not a classified interaction"
+      },
+      {
+        "check_id": "water.no_affinity",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "water evidence is not converted into affinity",
+        "observed": "no affinity or free-energy estimate is produced",
+        "expected": "structural evidence only",
+        "detail": "water displacement thermodynamics is out of scope"
+      }
+    ]
+  },
+  "discrepancies": [
+    {
+      "category": "water_roles",
+      "status": "not_applicable",
+      "detail": "Water orientations and chemical roles were not assigned.",
+      "observed": "unassigned",
+      "expected": "explicit water geometry and role evidence",
+      "resolution": "Only geometric bridge plausibility is reported."
+    }
+  ]
+}

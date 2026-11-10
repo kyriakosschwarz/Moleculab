@@ -63,6 +63,8 @@ linked from the relevant tutorial or reference page.
 | [`capstone_state_interactions.py`](drug_discovery/capstone_state_interactions.py) | state-aware [interaction eligibility](../data/structures/2HYY.state-interactions.json); no ranking |
 | [`capstone_protein_preparation.py`](drug_discovery/capstone_protein_preparation.py) | protein-pocket [chemical preparation](../data/structures/2HYY.protein-preparation.json) with explicit templates |
 | [`capstone_combination_interactions.py`](drug_discovery/capstone_combination_interactions.py) | 8×2 ligand/protein [state interaction matrix](../data/structures/2HYY.combination-interactions.json) |
+| [`capstone_hydrogen_evidence.py`](drug_discovery/capstone_hydrogen_evidence.py) | generated-hydrogen provenance and D–H···A [geometry](../data/structures/2HYY.hydrogen-evidence.json) |
+| [`capstone_water_evidence.py`](drug_discovery/capstone_water_evidence.py) | deposited-water identity, occupancy, and geometric [bridge plausibility](../data/structures/2HYY.water-evidence.json) |
 
 ## Advanced
 

@@ -28,6 +28,7 @@ from moleculab import (
     ProteinHeteroRole,
     ProteinResidueState,
     build_protein_preparation_record,
+    residue_atom_features,
     load_binding_site,
     load_manifest,
     load_protein_preparation,
@@ -46,17 +47,6 @@ _AROMATIC_RINGS = {
     "TYR": ("CG", "CD1", "CD2", "CE1", "CE2", "CZ"),
     "TRP": ("CG", "CD1", "CD2", "NE1", "CE2", "CE3", "CZ2", "CZ3", "CH2"),
     "HIS": ("CG", "ND1", "CD2", "CE1", "NE2"),
-}
-_HYDROPHOBIC_CARBONS = {
-    "ALA": {"CB"},
-    "VAL": {"CB", "CG1", "CG2"},
-    "LEU": {"CB", "CG", "CD1", "CD2"},
-    "ILE": {"CB", "CG1", "CG2", "CD1"},
-    "MET": {"CB", "CG", "CE"},
-    "PHE": {"CB", "CG", "CD1", "CD2", "CE1", "CE2", "CZ"},
-    "TRP": {"CB", "CG", "CD1", "CD2", "CE2", "CE3", "CZ2", "CZ3", "CH2"},
-    "PRO": {"CB", "CG", "CD"},
-    "TYR": {"CB", "CG", "CD1", "CD2", "CE1", "CE2", "CZ"},
 }
 
 
@@ -139,71 +129,6 @@ def _pocket_atoms(block: gemmi.cif.Block, site, selection) -> list[list[str]]:
     return atoms
 
 
-def _features(residue_name: str, atom_name: str, his_state: str) -> tuple[int, bool, bool, bool]:
-    charge = 0
-    donor = atom_name == "N" and residue_name != "PRO"
-    acceptor = atom_name == "O"
-    if residue_name == "ARG":
-        if atom_name in {"NE", "NH1", "NH2"}:
-            donor = True
-        if atom_name == "CZ":
-            charge = 1
-    elif residue_name == "ASN":
-        if atom_name == "ND2":
-            donor = True
-        if atom_name == "OD1":
-            acceptor = True
-    elif residue_name == "ASP":
-        if atom_name in {"OD1", "OD2"}:
-            acceptor = True
-        if atom_name == "OD1":
-            charge = -1
-    elif residue_name == "CYS":
-        if atom_name == "SG":
-            donor = acceptor = True
-    elif residue_name == "GLN":
-        if atom_name == "NE2":
-            donor = True
-        if atom_name == "OE1":
-            acceptor = True
-    elif residue_name == "GLU":
-        if atom_name in {"OE1", "OE2"}:
-            acceptor = True
-        if atom_name == "OE1":
-            charge = -1
-    elif residue_name == "HIS":
-        if his_state == "HIP":
-            if atom_name in {"ND1", "NE2"}:
-                donor = True
-            if atom_name == "ND1":
-                charge = 1
-        else:
-            if atom_name == "NE2":
-                donor = True
-            if atom_name == "ND1":
-                acceptor = True
-    elif residue_name == "LYS":
-        if atom_name == "NZ":
-            donor = True
-            charge = 1
-    elif residue_name == "SER":
-        if atom_name == "OG":
-            donor = acceptor = True
-    elif residue_name == "THR":
-        if atom_name == "OG1":
-            donor = acceptor = True
-    elif residue_name == "TRP":
-        if atom_name == "NE1":
-            donor = True
-    elif residue_name == "TYR":
-        if atom_name == "OH":
-            donor = acceptor = True
-    if atom_name == "OXT":
-        acceptor = True
-        charge = -1
-    return charge, donor, acceptor, atom_name in _HYDROPHOBIC_CARBONS.get(residue_name, set())
-
-
 def _ring_geometry(atoms: list[list[str]], ring_names: tuple[str, ...]):
     positions = {
         values[7]: (float(values[9]), float(values[10]), float(values[11]))
@@ -269,7 +194,9 @@ def _state(site, atom_rows: list[list[str]], selection, state_id: str, his_state
     for values in atom_rows:
         residue_name = values[1]
         atom_name = values[7]
-        charge, donor, acceptor, hydrophobic = _features(residue_name, atom_name, his_state)
+        charge, donor, acceptor, hydrophobic = residue_atom_features(
+            residue_name, atom_name, his_state
+        )
         atom_id = f"{values[3]}:{values[5]}:{atom_name}"
         atoms.append(
             PreparedProteinAtom(
@@ -305,7 +232,8 @@ def _state(site, atom_rows: list[list[str]], selection, state_id: str, his_state
             == _residue_key(residue)
         ]
         total_charge = sum(
-            _features(values[1], values[7], his_state)[0] for values in residue_atoms
+            residue_atom_features(values[1], values[7], his_state)[0]
+            for values in residue_atoms
         )
         residue_states.append(
             ProteinResidueState(

@@ -31,6 +31,97 @@ from .structure_manifest import (
 )
 
 PROTEIN_PREPARATION_SCHEMA_VERSION = "1.1"
+
+_HYDROPHOBIC_CARBONS = {
+    "ALA": {"CB"},
+    "VAL": {"CB", "CG1", "CG2"},
+    "LEU": {"CB", "CG", "CD1", "CD2"},
+    "ILE": {"CB", "CG1", "CG2", "CD1"},
+    "MET": {"CB", "CG", "CE"},
+    "PHE": {"CB", "CG", "CD1", "CD2", "CE1", "CE2", "CZ"},
+    "TRP": {"CB", "CG", "CD1", "CD2", "CE2", "CE3", "CZ2", "CZ3", "CH2"},
+    "PRO": {"CB", "CG", "CD"},
+    "TYR": {"CB", "CG", "CD1", "CD2", "CE1", "CE2", "CZ"},
+}
+
+
+def residue_atom_features(
+    residue_name: str,
+    atom_name: str,
+    histidine_state: str = "HIE",
+) -> tuple[int, bool, bool, bool]:
+    """Return ``(formal_charge, is_donor, is_acceptor, is_hydrophobic)``.
+
+    Backbone and side-chain roles are composed, never overwritten.  The values
+    are explicit residue-template hypotheses, not experimental observations.
+    """
+
+    charge = 0
+    donor = atom_name == "N" and residue_name != "PRO"
+    acceptor = atom_name == "O"
+    if residue_name == "ARG":
+        if atom_name in {"NE", "NH1", "NH2"}:
+            donor = True
+        if atom_name == "CZ":
+            charge = 1
+    elif residue_name == "ASN":
+        if atom_name == "ND2":
+            donor = True
+        if atom_name == "OD1":
+            acceptor = True
+    elif residue_name == "ASP":
+        if atom_name in {"OD1", "OD2"}:
+            acceptor = True
+        if atom_name == "OD1":
+            charge = -1
+    elif residue_name == "CYS":
+        if atom_name == "SG":
+            donor = acceptor = True
+    elif residue_name == "GLN":
+        if atom_name == "NE2":
+            donor = True
+        if atom_name == "OE1":
+            acceptor = True
+    elif residue_name == "GLU":
+        if atom_name in {"OE1", "OE2"}:
+            acceptor = True
+        if atom_name == "OE1":
+            charge = -1
+    elif residue_name == "HIS":
+        if histidine_state == "HIP":
+            if atom_name in {"ND1", "NE2"}:
+                donor = True
+            if atom_name == "ND1":
+                charge = 1
+        else:
+            if atom_name == "NE2":
+                donor = True
+            if atom_name == "ND1":
+                acceptor = True
+    elif residue_name == "LYS":
+        if atom_name == "NZ":
+            donor = True
+            charge = 1
+    elif residue_name == "SER":
+        if atom_name == "OG":
+            donor = acceptor = True
+    elif residue_name == "THR":
+        if atom_name == "OG1":
+            donor = acceptor = True
+    elif residue_name == "TRP":
+        if atom_name == "NE1":
+            donor = True
+    elif residue_name == "TYR":
+        if atom_name == "OH":
+            donor = acceptor = True
+    if atom_name == "OXT":
+        acceptor = True
+        charge = -1
+    return charge, donor, acceptor, atom_name in _HYDROPHOBIC_CARBONS.get(
+        residue_name, set()
+    )
+
+
 COORDINATE_SOURCES = ("deposited", "generated")
 WATER_ROLES = ("unassigned", "donor", "acceptor", "both", "unknown")
 HETERO_ROLES = ("unknown", "ion", "cofactor", "ligand")
