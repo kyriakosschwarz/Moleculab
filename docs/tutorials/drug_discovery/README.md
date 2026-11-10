@@ -40,7 +40,7 @@ with geometry and representation before it introduces scoring.
 | [05 — Docking foundations](05_docking_fundamentals.md) | search, scoring, poses, and limitations | available |
 | [06 — Comparing binding modes](06_comparing_binding_modes.md) | pose clustering, geometry, interaction-pattern comparison | available |
 | [07 — Docking validation and benchmarking](07_docking_validation.md) | redocking, cross-docking, pose recovery, score interpretation | available |
-| 08 — Trajectory contact analysis | contact timelines and persistence | planned |
+| [08 — Trajectory contact analysis](08_trajectory_contact_analysis.md) | contact matrices, occupancy, and lifetimes | available |
 | 09 — Lead optimisation and structure–activity relationships | multi-ligand comparison and SAR | planned |
 
 Start with [module 01](01_protein_structure.md). It establishes the structural
@@ -175,8 +175,16 @@ visible in the report.
 
 ### 2.9 Module 08: trajectory contact analysis
 
-This planned module will use the fingerprint and occupancy infrastructure to
-analyse contact timelines and persistence over a trajectory.
+[Module 08](08_trajectory_contact_analysis.md) analyses geometric contacts over
+coordinate frames:
+
+- atom-level and residue-level contact matrices;
+- sampled-frame contact occupancy;
+- contact run lengths and lifetimes;
+- the difference between a continuous contact and many short contacts;
+- missing-frame handling and sampling limitations.
+
+It is parser-independent and does not load trajectory files.
 
 ### 2.10 Module 09: lead optimisation and structure–activity relationships
 

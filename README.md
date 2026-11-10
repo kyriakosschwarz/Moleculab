@@ -89,6 +89,7 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   residue-level interaction patterns.
 - Reproducible docking benchmark records with valid-case success rates and
   explicit invalid-case reporting.
+- Trajectory contact matrices, sampled-frame occupancy, and contact lifetimes.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

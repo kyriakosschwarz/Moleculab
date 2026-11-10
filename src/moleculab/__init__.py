@@ -17,8 +17,8 @@ The source is organised by architecture layer:
 ``protocols``
     thermostats and pressure coupling;
 ``analysis``
-    trajectory measurements, binding-site geometry, interaction records,
-    fingerprints, and external pose analysis;
+    trajectory measurements, contact persistence, binding-site geometry,
+    interaction records, fingerprints, and external pose analysis;
 ``applications``
     docking, solvent, water, free energy, acid-base, and QM/MM.
 
@@ -99,6 +99,15 @@ from .analysis.trajectory import (
     RDFResult,
     mean_squared_displacement,
     radial_distribution_function,
+)
+from .analysis.trajectory_contacts import (
+    ContactLifetimeResult,
+    ContactOccupancyResult,
+    ResidueContactMatrix,
+    aggregate_contacts_by_residue,
+    calculate_contact_lifetimes,
+    calculate_contact_matrix,
+    calculate_contact_occupancy,
 )
 from .applications.acid_base import (
     boltzmann_populations,
@@ -227,6 +236,8 @@ from .protocols.thermostats import (
 __all__ = [
     "ARGON",
     "COARSE_GRAINED_WATER",
+    "ContactLifetimeResult",
+    "ContactOccupancyResult",
     "ELECTRON_MASS_DA",
     "SPCE_WATER",
     "Angle",
@@ -283,6 +294,7 @@ __all__ = [
     "RDFResult",
     "RattleResult",
     "ReactionFieldElectrostatics",
+    "ResidueContactMatrix",
     "RigidLigand",
     "ShakeResult",
     "SideChain",
@@ -300,6 +312,7 @@ __all__ = [
     "Trajectory",
     "WaterModel",
     "acceleration",
+    "aggregate_contacts_by_residue",
     "assert_constraints_satisfied",
     "atom_id_mapping",
     "available_backends",
@@ -312,6 +325,9 @@ __all__ = [
     "build_neighbour_list",
     "build_solvent_box",
     "build_water_box",
+    "calculate_contact_lifetimes",
+    "calculate_contact_matrix",
+    "calculate_contact_occupancy",
     "calculate_occupancy",
     "cluster_poses",
     "combine_lorentz_berthelot",

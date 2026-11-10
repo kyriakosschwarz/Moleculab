@@ -41,6 +41,7 @@ uv run pytest tests/test_fingerprints.py -q
 uv run pytest tests/test_docking_poses.py -q
 uv run pytest tests/test_pose_comparison.py -q
 uv run pytest tests/test_docking_benchmark.py -q
+uv run pytest tests/test_trajectory_contacts.py -q
 ```
 
 Covered:
@@ -60,6 +61,7 @@ Covered:
   thresholds;
 - pose clustering, centroid comparison, and interaction-pattern Jaccard;
 - benchmark statuses, valid-case denominators, and protocol retention;
+- contact matrices, occupancy, missing frames, and lifetime run lengths;
 - parameter validation and shape checks.
 
 The force-gradient audit uses only the energy function in its numerical
@@ -132,6 +134,7 @@ uv run python examples/interaction_fingerprints.py
 uv run python examples/docking_pose_analysis.py
 uv run python examples/compare_binding_modes.py
 uv run python examples/docking_benchmark.py
+uv run python examples/trajectory_contacts.py
 
 uv run python docs/tutorials/physics/generate_visuals.py
 uv run python docs/generate_architecture_visuals.py
@@ -200,12 +203,14 @@ point when a single operator typo could corrupt every downstream result.
 | geometry and interaction similarity are reported separately | `tests/test_pose_comparison.py` |
 | benchmark success rate excludes invalid cases from the denominator | `tests/test_docking_benchmark.py` |
 | benchmark statuses agree with pose-recovery results | `tests/test_docking_benchmark.py` |
+| contact occupancy excludes missing frames and reports them | `tests/test_trajectory_contacts.py` |
+| equal occupancy can yield different contact lifetimes | `tests/test_trajectory_contacts.py` |
 
 ## Current status
 
 ```text
 $ uv run pytest -q
-492 passed, 1 skipped
+506 passed, 1 skipped
 ```
 
 The skip is the PyTorch-unavailable test; PyTorch is installed in this

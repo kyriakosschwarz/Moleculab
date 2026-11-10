@@ -88,9 +88,10 @@ Modules [01](drug_discovery/01_protein_structure.md),
 [03](drug_discovery/03_protein_ligand_interactions.md),
 [04](drug_discovery/04_interaction_fingerprints.md),
 [05](drug_discovery/05_docking_fundamentals.md),
-[06](drug_discovery/06_comparing_binding_modes.md), and
-[07](drug_discovery/07_docking_validation.md) are available; the later
-modules are planned. The docking foundations are already available as Track A
+[06](drug_discovery/06_comparing_binding_modes.md),
+[07](drug_discovery/07_docking_validation.md), and
+[08](drug_discovery/08_trajectory_contact_analysis.md) are available; the
+later modules are planned. The docking foundations are already available as Track A
 sections 15 and 24. [Units and conventions](drug_discovery/units.md) collects
 the common structural and affinity units.
 
