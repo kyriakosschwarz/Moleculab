@@ -60,6 +60,7 @@ linked from the relevant tutorial or reference page.
 | [`capstone_evidence_fingerprint.py`](drug_discovery/capstone_evidence_fingerprint.py) | three-state [evidence fingerprint](../data/structures/2HYY.evidence-fingerprint.json); unknown is not zero |
 | [`capstone_chemical_preparation.py`](drug_discovery/capstone_chemical_preparation.py) | separate [chemical-state preparation](../data/structures/2HYY.chemical-preparation.json) with explicit assumptions |
 | [`capstone_chemical_states.py`](drug_discovery/capstone_chemical_states.py) | protonation and tautomer [state enumeration](../data/structures/2HYY.chemical-states.json); no population estimate |
+| [`capstone_state_interactions.py`](drug_discovery/capstone_state_interactions.py) | state-aware [interaction eligibility](../data/structures/2HYY.state-interactions.json); no ranking |
 
 ## Advanced
 

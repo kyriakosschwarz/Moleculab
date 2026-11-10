@@ -128,6 +128,7 @@ class ChemicalState:
     enumeration_parameters: tuple[str, ...]
     assumptions: tuple[str, ...]
     atoms: tuple[PreparedAtom, ...]
+    reference_atom_mapping: tuple[tuple[str, int], ...]
     rings: tuple[PreparedRing, ...]
     water_roles: tuple[PreparedWaterRole, ...]
 
@@ -148,6 +149,10 @@ class ChemicalState:
             "enumeration_parameters": list(self.enumeration_parameters),
             "assumptions": list(self.assumptions),
             "atoms": [atom.to_dict() for atom in self.atoms],
+            "reference_atom_mapping": [
+                {"atom_id": atom_id, "reference_index": reference_index}
+                for atom_id, reference_index in self.reference_atom_mapping
+            ],
             "rings": [ring.to_dict() for ring in self.rings],
             "water_roles": [role.to_dict() for role in self.water_roles],
         }
@@ -176,6 +181,17 @@ class ChemicalState:
             atoms=tuple(
                 PreparedAtom.from_dict(_as_mapping(item, "prepared atom"))
                 for item in _as_list(data.get("atoms"), "atoms")
+            ),
+            reference_atom_mapping=tuple(
+                (
+                    _required_string(_as_mapping(item, "reference atom mapping"), "atom_id"),
+                    _required_int(
+                        _as_mapping(item, "reference atom mapping"), "reference_index"
+                    ),
+                )
+                for item in _as_list(
+                    data.get("reference_atom_mapping"), "reference_atom_mapping"
+                )
             ),
             rings=tuple(
                 PreparedRing.from_dict(_as_mapping(item, "prepared ring"))
@@ -682,6 +698,22 @@ def validate_chemical_state_enumeration(record: ChemicalStateEnumerationRecord) 
             errors.append(f"states[{index}] atom_ids must be unique.")
         if not state.atoms:
             errors.append(f"states[{index}].atoms must not be empty.")
+        mapping_names = [atom_id for atom_id, _ in state.reference_atom_mapping]
+        mapping_indices = [
+            reference_index for _, reference_index in state.reference_atom_mapping
+        ]
+        if set(mapping_names) != set(atom_ids):
+            errors.append(
+                f"states[{index}].reference_atom_mapping must cover every state atom."
+            )
+        if len(set(mapping_indices)) != len(mapping_indices):
+            errors.append(
+                f"states[{index}].reference_atom_mapping indices must be unique."
+            )
+        if any(reference_index < 0 for reference_index in mapping_indices):
+            errors.append(
+                f"states[{index}].reference_atom_mapping indices cannot be negative."
+            )
         for ring_index, ring in enumerate(state.rings):
             if not set(ring.atom_ids).issubset(set(atom_ids)):
                 errors.append(

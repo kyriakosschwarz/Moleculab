@@ -181,6 +181,9 @@ def _prepared_state_from_molecule(
         enumeration_parameters=enumeration_parameters,
         assumptions=assumptions,
         atoms=tuple(atoms),
+        reference_atom_mapping=tuple(
+            (f"atom_{index}", index) for index in range(heavy_count)
+        ),
         rings=tuple(rings),
         water_roles=(),
     )
@@ -190,6 +193,7 @@ def _reference_state(preparation, identity) -> ChemicalState:
     prepared = next(
         state for state in preparation.states if state.state_id == "reference-neutral"
     )
+    reference_indices = dict(identity.mapping.pairs)
     return ChemicalState(
         state_id="reference-neutral",
         kind="reference",
@@ -206,6 +210,10 @@ def _reference_state(preparation, identity) -> ChemicalState:
         enumeration_parameters=(),
         assumptions=prepared.assumptions,
         atoms=prepared.atoms,
+        reference_atom_mapping=tuple(
+            (atom.atom_id, reference_indices[atom.atom_id])
+            for atom in prepared.atoms
+        ),
         rings=prepared.rings,
         water_roles=prepared.water_roles,
     )

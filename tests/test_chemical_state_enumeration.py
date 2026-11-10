@@ -76,6 +76,7 @@ def state(
         enumeration_parameters=("test",),
         assumptions=("test assumption",),
         atoms=(atom(),),
+        reference_atom_mapping=(("C1", 0),),
         rings=(),
         water_roles=(),
     )

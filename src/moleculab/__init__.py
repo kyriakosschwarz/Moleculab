@@ -25,8 +25,8 @@ The source is organised by architecture layer:
     experimental-structure provenance, ligand identity reconciliation,
     ligand coordinate reconciliation, binding-site reconciliation,
     evidence-gated interaction interpretation, three-state evidence
-    fingerprints, separate chemical-state preparation, and protonation/tautomer
-    enumeration.
+    fingerprints, separate chemical-state preparation, protonation/tautomer
+    enumeration, and state-aware interaction assessment.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -175,6 +175,20 @@ from .applications.chemical_state_enumeration import (
     load_chemical_state_enumeration,
     validate_chemical_state_enumeration,
     write_chemical_state_enumeration,
+)
+from .applications.state_interactions import (
+    STATE_INTERACTION_SCHEMA_VERSION,
+    FeatureSummary,
+    StateInteractionAssessment,
+    StateInteractionComparison,
+    StateInteractionCriteria,
+    StateInteractionRecord,
+    assess_state_features,
+    build_state_interaction_record,
+    compare_state_assessment,
+    load_state_interactions,
+    validate_state_interactions,
+    write_state_interactions,
 )
 from .applications.docking import (
     DockingPose,
@@ -443,6 +457,7 @@ __all__ = [
     "EvidenceOccupancy",
     "EvidenceSchema",
     "FEPResult",
+    "FeatureSummary",
     "FingerprintSchema",
     "FlexibleDockingPose",
     "GeometryConvention",
@@ -520,9 +535,14 @@ __all__ = [
     "RingPlanarity",
     "ShakeResult",
     "SideChain",
+    "STATE_INTERACTION_SCHEMA_VERSION",
     "SoftCoreLennardJones",
     "SoftCoreLennardJonesPair",
     "StateEnumerationDiscrepancy",
+    "StateInteractionAssessment",
+    "StateInteractionComparison",
+    "StateInteractionCriteria",
+    "StateInteractionRecord",
     "SolvatedLigandAlchemy",
     "SolventModel",
     "StructureManifest",
@@ -543,6 +563,7 @@ __all__ = [
     "acceleration",
     "aggregate_contacts_by_residue",
     "aggregate_evidence",
+    "assess_state_features",
     "assert_constraints_satisfied",
     "atom_id_mapping",
     "available_backends",
@@ -557,6 +578,7 @@ __all__ = [
     "build_fingerprint",
     "build_interaction_evidence",
     "build_neighbour_list",
+    "build_state_interaction_record",
     "build_solvent_box",
     "build_water_box",
     "calculate_contact_lifetimes",
@@ -568,6 +590,7 @@ __all__ = [
     "compare_binding_modes",
     "compare_evidence_fingerprints",
     "compare_interaction_patterns",
+    "compare_state_assessment",
     "compare_matched_pair",
     "compare_pose_geometry",
     "constraint_error",
@@ -602,6 +625,7 @@ __all__ = [
     "load_ligand_coordinates",
     "load_ligand_identity",
     "load_manifest",
+    "load_state_interactions",
     "logd_from_logp",
     "make_receptor_conformer",
     "max_force_magnitude",
@@ -658,6 +682,7 @@ __all__ = [
     "validate_ligand_coordinates",
     "validate_ligand_identity",
     "validate_manifest",
+    "validate_state_interactions",
     "velocity_verlet_step",
     "velocity_verlet_step_system",
     "virial_pressure",
@@ -669,4 +694,5 @@ __all__ = [
     "write_ligand_coordinates",
     "write_ligand_identity",
     "write_manifest",
+    "write_state_interactions",
 ]

@@ -1,0 +1,2294 @@
+{
+  "schema_version": "1.0",
+  "source_manifest_path": "data/structures/2HYY.manifest.json",
+  "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
+  "ligand_identity_record_path": "data/structures/2HYY.ligand-identity.json",
+  "ligand_identity_record_sha256": "c4915527ec7957a1b600e6393573d93ad82612d4be1dd4cbff86979efea53b70",
+  "ligand_coordinate_record_path": "data/structures/2HYY.ligand-coordinates.json",
+  "ligand_coordinate_record_sha256": "eae85cb84fa3faa25d4ba8ead2853b153ac84fd1e1f8ea22716438f3cdd74b4c",
+  "binding_site_record_path": "data/structures/2HYY.binding-site.json",
+  "binding_site_record_sha256": "b94c4cd99f2c1e3b1bbc2f0bef1c0594c38deda68cb3161a80753d6fb4036a4a",
+  "chemical_state_record_path": "data/structures/2HYY.chemical-states.json",
+  "chemical_state_record_sha256": "c34dfcdcd5070f136d9374340c56971aa349eccf8400d9e6749d3f7407ba727a",
+  "accession": "2HYY",
+  "selection": {
+    "component_id": "STI",
+    "label_asym_id": "E",
+    "auth_asym_id": "A",
+    "instance": "E",
+    "auth_seq_id": "600",
+    "label_seq_id": null,
+    "insertion_code": null,
+    "alternate_location": null,
+    "available_instances": [
+      "E",
+      "F",
+      "G",
+      "H"
+    ]
+  },
+  "selected_state_ids": [
+    "reference-neutral",
+    "tautomer-1",
+    "tautomer-2",
+    "tautomer-3",
+    "tautomer-4",
+    "tautomer-5",
+    "protonation-1",
+    "protonation-2"
+  ],
+  "reference_state_id": "reference-neutral",
+  "criteria": {
+    "contact_cutoff_angstrom": 4.0,
+    "geometry_source": "Batch 3 ligand coordinates and Batch 4 binding-site contacts",
+    "feature_source": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+    "classification_limitations": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9"
+  },
+  "assessments": [
+    {
+      "state_id": "reference-neutral",
+      "kind": "reference",
+      "label": "Batch 7 reference-neutral prepared state",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 4,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 4,
+        "acceptor_count": 4,
+        "hydrophobic_count": 14,
+        "aromatic_atom_count": 21,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "4 donors, 4 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Batch 7 reference-neutral prepared state",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Batch 7 reference-neutral prepared state",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Batch 7 reference-neutral prepared state",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Batch 7 reference-neutral prepared state",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "tautomer-1",
+      "kind": "tautomer",
+      "label": "RDKit tautomer 1",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 5,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 4,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "5 donors, 3 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 1",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 1",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 1",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 1",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "tautomer-2",
+      "kind": "tautomer",
+      "label": "RDKit tautomer 2",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 5,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 4,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "5 donors, 3 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 2",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 2",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 2",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 2",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "tautomer-3",
+      "kind": "tautomer",
+      "label": "RDKit tautomer 3",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 4,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 3,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "4 donors, 4 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 3",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 3",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 3",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 3",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "tautomer-4",
+      "kind": "tautomer",
+      "label": "RDKit tautomer 4",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 5,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 4,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "5 donors, 3 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 4",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 4",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 4",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 4",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "tautomer-5",
+      "kind": "tautomer",
+      "label": "RDKit tautomer 5",
+      "formula": "C29H31N7O",
+      "proton_count": 31,
+      "formal_charge": 0,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 5,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 4,
+        "acceptor_count": 3,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "absent"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "5 donors, 3 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 5",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "absent",
+            "assessable": true,
+            "evidence": "formal charge 0; 0 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 5",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 5",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "RDKit tautomer 5",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "protonation-1",
+      "kind": "protonation",
+      "label": "Hypothetical protonation at reference atom 13",
+      "formula": "C29H32N7O+",
+      "proton_count": 32,
+      "formal_charge": 1,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 4,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 1,
+        "formal_charge": 1
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 3,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 0,
+        "formal_charge": 0
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "present"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "4 donors, 4 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 13",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "formal charge 1; 1 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 13",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 13",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 13",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    },
+    {
+      "state_id": "protonation-2",
+      "kind": "protonation",
+      "label": "Hypothetical protonation at reference atom 16",
+      "formula": "C29H32N7O+",
+      "proton_count": 32,
+      "formal_charge": 1,
+      "ligand_feature_summary": {
+        "atom_count": 37,
+        "donor_count": 4,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 1,
+        "formal_charge": 1
+      },
+      "contact_feature_summary": {
+        "atom_count": 34,
+        "donor_count": 3,
+        "acceptor_count": 4,
+        "hydrophobic_count": 17,
+        "aromatic_atom_count": 24,
+        "charged_atom_count": 1,
+        "formal_charge": 1
+      },
+      "contact_atom_count": 34,
+      "fingerprint": {
+        "schema": {
+          "schema_id": "state-interaction-v1",
+          "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+          "criteria_json": "{\"classification_limitations\":\"protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9\",\"contact_cutoff_angstrom\":4.0,\"feature_source\":\"state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration\",\"geometry_source\":\"Batch 3 ligand coordinates and Batch 4 binding-site contacts\"}",
+          "features": [
+            {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            }
+          ]
+        },
+        "states": [
+          "present",
+          "unknown",
+          "present",
+          "present",
+          "present",
+          "present"
+        ],
+        "assessable": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "applicable": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "observations": [
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_donor_acceptor",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "4 donors, 4 acceptors",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 16",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_ionic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "formal charge 1; 1 charged atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 16",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_hydrophobic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "17 hydrophobic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 16",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "ligand_aromatic",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "24 aromatic atoms",
+            "criteria": "state-specific donor/acceptor/hydrophobic/aromatic features from the Batch 8 enumeration",
+            "provenance": "Hypothetical protonation at reference atom 16",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "geometric_contact",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "present",
+            "assessable": true,
+            "evidence": "34 contact ligand atoms",
+            "criteria": "Batch 3 ligand coordinates and Batch 4 binding-site contacts; contact cutoff 4.0 A",
+            "provenance": "Batch 4 binding-site record",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          },
+          {
+            "feature": {
+              "scope": "category",
+              "interaction_type": "interaction_classification",
+              "protein_residue": "",
+              "protein_atom": "",
+              "ligand_atom": "",
+              "ligand_residue": "",
+              "water_id": ""
+            },
+            "state": "unknown",
+            "assessable": false,
+            "evidence": "protein chemical features and aligned hydrogen positions are not supplied",
+            "criteria": "protein donor/acceptor, formal-charge, hydrophobic, ring, and aligned hydrogen evidence is not supplied in Batch 9",
+            "provenance": "state-aware interaction assessment",
+            "applicable": true,
+            "distance_nm": null,
+            "angle_degrees": null
+          }
+        ]
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "tautomer-1",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 1,
+        "first_only_present": 0,
+        "second_only_present": 0,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [],
+      "ligand_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 5
+        },
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "tautomer-2",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 1,
+        "first_only_present": 0,
+        "second_only_present": 0,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [],
+      "ligand_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 5
+        },
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "tautomer-3",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 1,
+        "first_only_present": 0,
+        "second_only_present": 0,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [],
+      "ligand_feature_differences": [],
+      "contact_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "tautomer-4",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 1,
+        "first_only_present": 0,
+        "second_only_present": 0,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [],
+      "ligand_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 5
+        },
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "tautomer-5",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 1,
+        "first_only_present": 0,
+        "second_only_present": 0,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [],
+      "ligand_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 5
+        },
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "acceptor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "protonation-1",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 0,
+        "first_only_present": 0,
+        "second_only_present": 1,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [
+        "ligand_ionic"
+      ],
+      "ligand_feature_differences": [
+        {
+          "feature": "charged_atom_count",
+          "reference_count": 0,
+          "state_count": 1
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        }
+      ]
+    },
+    {
+      "reference_state_id": "reference-neutral",
+      "state_id": "protonation-2",
+      "comparison": {
+        "schema_id": "state-interaction-v1",
+        "criteria_fingerprint": "919d6be20b0273591cce6d1ae639d46613bb36e49674ec46a44b11a92a1bb43e",
+        "both_present": 4,
+        "both_absent": 0,
+        "first_only_present": 0,
+        "second_only_present": 1,
+        "unknown_involved": 1,
+        "not_applicable_involved": 0,
+        "assessable_both": 5
+      },
+      "differing_categories": [
+        "ligand_ionic"
+      ],
+      "ligand_feature_differences": [
+        {
+          "feature": "charged_atom_count",
+          "reference_count": 0,
+          "state_count": 1
+        }
+      ],
+      "contact_feature_differences": [
+        {
+          "feature": "donor_count",
+          "reference_count": 4,
+          "state_count": 3
+        },
+        {
+          "feature": "hydrophobic_count",
+          "reference_count": 14,
+          "state_count": 17
+        },
+        {
+          "feature": "aromatic_atom_count",
+          "reference_count": 21,
+          "state_count": 24
+        },
+        {
+          "feature": "charged_atom_count",
+          "reference_count": 0,
+          "state_count": 1
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "interpreted the same experimental contacts under each selected state",
+      "actor": "state-aware interaction assessment",
+      "rationale": "chemical state changes feature eligibility without changing the deposited geometry"
+    },
+    {
+      "decision": "kept geometric contact and interaction classification separate",
+      "actor": "state-aware interaction assessment",
+      "rationale": "a contact is not a classified interaction"
+    },
+    {
+      "decision": "did not rank states or estimate populations",
+      "actor": "state-aware interaction assessment",
+      "rationale": "no pH-dependent thermodynamic model was supplied"
+    }
+  ],
+  "provenance": {
+    "records": [
+      {
+        "label": "experimental",
+        "subject": "binding-site contacts",
+        "detail": "272 state-mapped contact atoms across 8 states.",
+        "actor": "RCSB PDB deposition"
+      },
+      {
+        "label": "calculated",
+        "subject": "state-specific features",
+        "detail": "8 selected states; features from the enumerated chemical-state record.",
+        "actor": "state-aware interaction assessment"
+      },
+      {
+        "label": "predicted",
+        "subject": "none",
+        "detail": "No affinity, population, or free-energy estimate is produced.",
+        "actor": "state-aware interaction assessment"
+      },
+      {
+        "label": "hypothesised",
+        "subject": "state alternatives",
+        "detail": "Differences between states are hypotheses for later evaluation.",
+        "actor": "state-aware interaction assessment"
+      }
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "check_id": "state_interactions.source_records",
+        "category": "provenance",
+        "status": "pass",
+        "subject": "2HYY",
+        "criterion": "experimental and state records are referenced",
+        "observed": "four input records present",
+        "expected": "manifest, identity, binding site, and state enumeration",
+        "detail": "states are interpreted against the same experimental geometry"
+      },
+      {
+        "check_id": "state_interactions.explicit_selection",
+        "category": "state",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "chemical states are selected explicitly for this analysis",
+        "observed": "reference-neutral, tautomer-1, tautomer-2, tautomer-3, tautomer-4, tautomer-5, protonation-1, protonation-2",
+        "expected": "one or more named states",
+        "detail": "no default state is chosen by the record builder"
+      },
+      {
+        "check_id": "state_interactions.atom_mapping_complete",
+        "category": "mapping",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "contact ligand atoms map into each selected state",
+        "observed": "reference-neutral: 34, tautomer-1: 34, tautomer-2: 34, tautomer-3: 34, tautomer-4: 34, tautomer-5: 34, protonation-1: 34, protonation-2: 34",
+        "expected": "all contact atoms mapped",
+        "detail": "state atoms are mapped through the Batch 2 reference indices"
+      },
+      {
+        "check_id": "state_interactions.geometry_separate",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "geometric contacts are recorded separately from classification",
+        "observed": "geometric contact category is independent",
+        "expected": "geometry and chemical interpretation remain distinct",
+        "detail": "a contact is not promoted to a classified interaction"
+      },
+      {
+        "check_id": "state_interactions.no_ranking",
+        "category": "interpretation",
+        "status": "pass",
+        "subject": "STI",
+        "criterion": "states are compared without ranking or population weighting",
+        "observed": "no score, ranking, or affinity is produced",
+        "expected": "traceable state differences only",
+        "detail": "enumeration and geometry do not establish thermodynamic dominance"
+      }
+    ]
+  },
+  "discrepancies": []
+}

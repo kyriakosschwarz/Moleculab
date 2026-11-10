@@ -74,7 +74,7 @@ src/moleculab/
 │                     structure provenance, ligand identity, ligand coordinates,
 │                     binding-site reconciliation, interaction interpretation,
 │                     evidence fingerprints, chemical-state preparation,
-│                     protonation/tautomer enumeration
+│                     protonation/tautomer enumeration, state-aware interactions
 ├── backend.py        optional CPU/ROCm/PyTorch dispatch
 └── __init__.py       stable public API
 ```
@@ -152,6 +152,7 @@ The actual imports are visible in the source. The important rules are:
 | `applications.interaction_evidence` | `analysis.evidence`, `applications.interaction_interpretation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.chemical_preparation` | `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `applications.chemical_state_enumeration` | `applications.chemical_preparation`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
+| `applications.state_interactions` | `analysis.evidence`, `applications.chemical_state_enumeration`, `applications.ligand_coordinates`, `applications.structure_manifest` | coordinate parsers, chemistry toolkits, `System`, integrators |
 | `backend` | optional PyTorch | any model |
 
 Two deliberate design choices are visible here:
@@ -180,9 +181,10 @@ classical potential and is deliberately isolated.
 
 `structure_manifest`, `ligand_identity`, `ligand_coordinates`,
 `binding_site_reconciliation`, `interaction_interpretation`,
-`interaction_evidence`, `chemical_preparation`, and
-`chemical_state_enumeration` are **record layers**. They accept plain,
-already-parsed data and do not import `gemmi`, RDKit, or any coordinate reader.
+`interaction_evidence`, `chemical_preparation`,
+`chemical_state_enumeration`, and `state_interactions` are **record layers**.
+They accept plain, already-parsed data and do not import `gemmi`, RDKit, or any
+coordinate reader.
 The capstone adapters in `examples/drug_discovery/` own those optional
 dependencies and pass explicit records, graphs, candidate mappings, coordinate
 records, and protein/water records into the library. This keeps the core
@@ -598,8 +600,11 @@ with explicit protonation, tautomer, hydrogen, charge, feature, water-role,
 toolkit, and assumption provenance; it never modifies the earlier records.
 `applications/chemical_state_enumeration.py` holds protonation and tautomer
 alternatives with state-specific graphs, proton counts, charges, and features;
-it records pKa provenance where supplied and never estimates populations. The
-capstone consumes these records rather than hard-coding a residue lookup. The records are JSON-serialisable and validated
+it records pKa provenance where supplied and never estimates populations.
+`applications/state_interactions.py` maps state atoms back to deposited ligand
+atoms and assesses the same experimental contacts under each explicitly selected
+state; it compares feature evidence without ranking states or claiming affinity.
+The capstone consumes these records rather than hard-coding a residue lookup. The records are JSON-serialisable and validated
 independently of the scientific success of the analysis.
 
 **Trade-off.** The record schema is larger than a single result number, and
@@ -732,6 +737,7 @@ mmCIF file (adapter: gemmi)
     → fingerprint occupancy and comparison
     → ChemicalPreparationRecord (separate states and assumptions)
     → ChemicalStateEnumerationRecord (protonation/tautomer alternatives)
+    → StateInteractionRecord (same contacts, selected states)
     → later population or feature-aware interaction pass
 ```
 
@@ -759,6 +765,9 @@ creates separate prepared states with explicit assumptions instead of mutating
 the deposited coordinates or prior records. `chemical_state_enumeration` keeps
 protonation and tautomer alternatives separate from population estimation; the
 record may contain several alternatives and no selected state.
+`state_interactions` applies each explicitly selected state to the same
+experimental contacts, preserving state-specific eligibility while leaving
+interaction classification unknown where protein chemistry is missing.
 
 The reference records live in [`data/structures/`](../../data/structures/README.md):
 the manifest, identity record, and coordinate record are committed, while the
@@ -801,7 +810,7 @@ forking the codebase.
 | --- | --- | --- | --- |
 | A — molecular physics | foundation → models → composition → algorithms/protocols → analysis | `Particle`, potentials, `System`, integrators, thermostats, `Box`, FEP/TI/MBAR | supplies the physical model and the limits of energy calculations |
 | B — chemistry | foundation and analysis, with chemistry adapters outside the core | `analysis.adme`, `analysis.electrostatics`, `applications.acid_base`; RDKit examples | establishes molecular identity, protonation, stereochemistry, polarity, hydrogen bonding, and ADME context |
-| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration | turns structural observations into auditable records without claiming affinity |
+| C — drug discovery | analysis and applications | binding sites, interactions, fingerprints, docking, pose comparison, SAR, trajectory contacts, structure manifests, ligand identity, ligand coordinates, binding-site reconciliation, interaction interpretation, evidence fingerprints, chemical-state preparation, protonation/tautomer enumeration, state-aware interactions | turns structural observations into auditable records without claiming affinity |
 
 The capstone is the integration point:
 
@@ -816,6 +825,7 @@ experimental structure
     → fingerprint occupancy and comparison
     → separate chemical-state preparation (assumptions explicit)
     → protonation/tautomer enumeration (no population estimate)
+    → state-aware interaction assessment (same contacts, selected states)
     → explicit limitations; no affinity or free-energy claim
 ```
 
@@ -933,6 +943,8 @@ separate chemical-state preparation (multiple states preserved)
         ↓
 protonation/tautomer alternatives (no population model)
         ↓
+state-aware interaction assessment (same contacts, selected states)
+        ↓
 later decision: System preparation and force-field parameters
 ```
 
@@ -962,6 +974,8 @@ Every stage is already represented by a module:
   experimental records.
 - `chemical_state_enumeration` records protonation and tautomer alternatives
   without selecting one or estimating populations.
+- `state_interactions` applies explicitly selected states to the same
+  experimental contacts without ranking them.
 - `docking` and `flexible_docking` score receptor-ligand poses.
 - `fep`, `ti`, `mbar`, and the alchemy modules estimate free-energy differences.
 - `qm_mm` is a separate path for electronic effects.
@@ -1108,6 +1122,7 @@ These are the rules that keep the layers honest.
 | evidence fingerprints keep unknown distinct from absent, use assessable denominators, and reject incompatible schemas | `tests/test_evidence_fingerprint.py` |
 | prepared states preserve generated-vs-deposited provenance, assumptions, and unselected alternatives | `tests/test_chemical_preparation.py` |
 | protonation/tautomer enumeration keeps alternatives unselected and does not estimate populations | `tests/test_chemical_state_enumeration.py` |
+| state-aware assessment maps state atoms to contacts, preserves feature differences, and does not rank states | `tests/test_state_interactions.py` |
 | units and constants are coherent | `tests/test_units.py` |
 
 If a change violates one of these, the architecture is no longer doing its job.
@@ -1138,11 +1153,12 @@ For a new contributor, the source is best read in this order:
     `applications/interaction_interpretation.py`,
     `applications/interaction_evidence.py`, `analysis/evidence.py`,
     `applications/chemical_preparation.py`,
-    `applications/chemical_state_enumeration.py` — provenance, explicit
-    selection, atom mapping, chemical-identity discrepancies, occupancy,
-    alternate locations, coordinate geometry, pocket selection, contacts,
-    evidence-gated interaction classification, three-state fingerprints,
-    separate prepared chemical states, and protonation/tautomer alternatives.
+    `applications/chemical_state_enumeration.py`,
+    `applications/state_interactions.py` — provenance, explicit selection, atom
+    mapping, chemical-identity discrepancies, occupancy, alternate locations,
+    coordinate geometry, pocket selection, contacts, evidence-gated interaction
+    classification, three-state fingerprints, separate prepared chemical states,
+    protonation/tautomer alternatives, and state-aware contact assessment.
 12. `applications/solvent.py`, `applications/water.py` — environment builders.
 13. `applications/fep.py`, `applications/ti.py`, `applications/mbar.py`, `applications/lj_alchemy.py`, `applications/mc_alchemy.py`,
     `applications/solvated_alchemy.py` — free energy.
@@ -1166,9 +1182,9 @@ The tutorials follow the same order, which is not a coincidence.
 - The tutorials are a layer-by-layer tour of the same structure.
 - Experimental provenance, ligand identity, coordinate geometry, binding-site
   context, evidence-gated interaction interpretation, three-state evidence
-  fingerprints, separate chemical-state preparation, and protonation/tautomer
-  enumeration are first-class records, separate from the physics and from any
-  affinity claim.
+  fingerprints, separate chemical-state preparation, protonation/tautomer
+  enumeration, and state-aware contact assessment are first-class records,
+  separate from the physics and from any affinity claim.
 - The composition path from particle to force field to solvent to docking to
   free energy is already present, with explicit limitations.
 - The design is a good basis for drug discovery because new physics and new

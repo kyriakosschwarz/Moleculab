@@ -308,6 +308,9 @@ class EvidenceFingerprint:
     def assessable_for(self, feature: EvidenceFeature) -> bool:
         return self.assessable[self.index(feature)]
 
+    def applicable_for(self, feature: EvidenceFeature) -> bool:
+        return self.applicable[self.index(feature)]
+
     @property
     def present_count(self) -> int:
         return sum(state == "present" for state in self.states)

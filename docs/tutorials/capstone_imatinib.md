@@ -69,6 +69,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
+uv run python examples/drug_discovery/capstone_state_interactions.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -88,7 +89,9 @@ interaction-evidence fingerprint and writes
 chemical states and writes
 `data/structures/2HYY.chemical-preparation.json`. The ninth enumerates
 protonation and tautomer alternatives and writes
-`data/structures/2HYY.chemical-states.json`. None of the commands docks a
+`data/structures/2HYY.chemical-states.json`. The tenth interprets the same
+experimental contacts under each selected state and writes
+`data/structures/2HYY.state-interactions.json`. None of the commands docks a
 ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
@@ -585,6 +588,46 @@ batch.
 
 The experimental records and the Batch 7 preparation states are unchanged.
 
+### 4.11 Batch 9: state-aware interaction assessment
+
+Batch 9 interprets the same experimental binding site under every explicitly
+selected chemical state.
+
+```bash
+uv run python examples/drug_discovery/capstone_state_interactions.py
+```
+
+The record is written to `data/structures/2HYY.state-interactions.json`.
+
+Each of the eight states is mapped back to the deposited ligand atoms through
+the identified reference indices. The same 34 contact ligand atoms are used for
+every state; only the chemical-state features change.
+
+For 2HYY:
+
+| Observation | Reference state | Tautomers | Protonation states |
+| --- | --- | --- | --- |
+| Ligand donor/acceptor features | present | some counts differ | some counts differ |
+| Ligand ionic feature | absent | absent | present |
+| Ligand hydrophobic feature | present | counts differ | counts differ |
+| Ligand aromatic feature | present | counts differ | counts differ |
+| Geometric contact | present | present | present |
+| Interaction classification | unknown | unknown | unknown |
+
+The last row is essential. The states change which ligand chemistry is
+available, but the protein donor/acceptor, charge, hydrophobic, ring, and aligned
+hydrogen evidence is still not supplied. Chemical eligibility therefore does not
+become a demonstrated interaction.
+
+Tautomer comparisons show feature-count changes even where the category-level
+fingerprint is unchanged. Protonation states differ in the `ligand_ionic`
+category and in charged-atom counts. The record preserves these differences
+without ranking the states or estimating populations.
+
+No state is selected as dominant, and no affinity is computed. The same
+experimental geometry is simply interpreted under different explicitly chosen
+chemical hypotheses.
+
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
 detection, pose analysis, and benchmarking. State clearly that the synthetic
@@ -636,6 +679,7 @@ uv run --with gemmi python examples/drug_discovery/capstone_interactions.py
 uv run python examples/drug_discovery/capstone_evidence_fingerprint.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_preparation.py
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
+uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -660,6 +704,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | evidence-aware fingerprint | `capstone_evidence_fingerprint.py` | calculated, with unknown states preserved |
 | chemical-state preparation | `capstone_chemical_preparation.py` | prepared: calculated assumptions kept separate |
 | protonation and tautomer enumeration | `capstone_chemical_states.py` | enumerated alternatives; no population estimate |
+| state-aware interaction assessment | `capstone_state_interactions.py` | calculated, state-specific eligibility only |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |
