@@ -94,6 +94,9 @@ Moleculab now implements a small but coherent molecular-mechanics engine:
   descriptor, docking, and hypothesis fields.
 - A conceptual bridge from structural observations to binding thermodynamics,
   including ensemble populations and the limits of contact occupancy.
+- Stereochemistry and molecular-recognition tutorial coverage: R/S, E/Z,
+  enantiomers, diastereomers, meso compounds, and conformational versus
+  configurational isomerism.
 - CPU-default NumPy execution with an optional lazy PyTorch backend for the
   Ewald reciprocal energy/force path.
 - Tests that check physical relationships, not just that code runs.

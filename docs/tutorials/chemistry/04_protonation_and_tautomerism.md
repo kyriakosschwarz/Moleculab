@@ -561,4 +561,4 @@ Acceptance criteria for this module:
   engine.
 
 **Previous:** [03 — Molecular properties](03_molecular_properties.md).  
-**Next:** [Track C — structure-based drug discovery](../drug_discovery/README.md).
+**Next:** [05 — Stereochemistry and molecular recognition](05_stereochemistry.md).

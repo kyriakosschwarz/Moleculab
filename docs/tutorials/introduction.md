@@ -176,6 +176,7 @@ it in?** Start with [Track B](chemistry/README.md) after Track A section 4b or
 | 02 Molecular representation | graphs, SMILES, aromaticity, conformers |
 | 03 Molecular properties | descriptors, fingerprints, similarity |
 | 04 Protonation and tautomerism | pKa, pH populations, microstates, tautomers |
+| 05 Stereochemistry and molecular recognition | R/S, E/Z, enantiomers, diastereomers, meso compounds |
 
 Track B supplies the chemical identity and state that the force field cannot
 infer. It uses RDKit as an optional external toolkit for chemical perception;
