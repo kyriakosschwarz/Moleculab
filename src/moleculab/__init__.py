@@ -26,8 +26,8 @@ The source is organised by architecture layer:
     ligand coordinate reconciliation, binding-site reconciliation,
     evidence-gated interaction interpretation, three-state evidence
     fingerprints, separate chemical-state preparation, protonation/tautomer
-    enumeration, state-aware interaction assessment, and protein-pocket
-    preparation.
+    enumeration, state-aware interaction assessment, protein-pocket
+    preparation, and ligand/protein state-pair interaction matrices.
 
 The public names below are re-exported so tutorials and users can write
 ``from moleculab import ...`` without depending on the internal layout.
@@ -165,6 +165,16 @@ from .applications.chemical_preparation import (
     load_chemical_preparation,
     validate_chemical_preparation,
     write_chemical_preparation,
+)
+from .applications.combination_interactions import (
+    COMBINATION_SCHEMA_VERSION,
+    CombinationAssessment,
+    CombinationInteractionRecord,
+    assess_combination,
+    build_combination_record,
+    load_combination_record,
+    validate_combination_record,
+    write_combination_record,
 )
 from .applications.chemical_state_enumeration import (
     CHEMICAL_STATE_SCHEMA_VERSION,
@@ -447,6 +457,9 @@ __all__ = [
     "ChemicalPreparationRecord",
     "ChemicalState",
     "ChemicalStateEnumerationRecord",
+    "CombinationAssessment",
+    "CombinationInteractionRecord",
+    "COMBINATION_SCHEMA_VERSION",
     "CloseContact",
     "CoordinateAtom",
     "CoordinateDiscrepancy",
@@ -586,6 +599,7 @@ __all__ = [
     "acceleration",
     "aggregate_contacts_by_residue",
     "aggregate_evidence",
+    "assess_combination",
     "assess_state_features",
     "assert_constraints_satisfied",
     "atom_id_mapping",
@@ -597,6 +611,7 @@ __all__ = [
     "boltzmann_populations",
     "build_chemical_preparation_record",
     "build_chemical_state_enumeration_record",
+    "build_combination_record",
     "build_evidence_fingerprint",
     "build_fingerprint",
     "build_interaction_evidence",
@@ -644,6 +659,7 @@ __all__ = [
     "load_binding_site",
     "load_chemical_preparation",
     "load_chemical_state_enumeration",
+    "load_combination_record",
     "load_interaction_evidence",
     "load_interactions",
     "load_ligand_coordinates",
@@ -702,6 +718,7 @@ __all__ = [
     "validate_binding_site",
     "validate_chemical_preparation",
     "validate_chemical_state_enumeration",
+    "validate_combination_record",
     "validate_interaction_evidence",
     "validate_interactions",
     "validate_ligand_coordinates",
@@ -715,6 +732,7 @@ __all__ = [
     "write_binding_site",
     "write_chemical_preparation",
     "write_chemical_state_enumeration",
+    "write_combination_record",
     "write_interaction_evidence",
     "write_interactions",
     "write_ligand_coordinates",

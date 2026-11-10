@@ -30,7 +30,7 @@ from .structure_manifest import (
     ValidationRecord,
 )
 
-PROTEIN_PREPARATION_SCHEMA_VERSION = "1.0"
+PROTEIN_PREPARATION_SCHEMA_VERSION = "1.1"
 COORDINATE_SOURCES = ("deposited", "generated")
 WATER_ROLES = ("unassigned", "donor", "acceptor", "both", "unknown")
 HETERO_ROLES = ("unknown", "ion", "cofactor", "ligand")
@@ -111,6 +111,7 @@ class PreparedProteinAtom:
     auth_seq_id: str
     insertion_code: str | None
     alternate_location: str | None
+    position_angstrom: tuple[float, float, float]
     formal_charge: int | None
     is_donor: bool | None
     is_acceptor: bool | None
@@ -134,6 +135,7 @@ class PreparedProteinAtom:
             "auth_seq_id": self.auth_seq_id,
             "insertion_code": self.insertion_code,
             "alternate_location": self.alternate_location,
+            "position_angstrom": list(self.position_angstrom),
             "formal_charge": self.formal_charge,
             "is_donor": self.is_donor,
             "is_acceptor": self.is_acceptor,
@@ -162,6 +164,7 @@ class PreparedProteinAtom:
             auth_seq_id=_required_string(data, "auth_seq_id"),
             insertion_code=_optional_string(data, "insertion_code"),
             alternate_location=_optional_string(data, "alternate_location"),
+            position_angstrom=_vector3(data, "position_angstrom"),
             formal_charge=_optional_int(data, "formal_charge"),
             is_donor=_optional_bool(data, "is_donor"),
             is_acceptor=_optional_bool(data, "is_acceptor"),
@@ -732,6 +735,12 @@ def validate_protein_preparation(record: ProteinPreparationRecord) -> list[str]:
             if atom.coordinate_source not in COORDINATE_SOURCES:
                 errors.append(
                     f"states[{state_index}].atoms[{atom_index}].coordinate_source is invalid."
+                )
+            if len(atom.position_angstrom) != 3 or not all(
+                math.isfinite(value) for value in atom.position_angstrom
+            ):
+                errors.append(
+                    f"states[{state_index}].atoms[{atom_index}].position_angstrom must be a finite three-vector."
                 )
             if atom.hydrogen_count < 0:
                 errors.append(

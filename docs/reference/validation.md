@@ -53,6 +53,7 @@ uv run pytest tests/test_chemical_preparation.py -q
 uv run pytest tests/test_chemical_state_enumeration.py -q
 uv run pytest tests/test_state_interactions.py -q
 uv run pytest tests/test_protein_preparation.py -q
+uv run pytest tests/test_combination_interactions.py -q
 uv run pytest tests/test_electrostatics.py -q
 uv run pytest tests/test_adme.py -q
 ```
@@ -220,6 +221,7 @@ point when a single operator typo could corrupt every downstream result.
 | protonation/tautomer enumeration, pKa provenance, and no-population assumptions are tested | `tests/test_chemical_state_enumeration.py` |
 | state-aware contact interpretation preserves state differences without ranking or affinity inference | `tests/test_state_interactions.py` |
 | protein-pocket preparation preserves templates, multiple states, and unassigned water/hetero roles | `tests/test_protein_preparation.py` |
+| ligand/protein state matrix completeness and no-ranking interaction classification are tested | `tests/test_combination_interactions.py` |
 | acid-base fractions match closed-form Henderson-Hasselbalch values | `tests/test_acid_base.py` |
 | protonation microstates sum to one and match site marginals | `tests/test_acid_base.py` |
 | Boltzmann ratios match known free-energy differences | `tests/test_acid_base.py` |

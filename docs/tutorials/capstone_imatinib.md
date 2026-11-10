@@ -71,6 +71,7 @@ uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemica
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
+uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
 ```
 
 The first calculates the imatinib chemical record and prints a provenance
@@ -94,8 +95,10 @@ protonation and tautomer alternatives and writes
 experimental contacts under each selected state and writes
 `data/structures/2HYY.state-interactions.json`. The eleventh prepares explicit
 protein-pocket chemistry and writes
-`data/structures/2HYY.protein-preparation.json`. None of the commands docks a
-ligand, predicts affinity, or estimates a free energy.
+`data/structures/2HYY.protein-preparation.json`. The twelfth crosses ligand and
+protein states and writes
+`data/structures/2HYY.combination-interactions.json`. None of the commands
+docks a ligand, predicts affinity, or estimates a free energy.
 
 ## 1. Why imatinib?
 
@@ -646,8 +649,8 @@ record, under two explicit residue-template states:
 
 | State | Atoms | Residues | Rings | Donors | Acceptors | Hydrophobic | Charged atoms |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `standard-templates` | 186 | 23 | 4 | 25 | 25 | 61 | 4 |
-| `histidine-protonated` | 186 | 23 | 4 | 26 | 25 | 61 | 5 |
+| `standard-templates` | 186 | 23 | 4 | 30 | 30 | 61 | 4 |
+| `histidine-protonated` | 186 | 23 | 4 | 31 | 29 | 61 | 5 |
 
 `selected_state_id` is `null`. The two states differ in the histidine 361
 protonation hypothesis; no state is chosen as correct.
@@ -668,6 +671,54 @@ No protein hydrogens were generated, so angular hydrogen-bond geometry is still
 unavailable. No pH-dependent population model was supplied, and no affinity is
 computed. The original experimental and earlier preparation records are
 unchanged.
+
+### 4.13 Batch 11: evidence-complete interaction matrix
+
+Batch 11 crosses every ligand state with every protein state against the same
+experimental contacts.
+
+```bash
+uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
+```
+
+The record is written to
+`data/structures/2HYY.combination-interactions.json`.
+
+The matrix contains:
+
+```text
+8 ligand states × 2 protein states = 16 combinations
+```
+
+Each combination is a separate evidence result. The same 34 contact ligand atoms
+and the same protein contact atoms are used everywhere; only the chemical-state
+features change.
+
+For 2HYY, every combination currently classifies:
+
+| Category | Result |
+| --- | --- |
+| Hydrophobic | 18 classified atom pairs |
+| Aromatic | 1 classified ring pair |
+| Ionic | absent at the contact set |
+| Hydrogen bond | unknown |
+| Water-mediated | unknown |
+| Metal coordination | not applicable |
+
+The categories are stable across the 16 combinations at this contact set, while
+the feature inventories differ between ligand and protein states. This is a
+useful negative result: changing the chemical hypothesis changes the available
+chemistry, but it does not automatically change which geometrically supported
+interactions are classified.
+
+Hydrogen bonds remain unknown because no ligand or protein hydrogens are aligned
+to the experimental frame. Water-mediated interactions remain unknown because
+water roles are unassigned. Template ionic, hydrophobic, and aromatic
+classifications are explicitly hypothesis-conditioned.
+
+The matrix does not rank the 16 combinations, estimate populations, or treat a
+larger interaction count as stronger binding. It is a set of alternative
+chemical descriptions of one experimental structure.
 
 If network access is unavailable, the capstone can still be completed with the
 synthetic examples for structure inspection, binding-site geometry, interaction
@@ -722,6 +773,7 @@ uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemica
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
+uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
 uv run --with rdkit python examples/chemistry/molecular_properties.py
 uv run python examples/chemistry/protonation.py
 uv run --with gemmi python examples/drug_discovery/protein_structure.py
@@ -748,6 +800,7 @@ uv run python examples/drug_discovery/structural_observations_thermodynamics.py
 | protonation and tautomer enumeration | `capstone_chemical_states.py` | enumerated alternatives; no population estimate |
 | state-aware interaction assessment | `capstone_state_interactions.py` | calculated, state-specific eligibility only |
 | protein-pocket chemical preparation | `capstone_protein_preparation.py` | prepared: template hypotheses kept separate |
+| evidence-complete interaction matrix | `capstone_combination_interactions.py` | calculated, hypothesis-conditioned |
 | descriptors and similarity | `molecular_properties.py` | calculated |
 | protonation populations | `protonation.py` | calculated from pKa inputs |
 | structure inspection | `protein_structure.py` | experimental or synthetic, depending on input |

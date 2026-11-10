@@ -36,6 +36,9 @@ and its provenance manifest.
   holds explicit residue-template states with localized formal charges,
   donor/acceptor/hydrophobic/aromatic features, unassigned water/hetero roles,
   and no generated protein hydrogens.
+- `2HYY.combination-interactions.json` is the Batch 11 matrix of all 16
+  ligand/protein state combinations on the same experimental contacts, with
+  hypothesis-conditioned interaction classification and no ranking.
 - Do not edit a downloaded file in place. If the checksum no longer matches the
   manifest, the workflow stops instead of silently replacing the provenance
   record.
@@ -53,4 +56,5 @@ uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemica
 uv run --with rdkit --with gemmi python examples/drug_discovery/capstone_chemical_states.py
 uv run python examples/drug_discovery/capstone_state_interactions.py
 uv run --with gemmi python examples/drug_discovery/capstone_protein_preparation.py
+uv run --with gemmi python examples/drug_discovery/capstone_combination_interactions.py
 ```

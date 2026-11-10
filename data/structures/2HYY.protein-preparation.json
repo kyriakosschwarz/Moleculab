@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source_manifest_path": "data/structures/2HYY.manifest.json",
   "source_manifest_sha256": "d4da8ca0ab2513b3b08272517df428839363fd7f8b3ce8cac3e10d2f67ebb83f",
   "binding_site_record_path": "data/structures/2HYY.binding-site.json",
@@ -43,6 +43,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            25.252,
+            8.608,
+            19.863
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -65,6 +70,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            25.411,
+            9.365,
+            18.618
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -87,6 +97,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            26.217,
+            10.637,
+            18.809
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -109,6 +124,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            26.135,
+            11.286,
+            19.866
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -131,6 +151,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.055,
+            9.763,
+            18.043
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -153,6 +178,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.24,
+            8.692,
+            17.348
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -175,6 +205,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.873,
+            9.215,
+            17.198
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -197,6 +232,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.833,
+            8.296,
+            15.998
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -219,8 +259,13 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.531,
+            14.825,
+            21.567
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -241,6 +286,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.085,
+            14.845,
+            21.617
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -263,6 +313,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.552,
+            14.362,
+            22.963
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -285,9 +340,14 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.353,
+            14.146,
+            23.118
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -307,6 +367,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.492,
+            14.042,
+            20.472
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -329,6 +394,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.92,
+            14.495,
+            19.114
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -353,6 +423,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.817,
+            13.724,
+            18.368
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -377,6 +452,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.432,
+            15.684,
+            18.553
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -401,6 +481,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.215,
+            14.118,
+            17.108
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -425,6 +510,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.849,
+            16.098,
+            17.286
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -449,6 +539,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.727,
+            15.31,
+            16.576
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -473,6 +568,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.138,
+            15.654,
+            15.314
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": true,
@@ -495,6 +595,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.24,
+            10.031,
+            23.76
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -517,6 +622,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.672,
+            9.544,
+            22.493
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -539,6 +649,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.628,
+            8.505,
+            21.919
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -561,6 +676,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.833,
+            8.761,
+            21.834
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -583,6 +703,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.398,
+            10.704,
+            21.467
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -605,6 +730,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.966,
+            10.181,
+            20.11
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -627,6 +757,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.367,
+            11.656,
+            22.003
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -649,6 +784,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.774,
+            6.107,
+            15.887
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -671,6 +811,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.252,
+            6.875,
+            17.017
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -693,6 +838,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.278,
+            6.695,
+            18.166
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -715,6 +865,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.055,
+            6.718,
+            17.984
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -737,6 +892,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.427,
+            8.356,
+            16.648
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -759,6 +919,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.813,
+            6.508,
+            19.358
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -781,6 +946,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.96,
+            6.261,
+            20.5
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -803,6 +973,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.285,
+            7.24,
+            21.606
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -825,6 +1000,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.353,
+            7.17,
+            22.221
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -847,6 +1027,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.096,
+            4.789,
+            21.032
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -869,6 +1054,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.114,
+            4.542,
+            22.176
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -891,6 +1081,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.93,
+            3.753,
+            19.895
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -913,8 +1108,13 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.361,
+            8.149,
+            21.868
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -935,6 +1135,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.52,
+            9.043,
+            22.99
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -957,6 +1162,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.064,
+            8.362,
+            24.295
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -979,6 +1189,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.908,
+            7.986,
+            24.441
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1001,6 +1216,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.797,
+            10.372,
+            22.745
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1023,6 +1243,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.202,
+            11.48,
+            23.715
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1045,6 +1270,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.36,
+            12.719,
+            23.545
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1067,6 +1297,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.812,
+            13.774,
+            24.522
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1089,6 +1324,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.875,
+            14.916,
+            24.64
+          ],
           "formal_charge": 1,
           "is_donor": true,
           "is_acceptor": false,
@@ -1111,6 +1351,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.891,
+            15.218,
+            24.902
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1133,6 +1378,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.662,
+            15.161,
+            23.68
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1155,6 +1405,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.209,
+            14.055,
+            22.747
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1177,9 +1432,14 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.875,
+            14.333,
+            21.593
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -1199,6 +1459,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.156,
+            15.09,
+            23.981
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1221,6 +1486,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.954,
+            15.124,
+            22.702
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1243,6 +1513,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.441,
+            15.015,
+            22.886
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1265,6 +1540,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.933,
+            14.979,
+            24.035
+          ],
           "formal_charge": -1,
           "is_donor": false,
           "is_acceptor": true,
@@ -1287,6 +1567,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.114,
+            15.014,
+            21.842
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1309,6 +1594,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.766,
+            14.796,
+            21.332
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1331,6 +1621,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.887,
+            15.822,
+            20.266
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1353,6 +1648,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.324,
+            15.177,
+            18.96
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1375,6 +1675,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.764,
+            15.424,
+            17.908
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1397,6 +1702,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.9,
+            16.928,
+            20.663
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1419,6 +1729,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.272,
+            17.811,
+            19.486
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1441,6 +1756,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.315,
+            17.759,
+            21.737
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1463,6 +1783,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.352,
+            14.348,
+            19.062
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1485,6 +1810,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.922,
+            13.695,
+            17.907
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1507,6 +1837,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.898,
+            12.829,
+            17.202
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1529,6 +1864,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.841,
+            12.83,
+            15.964
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1551,6 +1891,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.184,
+            12.926,
+            18.302
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1573,6 +1918,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.428,
+            13.747,
+            18.103
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1595,6 +1945,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.944,
+            12.949,
+            18.625
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1617,6 +1972,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.782,
+            13.413,
+            20.304
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1639,6 +1999,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            2.736,
+            14.807,
+            14.524
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1661,6 +2026,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.374,
+            15.486,
+            13.395
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1683,6 +2053,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.089,
+            14.521,
+            12.472
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1705,6 +2080,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.756,
+            13.598,
+            12.934
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1727,6 +2107,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.29,
+            16.734,
+            13.829
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1749,6 +2134,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.654,
+            16.332,
+            14.389
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1771,6 +2161,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.58,
+            17.622,
+            14.848
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1793,6 +2188,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.203,
+            17.365,
+            15.425
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1815,6 +2215,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.996,
+            15.227,
+            11.256
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1837,6 +2242,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.495,
+            13.932,
+            11.679
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1859,6 +2269,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.295,
+            12.985,
+            12.095
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1881,6 +2296,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.313,
+            13.401,
+            12.772
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -1903,6 +2323,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.664,
+            14.044,
+            12.68
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1925,6 +2350,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.165,
+            14.244,
+            14.057
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1947,6 +2377,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.534,
+            12.825,
+            12.627
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -1969,6 +2404,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.491,
+            7.086,
+            23.085
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -1991,6 +2431,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.801,
+            7.594,
+            21.884
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2013,6 +2458,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.705,
+            7.285,
+            20.707
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2035,6 +2485,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.924,
+            7.488,
+            20.783
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -2057,6 +2512,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.52,
+            9.11,
+            21.913
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2079,6 +2539,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.459,
+            9.463,
+            22.94
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2101,6 +2566,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.085,
+            9.599,
+            20.54
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2123,6 +2593,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.312,
+            10.938,
+            23.169
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2145,8 +2620,13 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.5,
+            7.406,
+            16.518
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -2167,6 +2647,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.296,
+            7.966,
+            15.179
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2189,6 +2674,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.201,
+            7.353,
+            14.131
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2211,9 +2701,14 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.1,
+            6.595,
+            14.453
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -2233,6 +2728,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.498,
+            9.509,
+            15.116
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2255,6 +2755,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.889,
+            9.816,
+            15.321
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": true,
@@ -2277,6 +2782,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.57,
+            10.243,
+            16.121
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2299,6 +2809,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.295,
+            7.449,
+            11.399
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -2321,6 +2836,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.655,
+            7.862,
+            11.634
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2343,6 +2863,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.062,
+            8.474,
+            10.325
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2365,6 +2890,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.836,
+            7.869,
+            9.259
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -2387,6 +2917,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.551,
+            6.67,
+            11.999
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2409,6 +2944,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.036,
+            6.909,
+            11.749
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2433,6 +2973,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.864,
+            7.388,
+            12.762
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2457,6 +3002,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.6,
+            6.65,
+            10.494
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2481,6 +3031,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.219,
+            7.62,
+            12.523
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2505,6 +3060,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.948,
+            6.871,
+            10.259
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2529,6 +3089,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.754,
+            7.359,
+            11.279
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2553,6 +3118,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.652,
+            9.668,
+            10.399
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -2575,6 +3145,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.028,
+            10.404,
+            9.18
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2597,6 +3172,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.52,
+            10.344,
+            8.9
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2619,6 +3199,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.317,
+            10.826,
+            9.705
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -2641,6 +3226,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.45,
+            11.818,
+            9.212
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2663,6 +3253,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.912,
+            11.763,
+            9.312
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2685,6 +3280,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.241,
+            12.123,
+            7.721
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2707,6 +3307,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.827,
+            10.502,
+            7.029
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2729,6 +3334,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.175,
+            13.288,
+            9.414
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -2751,6 +3361,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.159,
+            13.94,
+            10.732
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2773,6 +3388,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.592,
+            15.331,
+            10.711
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2795,6 +3415,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.796,
+            15.678,
+            9.833
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -2817,6 +3442,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.96,
+            25.432,
+            17.474
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -2839,6 +3469,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.036,
+            26.413,
+            17.593
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2861,6 +3496,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.23,
+            25.553,
+            17.865
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2883,6 +3523,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.209,
+            24.791,
+            18.831
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -2905,6 +3550,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.841,
+            27.365,
+            18.795
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2927,6 +3577,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.614,
+            28.254,
+            18.574
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2949,6 +3604,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.015,
+            28.294,
+            18.925
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2971,6 +3631,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.17,
+            29.061,
+            19.796
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -2993,8 +3658,13 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.275,
+            25.677,
+            17.028
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -3015,6 +3685,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.513,
+            24.934,
+            17.212
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3037,6 +3712,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.215,
+            25.45,
+            18.462
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3059,9 +3739,14 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.426,
+            24.693,
+            19.439
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -3081,6 +3766,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.417,
+            25.059,
+            15.949
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3103,6 +3793,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.637,
+            24.18,
+            15.99
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3127,6 +3822,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.667,
+            24.361,
+            16.905
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -3151,6 +3851,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.957,
+            23.072,
+            15.28
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3175,6 +3880,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.583,
+            23.432,
+            16.716
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3199,6 +3909,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.173,
+            22.627,
+            15.75
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3223,8 +3938,13 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.598,
+            26.723,
+            18.417
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -3245,6 +3965,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.309,
+            27.407,
+            19.509
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3267,6 +3992,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.856,
+            27.406,
+            19.519
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3289,6 +4019,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.454,
+            28.096,
+            20.32
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -3311,6 +4046,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.85,
+            26.919,
+            20.881
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3333,6 +4073,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.488,
+            27.328,
+            21.305
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3355,6 +4100,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.417,
+            27.165,
+            22.794
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3377,6 +4127,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.303,
+            27.928,
+            23.296
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3399,6 +4154,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.312,
+            28.577,
+            24.461
+          ],
           "formal_charge": 1,
           "is_donor": false,
           "is_acceptor": false,
@@ -3421,6 +4181,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.413,
+            28.531,
+            25.244
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3443,6 +4208,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.226,
+            29.265,
+            24.836
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3465,6 +4235,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.955,
+            17.814,
+            10.296
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3487,6 +4262,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.662,
+            16.578,
+            9.925
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3509,6 +4289,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.692,
+            16.479,
+            8.422
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3531,6 +4316,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.81,
+            17.006,
+            7.744
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -3553,6 +4343,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.04,
+            15.32,
+            10.569
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3575,6 +4370,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.098,
+            15.122,
+            12.103
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3597,6 +4397,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.015,
+            14.074,
+            12.608
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3619,6 +4424,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.456,
+            14.781,
+            12.716
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3641,6 +4451,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.511,
+            19.012,
+            13.175
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3663,6 +4478,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.382,
+            18.205,
+            14.396
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3685,6 +4505,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.369,
+            19.128,
+            15.617
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3707,6 +4532,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.284,
+            20.322,
+            15.474
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -3729,6 +4559,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.518,
+            17.175,
+            14.468
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3751,6 +4586,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.471,
+            18.582,
+            16.816
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3773,6 +4613,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.609,
+            19.369,
+            18.029
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3795,6 +4640,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.263,
+            18.428,
+            19.031
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3817,9 +4667,14 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.624,
+            17.507,
+            19.553
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -3839,6 +4694,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.229,
+            19.796,
+            18.55
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3861,6 +4721,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.312,
+            20.654,
+            19.796
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3883,6 +4748,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.412,
+            20.9,
+            20.316
+          ],
           "formal_charge": -1,
           "is_donor": false,
           "is_acceptor": true,
@@ -3905,6 +4775,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.266,
+            21.13,
+            20.251
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -3927,6 +4802,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.53,
+            18.658,
+            19.336
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -3949,6 +4829,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.27,
+            17.69,
+            20.146
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3971,6 +4856,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.363,
+            18.077,
+            21.601
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -3993,6 +4883,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.053,
+            17.37,
+            22.341
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -4015,6 +4910,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.696,
+            17.47,
+            19.592
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4037,6 +4937,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.744,
+            17.135,
+            18.146
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4061,6 +4966,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.55,
+            17.866,
+            17.28
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4085,6 +4995,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.965,
+            16.105,
+            17.622
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4109,6 +5024,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.58,
+            17.58,
+            15.898
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4133,6 +5053,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.01,
+            15.799,
+            16.255
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4157,6 +5082,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.817,
+            16.558,
+            15.384
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4590,6 +5520,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            25.252,
+            8.608,
+            19.863
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -4612,6 +5547,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            25.411,
+            9.365,
+            18.618
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4634,6 +5574,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            26.217,
+            10.637,
+            18.809
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4656,6 +5601,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            26.135,
+            11.286,
+            19.866
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -4678,6 +5628,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.055,
+            9.763,
+            18.043
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4700,6 +5655,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.24,
+            8.692,
+            17.348
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4722,6 +5682,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.873,
+            9.215,
+            17.198
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4744,6 +5709,11 @@
           "auth_seq_id": "248",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.833,
+            8.296,
+            15.998
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4766,8 +5736,13 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.531,
+            14.825,
+            21.567
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -4788,6 +5763,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.085,
+            14.845,
+            21.617
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4810,6 +5790,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.552,
+            14.362,
+            22.963
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4832,9 +5817,14 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.353,
+            14.146,
+            23.118
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -4854,6 +5844,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.492,
+            14.042,
+            20.472
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4876,6 +5871,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.92,
+            14.495,
+            19.114
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4900,6 +5900,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.817,
+            13.724,
+            18.368
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4924,6 +5929,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.432,
+            15.684,
+            18.553
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4948,6 +5958,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.215,
+            14.118,
+            17.108
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4972,6 +5987,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.849,
+            16.098,
+            17.286
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -4996,6 +6016,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.727,
+            15.31,
+            16.576
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5020,6 +6045,11 @@
           "auth_seq_id": "253",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.138,
+            15.654,
+            15.314
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": true,
@@ -5042,6 +6072,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.24,
+            10.031,
+            23.76
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -5064,6 +6099,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.672,
+            9.544,
+            22.493
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5086,6 +6126,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.628,
+            8.505,
+            21.919
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5108,6 +6153,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.833,
+            8.761,
+            21.834
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5130,6 +6180,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.398,
+            10.704,
+            21.467
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5152,6 +6207,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.966,
+            10.181,
+            20.11
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5174,6 +6234,11 @@
           "auth_seq_id": "256",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.367,
+            11.656,
+            22.003
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5196,6 +6261,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.774,
+            6.107,
+            15.887
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -5218,6 +6288,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.252,
+            6.875,
+            17.017
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5240,6 +6315,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.278,
+            6.695,
+            18.166
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5262,6 +6342,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.055,
+            6.718,
+            17.984
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5284,6 +6369,11 @@
           "auth_seq_id": "269",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.427,
+            8.356,
+            16.648
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5306,6 +6396,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.813,
+            6.508,
+            19.358
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -5328,6 +6423,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.96,
+            6.261,
+            20.5
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5350,6 +6450,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.285,
+            7.24,
+            21.606
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5372,6 +6477,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.353,
+            7.17,
+            22.221
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5394,6 +6504,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.096,
+            4.789,
+            21.032
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5416,6 +6531,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.114,
+            4.542,
+            22.176
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5438,6 +6558,11 @@
           "auth_seq_id": "270",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.93,
+            3.753,
+            19.895
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5460,8 +6585,13 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.361,
+            8.149,
+            21.868
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -5482,6 +6612,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.52,
+            9.043,
+            22.99
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5504,6 +6639,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.064,
+            8.362,
+            24.295
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5526,6 +6666,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.908,
+            7.986,
+            24.441
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5548,6 +6693,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.797,
+            10.372,
+            22.745
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5570,6 +6720,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.202,
+            11.48,
+            23.715
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5592,6 +6747,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.36,
+            12.719,
+            23.545
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5614,6 +6774,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.812,
+            13.774,
+            24.522
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5636,6 +6801,11 @@
           "auth_seq_id": "271",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.875,
+            14.916,
+            24.64
+          ],
           "formal_charge": 1,
           "is_donor": true,
           "is_acceptor": false,
@@ -5658,6 +6828,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.891,
+            15.218,
+            24.902
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -5680,6 +6855,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.662,
+            15.161,
+            23.68
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5702,6 +6882,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.209,
+            14.055,
+            22.747
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5724,9 +6909,14 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.875,
+            14.333,
+            21.593
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -5746,6 +6936,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.156,
+            15.09,
+            23.981
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5768,6 +6963,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.954,
+            15.124,
+            22.702
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5790,6 +6990,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.441,
+            15.015,
+            22.886
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5812,6 +7017,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.933,
+            14.979,
+            24.035
+          ],
           "formal_charge": -1,
           "is_donor": false,
           "is_acceptor": true,
@@ -5834,6 +7044,11 @@
           "auth_seq_id": "286",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.114,
+            15.014,
+            21.842
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5856,6 +7071,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.766,
+            14.796,
+            21.332
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -5878,6 +7098,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.887,
+            15.822,
+            20.266
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5900,6 +7125,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.324,
+            15.177,
+            18.96
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5922,6 +7152,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.764,
+            15.424,
+            17.908
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -5944,6 +7179,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.9,
+            16.928,
+            20.663
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5966,6 +7206,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.272,
+            17.811,
+            19.486
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -5988,6 +7233,11 @@
           "auth_seq_id": "289",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.315,
+            17.759,
+            21.737
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6010,6 +7260,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.352,
+            14.348,
+            19.062
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -6032,6 +7287,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.922,
+            13.695,
+            17.907
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6054,6 +7314,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.898,
+            12.829,
+            17.202
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6076,6 +7341,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.841,
+            12.83,
+            15.964
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -6098,6 +7368,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.184,
+            12.926,
+            18.302
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6120,6 +7395,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.428,
+            13.747,
+            18.103
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6142,6 +7422,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.944,
+            12.949,
+            18.625
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6164,6 +7449,11 @@
           "auth_seq_id": "290",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.782,
+            13.413,
+            20.304
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6186,6 +7476,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            2.736,
+            14.807,
+            14.524
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -6208,6 +7503,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.374,
+            15.486,
+            13.395
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6230,6 +7530,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.089,
+            14.521,
+            12.472
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6252,6 +7557,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.756,
+            13.598,
+            12.934
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -6274,6 +7584,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.29,
+            16.734,
+            13.829
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6296,6 +7611,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.654,
+            16.332,
+            14.389
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6318,6 +7638,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            3.58,
+            17.622,
+            14.848
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6340,6 +7665,11 @@
           "auth_seq_id": "293",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.203,
+            17.365,
+            15.425
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6362,6 +7692,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.996,
+            15.227,
+            11.256
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -6384,6 +7719,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.495,
+            13.932,
+            11.679
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6406,6 +7746,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.295,
+            12.985,
+            12.095
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6428,6 +7773,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.313,
+            13.401,
+            12.772
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -6450,6 +7800,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.664,
+            14.044,
+            12.68
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6472,6 +7827,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.165,
+            14.244,
+            14.057
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6494,6 +7854,11 @@
           "auth_seq_id": "299",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.534,
+            12.825,
+            12.627
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6516,6 +7881,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.491,
+            7.086,
+            23.085
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -6538,6 +7908,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.801,
+            7.594,
+            21.884
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6560,6 +7935,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.705,
+            7.285,
+            20.707
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6582,6 +7962,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.924,
+            7.488,
+            20.783
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -6604,6 +7989,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.52,
+            9.11,
+            21.913
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6626,6 +8016,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.459,
+            9.463,
+            22.94
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6648,6 +8043,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.085,
+            9.599,
+            20.54
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6670,6 +8070,11 @@
           "auth_seq_id": "313",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.312,
+            10.938,
+            23.169
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6692,8 +8097,13 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.5,
+            7.406,
+            16.518
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -6714,6 +8124,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.296,
+            7.966,
+            15.179
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6736,6 +8151,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.201,
+            7.353,
+            14.131
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6758,9 +8178,14 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.1,
+            6.595,
+            14.453
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -6780,6 +8205,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.498,
+            9.509,
+            15.116
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6802,6 +8232,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.889,
+            9.816,
+            15.321
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": true,
@@ -6824,6 +8259,11 @@
           "auth_seq_id": "315",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.57,
+            10.243,
+            16.121
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6846,6 +8286,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.295,
+            7.449,
+            11.399
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -6868,6 +8313,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.655,
+            7.862,
+            11.634
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6890,6 +8340,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.062,
+            8.474,
+            10.325
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6912,6 +8367,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.836,
+            7.869,
+            9.259
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -6934,6 +8394,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.551,
+            6.67,
+            11.999
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6956,6 +8421,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.036,
+            6.909,
+            11.749
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -6980,6 +8450,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.864,
+            7.388,
+            12.762
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7004,6 +8479,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.6,
+            6.65,
+            10.494
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7028,6 +8508,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.219,
+            7.62,
+            12.523
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7052,6 +8537,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.948,
+            6.871,
+            10.259
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7076,6 +8566,11 @@
           "auth_seq_id": "317",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.754,
+            7.359,
+            11.279
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7100,6 +8595,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.652,
+            9.668,
+            10.399
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7122,6 +8622,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.028,
+            10.404,
+            9.18
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7144,6 +8649,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            21.52,
+            10.344,
+            8.9
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7166,6 +8676,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.317,
+            10.826,
+            9.705
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -7188,6 +8703,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.45,
+            11.818,
+            9.212
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7210,6 +8730,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.912,
+            11.763,
+            9.312
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7232,6 +8757,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.241,
+            12.123,
+            7.721
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7254,6 +8784,11 @@
           "auth_seq_id": "318",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.827,
+            10.502,
+            7.029
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7276,6 +8811,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.175,
+            13.288,
+            9.414
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7298,6 +8838,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            24.159,
+            13.94,
+            10.732
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7320,6 +8865,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            23.592,
+            15.331,
+            10.711
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7342,6 +8892,11 @@
           "auth_seq_id": "321",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            22.796,
+            15.678,
+            9.833
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -7364,6 +8919,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.96,
+            25.432,
+            17.474
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7386,6 +8946,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            6.036,
+            26.413,
+            17.593
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7408,6 +8973,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.23,
+            25.553,
+            17.865
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7430,6 +9000,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.209,
+            24.791,
+            18.831
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -7452,6 +9027,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            5.841,
+            27.365,
+            18.795
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7474,6 +9054,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.614,
+            28.254,
+            18.574
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7496,6 +9081,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.015,
+            28.294,
+            18.925
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7518,6 +9108,11 @@
           "auth_seq_id": "360",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            4.17,
+            29.061,
+            19.796
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7540,8 +9135,13 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.275,
+            25.677,
+            17.028
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -7562,6 +9162,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.513,
+            24.934,
+            17.212
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7584,6 +9189,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.215,
+            25.45,
+            18.462
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7606,6 +9216,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.426,
+            24.693,
+            19.439
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -7628,6 +9243,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.417,
+            25.059,
+            15.949
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7650,6 +9270,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.637,
+            24.18,
+            15.99
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7674,6 +9299,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.667,
+            24.361,
+            16.905
+          ],
           "formal_charge": 1,
           "is_donor": true,
           "is_acceptor": false,
@@ -7698,6 +9328,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.957,
+            23.072,
+            15.28
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7722,6 +9357,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.583,
+            23.432,
+            16.716
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7746,6 +9386,11 @@
           "auth_seq_id": "361",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.173,
+            22.627,
+            15.75
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7770,8 +9415,13 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.598,
+            26.723,
+            18.417
+          ],
           "formal_charge": 0,
-          "is_donor": false,
+          "is_donor": true,
           "is_acceptor": false,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
@@ -7792,6 +9442,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            11.309,
+            27.407,
+            19.509
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7814,6 +9469,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.856,
+            27.406,
+            19.519
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7836,6 +9496,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.454,
+            28.096,
+            20.32
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -7858,6 +9523,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            10.85,
+            26.919,
+            20.881
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7880,6 +9550,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.488,
+            27.328,
+            21.305
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7902,6 +9577,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.417,
+            27.165,
+            22.794
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -7924,6 +9604,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.303,
+            27.928,
+            23.296
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7946,6 +9631,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            8.312,
+            28.577,
+            24.461
+          ],
           "formal_charge": 1,
           "is_donor": false,
           "is_acceptor": false,
@@ -7968,6 +9658,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            9.413,
+            28.531,
+            25.244
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -7990,6 +9685,11 @@
           "auth_seq_id": "362",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            7.226,
+            29.265,
+            24.836
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -8012,6 +9712,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.955,
+            17.814,
+            10.296
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -8034,6 +9739,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.662,
+            16.578,
+            9.925
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8056,6 +9766,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.692,
+            16.479,
+            8.422
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8078,6 +9793,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.81,
+            17.006,
+            7.744
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -8100,6 +9820,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.04,
+            15.32,
+            10.569
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8122,6 +9847,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.098,
+            15.122,
+            12.103
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8144,6 +9874,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.015,
+            14.074,
+            12.608
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8166,6 +9901,11 @@
           "auth_seq_id": "370",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            20.456,
+            14.781,
+            12.716
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8188,6 +9928,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.511,
+            19.012,
+            13.175
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -8210,6 +9955,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.382,
+            18.205,
+            14.396
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8232,6 +9982,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.369,
+            19.128,
+            15.617
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8254,6 +10009,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.284,
+            20.322,
+            15.474
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -8276,6 +10036,11 @@
           "auth_seq_id": "380",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.518,
+            17.175,
+            14.468
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8298,6 +10063,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.471,
+            18.582,
+            16.816
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -8320,6 +10090,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.609,
+            19.369,
+            18.029
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8342,6 +10117,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            15.263,
+            18.428,
+            19.031
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8364,9 +10144,14 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.624,
+            17.507,
+            19.553
+          ],
           "formal_charge": 0,
           "is_donor": false,
-          "is_acceptor": false,
+          "is_acceptor": true,
           "is_hydrophobic": false,
           "aromatic_ring_ids": [],
           "hydrogen_count": 0,
@@ -8386,6 +10171,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.229,
+            19.796,
+            18.55
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8408,6 +10198,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            13.312,
+            20.654,
+            19.796
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8430,6 +10225,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            14.412,
+            20.9,
+            20.316
+          ],
           "formal_charge": -1,
           "is_donor": false,
           "is_acceptor": true,
@@ -8452,6 +10252,11 @@
           "auth_seq_id": "381",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            12.266,
+            21.13,
+            20.251
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -8474,6 +10279,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            16.53,
+            18.658,
+            19.336
+          ],
           "formal_charge": 0,
           "is_donor": true,
           "is_acceptor": false,
@@ -8496,6 +10306,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.27,
+            17.69,
+            20.146
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8518,6 +10333,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.363,
+            18.077,
+            21.601
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8540,6 +10360,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.053,
+            17.37,
+            22.341
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": true,
@@ -8562,6 +10387,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.696,
+            17.47,
+            19.592
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8584,6 +10414,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.744,
+            17.135,
+            18.146
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8608,6 +10443,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.55,
+            17.866,
+            17.28
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8632,6 +10472,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            17.965,
+            16.105,
+            17.622
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8656,6 +10501,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            19.58,
+            17.58,
+            15.898
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8680,6 +10530,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.01,
+            15.799,
+            16.255
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,
@@ -8704,6 +10559,11 @@
           "auth_seq_id": "382",
           "insertion_code": null,
           "alternate_location": null,
+          "position_angstrom": [
+            18.817,
+            16.558,
+            15.384
+          ],
           "formal_charge": 0,
           "is_donor": false,
           "is_acceptor": false,

@@ -49,6 +49,7 @@ def atom(
         auth_seq_id="1",
         insertion_code=None,
         alternate_location=None,
+        position_angstrom=(0.0, 0.0, 0.0),
         formal_charge=charge,
         is_donor=donor,
         is_acceptor=acceptor,
@@ -211,11 +212,12 @@ def test_reference_2hyy_protein_preparation_is_reproducible():
     assert len(standard.atoms) == 186
     assert len(standard.residue_states) == 23
     assert len(standard.rings) == 4
-    assert sum(1 for atom in standard.atoms if atom.is_donor) == 25
-    assert sum(1 for atom in standard.atoms if atom.is_acceptor) == 25
+    assert sum(1 for atom in standard.atoms if atom.is_donor) == 30
+    assert sum(1 for atom in standard.atoms if atom.is_acceptor) == 30
     assert sum(1 for atom in standard.atoms if atom.is_hydrophobic) == 61
     assert sum(1 for atom in standard.atoms if atom.formal_charge) == 4
-    assert sum(1 for atom in histidine.atoms if atom.is_donor) == 26
+    assert sum(1 for atom in histidine.atoms if atom.is_donor) == 31
+    assert sum(1 for atom in histidine.atoms if atom.is_acceptor) == 29
     assert sum(1 for atom in histidine.atoms if atom.formal_charge) == 5
     assert all(water.role == "unassigned" for water in standard.water_roles)
     assert result.toolkit == "Moleculab residue templates"
